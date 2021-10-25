@@ -6,3 +6,5 @@ var { getServices } = require("../controllers/services");
 router.get("/", getServices);
 
 // router.post("/", )
+
+module.exports = router;
