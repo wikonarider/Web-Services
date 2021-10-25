@@ -1,9 +1,10 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-var { getServices } = require("../controllers/services");
+var { getServices, postServices } = require('../controllers/services');
 
 // http://localhost:3001/services
-router.get("/", getServices);
+router.get('/', getServices);
+router.post('/', postServices);
 
 // router.post("/", )
 
