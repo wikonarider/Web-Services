@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "./Register.module.css";
 import { TextField, Button } from "@mui/material";
 import { validateInput, registerUser } from "../../utils/registerValidations";
+import ModalRegister from "./ModalRegister";
 
 function Register() {
   const [start, setStart] = useState(true);
@@ -13,8 +14,8 @@ function Register() {
     email: "",
     location: "",
   });
-
   const [inputsErrors, setInputErrors] = useState({});
+  const [modal, setModal] = useState(false);
 
   const handleChange = (e) => {
     if (start) {
@@ -42,6 +43,7 @@ function Register() {
         const user = { ...inputs, location: [inputs.location], userImg: "" };
         const response = await registerUser(user);
         if (response.response === "created") {
+          setModal(true);
           setInputs({
             name: "",
             lastname: "",
@@ -146,6 +148,11 @@ function Register() {
           Register
         </Button>
       </form>
+      <ModalRegister
+        modal={modal}
+        setModal={setModal}
+        message={"Successful registration"}
+      />
     </div>
   );
 }
