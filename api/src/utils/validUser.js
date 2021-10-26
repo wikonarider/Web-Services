@@ -20,7 +20,7 @@ function strIsOnlyLetters(str) {
   return typeof str === "string" && /^[a-zA-Z]+$/.test(str);
 }
 
-// valida un username, empeiza con al menos 4 letras y termina con
+// valida un username, empieza con al menos 4 letras y termina con
 // letras o numeros
 function validUsername(username) {
   return (
@@ -28,7 +28,7 @@ function validUsername(username) {
   );
 }
 
-// valida si es una password tiene 8 caracteres, al menos 1 letra and 1 numero
+// valida si es una password. Tiene que tener 8 caracteres, al menos 1 letra y 1 numero
 function validPassword(password) {
   return (
     typeof password === "string" &&
@@ -36,7 +36,7 @@ function validPassword(password) {
   );
 }
 
-// valida si un email es valido
+// valida si es un email es valido
 function validEmail(email) {
   return (
     typeof email === "string" &&
@@ -44,20 +44,51 @@ function validEmail(email) {
   );
 }
 
+// valida si es un arreglo de strings
+function validLocation(location) {
+  if (!Array.isArray(location)) return false;
+  else if (!location.length) return false;
+
+  return location.every((elem) => typeof elem === "string");
+}
+
 // valida todos los parametros de un user
 function validateUser(user) {
-  if (Object.keys(user).length) {
-    return (
-      validateUrl(user.userImg) &&
-      strIsOnlyLetters(user.name) &&
-      strIsOnlyLetters(user.lastname) &&
-      validUsername(user.username) &&
-      validPassword(user.password) &&
-      validEmail(user.email) &&
-      Array.isArray(user.location)
-    );
+  let errors = {};
+  // userImg validations
+  if (typeof user.userImg !== "string") {
+    errors.userImg = "It has to be of type string";
+  } else if (user.userImg && !validateUrl(userImg)) {
+    errors.userImg = "It has to be a valid url";
   }
-  return false;
+  // name validations
+  if (!strIsOnlyLetters(user.name)) {
+    errors.name = "It has to be only letters, not numbers or spaces";
+  }
+  // lastname validations
+  if (!strIsOnlyLetters(user.lastname)) {
+    errors.lastname = "It has to be only letters, not numbers or spaces";
+  }
+  // username validations
+  if (!validUsername(user.username)) {
+    errors.username = "It has to start with at least 4 letters";
+  }
+  // password validations
+  if (!validPassword(user.password)) {
+    errors.password =
+      "At least 8 characters, it must contain 1 letter and 1 number";
+  }
+  // email validations
+  if (!validEmail(user.email)) {
+    errors.email = "It must be a valid email address";
+  }
+  // location validations (not finished)
+  if (!Array.isArray(user.location)) {
+    errors.location = "It has to be of type array";
+  } else if (!validLocation(user.location)) {
+    errors.location = "It has to be an array of string";
+  }
+  return errors;
 }
 
 // chequea que el username o email no existan en la db ya
