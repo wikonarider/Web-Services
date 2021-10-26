@@ -1,4 +1,4 @@
-const { Users } = require("../db");
+const { Users, Service } = require("../db");
 const { validateUser, checkUnique } = require("../utils/validUser");
 
 async function userCreated(req, res, next) {
@@ -25,7 +25,34 @@ async function userCreated(req, res, next) {
   }
 }
 
-async function userDeleted(req, res, next) {
+async function getUsers(req, res, next) {
+  try {
+    // let { username } = req.params;
+    let { username } = req.query;
+    if(!username){
+      const usersDb = await Users.findAll({
+        include: [{
+          model: Service,
+          attributes: [],
+        },],
+      });
+    usersDb.length > 0 ? res.status(200).send(usersDb): res.status(500).send({ response: "no users yet"})
+    } else { const userFinded = await Users.findOne({
+      where: {
+        username,
+      }, include: [{
+        model: Service,
+        attributes: [],
+      },],
+    });
+    res.status(200).send(userFinded);
+  }; 
+  } catch (e) {
+    next(e);
+  }
+};
+
+async function userBanned(req, res, next) {
   try {
     const { id } = req.params;
     const usersInDb = await Users.findOne({
@@ -35,11 +62,12 @@ async function userDeleted(req, res, next) {
     if (usersInDb === null) {
       res.json({ respones: "user not founded" });
     } else {
-      await Users.destroy({
-        // si existe lo deleteo
-        where: { id: id },
+      await Users.update({ // si existe seteo el ban en true
+        ban: true
+      }, {
+        where: {id: id}
       });
-      res.json({ response: "user deleted" });
+      res.json({ response: "user banned" });
     }
   } catch (e) {
     next(e);
@@ -48,5 +76,6 @@ async function userDeleted(req, res, next) {
 
 module.exports = {
   userCreated,
-  userDeleted,
+  userBanned,
+  getUsers
 };

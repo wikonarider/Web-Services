@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("qualification", {
+  sequelize.define('qualification', {
     comment: {
       type: DataTypes.STRING(1234),
       allowNull: true,
