@@ -1,4 +1,4 @@
-const { Users } = require("../db");
+const { Users, Service } = require("../db");
 const { validateUser, checkUnique } = require("../utils/validUser");
 
 async function userCreated(req, res, next) {
@@ -25,6 +25,21 @@ async function userCreated(req, res, next) {
   }
 }
 
+async function getUsers(req, res, next) {
+  try {
+    const usersDb = await Users.findAll({
+      include: [{
+        model: Service,
+        attributes: [],
+      },],
+    });
+    if(usersDb.length > 0) return res.send(usersDb) 
+    else return res.send({ response: "no users yet"})
+  } catch (e) {
+    next(e);
+  }
+};
+
 async function userDeleted(req, res, next) {
   try {
     const { id } = req.params;
@@ -49,4 +64,5 @@ async function userDeleted(req, res, next) {
 module.exports = {
   userCreated,
   userDeleted,
+  getUsers
 };
