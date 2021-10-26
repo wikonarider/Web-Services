@@ -64,7 +64,24 @@ async function postServices(req, res, next) {
   }
 }
 
+async function getServicesById(req, res, next){
+  let {id} = req.params;
+
+  try {
+    let service = await Service.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    service ? res.status(200).send(service) : res.status(404).send({message: `Service (id: ${id}) not found`});
+  }catch(e){
+    next(e);
+  }
+}
+
 module.exports = {
   getServices,
   postServices,
+  getServicesById
 };

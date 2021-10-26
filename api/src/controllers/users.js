@@ -52,7 +52,7 @@ async function getUsers(req, res, next) {
   }
 };
 
-async function userDeleted(req, res, next) {
+async function userBanned(req, res, next) {
   try {
     const { id } = req.params;
     const usersInDb = await Users.findOne({
@@ -62,11 +62,12 @@ async function userDeleted(req, res, next) {
     if (usersInDb === null) {
       res.json({ respones: "user not founded" });
     } else {
-      await Users.destroy({
-        // si existe lo deleteo
-        where: { id: id },
+      await Users.update({ // si existe seteo el ban en true
+        ban: true
+      }, {
+        where: {id: id}
       });
-      res.json({ response: "user deleted" });
+      res.json({ response: "user banned" });
     }
   } catch (e) {
     next(e);
@@ -75,6 +76,6 @@ async function userDeleted(req, res, next) {
 
 module.exports = {
   userCreated,
-  userDeleted,
+  userBanned,
   getUsers
 };
