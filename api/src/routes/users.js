@@ -4,6 +4,7 @@ var { userCreated, userDeleted, getUsers } = require("../controllers/users");
 
 router.post("/", userCreated);
 router.get("/", getUsers);
+router.get("/?username=", getUsers);
 router.delete("/:id", userDeleted);
 
 module.exports = router;

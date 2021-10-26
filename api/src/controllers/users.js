@@ -27,14 +27,26 @@ async function userCreated(req, res, next) {
 
 async function getUsers(req, res, next) {
   try {
-    const usersDb = await Users.findAll({
-      include: [{
+    // let { username } = req.params;
+    let { username } = req.query;
+    if(!username){
+      const usersDb = await Users.findAll({
+        include: [{
+          model: Service,
+          attributes: [],
+        },],
+      });
+    usersDb.length > 0 ? res.status(200).send(usersDb): res.status(500).send({ response: "no users yet"})
+    } else { const userFinded = await Users.findOne({
+      where: {
+        username,
+      }, include: [{
         model: Service,
         attributes: [],
       },],
     });
-    if(usersDb.length > 0) return res.send(usersDb) 
-    else return res.send({ response: "no users yet"})
+    res.status(200).send(userFinded);
+  }; 
   } catch (e) {
     next(e);
   }
