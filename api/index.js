@@ -19,15 +19,16 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const {json} = require('./dbJson')
-const {Service} = require('./src/db')
-
+const { services } = require('./servicesJson');
+const { json } = require('./dbJson');
+const { Service, Category } = require('./src/db');
 
 // Syncing all the models at once.
 
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
-    Service.bulkCreate(json).then(() => console.log('Datos Cargados'))
+    Service.bulkCreate(json).then(() => console.log('Datos Cargados'));
+    Category.bulkCreate(services).then(() => console.log('Servicios Cargados'));
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
