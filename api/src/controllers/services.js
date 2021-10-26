@@ -80,8 +80,30 @@ async function getServicesById(req, res, next){
   }
 }
 
+async function deleteServices(req, res, next) {
+  let  id  = req.params.id;
+  try {
+    let service = await Service.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if(service === null){
+      res.send("service not founded")
+    }
+    await Service.destroy({
+      where: {id : id}
+    })
+    res.send("service deleted")
+  }
+    catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   getServices,
   postServices,
-  getServicesById
+  getServicesById,
+  deleteServices
 };
