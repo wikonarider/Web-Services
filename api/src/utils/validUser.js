@@ -58,7 +58,7 @@ function validateUser(user) {
   // userImg validations
   if (typeof user.userImg !== "string") {
     errors.userImg = "It has to be of type string";
-  } else if (user.userImg && !validateUrl(userImg)) {
+  } else if (user.userImg && !validateUrl(user.userImg)) {
     errors.userImg = "It has to be a valid url";
   }
   // name validations
