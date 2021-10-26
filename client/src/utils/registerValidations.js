@@ -1,16 +1,4 @@
-// valida si es una url
-function validateUrl(str) {
-  const pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // fragment locator
-  return !!pattern.test(str);
-}
+import axios from "axios";
 
 // Valida si contiene solo letras, para el name y lastname
 function strIsOnlyLetters(str) {
@@ -73,4 +61,9 @@ export function validateInput(user) {
     errors.location = "It can't be empty ";
   }
   return errors;
+}
+
+export async function registerUser(user) {
+  const response = await axios.post("/users", user);
+  return response.data;
 }
