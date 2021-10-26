@@ -43,6 +43,7 @@ const { Service, Users } = sequelize.models;
 Service.belongsToMany(Users, { through: "services_users_bought" });
 Users.belongsToMany(Service, { through: "services_users_bought" });
 
+
 Service.belongsToMany(Users, { through: "services_users_favourites" });
 Users.belongsToMany(Service, { through: "services_users_favourites" });
 
