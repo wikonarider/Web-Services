@@ -1,15 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import s from "./YourAccount.module.css";
 
-import { Typography, Button, Avatar } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 //mockup de usuario para mostrar el panel
 const userData = {
