@@ -1,33 +1,86 @@
-import React , {useEffect} from "react";
+import React , {useEffect, useState} from "react";
+import axios from 'axios';
+import { Grid , Box, Card, CardMedia, CardContent, Typography, Rating,
+          CardActions, IconButton} from '@mui/material';
+import {AddShoppingCart, Favorite, Share, ShareOutlined} from "@mui/icons-material";
 
-import ReactDOM from "react-dom";
-import { Grid , Box, Paper , styled} from '@mui/material';
 
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
 
 export default function DetailService({id}){
-    
+  
+  let [service, setService] = useState({})
+
+  //componentDidMount para traer la información del servicio por id
+  useEffect(()=>{ 
+    axios(`http://localhost:3001/services/${id}`)
+    .then(response=>setService(response.data))
+}, [] ); 
+
+  const IMG_TEMPLATE =
+  "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
+
+  let {img, title, price, description, rating} = service;
+
     return (
-        <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={8}>
-          <Item>xs=8</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={8}>
-          <Item>xs=8</Item>
-        </Grid>
-      </Grid>
-    </Box>
+
+      <Box display="grid" 
+          gridTemplateColumns="repeat(12, 1fr)"
+          gap={2} p={2} border="solid 1px lightgrey"
+          maxWidth="80%" m="auto">
+        
+        <Box gridColumn="span 8" p={2}>
+          <CardMedia
+              component="img"
+              image={img ? img : IMG_TEMPLATE}
+              height= "400"
+              alt={id}
+              sx={{ objectFit: "cover"}}
+            />
+        </Box> 
+
+        <Box gridColumn="span 4" m={2} p={2} border="solid 1px lightgrey">
+          <Box gridColumn="span 12" display="flex" flexDirection="row" flexWrap="wrap" alignContent="start">
+              <Typography variant="h5"> {title} </Typography>
+              <Rating
+                name="read-only"
+                value={rating}
+                precision={0.5}
+                readOnly
+                sx={{}}
+              /> 
+              {rating ? rating : "84 opiniones"}
+          </Box>
+
+          <Box gridColumn="span 12" display="flex" flexDirection="row" flexWrap="wrap" alignContent="start">
+            <CardActions disableSpacing>
+              <Typography variant="h5" sx={{}}> {`$${price ? price : 0}`} </Typography>
+              <IconButton
+                onClick={() => {}}
+                color={!false ? "primary" : "success"}
+                aria-label="add to shopping cart"
+                sx={{}}
+              >
+                <AddShoppingCart />
+              </IconButton>
+              <IconButton onClick={() => {}} aria-label="add to favorites">
+                <Favorite sx={{}} />
+              </IconButton>
+              <IconButton aria-label="share">
+                <Share />
+              </IconButton>
+            </CardActions>
+          </Box>
+
+          <Box gridColumn="span 12">
+            <Typography variant="subtitle1" component="div" sx={{textAlign: "left"}}> {description} </Typography>
+          </Box>
+        </Box>
+        
+        
+        
+      </Box>
+      
+      
+        
     )
 }
