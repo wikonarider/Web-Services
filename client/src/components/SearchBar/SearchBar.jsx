@@ -58,12 +58,6 @@ export default function SearchBar() {
         dispatch(getServices(name))
     }
 
-    function onSearch(e) {
-        e.preventDefault()
-        dispatch(getServices(name))
-        setName('')
-    }
-
 
     return (
         <Search>
@@ -76,12 +70,5 @@ export default function SearchBar() {
           onChange={(e) => handleChange(e)}
         />
       </Search>
-        // <div>
-
-        //     <input  type='text' placeholder='Service...' onChange={(e) => handleChange(e)}></input>
-
-        //     <button onClick={(e) => onSearch(e)}>Search </button>
-
-        // </div>
     )
 }
