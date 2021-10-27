@@ -7,11 +7,6 @@ const favs = require('./favs');
 const login = require("./login")
 const logout = require("./logout")
 
-const favs = require('./favs');
-
-const login = require("./login")
-const logout = require("./logout")
-
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -27,12 +22,5 @@ router.use('/categories', categories);
 router.use('/favs', favs);
 router.use("/login", login)
 router.use("/logout", logout)
-
-router.use('/favs', favs);
-
-router.use("/login", login)
-router.use("/logout", logout)
-
-
 
 module.exports = router;
