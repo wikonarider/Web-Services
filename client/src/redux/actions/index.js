@@ -90,3 +90,23 @@ export function banUser(id) {
     }
   };
 }
+
+export function createService(body) {
+  return async function (dispatch) {
+      var json = await axios.post(`http://localhost:3001/services`, body)
+      return dispatch({
+          type: 'CREATE_SERVICE',
+          payload: json.data
+      })
+  }
+}
+
+export function getUsers(username) {
+  return async function (dispatch) {
+      var json = await axios(`http://localhost:3001/users?username=${username}`);
+      return dispatch({
+          type: 'GET_USERS',
+          payload: json.data
+      })
+  }
+}

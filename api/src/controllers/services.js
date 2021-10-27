@@ -37,7 +37,6 @@ async function postServices(req, res, next) {
   try {
     //userName eventualmente debería ser enviada por cookie
     const { title, img, description, price, userName } = req.body;
-
     //busco el user que lo creó para asociárselo
     const userFound = await Users.findOne({
       where: {
