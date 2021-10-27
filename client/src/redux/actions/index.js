@@ -77,3 +77,13 @@ export function getUsers(username) {
     }
   };
 }
+
+export function banUser(id) {
+  return async () => {
+    try {
+      return await axios.post(`http://localhost:3001/users/${id}`);
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
