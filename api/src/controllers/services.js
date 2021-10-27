@@ -81,7 +81,7 @@ async function getServicesById(req, res, next){
 }
 
 async function deleteServices(req, res, next) {
-  let  id  = req.params.id;
+  let  {id}  = req.params;
   try {
     let service = await Service.findOne({
       where: {
