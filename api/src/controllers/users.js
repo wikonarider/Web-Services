@@ -110,11 +110,13 @@ async function postPurchase(req, res, next) {
           .status(200)
           .send({ message: 'User associated to Service successful' });
       } else {
-        //sino existe el usuario no está logueado
+        //sino existe el usuario o no está logueado
         return res
           .status(200)
           .send({ message: 'You need to be logged to purchase a service' });
       }
+    } else {
+      return res.status(200).send({ message: 'Logged false' });
     }
   } catch (e) {
     next(e);
