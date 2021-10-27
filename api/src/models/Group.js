@@ -1,10 +1,16 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define('group', {
-    name: {
-      type: DataTypes.STRING,
-      alowNull: false,
+  sequelize.define(
+    "group",
+    {
+      name: {
+        type: DataTypes.STRING,
+        alowNull: false,
+      },
     },
-  });
+    {
+      timestamps: false,
+    }
+  );
 };
