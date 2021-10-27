@@ -3,18 +3,21 @@ import axios from "axios";
 //_____________________________________________________________________________________actions service
 export function getServices(title) {
   return async function (dispatch) {
-    var json = await axios(`http://localhost:3001/services?title=${title}`);
-    return dispatch({
-      type: type.GET_SERVICES,
-      payload: json.data,
-    });
+    try {
+      var json = await axios(`http://localhost:3001/services?title=${title}`);
+      return dispatch({
+        type: type.GET_SERVICES,
+        payload: json.data,
+      });
+    } catch (err) {
+      return new Error(err);
+    }
   };
 }
 export function getServicesById(id) {
   return async function (dispatch) {
-    var json;
     try {
-      json = await axios(`http://localhost:3001/services/${id}`);
+      var json = await axios(`http://localhost:3001/services/${id}`);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,

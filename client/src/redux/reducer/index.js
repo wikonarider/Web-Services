@@ -1,10 +1,11 @@
 import { type } from "../actions/variables";
 const initialState = {
   services: [],
-  users:[]
+  users: [],
 };
 
 const rootReducer = (state = initialState, action) => {
+  const { payload } = action;
   switch (action.type) {
     //___________________________________________________________
     case type.GET_SERVICES:
@@ -12,10 +13,12 @@ const rootReducer = (state = initialState, action) => {
       console.log("globalState de servicios", state.services);
       return {
         ...state,
-        services: action.payload,
+        services: payload,
       };
 
     //_____________________________________________________________
+    case type.GET_USERS:
+      return { ...state, users: payload };
 
     default:
       return state;
