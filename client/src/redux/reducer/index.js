@@ -1,4 +1,4 @@
-import { type } from "../actions/variables";
+
 const initialState = {
   services: [],
   users: []
