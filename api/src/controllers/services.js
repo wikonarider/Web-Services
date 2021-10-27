@@ -112,7 +112,7 @@ async function putServiceById(req, res, next) {
       return service.update({ title, description, img, price });
     })
     .then((res) => {
-      console.log(res);
+      res.status(200).send(res.dataValues);
     })
     .catch((error) => next(error));
 }
