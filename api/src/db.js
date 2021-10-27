@@ -41,8 +41,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Service, Users, Qualification, Category } = sequelize.models;
 console.log("SEQUELIZE MODEL", sequelize.models);
 // Aca vendrian las relaciones
-// Service.belongsToMany(Users, { through: 'services_users_bought' });
-// Users.belongsToMany(Service, { through: 'services_users_bought' });
+Service.belongsToMany(Users, { through: 'services_users_bought' });
+Users.belongsToMany(Service, { through: 'services_users_bought' });
 
 Users.belongsToMany(Service, { through: 'services_users_favourites' });
 Service.belongsToMany(Users, { through: 'services_users_favourites' });
