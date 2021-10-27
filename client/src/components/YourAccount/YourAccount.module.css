@@ -1,0 +1,35 @@
+.yourAccount{
+    text-align: left;
+    font-size: 25px;
+    margin-left: 20%;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
+}
+
+.userInfo{
+    margin-left: 5%;
+}
+
+.fullName{
+    display: flex;
+    justify-content: center;
+}
+
+    .fullName p{
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+.name{
+    margin-right: 5%;
+}
+
+.avatar{
+    margin-bottom: 5%;
+}
+

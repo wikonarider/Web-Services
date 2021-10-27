@@ -17,10 +17,10 @@ const rootReducer = (state = initialState, action) => {
         services: payload,
       };
 
-      case 'CREATE_SERVICE':
+     case 'CREATE_SERVICE':
         return { ...state}
 
-        case 'GET_USERS':
+     case 'GET_USERS':
         return { ...state,
         users: action.payload}
 
