@@ -81,7 +81,7 @@ async function getServicesById(req, res, next){
 }
 
 async function deleteServices(req, res, next) {
-  let  id  = req.params.id;
+  let  {id}  = req.params;
   try {
     let service = await Service.findOne({
       where: {
@@ -100,6 +100,27 @@ async function deleteServices(req, res, next) {
     next(err);
   }
 }
+
+
+//____________________________________________________________________________
+ function putServiceById(req, res, next) {
+  var { id } = req.params;
+  var { title, description, img, price } = req.body;
+
+  Service.findByPk(id)
+    .then((service) => {
+      return service.update({ title, description, img, price });
+    })
+    .then((res) => {
+      res.status(200).send(res.dataValues);
+    })
+    .catch((error) => next(error));
+}
+
+//________________________________________________________________________
+
+
+
 
 module.exports = {
   getServices,
