@@ -7,8 +7,7 @@ async function addFavs(req, res, next) {
         const { serviceId , userId } = req.body;
         await Service.findByPk(serviceId);
         await Users.findByPk(userId);
-        await Services_users_favourites.create({ serviceId: serviceId, userId: userId  })
-        // await user.createService(favService, 'services_users_favourites' );
+        await Services_users_favourites.create({ serviceId: serviceId, userId: userId  });
         return res.status(200).json("add fav")
     } catch (e) {
         next (e);
