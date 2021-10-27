@@ -28,10 +28,10 @@ export function getServicesById(id) {
   };
 }
 
-export function putService(id, data) {
+export function putService(data) {
   return async () => {
     try {
-      return await axios.post(`http://localhost:3001/services/${id}`, data);
+      return await axios.post(`http://localhost:3001/services`, data);
     } catch (err) {
       return new Error(err);
     }
@@ -101,12 +101,3 @@ export function createService(body) {
   }
 }
 
-// export function getUsers(username) {
-//   return async function (dispatch) {
-//       var json = await axios(`http://localhost:3001/users?username=${username}`);
-//       return dispatch({
-//           type: 'GET_USERS',
-//           payload: json.data
-//       })
-//   }
-// }

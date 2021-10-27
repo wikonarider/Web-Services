@@ -103,8 +103,8 @@ async function deleteServices(req, res, next) {
 
 //____________________________________________________________________________
  function putServiceById(req, res, next) {
-  var { id } = req.params;
-  var { title, description, img, price } = req.body;
+ 
+  var { title, description, img, price ,id} = req.body;
 
   Service.findByPk(id)
     .then((service) => {

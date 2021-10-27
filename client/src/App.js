@@ -9,7 +9,7 @@ import YourAccount from "./components/YourAccount/YourAccount";
 function App() {
   return (
     <div className="App">
-      <Route exact path="/home" component={Home} />
+      <Route exact path="/" component={Home} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/service" component={CreateService} />
       <Route exact path="/services/:id" render={({match})=>{
