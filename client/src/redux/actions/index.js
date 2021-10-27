@@ -101,12 +101,12 @@ export function createService(body) {
   }
 }
 
-export function getUsers(username) {
-  return async function (dispatch) {
-      var json = await axios(`http://localhost:3001/users?username=${username}`);
-      return dispatch({
-          type: 'GET_USERS',
-          payload: json.data
-      })
-  }
-}
+// export function getUsers(username) {
+//   return async function (dispatch) {
+//       var json = await axios(`http://localhost:3001/users?username=${username}`);
+//       return dispatch({
+//           type: 'GET_USERS',
+//           payload: json.data
+//       })
+//   }
+// }
