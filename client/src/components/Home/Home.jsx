@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getServices } from "../../redux/actions";
 import Cards from "../Cards/Cards";
 import Nav from "../Nav/Nav";
+import Carrousel from "../Carousel/Carousel";
 
 export default function Home() {
   const servicesState = useSelector((state) => state.services);
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <div>
       <Nav />
+      <Carrousel />
       <Cards services={servicesState} />
     </div>
   );

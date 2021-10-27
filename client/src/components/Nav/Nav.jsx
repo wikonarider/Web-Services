@@ -7,10 +7,10 @@ import Typography from "@mui/material/Typography";
 import SearchBar from "../SearchBar/SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@mui/material";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-
 
 export default function Nav() {
   const history = useHistory();
@@ -19,7 +19,6 @@ export default function Nav() {
     let path = "/carrito";
     history.push(path);
   };
-
 
   //cheque si el usuario esta logeado
   const user = useSelector((state) => state.userData);
@@ -36,7 +35,15 @@ export default function Nav() {
   } else {
     reDirect = "/singin";
   }
-//---------------------------------------
+
+  //-- count tiene que ser igual a las cosas que hayan en el carrito
+
+  let count = 4;
+
+  //--------------------
+
+
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -58,13 +65,15 @@ export default function Nav() {
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           ></Typography>
           <SearchBar />
-          <Link to={reDirect} style={{ textDecoration: 'none' }}>
-            <Button variant="outlined" color="secondary" size="small" >
+          <Link to={reDirect} style={{ textDecoration: "none" }}>
+            <Button variant="outlined" color="secondary" size="small">
               {button}
             </Button>
           </Link>
           <IconButton onClick={routeChange}>
-            <ShoppingCartIcon />
+            <Badge color="secondary" badgeContent={count}>
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>
