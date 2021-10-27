@@ -101,6 +101,24 @@ async function deleteServices(req, res, next) {
   }
 }
 
+
+//____________________________________________________________________________
+async function putServiceById(req, res, next) {
+  var { id } = req.params;
+  var { title, description, img, price } = req.body;
+
+  Service.findByPk(id)
+    .then((service) => {
+      return service.update({ title, description, img, price });
+    })
+    .then((res) => {
+      res.status(200).send(res.dataValues);
+    })
+    .catch((error) => next(error));
+}
+
+
+
 module.exports = {
   getServices,
   postServices,
