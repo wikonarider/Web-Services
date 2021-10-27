@@ -25,7 +25,7 @@ const { Service, Category } = require('./src/db');
 
 // Syncing all the models at once.
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     Service.bulkCreate(json).then(() => console.log('Datos Cargados'));
     Category.bulkCreate(services).then(() => console.log('Servicios Cargados'));
