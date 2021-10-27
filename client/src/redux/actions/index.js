@@ -28,10 +28,10 @@ export function getServicesById(id) {
   };
 }
 
-export function putService(id, data) {
+export function putService(data) {
   return async () => {
     try {
-      return await axios.post(`http://localhost:3001/services/${id}`, data);
+      return await axios.post(`http://localhost:3001/services`, data);
     } catch (err) {
       return new Error(err);
     }
