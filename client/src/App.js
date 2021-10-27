@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
 import DetailService from "./components/DetailService/DetailService";
+import YourAccount from "./components/YourAccount/YourAccount";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route exact path="/services/:id" render={({match})=>{
         return <DetailService id={match.params.id} />
       }} />
+      <Route exact path="/account" component={YourAccount} />
     </div>
   );
 }
