@@ -91,6 +91,29 @@ function validateUser(user) {
   return errors;
 }
 
+function validateUserEdit(user) {
+  let errors = {};
+
+  if (user.name && !strIsOnlyLetters(user.name)) {
+    errors.name = "It has to be only letters, not numbers or spaces";
+  }
+
+  if (user.lastname && !strIsOnlyLetters(user.lastname)) {
+    errors.lastname = "It has to be only letters, not numbers or spaces";
+  }
+
+  if (user.password && !validPassword(user.password)) {
+    errors.password =
+      "At least 8 characters, it must contain 1 letter and 1 number";
+  }
+
+  if (user.userImg && !validateUrl(user.userImg)) {
+    errors.userImg = "It has to be a valid url";
+  }
+
+  return errors;
+}
+
 // chequea que el username o email no existan en la db ya
 async function checkUnique(username, email) {
   if (
@@ -113,4 +136,5 @@ module.exports = {
   validateUrl,
   validateUser,
   checkUnique,
+  validateUserEdit,
 };
