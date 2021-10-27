@@ -103,7 +103,7 @@ async function deleteServices(req, res, next) {
 
 
 //____________________________________________________________________________
-async function putServiceById(req, res, next) {
+ function putServiceById(req, res, next) {
   var { id } = req.params;
   var { title, description, img, price } = req.body;
 
@@ -116,6 +116,9 @@ async function putServiceById(req, res, next) {
     })
     .catch((error) => next(error));
 }
+
+//________________________________________________________________________
+
 
 
 
