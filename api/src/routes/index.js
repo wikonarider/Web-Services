@@ -3,6 +3,7 @@ const services = require("./services");
 const users = require("./users");
 const qualification = require("./qualification");
 const categories = require('./categories');
+const favs = require('./favs');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -15,6 +16,7 @@ router.use("/services", services);
 router.use("/users", users);
 router.use('/qualification', qualification)
 router.use('/categories', categories);
+router.use('/favs', favs);
 
 
 module.exports = router;
