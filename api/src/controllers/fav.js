@@ -1,6 +1,7 @@
 const { Service, Users, Services_users_favourites } = require('../db.js');
 // const services_users_favourites = require('../models/Services_users_favourites.js');
 
+
 async function addFavs(req, res, next) {
     try {
         const { serviceId , userId } = req.body;
@@ -13,6 +14,7 @@ async function addFavs(req, res, next) {
         next (e);
     };
 };
+
 
 async function getFavs(req, res, next) {
     try {
