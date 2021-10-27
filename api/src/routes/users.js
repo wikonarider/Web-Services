@@ -1,12 +1,18 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-var { userCreated, userBanned, getUsers } = require("../controllers/users");
+var {
+  userCreated,
+  userBanned,
+  getUsers,
+  postPurchase,
+} = require('../controllers/users');
 
-router.post("/", userCreated);
+router.post('/', userCreated);
+router.post('/purchase', postPurchase);
 
-router.get("/", getUsers);
-router.get("/?username=", getUsers);
+router.get('/', getUsers);
+router.get('/?username=', getUsers);
 
-router.delete("/:id", userBanned);
+router.delete('/:id', userBanned);
 
 module.exports = router;
