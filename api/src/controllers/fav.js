@@ -1,18 +1,19 @@
 const { Service, Users, Services_users_favourites } = require('../db.js');
 // const services_users_favourites = require('../models/Services_users_favourites.js');
 
+
 async function addFavs(req, res, next) {
     try {
-        const { idService, idUser } = req.body;
-        const favService = await Service.findByPk(idService);
-        const user = await Users.findByPk(idUser);
-        await user.addService(favService, 'services_users_favourites' );
-
+        const { serviceId , userId } = req.body;
+        await Service.findByPk(serviceId);
+        await Users.findByPk(userId);
+        await Services_users_favourites.create({ serviceId: serviceId, userId: userId  });
         return res.status(200).json("add fav")
     } catch (e) {
         next (e);
     };
 };
+
 
 async function getFavs(req, res, next) {
     try {
