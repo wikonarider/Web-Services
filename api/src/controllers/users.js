@@ -106,6 +106,8 @@ async function userBanned(req, res, next) {
       // chequeo si existe el usuario
       where: { id: id },
     });
+
+     res.json({ response: "user banned" });
     if (usersInDb === null) {
       res.json({ respones: "user not founded" });
     } else {
