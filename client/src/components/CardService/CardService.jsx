@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
+
 function CardService({ service }) {
   const { title, img, price } = service;
   const rating = 5;
