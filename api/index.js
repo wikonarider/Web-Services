@@ -23,10 +23,9 @@ const { json } = require('./mock/dbJson');
 const { services } = require('./mock/servicesJson');
 const { users } = require('./mock/usersJson');
 const { Service, Category, Users } = require('./src/db');
+const { ENV_VARIABLE } = process.env;
 
-// Syncing all the models at once.
-
-conn.sync({ force:true }).then(() => {
+conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
   server.listen(3001, () => {
     Service.bulkCreate(json).then(() => console.log('Datos Cargados'));
     Category.bulkCreate(services).then(() => console.log('Servicios Cargados'));
