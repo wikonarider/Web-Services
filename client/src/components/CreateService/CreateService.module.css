@@ -1,0 +1,27 @@
+.container{
+    /* background-color: blueviolet; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.formWrapper{
+    /* background-color: rgb(136, 35, 35); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+}
+
+.inputsContainer{
+    margin: 0.7em;
+    width: 100%;
+}
+
+.submitButton{
+    margin: 1em;
+}
+

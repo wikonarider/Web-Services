@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
+
 function CardService({ service }) {
   const { title, img, price, id } = service;
   const rating = 5;
