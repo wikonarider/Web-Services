@@ -3,7 +3,7 @@ const { Province, City } = require("../db");
 async function getProvinces(req, res, next) {
   try {
     const { provinceId } = req.query;
-    if (Number.isNaN(Number(provinceId))) {
+    if (provinceId && Number.isNaN(Number(provinceId))) {
       return res.status(400).json({ data: "It has to be of type number" });
     }
     const response = await Province.findAll({
