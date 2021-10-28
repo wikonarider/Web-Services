@@ -1,8 +1,9 @@
-import { type } from "../actions/variables";
+import { type } from '../actions/variables';
 
 const initialState = {
   services: [],
   users: [],
+  groups: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -11,8 +12,8 @@ const rootReducer = (state = initialState, action) => {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
 
     case type.GET_SERVICES:
-      console.log("Payload en reducer", action.payload);
-      console.log("globalState de servicios", state.services);
+      console.log('Payload en reducer', action.payload);
+      console.log('globalState de servicios', state.services);
       return {
         ...state,
         services: payload,
@@ -23,6 +24,9 @@ const rootReducer = (state = initialState, action) => {
 
     case type.GET_USERS:
       return { ...state, users: action.payload };
+
+    case type.GET_GROUPS:
+      return { ...state, groups: action.payload };
 
     default:
       return state;

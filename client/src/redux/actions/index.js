@@ -1,5 +1,5 @@
-import { type } from "./variables";
-import axios from "axios";
+import { type } from './variables';
+import axios from 'axios';
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
 // esta configurado en el archivo index.js
@@ -22,6 +22,20 @@ export function getServicesById(id) {
       var json = await axios(`/services/${id}`);
       return dispatch({
         type: type.GET_SERVICES,
+        payload: json.data,
+      });
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
+
+export function getGroups() {
+  return async function (dispatch) {
+    try {
+      var json = await axios(`/groups`);
+      return dispatch({
+        type: type.GET_GROUPS,
         payload: json.data,
       });
     } catch (err) {
@@ -53,7 +67,7 @@ export function deleteService(id) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post("/users/", data);
+      return await axios.post('/users/', data);
     } catch (err) {
       return new Error(err);
     }
@@ -63,7 +77,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.post("/users/", newData);
+      return await axios.post('/users/', newData);
     } catch (err) {
       return new Error(err);
     }
@@ -95,7 +109,7 @@ export function createService(body) {
   return async function (dispatch) {
     var json = await axios.post(`/services`, body);
     return dispatch({
-      type: "CREATE_SERVICE",
+      type: 'CREATE_SERVICE',
       payload: json.data,
     });
   };
