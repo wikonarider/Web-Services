@@ -46,30 +46,20 @@ async function getServices(req, res, next) {
 async function postServices(req, res, next) {
   try {
     const { userId } = req.cookies;
-    // si esta logeado
-    if (userId) {
-      // si existe el user
-      const user = await Users.findByPk(userId);
-      if (user) {
-        const { title, img, description, price, categoryId } = req.body;
-        // si se pasaron todos los parametros
-        if (title && img && description && price && categoryId) {
-          const errors = await validateServices(req.body);
-          // si son todos los parametros validos
-          if (!Object.keys(errors).length) {
-            await Service.create({ ...req.body, userId, categoryId });
-            res.json({ data: "Service created " });
-          } else {
-            res.status(400).json({ data: errors });
-          }
-        } else {
-          res.status(400).json({ data: "All parameters are required" });
-        }
+
+    const { title, img, description, price, categoryId } = req.body;
+    // si se pasaron todos los parametros
+    if (title && img && description && price && categoryId) {
+      const errors = await validateServices(req.body);
+      // si son todos los parametros validos
+      if (!Object.keys(errors).length) {
+        await Service.create({ ...req.body, userId, categoryId });
+        res.json({ data: "Service created " });
       } else {
-        res.status(400).json({ data: "User not found" });
+        res.status(400).json({ data: errors });
       }
     } else {
-      res.status(400).json({ data: "User not logged in" });
+      res.status(400).json({ data: "All parameters are required" });
     }
   } catch (e) {
     next(e);
