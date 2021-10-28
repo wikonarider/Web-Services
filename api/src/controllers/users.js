@@ -31,36 +31,30 @@ async function userCreated(req, res, next) {
 
 async function userEdit(req, res, next) {
   const { userId } = req.cookies;
-  if (userId) {
-    try {
-      const user = await Users.findByPk(userId);
-      if (user) {
-        const { name, lastname, userImg, password } = req.body;
-        const errors = validateUserEdit(req.body);
-        if (name || lastname || userImg || password) {
-          if (!Object.keys(errors).length) {
-            // Cambios los datos, si fueron pasados
-            user.name = name ? name : user.name;
-            user.lastname = lastname ? lastname : user.lastname;
-            user.userImg = userImg ? userImg : user.userImg;
-            user.password = password ? password : user.password;
 
-            await user.save();
-            res.json({ data: "User edited" });
-          } else {
-            res.status(400).json({ data: errors });
-          }
-        } else {
-          res.status(400).json({ data: "Empty parameters, user not edited" });
-        }
+  try {
+    const user = await Users.findByPk(userId);
+
+    const { name, lastname, userImg, password } = req.body;
+    const errors = validateUserEdit(req.body);
+    if (name || lastname || userImg || password) {
+      if (!Object.keys(errors).length) {
+        // Cambios los datos, si fueron pasados
+        user.name = name ? name : user.name;
+        user.lastname = lastname ? lastname : user.lastname;
+        user.userImg = userImg ? userImg : user.userImg;
+        user.password = password ? password : user.password;
+
+        await user.save();
+        res.json({ data: "User edited" });
       } else {
-        res.status(400).json({ data: "User not found" });
+        res.status(400).json({ data: errors });
       }
-    } catch (e) {
-      next(e);
+    } else {
+      res.status(400).json({ data: "Empty parameters, user not edited" });
     }
-  } else {
-    res.json({ data: "User not logged" });
+  } catch (e) {
+    next(e);
   }
 }
 

@@ -7,15 +7,23 @@ var {
   postPurchase,
   userEdit,
 } = require("../controllers/users");
+const {
+  isAuthenticated,
+  isNotAuthenticated,
+} = require("../controllers/authentication");
 
-router.post("/", userCreated);
+// User post
+router.post("/", isNotAuthenticated, userCreated);
 router.post("/purchase", postPurchase);
 
+// User get
 router.get("/", getUsers);
 router.get("/?username=", getUsers);
 
+// User delete
 router.delete("/:id", userBanned);
 
-router.put("/", userEdit);
+// User put
+router.put("/", isAuthenticated, userEdit);
 
 module.exports = router;
