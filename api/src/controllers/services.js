@@ -114,8 +114,8 @@ async function deleteServices(req, res, next) {
 }
 
 //____________________________________________________________________________
-function putServiceById(req, res, next) {
-  var { title, description, img, price, id } = req.body;
+ function putServiceById(req, res, next) {
+  var { title, description, img, price, id,username,pas } = req.body;
 
   Service.findByPk(id)
     .then((service) => {
@@ -134,4 +134,5 @@ module.exports = {
   postServices,
   getServicesById,
   deleteServices,
+  putServiceById,
 };
