@@ -14,15 +14,15 @@ async function userCreated(req, res, next) {
       const errors = validateUser(req.body);
       if (!Object.keys(errors).length) {
         await Users.create(req.body);
-        res.json({ response: "created" }); // responde con 200, y created
+        res.json({ data: "created" }); // responde con 200, y created
       } else {
-        res.status(400).json({ response: errors });
+        res.status(400).json({ data: errors });
         // algun parametro invalido.
       }
     } else {
       res
         .status(400)
-        .json({ response: "username or email already exist or is empty" });
+        .json({ data: "username or email already exist or is empty" });
     }
   } catch (e) {
     next(e);
@@ -31,36 +31,30 @@ async function userCreated(req, res, next) {
 
 async function userEdit(req, res, next) {
   const { userId } = req.cookies;
-  if (userId) {
-    try {
-      const user = await Users.findByPk(userId);
-      if (user) {
-        const { name, lastname, userImg, password } = req.body;
-        const errors = validateUserEdit(req.body);
-        if (name || lastname || userImg || password) {
-          if (!Object.keys(errors).length) {
-            // Cambios los datos, si fueron pasados
-            user.name = name ? name : user.name;
-            user.lastname = lastname ? lastname : user.lastname;
-            user.userImg = userImg ? userImg : user.userImg;
-            user.password = password ? password : user.password;
 
-            await user.save();
-            res.json({ data: "User edited" });
-          } else {
-            res.status(400).json({ data: errors });
-          }
-        } else {
-          res.status(400).json({ data: "Empty parameters, user not edited" });
-        }
+  try {
+    const user = await Users.findByPk(userId);
+
+    const { name, lastname, userImg, password } = req.body;
+    const errors = validateUserEdit(req.body);
+    if (name || lastname || userImg || password) {
+      if (!Object.keys(errors).length) {
+        // Cambios los datos, si fueron pasados
+        user.name = name ? name : user.name;
+        user.lastname = lastname ? lastname : user.lastname;
+        user.userImg = userImg ? userImg : user.userImg;
+        user.password = password ? password : user.password;
+
+        await user.save();
+        res.json({ data: "User edited" });
       } else {
-        res.status(400).json({ data: "User not found" });
+        res.status(400).json({ data: errors });
       }
-    } catch (e) {
-      next(e);
+    } else {
+      res.status(400).json({ data: "Empty parameters, user not edited" });
     }
-  } else {
-    res.json({ data: "User not logged" });
+  } catch (e) {
+    next(e);
   }
 }
 
@@ -86,7 +80,7 @@ async function getUsers(req, res, next) {
           username,
         },
         include: {
-          all:true
+          all: true,
         },
       });
       res.status(200).send(userFinded);
@@ -104,7 +98,7 @@ async function userBanned(req, res, next) {
       where: { id: id },
     });
 
-     res.json({ response: "user banned" });
+    res.json({ response: "user banned" });
     if (usersInDb === null) {
       res.json({ respones: "user not founded" });
     } else {

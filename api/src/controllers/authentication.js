@@ -18,6 +18,16 @@ async function isAuthenticated(req, res, next) {
   }
 }
 
+function isNotAuthenticated(req, res, next) {
+  const { userId } = req.cookies;
+  if (!userId) {
+    next();
+  } else {
+    res.status(400).json({ data: "Logged in user, access not allowed" });
+  }
+}
+
 module.exports = {
   isAuthenticated,
+  isNotAuthenticated,
 };

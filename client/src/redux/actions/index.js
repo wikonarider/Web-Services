@@ -3,11 +3,10 @@ import axios from "axios";
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
 // esta configurado en el archivo index.js
-//type contiene las constantes,llamar con type punto,ejemplo: type.GET_SERVICES
-export function getServices(title) {
+export function getServices(title, order) {
   return async function (dispatch) {
     try {
-      var json = await axios(`/services?title=${title}`);
+      var json = await axios(`/services?title=${title}&order=${order}`);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,

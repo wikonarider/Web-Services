@@ -3,10 +3,10 @@ const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-  const { title } = req.query;
+  const { title, order } = req.query;
 
   try {
-    const dbServices = await Service.findAll({
+    let dbServices = await Service.findAll({
       //Traigo todo de la db
       include: [
         {
@@ -22,7 +22,25 @@ async function getServices(req, res, next) {
         },
       ],
     });
-
+    order && order === "ASC"
+      ? (dbServices = dbServices.sort(function (a, b) {
+          if (a.price > b.price) {
+            return -1;
+          }
+          if (b.price > a.price) {
+            return 1;
+          }
+          return 0;
+        }))
+      : (dbServices = dbServices.sort(function (a, b) {
+          if (b.price > a.price) {
+            return -1;
+          }
+          if (a.price > b.price) {
+            return 1;
+          }
+          return 0;
+        }));
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
     else {

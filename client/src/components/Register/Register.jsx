@@ -12,7 +12,6 @@ function Register() {
     username: "",
     password: "",
     email: "",
-    location: "",
   });
   const [inputsErrors, setInputErrors] = useState({});
   const [modal, setModal] = useState(false);
@@ -42,7 +41,7 @@ function Register() {
       if (!Object.keys(inputsErrors).length) {
         const user = { ...inputs, location: [inputs.location], userImg: "" };
         const response = await registerUser(user);
-        if (response.response === "created") {
+        if (response.data === "created") {
           setModal(true);
           setInputs({
             name: "",
@@ -50,13 +49,13 @@ function Register() {
             username: "",
             password: "",
             email: "",
-            location: "",
           });
           setInputErrors({});
           setStart(true);
         }
       }
     } catch (e) {
+      console.log(e);
       setInputErrors((prev) => {
         return {
           ...prev,
@@ -123,17 +122,6 @@ function Register() {
           name="email"
           value={inputs.email}
           label="Email"
-          variant="outlined"
-          onChange={handleChange}
-        />
-        <TextField
-          required
-          fullWidth
-          error={inputsErrors.location ? true : false}
-          helperText={inputsErrors.location}
-          name="location"
-          value={inputs.location}
-          label="Location"
           variant="outlined"
           onChange={handleChange}
         />
