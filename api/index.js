@@ -45,6 +45,6 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
       console.log("Servicios Cargados")
     );
 
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    console.log("----listening on port 3001-----"); // eslint-disable-line no-console
   });
 });

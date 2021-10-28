@@ -5,11 +5,15 @@ import Register from "./components/Register/Register";
 import CreateService from "./components/CreateService/CreateService";
 import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
+import Chat from "./components/chat/chat";
+import React from "react";
 
 function App() {
+   
   return (
     <div className="App">
       <Route exact path="/" component={Home} />
+      <Route exact path="/chat" component={Chat}/>
       <Route exact path="/register" component={Register} />
       <Route exact path="/service" component={CreateService} />
       <Route exact path="/services/:id" render={({match})=>{
