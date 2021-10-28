@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import s from "./YourAccount.module.css";
 
 import { Button, Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import CardService from "../CardService/CardService";
+import { Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 //mockup de usuario para mostrar el panel
 const userData = {
@@ -17,16 +20,38 @@ const userData = {
   name: "Everett",
   lastname: "Roskilly",
   username: "eroskilly7",
-  password: "DJM1j7OZYlO",
+  password: "$2b$10$Q1eIlfNVChrK3VWl7.PPVeCywddxvrNarA7OMsafFgsoFz8GT2hqO",
   email: "eroskilly7@twitpic.com",
   location: ["Ushuaia"],
   ban: false,
-  createdAt: "2021-10-27T15:40:21.861Z",
-  updatedAt: "2021-10-27T15:40:21.861Z",
+  createdAt: "2021-10-28T13:38:48.567Z",
+  updatedAt: "2021-10-28T13:38:48.567Z",
+  services: [
+    {
+      id: 4,
+      title: "paseadora de perros",
+      img: "https://www.ciudaddelosangeles.com/wp-content/uploads/2016/03/paseador-de-perros.jpg",
+      description: "i love little dogs",
+      price: 15.3,
+      createdAt: "2021-10-28T13:38:49.601Z",
+      updatedAt: "2021-10-28T13:38:49.601Z",
+      userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
+      categoryId: 31,
+    },
+  ],
+  qualifications: [],
 };
 
 export default function YourAccount() {
   // const userData = useSelector((state) => state.userData);
+
+  const [viewServices, setViewservices] = useState(false);
+  const [viewOrders, setViewOrders] = useState(false);
+  const [viewFavs, setViewFavs] = useState(false);
+
+  const fileInput = useRef();
+
+  function loadImg(files) {}
 
   return (
     <div>
@@ -41,11 +66,14 @@ export default function YourAccount() {
             className={s.avatar}
           ></Avatar>
 
+          <input style={{ display: "none" }} type="file" ref={fileInput} />
+
           <Button
             variant="text"
             startIcon={<PhotoCameraIcon />}
             size="small"
             color="secondary"
+            onClick={() => fileInput.current.click()}
           >
             Change Photo
           </Button>
@@ -66,51 +94,82 @@ export default function YourAccount() {
       <div>
         <Button
           variant="outlined"
+          variant={viewOrders ? "contained" : "outlined"}
+          color={viewOrders ? "secondary" : "primary"}
           startIcon={<ShoppingBagIcon />}
           className={s.button}
-          onClick={() => console.log("orders")}
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(!viewOrders);
+            setViewservices(false);
+          }}
         >
           Your Orders
         </Button>
         <Button
-          variant="outlined"
+          variant={viewFavs ? "contained" : "outlined"}
+          color={viewFavs ? "secondary" : "primary"}
           startIcon={<FavoriteIcon />}
-          onClick={() => console.log("favs")}
+          onClick={() => {
+            setViewFavs(!viewFavs);
+            setViewOrders(false);
+            setViewservices(false);
+          }}
         >
           Your Favs
         </Button>
-      </div>
-      <div>
         <Button
-          variant="outlined"
-          startIcon={<HomeRepairServiceIcon />}
-          onClick={() => console.log("service")}
-        >
-          Post Service
-        </Button>
-        <Button
-          variant="outlined"
+          variant={viewServices ? "contained" : "outlined"}
+          color={viewServices ? "secondary" : "primary"}
           startIcon={<VisibilityIcon />}
-          onClick={() => console.log("service")}
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(false);
+            setViewservices(!viewServices);
+          }}
         >
           Your Services
         </Button>
-        <Button
-          variant="outlined"
-          startIcon={<DataSaverOffIcon />}
-          onClick={() => console.log("profile data")}
-        >
+      </div>
+      <div>
+        <Link to="/service" style={{ textDecoration: "none" }}>
+          <Button variant="outlined" startIcon={<PostAddIcon />}>
+            Post Service
+          </Button>
+        </Link>
+
+        <Button variant="outlined" startIcon={<DataSaverOffIcon />}>
           Change Your Data
         </Button>
       </div>
+
+      {viewFavs && (
+        <Container>
+          <div>
+            <h1>FAVS</h1>
+            {userData.qualifications.map((s) => (
+              <CardService service={s} />
+            ))}
+          </div>
+        </Container>
+      )}
+      {viewOrders && (
+        <Container>
+          <div>
+            <h1>YOUR ORDERS</h1>
+          </div>
+        </Container>
+      )}
+      {viewServices && (
+        <Container>
+          <div>
+            <h1>YOUR SERVICES</h1>
+            {userData.services.map((s) => (
+              <CardService service={s} />
+            ))}
+          </div>
+        </Container>
+      )}
     </div>
   );
 }
-
-// cambiar foto
-// ver favs ---
-// crear servicio ---
-// ver servicios comprados // orders  ---
-// chatear con usuarios de servicios que compro //
-
-// datos de la cuenta
