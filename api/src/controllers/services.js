@@ -7,10 +7,19 @@ async function getServices(req, res, next) {
   try {
     const dbServices = await Service.findAll({
       //Traigo todo de la db
-      include: {
-        model: Users,
-        through: { attributes: [] },
-      },
+      include: [
+        {
+          model: Users,
+          through: { attributes: [] },
+        },
+        Qualification,
+        {
+          model: Category,
+          include: {
+            model: Group,
+          },
+        },
+      ],
     });
 
     if (!title) return res.send(dbServices);
