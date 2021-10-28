@@ -14,15 +14,15 @@ async function userCreated(req, res, next) {
       const errors = validateUser(req.body);
       if (!Object.keys(errors).length) {
         await Users.create(req.body);
-        res.json({ response: "created" }); // responde con 200, y created
+        res.json({ data: "created" }); // responde con 200, y created
       } else {
-        res.status(400).json({ response: errors });
+        res.status(400).json({ data: errors });
         // algun parametro invalido.
       }
     } else {
       res
         .status(400)
-        .json({ response: "username or email already exist or is empty" });
+        .json({ data: "username or email already exist or is empty" });
     }
   } catch (e) {
     next(e);
@@ -86,7 +86,7 @@ async function getUsers(req, res, next) {
           username,
         },
         include: {
-          all:true
+          all: true,
         },
       });
       res.status(200).send(userFinded);
@@ -104,7 +104,7 @@ async function userBanned(req, res, next) {
       where: { id: id },
     });
 
-     res.json({ response: "user banned" });
+    res.json({ response: "user banned" });
     if (usersInDb === null) {
       res.json({ respones: "user not founded" });
     } else {
