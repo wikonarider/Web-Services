@@ -1,4 +1,4 @@
-const { Users, Service } = require("../db");
+const { Users, Service, Qualification } = require("../db");
 const {
   validateUser,
   checkUnique,
@@ -85,12 +85,9 @@ async function getUsers(req, res, next) {
         where: {
           username,
         },
-        include: [
-          {
-            model: Service,
-            attributes: [],
-          },
-        ],
+        include: {
+          all:true
+        },
       });
       res.status(200).send(userFinded);
     }
