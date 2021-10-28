@@ -1,4 +1,5 @@
 const { Service, Users, Qualification, Category, Group } = require("../db.js");
+const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
@@ -44,29 +45,32 @@ async function getServices(req, res, next) {
 
 async function postServices(req, res, next) {
   try {
-    //userName eventualmente debería ser enviada por cookie
-    const { title, img, description, price, userName } = req.body;
-    //busco el user que lo creó para asociárselo
-    const userFound = await Users.findOne({
-      where: {
-        username: userName,
-      },
-    });
-
-    if (userFound) {
-      //creo el servicio y asocio el servicio creado al user que lo creó
-      const serviceCreated = await Service.create({
-        title,
-        img,
-        description,
-        price,
-        userId: userFound.id,
-      });
-
-      return res.status(200).send(serviceCreated);
+    const { userId } = req.cookies;
+    // si esta logeado
+    if (userId) {
+      // si existe el user
+      const user = await Users.findByPk(userId);
+      if (user) {
+        const { title, img, description, price, categoryId } = req.body;
+        // si se pasaron todos los parametros
+        if (title && img && description && price && categoryId) {
+          const errors = await validateServices(req.body);
+          // si son todos los parametros validos
+          if (!Object.keys(errors).length) {
+            await Service.create({ ...req.body, userId, categoryId });
+            res.json({ data: "Service created " });
+          } else {
+            res.status(400).json({ data: errors });
+          }
+        } else {
+          res.status(400).json({ data: "All parameters are required" });
+        }
+      } else {
+        res.status(400).json({ data: "User not found" });
+      }
+    } else {
+      res.status(400).json({ data: "User not logged in" });
     }
-
-    return res.status(200).send({ message: "User Not Found" });
   } catch (e) {
     next(e);
   }
