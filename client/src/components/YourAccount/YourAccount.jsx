@@ -10,8 +10,9 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CardService from "../CardService/CardService";
-import { Container } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { FormDialog } from "./FormDialog/FormDialog";
 
 //mockup de usuario para mostrar el panel
 const userData = {
@@ -42,12 +43,23 @@ const userData = {
   qualifications: [],
 };
 
+const useStyles = makeStyles({
+  button:{
+    marginRight: 5,
+    marginLeft: 5,
+  }
+})
+
 export default function YourAccount() {
   // const userData = useSelector((state) => state.userData);
+
+  const classes = useStyles();
 
   const [viewServices, setViewservices] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [viewFavs, setViewFavs] = useState(false);
+
+  const [openForm, setOpenForm] = useState(false);
 
   const fileInput = useRef();
 
@@ -91,62 +103,75 @@ export default function YourAccount() {
         </div>
       </div>
 
-      <div>
-        <Button
-          variant="outlined"
-          variant={viewOrders ? "contained" : "outlined"}
-          color={viewOrders ? "secondary" : "primary"}
-          startIcon={<ShoppingBagIcon />}
-          className={s.button}
-          onClick={() => {
-            setViewFavs(false);
-            setViewOrders(!viewOrders);
-            setViewservices(false);
-          }}
-        >
-          Your Orders
-        </Button>
-        <Button
-          variant={viewFavs ? "contained" : "outlined"}
-          color={viewFavs ? "secondary" : "primary"}
-          startIcon={<FavoriteIcon />}
-          onClick={() => {
-            setViewFavs(!viewFavs);
-            setViewOrders(false);
-            setViewservices(false);
-          }}
-        >
-          Your Favs
-        </Button>
-        <Button
-          variant={viewServices ? "contained" : "outlined"}
-          color={viewServices ? "secondary" : "primary"}
-          startIcon={<VisibilityIcon />}
-          onClick={() => {
-            setViewFavs(false);
-            setViewOrders(false);
-            setViewservices(!viewServices);
-          }}
-        >
-          Your Services
-        </Button>
-      </div>
-      <div>
-        <Link to="/service" style={{ textDecoration: "none" }}>
-          <Button variant="outlined" startIcon={<PostAddIcon />}>
-            Post Service
+      <div className={s.botonera}>
+          <Button
+            variant="outlined"
+            variant={viewOrders ? "contained" : "outlined"}
+            color={viewOrders ? "secondary" : "primary"}
+            startIcon={<ShoppingBagIcon />}
+            className={classes.button}
+            onClick={() => {
+              setViewFavs(false);
+              setViewOrders(!viewOrders);
+              setViewservices(false);
+            }}
+            className={classes.button}
+          >
+            Your Orders
           </Button>
-        </Link>
+          <Button
+            variant={viewFavs ? "contained" : "outlined"}
+            color={viewFavs ? "secondary" : "primary"}
+            startIcon={<FavoriteIcon />}
+            onClick={() => {
+              setViewFavs(!viewFavs);
+              setViewOrders(false);
+              setViewservices(false);
+            }}
+            className={classes.button}
+          >
+            Your Favs
+          </Button>
+          <Button
+            variant={viewServices ? "contained" : "outlined"}
+            color={viewServices ? "secondary" : "primary"}
+            startIcon={<VisibilityIcon />}
+            onClick={() => {
+              setViewFavs(false);
+              setViewOrders(false);
+              setViewservices(!viewServices);
+            }}
+            className={classes.button}
+          >
+            Your Services
+          </Button>
 
-        <Button variant="outlined" startIcon={<DataSaverOffIcon />}>
-          Change Your Data
-        </Button>
+          <Link to="/service" style={{ textDecoration: "none" }}>
+            <Button
+              variant="outlined"
+              startIcon={<PostAddIcon />}
+              className={classes.button}
+            >
+              Post Service
+            </Button>
+          </Link>
+
+          <Button
+            variant="outlined"
+            startIcon={<DataSaverOffIcon />}
+            onClick={() => {
+              setOpenForm(true);
+            }}
+            className={classes.button}
+          >
+            Change Your Data
+          </Button>
       </div>
 
       {viewFavs && (
         <Container>
           <div>
-            <h1>FAVS</h1>
+            <h1>YOUR FAVS</h1>
             {userData.qualifications.map((s) => (
               <CardService service={s} />
             ))}
@@ -170,6 +195,8 @@ export default function YourAccount() {
           </div>
         </Container>
       )}
+
+      <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
     </div>
   );
 }
