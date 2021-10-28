@@ -54,12 +54,7 @@ export function validateInput(user) {
   if (!validEmail(user.email)) {
     errors.email = "It must be a valid email address";
   }
-  // location validations (not finished)
-  if (typeof user.location !== "string") {
-    errors.location = "It has to be an string";
-  } else if (!user.location.length) {
-    errors.location = "It can't be empty ";
-  }
+
   return errors;
 }
 
