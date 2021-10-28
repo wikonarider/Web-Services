@@ -1,31 +1,31 @@
 const groups = [
   {
     id: 1,
-    name: "Clases - Cursos",
+    name: "Lessons - Courses",
   },
   {
     id: 2,
-    name: "Reparaciones - Tecnicos",
+    name: "Repairs - Technician",
   },
   {
     id: 3,
-    name: "Organizaciones de eventos",
+    name: "Event organizations",
   },
   {
     id: 4,
-    name: "Transporte - Mudanzas",
+    name: "Transport - Moving",
   },
   {
     id: 5,
-    name: "Servicios Doméstico - Limpieza",
+    name: "House service",
   },
   {
     id: 6,
-    name: "Turismo - Paquetes turisticos",
+    name: "Touring - Tour Packages",
   },
   {
     id: 7,
-    name: "Otros servicios",
+    name: "Other",
   },
 ];
 

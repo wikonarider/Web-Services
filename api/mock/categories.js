@@ -17,109 +17,112 @@ function linkCategoryWithGroup(array, groupId) {
 
 const clases = [
   {
-    name: "Danzas",
+    name: "Dance",
   },
   {
-    name: "Idiomas",
+    name: "Language",
   },
   {
-    name: "Informatica",
+    name: "Computing",
   },
   {
-    name: "Musica",
+    name: "Music",
   },
   {
-    name: "Otros temas",
+    name: "Other",
   },
   {
-    name: "Teatro",
+    name: "Theater",
   },
   {
-    name: "Tutores - Clases Particulares",
+    name: "Academics Tutoring",
   },
 ];
 
 const reparaciones = [
   {
-    name: "Carpinteria",
+    name: "Carpentry",
   },
   {
-    name: "Cerrajeria",
+    name: "Locksmith",
   },
   {
-    name: "Construccion - Albañiles",
+    name: "Construction & Bricklayer",
   },
   {
-    name: "Electricista",
+    name: "Electrical",
   },
   {
-    name: "Electrodomesticos",
+    name: "Appliance Repair",
   },
   {
-    name: "Electronica y Computadoras",
+    name: "Electrical & Computers",
   },
   {
-    name: "Herreria",
+    name: "Smithy",
   },
   {
-    name: "Mecanicos",
+    name: "Auto Repair",
   },
   {
-    name: "Otros Servicios",
+    name: "Other",
   },
   {
-    name: "Pintor",
+    name: "Painting",
   },
   {
-    name: "Plomero y Gasista",
+    name: "Plumbing y Gas",
   },
 ];
 
 const organizaciones = [
   {
-    name: "Ambientacion",
+    name: "Ambience & Decoration",
   },
   {
     name: "Catering",
   },
   {
-    name: "Entretenimiento",
+    name: "Entertainment",
   },
   {
-    name: "Fotografia",
+    name: "Photography",
   },
   {
-    name: "Organizacion",
+    name: "Organization",
   },
   {
-    name: "Otros Servicios",
+    name: "Other",
   },
   {
-    name: "Salones",
+    name: "Salon",
   },
 ];
 
 const transporte = [
   {
-    name: "Fletes",
+    name: "Freight - Lading",
   },
   {
-    name: "Mudanza",
+    name: "Moving",
   },
   {
-    name: "Otros Servicios",
+    name: "Other",
   },
   {
-    name: "Transporte",
+    name: "Transport",
   },
 ];
 
 const domestico = [
   {
-    name: "Jardinero",
+    name: "Gardener",
   },
   {
-    name: "Niñera",
+    name: "Baby sister",
+  },
+  {
+    name: "Cleaning & Maid Service"
   },
 ];
 
@@ -131,7 +134,7 @@ const turismo = [
     name: "Misiones",
   },
   {
-    name: "Cordoba",
+    name: "Córdoba",
   },
   {
     name: "Mar Del Plata",
