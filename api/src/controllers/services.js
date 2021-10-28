@@ -1,4 +1,4 @@
-const { Service, Users } = require('../db.js');
+const { Service, Users, Qualification, Category, Group } = require("../db.js");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
@@ -7,10 +7,19 @@ async function getServices(req, res, next) {
   try {
     const dbServices = await Service.findAll({
       //Traigo todo de la db
-      include: {
-        model: Users,
-        through: { attributes: [] },
-      },
+      include: [
+        {
+          model: Users,
+          through: { attributes: [] },
+        },
+        Qualification,
+        {
+          model: Category,
+          include: {
+            model: Group,
+          },
+        },
+      ],
     });
 
     if (!title) return res.send(dbServices);
@@ -57,54 +66,62 @@ async function postServices(req, res, next) {
       return res.status(200).send(serviceCreated);
     }
 
-    return res.status(200).send({ message: 'User Not Found' });
+    return res.status(200).send({ message: "User Not Found" });
   } catch (e) {
     next(e);
   }
 }
 
-async function getServicesById(req, res, next){
-  let {id} = req.params;
+async function getServicesById(req, res, next) {
+  let { id } = req.params;
 
   try {
     let service = await Service.findOne({
       where: {
         id: id,
       },
+      include: [
+        Qualification,
+        {
+          model: Category,
+          include: {
+            model: Group,
+          },
+        },
+      ],
     });
 
-    service ? res.status(200).send(service) : res.status(404).send({message: `Service (id: ${id}) not found`});
-  }catch(e){
+    service
+      ? res.status(200).send(service)
+      : res.status(404).send({ message: `Service (id: ${id}) not found` });
+  } catch (e) {
     next(e);
   }
 }
 
 async function deleteServices(req, res, next) {
-  let  {id}  = req.params;
+  let { id } = req.params;
   try {
     let service = await Service.findOne({
       where: {
         id: id,
       },
     });
-    if(service === null){
-      res.send("service not founded")
+    if (service === null) {
+      res.send("service not founded");
     }
     await Service.destroy({
-      where: {id : id}
-    })
-    res.send("service deleted")
-  }
-    catch (err) {
+      where: { id: id },
+    });
+    res.send("service deleted");
+  } catch (err) {
     next(err);
   }
 }
 
-
 //____________________________________________________________________________
- function putServiceById(req, res, next) {
- 
-  var { title, description, img, price ,id} = req.body;
+function putServiceById(req, res, next) {
+  var { title, description, img, price, id } = req.body;
 
   Service.findByPk(id)
     .then((service) => {
@@ -118,12 +135,9 @@ async function deleteServices(req, res, next) {
 
 //________________________________________________________________________
 
-
-
-
 module.exports = {
   getServices,
   postServices,
   getServicesById,
-  deleteServices
+  deleteServices,
 };

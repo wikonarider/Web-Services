@@ -27,12 +27,8 @@ const { Service, Users, Group } = require("./src/db");
 const { ENV_VARIABLE } = process.env;
 
 conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
-  server.listen(3001, () => {
-    Service.bulkCreate(json).then(() => console.log("Servicios Cargados"));
-    Users.bulkCreate(users, { individualHooks: true }).then(() =>
-      console.log("Users Cargados")
-    );
-    Group.bulkCreate(groups)
+  server.listen(3001, async () => {
+    await Group.bulkCreate(groups)
       .then(() => {
         console.log("Grupos cargados");
         Promise.resolve(linkAllGroups()).then(() =>
@@ -40,6 +36,14 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
         );
       })
       .catch((e) => console.log(e));
+
+    await Users.bulkCreate(users, { individualHooks: true }).then(() =>
+      console.log("Users Cargados")
+    );
+
+    await Service.bulkCreate(json).then(() =>
+      console.log("Servicios Cargados")
+    );
 
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
