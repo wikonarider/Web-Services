@@ -63,6 +63,16 @@ export function deleteService(id) {
     }
   };
 }
+
+export function createService(body) {
+  return async function (dispatch) {
+    var json = await axios.post(`/services`, body);
+    return dispatch({
+      type: type.CREATE_SERVICE,
+      payload: json.data,
+    });
+  };
+}
 //_____________________________________________________________________________________actions user
 export function postUser(data) {
   return async () => {
@@ -102,15 +112,5 @@ export function banUser(id) {
     } catch (err) {
       return new Error(err);
     }
-  };
-}
-
-export function createService(body) {
-  return async function (dispatch) {
-    var json = await axios.post(`/services`, body);
-    return dispatch({
-      type: "CREATE_SERVICE",
-      payload: json.data,
-    });
   };
 }

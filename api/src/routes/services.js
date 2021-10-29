@@ -4,6 +4,7 @@ var {
   getServices,
   postServices,
   getServicesById,
+  putServiceById,
   deleteServices,
 } = require("../controllers/services");
 const { isAuthenticated } = require("../controllers/authentication");
@@ -16,7 +17,7 @@ router.get("/:id", getServicesById);
 router.post("/", isAuthenticated, postServices);
 
 // put Services
-
+router.put("/",  putServiceById);//colocar isAuthenticated
 // delete Services
 router.delete("/:id", deleteServices);
 

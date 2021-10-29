@@ -133,16 +133,25 @@ async function deleteServices(req, res, next) {
 
 //____________________________________________________________________________
 function putServiceById(req, res, next) {
-  var { title, description, img, price, id } = req.body;
+  var { title, description, img, price, id, categoryId } = req.body;
 
-  Service.findByPk(id)
-    .then((service) => {
-      return service.update({ title, description, img, price });
-    })
-    .then((res) => {
-      res.status(200).send(res.dataValues);
-    })
-    .catch((error) => next(error));
+  if (title && description && img && price && categoryId && id) {
+    var errors = validateServices(req.body);
+    if (!Object.values(errors).length) {
+      Service.findByPk(id)
+        .then((service) => {
+          return service.update({ title, description, img, price, categoryId });
+        })
+        .then((result) => {
+          res.status(200).send(result.dataValues);
+        })
+        .catch((error) => next(error));
+    } else {
+      res.status(500).send(errors);
+    }
+  } else {
+    res.status(500).send("All parameters are required");
+  }
 }
 
 //________________________________________________________________________
@@ -152,4 +161,5 @@ module.exports = {
   postServices,
   getServicesById,
   deleteServices,
+  putServiceById,
 };
