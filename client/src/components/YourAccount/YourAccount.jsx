@@ -16,14 +16,6 @@ import { FormDialog } from "./FormDialog/FormDialog";
 import { getUsers, putUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-
-const useStyles = makeStyles({
-  button: {
-    marginRight: 5,
-    marginLeft: 5,
-  },
-});
-
 export default function YourAccount() {
   const dispatch = useDispatch();
 
