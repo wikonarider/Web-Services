@@ -1,13 +1,22 @@
-
-const { Service, Users, Qualification, Category, Group } = require("../db.js");
-const { orderByPrice, filterByPriceRange } = require("../utils/servicesFilter.js");
+const {
+  Service,
+  Users,
+  Qualification,
+  Category,
+  Group,
+  Services_provinces,
+  Services_cities,
+} = require("../db.js");
+const {
+  orderByPrice,
+  filterByPriceRange,
+} = require("../utils/servicesFilter.js");
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
   const { title, order } = req.query;
-  const {startRange, endRange} = req.query;
-
+  const { startRange, endRange } = req.query;
 
   try {
     let dbServices = await Service.findAll({
@@ -30,9 +39,9 @@ async function getServices(req, res, next) {
       orderByPrice(order, dbServices);
     }
     //FILTRO POR RANGO
-    if(startRange & endRange){
+    if (startRange & endRange) {
       let filteredByPriceRange = await filterByPriceRange(startRange, endRange);
-      return res.send(filteredByPriceRange)
+      return res.send(filteredByPriceRange);
     }
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
@@ -46,8 +55,7 @@ async function getServices(req, res, next) {
               filteredServices.push(service);
           });
           return res.send(filteredServices); //Si coincide mando el servicio con ese title
-        }
-        else return dbServices; //Si no, devuelvo todos los servicios
+        } else return dbServices; //Si no, devuelvo todos los servicios
       }
     }
   } catch (err) {
@@ -59,13 +67,42 @@ async function postServices(req, res, next) {
   try {
     const { userId } = req.cookies;
 
-    const { title, img, description, price, categoryId } = req.body;
+    const { title, img, description, price, categoryId, provinces } = req.body;
     // si se pasaron todos los parametros
-    if (title && img && description && price && categoryId) {
+    if (title && img && description && price && categoryId && provinces) {
       const errors = await validateServices(req.body);
       // si son todos los parametros validos
       if (!Object.keys(errors).length) {
-        await Service.create({ ...req.body, userId, categoryId });
+        const service = await Service.create({
+          ...req.body,
+          userId,
+          categoryId,
+        });
+
+        const promises = [];
+        // cargo las provincias
+        provinces.forEach((p) => {
+          promises.push(
+            Services_provinces.findOrCreate({
+              where: {
+                serviceId: service.id,
+                provinceId: p.id,
+              },
+            })
+          );
+          // cargo las ciudades
+          p.cities.forEach((c) => {
+            promises.push(
+              Services_cities.findOrCreate({
+                where: {
+                  cityId: c,
+                  serviceId: service.id,
+                },
+              })
+            );
+          });
+        });
+        await Promise.all(promises);
         res.json({ data: "Service created " });
       } else {
         res.status(400).json({ data: errors });
