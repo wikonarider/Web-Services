@@ -56,7 +56,7 @@ export default function YourAccount() {
       options
     )
       .then((res) => res.json())
-      .then((res) => dispatch(putUser(res.secure_url)))
+      .then((res) => dispatch(putUser({img: res.secure_url})))
       .catch((err) => console.log(err));
   };
 
