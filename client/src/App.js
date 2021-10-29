@@ -7,6 +7,8 @@ import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
+import Singin from "./components/Singin/singin";
+
 
 function App() {
    
@@ -20,6 +22,7 @@ function App() {
         return <DetailService id={match.params.id} />
       }} />
       <Route exact path="/account" component={YourAccount} />
+      <Route exact path="/login" component={Singin} />
     </div>
   );
 }

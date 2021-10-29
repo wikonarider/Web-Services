@@ -5,6 +5,7 @@ const initialState = {
   users: [],
   groups: [],
   provinces:[],
+  cookies: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,6 +24,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case type.CREATE_SERVICE:
+      return { ...state };
+
+    case type.SINGIN_USER:
+      return { ...state,
+      cookies: action.payload };
+
+    case type.LOGOUT_USER:
       return { ...state };
 
     case type.GET_USERS:

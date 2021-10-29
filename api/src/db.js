@@ -76,6 +76,10 @@ City.belongsTo(Province);
 Service.belongsToMany(Province, { through: "services_provinces" });
 Province.belongsToMany(Service, { through: "services_provinces" });
 
+// Service -> n cities
+// City -> m services
+Service.belongsToMany(City, { through: "services_cities" });
+City.belongsToMany(Service, { through: "services_cities" });
 // Product.hasMany(Reviews);
 
 // hooks users

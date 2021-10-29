@@ -10,7 +10,7 @@ const serverchat = require("./controllers/chat.js");
 require("./db.js");
 
 app.name = "API";
-app.set("port", process.env.PORT || 3001);// permite que la nube asigne un port cuando deploye
+app.set("port", process.env.PORT || 3001); // permite que la nube asigne un port cuando deploye
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -23,6 +23,11 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log("Cookies: ", req.cookies);
   next();
 });
 
