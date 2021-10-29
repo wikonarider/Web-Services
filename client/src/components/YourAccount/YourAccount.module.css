@@ -5,12 +5,14 @@
     padding: 1%;
 }
 
+
+
 .user{
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #808080;
-    padding: 2%;
+    padding: 2% 2% 1% 2%;
 }
 
 .userInfo{
@@ -33,13 +35,10 @@
     margin-right: 5%;
 }
 
-.avatar{
-    margin-bottom: 5%;
-}
-
 .botonera{
     padding: 1%;
     background-color: #cccccc;
+    margin-bottom: 3%;
 }
 
 

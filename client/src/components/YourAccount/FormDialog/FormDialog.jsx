@@ -13,12 +13,12 @@ import s from "./FormDialog.module.css";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
-    textfield:{
-        marginTop: 10,
-        marginBottom:20,
-        display: 'block',
-    }
-})
+  textfield: {
+    marginTop: 10,
+    marginBottom: 20,
+    display: "block",
+  },
+});
 
 export function FormDialog({ openForm, setOpenForm }) {
   const dispatch = useDispatch();
@@ -92,6 +92,7 @@ export function FormDialog({ openForm, setOpenForm }) {
             type="submit"
             variant="contained"
             className={s.submit}
+            sx={{ margin: "auto" }}
           >
             SUBMIT
           </Button>

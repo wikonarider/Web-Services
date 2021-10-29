@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import s from "./YourAccount.module.css";
 
@@ -10,38 +10,12 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CardService from "../CardService/CardService";
-import { Container, makeStyles } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
+import { getUsers, putUser } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-//mockup de usuario para mostrar el panel
-const userData = {
-  id: "4e218c00-36ad-11ec-8d3d-0242ac130003",
-  userImg: "http://dummyimage.com/189x100.png/5fa2dd/ffffff",
-  name: "Everett",
-  lastname: "Roskilly",
-  username: "eroskilly7",
-  password: "$2b$10$Q1eIlfNVChrK3VWl7.PPVeCywddxvrNarA7OMsafFgsoFz8GT2hqO",
-  email: "eroskilly7@twitpic.com",
-  location: ["Ushuaia"],
-  ban: false,
-  createdAt: "2021-10-28T13:38:48.567Z",
-  updatedAt: "2021-10-28T13:38:48.567Z",
-  services: [
-    {
-      id: 4,
-      title: "paseadora de perros",
-      img: "https://www.ciudaddelosangeles.com/wp-content/uploads/2016/03/paseador-de-perros.jpg",
-      description: "i love little dogs",
-      price: 15.3,
-      createdAt: "2021-10-28T13:38:49.601Z",
-      updatedAt: "2021-10-28T13:38:49.601Z",
-      userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
-      categoryId: 31,
-    },
-  ],
-  qualifications: [],
-};
 
 const useStyles = makeStyles({
   button: {
@@ -51,9 +25,9 @@ const useStyles = makeStyles({
 });
 
 export default function YourAccount() {
-  // const userData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
 
-  const classes = useStyles();
+  const userData = useSelector((state) => state.users);
 
   const [viewServices, setViewservices] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
@@ -61,9 +35,39 @@ export default function YourAccount() {
 
   const [openForm, setOpenForm] = useState(false);
 
+  const [img, setImg] = useState("");
+  const [url, setUrl] = useState("");
+
+  console.log(img);
+  console.log(url);
+
+  useEffect(() => {
+    dispatch(getUsers("aclowsere"));
+  }, []);
+
   const fileInput = useRef();
 
-  // function loadImg(files) {}
+
+  const handleImageUpload = () => {
+    const { files } = document.querySelector('input[type="file"]');
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    // replace this with your upload preset name
+    formData.append("upload_preset", "hn1tlyfq");
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+
+    return fetch(
+      "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
+      options
+    )
+      .then((res) => res.json())
+      .then((res) => dispatch(putUser(res.secure_url)))
+      .catch((err) => console.log(err));
+  };
+
 
   return (
     <div>
@@ -74,21 +78,45 @@ export default function YourAccount() {
           <Avatar
             alt="user name"
             src={userData.userImg}
-            sx={{ width: 200, height: 200 }}
+            sx={{ width: 200, height: 200, marginBottom: 2 }}
             className={s.avatar}
           ></Avatar>
 
-          <input style={{ display: "none" }} type="file" ref={fileInput} />
+          <div className={s.changePhoto}>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              name="myImage"
+              ref={fileInput}
+              onChange={(e) => setImg(e.target.files[0])}
+            />
+            <Button
+              variant="text"
+              size="small"
+              color="secondary"
+              startIcon={<PhotoCameraIcon />}
+              sx={{ marginRight: 1 }}
+              onClick={() => {
+                fileInput.current.click();
+              }}
+            >
+              Upload
+            </Button>
 
-          <Button
-            variant="text"
-            startIcon={<PhotoCameraIcon />}
-            size="small"
-            color="secondary"
-            onClick={() => fileInput.current.click()}
-          >
-            Change Photo
-          </Button>
+            <Button
+              variant="contained"
+              // startIcon={<PhotoCameraIcon />}
+              size="small"
+              color="secondary"
+              sx={{ boxShadow: "none", marginLeft: 1 }}
+              // onClick={() => {
+              //   fileInput.current.click();
+              // }}
+              onClick={handleImageUpload}
+            >
+              SUBMIT
+            </Button>
+          </div>
         </div>
 
         <div className={s.userInfo}>
@@ -108,11 +136,15 @@ export default function YourAccount() {
           variant={viewOrders ? "contained" : "outlined"}
           color={viewOrders ? "secondary" : "primary"}
           startIcon={<ShoppingBagIcon />}
-          className={classes.button}
           onClick={() => {
             setViewFavs(false);
             setViewOrders(!viewOrders);
             setViewservices(false);
+          }}
+          sx={{
+            marginRight: 1,
+            marginLeft: 1,
+            marginBottom: 1,
           }}
         >
           Your Orders
@@ -126,7 +158,12 @@ export default function YourAccount() {
             setViewOrders(false);
             setViewservices(false);
           }}
-          className={classes.button}
+          sx={{
+            marginRight: 1,
+            marginLeft: 1,
+            marginBottom: 1,
+          }}
+
         >
           Your Favs
         </Button>
@@ -139,7 +176,11 @@ export default function YourAccount() {
             setViewOrders(false);
             setViewservices(!viewServices);
           }}
-          className={classes.button}
+          sx={{
+            marginRight: 1,
+            marginLeft: 1,
+            marginBottom: 1,
+          }}
         >
           Your Services
         </Button>
@@ -148,7 +189,11 @@ export default function YourAccount() {
           <Button
             variant="outlined"
             startIcon={<PostAddIcon />}
-            className={classes.button}
+            sx={{
+              marginRight: 1,
+              marginLeft: 1,
+              marginBottom: 1,
+            }}
           >
             Post Service
           </Button>
@@ -160,7 +205,11 @@ export default function YourAccount() {
           onClick={() => {
             setOpenForm(true);
           }}
-          className={classes.button}
+          sx={{
+            marginRight: 1,
+            marginLeft: 1,
+            marginBottom: 1,
+          }}
         >
           Change Your Data
         </Button>
@@ -184,14 +233,17 @@ export default function YourAccount() {
         </Container>
       )}
       {viewServices && (
-        <Container>
-          <div>
-            <h1>YOUR SERVICES</h1>
-            {userData.services.map((s) => (
-              <CardService service={s} />
-            ))}
-          </div>
-        </Container>
+        <div>
+          <Container>
+            <Grid container justifyContent="center" spacing={3}>
+              {userData.services.map((s) => (
+                <Grid item key={s.id}>
+                  <CardService service={s} />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </div>
       )}
 
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />

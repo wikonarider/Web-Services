@@ -89,7 +89,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.post("/users/", newData);
+      return await axios.put("/users/", newData);
     } catch (err) {
       return new Error(err);
     }
@@ -99,7 +99,7 @@ export function putUser(newData) {
 export function getUsers(username) {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`/users?username=${username}`);
+      const res = await axios(`/users?username=${username}`);
       return dispatch({ type: type.GET_USERS, payload: res.data });
     } catch (err) {
       return new Error(err);
