@@ -7,7 +7,6 @@ const users = [
     username: 'mmecozzi0',
     password: '3g5APZ4fdg',
     email: 'mmecozzi0@webeden.co.uk',
-    location: ['Rosario'],
     ban: false,
   },
   {
@@ -18,7 +17,6 @@ const users = [
     username: 'msandiford1',
     password: 'xFi1L334gdfg',
     email: 'msandiford1@businesswire.com',
-    location: ['Rosario'],
     ban: false,
   },
   {
@@ -29,7 +27,6 @@ const users = [
     username: 'rbeardall2',
     password: 'K2BUfq7CkoV',
     email: 'rbeardall2@flickr.com',
-    location: ['Morón'],
     ban: false,
   },
   {
@@ -40,7 +37,6 @@ const users = [
     username: 'ngascoyne3',
     password: '5N97iZzzrMsdfg',
     email: 'ngascoyne3@angelfire.com',
-    location: ['Morón'],
     ban: false,
   },
   {
@@ -51,7 +47,6 @@ const users = [
     username: 'nsherington4',
     password: 'GhMqdMdfsd',
     email: 'nsherington4@ning.com',
-    location: ['Ushuaia'],
     ban: true,
   },
   {
@@ -62,7 +57,6 @@ const users = [
     username: 'fXY3MveoT96t',
     password: 'GhMqdMdfsd',
     email: 'bdoggart5@microsoft.com',
-    location: ['Ushuaia'],
     ban: false,
   },
 
@@ -74,7 +68,6 @@ const users = [
     username: 'lhuburn6',
     password: '9SDOUZuLK',
     email: 'lhuburn6@irs.gov',
-    location: ['Ushuaia'],
     ban: false,
   },
   {
@@ -85,7 +78,6 @@ const users = [
     username: 'eroskilly7',
     password: 'DJM1j7OZYlO',
     email: 'eroskilly7@twitpic.com',
-    location: ['Ushuaia'],
     ban: false,
   },
   {
@@ -96,7 +88,6 @@ const users = [
     username: 'rlamerton8',
     password: 'I4bTZsD2JRL',
     email: 'rlamerton8@lycos.com',
-    location: ['Haedo'],
     ban: false,
   },
 
@@ -108,7 +99,6 @@ const users = [
     username: 'kmcginn9',
     password: 'oUl2b3PLV1',
     email: 'kmcginn9@usgs.gov',
-    location: ['Haedo'],
     ban: false,
   },
   {
@@ -119,7 +109,6 @@ const users = [
     username: 'pstronacha',
     password: 'CvNbJSffOe',
     email: 'pstronacha@hc360.com',
-    location: ['Córdoba'],
     ban: false,
   },
   {
@@ -130,7 +119,6 @@ const users = [
     username: 'egozneyb',
     password: '345qRoffhJbA',
     email: 'egozneyb@cam.ac.uk',
-    location: ['Córdoba'],
     ban: false,
   },
   {
@@ -141,7 +129,6 @@ const users = [
     username: 'ssidwellc',
     password: 'huCxmJfur5X',
     email: 'ssidwellc@vinaora.com',
-    location: ['Resistencia'],
     ban: false,
   },
   {
@@ -152,7 +139,6 @@ const users = [
     username: 'lpawled',
     password: 'n88Hf8CfC4',
     email: 'lpawled@hugedomains.com',
-    location: ['Resistencia'],
     ban: false,
   },
 
@@ -164,7 +150,6 @@ const users = [
     username: 'aclowsere',
     password: 'f1Z1g0nJ8jzD',
     email: 'aclowsere@mlb.com',
-    location: ['Resistencia'],
     ban: false,
   },
   {
@@ -175,7 +160,6 @@ const users = [
     username: 'acanerof',
     password: 'JmdVh9HwJheL',
     email: 'acanerof@sina.com.cn',
-    location: ['Piedrabuena'],
     ban: false,
   },
   {
@@ -186,7 +170,6 @@ const users = [
     username: 'kpittawayg',
     password: '5UTtLf45gdf2',
     email: 'kpittawayg@baidu.com',
-    location: ['Piedrabuena'],
     ban: false,
   },
   {
@@ -197,7 +180,6 @@ const users = [
     username: 'kdanilchenkoh',
     password: '8zBBHX8sdf2',
     email: 'kdanilchenkoh@sciencedirect.com',
-    location: ['Corrientes', 'Goya'],
     ban: false,
   },
   {
@@ -208,7 +190,6 @@ const users = [
     username: 'dmocheri',
     password: 'wQkqbowWZ434fd',
     email: 'dmocheri@berkeley.edu',
-    location: ['Corrientes', 'Goya'],
     ban: false,
   },
 
@@ -220,7 +201,6 @@ const users = [
     username: 'mdomnickj',
     password: 'O5x6gch7Yr5',
     email: 'mdomnickj@liveinternet.ru',
-    location: ['Río Grande'],
     ban: false,
   },
 ];
