@@ -1,12 +1,14 @@
 import { type } from "./variables";
+import serviceURL from "./url";
 import axios from "axios";
+
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
 // esta configurado en el archivo index.js
-export function getServices(title, order) {
+export function getServices(obj) {
   return async function (dispatch) {
     try {
-      var json = await axios(`/services?title=${title}&order=${order}`);
+      var json = await axios(serviceURL(obj));
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -137,7 +139,7 @@ export function singin(body) {
     var json = await axios.post(`http://localhost:3001/login`, body);
     console.log("json", json.data);
     return dispatch({
-      type: "SINGIN_USER",
+      type: type.SINGIN_USER,
       payload: json.data,
     });
   };
@@ -147,7 +149,7 @@ export function logout() {
   return async function (dispatch) {
     var json = await axios.post(`http://localhost:3001/logout`);
     return dispatch({
-      type: "LOGOUT_USER",
+      type: type.LOGOUT_USER,
     });
   };
 }

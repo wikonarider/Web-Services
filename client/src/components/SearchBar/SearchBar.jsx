@@ -52,7 +52,7 @@ export default function SearchBar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getServices(name));
+    dispatch(getServices({title:name}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 

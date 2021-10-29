@@ -11,7 +11,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getServices(''));
+    dispatch(getServices());
   }, [dispatch]);
 
   return (

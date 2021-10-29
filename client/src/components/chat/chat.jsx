@@ -4,6 +4,11 @@ import { Box } from "@mui/system";
 import { Button, Input } from "@material-ui/core";
 var clienteIO = io("http://localhost:3001"); //conexion al servidor para bidireccional peticiones
 
+
+//en controller/chat.js  comente como hacer las response y request que es la misma mecanica que cliente.IO
+
+
+
 function Chat() {
   const [msg, setMsg] = useState("");
   const [conversacion, setConversacion] = useState([]);
