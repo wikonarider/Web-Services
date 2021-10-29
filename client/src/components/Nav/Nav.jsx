@@ -11,9 +11,12 @@ import { Badge } from '@mui/material';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { logout} from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 export default function Nav() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const cookiesState = useSelector((state) => state.cookies);
   if(cookiesState.length>0){
     document.cookie = encodeURIComponent("userId") + "=" + encodeURIComponent(cookiesState);
@@ -27,6 +30,7 @@ export default function Nav() {
 
   const logOutClear = () => {
     document.cookie = "userId=; max-age=0"
+    dispatch(logout())
     history.push("/login");
   };
 
@@ -80,7 +84,7 @@ export default function Nav() {
           <Button variant="outlined" color="secondary" size="small">
             {button}
           </Button>
-          <Button variant="outlined" color="secondary" size="small">
+          <Button variant="outlined" color="secondary" size="small" onClick={logOutClear}>
             {button2}
           </Button>
         </Link>

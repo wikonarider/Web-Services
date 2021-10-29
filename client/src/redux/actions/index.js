@@ -125,3 +125,12 @@ export function singin(body) {
     });
   };
 }
+
+export function logout() {
+  return async function (dispatch) {
+    var json = await axios.post(`http://localhost:3001/logout`);
+    return dispatch({
+      type: "LOGOUT_USER",
+    });
+  };
+}
