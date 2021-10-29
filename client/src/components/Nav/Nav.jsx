@@ -32,6 +32,7 @@ export default function Nav() {
     document.cookie = "userId=; max-age=0"
     dispatch(logout())
     history.push("/login");
+    
   };
 
   //cheque si el usuario esta logeado
@@ -45,15 +46,23 @@ export default function Nav() {
   }
 
   if (document.cookie) {
-    button2 = `logOut`;
-  } 
+    button2 = `LogOut`;
+  }  else{
+    button2 = "Register"
+  }
 
   let reDirect;
   if (document.cookie) {
     reDirect = '/account';
   } else {
-    reDirect = '/singin';
+    reDirect = '/login';
   }
+ let reDirect2;
+  if (!document.cookie) {
+    reDirect2 = '/register';
+  }else {
+    reDirect2 = '/login';
+  } 
 
   //-- count tiene que ser igual a las cosas que hayan en el carrito
 
@@ -84,10 +93,12 @@ export default function Nav() {
           <Button variant="outlined" color="secondary" size="small">
             {button}
           </Button>
-          <Button variant="outlined" color="secondary" size="small" onClick={logOutClear}>
+          </Link>
+          <Link to={reDirect2} style={{ textDecoration: 'none' }}>
+        <Button variant="outlined" color="secondary" size="small" onClick={logOutClear}>
             {button2}
           </Button>
-        </Link>
+          </Link>
         <IconButton onClick={routeChange}>
           <Badge color="secondary" badgeContent={count}>
             <ShoppingCartIcon />
