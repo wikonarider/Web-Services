@@ -7,7 +7,7 @@ import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
-import Singin from "./components/Singin/singin";
+import Singin from './components/SingIn/Singin'
 
 
 function App() {
