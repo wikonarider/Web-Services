@@ -20,4 +20,8 @@ export const type = {
 
   POST_PURCHASE: 'POST_PURCHASE',
 
+
+  //PROVINCES
+  GET_PROVINCES: 'GET_PROVINCES'
+
 };

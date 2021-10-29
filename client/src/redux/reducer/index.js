@@ -4,6 +4,7 @@ const initialState = {
   services: [],
   users: [],
   groups: [],
+  provinces:[],
   cookies: [],
 };
 
@@ -37,6 +38,9 @@ const rootReducer = (state = initialState, action) => {
 
     case type.GET_GROUPS:
       return { ...state, groups: action.payload };
+
+    case type.GET_PROVINCES:
+      return {...state, provinces: action.payload}
 
     default:
       return state;
