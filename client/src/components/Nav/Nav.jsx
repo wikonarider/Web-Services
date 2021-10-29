@@ -14,23 +14,38 @@ import { Link, useHistory } from 'react-router-dom';
 
 export default function Nav() {
   const history = useHistory();
+  const cookiesState = useSelector((state) => state.cookies);
+  if(cookiesState.length>0){
+    document.cookie = encodeURIComponent("userId") + "=" + encodeURIComponent(cookiesState);
+    console.log(document.cookie)
+    }
 
   const routeChange = () => {
     let path = '/carrito';
     history.push(path);
   };
 
+  const logOutClear = () => {
+    document.cookie = "userId=; max-age=0"
+    history.push("/login");
+  };
+
   //cheque si el usuario esta logeado
   const user = useSelector((state) => state.userData);
   let button;
-  if (user) {
-    button = `Hello, ${user.name}`;
+  let button2;
+  if (document.cookie) {
+    button = `Hello, user`;
   } else {
     button = 'Hello, Sign In';
   }
 
+  if (document.cookie) {
+    button2 = `logOut`;
+  } 
+
   let reDirect;
-  if (user) {
+  if (document.cookie) {
     reDirect = '/account';
   } else {
     reDirect = '/singin';
@@ -64,6 +79,9 @@ export default function Nav() {
         <Link to={reDirect} style={{ textDecoration: 'none' }}>
           <Button variant="outlined" color="secondary" size="small">
             {button}
+          </Button>
+          <Button variant="outlined" color="secondary" size="small">
+            {button2}
           </Button>
         </Link>
         <IconButton onClick={routeChange}>
