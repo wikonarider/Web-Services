@@ -2,14 +2,13 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import SideBarBtnDropDown from '../SideBarBtnDropDown/SideBarBtnDropDown';
+import SideBarNestedBtnDropDown from '../SideBarNestedBtnDropDown/SideBarNestedBtnDropDown';
 import { getGroups } from '../../../redux/actions';
 
 import List from '@mui/material/List';
 
 export default function SideBarNested({ openFromFather }) {
   const dispatch = useDispatch();
-
   const allGroups = useSelector((state) => state.groups);
 
   useEffect(() => {
@@ -24,10 +23,10 @@ export default function SideBarNested({ openFromFather }) {
     >
       {allGroups.map((group, index) => {
         return (
-          <SideBarBtnDropDown
-            text={group.name}
+          <SideBarNestedBtnDropDown
             key={index}
             openFromFather={openFromFather}
+            group={group}
           />
         );
       })}

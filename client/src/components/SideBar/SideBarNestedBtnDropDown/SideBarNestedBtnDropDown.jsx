@@ -1,16 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
+
+import SideBarNestedBtnDropDownInner from '../SideBarNestedBtnDropDownInner/SideBarNestedBtnDropDownInner';
+
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeRepairServiceRoundedIcon from '@mui/icons-material/HomeRepairServiceRounded';
+import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
 
-export default function SideBarBtnDropDown({ index, text, openFromFather }) {
+export default function SideBarNestedBtnDropDown({
+  index,
+  openFromFather,
+  group,
+}) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -23,27 +31,31 @@ export default function SideBarBtnDropDown({ index, text, openFromFather }) {
     <Box key={index}>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <HomeRepairServiceRoundedIcon />
+          <GradeOutlinedIcon />
         </ListItemIcon>
-        <ListItemText primary={text} />
+        <ListItemText primary={group.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       {openFromFather ? (
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="INTERNO" />
+              <Box sx={{ display: 'flex' }}>
+                <FormControl
+                  sx={{ m: 3 }}
+                  component="fieldset"
+                  variant="standard"
+                >
+                  {group.categories.map((c) => {
+                    return <SideBarNestedBtnDropDownInner name={c.name} />;
+                  })}
+                </FormControl>
+              </Box>
             </ListItemButton>
           </List>
         </Collapse>
       ) : (
-        <Collapse in={false} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="INTERNO" />
-            </ListItemButton>
-          </List>
-        </Collapse>
+        <Collapse in={false} timeout="auto" unmountOnExit></Collapse>
       )}
     </Box>
   );
