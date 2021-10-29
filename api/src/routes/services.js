@@ -17,7 +17,7 @@ router.get("/:id", getServicesById);
 router.post("/", isAuthenticated, postServices);
 
 // put Services
-router.put("/", isAuthenticated, putServiceById);
+router.put("/",  putServiceById);//colocar isAuthenticated
 // delete Services
 router.delete("/:id", deleteServices);
 
