@@ -10,6 +10,7 @@ const serverchat = require("./controllers/chat.js");
 require("./db.js");
 
 app.name = "API";
+app.set("port", process.env.PORT || 3001);// permite que la nube asigne un port cuando deploye
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
@@ -37,7 +38,8 @@ app.use((err, req, res, next) => {
 });
 
 const server = http.createServer(app); //requerido por socket.io para conexion chat
-const serverIO = socketIO(server, {// require cors para dominio
+const serverIO = socketIO(server, {
+  // require cors para dominio
   cors: {
     origin: "*", //habilita al front que se conecte
     methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
@@ -47,6 +49,4 @@ const serverIO = socketIO(server, {// require cors para dominio
 
 serverchat(serverIO);
 
-
-module.exports = server;
-
+module.exports = { server, port: app.get("port") };

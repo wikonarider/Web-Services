@@ -17,7 +17,7 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require("./src/app.js");
+const {server,port} = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const { json } = require("./mock/dbJson");
 const { linkAllGroups } = require("./mock/categories");
@@ -29,7 +29,7 @@ const { loadCities } = require("./mock/cities");
 const { ENV_VARIABLE } = process.env;
 
 conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
-  server.listen(3001, async () => {
+  server.listen(port, async () => {
     try {
       var flat = Boolean(Number(ENV_VARIABLE));
       if (!flat) {
@@ -57,7 +57,7 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
           .then((data) => City.bulkCreate(data))
           .then(() => console.log("Ciudades Cargadas"));
       }
-      console.log("----listening on port 3001-----"); // eslint-disable-line no-console
+      console.log(`--------listening on port ${port}---------`); // eslint-disable-line no-console
     } catch (e) {
       console.log(e);
     }

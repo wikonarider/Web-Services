@@ -135,7 +135,7 @@ async function deleteServices(req, res, next) {
 function putServiceById(req, res, next) {
   var { title, description, img, price, id, categoryId } = req.body;
 
-  if (title && description && img && price && id && categoryId) {
+  if (title && description && img && price && categoryId && id) {
     var errors = validateServices(req.body);
     if (!Object.values(errors).length) {
       Service.findByPk(id)
