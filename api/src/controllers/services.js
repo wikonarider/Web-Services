@@ -30,7 +30,7 @@ async function getServices(req, res, next) {
           if (b.price > a.price) {
             return 1;
           }
-          return 0;
+            0;
         }))
       : (dbServices = dbServices.sort(function (a, b) {
           if (b.price > a.price) {
@@ -131,7 +131,7 @@ async function deleteServices(req, res, next) {
   }
 }
 
-//____________________________________________________________________________
+
  function putServiceById(req, res, next) {
   var { title, description, img, price, id,username,pas } = req.body;
 
@@ -144,6 +144,9 @@ async function deleteServices(req, res, next) {
     })
     .catch((error) => next(error));
 }
+
+
+
 
 //________________________________________________________________________
 

@@ -31,11 +31,12 @@ const { ENV_VARIABLE } = process.env;
 conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
   server.listen(3001, async () => {
     try {
-      if (!Boolean(Number(ENV_VARIABLE))) {
-        console.log("Force desactivado, datos no cargados");
+      var flat = Boolean(Number(ENV_VARIABLE));
+      if (!flat) {
+        console.log(`Force ${flat}, datos no cargados`);
       } else {
         await Group.bulkCreate(groups).then(() => {
-          console.log("Grupos cargados");
+          console.log(`force ${flat},Grupos cargados`);
           Promise.resolve(linkAllGroups()).then(() =>
             console.log("Categorias cargadas")
           );
