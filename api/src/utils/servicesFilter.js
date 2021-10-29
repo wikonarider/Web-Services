@@ -27,7 +27,9 @@ async function orderByPrice(order, dbServices) {
   return dbServices;
 }
 
+
 async function filterByPriceRange(startRange, endRange) {
+
   let rangeFilter = await Service.findAll({
     where: {
       price: {
@@ -42,7 +44,28 @@ async function filterByPriceRange(startRange, endRange) {
   return rangeFilter;
 }
 
+
+async function filterByDate(date) {
+  if (date && date === "ASC" ){
+  let dateFilter = await Service.findAll({
+    include: {
+      all: true,
+    },
+    order: [["created_at", "ASC"]],
+  }) }else{
+  let dateFilter = await Service.findAll({
+    include: {
+      all: true,
+    },
+    order: [["created_at", "DESC"]],
+  })} 
+  return dateFilter;
+}
+
 module.exports = {
   orderByPrice,
   filterByPriceRange,
+  filterByDate
+
+
 };
