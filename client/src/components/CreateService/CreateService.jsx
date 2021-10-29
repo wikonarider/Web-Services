@@ -1,13 +1,27 @@
-import { React, useState } from "react";
-import { useDispatch } from "react-redux";
-import { TextField, Button } from "@mui/material";
+import { React, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import s from "./CreateService.module.css";
-import { createService } from "../../redux/actions";
+import { createService, getGroups } from "../../redux/actions";
 import axios from "axios";
 import ModalService from "./ModalService";
+import { Box } from "@mui/system";
 
 export default function CreateService() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getGroups());
+  }, []);
+
+  const groups = useSelector((state) => state.groups);
 
   const [errors, setErrors] = useState({});
   const [modal, setModal] = useState(false);
@@ -18,6 +32,19 @@ export default function CreateService() {
     userName: "frankera1312",
     img: "",
   });
+
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+
+  let typesNames = [];
+
+  const handleCategorySelect = (e) => {
+    setCategory(e.target.value);
+  };
+
+  const handleTypeSelect = (e) => {
+    setType(e.target.value);
+  };
 
   function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);
@@ -98,9 +125,60 @@ export default function CreateService() {
     //hacer cuenta cloudinay
   }
 
+  for(let i =0; i<groups.length; i++){
+    if (category === groups[i].name) {
+      typesNames = groups[i].categories;
+    }
+  }
+
   return (
     <div className={s.container}>
       <form onSubmit={(e) => handleSubmit(e)} className={s.formWrapper}>
+        <div>
+          <Box sx={{ minWidth: 200 }}>
+            <FormControl fullWidth>
+              <InputLabel>Category</InputLabel>
+              <Select
+                value={category}
+                label="Category"
+                onChange={handleCategorySelect}
+                defaultValue=""
+              >
+                {groups &&
+                  groups.map((el) => (
+                    <MenuItem key={el.name} value={el.name}>
+                      {el.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </div>
+        {category && (
+          <div>
+            <Box sx={{ minWidth: 200 }}>
+              <FormControl fullWidth>
+                <InputLabel>Type</InputLabel>
+                <Select
+                  value={type}
+                  label="Type"
+                  onChange={handleTypeSelect}
+                  defaultValue=""
+                >
+                  {typesNames &&
+                    typesNames.map((el) => (
+                      <MenuItem key={el.name} value={el.name}>
+                        {el.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+        )}
+
+        {groups && groups.map((el) => {})}
+
         <div className={s.inputsContainer}>
           <TextField
             name="title"
