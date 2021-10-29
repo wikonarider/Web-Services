@@ -1,4 +1,4 @@
-const { Qualification, User } = require("../db");
+const { Qualification, User } = require('../db');
 
 async function postComment(req, res, next) {
   try {
@@ -10,7 +10,7 @@ async function postComment(req, res, next) {
       serviceId,
     });
 
-    res.json({ response: "comment posted" });
+    res.json({ response: 'comment posted' });
   } catch (e) {
     next(e);
   }
@@ -34,9 +34,9 @@ async function putComment(req, res, next) {
 
       //si el comentario fue encontrado devuelve 1 sino 0
       if (commentFound[0] === 1) {
-        return res.json({ response: "comment modified" });
+        return res.json({ response: 'comment modified' });
       } else {
-        return res.json({ response: "comment can not be found" });
+        return res.json({ response: 'comment can not be found' });
       }
     }
   } catch (e) {
@@ -52,13 +52,13 @@ async function deleteComment(req, res, next) {
       where: { id: id },
     });
     if (commentInDb === null) {
-      res.json({ respones: "comment not founded" });
+      res.json({ respones: 'comment not founded' });
     } else {
       await Qualification.destroy({
         // si existe lo deleteo
         where: { id: id },
       });
-      res.json({ response: "comment deleted" });
+      res.json({ response: 'comment deleted' });
     }
   } catch (e) {
     next(e);

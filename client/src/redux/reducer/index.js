@@ -29,6 +29,9 @@ const rootReducer = (state = initialState, action) => {
       return { ...state,
       cookies: action.payload };
 
+    case type.LOGOUT_USER:
+      return { ...state };
+
     case type.GET_USERS:
       return { ...state, users: payload };
 

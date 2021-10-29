@@ -7,12 +7,16 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
-const { orderByPrice } = require("../utils/servicesFilter.js");
+const {
+  orderByPrice,
+  filterByPriceRange,
+} = require("../utils/servicesFilter.js");
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
   const { title, order } = req.query;
+  const { startRange, endRange } = req.query;
 
   try {
     let dbServices = await Service.findAll({
@@ -34,13 +38,18 @@ async function getServices(req, res, next) {
     if (order) {
       orderByPrice(order, dbServices);
     }
+    //FILTRO POR RANGO
+    if (startRange & endRange) {
+      let filteredByPriceRange = await filterByPriceRange(startRange, endRange);
+      return res.send(filteredByPriceRange);
+    }
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
     else {
       if (dbServices.length > 0) {
         if (title) {
           //si me pasan un title busco en la db los que coincidan
-          filteredServices = [];
+          const filteredServices = [];
           dbServices.map((service) => {
             if (service.title.toLowerCase().includes(title.toLowerCase()))
               filteredServices.push(service);
