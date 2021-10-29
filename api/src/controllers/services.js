@@ -1,4 +1,3 @@
-
 const {
   Service,
   Users,
@@ -12,24 +11,15 @@ const {
   orderByPrice,
   filterByPriceRange,
 
-  filterByDate
-} = require("../utils/servicesFilter.js");
-
-
+  filterByDate,
 } = require("../utils/servicesFilter.js");
 
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-
-
-
   const { title, order, dateOrder } = req.query;
   const { startRange, endRange } = req.query;
-
-
-
 
   try {
     let dbServices = await Service.findAll({
@@ -52,12 +42,10 @@ async function getServices(req, res, next) {
       orderByPrice(order, dbServices);
     }
 
-
-     //FILTRO POR FECHA
-     if (dateOrder) {
+    //FILTRO POR FECHA
+    if (dateOrder) {
       filterByDate(order);
     }
-
 
     //FILTRO POR RANGO
     if (startRange & endRange) {
