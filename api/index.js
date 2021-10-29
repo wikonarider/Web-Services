@@ -17,9 +17,9 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const {server,port} = require("./src/app.js");
+const { server, port } = require("./src/app.js");
 const { conn } = require("./src/db.js");
-const { json } = require("./mock/dbJson");
+const { loadServices } = require("./mock/services/index");
 const { linkAllGroups } = require("./mock/categories");
 const { groups } = require("./mock/groups");
 const { users } = require("./mock/usersJson");
@@ -45,10 +45,8 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
         await Users.bulkCreate(users, { individualHooks: true }).then(() =>
           console.log("Users Cargados")
         );
+        await loadServices().then(() => console.log("Servicios Cargados"));
 
-        await Service.bulkCreate(json).then(() =>
-          console.log("Servicios Cargados")
-        );
         await loadProvinces()
           .then((data) => Province.bulkCreate(data))
           .then(() => console.log("Provincias Cargadas"));
