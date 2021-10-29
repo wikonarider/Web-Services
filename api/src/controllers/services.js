@@ -1,4 +1,5 @@
 const { Service, Users, Qualification, Category, Group } = require("../db.js");
+const { orderByPrice } = require("../utils/servicesFilter.js");
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
@@ -22,25 +23,9 @@ async function getServices(req, res, next) {
         },
       ],
     });
-    order && order === "ASC"
-      ? (dbServices = dbServices.sort(function (a, b) {
-          if (a.price > b.price) {
-            return -1;
-          }
-          if (b.price > a.price) {
-            return 1;
-          }
-          return 0;
-        }))
-      : (dbServices = dbServices.sort(function (a, b) {
-          if (b.price > a.price) {
-            return -1;
-          }
-          if (a.price > b.price) {
-            return 1;
-          }
-          return 0;
-        }));
+    if (order) {
+      orderByPrice(order, dbServices);
+    }
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
     else {
