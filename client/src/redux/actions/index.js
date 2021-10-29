@@ -117,7 +117,6 @@ export function banUser(id) {
   };
 }
 
-
 //_____________________________________________________________________________________actions provinces
 
 export function getProvinces() {
@@ -134,9 +133,9 @@ export function getProvinces() {
   };
 }
 
-export function singin(body) {
+export function postLogin(body) {
   return async function (dispatch) {
-    var json = await axios.post(`http://localhost:3001/login`, body);
+    var json = await axios.post(`/login`, body);
     console.log("json", json.data);
     return dispatch({
       type: type.SINGIN_USER,
@@ -145,12 +144,12 @@ export function singin(body) {
   };
 }
 
-export function logout() {
+export function postLogout() {
   return async function (dispatch) {
-    var json = await axios.post(`http://localhost:3001/logout`);
+    var json = await axios.post(`/logout`);
     return dispatch({
       type: type.LOGOUT_USER,
+      payload: json,
     });
   };
 }
-

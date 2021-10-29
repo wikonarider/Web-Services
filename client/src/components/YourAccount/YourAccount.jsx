@@ -44,11 +44,11 @@ const userData = {
 };
 
 const useStyles = makeStyles({
-  button:{
+  button: {
     marginRight: 5,
     marginLeft: 5,
-  }
-})
+  },
+});
 
 export default function YourAccount() {
   // const userData = useSelector((state) => state.userData);
@@ -63,7 +63,7 @@ export default function YourAccount() {
 
   const fileInput = useRef();
 
-  function loadImg(files) {}
+  // function loadImg(files) {}
 
   return (
     <div>
@@ -104,68 +104,66 @@ export default function YourAccount() {
       </div>
 
       <div className={s.botonera}>
+        <Button
+          variant={viewOrders ? "contained" : "outlined"}
+          color={viewOrders ? "secondary" : "primary"}
+          startIcon={<ShoppingBagIcon />}
+          className={classes.button}
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(!viewOrders);
+            setViewservices(false);
+          }}
+        >
+          Your Orders
+        </Button>
+        <Button
+          variant={viewFavs ? "contained" : "outlined"}
+          color={viewFavs ? "secondary" : "primary"}
+          startIcon={<FavoriteIcon />}
+          onClick={() => {
+            setViewFavs(!viewFavs);
+            setViewOrders(false);
+            setViewservices(false);
+          }}
+          className={classes.button}
+        >
+          Your Favs
+        </Button>
+        <Button
+          variant={viewServices ? "contained" : "outlined"}
+          color={viewServices ? "secondary" : "primary"}
+          startIcon={<VisibilityIcon />}
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(false);
+            setViewservices(!viewServices);
+          }}
+          className={classes.button}
+        >
+          Your Services
+        </Button>
+
+        <Link to="/service" style={{ textDecoration: "none" }}>
           <Button
             variant="outlined"
-            variant={viewOrders ? "contained" : "outlined"}
-            color={viewOrders ? "secondary" : "primary"}
-            startIcon={<ShoppingBagIcon />}
-            className={classes.button}
-            onClick={() => {
-              setViewFavs(false);
-              setViewOrders(!viewOrders);
-              setViewservices(false);
-            }}
+            startIcon={<PostAddIcon />}
             className={classes.button}
           >
-            Your Orders
+            Post Service
           </Button>
-          <Button
-            variant={viewFavs ? "contained" : "outlined"}
-            color={viewFavs ? "secondary" : "primary"}
-            startIcon={<FavoriteIcon />}
-            onClick={() => {
-              setViewFavs(!viewFavs);
-              setViewOrders(false);
-              setViewservices(false);
-            }}
-            className={classes.button}
-          >
-            Your Favs
-          </Button>
-          <Button
-            variant={viewServices ? "contained" : "outlined"}
-            color={viewServices ? "secondary" : "primary"}
-            startIcon={<VisibilityIcon />}
-            onClick={() => {
-              setViewFavs(false);
-              setViewOrders(false);
-              setViewservices(!viewServices);
-            }}
-            className={classes.button}
-          >
-            Your Services
-          </Button>
+        </Link>
 
-          <Link to="/service" style={{ textDecoration: "none" }}>
-            <Button
-              variant="outlined"
-              startIcon={<PostAddIcon />}
-              className={classes.button}
-            >
-              Post Service
-            </Button>
-          </Link>
-
-          <Button
-            variant="outlined"
-            startIcon={<DataSaverOffIcon />}
-            onClick={() => {
-              setOpenForm(true);
-            }}
-            className={classes.button}
-          >
-            Change Your Data
-          </Button>
+        <Button
+          variant="outlined"
+          startIcon={<DataSaverOffIcon />}
+          onClick={() => {
+            setOpenForm(true);
+          }}
+          className={classes.button}
+        >
+          Change Your Data
+        </Button>
       </div>
 
       {viewFavs && (

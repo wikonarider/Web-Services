@@ -7,22 +7,24 @@ import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
-import Singin from './components/Singin/Singin'
-
+import Login from "./components/Login/Login";
 
 function App() {
-   
   return (
     <div className="App">
       <Route exact path="/" component={Home} />
-      <Route exact path="/chat" component={Chat}/>
+      <Route exact path="/chat" component={Chat} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/service" component={CreateService} />
-      <Route exact path="/services/:id" render={({match})=>{
-        return <DetailService id={match.params.id} />
-      }} />
+      <Route
+        exact
+        path="/services/:id"
+        render={({ match }) => {
+          return <DetailService id={match.params.id} />;
+        }}
+      />
       <Route exact path="/account" component={YourAccount} />
-      <Route exact path="/login" component={Singin} />
+      <Route exact path="/login" component={Login} />
     </div>
   );
 }

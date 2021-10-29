@@ -24,6 +24,7 @@ export default function CreateService() {
   useEffect(() => {
     dispatch(getGroups());
     dispatch(getProvinces());
+    // eslint-disable-next-line
   }, []);
 
   // CATEGORIAS-SUBCATEGORIAS // PROVINCIAS-CIUDADES
@@ -38,6 +39,7 @@ export default function CreateService() {
   let citiesNames = [];
 
   const [provinceLocation, setProvinceLocation] = useState([]);
+  // eslint-disable-next-line
   const [citieLocation, setCitieLocation] = useState();
   //---------------------------------------------
 
@@ -75,10 +77,10 @@ export default function CreateService() {
     setCitieLocation([
       {
         cities: values,
-      }
-    ])
-  }
-  //-----------------------------------------  
+      },
+    ]);
+  };
+  //-----------------------------------------
 
   function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);

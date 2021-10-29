@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import SideBarNestedBtnDropDown from '../SideBarNestedBtnDropDown/SideBarNestedBtnDropDown';
-import { getGroups } from '../../../redux/actions';
+import SideBarNestedBtnDropDown from "../SideBarNestedBtnDropDown/SideBarNestedBtnDropDown";
+import { getGroups } from "../../../redux/actions";
 
-import List from '@mui/material/List';
+import List from "@mui/material/List";
 
 export default function SideBarNested({ openFromFather }) {
   const dispatch = useDispatch();
@@ -13,11 +13,12 @@ export default function SideBarNested({ openFromFather }) {
 
   useEffect(() => {
     dispatch(getGroups());
+    // eslint-disable-next-line
   }, []);
 
   return (
     <List
-      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
