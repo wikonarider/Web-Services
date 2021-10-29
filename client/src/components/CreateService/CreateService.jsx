@@ -7,9 +7,13 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Autocomplete,
+  Checkbox,
 } from "@mui/material";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import s from "./CreateService.module.css";
-import { createService, getGroups } from "../../redux/actions";
+import { createService, getGroups, getProvinces } from "../../redux/actions";
 import axios from "axios";
 import ModalService from "./ModalService";
 import { Box } from "@mui/system";
@@ -19,9 +23,23 @@ export default function CreateService() {
 
   useEffect(() => {
     dispatch(getGroups());
+    dispatch(getProvinces());
   }, []);
 
+  // CATEGORIAS-SUBCATEGORIAS // PROVINCIAS-CIUDADES
+  //Category -> categoria / Type -> subcategoria // provinceLocation -> Provincia({provinces:[]}) / citieLocation -> Ciudad({cities:[]})
   const groups = useSelector((state) => state.groups);
+  const provinces = useSelector((state) => state.provinces);
+
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+
+  let typesNames = [];
+  let citiesNames = [];
+
+  const [provinceLocation, setProvinceLocation] = useState([]);
+  const [citieLocation, setCitieLocation] = useState();
+  //---------------------------------------------
 
   const [errors, setErrors] = useState({});
   const [modal, setModal] = useState(false);
@@ -33,11 +51,10 @@ export default function CreateService() {
     img: "",
   });
 
-  const [category, setCategory] = useState("");
-  const [type, setType] = useState("");
+  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-  let typesNames = [];
-
+  //HANDLE CATEGORIA - SUBCATEGORIA - PROVINCIA - CIUDAD
   const handleCategorySelect = (e) => {
     setCategory(e.target.value);
   };
@@ -45,6 +62,23 @@ export default function CreateService() {
   const handleTypeSelect = (e) => {
     setType(e.target.value);
   };
+
+  const handleProvinceSelect = (e, values) => {
+    setProvinceLocation([
+      {
+        provinces: values,
+      },
+    ]);
+  };
+
+  const handleCitySelect = (e, values) => {
+    setCitieLocation([
+      {
+        cities: values,
+      }
+    ])
+  }
+  //-----------------------------------------  
 
   function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);
@@ -125,15 +159,25 @@ export default function CreateService() {
     //hacer cuenta cloudinay
   }
 
-  for(let i =0; i<groups.length; i++){
+  //muestro las subcategorias dependiendo la categoria que eligio
+  for (let i = 0; i < groups.length; i++) {
     if (category === groups[i].name) {
       typesNames = groups[i].categories;
     }
   }
+  //lo mismo pero con las ciudades
+  if (provinceLocation.length > 0) {
+    provinceLocation[0].provinces.map((province) =>
+      province.cities.map((cities) => citiesNames.push(cities.name))
+    );
+  }
+
+  //-----------------------------------------------------
 
   return (
     <div className={s.container}>
       <form onSubmit={(e) => handleSubmit(e)} className={s.formWrapper}>
+        {/* SELECT DE CATEGORIA */}
         <div>
           <Box sx={{ minWidth: 200 }}>
             <FormControl fullWidth>
@@ -154,6 +198,8 @@ export default function CreateService() {
             </FormControl>
           </Box>
         </div>
+
+        {/* SELECT DE SUBCATEGORIA */}
         {category && (
           <div>
             <Box sx={{ minWidth: 200 }}>
@@ -177,7 +223,58 @@ export default function CreateService() {
           </div>
         )}
 
-        {groups && groups.map((el) => {})}
+        {/* SELECT DE PROVINCIA */}
+        <div>
+          <Autocomplete
+            multiple
+            onChange={handleProvinceSelect}
+            options={provinces}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.name}
+            renderOption={(props, option, { selected }) => (
+              <li {...props}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {option.name}
+              </li>
+            )}
+            style={{ width: 500 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Provinces" placeholder="Search" />
+            )}
+          />
+        </div>
+
+        {/* SELECT DE CIUDAD */}
+
+        <div>
+          <Autocomplete
+            multiple
+            options={citiesNames}
+            onChange={handleCitySelect}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option}
+            renderOption={(props, option, { selected }) => (
+              <li {...props}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {option}
+              </li>
+            )}
+            style={{ width: 500 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Cities" placeholder="Search" />
+            )}
+          />
+        </div>
 
         <div className={s.inputsContainer}>
           <TextField

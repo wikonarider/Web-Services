@@ -114,3 +114,19 @@ export function banUser(id) {
     }
   };
 }
+
+//_____________________________________________________________________________________actions provinces
+
+export function getProvinces() {
+  return async function (dispatch) {
+    try {
+      var json = await axios(`/provinces`);
+      return dispatch({
+        type: type.GET_PROVINCES,
+        payload: json.data,
+      });
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
