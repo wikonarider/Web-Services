@@ -11,10 +11,8 @@ const {
 
 //--------------------------------------------------------------------------
 const servicesFilters = function (objQuery, res, next) {
-  if (objQuery.title) {//_______________________para serachBar 
-    orderTitle(objQuery.title, res, next);
-  }
-  if (objQuery.prop) {
+  console.log("llego")
+  if (objQuery) {
     orderCategory(objQuery, res, next);
   }
 };
@@ -23,7 +21,7 @@ const servicesFilters = function (objQuery, res, next) {
 //los nombres de cada case deben ser exactamente como las props de cada model para facilitar desde el front los filtros!!!!!
 
 function orderCategory(objQuery, res, next) {
-  switch (objQuery.prop) {
+  switch (objQuery.filter) {
     case "price": {
       orderByPrice(objQuery, res, next);
       break;

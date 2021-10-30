@@ -1,17 +1,306 @@
-const { Service, Users, Qualification, Category, Group } = require("../db.js");
+const { Service, Users, Qualification, Category, Group, Province } = require("../db.js");
 const { Op } = require("sequelize");
 
 //------------------------------------------------------------------------------------------------------price
 
 async function orderByPrice(objQuery, res, next) {
-  const { order } = objQuery;
-  let priceFilter;
-  if (order === "ASC") {
+  const { order, province, group, category, startRange, endRange } = objQuery;
+  let priceFilter
+
+
+
+  if (order === "ASC" && !province && !group &&  !category &&  !startRange &&  !endRange) {
+    console.log("llego bien")     
     priceFilter = await Service.findAll({
       attributes: ["id", "title", "img", "description", "price", "userId"],
-
-      // include: { all: true },
       include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }   if (order === "DESC" && !province && !group &&  !category &&  !startRange &&  !endRange){
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && !province && group &&  !category &&  !startRange &&  !endRange) {
+    console.log("llegue")    
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  } 
+  if (order === "DESC" && !province && group &&  !category &&  !startRange &&  !endRange) {    
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ],    
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && !province && group &&  category &&  !startRange &&  !endRange) {
+    console.log("llegue")    
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  } 
+  if (order === "DESC" && !province && group &&  category &&  !startRange &&  !endRange) {    
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && !province && !group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],    
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }   if (order === "DESC" && !province && !group &&  !category &&  startRange &&  endRange){
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+if (order === "ASC" && !province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }   if (order === "DESC" && !province && group &&  !category &&  startRange &&  endRange){
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },
+        },
+      ],     
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+
+  }
+
+    if (order === "ASC" && !province && group &&  category &&  startRange &&  endRange) {     
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },
+          },
+        ],     
+        limit:30,
+        order: [["price", "ASC"]],
+      });
+    }   if (order === "DESC" && !province && group &&  category &&  startRange &&  endRange){
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },
+          },
+        ],  
+        limit:30,
+        order: [["price", "DESC"]],
+      });
+  }
+
+
+  if (order === "ASC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
         {
           model: Category,
           attributes: ["name"],
@@ -23,12 +312,16 @@ async function orderByPrice(objQuery, res, next) {
       ],
       order: [["price", "ASC"]],
     });
-  } else {
+  }
+  if (order === "DESC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
     priceFilter = await Service.findAll({
       attributes: ["id", "title", "img", "description", "price", "userId"],
-
-      // include: { all: true },
-      include: [
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
         {
           model: Category,
           attributes: ["name"],
@@ -37,44 +330,554 @@ async function orderByPrice(objQuery, res, next) {
             attributes: ["name"],
           },
         },
-      ],
+      ], 
+      limit:30,
       order: [["price", "DESC"]],
     });
   }
-  return res.status(200).send(priceFilter);
-}
-//--------------------------------------------------------------------------------------price range
-async function filterByPriceRange(objQuery, res, next) {
-  const { startRange, endRange } = objQuery;
-  let rangeFilter = await Service.findAll({
-    attributes: ["id", "title", "img", "description", "price", "userId"],
-    where: {
-      price: {
-        [Op.between]: [startRange, endRange],
-      },
-    },
-    include: [
-      {
-        model: Category,
-        attributes: ["name"],
-        include: {
-          model: Group,
-          attributes: ["name"],
+  
+
+  if (order === "ASC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
         },
       },
-    ],
-    order: [["price", "ASC"]],
-  });
-  res.status(200).send(rangeFilter);
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "ASC"]],
+    });
+  }
+
+
+  if (order === "DESC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["price", "DESC"]],
+    });
+  }
+  
+
+
+  return res.status(200).send(priceFilter);
 }
+
 //-------------------------------------------------------------------------------------------date create
 async function orderByCreatedDate(objQuery, res, next) {
-  const { order } = objQuery;
-  let dateFilter;
-  console.log("llego", order);
-  if (order === "ASC") {
-    dateFilter = await Service.findAll({
-      include: [
+    const { order, province, group, category, startRange, endRange } = objQuery;
+    let priceFilter
+    if (order === "ASC" && !province && !group &&  !category &&  !startRange &&  !endRange) {     
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
+          },
+        ],
+        order: [["createdAt", "ASC"]],
+      });
+    }   if (order === "DESC" && !province && !group &&  !category &&  !startRange &&  !endRange){
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
+          },
+        ], 
+        limit:30,
+        order: [["price", "DESC"]],
+      });
+    }
+  
+  
+  
+    if (order === "ASC" && !province && group &&  !category &&  !startRange &&  !endRange) {
+      console.log("llegue")    
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              }
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "ASC"]],
+      });
+    } 
+    if (order === "DESC" && !province && group &&  !category &&  !startRange &&  !endRange) {    
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              }
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "DESC"]],
+      });
+    }
+  
+  
+  
+    if (order === "ASC" && !province && group &&  category &&  !startRange &&  !endRange) {
+      console.log("llegue")    
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "ASC"]],
+      });
+    } 
+    if (order === "DESC" && !province && group &&  category &&  !startRange &&  !endRange) {    
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              }
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "DESC"]],
+      });
+    }
+  
+  
+  
+    if (order === "ASC" && !province && !group &&  !category &&  startRange &&  endRange) {
+      console.log("llego aca tambien")     
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "ASC"]],
+      });
+    }   if (order === "DESC" && !province && !group &&  !category &&  startRange &&  endRange){
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+    }
+  
+  if (order === "ASC" && !province && group &&  !category &&  startRange &&  endRange) {     
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "ASC"]],
+      });
+    }   if (order === "DESC" && !province && group &&  !category &&  startRange &&  endRange){
+      priceFilter = await Service.findAll({
+        attributes: ["id", "title", "img", "description", "price", "userId"],
+        where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },
+          },
+        ], 
+        limit:30,
+        order: [["createdAt", "DESC"]],
+      });
+  
+  
+    }
+      if (order === "ASC" && !province && group &&  category &&  startRange &&  endRange) {     
+        priceFilter = await Service.findAll({
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+            price: {
+              [Op.between]: [startRange, endRange],
+            },
+          },
+          include: [
+            {
+              model: Category,
+              attributes: ["name"],
+              where: {
+                id: category,
+              },
+              include: {
+                model: Group,
+                attributes: ["name"],
+                where: {
+                  id: group,
+                },
+              },
+            },
+          ], 
+          limit:30,
+          order: [["createdAt", "ASC"]],
+        });
+      }   if (order === "DESC" && !province && group &&  category &&  startRange &&  endRange){
+        priceFilter = await Service.findAll({
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+            price: {
+              [Op.between]: [startRange, endRange],
+            },
+          },
+          include: [
+            {
+              model: Category,
+              attributes: ["name"],
+              where: {
+                id: category,
+              },
+              include: {
+                model: Group,
+                attributes: ["name"],
+                where: {
+                  id: group,
+                },
+              },
+            },
+          ], 
+          limit:30,
+          order: [["createdAt", "DESC"]],
+        });
+    }
+    
+
+  if (order === "ASC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
         {
           model: Category,
           attributes: ["name"],
@@ -86,9 +889,16 @@ async function orderByCreatedDate(objQuery, res, next) {
       ],
       order: [["createdAt", "ASC"]],
     });
-  } else {
-    dateFilter = await Service.findAll({
-      include: [
+  }
+  if (order === "DESC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
         {
           model: Category,
           attributes: ["name"],
@@ -97,17 +907,265 @@ async function orderByCreatedDate(objQuery, res, next) {
             attributes: ["name"],
           },
         },
-      ],
+      ], 
+      limit:30,
       order: [["createdAt", "DESC"]],
     });
   }
-  console.log("esto es", dateFilter);
-  res.status(200).send(dateFilter);
+  
+
+  if (order === "ASC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "ASC"]],
+    });
+  }
+
+
+  if (order === "DESC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["createdAt", "DESC"]],
+    });
+  }
+  
+
+
+  
+  
+    return res.status(200).send(priceFilter);
 }
 //-------------------------------------------------------------------------------------------------date update
 async function orderByUpdateDate(objQuery, res, next) {
   const { order } = objQuery;
-  let dateFilter;
+  let dateFilter
   if (order === "ASC") {
     dateFilter = await Service.findAll({
       include: [
@@ -133,7 +1191,8 @@ async function orderByUpdateDate(objQuery, res, next) {
             attributes: ["name"],
           },
         },
-      ],
+      ], 
+      limit:30,
       order: [["updatedAt", "DESC"]],
     });
   }
@@ -141,7 +1200,7 @@ async function orderByUpdateDate(objQuery, res, next) {
 }
 
 //--------------------------------------------------------------------------------------------------title
-async function orderTitle(title, res, next) {
+async function orderTitle( title, res, next) {
   var dbServices = await Service.findAll({
     //Traigo todo de la db
     include: [
@@ -168,55 +1227,692 @@ async function orderTitle(title, res, next) {
 }
 
 //-------------------------------------------------------------------------------------------orderByScore
-async function orderByQualifications(objQuery, res, next) {
-  const { order } = objQuery;
-  console.log("llego");
-  let scoreFilter;
-  if (order === "ASC") {
-    scoreFilter = await Qualification.findAll({
-      attributes: ["score"],
+async function orderByQualifications(objQuery, res, next) {  
+
+  const { order, province, group, category, startRange, endRange } = objQuery;
+  let priceFilter
+  if (order === "ASC" && !province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = Qualification.findAll({
+      attributes : ["score"],
       include: [
         {
           model: Service,
           attributes: ["id", "title", "img", "description", "price", "userId"],
           include: [
-            {
-              model: Category,
-              attributes: ["name"],
-              include: {
-                model: Group,
-                attributes: ["name"],
-              },
-            },
-          ],
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },  },
+        ],
         },
-      ],
-      order: [["score", "DESC"]],
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
     });
-  } else {
-    scoreFilter = await Qualification.findAll({
-      attributes: ["score"],
+  }   if (order === "DESC" && !province && !group &&  !category &&  !startRange &&  !endRange){
+    priceFilter = Qualification.findAll({
+      attributes : ["score"],
       include: [
         {
           model: Service,
           attributes: ["id", "title", "img", "description", "price", "userId"],
           include: [
-            {
-              model: Category,
-              attributes: ["name"],
-              include: {
-                model: Group,
-                attributes: ["name"],
-              },
-            },
-          ],
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },  },
+        ],
         },
-      ],
+      ], 
+      limit:30,
       order: [["score", "DESC"]],
     });
   }
-  res.status(200).send(scoreFilter);
-}
+
+
+
+  if (order === "ASC" && !province && group &&  !category &&  !startRange &&  !endRange) {
+    console.log("llegue")    
+    priceFilter = Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ],
+      }
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  } 
+  if (order === "DESC" && !province && group &&  !category &&  !startRange &&  !endRange) {    
+    priceFilter = await Service.findAll({
+      attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && !province && group &&  category &&  !startRange &&  !endRange) {
+    console.log("llegue")    
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },
+        },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  } 
+  if (order === "DESC" && !province && group &&  category &&  !startRange &&  !endRange) {    
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },  },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && !province && !group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },  },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }   if (order === "DESC" && !province && !group &&  !category &&  startRange &&  endRange){
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },  },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+if (order === "ASC" && !province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },  },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }   if (order === "DESC" && !province && group &&  !category &&  startRange &&  endRange){
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          where: {
+          price: {
+            [Op.between]: [startRange, endRange],
+          },
+        },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            },
+          },  },
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+
+  }
+
+    if (order === "ASC" && !province && group &&  category &&  startRange &&  endRange) {     
+      priceFilter = await Qualification.findAll({
+        attributes : ["score"],
+        include: [
+          {
+            model: Service,
+            attributes: ["id", "title", "img", "description", "price", "userId"],
+            where: {
+            price: {
+              [Op.between]: [startRange, endRange],
+            },
+          },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },  },
+          ],
+          },
+        ], 
+        limit:30,
+        order: [["score", "ASC"]],
+      });
+    }   if (order === "DESC" && !province && group &&  category &&  startRange &&  endRange){
+      priceFilter = await Qualification.findAll({
+        attributes : ["score"],
+        include: [
+          {
+            model: Service,
+            attributes: ["id", "title", "img", "description", "price", "userId"],
+            where: {
+            price: {
+              [Op.between]: [startRange, endRange],
+            },
+          },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            where: {
+              id: category,
+            },
+            include: {
+              model: Group,
+              attributes: ["name"],
+              where: {
+                id: group,
+              },
+            },  },
+          ],
+          },
+        ], 
+        limit:30,
+        order: [["score", "DESC"]],
+      });
+   }
+
+   
+   if (order === "ASC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },},
+        ],
+        },
+      ],
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+    
+  }
+  if (order === "DESC" && province && !group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+  
+
+  if (order === "ASC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  !category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  !startRange &&  !endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+
+  if (order === "ASC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }
+  if (order === "DESC" && province && group &&  category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+        where: {
+         id: province,
+       },
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+
+
+
+  if (order === "ASC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+         model: Province,
+         where: {
+          id: province,
+        },
+      },
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "ASC"]],
+    });
+  }
+
+
+  if (order === "DESC" && province && group &&  !category &&  startRange &&  endRange) {     
+    priceFilter = await Qualification.findAll({
+      attributes : ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [{
+        model: Province,
+     },
+        {
+          model: Category,
+          attributes: ["name"],
+          where: {
+            id: category,
+          },
+          include: {
+            model: Group,
+            attributes: ["name"],
+            where: {
+              id: group,
+            }
+          },},
+        ],
+        },
+      ], 
+      limit:30,
+      order: [["score", "DESC"]],
+    });
+  }
+  
+
+
+
+  res.status(200).send(priceFilter);}
 //-------------------------------------------------------------------------------------------------------
 function orderProvince(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------
@@ -230,7 +1926,6 @@ function orderProvince(objQuery, res, next) {}
 module.exports = {
   orderByQualifications,
   orderByCreatedDate,
-  filterByPriceRange,
   orderByUpdateDate,
   orderByPrice,
   orderTitle,

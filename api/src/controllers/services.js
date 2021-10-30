@@ -1,5 +1,6 @@
 const db = require("../db.js");
 const { addRating } = require("../utils/index");
+const servicesFilters = require("../utils/routeFilterAndOrder.js");
 const {
   Service,
   Users,
@@ -21,11 +22,15 @@ const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-  const { title, order, dateOrder } = req.query;
-  const { startRange, endRange } = req.query;
-
-  try {
-    let dbServices = await Service.findAll({
+  const {title} = req.query
+  let dbServices
+  if (Object.values(req.query).length) {
+    console.log("llego")
+    //compruebo si query tiene propiedades para filtrar
+    servicesFilters(req.query, res, next);// se encarga de todo lo relacionado con filtros
+  } else{
+ 
+    dbServices = await Service.findAll({
       //Traigo todo de la db
       attributes: ["id", "title", "img", "description", "price", "userId"],
 
@@ -44,10 +49,6 @@ async function getServices(req, res, next) {
 
     dbServices = await addRating(dbServices);
 
-    if (order) {
-      orderByPrice(order, dbServices);
-      return res.send(dbServices);
-    }
 
     //FILTRO POR FECHA
     /* if (dateOrder) {
@@ -76,9 +77,7 @@ async function getServices(req, res, next) {
         } else return dbServices; //Si no, devuelvo todos los servicios
       }
     }
-  } catch (err) {
-    next(err);
-  }
+}
 }
 
 async function postServices(req, res, next) {
