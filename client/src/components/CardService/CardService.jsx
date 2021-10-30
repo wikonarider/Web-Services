@@ -34,6 +34,11 @@ function CardService({ service, favs, getUserFavs }) {
 
   const { title, img, price, id } = service;
   const rating = 5;
+  const fixedTitle = title
+    ? title.length > 40
+      ? `${title.substring(0, 40)}...`
+      : title
+    : null;
 
   useEffect(() => {
     const index = cart.findIndex((s) => s.id === id);
@@ -42,7 +47,7 @@ function CardService({ service, favs, getUserFavs }) {
     } else {
       setAdded(() => true);
     }
-  }, [cart]);
+  }, [cart, id]);
 
   const handleClick = () => {
     if (!added) {
@@ -59,7 +64,7 @@ function CardService({ service, favs, getUserFavs }) {
   return (
     <Card sx={{ width: 345, height: 420, textDecoration: "none" }}>
       <CardActionArea component={Link} to={`/services/${id}`}>
-        <CardHeader title={title} sx={{ pb: "0", height: "64px" }} />
+        <CardHeader title={fixedTitle} sx={{ pb: "0", height: "64px" }} />
         <Rating
           name="read-only"
           value={rating}
