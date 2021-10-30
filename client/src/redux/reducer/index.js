@@ -1,11 +1,12 @@
-import { type } from '../actions/variables';
+import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
   users: [],
   groups: [],
-  provinces:[],
+  provinces: [],
   cookies: [],
+  cart: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -14,7 +15,6 @@ const rootReducer = (state = initialState, action) => {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
 
     case type.GET_SERVICES:
-
       console.log("Payload en reducer", payload);
       console.log("globalState de servicios", state.services);
 
@@ -27,8 +27,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state };
 
     case type.SINGIN_USER:
-      return { ...state,
-      cookies: action.payload };
+      return { ...state, cookies: action.payload };
 
     case type.LOGOUT_USER:
       return { ...state };
@@ -40,7 +39,16 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, groups: action.payload };
 
     case type.GET_PROVINCES:
-      return {...state, provinces: action.payload}
+      return { ...state, provinces: action.payload };
+
+    case type.ADD_CART:
+      return { ...state, cart: [...state.cart, action.payload] };
+
+    case type.REMOVE_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((s) => s.id !== action.payload),
+      };
 
     default:
       return state;

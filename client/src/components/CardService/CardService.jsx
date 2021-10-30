@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,13 +10,42 @@ import { Typography, CardActionArea } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addCart } from "../../redux/actions/index";
+import { useSelector } from "react-redux";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
 function CardService({ service }) {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [added, setAdded] = useState(false);
+
   const { title, img, price, id } = service;
   const rating = 5;
+
+  useEffect(() => {
+    const index = cart.findIndex((s) => s.id === id);
+    if (index === -1) {
+      setAdded(() => false);
+    } else {
+      setAdded(() => true);
+    }
+  }, [cart]);
+
+  const handleClick = () => {
+    if (!added) {
+      const service = {
+        title,
+        img,
+        price,
+        id,
+      };
+      dispatch(addCart(service));
+      setAdded(() => true);
+    }
+  };
   return (
     <Card sx={{ width: 345, height: 420, textDecoration: "none" }}>
       <CardActionArea component={Link} to={`/services/${id}`}>
@@ -50,8 +79,8 @@ function CardService({ service }) {
         </IconButton>
 
         <IconButton
-          onClick={() => {}}
-          color={!false ? "primary" : "success"}
+          onClick={handleClick}
+          color={!added ? "primary" : "success"}
           aria-label="add to shopping cart"
           sx={{ ml: "auto" }}
         >

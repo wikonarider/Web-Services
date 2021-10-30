@@ -1,18 +1,14 @@
 import React from "react";
-// import AppBar from '@mui/material/AppBar';
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import SearchBar from "../SearchBar/SearchBar";
-// import MenuIcon from '@mui/icons-material/Menu';
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge } from "@mui/material";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { postLogout } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import Cart from "../Cart/Cart";
 
 export default function Nav() {
   const history = useHistory();
@@ -23,11 +19,6 @@ export default function Nav() {
       encodeURIComponent("userId") + "=" + encodeURIComponent(cookiesState);
     console.log(document.cookie);
   }
-
-  const routeChange = () => {
-    let path = "/carrito";
-    history.push(path);
-  };
 
   const logOutClear = () => {
     document.cookie = "userId=; max-age=0";
@@ -64,26 +55,9 @@ export default function Nav() {
     reDirect2 = "/login";
   }
 
-  console.log('COOKIE:', document.cookie);
-
-  //-- count tiene que ser igual a las cosas que hayan en el carrito
-
-  let count = 4;
-
-  //--------------------
-  //solo saqué el botón porque lo tengo en la SideBar
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Toolbar>
-        {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
         <Typography
           variant="h6"
           noWrap
@@ -106,11 +80,7 @@ export default function Nav() {
             {button2}
           </Button>
         </Link>
-        <IconButton onClick={routeChange}>
-          <Badge color="secondary" badgeContent={count}>
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
+        <Cart />
       </Toolbar>
     </Box>
   );
