@@ -20,7 +20,7 @@ export default function SideBarNested({ openFromFather }) {
         width: "100%",
         minWidth: 360,
         bgcolor: "background.paper",
-        mt: "20px",
+        mt: "75px",
       }}
       component="nav"
       aria-labelledby="nested-list-subheader"
