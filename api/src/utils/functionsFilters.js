@@ -5,43 +5,24 @@ const { Op } = require("sequelize");
 
 async function orderByPrice(objQuery, res, next) {
   const { order } = objQuery;
-  var dbServices = await Service.findAll({
-    //Traigo todo de la db
-    include: [
-      {
-        model: Users,
-        through: { attributes: [] },
+  let priceFilter
+  if (order === "ASC") {
+    
+    priceFilter = await Service.findAll({
+      include: {
+        all: true,
       },
-      Qualification,
-      {
-        model: Category,
-        include: {
-          model: Group,
-        },
+      order: [["price", "ASC"]],
+    });
+  } else {
+    priceFilter = await Service.findAll({
+      include: {
+        all: true,
       },
-    ],
-  });
-
-  order === "ASC"
-    ? (dbServices = dbServices.sort(function (a, b) {
-        if (a.price > b.price) {
-          return -1;
-        }
-        if (b.price > a.price) {
-          return 1;
-        }
-        return 0;
-      }))
-    : (dbServices = dbServices.sort(function (a, b) {
-        if (b.price > a.price) {
-          return -1;
-        }
-        if (a.price > b.price) {
-          return 1;
-        }
-        return 0;
-      }));
-  return res.status(200).send(dbServices);
+      order: [["price", "DESC"]],
+    });
+  }
+  return res.status(200).send(priceFilter);
 }
 //--------------------------------------------------------------------------------------price range
 async function filterByPriceRange(objQuery, res, next) {
@@ -62,40 +43,71 @@ async function filterByPriceRange(objQuery, res, next) {
 //-------------------------------------------------------------------------------------------date create
 async function orderByCreatedDate(objQuery, res, next) {
   const { order } = objQuery;
-
+  let dateFilter
+console.log("llego", order)
   if (order === "ASC") {
-    let dateFilter = await Service.findAll({
-      include: {
-        all: true,
-      },
-      order: [["created_at", "ASC"]],
+    dateFilter = await Service.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      order: [["createdAt", "ASC"]],
     });
   } else {
-    let dateFilter = await Service.findAll({
-      include: {
-        all: true,
-      },
-      order: [["created_at", "DESC"]],
+     dateFilter = await Service.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      order: [["createdAt", "DESC"]],
     });
   }
+  console.log("esto es",dateFilter)
   res.status(200).send(dateFilter);
 }
 //-------------------------------------------------------------------------------------------------date update
 async function orderByUpdateDate(objQuery, res, next) {
   const { order } = objQuery;
+  let dateFilter
   if (order === "ASC") {
-    let dateFilter = await Service.findAll({
-      include: {
-        all: true,
-      },
-      order: [["updated_at", "ASC"]],
+    dateFilter = await Service.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      order: [["updatedAt", "ASC"]],
     });
   } else {
-    let dateFilter = await Service.findAll({
-      include: {
-        all: true,
-      },
-      order: [["updated_at", "DESC"]],
+    dateFilter = await Service.findAll({
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+      ],
+      order: [["updatedAt", "DESC"]],
     });
   }
   res.status(200).send(dateFilter);
