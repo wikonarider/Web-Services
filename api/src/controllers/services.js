@@ -11,21 +11,15 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
-const {
-  orderByPrice,
-  filterByPriceRange,
-  filterByDate,
-} = require("../utils/servicesFilter.js");
-
+const servicesFilters = require("../utils/routeFilterAndOrder.js");
 const { validateServices } = require("../utils/validServices");
-
-//por cada ruta un controler
-async function getServices(req, res, next) {
-  const { title, order, dateOrder } = req.query;
-  const { startRange, endRange } = req.query;
-
-  try {
-    let dbServices = await Service.findAll({
+//-----------------------------------------------------------------------------------------
+function getServices(req, res, next) {
+  if (Object.values(req.query).length) {
+    //compruebo si query tiene propiedades para filtrar
+    servicesFilters(req.query, res, next);// se encarga de todo lo relacionado con filtros
+  } else {
+    Service.findAll({
       //Traigo todo de la db
       attributes: ["id", "title", "img", "description", "price", "userId"],
 
@@ -40,47 +34,16 @@ async function getServices(req, res, next) {
           },
         },
       ],
-    });
-
-    dbServices = await addRating(dbServices);
-
-    if (order) {
-      orderByPrice(order, dbServices);
-      return res.send(dbServices);
-    }
-
-    //FILTRO POR FECHA
-    /* if (dateOrder) {
-      filterByDate(order);
-    }
-
-    //FILTRO POR RANGO
-    if (startRange & endRange) {
-      let filteredByPriceRange = await filterByPriceRange(startRange, endRange);
-      return res.send(filteredByPriceRange);
-    }
-    }*/
-
-    if (!title) return res.send(dbServices);
-    //Devuelvo todos los servicios
-    else {
-      if (dbServices.length > 0) {
-        if (title) {
-          //si me pasan un title busco en la db los que coincidan
-          const filteredServices = [];
-          dbServices.map((service) => {
-            if (service.title.toLowerCase().includes(title.toLowerCase()))
-              filteredServices.push(service);
-          });
-          return res.send(filteredServices); //Si coincide mando el servicio con ese title
-        } else return dbServices; //Si no, devuelvo todos los servicios
-      }
-    }
-  } catch (err) {
-    next(err);
+    })
+      .then((resp) => {
+        res.status(200).send(resp);
+      })
+      .catch((err) => {
+        next(err);
+      });
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
   try {
     const { userId } = req.cookies;
@@ -132,7 +95,7 @@ async function postServices(req, res, next) {
     next(e);
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function getServicesById(req, res, next) {
   let { id } = req.params;
 
@@ -187,7 +150,7 @@ async function getServicesById(req, res, next) {
     next(e);
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function deleteServices(req, res, next) {
   let { id } = req.params;
   try {
@@ -208,7 +171,7 @@ async function deleteServices(req, res, next) {
   }
 }
 
-//____________________________________________________________________________
+//----------------------------------------------------------------------------------------------------------
 function putServiceById(req, res, next) {
   var { title, description, img, price, id, categoryId } = req.body;
 
@@ -231,7 +194,7 @@ function putServiceById(req, res, next) {
   }
 }
 
-//________________________________________________________________________
+//----------------------------------------------------------------------------------------------------------
 
 module.exports = {
   getServices,
