@@ -10,27 +10,15 @@ import {
 } from "@mui/material";
 import { putUser } from "../../../redux/actions";
 import s from "./FormDialog.module.css";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  textfield: {
-    marginTop: 10,
-    marginBottom: 20,
-    display: "block",
-  },
-});
 
 export function FormDialog({ openForm, setOpenForm }) {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   const [input, setInput] = useState({
     name: "",
     lastname: "",
     password: "",
   });
-
-  console.log(input);
 
   const handleInputChange = (e) => {
     setInput({
@@ -68,14 +56,14 @@ export function FormDialog({ openForm, setOpenForm }) {
             variant="filled"
             onChange={(e) => handleInputChange(e)}
             name="name"
-            className={classes.textfield}
+            sx = {{display: 'block', marginTop:2, marginBottom:2}}
           />
           <TextField
             label="New LastName"
             variant="filled"
             onChange={(e) => handleInputChange(e)}
             name="lastname"
-            className={classes.textfield}
+            sx = {{display: 'block', marginTop:2, marginBottom:2}}
           />
           <TextField
             label="New Password"
@@ -83,7 +71,7 @@ export function FormDialog({ openForm, setOpenForm }) {
             type="password"
             onChange={(e) => handleInputChange(e)}
             name="password"
-            className={classes.textfield}
+            sx = {{display: 'block', marginTop:2, marginBottom:2}}
           />
         </DialogContent>
         <DialogActions>
