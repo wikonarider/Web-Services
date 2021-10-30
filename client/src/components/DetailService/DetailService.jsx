@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { handleFav } from "../../utils/buttonHandlers";
 import {
   Box,
   CardMedia,
@@ -12,17 +13,28 @@ import {
 import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
 
 export default function DetailService({ id }) {
-  let [service, setService] = useState({});
+  let [service, setService] = useState({ service: {}, user: {} });
+  let [fav, setFav] = useState(false);
 
   let history = useHistory();
 
   //componentDidMount para traer la información del servicio por id
   useEffect(() => {
-    axios(`http://localhost:3001/services/${id}`).then((response) =>
-      setService(response.data)
-    );
-    // eslint-disable-next-line
+    axios(`http://localhost:3001/services/${id}`).then((response) => {
+      setService({ ...service, ...response.data });
+    });
+
+    axios(`http://localhost:3001/favs?id=${id}`).then((response) => {
+      setFav(response.data);
+    });
   }, []);
+
+  const theme = {
+    favorite: {
+      1: { color: "red" },
+      0: { color: "grey" },
+    },
+  };
 
   const handleClose = () => {
     history.goBack();
@@ -31,7 +43,8 @@ export default function DetailService({ id }) {
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-  let { img, title, price, description, rating } = service;
+  let { img, title, price, description, rating, qualifications } =
+    service.service;
 
   return (
     <Box
@@ -61,8 +74,14 @@ export default function DetailService({ id }) {
           justifyContent="space-between"
         >
           <Box gridColumn="span 6">
-            <IconButton onClick={() => {}} aria-label="add to favorites">
-              <Favorite sx={{}} />
+            <IconButton
+              onClick={async () => {
+                let newFavState = await handleFav(fav, id);
+                setFav(newFavState);
+              }}
+              aria-label="add to favorites"
+            >
+              <Favorite sx={fav ? theme.favorite["1"] : theme.favorite["0"]} />
             </IconButton>
             <IconButton aria-label="share">
               <Share />
@@ -89,12 +108,14 @@ export default function DetailService({ id }) {
           </Typography>
           <Rating
             name="read-only"
-            value={rating}
+            value={Number(rating)}
             precision={0.5}
             readOnly
             sx={{}}
           />
-          {rating ? rating : "84 opiniones"}
+          {qualifications
+            ? `${qualifications.length} opiniones`
+            : "0 opiniones"}
         </Box>
 
         <Box

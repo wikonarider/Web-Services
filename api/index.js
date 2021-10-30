@@ -23,7 +23,15 @@ const { loadServices } = require("./mock/services/index");
 const { linkAllGroups } = require("./mock/categories");
 const { groups } = require("./mock/groups");
 const { users } = require("./mock/usersJson");
-const { Service, Users, Group, Province, City } = require("./src/db");
+const { comments } = require("./mock/qualifications");
+const {
+  Service,
+  Users,
+  Group,
+  Province,
+  City,
+  Qualification,
+} = require("./src/db");
 const { loadProvinces } = require("./mock/provinces");
 const { loadCities } = require("./mock/cities");
 const { ENV_VARIABLE } = process.env;
@@ -46,6 +54,10 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
           console.log("Users Cargados")
         );
         await loadServices().then(() => console.log("Servicios Cargados"));
+
+        await Qualification.bulkCreate(comments).then(() => {
+          console.log(`Comentarios cargados`);
+        });
 
         await loadProvinces()
           .then((data) => Province.bulkCreate(data))

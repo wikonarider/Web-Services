@@ -51,8 +51,26 @@ async function deleteFav(req, res, next) {
   }
 }
 
+async function validateFav(req, res, next) {
+  try {
+    const { id } = req.query;
+    const { userId } = req.cookies;
+
+    const userFavs = await Services_users_favourites.findOne({
+      where: {
+        userId: userId,
+        serviceId: Number(id),
+      },
+    });
+    userFavs ? res.status(200).json(true) : res.status(200).json(false);
+  } catch (e) {
+    next(e);
+  }
+}
+
 module.exports = {
   addFavs,
   getFavs,
   deleteFav,
+  validateFav,
 };
