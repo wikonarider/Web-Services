@@ -11,6 +11,7 @@ export const type = {
   POST_USER: "POST_USER",
   PUT_USER: "PUT_USER",
   GET_USERS: "GET_USERS",
+  GET_USERS_BY_ID: "GET_USERS_BY_ID",
   BANNED_USER: "BANNED_USER",
   //
 

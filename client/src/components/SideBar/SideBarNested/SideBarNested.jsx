@@ -1,10 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-
 import SideBarNestedBtnDropDown from "../SideBarNestedBtnDropDown/SideBarNestedBtnDropDown";
 import { getGroups } from "../../../redux/actions";
-
 import List from "@mui/material/List";
 
 export default function SideBarNested({ openFromFather }) {
@@ -18,7 +16,12 @@ export default function SideBarNested({ openFromFather }) {
 
   return (
     <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+      sx={{
+        width: "100%",
+        minWidth: 360,
+        bgcolor: "background.paper",
+        mt: "20px",
+      }}
       component="nav"
       aria-labelledby="nested-list-subheader"
     >

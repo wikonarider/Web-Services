@@ -33,7 +33,7 @@ const rootReducer = (state = initialState, action) => {
     case type.LOGOUT_USER:
       return { ...state };
 
-    case type.GET_USERS:
+    case type.GET_USERS_BY_ID:
       return { ...state, users: payload };
 
     case type.GET_GROUPS:

@@ -27,6 +27,7 @@ export default function DetailService({ id }) {
     axios(`http://localhost:3001/favs?id=${id}`).then((response) => {
       setFav(response.data);
     });
+    // eslint-disable-next-line
   }, []);
 
   const theme = {

@@ -1,14 +1,12 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { Box, Toolbar, Button, AppBar } from "@mui/material";
 import SearchBar from "../SearchBar/SearchBar";
-import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { postLogout } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import Cart from "../Cart/Cart";
+import SideBar from "../SideBar/SideBar";
 
 export default function Nav() {
   const history = useHistory();
@@ -56,32 +54,35 @@ export default function Nav() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Toolbar>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-        ></Typography>
-        <SearchBar />
-        <Link to={reDirect} style={{ textDecoration: "none" }}>
-          <Button variant="outlined" color="secondary" size="small">
-            {button}
-          </Button>
-        </Link>
-        <Link to={reDirect2} style={{ textDecoration: "none" }}>
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={logOutClear}
-          >
-            {button2}
-          </Button>
-        </Link>
-        <Cart />
-      </Toolbar>
+    <Box sx={{ flexGrow: 1, width: "101%" }}>
+      <AppBar position="sticky" sx={{ zIndex: "9999" }}>
+        <Toolbar
+          sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+        >
+          <Box>
+            <SideBar />
+          </Box>
+          <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
+            <SearchBar />
+          </Box>
+          <Link to={reDirect} style={{ textDecoration: "none" }}>
+            <Button variant="outlined" color="secondary" size="small">
+              {button}
+            </Button>
+          </Link>
+          <Link to={reDirect2} style={{ textDecoration: "none" }}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={logOutClear}
+            >
+              {button2}
+            </Button>
+          </Link>
+          <Cart />
+        </Toolbar>
+      </AppBar>
     </Box>
   );
 }
