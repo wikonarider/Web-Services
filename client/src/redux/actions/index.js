@@ -1,5 +1,5 @@
 import { type } from "./variables";
-import serviceURL from "./url";
+import serviceURL from "./urlQuery";
 import axios from "axios";
 
 //_____________________________________________________________________________________actions service
