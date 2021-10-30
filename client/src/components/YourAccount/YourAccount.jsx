@@ -39,7 +39,6 @@ export default function YourAccount() {
 
   const fileInput = useRef();
 
-
   const handleImageUpload = () => {
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
@@ -56,10 +55,9 @@ export default function YourAccount() {
       options
     )
       .then((res) => res.json())
-      .then((res) => dispatch(putUser({img: res.secure_url})))
+      .then((res) => dispatch(putUser({ userImg: res.secure_url })))
       .catch((err) => console.log(err));
   };
-
 
   return (
     <div>
@@ -155,7 +153,6 @@ export default function YourAccount() {
             marginLeft: 1,
             marginBottom: 1,
           }}
-
         >
           Your Favs
         </Button>
