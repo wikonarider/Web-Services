@@ -29,13 +29,12 @@ export default function YourAccount() {
   const [openForm, setOpenForm] = useState(false);
 
   const [img, setImg] = useState("");
-  const [url, setUrl] = useState("");
 
   console.log(img);
-  console.log(url);
 
   useEffect(() => {
     dispatch(getUsers("aclowsere"));
+    // eslint-disable-next-line
   }, []);
 
   const fileInput = useRef();
