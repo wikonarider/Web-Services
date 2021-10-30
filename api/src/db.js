@@ -1,9 +1,9 @@
-require("dotenv").config();
-const { Sequelize } = require("sequelize");
-const fs = require("fs");
-const path = require("path");
+require('dotenv').config();
+const { Sequelize } = require('sequelize');
+const fs = require('fs');
+const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
@@ -17,13 +17,13 @@ const basename = path.basename(__filename);
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-fs.readdirSync(path.join(__dirname, "/models"))
+fs.readdirSync(path.join(__dirname, '/models'))
   .filter(
     (file) =>
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
   )
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+    modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
 // Injectamos la conexion (sequelize) a todos los modelos
@@ -42,11 +42,11 @@ const { Service, Users, Qualification, Category, Group, Province, City } =
   sequelize.models;
 // console.log("SEQUELIZE MODEL", sequelize.models);
 // Aca vendrian las relaciones
-Service.belongsToMany(Users, { through: "services_users_bought" });
-Users.belongsToMany(Service, { through: "services_users_bought" });
+Service.belongsToMany(Users, { through: 'services_users_bought' });
+Users.belongsToMany(Service, { through: 'services_users_bought' });
 
-Service.belongsToMany(Users, { through: "services_users_favourites" });
-Users.belongsToMany(Service, { through: "services_users_favourites" });
+Service.belongsToMany(Users, { through: 'services_users_favourites' });
+Users.belongsToMany(Service, { through: 'services_users_favourites' });
 
 Users.hasMany(Service);
 Service.belongsTo(Users);
@@ -73,13 +73,13 @@ City.belongsTo(Province);
 
 // Service -> n provinces
 // Provinces -> m services
-Service.belongsToMany(Province, { through: "services_provinces" });
-Province.belongsToMany(Service, { through: "services_provinces" });
+Service.belongsToMany(Province, { through: 'services_provinces' });
+Province.belongsToMany(Service, { through: 'services_provinces' });
 
 // Service -> n cities
 // City -> m services
-Service.belongsToMany(City, { through: "services_cities" });
-City.belongsToMany(Service, { through: "services_cities" });
+Service.belongsToMany(City, { through: 'services_cities' });
+City.belongsToMany(Service, { through: 'services_cities' });
 // Product.hasMany(Reviews);
 
 // hooks users
@@ -99,6 +99,14 @@ Users.beforeUpdate(async function (user) {
 Users.prototype.validPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+
+Service.beforeCreate(async function (service) {
+  const titleCapitalized =
+    service.title.charAt(0).toUpperCase() +
+    service.title.slice(1).toLowerCase();
+
+  service.title = titleCapitalized;
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
