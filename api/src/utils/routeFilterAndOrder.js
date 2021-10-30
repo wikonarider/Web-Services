@@ -1,4 +1,3 @@
-
 const {
   orderByUpdateDate,
   orderByCreatedDate,
@@ -12,11 +11,8 @@ const {
 
 //--------------------------------------------------------------------------
 const servicesFilters = function (objQuery, res, next) {
-  if (objQuery.title) {
+  if (objQuery.title) {//_______________________para serachBar 
     orderTitle(objQuery.title, res, next);
-  }
-  if (objQuery.province) {
-    orderProvince(objQuery.province, res, next);
   }
   if (objQuery.category) {
     orderCategory(objQuery, res, next);
