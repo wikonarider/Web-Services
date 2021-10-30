@@ -2,7 +2,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0% 0% 0% 20%;
+    margin: 0% 0% 0% 18%;
 }
 
 .yourAccount{
@@ -12,6 +12,11 @@
     
 }
 
+.logOut{
+    margin-left: auto;
+    margin-right: 22%;
+}
+
 
 
 .user{
@@ -19,7 +24,7 @@
     justify-content: center;
     align-items: center;
     background-color: #808080;
-    padding: 2% 2% 1% 2%;
+    padding: 2%;
 }
 
 .userInfo{
@@ -48,5 +53,17 @@
     margin-bottom: 3%;
 }
 
+.addFavContainer h3{
+    margin: 0;
+}
 
+.addToFav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .addToFav p {
+        margin: 0;
+    }
 

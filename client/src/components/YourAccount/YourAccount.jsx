@@ -14,20 +14,30 @@ import CardService from "../CardService/CardService";
 import { Container, Grid, IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
-import { getUsers, putUser } from "../../redux/actions";
+import { getUsersById, putUser, postLogout } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function YourAccount() {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.users);
+  const userId = document.cookie.slice(7);
 
+  useEffect(() => {
+    dispatch(getUsersById(userId));
+  }, []);
+
+  //BOTONES - YOUR ORDERS - YOUR FAVS - YOUR SERVICES
   const [viewServices, setViewservices] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [viewFavs, setViewFavs] = useState(false);
+  //----------------------------------------------
 
+  //MODAL FORM PARA CAMBIAR DATOS
   const [openForm, setOpenForm] = useState(false);
+  //-----------------------------------
 
+  //ESTADOS APRA ALMACENAR LA IMAGEN CUANDO LA QUIERA CAMBIAR
   const [img, setImg] = useState("");
 
   console.log(img);
@@ -37,8 +47,14 @@ export default function YourAccount() {
     // eslint-disable-next-line
   }, []);
 
-  const fileInput = useRef();
+  const [url, setUrl] = useState("");
+  //---------------------------------------------------
 
+  //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
+  const fileInput = useRef();
+  //----------------------------------------------------
+
+  //HANDLE IMAGEN CLOUDINARY
   const handleImageUpload = () => {
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
@@ -58,9 +74,18 @@ export default function YourAccount() {
       .then((res) => dispatch(putUser({ userImg: res.secure_url })))
       .catch((err) => console.log(err));
   };
+  //--------------------------------------------------------------
+
+  // HANDLE LOGOUT
+  const logOutClear = () => {
+    document.cookie = "userId=; max-age=0";
+    dispatch(postLogout());
+  };
+  //-------------------------------
 
   return (
     <div>
+      {/* ---------------    'NAVBAR' ---------------------------------------- */}
       <div className={s.nav}>
         <Link to="/">
           <IconButton color="secondary">
@@ -68,8 +93,24 @@ export default function YourAccount() {
           </IconButton>
         </Link>
         <p className={s.yourAccount}>Your Account</p>
+
+        <div className={s.logOut}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={logOutClear}
+            >
+              LOG OUT
+            </Button>
+          </Link>
+        </div>
       </div>
 
+      {/* --------------------------------------------------------- */}
+
+      {/* ------------------------USERINFO--------------------------- */}
       <div className={s.user}>
         <div>
           <Avatar
@@ -127,6 +168,10 @@ export default function YourAccount() {
           <p>{userData.location}</p>
         </div>
       </div>
+
+      {/* ------------------------------------------------------- */}
+
+      {/* ----------------------  BOTONERA ------------------------------------------- */}
 
       <div className={s.botonera}>
         <Button
@@ -211,16 +256,35 @@ export default function YourAccount() {
         </Button>
       </div>
 
-      {viewFavs && (
-        <Container>
-          <div>
-            <h1>YOUR FAVS</h1>
-            {userData.qualifications.map((s) => (
-              <CardService service={s} />
-            ))}
+      {/* ------------------------------------------------------ */}
+
+      {/* -------------------FAVS------------------------ */}
+      {viewFavs &&
+        (userData.qualifications.length > 0 ? (
+          <Container>
+            <div>
+              {userData.qualifications.map((s) => (
+                <Grid item key={s.id}>
+                  <CardService service={s} />
+                </Grid>
+              ))}
+            </div>
+          </Container>
+        ) : (
+          <div className={s.addFavContainer}>
+            <h3>Your Fav-list is currently empty</h3>
+            <div className={s.addToFav}>
+              <p>
+                Add Services that you like and want to see later by clicking on
+                the
+              </p>
+              <FavoriteIcon sx={{ marginLeft: 1 }} />
+            </div>
           </div>
-        </Container>
-      )}
+        ))}
+      {/* ------------------------------------------------ */}
+
+      {/* ------------------ORDERS---------------------------- */}
       {viewOrders && (
         <Container>
           <div>
@@ -228,19 +292,33 @@ export default function YourAccount() {
           </div>
         </Container>
       )}
-      {viewServices && (
-        <div>
-          <Container>
-            <Grid container justifyContent="center" spacing={3}>
-              {userData.services.map((s) => (
-                <Grid item key={s.id}>
-                  <CardService service={s} />
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </div>
-      )}
+      {/* ----------------------------------------------------- */}
+
+      {/* -------------------SERVICES-------------------------- */}
+      {viewServices &&
+        (userData.services.length > 0 ? (
+          <div>
+            <Container>
+              <Grid container justifyContent="center" spacing={3}>
+                {userData.services.map((s) => (
+                  <Grid item key={s.id}>
+                    <CardService service={s} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Container>
+          </div>
+        ) : (
+          <div className={s.addFavContainer}>
+            <h3>You are currently not offering any services</h3>
+            <div className={s.addToFav}>
+              <p>
+                Post Services that you want to offer by clicking on POST SERVICE
+              </p>
+            </div>
+          </div>
+        ))}
+      {/* ---------------------------------------------- */}
 
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
     </div>

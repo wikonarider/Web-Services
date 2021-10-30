@@ -107,6 +107,17 @@ export function getUsers(username) {
   };
 }
 
+export function getUsersById(id) {
+  return async (dispatch) => {
+    try {
+      const res = await axios(`/users?id=${id}`);
+      return dispatch({ type: type.GET_USERS_BY_ID, payload: res.data });
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
+
 export function banUser(id) {
   return async () => {
     try {
