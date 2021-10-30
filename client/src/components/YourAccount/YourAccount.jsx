@@ -25,6 +25,7 @@ export default function YourAccount() {
 
   useEffect(() => {
     dispatch(getUsersById(userId));
+    // eslint-disable-next-line
   }, []);
 
   //BOTONES - YOUR ORDERS - YOUR FAVS - YOUR SERVICES
@@ -38,16 +39,9 @@ export default function YourAccount() {
   //-----------------------------------
 
   //ESTADOS APRA ALMACENAR LA IMAGEN CUANDO LA QUIERA CAMBIAR
+  // eslint-disable-next-line
   const [img, setImg] = useState("");
 
-  console.log(img);
-
-  useEffect(() => {
-    dispatch(getUsers("aclowsere"));
-    // eslint-disable-next-line
-  }, []);
-
-  const [url, setUrl] = useState("");
   //---------------------------------------------------
 
   //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
@@ -82,7 +76,7 @@ export default function YourAccount() {
     dispatch(postLogout());
   };
   //-------------------------------
-
+  // eslint-disable-next-line
   const refreshPage = () => {
     window.location.reload();
   };
