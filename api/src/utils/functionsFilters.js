@@ -1,9 +1,27 @@
-const { Service } = require("../db.js");
+const { Service, Users, Qualification, Category, Group } = require("../db.js");
 const { Op } = require("sequelize");
-//------------------------------------------------------------------------------------------price
-function orderByPrice(services, objQuery, res, next) {
+
+//------------------------------------------------------------------------------------------------------price
+
+async function orderByPrice(objQuery, res, next) {
   const { order } = objQuery;
-  var dbServices = services;
+  var dbServices = await Service.findAll({
+    //Traigo todo de la db
+    include: [
+      {
+        model: Users,
+        through: { attributes: [] },
+      },
+      Qualification,
+      {
+        model: Category,
+        include: {
+          model: Group,
+        },
+      },
+    ],
+  });
+
   order === "ASC"
     ? (dbServices = dbServices.sort(function (a, b) {
         if (a.price > b.price) {
@@ -84,7 +102,24 @@ async function orderByUpdateDate(objQuery, res, next) {
 }
 
 //--------------------------------------------------------------------------------------------------title
-function orderTitle(dbServices, title, res, next) {
+async function orderTitle( title, res, next) {
+  var dbServices = await Service.findAll({
+    //Traigo todo de la db
+    include: [
+      {
+        model: Users,
+        through: { attributes: [] },
+      },
+      Qualification,
+      {
+        model: Category,
+        include: {
+          model: Group,
+        },
+      },
+    ],
+  });
+
   var filteredServices = [];
   dbServices.map((service) => {
     if (service.title.toLowerCase().includes(title.toLowerCase()))

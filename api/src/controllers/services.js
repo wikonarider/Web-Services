@@ -17,7 +17,7 @@ const { validateServices } = require("../utils/validServices");
 function getServices(req, res, next) {
   if (Object.values(req.query).length) {
     //compruebo si query tiene propiedades para filtrar
-    servicesFilters(req.query, res, next);
+    servicesFilters(req.query, res, next);// se encarga de todo lo relacionado con filtros
   } else {
     Service.findAll({
       //Traigo todo de la db
