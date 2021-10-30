@@ -163,25 +163,89 @@ const appliance = [
 
 const computer = [
   {
-    title: '',
-    description: '',
-    img: '',
+    title: 'SERVICIO TECNICO DE PC A DOMICILIO',
+    description: `*PC DE ESCRITORIO , NOTEBOOK , NETBOOK, MONITORES.
+
+    *TODAS LAS MARCAS Y MODELOS ¡¡
+    
+    *INSTALACION DE SISTEMA OPERATIVO
+    
+    WINDOWS TODAS LAS VERSIONES.
+    
+    *FORMATEO Y PARTICION DE DISCOS
+    
+    *iNSTALACION DE DISCOS SSD
+    
+    *ELIMINACION DE VIRUS
+    
+    *LIMPIEZA DE GABINETE
+    
+    *ACTUALIZACIONES
+    
+    *ARMADO DE PC A MEDIDA
+    
+    *CAMBIO DE COMPONENTES`,
+    img: 'https://apollo-virginia.akamaized.net/v1/files/a3rvsqlaa24u-AR/image;s=780x0;q=60',
+    price: 0,
+    categoryId: 6,
+    userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
+  },
+  {
+    title: 'Servicio Técnico PC',
+    description: `Atención inmediata.
+
+    Diagnósticos y reparación de PC, Notebooks, Netbooks
+    
+    Servicios para particulares y empresas
+    
+    Instalación de Sistemas Operativos
+    
+    Instalación Office
+    
+    Instalación y configuración de impresoras locales y en red
+    
+    Optimización de S.O
+    
+    Eliminación de virus, spyware, adware, malware
+    
+    Instalación de programas
+    
+    Administración de particiones y backup
+    
+    Colocación o cambio de hardware
+    
+    Servicio a domicilio o remoto
+    
+    Configuración de redes
+    
+    Configuración de Wi-Fi
+    
+    Soluciones informáticas en General
+    
+    Consulte por mas servicios!
+    
+    Se acepta MercadoPago
+    
+    Su consulta no molesta!`,
+    img: 'https://apollo-virginia.akamaized.net/v1/files/msnh7sn2h3bh2-AR/image;s=780x0;q=60',
     price: 1000,
     categoryId: 6,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
-    title: '',
-    description: '',
-    img: '',
-    price: 1000,
-    categoryId: 6,
-    userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
-  },
-  {
-    title: '',
-    description: '',
-    img: '',
+    title: 'Servicio Técnico en PC',
+    description: `Servicio tecnico
+
+    Reparación, Mantenimiento y Actualización de PC
+    
+    Asesoramiento, Redes, Instalaciones, Configuracion e instalacion de camaras IP, configuracion de programas.
+    
+    SOLUCIONES INFORMÁTICAS
+    
+    Se aceptan todas las tarjetas!
+    
+    No dude en consultar!`,
+    img: `https://apollo-virginia.akamaized.net/v1/files/h368j747qaev2-AR/image;s=780x0;q=60`,
     price: 1000,
     categoryId: 6,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
@@ -322,9 +386,10 @@ const plumbing = [
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
-    title: '',
-    description: '',
-    img: '',
+    title: 'plomero gasista en general jose',
+    description:
+      'soluciones a toda clase de perdidas de agua oh gas destrancaciones de cañerias desagues inodoros etc instalaciones cloacales sanitarias gas agua fria caliente tanques termotanques calefones cocinas etc soluciones rapidas y garantizadas',
+    img: 'https://apollo-virginia.akamaized.net/v1/files/8qofsth3857c3-AR/image;s=780x0;q=60',
     price: 1000,
     categoryId: 10,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',

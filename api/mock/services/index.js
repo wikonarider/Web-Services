@@ -7,7 +7,7 @@ const { eventsOrganization } = require('./eventsOrganization');
 const bulk = [...lessons, ...repair, ...transport, ...eventsOrganization];
 
 function loadServices() {
-  return Service.bulkCreate(bulk);
+  return Service.bulkCreate(bulk, { individualHooks: true });
 }
 
 module.exports = {
