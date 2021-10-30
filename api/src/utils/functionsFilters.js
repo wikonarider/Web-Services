@@ -5,9 +5,8 @@ const { Op } = require("sequelize");
 
 async function orderByPrice(objQuery, res, next) {
   const { order } = objQuery;
-  let priceFilter
+  let priceFilter;
   if (order === "ASC") {
-    
     priceFilter = await Service.findAll({
       attributes: ["id", "title", "img", "description", "price", "userId"],
 
@@ -71,8 +70,8 @@ async function filterByPriceRange(objQuery, res, next) {
 //-------------------------------------------------------------------------------------------date create
 async function orderByCreatedDate(objQuery, res, next) {
   const { order } = objQuery;
-  let dateFilter
-console.log("llego", order)
+  let dateFilter;
+  console.log("llego", order);
   if (order === "ASC") {
     dateFilter = await Service.findAll({
       include: [
@@ -88,7 +87,7 @@ console.log("llego", order)
       order: [["createdAt", "ASC"]],
     });
   } else {
-     dateFilter = await Service.findAll({
+    dateFilter = await Service.findAll({
       include: [
         {
           model: Category,
@@ -102,13 +101,13 @@ console.log("llego", order)
       order: [["createdAt", "DESC"]],
     });
   }
-  console.log("esto es",dateFilter)
+  console.log("esto es", dateFilter);
   res.status(200).send(dateFilter);
 }
 //-------------------------------------------------------------------------------------------------date update
 async function orderByUpdateDate(objQuery, res, next) {
   const { order } = objQuery;
-  let dateFilter
+  let dateFilter;
   if (order === "ASC") {
     dateFilter = await Service.findAll({
       include: [
@@ -142,7 +141,7 @@ async function orderByUpdateDate(objQuery, res, next) {
 }
 
 //--------------------------------------------------------------------------------------------------title
-async function orderTitle( title, res, next) {
+async function orderTitle(title, res, next) {
   var dbServices = await Service.findAll({
     //Traigo todo de la db
     include: [
@@ -169,54 +168,55 @@ async function orderTitle( title, res, next) {
 }
 
 //-------------------------------------------------------------------------------------------orderByScore
-async function orderByQualifications(objQuery, res, next) {  
-  console.log("llego")
-const { order } = objQuery;
-console.log("llego")
-let scoreFilter
-if (order === "ASC") {
-  scoreFilter = await Qualification.findAll({
-    attributes : ["score"],
-    include: [
-      {
-        model: Service,
-        attributes: ["id", "title", "img", "description", "price", "userId"],
-        include: [
-          {
-            model: Category,
-            attributes: ["name"],
-            include: {
-              model: Group,
+async function orderByQualifications(objQuery, res, next) {
+  const { order } = objQuery;
+  console.log("llego");
+  let scoreFilter;
+  if (order === "ASC") {
+    scoreFilter = await Qualification.findAll({
+      attributes: ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          include: [
+            {
+              model: Category,
               attributes: ["name"],
+              include: {
+                model: Group,
+                attributes: ["name"],
+              },
             },
-          },
-        ],
-      },
-    ],
-    order: [["score", "DESC"]],
-  });
-} else {
-  scoreFilter = await Qualification.findAll({
-    attributes : ["score"],
-    include: [
-      {
-        model: Service,
-        attributes: ["id", "title", "img", "description", "price", "userId"],
-        include: [
-          {
-            model: Category,
-            attributes: ["name"],
-            include: {
-              model: Group,
+          ],
+        },
+      ],
+      order: [["score", "DESC"]],
+    });
+  } else {
+    scoreFilter = await Qualification.findAll({
+      attributes: ["score"],
+      include: [
+        {
+          model: Service,
+          attributes: ["id", "title", "img", "description", "price", "userId"],
+          include: [
+            {
+              model: Category,
               attributes: ["name"],
+              include: {
+                model: Group,
+                attributes: ["name"],
+              },
             },
-          },
-        ],
-      },
-    ],
-    order: [["score", "DESC"]],
-  });
-}res.status(200).send(scoreFilter);}
+          ],
+        },
+      ],
+      order: [["score", "DESC"]],
+    });
+  }
+  res.status(200).send(scoreFilter);
+}
 //-------------------------------------------------------------------------------------------------------
 function orderProvince(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-const { Service, Users, Qualification, Category, Group } = require("../db.js");
-
 const {
   orderByUpdateDate,
   orderByCreatedDate,
@@ -13,20 +11,19 @@ const {
 
 //--------------------------------------------------------------------------
 const servicesFilters = function (objQuery, res, next) {
-  if (objQuery.title) {
+  if (objQuery.title) {//_______________________para serachBar 
     orderTitle(objQuery.title, res, next);
   }
-  if (objQuery.province) {
-    orderProvince(objQuery.province, res, next);
-  }
-  if (objQuery.category) {
+  if (objQuery.prop) {
     orderCategory(objQuery, res, next);
   }
 };
 
 //--------------------------------------------------------------------------------------------------routea functiones que ordenan y filtran
+//los nombres de cada case deben ser exactamente como las props de cada model para facilitar desde el front los filtros!!!!!
+
 function orderCategory(objQuery, res, next) {
-  switch (objQuery.category) {
+  switch (objQuery.prop) {
     case "price": {
       orderByPrice(objQuery, res, next);
       break;
@@ -43,7 +40,6 @@ function orderCategory(objQuery, res, next) {
       orderByQualifications(objQuery, res, next);
       break;
     }
-    
   }
 }
 
