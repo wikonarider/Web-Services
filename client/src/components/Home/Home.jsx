@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getServices } from "../../redux/actions";
+import { getServices, getUserFavs } from "../../redux/actions";
 import Cards from "../Cards/Cards";
 // import Nav from '../Nav/Nav';
 import SideBar from "../SideBar/SideBar";
@@ -12,6 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getServices());
+    document.cookie && dispatch(getUserFavs(document.cookie.split("=")[1]));
   }, [dispatch]);
 
   return (

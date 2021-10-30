@@ -7,7 +7,7 @@ export const handleFav = async (favState, serviceId) => {
     let deleteResponse = await axios.delete(`/favs`, {
       data: { serviceId, userId },
     });
-    console.log("deleteResponse", deleteResponse);
+
     if (deleteResponse.status === 200) {
       favState = false;
     }
@@ -16,7 +16,7 @@ export const handleFav = async (favState, serviceId) => {
       serviceId,
       userId,
     });
-    console.log("postResponse", postResponse);
+
     if (postResponse.status === 200) {
       favState = true;
     }

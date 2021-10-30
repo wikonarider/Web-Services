@@ -6,6 +6,7 @@ const initialState = {
   groups: [],
   provinces: [],
   cookies: [],
+  favs: [],
   cart: [],
 };
 
@@ -50,6 +51,11 @@ const rootReducer = (state = initialState, action) => {
         cart: state.cart.filter((s) => s.id !== action.payload),
       };
 
+    case type.GET_USER_FAVS:
+      return {
+        ...state,
+        favs: action.payload,
+      };
     default:
       return state;
   }
