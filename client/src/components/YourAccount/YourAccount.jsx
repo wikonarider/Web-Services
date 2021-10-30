@@ -75,6 +75,10 @@ export default function YourAccount() {
   };
   //-------------------------------
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
       {/* ---------------    'NAVBAR' ---------------------------------------- */}

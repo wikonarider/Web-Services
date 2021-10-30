@@ -39,8 +39,11 @@ export function FormDialog({ openForm, setOpenForm }) {
     } catch (e) {
       console.log(e);
     }
-    console.log("submit");
   };
+
+  const refreshPage = () => {
+    window.location.reload();
+  }
 
   return (
     <Dialog
@@ -76,7 +79,10 @@ export function FormDialog({ openForm, setOpenForm }) {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => setOpenForm(false)}
+            onClick={() => {
+              setOpenForm(false)
+              refreshPage();
+            }}
             type="submit"
             variant="contained"
             className={s.submit}
