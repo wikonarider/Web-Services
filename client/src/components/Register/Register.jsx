@@ -3,8 +3,10 @@ import s from "./Register.module.css";
 import { TextField, Button } from "@mui/material";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
+import { useHistory } from "react-router";
 
 function Register() {
+  const history = useHistory();
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     name: "",
@@ -52,6 +54,7 @@ function Register() {
           });
           setInputErrors({});
           setStart(true);
+          history.push('/')
         }
       }
     } catch (e) {
