@@ -54,7 +54,7 @@ function Register() {
           });
           setInputErrors({});
           setStart(true);
-          history.push('/')
+          history.push('/login')
         }
       }
     } catch (e) {

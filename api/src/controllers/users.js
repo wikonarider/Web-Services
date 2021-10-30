@@ -61,8 +61,8 @@ async function userEdit(req, res, next) {
 async function getUsers(req, res, next) {
   try {
     // let { username } = req.params;
-    let { username } = req.query;
-    if (!username) {
+    let { username, id } = req.query;
+    if (!username && !id) {
       const usersDb = await Users.findAll({
         include: [
           {
@@ -74,6 +74,16 @@ async function getUsers(req, res, next) {
       usersDb.length > 0
         ? res.status(200).send(usersDb)
         : res.status(500).send({ response: "no users yet" });
+    } else if (id) {
+      const userId = await Users.findOne({
+        where: {
+          id,
+        },
+        include: {
+          all: true,
+        },
+      });
+      res.status(200).send(userId);
     } else {
       const userFinded = await Users.findOne({
         where: {

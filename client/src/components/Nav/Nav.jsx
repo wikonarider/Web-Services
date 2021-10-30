@@ -40,7 +40,7 @@ export default function Nav() {
   let button;
   let button2;
   if (document.cookie) {
-    button = `Hello, user`;
+    button = `Your Account`;
   } else {
     button = "Hello, Sign In";
   }
@@ -63,6 +63,8 @@ export default function Nav() {
   } else {
     reDirect2 = "/login";
   }
+
+  console.log('COOKIE:', document.cookie);
 
   //-- count tiene que ser igual a las cosas que hayan en el carrito
 

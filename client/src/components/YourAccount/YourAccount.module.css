@@ -1,8 +1,15 @@
+.nav{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0% 0% 0% 20%;
+}
+
 .yourAccount{
     text-align: left;
     font-size: 25px;
-    margin: 0% 0% 0% 20%;
-    padding: 1%;
+    margin-left: 1%;
+    
 }
 
 
