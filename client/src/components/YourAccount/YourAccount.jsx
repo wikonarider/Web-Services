@@ -39,6 +39,14 @@ export default function YourAccount() {
 
   //ESTADOS APRA ALMACENAR LA IMAGEN CUANDO LA QUIERA CAMBIAR
   const [img, setImg] = useState("");
+
+  console.log(img);
+
+  useEffect(() => {
+    dispatch(getUsers("aclowsere"));
+    // eslint-disable-next-line
+  }, []);
+
   const [url, setUrl] = useState("");
   //---------------------------------------------------
 
