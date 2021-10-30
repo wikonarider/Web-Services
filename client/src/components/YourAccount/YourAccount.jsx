@@ -9,8 +9,9 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import HomeIcon from "@mui/icons-material/Home";
 import CardService from "../CardService/CardService";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
 import { getUsers, putUser } from "../../redux/actions";
@@ -61,7 +62,14 @@ export default function YourAccount() {
 
   return (
     <div>
-      <p className={s.yourAccount}>Your Account</p>
+      <div className={s.nav}>
+        <Link to="/">
+          <IconButton color="secondary">
+            <HomeIcon />
+          </IconButton>
+        </Link>
+        <p className={s.yourAccount}>Your Account</p>
+      </div>
 
       <div className={s.user}>
         <div>
