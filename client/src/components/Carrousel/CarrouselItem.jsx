@@ -10,6 +10,7 @@ function CarrouselItem({ title, img }) {
     <div>
       <img style={style} src={img} alt={title} />
       <p
+        className="legend"
         style={{
           fontWeight: "bold",
           fontSize: "20px",
