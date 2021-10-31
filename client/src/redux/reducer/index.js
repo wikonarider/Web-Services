@@ -5,7 +5,6 @@ const initialState = {
   users: [],
   groups: [],
   provinces: [],
-  cookies: [],
   favs: [],
   cart: [],
 };
@@ -16,18 +15,16 @@ const rootReducer = (state = initialState, action) => {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
 
     case type.GET_SERVICES:
+      // usar para testing no mas
+      // console.log("Payload en reducer", payload);
+      // console.log("globalState de servicios", state.services);
+
       return {
         ...state,
         services: payload,
       };
 
     case type.CREATE_SERVICE:
-      return { ...state };
-
-    case type.SINGIN_USER:
-      return { ...state, cookies: action.payload };
-
-    case type.LOGOUT_USER:
       return { ...state };
 
     case type.GET_USERS_BY_ID:

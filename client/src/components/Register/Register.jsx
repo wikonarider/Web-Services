@@ -3,10 +3,8 @@ import s from "./Register.module.css";
 import { TextField, Button } from "@mui/material";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
-import { useHistory } from "react-router";
 
-function Register() {
-  const history = useHistory();
+function Register({ setRegisterModal }) {
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     name: "",
@@ -54,16 +52,14 @@ function Register() {
           });
           setInputErrors({});
           setStart(true);
-          history.push('/login')
         }
       }
     } catch (e) {
-      console.log(e);
       setInputErrors((prev) => {
         return {
           ...prev,
-          username: "username or email already exist or is empty",
-          email: "username or email already exist or is empty",
+          username: e.response.data.data,
+          email: e.response.data.data,
         };
       });
     }
@@ -141,7 +137,7 @@ function Register() {
       </form>
       <ModalRegister
         modal={modal}
-        setModal={setModal}
+        setModal={setRegisterModal}
         message={"Successful registration"}
       />
     </div>

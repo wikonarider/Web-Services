@@ -58,6 +58,21 @@ export function validateInput(user) {
   return errors;
 }
 
+export function validateLogin(user) {
+  let errors = {};
+  // username validations
+  if (!validUsername(user.username)) {
+    errors.username =
+      "Must start with at least 4 letters and contain only letters or numbers ";
+  }
+  // password validations
+  if (!validPassword(user.password)) {
+    errors.password =
+      "At least 8 characters, it must contain 1 letter and 1 number";
+  }
+  return errors;
+}
+
 export async function registerUser(user) {
   const response = await axios.post("/users", user);
   return response.data;

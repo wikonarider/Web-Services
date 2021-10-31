@@ -1,63 +1,45 @@
-import React from "react";
-import { Box, Toolbar, Button, AppBar } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Toolbar, Button, AppBar, Modal } from "@mui/material";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { postLogout } from "../../redux/actions";
-import { useDispatch } from "react-redux";
 import Cart from "../Cart/Cart";
 import SideBar from "../SideBar/SideBar";
+import UserMenu from "./UserMenu";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 
 export default function Nav() {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const cookiesState = useSelector((state) => state.cookies);
-  if (cookiesState.length > 0) {
-    document.cookie =
-      encodeURIComponent("userId") + "=" + encodeURIComponent(cookiesState);
-    console.log(document.cookie);
-  }
+  const [login, setLogin] = useState(false);
+  const [registerModal, setRegisterModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [cookie, setCookie] = useState(document.cookie);
 
-  const logOutClear = () => {
-    document.cookie = "userId=; max-age=0";
-    dispatch(postLogout());
-    history.push("/login");
+  useEffect(() => {
+    setCookie(() => document.cookie);
+  }, []);
+
+  // Descomentar para ver las cookies en la consola del navegador
+  // console.log("Cookies: ", document.cookie);
+
+  const handleLogin = () => {
+    setLoginModal((prev) => !prev);
+    setRegisterModal(() => false);
   };
 
-  //cheque si el usuario esta logeado
-  // const user = useSelector((state) => state.userData);
-  let button;
-  let button2;
-  if (document.cookie) {
-    button = `Your Account`;
-  } else {
-    button = "Hello, Sign In";
-  }
-
-  if (document.cookie) {
-    button2 = `LogOut`;
-  } else {
-    button2 = "Register";
-  }
-
-  let reDirect;
-  if (document.cookie) {
-    reDirect = "/account";
-  } else {
-    reDirect = "/login";
-  }
-  let reDirect2;
-  if (!document.cookie) {
-    reDirect2 = "/register";
-  } else {
-    reDirect2 = "/login";
-  }
+  const handleRegister = () => {
+    setRegisterModal((prev) => !prev);
+    setLoginModal(() => false);
+  };
 
   return (
     <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="sticky" sx={{ zIndex: "9999" }}>
+      <AppBar position="fixed" sx={{ zIndex: "9999" }}>
         <Toolbar
-          sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "5px",
+          }}
         >
           <Box>
             <SideBar />
@@ -65,22 +47,71 @@ export default function Nav() {
           <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
             <SearchBar />
           </Box>
-          <Link to={reDirect} style={{ textDecoration: "none" }}>
-            <Button variant="outlined" color="secondary" size="small">
-              {button}
-            </Button>
-          </Link>
-          <Link to={reDirect2} style={{ textDecoration: "none" }}>
+
+          {/* Register */}
+
+          {login || cookie ? null : (
             <Button
-              variant="outlined"
+              variant="contained"
+              size="medium"
               color="secondary"
-              size="small"
-              onClick={logOutClear}
+              onClick={handleRegister}
             >
-              {button2}
+              Register
             </Button>
-          </Link>
+          )}
+          <Modal
+            open={registerModal}
+            onClose={handleRegister}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <Register setRegisterModal={setRegisterModal} />
+            </Box>
+          </Modal>
+
+          {/* Login */}
+
+          {!login && !cookie ? (
+            <Button
+              variant="contained"
+              size="medium"
+              color="secondary"
+              onClick={handleLogin}
+            >
+              Login
+            </Button>
+          ) : null}
+          <Modal
+            open={loginModal}
+            onClose={handleLogin}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <Login setLogin={setLogin} setLoginModal={setLoginModal} />
+            </Box>
+          </Modal>
+
           <Cart />
+          {login || cookie ? (
+            <UserMenu setLogin={setLogin} setCookie={setCookie} />
+          ) : null}
         </Toolbar>
       </AppBar>
     </Box>

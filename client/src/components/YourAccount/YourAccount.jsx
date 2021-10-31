@@ -14,7 +14,8 @@ import CardService from "../CardService/CardService";
 import { Container, Grid, IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
-import { getUsersById, putUser, postLogout } from "../../redux/actions";
+import { getUsersById, putUser } from "../../redux/actions";
+import { postLogout } from "../../utils/login";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function YourAccount() {
@@ -71,9 +72,9 @@ export default function YourAccount() {
   //--------------------------------------------------------------
 
   // HANDLE LOGOUT
-  const logOutClear = () => {
+  const logOutClear = async () => {
     document.cookie = "userId=; max-age=0";
-    dispatch(postLogout());
+    await postLogout();
   };
   //-------------------------------
   // eslint-disable-next-line
