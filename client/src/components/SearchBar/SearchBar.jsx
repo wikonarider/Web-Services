@@ -50,9 +50,12 @@ const Search = styled("div")(({ theme }) => ({
 export default function SearchBar() {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-
+  const obj = {
+  filter: "title",
+  name: name,
+   }
   useEffect(() => {
-    dispatch(getServices({title:name}));
+    dispatch(getServices(obj));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
