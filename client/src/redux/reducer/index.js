@@ -6,6 +6,7 @@ const initialState = {
   groups: [],
   provinces: [],
   favs: [],
+  favsData: [],
   cart: [],
 };
 
@@ -49,6 +50,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         favs: action.payload,
+      };
+
+    case type.GET_FAVS_SERVICES_DATA:
+      return {
+        ...state,
+        favsData: action.payload,
       };
     default:
       return state;
