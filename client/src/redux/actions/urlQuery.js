@@ -1,4 +1,4 @@
-//reconstruyo URL para query dependiendo las props del objeto que recibe getService(obj)
+//construye URL para query dependiendo las props del objeto que recibe getService(obj)
 
 export default function serviceURL(obj) {
   var URL = "services";

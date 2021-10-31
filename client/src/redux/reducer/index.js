@@ -16,9 +16,6 @@ const rootReducer = (state = initialState, action) => {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
 
     case type.GET_SERVICES:
-      console.log("Payload en reducer", payload);
-      console.log("globalState de servicios", state.services);
-
       return {
         ...state,
         services: payload,

@@ -110,7 +110,6 @@ async function getServicesById(req, res, next) {
         "img",
         "description",
         "price",
-        "userId",
         "createdAt",
         "updatedAt",
         "userId",
