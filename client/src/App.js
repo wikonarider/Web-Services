@@ -6,11 +6,14 @@ import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
+import Login from "./components/Login/Login";
+import Landing from "./components/Landing/Landing";
 
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/home" component={Home} />
       <Route exact path="/chat" component={Chat} />
       <Route exact path="/service" component={CreateService} />
       <Route
