@@ -1,7 +1,7 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-
+import CarrouselItem from "./CarrouselItem";
 //habria que tener un estado con los destacados y esos serian los que se muestran
 //queda asi para visualizar
 
@@ -62,14 +62,9 @@ const featured = [
   },
 ];
 
-const style = {
-  objectFit: "cover",
-  height: "450px",
-};
-
 export default function Carrousel() {
   return (
-    <div style={{ width: "90%", margin: "50px auto 0 auto" }}>
+    <div style={{ width: "90%", margin: "100px auto 0 auto" }}>
       <Carousel
         dynamicHeight={true}
         autoPlay={true}
@@ -78,25 +73,10 @@ export default function Carrousel() {
         showThumbs={false}
         showStatus={false}
       >
-        {featured.map((f) => item(f.title, f.img))}
+        {featured.map((f) => (
+          <CarrouselItem key={f.title} title={f.title} img={f.img} />
+        ))}
       </Carousel>
-    </div>
-  );
-}
-
-function item(title, img) {
-  return (
-    <div>
-      <img style={style} src={img} alt={title} />
-      <p
-        className="legend"
-        style={{
-          fontWeight: "bold",
-          fontSize: "20px",
-        }}
-      >
-        {title}
-      </p>
     </div>
   );
 }

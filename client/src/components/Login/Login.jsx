@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import s from "./Login.module.css";
 import { TextField, Button } from "@mui/material";
-import { validateInput } from "../../utils/registerValidations";
-import { useDispatch } from "react-redux";
-import { postLogin } from "../../redux/actions";
-import { useHistory } from "react-router-dom";
+import { validateLogin } from "../../utils/registerValidations";
+import { postLogin } from "../../utils/login";
 
-function Singin() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+function Login({ setLogin, setLoginModal }) {
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     username: "",
@@ -28,7 +24,7 @@ function Singin() {
       };
       // seteo los errores
       setInputErrors(() => {
-        return validateInput(input);
+        return validateLogin(input);
       });
       // seteo el estado
       return input;
@@ -36,15 +32,28 @@ function Singin() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(postLogin(inputs));
+    try {
+      e.preventDefault();
+      await postLogin(inputs);
 
-    setInputs({
-      username: "",
-      password: "",
-    });
+      setInputs({
+        username: "",
+        password: "",
+      });
 
-    history.push("/");
+      setLogin(() => true);
+      setLoginModal(() => false);
+    } catch (e) {
+      setInputErrors(() => {
+        let error = {};
+        if (e.response.data === "user incorrect") {
+          error.username = "User incorrect";
+        } else {
+          error.password = "Password incorrect";
+        }
+        return error;
+      });
+    }
   };
 
   return (
@@ -73,7 +82,11 @@ function Singin() {
           variant="outlined"
           onChange={handleChange}
         />
-        <Button type="submit" variant="contained">
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={Object.keys(inputsErrors).length ? true : false}
+        >
           Sing in
         </Button>
       </form>
@@ -81,4 +94,4 @@ function Singin() {
   );
 }
 
-export default Singin;
+export default Login;
