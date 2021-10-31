@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import s from "./YourAccount.module.css";
 
-import { Button, Avatar } from "@mui/material";
+//-------------- MATERIAL UI -------------------------------------
+import Button from '@mui/material/Button'
+import { Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -10,12 +12,16 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import HomeIcon from "@mui/icons-material/Home";
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+//-------------------------------------------------------
+
 import CardService from "../CardService/CardService";
-import { Container, Grid, IconButton } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
-import { getUsersById, putUser } from "../../redux/actions";
 import { postLogout } from "../../utils/login";
+import { getUsersById, putUser } from "../../redux/actions";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function YourAccount() {
