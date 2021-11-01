@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Box, Toolbar, Button, AppBar, Modal } from "@mui/material";
-import SearchBar from "../SearchBar/SearchBar";
-import Cart from "../Cart/Cart";
-import SideBar from "../SideBar/SideBar";
-import UserMenu from "./UserMenu";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
+import React, { useState, useEffect } from 'react';
+import { Box, Toolbar, Button, AppBar, Modal } from '@mui/material';
+import SearchBar from '../SearchBar/SearchBar';
+import Cart from '../Cart/Cart';
+import SideBar from '../SideBar/SideBar';
+import UserMenu from './UserMenu';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 export default function Nav() {
   const [login, setLogin] = useState(false);
@@ -31,20 +31,20 @@ export default function Nav() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="fixed" sx={{ zIndex: "9999" }}>
+    <Box sx={{ flexGrow: 1, width: '101%' }}>
+      <AppBar position="fixed" sx={{ zIndex: '9999' }}>
         <Toolbar
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "5px",
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '5px',
           }}
         >
           <Box>
             <SideBar />
           </Box>
-          <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
+          <Box sx={{ width: '50%', ml: 'auto', mr: 'auto' }}>
             <SearchBar />
           </Box>
 
@@ -68,10 +68,10 @@ export default function Nav() {
           >
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
-                width: "100%",
+                display: 'flex',
+                justifyContent: 'center',
+                height: '100%',
+                width: '100%',
               }}
             >
               <Register setRegisterModal={setRegisterModal} />
@@ -98,10 +98,10 @@ export default function Nav() {
           >
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
-                width: "100%",
+                display: 'flex',
+                justifyContent: 'center',
+                height: '100%',
+                width: '100%',
               }}
             >
               <Login setLogin={setLogin} setLoginModal={setLoginModal} />

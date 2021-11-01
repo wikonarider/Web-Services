@@ -1,8 +1,9 @@
 import React from "react";
 
 const style = {
-  objectFit: "cover",
+  // objectFit: "contain",
   height: "450px",
+
 };
 
 function CarrouselItem({ title, img }) {
@@ -10,6 +11,7 @@ function CarrouselItem({ title, img }) {
     <div>
       <img style={style} src={img} alt={title} />
       <p
+        className="legend"
         style={{
           fontWeight: "bold",
           fontSize: "20px",

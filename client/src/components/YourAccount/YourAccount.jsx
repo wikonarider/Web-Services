@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import s from "./YourAccount.module.css";
 
-import { Button, Avatar } from "@mui/material";
+//-------------- MATERIAL UI -------------------------------------
+import Button from "@mui/material/Button";
+import { Avatar } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -10,22 +12,36 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import HomeIcon from "@mui/icons-material/Home";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+//-------------------------------------------------------
+
 import CardService from "../CardService/CardService";
-import { Container, Grid, IconButton } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import { FormDialog } from "./FormDialog/FormDialog";
-import { getUsersById, putUser } from "../../redux/actions";
 import { postLogout } from "../../utils/login";
+import {
+  getUsersById,
+  putUser,
+  getUserFavs,
+  getFavsServicesData,
+} from "../../redux/actions";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function YourAccount() {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.users);
+  const userServiceData = useSelector((state) => state.favsData);
+
   const userId = document.cookie.slice(7);
 
   useEffect(() => {
     dispatch(getUsersById(userId));
+    dispatch(getUserFavs(userId));
+    dispatch(getFavsServicesData(userId));
+
     // eslint-disable-next-line
   }, []);
 
@@ -86,11 +102,9 @@ export default function YourAccount() {
     <div>
       {/* ---------------    'NAVBAR' ---------------------------------------- */}
       <div className={s.nav}>
-        <Link to="/">
-          <IconButton color="secondary">
-            <HomeIcon />
-          </IconButton>
-        </Link>
+        <IconButton color="secondary" component={Link} to="/home">
+          <HomeIcon />
+        </IconButton>
         <p className={s.yourAccount}>Your Account</p>
 
         <div className={s.logOut}>
@@ -259,14 +273,16 @@ export default function YourAccount() {
 
       {/* -------------------FAVS------------------------ */}
       {viewFavs &&
-        (userData.qualifications.length > 0 ? (
+        (userServiceData.length > 0 ? (
           <Container>
             <div>
-              {userData.qualifications.map((s) => (
-                <Grid item key={s.id}>
-                  <CardService service={s} />
-                </Grid>
-              ))}
+              <Grid container justifyContent="center" spacing={3}>
+                {userServiceData.map((s) => (
+                  <Grid item key={s.id}>
+                    <CardService service={s} />
+                  </Grid>
+                ))}
+              </Grid>
             </div>
           </Container>
         ) : (

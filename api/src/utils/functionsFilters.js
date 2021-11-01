@@ -46,20 +46,21 @@ async function orderByPrice(objQuery, res, next) {
 
 
 
-  if (order === "ASC" && !province && group &&  !category &&  !startRange &&  !endRange) {
-    console.log("llegue")    
+  if (order === "ASC" && !province && !group &&  category &&  !startRange &&  !endRange) {
+    console.log("llegue bien")    
     priceFilter = await Service.findAll({
       attributes: ["id", "title", "img", "description", "price", "userId"],
       include: [
         {
           model: Category,
           attributes: ["name"],
+          where: {
+            name: category,
+          },
           include: {
             model: Group,
             attributes: ["name"],
-            where: {
-              id: group,
-            }
+
           },
         },
       ],     
@@ -67,19 +68,19 @@ async function orderByPrice(objQuery, res, next) {
       order: [["price", "ASC"]],
     });
   } 
-  if (order === "DESC" && !province && group &&  !category &&  !startRange &&  !endRange) {    
+  if (order === "DESC" && !province && !group &&  category &&  !startRange &&  !endRange) {    
     priceFilter = await Service.findAll({
       attributes: ["id", "title", "img", "description", "price", "userId"],
       include: [
         {
           model: Category,
           attributes: ["name"],
+          where: {
+            name: category,
+          },
           include: {
             model: Group,
             attributes: ["name"],
-            where: {
-              id: group,
-            }
           },
         },
       ],    

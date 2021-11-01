@@ -19,7 +19,6 @@ async function getServices(req, res, next) {
   const { title } = req.query;
   let dbServices;
   if (Object.values(req.query).length) {
-    console.log("llego");
     //compruebo si query tiene propiedades para filtrar
     servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
   } else {

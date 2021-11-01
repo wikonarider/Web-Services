@@ -1,18 +1,21 @@
-import React from "react";
-import { useState } from "react";
-import SideBarNested from "./SideBarNested/SideBarNested";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import { Drawer } from "@mui/material";
+import React from 'react';
+import { useState } from 'react';
 
-//maneja el anocho de la expansión al tocar el hamburguer button
+import SideBarNested from './SideBarNested/SideBarNested';
+import SideBarOrderPrice from './SideBarOrderPrice/SideBarOrderPrice';
+
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
+import { Drawer } from '@mui/material';
+
+//maneja el ancho de la expansión al tocar el hamburguer button
 const drawerWidth = 350;
 
 export default function MiniDrawer() {
@@ -36,8 +39,10 @@ export default function MiniDrawer() {
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
         <Divider />
+        <SideBarOrderPrice text={'Price order'} key={1} />;
+        <Divider />
         <List>
-          {["Info", "About", "Something"].map((text, index) => (
+          {['Info', 'About', 'Something'].map((text, index) => (
             <ListItem button key={index}>
               <ListItemIcon>
                 <MailIcon />
@@ -47,6 +52,7 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
+      <Divider />
     </Box>
   );
 }

@@ -5,6 +5,7 @@ var {
   getFavs,
   deleteFav,
   validateFav,
+  getFavsServicesData,
 } = require("../controllers/fav");
 
 // http://localhost:3001/favs
@@ -12,6 +13,7 @@ var {
 // router.get('/', getFavs);
 router.post("/", addFavs);
 router.get("/:userId", getFavs);
+router.get('/:userId/data', getFavsServicesData)
 router.delete("/", deleteFav);
 router.get("/", validateFav);
 

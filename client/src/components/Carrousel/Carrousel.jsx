@@ -64,6 +64,19 @@ const featured = [
 
 export default function Carrousel() {
   return (
-    <div></div>
+    <div style={{ width: "90%", margin: "100px auto 0 auto", objectFit : "cover"}}>
+      <Carousel
+        dynamicHeight={true}
+        autoPlay={true}
+        interval={3000}
+        infiniteLoop={true}
+        showThumbs={false}
+        showStatus={false}
+      >
+        {featured.map((f) => (
+          <CarrouselItem key={f.title} title={f.title} img={f.img}/>
+        ))}
+      </Carousel>
+    </div>
   );
 }
