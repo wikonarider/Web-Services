@@ -21,6 +21,7 @@ export default function DetailService({ id }) {
   //componentDidMount para traer la información del servicio por id
   useEffect(() => {
     axios(`http://localhost:3001/services/${id}`).then((response) => {
+      console.log('respuestaEnDetail', response)
       setService({ ...service, ...response.data });
     });
 
