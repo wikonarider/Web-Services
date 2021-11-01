@@ -7,7 +7,7 @@ const {
   orderTitle,
   orderByProvince,
   orderByPrice,
-} = require("./functionsFilters.js");
+} = require('./functionsFilters.js');
 const {
   Service,
   Users,
@@ -34,19 +34,19 @@ const servicesFilters = function (objQuery, res, next) {
 
 async function orderCategory(objQuery, res, next) {
   switch (objQuery.filter) {
-    case "price": {
+    case 'price': {
       orderByPrice(objQuery, res, next);
       break;
     }
-    case "created": {
+    case 'created': {
       orderByCreatedDate(objQuery, res, next);
       break;
     }
-    case "updated": {
+    case 'updated': {
       orderByUpdateDate(objQuery, res, next);
       break;
     }
-    case "qualifications": {
+    case 'qualifications': {
       orderByQualifications(objQuery, res, next);
       break;
     }
