@@ -12,6 +12,11 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
+const {
+  orderByPrice,
+  filterByPriceRange,
+  filterByDate,
+} = require("../utils/servicesFilter.js");
 
 const { validateServices } = require("../utils/validServices");
 
