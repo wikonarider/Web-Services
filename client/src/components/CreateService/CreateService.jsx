@@ -36,6 +36,7 @@ function CreateService(props) {
     province: "",
     category: "",
     subCategory: "",
+    city: "",
   }); //names
 
   //props input client
@@ -219,6 +220,7 @@ function CreateService(props) {
               <FormControl fullWidth>
                 <InputLabel>Category</InputLabel>
                 <Select
+                  value={inputs.categoryId}
                   label="Category"
                   onChange={(e) => handleCategory(e.target.value)}
                 >
@@ -241,6 +243,7 @@ function CreateService(props) {
                   <InputLabel>Type</InputLabel>
                   <Select
                     label="Type"
+                    value={inputs.subCategory}
                     onChange={(e) => handleSubCategory(e.target.value)}
                     defaultValue=""
                   >

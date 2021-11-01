@@ -64,7 +64,7 @@ async function postServices(req, res, next) {
   const { title, img, description, price, categoryId, provinces, cities  } =
     req.body;
   // si se pasaron todos los parametros 
-  if (title && img && description && price && categoryId && provinces) {
+  if (title && img && description && price && categoryId && provinces && cities) {
     const errors = await validateServices(req.body);
     // si son todos los parametros validos
     if (!Object.keys(errors).length) {
