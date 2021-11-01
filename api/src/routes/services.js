@@ -14,7 +14,7 @@ router.get("/", getServices);
 router.get("/:id", getServicesById);
 
 // post Services
-router.post("/", isAuthenticated, postServices);
+router.post("/", postServices);
 
 // put Services
 router.put("/",  putServiceById);//colocar isAuthenticated

@@ -67,6 +67,7 @@ export function deleteService(id) {
 }
 
 export function createService(body) {
+    console.log(body)
   return async function (dispatch) {
     var json = await axios.post(`/services`, body);
     return dispatch({

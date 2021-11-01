@@ -12,19 +12,17 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
-const servicesFilters = require("../utils/routeFilterAndOrder.js");
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-  const {title} = req.query
-  let dbServices
+  const { title } = req.query;
+  let dbServices;
   if (Object.values(req.query).length) {
-    console.log("llego")
+    console.log("llego");
     //compruebo si query tiene propiedades para filtrar
-    servicesFilters(req.query, res, next);// se encarga de todo lo relacionado con filtros
-  } else{
- 
+    servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
+  } else {
     dbServices = await Service.findAll({
       //Traigo todo de la db
       attributes: ["id", "title", "img", "description", "price", "userId"],
@@ -43,7 +41,6 @@ async function getServices(req, res, next) {
     });
 
     dbServices = await addRating(dbServices);
-
 
     //FILTRO POR FECHA
     /* if (dateOrder) {
@@ -72,58 +69,56 @@ async function getServices(req, res, next) {
         } else return dbServices; //Si no, devuelvo todos los servicios
       }
     }
-}
+  }
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
-  try {
-    const { userId } = req.cookies;
-
-    const { title, img, description, price, categoryId, provinces } = req.body;
-    // si se pasaron todos los parametros
-    if (title && img && description && price && categoryId && provinces) {
-      const errors = await validateServices(req.body);
-      // si son todos los parametros validos
-      if (!Object.keys(errors).length) {
-        const service = await Service.create({
+ // const { userId } = req.cookies;                                hardcodeo el id y lo mando por body
+  const { title, img, description, price, categoryId, provinces, cities ,userId } =
+    req.body;
+  // si se pasaron todos los parametros
+  if (title && img && description && price && categoryId && provinces) {
+    const errors = await validateServices(req.body);
+    // si son todos los parametros validos
+    if (!Object.keys(errors).length) {
+      var service;
+      try {
+        service = await Service.create({
           ...req.body,
           userId,
           categoryId,
         });
-
-        const promises = [];
-        // cargo las provincias
-        provinces.forEach((p) => {
-          promises.push(
-            Services_provinces.findOrCreate({
-              where: {
-                serviceId: service.id,
-                provinceId: p.id,
-              },
-            })
-          );
-          // cargo las ciudades
-          p.cities.forEach((c) => {
-            promises.push(
-              Services_cities.findOrCreate({
-                where: {
-                  cityId: c,
-                  serviceId: service.id,
-                },
-              })
-            );
-          });
+        var [p] = await Services_provinces.findOrCreate({
+          where: {
+            serviceId: service.id,
+            provinceId: provinces.id,
+          },
         });
-        await Promise.all(promises);
-        res.json({ data: "Service created " });
-      } else {
-        res.status(400).json({ data: errors });
+      } catch (error) {
+        next(error);
       }
+//
+      var c = cities.map((e) => {
+        return Services_cities.findOrCreate({
+          where: {
+            cityId: e,
+            serviceId: p.dataValues.serviceId,
+          },
+        });
+      });
+      Promise.all(c)
+        .then(([provAndcity]) => {
+          return service.addProvince(provAndcity.dataValues);
+        })
+        .then(() => {
+          res.status(200).send("Created Service");
+        })
+        .catch((e) => next(e));
     } else {
       res.status(400).json({ data: "All parameters are required" });
     }
-  } catch (e) {
-    next(e);
+  } else {
+    res.status(400).json({ data: "All parameters are required" });
   }
 }
 //----------------------------------------------------------------------------------------------------------

@@ -583,7 +583,6 @@ if (order === "ASC" && !province && group &&  !category &&  startRange &&  endRa
 
   return res.status(200).send(priceFilter);
 }
-
 //-------------------------------------------------------------------------------------------date create
 async function orderByCreatedDate(objQuery, res, next) {
     const { order, province, group, category, startRange, endRange } = objQuery;
@@ -1198,7 +1197,6 @@ async function orderByUpdateDate(objQuery, res, next) {
   }
   res.status(200).send(dateFilter);
 }
-
 //--------------------------------------------------------------------------------------------------title
 async function orderTitle( title, res, next) {
   var dbServices = await Service.findAll({
@@ -1225,7 +1223,6 @@ async function orderTitle( title, res, next) {
   });
   return res.send(filteredServices); //Si coincide mando el servicio con ese title
 }
-
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {  
 

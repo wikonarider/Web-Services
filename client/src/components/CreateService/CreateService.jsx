@@ -32,12 +32,16 @@ function CreateService(props) {
   //props de back
   const { provinces, groups } = props;
 
-  const [province, setProvince] = useState({ });
-  const [subGrup,setSubGrup]=useState({
-      category:"",
-      subCategory:""
-  })
-
+  const [index, setIndex] = useState({
+    indexCat: "2",
+    indexProv: "2",
+  });
+  const [names, setNames] = useState({
+    city: "",
+    province: "",
+    category: "",
+    subCategory: "",
+  }); //names
 
   //props input client
   const [errors, setErrors] = useState({});
@@ -46,41 +50,72 @@ function CreateService(props) {
     title: "",
     description: "",
     price: "",
-    userId: "",
-    img: "",
+    //hardcodeo el id para para comprobar en el back
+    img: "https://placeimg.com/400/400/service/3",
     categoryId: "",
-    provinces: [],
+    provinces: "",
+    cities: [],
+    subCategory: "",
   });
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   //HANDLE CATEGORIA - SUBCATEGORIA - PROVINCIA - CIUDAD
-  const handleGroup = (e) => {
-    setInputs({ ...inputs, categoryId: e.target.value });
+  //------------------------------------------------------------------------set subCategory
+  const handleSubCategory = (idSubCat) => {
+    var [subCat] = groups[index.indexCat].categories.filter(
+      (e) => e.id === idSubCat
+    );
+
+    setInputs({ ...inputs, subCategory: subCat.id });
+    setNames({ ...names, subCategory: subCat.name });
+  };
+  //-------------------------------------------------------------------set category
+  const handleCategory = (idCategory) => {
+    var ind = 0;
+
+    var [cat] = groups.filter((e, i) => {
+      if (e.id === idCategory) {
+        ind = i;
+        return e;
+      }
+    });
+    setInputs({ ...inputs, categoryId: cat.id });
+    setIndex({ ...index, indexCat: ind });
+    setNames({
+      ...names,
+      category: cat.name,
+    });
   };
   //-------------------------------------------------------------------set province
-  const handleProvince = (nameProvince) => {
-    const prov = provinces.filter((e) => e.name === nameProvince);
-
-    if (province === prov) {
-      //verifico que no exista en province
-      setProvince({});
+  const handleProvince = (province) => {
+    if (province) {
+      var indexPro = provinces.indexOf(province);
+      setInputs({
+        //borra si selecciona otra provincia
+        ...inputs,
+        provinces: { id: province.id, name: province.name },
+        cities: [],
+      });
+      setIndex({ ...index, indexProv: indexPro });
+      setNames({ ...names, province: province.name, cities: "" });
     } else {
-      setProvince(prov[0]);
+      setInputs({
+        //borra si selecciona otra provincia
+        ...inputs,
+        provinces: "",
+        cities: [],
+      });
     }
   };
   //----------------------------------------------------------------------------------------set city
-  const handleCity = (nameCity) => {
-    const city = province.cities.filter((e) => e.name === nameCity);
-    if (province.cities.includes(city)) {
-      //verifico que no exista en city
-      setProvince({
-        ...province,
-        cities: province.cities.filter((e) => e.id !== city.id),
-      });
+  const handleCity = (city) => {
+    if (city) {
+      var idCities = city.map((e) => e.id);
+      setInputs({ ...inputs, cities: idCities });
     } else {
-      setProvince({ ...province, cities: province.cities.concat(city) });
+      setInputs({ ...inputs, cities: [] });
     }
   };
   //-----------------------------------------------------------------handleinput
@@ -100,18 +135,20 @@ function CreateService(props) {
     });
   }
 
+  //---------------------------------------------------------------submit
   function handleSubmit(e) {
-    //---------------------------------------------------------------submit
-
+    e.preventDefault();
     if (
       inputs.title &&
       inputs.categoryId &&
-      inputs.provinces.length &&
+      inputs.provinces &&
       inputs.description &&
-      inputs.price
+      inputs.price &&
+      inputs.cities.length
     ) {
-      setModal(true);
-      dispatch(createService(inputs));
+      // setModal(true);
+      console.log("entre a submmit");
+      dispatch(createService({ ...inputs, price: parseInt(inputs.price) }));
 
       setInputs({
         title: "",
@@ -120,11 +157,12 @@ function CreateService(props) {
         userId: "",
         img: "",
         categoryId: "",
-        provinces: [],
-        type: "",
+        subCategory: "",
+        provinces: "",
+        cities: [],
       });
     } else {
-      alert("Faltan campos por completar");
+      console.log("no entre a submit");
     }
   }
 
@@ -176,9 +214,12 @@ function CreateService(props) {
             <Box sx={{ minWidth: 200 }}>
               <FormControl fullWidth>
                 <InputLabel>Category</InputLabel>
-                <Select label="Category" onChange={handleGroup} defaultValue="">
+                <Select
+                  label="Category"
+                  onChange={(e) => handleCategory(e.target.value)}
+                >
                   {groups &&
-                     groups.map((el) => (
+                    groups.map((el) => (
                       <MenuItem key={el.name} value={el.id}>
                         {el.name}
                       </MenuItem>
@@ -189,23 +230,21 @@ function CreateService(props) {
           </div>
 
           {/* SELECT DE SUBCATEGORIA */}
-          {prop.categories && (
+          {inputs.categoryId && (
             <div>
               <Box sx={{ minWidth: 200 }}>
                 <FormControl fullWidth>
                   <InputLabel>Type</InputLabel>
                   <Select
-                    value={subCities}
                     label="Type"
-                    onChange={handleGroup}
+                    onChange={(e) => handleSubCategory(e.target.value)}
                     defaultValue=""
                   >
-                    {inputs.categoryId &&
-                      prop.categories.map((el) => (
-                        <MenuItem key={el.name} value={el.id}>
-                          {el.name}
-                        </MenuItem>
-                      ))}
+                    {groups[index.indexCat].categories.map((el) => (
+                      <MenuItem key={el.name} value={el.id}>
+                        {el.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Box>
@@ -215,56 +254,47 @@ function CreateService(props) {
           {/* SELECT DE PROVINCIA */}
           <div>
             <Autocomplete
-              multiple
-              onChange={(e) => handleProvince(e.target.value)}
-              options={["prop.provinces"]}
-              disableCloseOnSelect
+              options={provinces}
               getOptionLabel={(option) => option.name}
-              renderInput={(props, option, { selected }) => (
-                <li {...props}>
-                  <Checkbox
-                    icon={icon}
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
-                  />
-                  {option.name}
-                </li>
-              )}
+              onChange={(e, value) => handleProvince(value)}
               style={{ width: 500 }}
               renderInput={(params) => (
-                <TextField {...params} label="Provinces" placeholder="Search" />
+                <TextField
+                  {...params}
+                  label={"Provinces"}
+                  placeholder="Search"
+                />
               )}
             />
           </div>
 
           {/* SELECT DE CIUDAD */}
-
-          <div>
-            <Autocomplete
-              multiple
-              options={[]}
-              onChange={(e) => handleCity(e.target.value)}
-              disableCloseOnSelect
-              getOptionLabel={(option) => option.name}
-              renderInput={(props, option, { selected }) => (
-                <li {...props}>
-                  <Checkbox
-                    icon={icon}
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
-                  />
-                  {option.name}
-                </li>
-              )}
-              style={{ width: 500 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Cities" placeholder="Search" />
-              )}
-            />
-          </div>
-
+          {inputs.provinces && (
+            <div>
+              <Autocomplete
+                multiple
+                options={provinces[index.indexProv].cities}
+                onChange={(e, value) => handleCity(value)}
+                disableCloseOnSelect
+                getOptionLabel={(option) => option.name}
+                renderInput={(props, option, { selected }) => (
+                  <li {...props}>
+                    <Checkbox
+                      icon={icon}
+                      checkedIcon={checkedIcon}
+                      style={{ marginRight: 8 }}
+                      checked={selected}
+                    />
+                    {option.name}
+                  </li>
+                )}
+                style={{ width: 500 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Cities" placeholder="Search" />
+                )}
+              />
+            </div>
+          )}
           <div className={s.inputsContainer}>
             <TextField
               name="title"
@@ -311,12 +341,7 @@ function CreateService(props) {
           </div>
 
           <div className={s.inputsContainer}>
-            <TextField
-              name="img"
-              type="file"
-              fullWidth
-              onChange={(e) => loadImg(e.target.files[0])}
-            />
+            <TextField name="img" type="file" fullWidth />
           </div>
 
           <div className={s.imgContainer}>
@@ -341,7 +366,7 @@ function CreateService(props) {
         <ModalService
           modal={modal}
           setModal={setModal}
-          message={"Â¡Service created successfully!"}
+          message={"Service created successfully!"}
         />
       </div>
     );
