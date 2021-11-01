@@ -18,11 +18,12 @@ const {
   Services_users_favourites,
   Services_provinces,
   Services_cities,
-} = require('../db.js');
+} = require("../db.js");
+
 
 //--------------------------------------------------------------------------
 const servicesFilters = function (objQuery, res, next) {
-  console.log('llego');
+  console.log("llego");
   if (objQuery) {
     orderCategory(objQuery, res, next);
   }
@@ -50,7 +51,7 @@ async function orderCategory(objQuery, res, next) {
       break;
     }
 
-    case 'title': {
+    case "title": {
       orderTitle(objQuery, res, next);
       break;
     }

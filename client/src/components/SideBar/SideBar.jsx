@@ -40,7 +40,7 @@ export default function MiniDrawer() {
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
         <Divider />
-        <SideBarOrderPrice text={'Price order'} key={1} />
+        <SideBarOrderPrice text={"Price order"} key={1} />
         <Divider />
         <SideBarRangePrice key={2} />
         <Divider />
