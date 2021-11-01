@@ -39,7 +39,7 @@ export default function MiniDrawer() {
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
         <Divider />
-        <SideBarRangePrice text={'Price order'} key={1} />;
+        <SideBarOrderPrice text={'Price order'} key={1} />;
         <Divider />
         <List>
           {['Info', 'About', 'Something'].map((text, index) => (
