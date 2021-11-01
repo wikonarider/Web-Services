@@ -2,7 +2,7 @@ import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
-  users: [],
+  user: [],
   groups: [],
   provinces: [],
   favs: [],
@@ -30,8 +30,8 @@ const rootReducer = (state = initialState, action) => {
     case type.CREATE_SERVICE:
       return { ...state };
 
-    case type.GET_USERS_BY_ID:
-      return { ...state, users: payload };
+    case type.GET_USER_INFO:
+      return { ...state, user: payload };
 
     case type.GET_GROUPS:
       return { ...state, groups: action.payload };
