@@ -1535,32 +1535,7 @@ async function orderByUpdateDate(objQuery, res, next) {
   res.status(200).send(dateFilter);
 }
 
-//--------------------------------------------------------------------------------------------------title
-async function orderTitle(title, res, next) {
-  var dbServices = await Service.findAll({
-    //Traigo todo de la db
-    include: [
-      {
-        model: Users,
-        through: { attributes: [] },
-      },
-      Qualification,
-      {
-        model: Category,
-        include: {
-          model: Group,
-        },
-      },
-    ],
-  });
 
-  var filteredServices = [];
-  dbServices.map((service) => {
-    if (service.title.toLowerCase().includes(title.toLowerCase()))
-      filteredServices.push(service);
-  });
-  return res.send(filteredServices); //Si coincide mando el servicio con ese title
-}
 
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {
