@@ -9,6 +9,8 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
+      console.log('OBJ', obj);
+      console.log('AXIOS', json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,

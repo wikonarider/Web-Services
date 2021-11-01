@@ -12,17 +12,17 @@ export default function SideBarNestedBtnDropDownInner({ name }) {
   const dispatch = useDispatch();
 
   const obj = {
-    category: "",
+    category: '',
     order: 'ASC',
     filter: 'price',
   };
 
-if(checked === false){
- obj.category = name
-}
-if(checked === true){
-obj.category = ""
-}
+  if (checked === false) {
+    obj.category = name;
+  }
+  if (checked === true) {
+    obj.category = '';
+  }
 
   const handleChange = () => {
     setChecked(!checked);

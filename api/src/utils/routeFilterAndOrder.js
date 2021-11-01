@@ -7,7 +7,7 @@ const {
   orderTitle,
   orderByProvince,
   orderByPrice,
-} = require("./functionsFilters.js");
+} = require('./functionsFilters.js');
 const {
   Service,
   Users,
@@ -18,12 +18,11 @@ const {
   Services_users_favourites,
   Services_provinces,
   Services_cities,
-} = require("../db.js");
-
+} = require('../db.js');
 
 //--------------------------------------------------------------------------
 const servicesFilters = function (objQuery, res, next) {
-  console.log("llego");
+  console.log('llego');
   if (objQuery) {
     orderCategory(objQuery, res, next);
   }
@@ -34,24 +33,24 @@ const servicesFilters = function (objQuery, res, next) {
 
 async function orderCategory(objQuery, res, next) {
   switch (objQuery.filter) {
-    case "price": {
+    case 'price': {
       orderByPrice(objQuery, res, next);
       break;
     }
-    case "created": {
+    case 'created': {
       orderByCreatedDate(objQuery, res, next);
       break;
     }
-    case "updated": {
+    case 'updated': {
       orderByUpdateDate(objQuery, res, next);
       break;
     }
-    case "qualifications": {
+    case 'qualifications': {
       orderByQualifications(objQuery, res, next);
       break;
     }
 
-    case "title": {
+    case 'title': {
       orderTitle(objQuery, res, next);
       break;
     }
