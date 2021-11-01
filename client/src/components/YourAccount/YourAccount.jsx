@@ -105,11 +105,9 @@ export default function YourAccount() {
     <div>
       {/* ---------------    'NAVBAR' ---------------------------------------- */}
       <div className={s.nav}>
-        <Link to="/">
-          <IconButton color="secondary">
-            <HomeIcon />
-          </IconButton>
-        </Link>
+        <IconButton color="secondary" component={Link} to="/home">
+          <HomeIcon />
+        </IconButton>
         <p className={s.yourAccount}>Your Account</p>
 
         <div className={s.logOut}>
