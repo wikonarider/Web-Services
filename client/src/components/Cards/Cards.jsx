@@ -14,7 +14,7 @@ export default function Cards({ services }) {
         dispatch(await getUserFavs());
       })();
     }
-  }, [cookie]);
+  }, [cookie, dispatch]);
 
   return (
     <div className={s.container}>

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/actions/index";
 import { useSelector } from "react-redux";
 import { deleteFavs, addFavs } from "../../utils/favs";
+import { getUserInfo } from "../../redux/actions/index";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -47,7 +48,7 @@ function CardService({ service }) {
         }
       }
     }
-  }, [favs]);
+  }, [favs, cookie, id]);
 
   // para agregarlo o sacarlo del carrito
   useEffect(() => {
@@ -80,9 +81,11 @@ function CardService({ service }) {
         if (favState) {
           await deleteFavs(id);
           setFavState(() => false);
+          dispatch(await getUserInfo());
         } else {
           await addFavs(id);
           setFavState(() => true);
+          dispatch(await getUserInfo());
         }
       }
     } catch (e) {
