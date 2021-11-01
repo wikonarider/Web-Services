@@ -64,7 +64,7 @@ async function getUserInfo(req, res, next) {
   try {
     const { userId } = req.cookies;
     const user = await Users.findOne({
-      attributes: ["id", "userImg", "name", "lastname"],
+      attributes: ["id", "userImg", "name", "lastname", "username", "email"],
       where: {
         id: userId,
       },
@@ -72,7 +72,7 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesOwn",
-          attributes: ["id", "title", "img", "price"],
+          attributes: ["id", "title", "img", "price", "userId"],
           include: {
             model: Qualification,
             attributes: ["score"],
@@ -81,7 +81,7 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesFavs",
-          attributes: ["id", "title", "img", "price"],
+          attributes: ["id", "title", "img", "price", "userId"],
           through: {
             attributes: [],
           },
@@ -93,7 +93,7 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesBought",
-          attributes: ["id", "title", "img", "price"],
+          attributes: ["id", "title", "img", "price", "userId"],
           through: {
             attributes: [],
           },
