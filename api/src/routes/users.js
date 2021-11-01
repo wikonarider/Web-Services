@@ -3,7 +3,7 @@ var router = express.Router();
 var {
   userCreated,
   userBanned,
-  getUsers,
+  getUserInfo,
   postPurchase,
   userEdit,
 } = require("../controllers/users");
@@ -17,8 +17,7 @@ router.post("/", isNotAuthenticated, userCreated);
 router.post("/purchase", postPurchase);
 
 // User get
-router.get("/", getUsers);
-router.get("/?username=", getUsers);
+router.get("/", isAuthenticated, getUserInfo);
 
 // User delete
 router.delete("/:id", userBanned);
