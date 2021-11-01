@@ -8,59 +8,55 @@ import CarrouselItem from "./CarrouselItem";
 const featured = [
   {
     title: "Karaoke",
-    description: "Servicio de karaoke para eventos",
+    description: "canto lindo rey  ",
     img: "https://i.ytimg.com/vi/7BqddKQSVhE/maxresdefault.jpg",
     price: 1.05,
   },
   {
-    title: "Musical performance drag queen",
-    description: "show de entretenimiento para eventos, diversión asegurada",
-    img: "https://choose901.com/wp-content/uploads/2019/05/F545B03B-C871-4693-852F-B3602AAA5B77.jpg",
-    price: 19.3,
-  },
-  {
     title: "Gasista",
     description: "Hago revisión de instalaciones en general",
-    img: "https://irp-cdn.multiscreensite.com/ebcd9081/MOBILE/jpg/1642655-banner.jpg",
+    img: "https://placeimg.com/400/400/service/3",
     price: 8,
   },
   {
-    title: "Electricista",
-    description:
-      "Matriculado, servicios de electricidad integral, instalaciones en obras",
-    img: "https://static9.depositphotos.com/1192060/1105/i/600/depositphotos_11057897-stock-photo-woman-measuring-electrical-current.jpg",
+    title: "electricista",
+    description: "pongo los mejores enchufes del condado",
+    img: "https://placeimg.com/400/400/service/4",
     price: 3.05,
   },
   {
-    title: "Paseadora de perros",
-    description: "Tengo mucha experiencia ¡también soy adiestradora!",
-    img: "https://cnnespanol.cnn.com/wp-content/uploads/2020/07/200724095936-primera-perritos-full-169.jpg?quality=100&strip=info",
+    title: "paseadora de perros",
+    description: "i love little dogs",
+    img: "https://www.ciudaddelosangeles.com/wp-content/uploads/2016/03/paseador-de-perros.jpg",
     price: 15.3,
   },
   {
-    title: "Profesora de yoga",
-    description: "Formación en la Escuela Internacional de Yoga",
-    img: "https://centro-maya.com/wp-content/uploads/2019/08/profesora-de-yoga-en-Valencia-Mislata-1303x618.jpg",
+    title: "musical performance drag queen",
+    description: "te hago tu señor show",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnhkWeqrLkQsnR9luI2nBqGejwey22a0QhTA&usqp=CAU",
+    price: 19.3,
+  },
+  {
+    title: "prfesorx de yoga",
+    description: "i love little dogs",
+    img: "https://www.yogaenred.com/wp-content/uploads/2020/04/Profesora-yoga-1-605x403.jpg",
     price: 28.3,
   },
   {
-    title: "Servicio de Catering Ejecutivo",
-    description:
-      "Nuestros servicios de catering se ajustan a las necesidades de los clientes",
-    img: "https://images.pexels.com/photos/1243337/pexels-photo-1243337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    title: "Plomero",
+    description: "te plomeo todo",
+    img: "https://procrew.b-cdn.net/wp-content/uploads/2020/06/plumber-at-work-in-a-bathroom-1024x683-1-768x512.jpg",
     price: 15.3,
   },
   {
     title: "Fletes",
-    description:
-      "Rápido, seguro, eficiente, equipo entrenado gracias a 20 años en mudanzas.",
+    description: "fletes a la velocidad del rayo mqueen cuchau",
     img: "https://fotos.perfil.com/2020/05/16/trim/1280/720/20200516comerciociudadfletesprotocolojuanobregong-957557.jpg",
     price: 19.3,
   },
   {
     title: "Reparacion pc",
-    description:
-      "Ofrecemos un servicio a medida, de calidad y buen precio para resolver cualquier problema",
+    description: "te dejo la pc gamer redy",
     img: "https://www.cetae.com.ar/wp-content/uploads/2018/02/reppc.jpg",
     price: 28.3,
   },
@@ -68,8 +64,7 @@ const featured = [
 
 export default function Carrousel() {
   return (
-    <div style={{ opacity: "98%", width: "80%", margin: "40px auto 0 auto" }}>
-
+    <div style={{ width: "90%", margin: "100px auto 0 auto", objectFit : "cover"}}>
       <Carousel
         dynamicHeight={true}
         autoPlay={true}
