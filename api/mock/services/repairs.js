@@ -33,7 +33,7 @@ const locksmith = [
     description: 'Cerrajero uegencias las 24 horas. Mar del Plata.',
     img: 'https://apollo-virginia.akamaized.net/v1/files/px953xpn059r2-AR/image;s=780x0;q=60',
     price: 3000,
-    categoryId: 2,
+    categoryId: 9,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -55,7 +55,7 @@ const locksmith = [
       cerrajería automotor`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/ir9x3532n1ix-AR/image;s=780x0;q=60',
     price: 750,
-    categoryId: 2,
+    categoryId: 9,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -63,7 +63,7 @@ const locksmith = [
     description: `Cerrajero Urgencias 24 horas. Aperturas. Mar del Pltata.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/eusak6mb5kbd3-AR/image;s=780x0;q=60',
     price: 4000,
-    categoryId: 2,
+    categoryId: 9,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -74,7 +74,7 @@ const construction = [
     description: 'Busco jente para trabajar en Escobar oficial albañil',
     img: 'https://apollo-virginia.akamaized.net/v1/files/dryczt9p4hoy2-AR/image;s=780x0;q=60',
     price: 35,
-    categoryId: 3,
+    categoryId: 10,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -83,7 +83,7 @@ const construction = [
       'se necesita oficial albañil con experiencia comprobable sin excepcion ..pago semanal para OBRA EN MONTE CRISTO ...DEJE SU CONTACTO POR ESTE MEDIO SE LO LLAMARA ...',
     img: 'https://apollo-virginia.akamaized.net/v1/files/ya5hohxeki7m1-AR/image;s=780x0;q=60',
     price: 111,
-    categoryId: 3,
+    categoryId: 10,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -94,7 +94,7 @@ const construction = [
     sin cargos trabajos garantizados ..mathias`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/0xqj67bw54xs1-AR/image;s=780x0;q=60',
     price: 3000,
-    categoryId: 3,
+    categoryId: 10,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -107,7 +107,7 @@ const electrical = [
       'Electricista Mar del Plata/Batan. Monofásica y Trifásica. Medición de puesta a Tierra.',
     img: 'https://apollo-virginia.akamaized.net/v1/files/0z2vvl2lhbtz2-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 4,
+    categoryId: 11,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -116,7 +116,7 @@ const electrical = [
       'Hola hacemos trabajos de mantenimiento reparación e instalación de aires acondicionados reparación de heladeras frezzer dispenser de aguas...También trabajos de electricidad domiciliaria en general su consulta no molesta..',
     img: 'https://apollo-virginia.akamaized.net/v1/files/ya5hohxeki7m1-AR/image;s=780x0;q=60',
     price: 111,
-    categoryId: 4,
+    categoryId: 11,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -124,7 +124,7 @@ const electrical = [
     description: `TRABAJOS en toda la provincia de Buenos Aires y toda la zona,costa atlántica.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/756yidqy8dto1-AR/image;s=780x0;q=60    ',
     price: 5000,
-    categoryId: 4,
+    categoryId: 11,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -135,7 +135,7 @@ const appliance = [
     description: 'Carga de gas a heladeras y aires',
     img: 'https://apollo-virginia.akamaized.net/v1/files/65jb7yvyc60s3-AR/image;s=780x0;q=60',
     price: 4000,
-    categoryId: 5,
+    categoryId: 13,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -144,7 +144,7 @@ const appliance = [
       'Reparación de electrodomésticos licuadoras procesadoras planchas secadores de cabello planchas de cabello caloventores estufas',
     img: 'https://apollo-virginia.akamaized.net/v1/files/im528kfx03sv-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 5,
+    categoryId: 13,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -156,7 +156,7 @@ const appliance = [
       REPARAMOS EN DOMICILIO`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/2n0q2o62b76n3-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 5,
+    categoryId: 13,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -187,7 +187,7 @@ const computer = [
     *CAMBIO DE COMPONENTES`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/a3rvsqlaa24u-AR/image;s=780x0;q=60',
     price: 0,
-    categoryId: 6,
+    categoryId: 14,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -229,7 +229,7 @@ const computer = [
     Su consulta no molesta!`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/msnh7sn2h3bh2-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 6,
+    categoryId: 14,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -247,7 +247,7 @@ const computer = [
     No dude en consultar!`,
     img: `https://apollo-virginia.akamaized.net/v1/files/h368j747qaev2-AR/image;s=780x0;q=60`,
     price: 1000,
-    categoryId: 6,
+    categoryId: 14,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -259,7 +259,7 @@ const smithy = [
     description: 'Hacemos muebles a medida tu consulta no molesta gracias...',
     img: 'https://apollo-virginia.akamaized.net/v1/files/7bvpc6lxdt28-AR/image;s=780x0;q=60',
     price: 999,
-    categoryId: 7,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -269,7 +269,7 @@ const smithy = [
       'hacemos todo tipo de trabajos en herrería y pintura. de confianza. presupuestos sin cargo su consulta no molesta, vamos a domicilio',
     img: 'https://apollo-virginia.akamaized.net/v1/files/jrjfgd7ni8jg-AR/image;s=780x0;q=60',
     price: 666,
-    categoryId: 7,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -278,7 +278,7 @@ const smithy = [
     CONTRAPISOS , CARPETAS , CIMIENTOS ... TRABAJOS D HERRERIA Y MAS ...PRESUPUESTOS SIN CARGO SU CONSULTA NO MOLESTA ...`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/hvtux78zq5q11-AR/image;s=780x0;q=60',
     price: 111111111111,
-    categoryId: 7,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -311,7 +311,7 @@ const auto = [
       Escribanos por whatsapp para hacernos consultas y pedidos al instante.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/nwxwyp4syjsg-AR/image;s=780x0;q=60',
     price: 1520,
-    categoryId: 15,
+    categoryId: 16,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -322,7 +322,7 @@ const auto = [
     La llegada del Delibery del Arranque. Promocion para todo C.A.B.A y Gran Buenos Aíres.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/553ztsvmah463-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 15,
+    categoryId: 16,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -332,7 +332,7 @@ const auto = [
       'TALLER CHAPA Y PINTURA Y MECANICA HABILITADO COMO AGENCIA DE AUTOS NUEVOS Y USADOS TODO AZULEJADO -$95000 SE ENTRA CON GARANTIA CAPITAL',
     img: 'https://apollo-virginia.akamaized.net/v1/files/u1g3fd5sf4oc1-AR/image;s=780x0;q=60',
     price: 95000,
-    categoryId: 15,
+    categoryId: 16,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -344,7 +344,7 @@ const painting = [
       'Realizo todo tipo de trabajos prolijo y presupuestos accesibles',
     img: 'https://apollo-virginia.akamaized.net/v1/files/c4g6qpyttpez-AR/image;s=780x0;q=60',
     price: 111,
-    categoryId: 9,
+    categoryId: 17,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -358,7 +358,7 @@ const painting = [
       NO MANDE MAIL NI MENSAJES LLAME AL TEL: PUBLICADO GRACIAS`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/qywkmex5r64k1-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 9,
+    categoryId: 17,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -370,7 +370,7 @@ const painting = [
       .`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/nudlfe1vr76c1-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 9,
+    categoryId: 17,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -382,7 +382,7 @@ const plumbing = [
       'Seriedad trabajos de electricidad domiciliaria e industrial, refrigeración aires acondicionados, plomería, construcciones civiles.',
     img: 'https://apollo-virginia.akamaized.net/v1/files/5584am6pqmem3-AR/image;s=780x0;q=60',
     price: 11111,
-    categoryId: 10,
+    categoryId: 18,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -391,7 +391,7 @@ const plumbing = [
       'soluciones a toda clase de perdidas de agua oh gas destrancaciones de cañerias desagues inodoros etc instalaciones cloacales sanitarias gas agua fria caliente tanques termotanques calefones cocinas etc soluciones rapidas y garantizadas',
     img: 'https://apollo-virginia.akamaized.net/v1/files/8qofsth3857c3-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 10,
+    categoryId: 18,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -399,7 +399,7 @@ const plumbing = [
     description: 'MAS DE 20 AÑOS DE EXPERIENCIA!',
     img: 'https://apollo-virginia.akamaized.net/v1/files/wor96hu5fo3r-AR/image;s=780x0;q=60',
     price: 11111111,
-    categoryId: 10,
+    categoryId: 18,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -439,7 +439,7 @@ const other = [
       Nos enorgullese decir que nos diferenciamos por el servicio de post-venta, tenemos el 100% de los sistemas instalados en operación.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/4p6jfah414z02-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 11,
+    categoryId: 19,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -448,7 +448,7 @@ const other = [
       'Realizo tramites de MONOTRIBUTO- INSCRIPCION- RECATEGORIZACION- DGR- MUNICIPALIDAD: TISSH- HABILITACION- JUBILACION',
     img: 'https://apollo-virginia.akamaized.net/v1/files/3d1yx8autby42-AR/image;s=780x0;q=60',
     price: 11,
-    categoryId: 11,
+    categoryId: 19,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -456,7 +456,7 @@ const other = [
     description: 'Torta de Kitty, princesas',
     img: 'https://apollo-virginia.akamaized.net/v1/files/gfvqze5lrehl-AR/image;s=780x0;q=60',
     price: 800,
-    categoryId: 11,
+    categoryId: 19,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];

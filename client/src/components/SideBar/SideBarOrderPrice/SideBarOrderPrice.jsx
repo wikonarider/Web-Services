@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
 
-export default function SideBarRangePrice({ text, index }) {
+export default function SideBarOrderPrice({ text, index }) {
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.categories);
 

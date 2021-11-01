@@ -28,7 +28,10 @@ export default function YourAccount() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
-  // console.log(userData);
+  const userData = useSelector((state) => state.users);
+  const userServiceData = useSelector((state) => state.favsData);
+
+  const userId = document.cookie.slice(7);
 
   useEffect(() => {
     (async () => {
