@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {getFilters, getServices} from "../../../redux/actions";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getFilters, getServices, postCategory } from '../../../redux/actions';
 
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -9,15 +9,20 @@ import { privateEncrypt } from 'crypto';
 
 export default function SideBarNestedBtnDropDownInner({ name }) {
   const [checked, setChecked] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const obj = {
-    category : name,
-    order : "ASC",
-    filter : "price",
-  }
+    category: name,
+    order: 'ASC',
+    filter: 'price',
+  };
+
   const handleChange = () => {
     setChecked(!checked);
-    dispatch(getServices(obj))
+    console.log('OBJETO', obj);
+
+    dispatch(postCategory(name));
+    dispatch(getServices(obj));
   };
 
   return (

@@ -5,7 +5,7 @@ const carpentry = [
       'carpintero que disponga de herramientas , para trabajos por tanto zona pilar .',
     img: 'https://apollo-virginia.akamaized.net/v1/files/0z2vvl2lhbtz2-AR/image;s=780x0;q=60',
     price: 1,
-    categoryId: 1,
+    categoryId: 8,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -14,7 +14,7 @@ const carpentry = [
       'Cala de 4 cuerpos en buen estado como se ve en la foto Medidas:Interior 93x93cm Base de prisioneros completas',
     img: 'https://apollo-virginia.akamaized.net/v1/files/d4iv1xo0wvh2-AR/image;s=780x0;q=60',
     price: 16000,
-    categoryId: 1,
+    categoryId: 8,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -22,7 +22,7 @@ const carpentry = [
     description: `Soy carpintero ago trabajos a medidas`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/icclgg3f0mvv3-AR/image;s=780x0;q=60',
     price: 5000,
-    categoryId: 1,
+    categoryId: 8,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];
@@ -311,7 +311,7 @@ const auto = [
       Escribanos por whatsapp para hacernos consultas y pedidos al instante.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/nwxwyp4syjsg-AR/image;s=780x0;q=60',
     price: 1520,
-    categoryId: 8,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -322,7 +322,7 @@ const auto = [
     La llegada del Delibery del Arranque. Promocion para todo C.A.B.A y Gran Buenos Aíres.`,
     img: 'https://apollo-virginia.akamaized.net/v1/files/553ztsvmah463-AR/image;s=780x0;q=60',
     price: 1000,
-    categoryId: 8,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
   {
@@ -332,7 +332,7 @@ const auto = [
       'TALLER CHAPA Y PINTURA Y MECANICA HABILITADO COMO AGENCIA DE AUTOS NUEVOS Y USADOS TODO AZULEJADO -$95000 SE ENTRA CON GARANTIA CAPITAL',
     img: 'https://apollo-virginia.akamaized.net/v1/files/u1g3fd5sf4oc1-AR/image;s=780x0;q=60',
     price: 95000,
-    categoryId: 8,
+    categoryId: 15,
     userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
   },
 ];

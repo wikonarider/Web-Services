@@ -1,6 +1,6 @@
-import { type } from "./variables";
-import serviceURL from "./urlQuery";
-import axios from "axios";
+import { type } from './variables';
+import serviceURL from './urlQuery';
+import axios from 'axios';
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -9,6 +9,7 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
+      console.log('AXIOS', json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -18,8 +19,6 @@ export function getServices(obj) {
     }
   };
 }
-
-
 
 export function getServicesById(id) {
   return async function (dispatch) {
@@ -78,11 +77,19 @@ export function createService(body) {
     });
   };
 }
+
+export function postCategory(category) {
+  return {
+    type: type.POST_CATEGORY,
+    payload: category,
+  };
+}
+
 //_____________________________________________________________________________________actions user
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post("/users/", data);
+      return await axios.post('/users/', data);
     } catch (err) {
       return new Error(err);
     }
@@ -92,7 +99,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put("/users/", newData);
+      return await axios.put('/users/', newData);
     } catch (err) {
       return new Error(err);
     }
