@@ -131,6 +131,24 @@ export function banUser(id) {
   };
 }
 
+export const getUserFavs = (userId) => {
+  return async function (dispatch) {
+    return await axios(`http://localhost:3001/favs/${userId}`).then(
+      (response) =>
+        dispatch({ type: type.GET_USER_FAVS, payload: response.data })
+    );
+  };
+};
+
+export const getFavsServicesData = (userId) => {
+  return async function (dispatch) {
+    return await axios(`http://localhost:3001/favs/${userId}/data`).then(
+      (response) =>
+        dispatch({ type: type.GET_FAVS_SERVICES_DATA, payload: response.data })
+    );
+  };
+};
+
 //_____________________________________________________________________________________actions provinces
 
 export function getProvinces() {
@@ -147,14 +165,7 @@ export function getProvinces() {
   };
 }
 
-export const getUserFavs = (userId) => {
-  return async function (dispatch) {
-    return await axios(`http://localhost:3001/favs/${userId}`).then(
-      (response) =>
-        dispatch({ type: type.GET_USER_FAVS, payload: response.data })
-    );
-  };
-};
+
 // Shopping
 export function addCart(service) {
   return {
