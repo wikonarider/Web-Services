@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import Header from "./Header";
 import Cards from "./Cards";
-import LandingNav from "./LandingNav";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,12 +15,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Landing = () => {
   const classes = useStyles();
+  const [cookie, setCookie] = useState(document.cookie);
+
+  useEffect(() => {
+    setCookie(() => document.cookie);
+  }, []);
+
   return (
     <div className={classes.root}>
-      {/* <LandingNav /> */}
       <CssBaseline />
-      <Header />
-      <Cards />
+      <Header cookie={cookie} setCookie={setCookie} />
+      <Cards cookie={cookie} />
     </div>
   );
 };

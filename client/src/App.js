@@ -6,7 +6,6 @@ import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
-import Login from "./components/Login/Login";
 import Landing from "./components/Landing/Landing";
 
 function App() {
