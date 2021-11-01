@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getFilters, getServices, postCategory } from '../../../redux/actions';
 
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,23 +10,26 @@ import { privateEncrypt } from 'crypto';
 export default function SideBarNestedBtnDropDownInner({ name }) {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
-
+  const allCategories = useSelector((state) => state.categories);
   const obj = {
-    category: '',
+    category: allCategories,
     order: 'ASC',
     filter: 'price',
   };
 
-  if (checked === false) {
-    obj.category = name;
-  }
-  if (checked === true) {
-    obj.category = '';
-  }
+ 
 
   const handleChange = () => {
+    if (checked === false) {
+      allCategories.push(name)  }
+    if (checked === true) {
+      var index = allCategories.indexOf(name);
+      if (index > -1) {
+        allCategories.splice(index, 1);
+      } 
+    }
     setChecked(!checked);
-    dispatch(postCategory(obj.category));
+    dispatch(postCategory(allCategories));
     dispatch(getServices(obj));
   };
 
