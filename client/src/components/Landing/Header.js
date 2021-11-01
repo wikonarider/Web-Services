@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link as Scroll } from "react-scroll";
 import Login from "../Login/Login";
 import { useHistory } from "react-router";
+import UserMenu from "../Nav/UserMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,15 +54,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = ({ cookie, setCookie }) => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [login, setLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const history = useHistory();
+
   if (login) {
     history.push("/home");
   }
+
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
   };
@@ -69,6 +72,7 @@ const Header = () => {
   useEffect(() => {
     setChecked(true);
   }, []);
+
   return (
     <div className={classes.root} id="header">
       <AppBar className={classes.appbar} elevation={0}>
@@ -76,14 +80,16 @@ const Header = () => {
           <h1 className={classes.appbarTitle}>
             WEB <span className={classes.colorText}>SERVICE. </span>
           </h1>
-          {!login ? (
+          {!cookie ? (
             <IconButton onClick={handleLogin}>
               <SortIcon className={classes.icon} />
             </IconButton>
-          ) : null}
+          ) : (
+            <UserMenu setLogin={setLogin} setCookie={setCookie} />
+          )}
           <Modal
             open={loginModal}
-            onClose={setLoginModal}
+            onClose={handleLogin}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
@@ -103,7 +109,7 @@ const Header = () => {
       <Collapse
         in={checked}
         {...(checked ? { timeout: 2000 } : {})}
-        collapsedHeight={50}
+        collapsedSize={50}
       >
         <div className={classes.container}>
           <h1 className={classes.title}>
