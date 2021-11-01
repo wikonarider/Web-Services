@@ -20,27 +20,19 @@ import IconButton from "@mui/material/IconButton";
 import CardService from "../CardService/CardService";
 import { FormDialog } from "./FormDialog/FormDialog";
 import { postLogout } from "../../utils/login";
-import {
-  getUsersById,
-  putUser,
-  getUserFavs,
-  getFavsServicesData,
-} from "../../redux/actions";
+import { getUserInfo, putUser, getUserFavs } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function YourAccount() {
   const dispatch = useDispatch();
-
-  const userData = useSelector((state) => state.users);
-  const userServiceData = useSelector((state) => state.favsData);
-
-  const userId = document.cookie.slice(7);
+  const userData = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUsersById(userId));
-    dispatch(getUserFavs(userId));
-    dispatch(getFavsServicesData(userId));
+    (async () => {
+      dispatch(await getUserInfo());
+      dispatch(await getUserFavs());
+    })();
 
     // eslint-disable-next-line
   }, []);
@@ -178,7 +170,6 @@ export default function YourAccount() {
 
           <p>{userData.username}</p>
           <p>{userData.email}</p>
-          <p>{userData.location}</p>
         </div>
       </div>
 
@@ -273,11 +264,11 @@ export default function YourAccount() {
 
       {/* -------------------FAVS------------------------ */}
       {viewFavs &&
-        (userServiceData.length > 0 ? (
+        (userData.servicesFavs.length > 0 ? (
           <Container>
             <div>
               <Grid container justifyContent="center" spacing={3}>
-                {userServiceData.map((s) => (
+                {userData.servicesFavs.map((s) => (
                   <Grid item key={s.id}>
                     <CardService service={s} />
                   </Grid>
@@ -311,11 +302,11 @@ export default function YourAccount() {
 
       {/* -------------------SERVICES-------------------------- */}
       {viewServices &&
-        (userData.services.length > 0 ? (
+        (userData.servicesOwn.length > 0 ? (
           <div>
             <Container>
               <Grid container justifyContent="center" spacing={3}>
-                {userData.services.map((s) => (
+                {userData.servicesOwn.map((s) => (
                   <Grid item key={s.id}>
                     <CardService service={s} />
                   </Grid>
