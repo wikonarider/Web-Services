@@ -3,8 +3,11 @@ import s from "./Login.module.css";
 import { TextField, Button } from "@mui/material";
 import { validateLogin } from "../../utils/registerValidations";
 import { postLogin } from "../../utils/login";
+import { useDispatch } from "react-redux";
+import { setCookie } from "../../redux/actions";
 
 function Login({ setLogin, setLoginModal }) {
+  const dispatch = useDispatch();
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     username: "",
@@ -43,6 +46,7 @@ function Login({ setLogin, setLoginModal }) {
 
       setLogin(() => true);
       setLoginModal(() => false);
+      dispatch(setCookie(document.cookie));
     } catch (e) {
       setInputErrors(() => {
         let error = {};
