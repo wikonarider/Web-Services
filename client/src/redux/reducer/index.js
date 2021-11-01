@@ -1,4 +1,4 @@
-import { type } from '../actions/variables';
+import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
@@ -6,9 +6,9 @@ const initialState = {
   groups: [],
   provinces: [],
   favs: [],
-  favsData: [],
   cart: [],
   categories: [],
+  cookie: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -60,11 +60,12 @@ const rootReducer = (state = initialState, action) => {
         categories: payload,
       };
 
-    case type.GET_FAVS_SERVICES_DATA:
+    case type.SET_COOKIE: {
       return {
         ...state,
-        favsData: action.payload,
+        cookie: action.payload,
       };
+    }
     default:
       return state;
   }
