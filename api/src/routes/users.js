@@ -13,7 +13,7 @@ const {
 } = require("../controllers/authentication");
 
 // User post
-router.post("/", userCreated);
+router.post("/", isNotAuthenticated, userCreated);
 router.post("/purchase", postPurchase);
 
 // User get
