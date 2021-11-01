@@ -51,9 +51,9 @@ export default function SearchBar() {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const obj = {
-    filter: "title",
-    name: name,
-  };
+  filter: "title",
+  name: name,
+   }
   useEffect(() => {
     dispatch(getServices(obj));
     // eslint-disable-next-line react-hooks/exhaustive-deps
