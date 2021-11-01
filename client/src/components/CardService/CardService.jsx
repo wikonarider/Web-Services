@@ -1,5 +1,3 @@
-import { connect } from "react-redux";
-import { getUserFavs } from "../../redux/actions";
 import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -12,34 +10,47 @@ import { Typography, CardActionArea } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
-import { handleFav } from "../../utils/buttonHandlers";
 import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/actions/index";
 import { useSelector } from "react-redux";
+import { deleteFavs, addFavs } from "../../utils/favs";
+import { getUserInfo } from "../../redux/actions/index";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-const theme = {
-  favorite: {
-    1: { color: "red" },
-    0: { color: "grey" },
-  },
-};
-
-function CardService({ service, favs, getUserFavs }) {
+function CardService({ service }) {
   const cart = useSelector((state) => state.cart);
+  const favs = useSelector((state) => state.favs);
+  const cookie = useSelector((state) => state.cookie);
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
+  const [favState, setFavState] = useState(false);
 
-  const { title, img, price, id } = service;
-  const rating = 5;
+  const { title, img, price, id, userId, ratingService } = service;
+  const rating = ratingService ? ratingService : 5;
   const fixedTitle = title
     ? title.length > 40
       ? `${title.substring(0, 40)}...`
       : title
     : null;
 
+  // verificar si ya esta en favorito, prende en rojo
+  // el boton de favs de las cards del home o lo deja apagado
+  useEffect(() => {
+    if (cookie) {
+      if (favs) {
+        const index = favs.findIndex((f) => f.serviceId === id);
+        if (index === -1) {
+          setFavState(() => false);
+        } else {
+          setFavState(() => true);
+        }
+      }
+    }
+  }, [favs, cookie, id]);
+
+  // para agregarlo o sacarlo del carrito
   useEffect(() => {
     const index = cart.findIndex((s) => s.id === id);
     if (index === -1) {
@@ -49,6 +60,7 @@ function CardService({ service, favs, getUserFavs }) {
     }
   }, [cart, id]);
 
+  // onClick del carrito
   const handleClick = () => {
     if (!added) {
       const service = {
@@ -59,6 +71,25 @@ function CardService({ service, favs, getUserFavs }) {
       };
       dispatch(addCart(service));
       setAdded(() => true);
+    }
+  };
+
+  // onClick del favs
+  const handleFavs = async () => {
+    try {
+      if (cookie) {
+        if (favState) {
+          await deleteFavs(id);
+          setFavState(() => false);
+          dispatch(await getUserInfo());
+        } else {
+          await addFavs(id);
+          setFavState(() => true);
+          dispatch(await getUserInfo());
+        }
+      }
+    } catch (e) {
+      console.log(e.response.data);
     }
   };
   return (
@@ -87,21 +118,13 @@ function CardService({ service, favs, getUserFavs }) {
 
       <CardActions disableSpacing>
         <IconButton
-          onClick={async () => {
-            let fav = favs.find((s) => s.serviceId === id) ? true : false;
-            console.log(fav);
-            await handleFav(fav, id);
-            getUserFavs(document.cookie.split("=")[1]);
-          }}
+          onClick={handleFavs}
           aria-label="add to favorites"
+          sx={
+            cookie && cookie.split("=")[1] !== userId ? {} : { display: "none" }
+          }
         >
-          <FavoriteIcon
-            sx={
-              favs.find((f) => f.serviceId === id)
-                ? theme.favorite["1"]
-                : theme.favorite["0"]
-            }
-          />
+          <FavoriteIcon color={favState ? "error" : ""} />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
@@ -120,10 +143,4 @@ function CardService({ service, favs, getUserFavs }) {
   );
 }
 
-const mapStatetoProps = (state) => {
-  return {
-    favs: state.favs,
-  };
-};
-
-export default connect(mapStatetoProps, { getUserFavs })(CardService);
+export default CardService;
