@@ -1,8 +1,9 @@
 import React from "react";
 
 const style = {
-  objectFit: "cover",
+  // objectFit: "contain",
   height: "450px",
+
 };
 
 function CarrouselItem({ title, img }) {
