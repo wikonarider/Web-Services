@@ -1,6 +1,6 @@
-import { type } from './variables';
-import serviceURL from './urlQuery';
-import axios from 'axios';
+import { type } from "./variables";
+import serviceURL from "./urlQuery";
+import axios from "axios";
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -9,7 +9,7 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
-      console.log('AXIOS', json.data);
+      console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -89,7 +89,7 @@ export function postCategory(category) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post('/users/', data);
+      return await axios.post("/users/", data);
     } catch (err) {
       return new Error(err);
     }
@@ -99,7 +99,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put('/users/', newData);
+      return await axios.put("/users/", newData);
     } catch (err) {
       return new Error(err);
     }
@@ -138,22 +138,18 @@ export function banUser(id) {
   };
 }
 
-export const getUserFavs = (userId) => {
-  return async function (dispatch) {
-    return await axios(`http://localhost:3001/favs/${userId}`).then(
-      (response) =>
-        dispatch({ type: type.GET_USER_FAVS, payload: response.data })
-    );
+// cookie
+export const setCookie = (cookie) => {
+  return {
+    type: type.SET_COOKIE,
+    payload: cookie,
   };
 };
 
-export const getFavsServicesData = (userId) => {
-  return async function (dispatch) {
-    return await axios(`http://localhost:3001/favs/${userId}/data`).then(
-      (response) =>
-        dispatch({ type: type.GET_FAVS_SERVICES_DATA, payload: response.data })
-    );
-  };
+// favs
+export const getUserFavs = async () => {
+  const response = await axios(`/favs`);
+  return { type: type.GET_USER_FAVS, payload: response.data };
 };
 
 //_____________________________________________________________________________________actions provinces
@@ -171,7 +167,6 @@ export function getProvinces() {
     }
   };
 }
-
 
 // Shopping
 export function addCart(service) {
