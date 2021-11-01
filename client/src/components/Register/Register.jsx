@@ -4,7 +4,7 @@ import { TextField, Button } from "@mui/material";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
 
-function Register({ setRegisterModal }) {
+function Register({ setRegisterModal, handleRedirect }) {
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     name: "",
@@ -52,6 +52,7 @@ function Register({ setRegisterModal }) {
           });
           setInputErrors({});
           setStart(true);
+          handleRedirect && handleRedirect();
         }
       }
     } catch (e) {
