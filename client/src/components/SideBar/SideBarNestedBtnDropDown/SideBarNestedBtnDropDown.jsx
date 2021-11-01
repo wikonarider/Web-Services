@@ -46,8 +46,13 @@ export default function SideBarNestedBtnDropDown({
                   component="fieldset"
                   variant="standard"
                 >
-                  {group.categories.map((c) => {
-                    return <SideBarNestedBtnDropDownInner name={c.name} />;
+                  {group.categories.map((c, index) => {
+                    return (
+                      <SideBarNestedBtnDropDownInner
+                        name={c.name}
+                        key={index}
+                      />
+                    );
                   })}
                 </FormControl>
               </Box>

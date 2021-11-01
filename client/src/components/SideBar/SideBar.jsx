@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 import SideBarNested from './SideBarNested/SideBarNested';
-import SideBarRangePrice from './SideBarRangePrice/SideBarRangePrice';
+import SideBarOrderPrice from './SideBarOrderPrice/SideBarOrderPrice';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
