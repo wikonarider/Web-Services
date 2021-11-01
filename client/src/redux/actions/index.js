@@ -106,25 +106,11 @@ export function putUser(newData) {
   };
 }
 
-export function getUsers(username) {
-  return async (dispatch) => {
-    try {
-      const res = await axios(`/users?username=${username}`);
-      return dispatch({ type: type.GET_USERS, payload: res.data });
-    } catch (err) {
-      return new Error(err);
-    }
-  };
-}
-
-export function getUsersById(id) {
-  return async (dispatch) => {
-    try {
-      const res = await axios(`/users?id=${id}`);
-      return dispatch({ type: type.GET_USERS_BY_ID, payload: res.data });
-    } catch (err) {
-      return new Error(err);
-    }
+export async function getUserInfo() {
+  const response = await axios.get("/users");
+  return {
+    type: type.GET_USER_INFO,
+    payload: response.data,
   };
 }
 
