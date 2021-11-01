@@ -261,6 +261,7 @@ function CreateService(props) {
           {/* SELECT DE PROVINCIA */}
           <div>
             <Autocomplete
+              
               options={provinces}
               getOptionLabel={(option) => option.name}
               onChange={(e, value) => handleProvince(value)}
@@ -270,7 +271,9 @@ function CreateService(props) {
                   {...params}
                   label={"Provinces"}
                   placeholder="Search"
+                  
                 />
+                
               )}
             />
           </div>

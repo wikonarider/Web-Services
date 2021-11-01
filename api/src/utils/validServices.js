@@ -1,4 +1,4 @@
-const { Category } = require("../db");
+const { Category, Province, City } = require("../db");
 
 function validateUrl(str) {
   const pattern = new RegExp(
@@ -18,6 +18,20 @@ async function validateCategoryId(id) {
   return category ? true : false;
 }
 
+async function validateProvince(id) {
+  const province = await Province.findByPk(id);
+  return province ? true : false;
+}
+async function validateCity(citys) {
+  var citys = citys.map((e) => {
+    return City.findByPk(e);
+  });
+  Promise.all(citys).then((resp) => {
+    citys = resp;
+  });
+  return citys.length ? true : false;
+}
+
 async function validateServices(service) {
   let errors = {};
 
@@ -25,6 +39,21 @@ async function validateServices(service) {
     errors.img = "It has to be of type string";
   } else if (!validateUrl(service.img)) {
     errors.img = "It has to be a valid url";
+  }
+  if (!Object.values(service.provinces).length) {
+    errors.provinces = "must have a province";
+  } else {
+    if (!validateProvince(service.provinces.id)) {
+      errors.provinces = "must have a province";
+    }
+  }
+
+  if (!service.cities.length) {
+    errors.cities = "should contain city";
+  } else {
+    if (!validateCity(service.cities)) {
+      errors.cities = "should contain city";
+    }
   }
 
   if (typeof service.description !== "string") {

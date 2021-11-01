@@ -1,4 +1,5 @@
 const { Service, Users, Qualification, Category, Group, Province } = require("../db.js");
+const { addRating } = require("../utils/index");
 const { Op } = require("sequelize");
 
 //------------------------------------------------------------------------------------------------------price
@@ -1199,30 +1200,38 @@ async function orderByUpdateDate(objQuery, res, next) {
   res.status(200).send(dateFilter);
 }
 //--------------------------------------------------------------------------------------------------title
-async function orderTitle( title, res, next) {
-  var dbServices = await Service.findAll({
-    //Traigo todo de la db
-    include: [
-      {
-        model: Users,
-        through: { attributes: [] },
-      },
-      Qualification,
-      {
-        model: Category,
-        include: {
-          model: Group,
-        },
-      },
-    ],
-  });
+async function orderTitle( objQuery, res, next) {
+ const { name } = objQuery;
+ dbServices = await Service.findAll({
+   //Traigo todo de la db
+   attributes: ["id", "title", "img", "description", "price", "userId"],
 
-  var filteredServices = [];
-  dbServices.map((service) => {
-    if (service.title.toLowerCase().includes(title.toLowerCase()))
-      filteredServices.push(service);
-  });
-  return res.send(filteredServices); //Si coincide mando el servicio con ese title
+   // include: { all: true },
+   include: [
+     {
+       model: Category,
+       attributes: ["name"],
+       include: {
+         model: Group,
+         attributes: ["name"],
+       },
+     },
+   ],
+ });
+
+ dbServices = await addRating(dbServices);
+ if (dbServices.length > 0) {
+   if (name) {
+     //si me pasan un title busco en la db los que coincidan
+     const filteredServices = [];
+     dbServices.map((service) => {
+       if (service.title.toLowerCase().includes(name.toLowerCase()))
+         filteredServices.push(service);
+     });
+     return res.send(filteredServices); //Si coincide mando el servicio con ese title
+   } else return dbServices; //Si no, devuelvo todos los servicios
+ }
+      
 }
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {  
@@ -1911,10 +1920,12 @@ if (order === "ASC" && !province && group &&  !category &&  startRange &&  endRa
 
 
   res.status(200).send(priceFilter);}
-//-------------------------------------------------------------------------------------------------------
-function orderProvince(objQuery, res, next) {}
-//-------------------------------------------------------------------------------------------------------
-//function orderProvince(objQuery, res, next) {}
+//-------------------------------------------------------------------------------------------------------order by province
+function orderByProvince(objQuery, res, next) {}
+//-------------------------------------------------------------------------------------------------------order by city
+function orderByCity(objQuery, res, next) {
+ 
+}
 //-------------------------------------------------------------------------------------------------------
 //function orderProvince(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------
@@ -1927,5 +1938,6 @@ module.exports = {
   orderByUpdateDate,
   orderByPrice,
   orderTitle,
-  orderProvince,
+  orderByProvince,
+  orderByCity,
 };
