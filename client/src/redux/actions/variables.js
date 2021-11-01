@@ -21,7 +21,7 @@ export const type = {
 
   //FAVS
   GET_USER_FAVS: "GET_USER_FAVS",
-
+  
   // Shopping
   ADD_CART: "ADD_CART",
   REMOVE_CART: "REMOVE_CART",
