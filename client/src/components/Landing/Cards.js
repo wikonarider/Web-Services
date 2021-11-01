@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Cards = () => {
+const Cards = ({ cookie }) => {
   const history = useHistory();
   const [registerModal, setRegisterModal] = useState(false);
 
@@ -27,34 +27,30 @@ const Cards = () => {
     setRegisterModal((prev) => !prev);
   };
 
-  const handleOnClick1 = () => {
+  const handleRedirect = () => {
     history.push("/home");
   };
-
-  //   const handleOnClick0 = () => {
-  //     history.push("/home");
-  //   };
 
   const classes = useStyles();
   const checked = useWindowPosition("header");
   return (
     <div className={classes.root} id="cards">
       <div
-        onClick={handleOnClick1}
-        infoCardClick={infoCardClick[1]}
+        onClick={handleRedirect}
         checked={checked}
+        style={{ cursor: "pointer" }}
       >
         <CardClick infoCardClick={infoCardClick[1]} checked={checked} />
       </div>
       <div
         onClick={handleRegister}
-        infoCardClick={infoCardClick[1]}
         checked={checked}
+        style={{ cursor: "pointer" }}
       >
         <CardClick infoCardClick={infoCardClick[0]} checked={checked} />
       </div>
       <Modal
-        open={registerModal}
+        open={!cookie ? registerModal : false}
         onClose={handleRegister}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -67,7 +63,10 @@ const Cards = () => {
             width: "100%",
           }}
         >
-          <Register setRegisterModal={setRegisterModal} />
+          <Register
+            setRegisterModal={setRegisterModal}
+            handleRedirect={handleRedirect}
+          />
         </Box>
       </Modal>
     </div>
