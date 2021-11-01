@@ -65,7 +65,7 @@ export default function SideBarRangePrice() {
       <TextField
         required
         id="startRange"
-        label="Minimun price"
+        label="Minimum price"
         type="number"
         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
         onChange={handleMinMaxChange}
@@ -74,7 +74,7 @@ export default function SideBarRangePrice() {
       <TextField
         required
         id="endRange"
-        label="Maximun price"
+        label="Maximum price"
         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
         onChange={handleMinMaxChange}
         value={rangePrice.endRange}
