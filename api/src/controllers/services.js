@@ -72,10 +72,10 @@ async function getServices(req, res, next) {
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
- // const { userId } = req.cookies;                                hardcodeo el id y lo mando por body
-  const { title, img, description, price, categoryId, provinces, cities ,userId } =
+ const { userId } = req.cookies;                               
+  const { title, img, description, price, categoryId, provinces, cities  } =
     req.body;
-  // si se pasaron todos los parametros
+  // si se pasaron todos los parametros 
   if (title && img && description && price && categoryId && provinces) {
     const errors = await validateServices(req.body);
     // si son todos los parametros validos

@@ -17,7 +17,6 @@ async function addFavs(req, res, next) {
     next(e);
   }
 }
-
 async function getFavs(req, res, next) {
   try {
     const { userId } = req.params;
