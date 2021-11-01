@@ -310,7 +310,7 @@ async function orderByPrice(objQuery, res, next) {
   if (
     order === 'ASC' &&
     !province &&
-    group &&
+    !group &&
     category &&
     startRange &&
     endRange
@@ -327,14 +327,11 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            name: category,
           },
           include: {
             model: Group,
             attributes: ['name'],
-            where: {
-              id: group,
-            },
           },
         },
       ],
@@ -345,7 +342,7 @@ async function orderByPrice(objQuery, res, next) {
   if (
     order === 'DESC' &&
     !province &&
-    group &&
+    !group &&
     category &&
     startRange &&
     endRange
@@ -362,14 +359,11 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            name: category,
           },
           include: {
             model: Group,
             attributes: ['name'],
-            where: {
-              id: group,
-            },
           },
         },
       ],
@@ -1037,11 +1031,12 @@ async function orderByCreatedDate(objQuery, res, next) {
   if (
     order === 'ASC' &&
     !province &&
-    group &&
+    !group &&
     category &&
     startRange &&
     endRange
   ) {
+    console.log("llegue aca rebien")
     priceFilter = await Service.findAll({
       attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
       where: {
@@ -1059,9 +1054,6 @@ async function orderByCreatedDate(objQuery, res, next) {
           include: {
             model: Group,
             attributes: ['name'],
-            where: {
-              id: group,
-            },
           },
         },
       ],
@@ -1072,11 +1064,12 @@ async function orderByCreatedDate(objQuery, res, next) {
   if (
     order === 'DESC' &&
     !province &&
-    group &&
+    !group &&
     category &&
     startRange &&
     endRange
   ) {
+    console.log("llegue aca rebien")
     priceFilter = await Service.findAll({
       attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
       where: {
@@ -1094,9 +1087,6 @@ async function orderByCreatedDate(objQuery, res, next) {
           include: {
             model: Group,
             attributes: ['name'],
-            where: {
-              id: group,
-            },
           },
         },
       ],
