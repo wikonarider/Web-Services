@@ -41,18 +41,6 @@ async function getServices(req, res, next) {
 
     dbServices = await addRating(dbServices);
 
-    //FILTRO POR FECHA
-    /* if (dateOrder) {
-      filterByDate(order);
-    }
-
-    //FILTRO POR RANGO
-    if (startRange & endRange) {
-      let filteredByPriceRange = await filterByPriceRange(startRange, endRange);
-      return res.send(filteredByPriceRange);
-    }
-    }*/
-
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
     else {
@@ -96,7 +84,6 @@ async function postServices(req, res, next) {
       } catch (error) {
         next(error);
       }
-//
       var c = cities.map((e) => {
         return Services_cities.findOrCreate({
           where: {

@@ -3,12 +3,12 @@ import { Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-import CreateService from "./components/CreateService/CreateService";
 import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
 import Landing from "./components/Landing/Landing";
+import CreateService from "./components/CreateService/CreateService";
 
 function App() {
   return (

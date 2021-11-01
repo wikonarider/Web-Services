@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import {
   TextField,
   Button,
@@ -14,7 +14,6 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import s from "./CreateService.module.css";
 import { createService, getGroups, getProvinces } from "../../redux/actions";
-import axios from "axios";
 import ModalService from "./ModalService";
 import { Box } from "@mui/system";
 
@@ -27,17 +26,13 @@ function CreateService(props) {
     // eslint-disable-next-line
   }, []);
 
-  // CATEGORIAS-SUBCATEGORIAS // PROVINCIAS-CIUDADES
-  //Category -> categoria / Type -> subcategoria // provinceLocation -> Provincia({provinces:[]}) / citieLocation -> Ciudad({cities:[]})
-  //props de back
   const { provinces, groups } = props;
 
   const [index, setIndex] = useState({
-    indexCat: "2",
-    indexProv: "2",
+    indexCat: "",
+    indexProv: "",
   });
   const [names, setNames] = useState({
-    city: "",
     province: "",
     category: "",
     subCategory: "",
@@ -50,14 +45,12 @@ function CreateService(props) {
     title: "",
     description: "",
     price: "",
-    //hardcodeo el id para para comprobar en el back
-    img: "https://placeimg.com/400/400/service/3",
+    img: "",
     categoryId: "",
     provinces: "",
     cities: [],
     subCategory: "",
   });
-
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -75,11 +68,11 @@ function CreateService(props) {
   const handleCategory = (idCategory) => {
     var ind = 0;
 
-    var [cat] = groups.filter((e, i) => {
+    var [cat] = groups.filter(function (e, i) {
       if (e.id === idCategory) {
         ind = i;
-        return e;
       }
+      return e.id === idCategory;
     });
     setInputs({ ...inputs, categoryId: cat.id });
     setIndex({ ...index, indexCat: ind });
@@ -99,7 +92,7 @@ function CreateService(props) {
         cities: [],
       });
       setIndex({ ...index, indexProv: indexPro });
-      setNames({ ...names, province: province.name, cities: "" });
+      setNames({ ...names, province: province.name });
     } else {
       setInputs({
         //borra si selecciona otra provincia
@@ -143,11 +136,11 @@ function CreateService(props) {
       inputs.categoryId &&
       inputs.provinces &&
       inputs.description &&
+      inputs.img &&
       inputs.price &&
       inputs.cities.length
     ) {
-      // setModal(true);
-      console.log("entre a submmit");
+      setModal(true);
       dispatch(createService({ ...inputs, price: parseInt(inputs.price) }));
 
       setInputs({
@@ -162,28 +155,39 @@ function CreateService(props) {
         cities: [],
       });
     } else {
-      console.log("no entre a submit");
+      alert("Faltan parmetros");
     }
   }
 
-  function loadImg(files) {
+  const loadImg = async (files) => {
     const reader = new FileReader();
-    const formData = new FormData();
     reader.onload = function () {
       let imgDiv = document.querySelector("#imgBox");
-      imgDiv.src = reader.result; //BÃ¡sicamente lo que hago acÃ¡ es
+      imgDiv.src = reader.result; //Básicamente lo que hago acá es
       //convertir la img en una URL para poder mandarla
     };
     reader.readAsDataURL(files);
+
+    const formData = new FormData();
     formData.append("file", files);
-    formData.append("upload_preset", "za6qmkus");
-    axios
-      .post("https://api.cloudinary.com/v1_1/dd9t6masq/auto/upload", formData)
-      .then((response) =>
-        setInputs({ ...inputs, img: response.data.secure_url })
+    // replace this with your upload preset name
+    formData.append("upload_preset", "hn1tlyfq");
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
+        options
       );
-    //hacer cuenta cloudinay
-  }
+      const res_1 = await res.json();
+      return setInputs({ ...inputs, img: res_1.secure_url });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
   //---------------------------------------------------------------------------------validate
   function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);
@@ -341,7 +345,12 @@ function CreateService(props) {
           </div>
 
           <div className={s.inputsContainer}>
-            <TextField name="img" type="file" fullWidth />
+            <TextField
+              name="img"
+              type="file"
+              fullWidth
+              onChange={(e) => loadImg(e.target.files[0])}
+            />
           </div>
 
           <div className={s.imgContainer}>
