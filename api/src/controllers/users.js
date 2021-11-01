@@ -1,4 +1,4 @@
-const { Users, Service, Qualification } = require("../db");
+const { Users, Service, Qualification, conn } = require("../db");
 const {
   validateUser,
   checkUnique,
@@ -58,43 +58,54 @@ async function userEdit(req, res, next) {
   }
 }
 
-async function getUsers(req, res, next) {
+// se trae la info de un usuario, todos sus favs,
+// servicios comprados y creados
+async function getUserInfo(req, res, next) {
   try {
-    // let { username } = req.params;
-    let { username, id } = req.query;
-    if (!username && !id) {
-      const usersDb = await Users.findAll({
-        include: [
-          {
-            model: Service,
+    const { userId } = req.cookies;
+    const user = await Users.findOne({
+      attributes: ["id", "userImg", "name", "lastname"],
+      where: {
+        id: userId,
+      },
+      include: [
+        {
+          model: Service,
+          as: "servicesOwn",
+          attributes: ["id", "title", "img", "price"],
+          include: {
+            model: Qualification,
+            attributes: ["score"],
+          },
+        },
+        {
+          model: Service,
+          as: "servicesFavs",
+          attributes: ["id", "title", "img", "price"],
+          through: {
             attributes: [],
           },
-        ],
-      });
-      usersDb.length > 0
-        ? res.status(200).send(usersDb)
-        : res.status(500).send({ response: "no users yet" });
-    } else if (id) {
-      const userId = await Users.findOne({
-        where: {
-          id,
+          include: {
+            model: Qualification,
+            attributes: ["score"],
+          },
         },
-        include: {
-          all: true,
+        {
+          model: Service,
+          as: "servicesBought",
+          attributes: ["id", "title", "img", "price"],
+          through: {
+            attributes: [],
+          },
+          include: {
+            model: Qualification,
+            attributes: ["score"],
+          },
         },
-      });
-      res.status(200).send(userId);
-    } else {
-      const userFinded = await Users.findOne({
-        where: {
-          username,
-        },
-        include: {
-          all: true,
-        },
-      });
-      res.status(200).send(userFinded);
-    }
+      ],
+    });
+
+    user ? res.json(user) : res.status(404).json({ message: "User not found" });
   } catch (e) {
     next(e);
   }
@@ -168,7 +179,7 @@ async function postPurchase(req, res, next) {
 module.exports = {
   userCreated,
   userBanned,
-  getUsers,
+  getUserInfo,
   postPurchase,
   userEdit,
 };
