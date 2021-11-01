@@ -28,14 +28,15 @@ const clases = [
   {
     name: 'Music',
   },
+
   {
-    name: 'Other',
+    name: 'Academics Tutoring',
   },
   {
     name: 'Theater',
   },
   {
-    name: 'Academics Tutoring',
+    name: 'Other',
   },
 ];
 
@@ -92,10 +93,10 @@ const organizaciones = [
     name: 'Organization',
   },
   {
-    name: 'Other',
+    name: 'Salon',
   },
   {
-    name: 'Salon',
+    name: 'Other',
   },
 ];
 

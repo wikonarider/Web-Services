@@ -28,16 +28,13 @@ import {
 } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 export default function YourAccount() {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.users);
-  const userFavs = useSelector((state) => state.favs);
   const userServiceData = useSelector((state) => state.favsData);
 
-  console.log(userServiceData);
   const userId = document.cookie.slice(7);
 
   useEffect(() => {
