@@ -1,4 +1,3 @@
-
 const {
   Service,
   Users,
@@ -15,7 +14,7 @@ const { Op } = require('sequelize');
 async function orderByPrice(objQuery, res, next) {
   const { order, province, group, category, startRange, endRange } = objQuery;
   let priceFilter;
-  var array = category.split(",")
+  var array = category.split(',');
 
   if (
     order === 'ASC' &&
@@ -82,7 +81,7 @@ async function orderByPrice(objQuery, res, next) {
         {
           model: Category,
           attributes: ['name'],
-          where:{
+          where: {
             name: array,
           },
           include: {
@@ -740,6 +739,7 @@ async function orderByPrice(objQuery, res, next) {
 //-------------------------------------------------------------------------------------------date create
 async function orderByCreatedDate(objQuery, res, next) {
   const { order, province, group, category, startRange, endRange } = objQuery;
+  console.log(9999, objQuery);
   let priceFilter;
   if (
     order === 'ASC' &&
@@ -810,7 +810,6 @@ async function orderByCreatedDate(objQuery, res, next) {
           include: {
             model: Group,
             attributes: ['name'],
-
           },
         },
       ],
@@ -838,7 +837,6 @@ async function orderByCreatedDate(objQuery, res, next) {
           include: {
             model: Group,
             attributes: ['name'],
-
           },
         },
       ],
@@ -906,7 +904,6 @@ async function orderByCreatedDate(objQuery, res, next) {
       order: [['createdAt', 'DESC']],
     });
   }
-
 
   if (
     order === 'ASC' &&
@@ -1033,38 +1030,37 @@ async function orderByCreatedDate(objQuery, res, next) {
   res.status(200).send(priceFilter);
 }
 //--------------------------------------------------------------------------------------------------title
-async function orderTitle( objQuery, res, next) {
- const { name } = objQuery;
- dbServices = await Service.findAll({
-   //Traigo todo de la db
-   attributes: ["id", "title", "img", "description", "price", "userId"],
+async function orderTitle(objQuery, res, next) {
+  const { name } = objQuery;
+  dbServices = await Service.findAll({
+    //Traigo todo de la db
+    attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
 
-   // include: { all: true },
-   include: [
-     {
-       model: Category,
-       attributes: ["name"],
-       include: {
-         model: Group,
-         attributes: ["name"],
-       },
-     },
-   ],
- });
+    // include: { all: true },
+    include: [
+      {
+        model: Category,
+        attributes: ['name'],
+        include: {
+          model: Group,
+          attributes: ['name'],
+        },
+      },
+    ],
+  });
 
- dbServices = await addRating(dbServices);
- if (dbServices.length > 0) {
-   if (name) {
-     //si me pasan un title busco en la db los que coincidan
-     const filteredServices = [];
-     dbServices.map((service) => {
-       if (service.title.toLowerCase().includes(name.toLowerCase()))
-         filteredServices.push(service);
-     });
-     return res.send(filteredServices); //Si coincide mando el servicio con ese title
-   } else return dbServices; //Si no, devuelvo todos los servicios
- }
-      
+  dbServices = await addRating(dbServices);
+  if (dbServices.length > 0) {
+    if (name) {
+      //si me pasan un title busco en la db los que coincidan
+      const filteredServices = [];
+      dbServices.map((service) => {
+        if (service.title.toLowerCase().includes(name.toLowerCase()))
+          filteredServices.push(service);
+      });
+      return res.send(filteredServices); //Si coincide mando el servicio con ese title
+    } else return dbServices; //Si no, devuelvo todos los servicios
+  }
 }
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {
@@ -1437,6 +1433,7 @@ async function orderByQualifications(objQuery, res, next) {
 async function orderByUpdateDate(objQuery, res, next) {
   const { order } = objQuery;
   let dateFilter;
+
   if (order === 'ASC') {
     dateFilter = await Service.findAll({
       include: [
@@ -1471,7 +1468,6 @@ async function orderByUpdateDate(objQuery, res, next) {
 }
 
 //--------------------------------------------------------------------------------------------------title
-
 
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {
@@ -1822,14 +1818,12 @@ async function orderByQualifications(objQuery, res, next) {
     });
   }
 
-
-  res.status(200).send(priceFilter);}
+  res.status(200).send(priceFilter);
+}
 //-------------------------------------------------------------------------------------------------------order by province
 function orderByProvince(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------order by city
-function orderByCity(objQuery, res, next) {
- 
-}
+function orderByCity(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------
 //function orderProvince(objQuery, res, next) {}
 //-------------------------------------------------------------------------------------------------------

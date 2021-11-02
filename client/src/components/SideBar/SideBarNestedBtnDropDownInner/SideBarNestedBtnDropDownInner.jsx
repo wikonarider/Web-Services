@@ -17,16 +17,15 @@ export default function SideBarNestedBtnDropDownInner({ name }) {
     filter: 'price',
   };
 
- 
-
   const handleChange = () => {
     if (checked === false) {
-      allCategories.push(name)  }
+      allCategories.push(name);
+    }
     if (checked === true) {
       var index = allCategories.indexOf(name);
       if (index > -1) {
         allCategories.splice(index, 1);
-      } 
+      }
     }
     setChecked(!checked);
     dispatch(postCategory(allCategories));

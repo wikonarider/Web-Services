@@ -42,15 +42,17 @@ async function filterByPriceRange(startRange, endRange) {
 }
 
 async function filterByDate(date) {
+  let dateFilter;
+
   if (date && date === 'ASC') {
-    let dateFilter = await Service.findAll({
+    dateFilter = await Service.findAll({
       include: {
         all: true,
       },
       order: [['created_at', 'ASC']],
     });
   } else {
-    let dateFilter = await Service.findAll({
+    dateFilter = await Service.findAll({
       include: {
         all: true,
       },
