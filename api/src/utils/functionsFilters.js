@@ -15,6 +15,7 @@ const { Op } = require('sequelize');
 async function orderByPrice(objQuery, res, next) {
   const { order, province, group, category, startRange, endRange } = objQuery;
   let priceFilter;
+  var array = category.split(",")
 
   if (
     order === 'ASC' &&
@@ -81,8 +82,8 @@ async function orderByPrice(objQuery, res, next) {
         {
           model: Category,
           attributes: ['name'],
-          where: {
-            name: category,
+          where:{
+            name: array,
           },
           include: {
             model: Group,
@@ -109,7 +110,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -1095,7 +1096,7 @@ async function orderByCreatedDate(objQuery, res, next) {
       order: [['createdAt', 'DESC']],
     });
   }
-  res.status(200).send(dateFilter);
+  res.status(200).send(priceFilter);
 }
 //--------------------------------------------------------------------------------------------------title
 async function orderTitle( objQuery, res, next) {
@@ -1536,31 +1537,7 @@ async function orderByUpdateDate(objQuery, res, next) {
 }
 
 //--------------------------------------------------------------------------------------------------title
-async function orderTitle(title, res, next) {
-  var dbServices = await Service.findAll({
-    //Traigo todo de la db
-    include: [
-      {
-        model: Users,
-        through: { attributes: [] },
-      },
-      Qualification,
-      {
-        model: Category,
-        include: {
-          model: Group,
-        },
-      },
-    ],
-  });
 
-  var filteredServices = [];
-  dbServices.map((service) => {
-    if (service.title.toLowerCase().includes(title.toLowerCase()))
-      filteredServices.push(service);
-  });
-  return res.send(filteredServices); //Si coincide mando el servicio con ese title
-}
 
 //-------------------------------------------------------------------------------------------orderByScore
 async function orderByQualifications(objQuery, res, next) {
