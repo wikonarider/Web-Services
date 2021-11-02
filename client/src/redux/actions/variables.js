@@ -21,7 +21,7 @@ export const type = {
 
   //FAVS
   GET_USER_FAVS: "GET_USER_FAVS",
-  
+
   // Shopping
   ADD_CART: "ADD_CART",
   REMOVE_CART: "REMOVE_CART",
@@ -29,4 +29,7 @@ export const type = {
 
   //COOKIE
   SET_COOKIE: "SET_COOKIE",
+
+  // OBJ GLOBAL
+  OBJ_GLOBAL: "OBJ_GLOBAL",
 };
