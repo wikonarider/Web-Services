@@ -1,25 +1,29 @@
 .container{
-    /* background-color: blueviolet; */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
+
 }
 
 .formWrapper{
-    /* background-color: rgb(136, 35, 35); */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 75%;
-    margin-right: 20em;
+    width: 95%;
+    height: 100%;
+    margin-right: 25em;
+    margin-top: 6em;
 }
 
 .inputsContainer{
     margin: 0.7em;
-    width: 100%;
+    width: 90%;
+    margin-right: 6%;
+    margin-left: 4em;
 }
 
 .submitButton{
@@ -38,7 +42,7 @@
 .imgRender{
     align-self: center;
     width: 70%;
-    height: 50%;
+    height: 80%;
     border: gray 6px;
     border-radius: 5px;
 }
