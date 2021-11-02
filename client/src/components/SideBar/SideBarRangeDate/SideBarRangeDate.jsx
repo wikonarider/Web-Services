@@ -19,10 +19,11 @@ export default function SideBarRangeDate({ text, index }) {
   });
 
   const handleChangeCheck = (event) => {
+      objState.order = event.target.value
+      objState.filter = 'created'
+
    
-      objState.order= event.target.value
-      objState.filter= 'created'
-   
+
 
     if (event.target.name === 'ascending') {
       setRangeDate({
