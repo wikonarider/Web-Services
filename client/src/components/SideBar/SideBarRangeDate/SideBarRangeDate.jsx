@@ -22,6 +22,9 @@ export default function SideBarRangeDate({ text, index }) {
       objState.order = event.target.value
       objState.filter = 'created'
 
+   
+
+
     if (event.target.name === 'ascending') {
       setRangeDate({
         descending: false,
