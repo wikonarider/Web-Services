@@ -9,10 +9,18 @@ const initialState = {
   cart: [],
   categories: [],
   cookie: "",
+  objGlobal: {
+    category: [],
+    filter: "price",
+    order: "ASC",
+    province: "",
+    startRange: "",
+    endRange: "",
+  }
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { payload } = action;
+  const { payload, objState } = action;
 
   switch (action.type) {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
@@ -20,7 +28,6 @@ const rootReducer = (state = initialState, action) => {
     case type.GET_SERVICES:
       // usar para testing no mas
       // console.log("Payload en reducer", payload);
-      // console.log("globalState de servicios", state.services);
 
       return {
         ...state,

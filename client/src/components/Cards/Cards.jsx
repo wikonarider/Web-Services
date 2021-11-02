@@ -1,8 +1,8 @@
-import CardService from "../CardService/CardService";
-import s from "./Cards.module.css";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserInfo } from "../../redux/actions";
+import CardService from '../CardService/CardService';
+import s from './Cards.module.css';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserInfo } from '../../redux/actions';
 
 export default function Cards({ services }) {
   const dispatch = useDispatch();
