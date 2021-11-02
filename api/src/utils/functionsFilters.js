@@ -1096,7 +1096,7 @@ async function orderByCreatedDate(objQuery, res, next) {
       order: [['createdAt', 'DESC']],
     });
   }
-  res.status(200).send(dateFilter);
+  res.status(200).send(priceFilter);
 }
 //--------------------------------------------------------------------------------------------------title
 async function orderTitle( objQuery, res, next) {
