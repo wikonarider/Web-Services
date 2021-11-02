@@ -18,7 +18,7 @@ console.log(objState)
     console.log(objState)
     if (checked === false) {
 
-      objState.category.push(name)  }
+      objState.category.push(name)  
 
 
     
