@@ -11,15 +11,15 @@ import {
   IconButton,
 } from "@mui/material";
 import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
+import CardUser from "../CardUser/CardUser";
+import Comments from "../Comments/Comments";
 
 export default function DetailService({ id }) {
   let [service, setService] = useState({ service: {}, user: {} });
   let [fav, setFav] = useState(false);
 
   let history = useHistory();
-
-  //componentDidMount para traer la información del servicio por id
-  useEffect(() => {
+  function updateService() {
     axios(`http://localhost:3001/services/${id}`).then((response) => {
       setService({ ...service, ...response.data });
     });
@@ -27,6 +27,11 @@ export default function DetailService({ id }) {
     axios(`http://localhost:3001/favs?id=${id}`).then((response) => {
       setFav(response.data);
     });
+  }
+
+  //componentDidMount para traer la información del servicio por id
+  useEffect(() => {
+    updateService();
     // eslint-disable-next-line
   }, []);
 
@@ -64,6 +69,12 @@ export default function DetailService({ id }) {
           height="400"
           alt={id}
           sx={{ objectFit: "cover" }}
+        />
+
+        <Comments
+          updateService={updateService}
+          serviceId={id}
+          qualifications={qualifications}
         />
       </Box>
 
@@ -159,6 +170,9 @@ export default function DetailService({ id }) {
             {" "}
             {description}{" "}
           </Typography>
+        </Box>
+        <Box gridColumn="span 12">
+          <CardUser user={service.user} />
         </Box>
       </Box>
     </Box>
