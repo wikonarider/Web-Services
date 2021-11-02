@@ -21,7 +21,7 @@ const IMG_TEMPLATE =
 
 function CardService({ service }) {
   const cart = useSelector((state) => state.cart);
-  const favs = useSelector((state) => state.favs);
+  const favs = useSelector((state) => state.user.servicesFavs);
   const cookie = useSelector((state) => state.cookie);
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
@@ -40,7 +40,7 @@ function CardService({ service }) {
   useEffect(() => {
     if (cookie) {
       if (favs) {
-        const index = favs.findIndex((f) => f.serviceId === id);
+        const index = favs.findIndex((f) => f.id === id);
         if (index === -1) {
           setFavState(() => false);
         } else {
