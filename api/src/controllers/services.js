@@ -155,8 +155,6 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
-        "name",
-        "lastname",
       ],
       include: [
         {
