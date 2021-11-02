@@ -16,18 +16,23 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 //-------------------------------------------------------
-
 import CardService from "../CardService/CardService";
 import { FormDialog } from "./FormDialog/FormDialog";
 import { postLogout } from "../../utils/login";
 import { getUserInfo, putUser, getUserFavs } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import CreateService from '../CreateService/CreateService'
+import ModalCreateService from './ModalCreateService'
+
+
+
 
 export default function YourAccount() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
+  
   useEffect(() => {
     (async () => {
       dispatch(await getUserInfo());
@@ -45,6 +50,7 @@ export default function YourAccount() {
 
   //MODAL FORM PARA CAMBIAR DATOS
   const [openForm, setOpenForm] = useState(false);
+  const [modal, setModal] = useState(false)
   //-----------------------------------
 
   //ESTADOS APRA ALMACENAR LA IMAGEN CUANDO LA QUIERA CAMBIAR
@@ -230,7 +236,7 @@ export default function YourAccount() {
           Your Services
         </Button>
 
-        <Link to="/service" style={{ textDecoration: "none" }}>
+        {/* <Link to="/service" style={{ textDecoration: "none" }}> */}
           <Button
             variant="outlined"
             startIcon={<PostAddIcon />}
@@ -239,10 +245,13 @@ export default function YourAccount() {
               marginLeft: 1,
               marginBottom: 1,
             }}
+            onClick={() => {
+              setModal(true);
+            }}
           >
             Post Service
           </Button>
-        </Link>
+        {/* </Link> */}
 
         <Button
           variant="outlined"
@@ -327,6 +336,12 @@ export default function YourAccount() {
       {/* ---------------------------------------------- */}
 
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
+      <ModalCreateService
+          modal={modal}
+          setModal={setModal}
+
+
+        />
     </div>
   );
 }

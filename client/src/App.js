@@ -25,7 +25,6 @@ function App() {
       <Route exact path="/" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/chat" component={Chat} />
-      <Route exact path="/service" component={CreateService} />
       <Route
         exact
         path="/services/:id"
