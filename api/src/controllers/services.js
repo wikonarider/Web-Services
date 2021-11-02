@@ -1,4 +1,3 @@
-const db = require("../db.js");
 const { addRating } = require("../utils/index");
 const servicesFilters = require("../utils/routeFilterAndOrder.js");
 const {
@@ -8,7 +7,6 @@ const {
   Category,
   Group,
   conn,
-  Services_users_favourites,
   Services_provinces,
   Services_cities,
 } = require("../db.js");
@@ -16,55 +14,87 @@ const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-  const { title } = req.query;
-  let dbServices;
-  if (Object.values(req.query).length) {
-    //compruebo si query tiene propiedades para filtrar
-    servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
-  } else {
-    dbServices = await Service.findAll({
-      //Traigo todo de la db
-      attributes: ["id", "title", "img", "description", "price", "userId"],
+  try {
+    const { title } = req.query;
+    let dbServices;
+    if (Object.values(req.query).length) {
+      //compruebo si query tiene propiedades para filtrar
+      servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
+    } else {
+      dbServices = await Service.findAll({
+        //Traigo todo de la db
+        attributes: [
+          "id",
+          "title",
+          "img",
+          "price",
+          "userId",
+          [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+        ],
 
-      // include: { all: true },
-      include: [
-        {
-          model: Category,
-          attributes: ["name"],
-          include: {
-            model: Group,
+        // include: { all: true },
+        include: [
+          {
+            model: Category,
             attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
           },
-        },
-      ],
-    });
+          {
+            model: Qualification,
+            attributes: [],
+          },
+        ],
+        raw: false,
+        group: [
+          "service.id",
+          "category.name",
+          "category->group.id",
+          "category.id",
+        ],
+        // Utilizar para ordernar por rating
+        // order: [
+        //   [conn.fn("AVG", conn.col("qualifications.score")), "DESC NULLS LAST"],
+        // ],
+      });
 
-    dbServices = await addRating(dbServices);
-
-    if (!title) return res.send(dbServices);
-    //Devuelvo todos los servicios
-    else {
-      if (dbServices.length > 0) {
-        if (title) {
-          //si me pasan un title busco en la db los que coincidan
-          const filteredServices = [];
-          dbServices.map((service) => {
-            if (service.title.toLowerCase().includes(title.toLowerCase()))
-              filteredServices.push(service);
-          });
-          return res.send(filteredServices); //Si coincide mando el servicio con ese title
-        } else return dbServices; //Si no, devuelvo todos los servicios
+      if (!title) return res.send(dbServices);
+      //Devuelvo todos los servicios
+      else {
+        if (dbServices.length > 0) {
+          if (title) {
+            //si me pasan un title busco en la db los que coincidan
+            const filteredServices = [];
+            dbServices.map((service) => {
+              if (service.title.toLowerCase().includes(title.toLowerCase()))
+                filteredServices.push(service);
+            });
+            return res.send(filteredServices); //Si coincide mando el servicio con ese title
+          } else return dbServices; //Si no, devuelvo todos los servicios
+        }
       }
     }
+  } catch (e) {
+    next(e);
   }
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
- const { userId } = req.cookies;                               
-  const { title, img, description, price, categoryId, provinces, cities  } =
+  const { userId } = req.cookies;
+  const { title, img, description, price, categoryId, provinces, cities } =
     req.body;
-  // si se pasaron todos los parametros 
-  if (title && img && description && price && categoryId && provinces && Object.values(cities).length) {
+  // si se pasaron todos los parametros
+  if (
+    title &&
+    img &&
+    description &&
+    price &&
+    categoryId &&
+    provinces &&
+    Object.values(cities).length
+  ) {
     const errors = await validateServices(req.body);
     // si son todos los parametros validos
     if (!Object.keys(errors).length) {
@@ -125,13 +155,15 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
+        "name",
+        "lastname",
       ],
       include: [
         {
           model: Qualification,
           include: {
             model: Users,
-            attributes: ["userImg", "username"],
+            attributes: ["userImg", "username", "name", "lastname"],
           },
         },
         {

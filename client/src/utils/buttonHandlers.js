@@ -3,13 +3,13 @@ import axios from "axios";
 export const handleFav = async (favState, serviceId) => {
   let userId = document.cookie.split("=")[1];
 
-  if (favState) {
+  if (favState.filter((f) => serviceId === f.serviceId).length > 0) {
     let deleteResponse = await axios.delete(`/favs`, {
       data: { serviceId, userId },
     });
 
     if (deleteResponse.status === 200) {
-      favState = false;
+      favState = "deleted";
     }
   } else {
     let postResponse = await axios.post(`/favs`, {
@@ -18,7 +18,7 @@ export const handleFav = async (favState, serviceId) => {
     });
 
     if (postResponse.status === 200) {
-      favState = true;
+      favState = "posted";
     }
   }
 

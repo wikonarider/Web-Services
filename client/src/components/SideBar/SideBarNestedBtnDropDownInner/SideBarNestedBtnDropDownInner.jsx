@@ -14,17 +14,23 @@ export default function SideBarNestedBtnDropDownInner({ name }) {
   const objState = useSelector((state) => state.objGlobal);
 console.log(objState)
 
- 
-
   const handleChange = () => {
     console.log(objState)
     if (checked === false) {
+
       objState.category.push(name)  }
+
+
+    }
+
     if (checked === true) {
       var index = objState.category.indexOf(name);
       if (index > -1) {
+
         objState.category.splice(index, 1);
       } 
+
+
     }
     setChecked(!checked);
     dispatch(getServices(objState));

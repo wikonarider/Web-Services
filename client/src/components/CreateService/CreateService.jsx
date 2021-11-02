@@ -360,7 +360,7 @@ function CreateService(props) {
           </div>
 
           <div className={s.imgContainer}>
-            <img id="imgBox" src="hola" alt=""></img>
+            <img className={s.imgRender}id="imgBox" src="hola" alt=""></img>
           </div>
 
           {!errors.title && !errors.description && !errors.price ? (

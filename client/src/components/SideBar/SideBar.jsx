@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SideBarNested from './SideBarNested/SideBarNested';
 import SideBarOrderPrice from './SideBarOrderPrice/SideBarOrderPrice';
 import SideBarRangePrice from './SideBarRangePrice/SideBarRangePrice';
+import SideBarRangeDate from './SideBarRangeDate/SideBarRangeDate';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -40,9 +41,11 @@ export default function MiniDrawer() {
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
         <Divider />
-        <SideBarOrderPrice text={"Price order"} key={1} />
+        <SideBarOrderPrice text={'Price order'} />
         <Divider />
-        <SideBarRangePrice key={2} />
+        <SideBarRangeDate text={'Date order'} />
+        <Divider />
+        <SideBarRangePrice />
         <Divider />
         <List>
           {['Info', 'About', 'Something'].map((text, index) => (
