@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { handleFav } from "../../utils/buttonHandlers";
+import { deleteFavs, addFavs } from "../../utils/favs";
+import { getUserInfo } from "../../redux/actions/index";
+// import { handleFav } from "../../utils/buttonHandlers";
 import {
   Box,
   CardMedia,
@@ -16,19 +19,30 @@ import Comments from "../Comments/Comments";
 
 export default function DetailService({ id }) {
   let [service, setService] = useState({ service: {}, user: {} });
-  let [fav, setFav] = useState(false);
+  const [favState, setFavState] = useState(false);
+  const cookie = useSelector((state) => state.cookie);
+  const favs = useSelector((state) => state.favs);
+  const dispatch = useDispatch();
 
   let history = useHistory();
   function updateService() {
     axios(`http://localhost:3001/services/${id}`).then((response) => {
-      console.log('respuestaEnDetail', response)
+      console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
     });
-
-    axios(`http://localhost:3001/favs?id=${id}`).then((response) => {
-      setFav(response.data);
-    });
   }
+  useEffect(() => {
+    if (cookie) {
+      if (favs) {
+        const index = favs.findIndex((f) => f.serviceId === id);
+        if (index === -1) {
+          setFavState(() => false);
+        } else {
+          setFavState(() => true);
+        }
+      }
+    }
+  }, [favs, cookie, id]);
 
   //componentDidMount para traer la información del servicio por id
   useEffect(() => {
@@ -45,6 +59,24 @@ export default function DetailService({ id }) {
 
   const handleClose = () => {
     history.goBack();
+  };
+
+  const handleFavs = async () => {
+    try {
+      if (cookie) {
+        if (favState) {
+          await deleteFavs(Number(id));
+          setFavState(() => false);
+          dispatch(await getUserInfo());
+        } else {
+          await addFavs(Number(id));
+          setFavState(() => true);
+          dispatch(await getUserInfo());
+        }
+      }
+    } catch (e) {
+      console.log(e.response.data);
+    }
   };
 
   const IMG_TEMPLATE =
@@ -88,13 +120,15 @@ export default function DetailService({ id }) {
         >
           <Box gridColumn="span 6">
             <IconButton
-              onClick={async () => {
-                let newFavState = await handleFav(fav, id);
-                setFav(newFavState);
-              }}
+              onClick={handleFavs}
               aria-label="add to favorites"
+              sx={
+                cookie && cookie.split("=")[1] !== service.userId
+                  ? {}
+                  : { display: "none" }
+              }
             >
-              <Favorite sx={fav ? theme.favorite["1"] : theme.favorite["0"]} />
+              <Favorite color={favState ? "error" : ""} />
             </IconButton>
             <IconButton aria-label="share">
               <Share />
