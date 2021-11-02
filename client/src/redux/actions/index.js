@@ -14,6 +14,7 @@ export function getServices(obj) {
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
+        objState: obj
       });
     } catch (err) {
       return new Error(err);

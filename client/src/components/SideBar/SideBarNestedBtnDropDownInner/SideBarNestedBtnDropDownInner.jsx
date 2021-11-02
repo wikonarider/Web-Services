@@ -11,26 +11,23 @@ export default function SideBarNestedBtnDropDownInner({ name }) {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.categories);
-  const obj = {
-    category: allCategories,
-    order: 'ASC',
-    filter: 'price',
-  };
+  const objState = useSelector((state) => state.objGlobal);
+console.log(objState)
 
  
 
   const handleChange = () => {
+    console.log(objState)
     if (checked === false) {
-      allCategories.push(name)  }
+      objState.category.push(name)  }
     if (checked === true) {
-      var index = allCategories.indexOf(name);
+      var index = objState.category.indexOf(name);
       if (index > -1) {
-        allCategories.splice(index, 1);
+        objState.category.splice(index, 1);
       } 
     }
     setChecked(!checked);
-    dispatch(postCategory(allCategories));
-    dispatch(getServices(obj));
+    dispatch(getServices(objState));
   };
 
   return (
