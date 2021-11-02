@@ -17,7 +17,10 @@ export default function Home() {
     <div>
       <Nav />
       <Carrousel />
+      {servicesState.length>0?
       <Cards services={servicesState} />
+      : <h1>No hay servicios en este filtro</h1>
+       }
     </div>
   );
 }

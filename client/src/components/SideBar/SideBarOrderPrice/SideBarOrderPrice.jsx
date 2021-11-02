@@ -11,7 +11,7 @@ import List from '@mui/material/List';
 
 export default function SideBarOrderPrice({ text, index }) {
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories);
+  const objState = useSelector((state) => state.objGlobal);
 
   const [rangePrice, setRangePrice] = useState({
     ascending: true,
@@ -19,11 +19,10 @@ export default function SideBarOrderPrice({ text, index }) {
   });
 
   const handleChangeCheck = (event) => {
-    let obj = {
-      category: allCategories,
-      order: event.target.value,
-      filter: 'price',
-    };
+    
+      objState.order = event.target.value
+      objState.filter = 'price'
+    
 
     if (event.target.name === 'ascending') {
       setRangePrice({
@@ -37,8 +36,8 @@ export default function SideBarOrderPrice({ text, index }) {
         [event.target.name]: event.target.checked,
       });
     }
-
-    dispatch(getServices(obj));
+   console.log(objState)
+    dispatch(getServices(objState));
   };
 
   return (

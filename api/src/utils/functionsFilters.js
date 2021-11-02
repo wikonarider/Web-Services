@@ -138,7 +138,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -168,7 +168,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -186,35 +186,6 @@ async function orderByPrice(objQuery, res, next) {
 
   if (
     order === 'ASC' &&
-    !province &&
-    !group &&
-    !category &&
-    startRange &&
-    endRange
-  ) {
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      where: {
-        price: {
-          [Op.between]: [startRange, endRange],
-        },
-      },
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-          },
-        },
-      ],
-      limit: 30,
-      order: [['price', 'ASC']],
-    });
-  }
-  if (
-    order === 'DESC' &&
     !province &&
     !group &&
     !category &&
@@ -239,6 +210,35 @@ async function orderByPrice(objQuery, res, next) {
         },
       ],
       limit: 30,
+      order: [['price', 'ASC']],
+    });
+  }
+  if (
+    order === 'DESC' &&
+    !province &&
+    !group &&
+    !category &&
+    startRange &&
+    endRange
+  ) {
+    priceFilter = await Service.findAll({
+      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+          include: {
+            model: Group,
+            attributes: ['name'],
+          },
+        },
+      ],
+      limit: 30,
       order: [['price', 'DESC']],
     });
   }
@@ -328,7 +328,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -360,7 +360,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -521,7 +521,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -557,7 +557,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -599,7 +599,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -640,7 +640,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -718,7 +718,7 @@ async function orderByPrice(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -741,6 +741,7 @@ async function orderByCreatedDate(objQuery, res, next) {
   const { order, province, group, category, startRange, endRange } = objQuery;
   console.log(9999, objQuery);
   let priceFilter;
+  var array = category.split(",")
   if (
     order === 'ASC' &&
     !province &&
@@ -805,7 +806,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -832,7 +833,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -861,7 +862,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            id: array,
           },
           include: {
             model: Group,
@@ -925,7 +926,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
@@ -957,7 +958,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            name: category,
+            name: array,
           },
           include: {
             model: Group,
