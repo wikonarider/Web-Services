@@ -792,63 +792,7 @@ async function orderByCreatedDate(objQuery, res, next) {
   if (
     order === 'ASC' &&
     !province &&
-    group &&
-    !category &&
-    !startRange &&
-    !endRange
-  ) {
-    console.log('llegue');
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-            where: {
-              id: group,
-            },
-          },
-        },
-      ],
-      limit: 30,
-      order: [['createdAt', 'ASC']],
-    });
-  }
-  if (
-    order === 'DESC' &&
-    !province &&
-    group &&
-    !category &&
-    !startRange &&
-    !endRange
-  ) {
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-            where: {
-              id: group,
-            },
-          },
-        },
-      ],
-      limit: 30,
-      order: [['createdAt', 'DESC']],
-    });
-  }
-
-  if (
-    order === 'ASC' &&
-    !province &&
-    group &&
+    !group &&
     category &&
     !startRange &&
     !endRange
@@ -861,6 +805,64 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
+            name: category,
+          },
+          include: {
+            model: Group,
+            attributes: ['name'],
+
+          },
+        },
+      ],
+      limit: 30,
+      order: [['createdAt', 'ASC']],
+    });
+  }
+  if (
+    order === 'DESC' &&
+    !province &&
+    !group &&
+    category &&
+    !startRange &&
+    !endRange
+  ) {
+    priceFilter = await Service.findAll({
+      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+          where: {
+            name: category,
+          },
+          include: {
+            model: Group,
+            attributes: ['name'],
+
+          },
+        },
+      ],
+      limit: 30,
+      order: [['createdAt', 'DESC']],
+    });
+  }
+
+  if (
+    order === 'ASC' &&
+    !province &&
+    group &&
+    category &&
+    !startRange &&
+    !endRange
+  ) {
+    console.log('llegue');
+    priceFilter = await Service.findAll({
+      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+          where: {
             id: category,
           },
           include: {
@@ -890,9 +892,7 @@ async function orderByCreatedDate(objQuery, res, next) {
         {
           model: Category,
           attributes: ['name'],
-          where: {
-            id: category,
-          },
+
           include: {
             model: Group,
             attributes: ['name'],
@@ -907,129 +907,7 @@ async function orderByCreatedDate(objQuery, res, next) {
     });
   }
 
-  if (
-    order === 'ASC' &&
-    !province &&
-    !group &&
-    !category &&
-    startRange &&
-    endRange
-  ) {
-    console.log('llego aca tambien');
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      where: {
-        price: {
-          [Op.between]: [startRange, endRange],
-        },
-      },
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-          },
-        },
-      ],
-      limit: 30,
-      order: [['createdAt', 'ASC']],
-    });
-  }
-  if (
-    order === 'DESC' &&
-    !province &&
-    !group &&
-    !category &&
-    startRange &&
-    endRange
-  ) {
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      where: {
-        price: {
-          [Op.between]: [startRange, endRange],
-        },
-      },
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-          },
-        },
-      ],
-      order: [['createdAt', 'DESC']],
-    });
-  }
 
-  if (
-    order === 'ASC' &&
-    !province &&
-    group &&
-    !category &&
-    startRange &&
-    endRange
-  ) {
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      where: {
-        price: {
-          [Op.between]: [startRange, endRange],
-        },
-      },
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-            where: {
-              id: group,
-            },
-          },
-        },
-      ],
-      limit: 30,
-      order: [['createdAt', 'ASC']],
-    });
-  }
-  if (
-    order === 'DESC' &&
-    !province &&
-    group &&
-    !category &&
-    startRange &&
-    endRange
-  ) {
-    priceFilter = await Service.findAll({
-      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
-      where: {
-        price: {
-          [Op.between]: [startRange, endRange],
-        },
-      },
-      include: [
-        {
-          model: Category,
-          attributes: ['name'],
-          include: {
-            model: Group,
-            attributes: ['name'],
-            where: {
-              id: group,
-            },
-          },
-        },
-      ],
-      limit: 30,
-      order: [['createdAt', 'DESC']],
-    });
-  }
   if (
     order === 'ASC' &&
     !province &&
@@ -1038,7 +916,6 @@ async function orderByCreatedDate(objQuery, res, next) {
     startRange &&
     endRange
   ) {
-    console.log("llegue aca rebien")
     priceFilter = await Service.findAll({
       attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
       where: {
@@ -1051,7 +928,7 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            name: category,
           },
           include: {
             model: Group,
@@ -1071,7 +948,6 @@ async function orderByCreatedDate(objQuery, res, next) {
     startRange &&
     endRange
   ) {
-    console.log("llegue aca rebien")
     priceFilter = await Service.findAll({
       attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
       where: {
@@ -1084,8 +960,66 @@ async function orderByCreatedDate(objQuery, res, next) {
           model: Category,
           attributes: ['name'],
           where: {
-            id: category,
+            name: category,
           },
+          include: {
+            model: Group,
+            attributes: ['name'],
+          },
+        },
+      ],
+      limit: 30,
+      order: [['createdAt', 'DESC']],
+    });
+  }
+  if (
+    order === 'ASC' &&
+    !province &&
+    !group &&
+    !category &&
+    startRange &&
+    endRange
+  ) {
+    priceFilter = await Service.findAll({
+      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+          include: {
+            model: Group,
+            attributes: ['name'],
+          },
+        },
+      ],
+      limit: 30,
+      order: [['createdAt', 'ASC']],
+    });
+  }
+  if (
+    order === 'DESC' &&
+    !province &&
+    !group &&
+    !category &&
+    startRange &&
+    endRange
+  ) {
+    priceFilter = await Service.findAll({
+      attributes: ['id', 'title', 'img', 'description', 'price', 'userId'],
+      where: {
+        price: {
+          [Op.between]: [startRange, endRange],
+        },
+      },
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
           include: {
             model: Group,
             attributes: ['name'],
