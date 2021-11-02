@@ -22,6 +22,7 @@ console.log(objState)
 
 
     
+    }
 
     if (checked === true) {
       var index = objState.category.indexOf(name);
