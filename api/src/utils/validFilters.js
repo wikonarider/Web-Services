@@ -45,7 +45,6 @@ async function validFilters(query, dictonary) {
     errors.pageSize = "It has to be a positive number";
   }
   // type
-  console.log(query.type);
   if (
     query.type &&
     query.type.toLowerCase() !== "asc" &&
