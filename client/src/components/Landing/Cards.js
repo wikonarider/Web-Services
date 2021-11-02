@@ -4,7 +4,8 @@ import CardClick from "./CardClick";
 import infoCardClick from "./static/InfoCardClick";
 import useWindowPosition from "./hook/useWindowPosition";
 import { useHistory } from "react-router";
-import { Box, Modal } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Modal from "@material-ui/core/Modal";
 import Register from "../Register/Register";
 import s from "./Cards.module.css";
 
