@@ -60,11 +60,19 @@ async function getServices(req, res, next) {
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
- const { userId } = req.cookies;                               
-  const { title, img, description, price, categoryId, provinces, cities  } =
+  const { userId } = req.cookies;
+  const { title, img, description, price, categoryId, provinces, cities } =
     req.body;
-  // si se pasaron todos los parametros 
-  if (title && img && description && price && categoryId && provinces && Object.values(cities).length) {
+  // si se pasaron todos los parametros
+  if (
+    title &&
+    img &&
+    description &&
+    price &&
+    categoryId &&
+    provinces &&
+    Object.values(cities).length
+  ) {
     const errors = await validateServices(req.body);
     // si son todos los parametros validos
     if (!Object.keys(errors).length) {
@@ -131,7 +139,7 @@ async function getServicesById(req, res, next) {
           model: Qualification,
           include: {
             model: Users,
-            attributes: ["userImg", "username"],
+            attributes: ["userImg", "username", "name", "lastname"],
           },
         },
         {

@@ -46,7 +46,7 @@ const comments = [
       "No contesta el celular, no responde whatsapps, no da facturas, recibos, evidencias. Incumple las citas. Los costos de reparación lucen elevados. No lo recomiendo en lo absoluto.",
     score: 1,
     serviceId: 27,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
   },
   {
     comment:
@@ -60,7 +60,7 @@ const comments = [
       "Lo llame, fue a mi apartamento, llegamos a un acuerdo en precio y tiempo, le pague un adelanto, luego me subió el presupuesto y me dijo lo se demoraría una semana más y posteriormente que tres dias más. Le escribí para que me dijera cuando me entregaba se enfureció y me dijo que ya no me vendía nada y me devolvería el dinero, que le escribiera el numero de la cuenta. Le di en numero de mi cuenta el 15 de abril y a la fecha dice, como ustedes lo pueden constatar, que él no ha hecho negocio.",
     score: 2,
     serviceId: 27,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
   },
   {
     comment:
@@ -74,7 +74,7 @@ const comments = [
       "Exelente servicio. El vehiculo esta muy bien adecuado para cualquier trasteo y el encargado es muy colaborador y eficiente ¡super recomendado!.",
     score: 5,
     serviceId: 27,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
   },
   {
     comment:

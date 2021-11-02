@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.23.0",
     "dotenv": "^10.0.0",
+    "javascript-time-ago": "^2.3.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-material-ui-carousel": "^2.3.5",

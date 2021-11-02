@@ -9,8 +9,8 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
-      console.log('OBJ', obj);
-      console.log('AXIOS', json.data);
+      console.log("OBJ", obj);
+      console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -107,11 +107,21 @@ export function putUser(newData) {
   };
 }
 
+// export async function getUserInfo() {
+//   const response = await axios.get("/users");
+//   return {
+//     type: type.GET_USER_INFO,
+//     payload: response.data,
+//   };
+// }
+
 export async function getUserInfo() {
-  const response = await axios.get("/users");
-  return {
-    type: type.GET_USER_INFO,
-    payload: response.data,
+  return async function (dispatch) {
+    const response = await axios.get("/users");
+    dispatch({
+      type: type.GET_USER_INFO,
+      payload: response.data,
+    });
   };
 }
 
