@@ -1,40 +1,47 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFilters, getServices, postCategory } from '../../../redux/actions';
-
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { privateEncrypt } from 'crypto';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { setObjGlobal } from "../../../redux/actions";
 
 export default function SideBarNestedBtnDropDownInner({ name }) {
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories);
-  const objState = useSelector((state) => state.objGlobal);
-console.log(objState)
+  const objGlobal = useSelector((state) => state.objGlobal);
+
+  // para dejarlo prendido cuando se cierra y abre denuevo
+  useEffect(() => {
+    let index = objGlobal.category.indexOf(name);
+    if (index !== -1) {
+      setChecked(() => true);
+    }
+  }, []);
 
   const handleChange = () => {
-    console.log(objState)
     if (checked === false) {
-
-      objState.category.push(name)  
-
-
-    
+      // armo el obj del estado de redux
+      const obj = {
+        ...objGlobal,
+        category: [...objGlobal.category, name],
+      };
+      // lo despacho
+      dispatch(setObjGlobal(obj));
     }
 
     if (checked === true) {
-      var index = objState.category.indexOf(name);
+      let index = objGlobal.category.indexOf(name);
       if (index > -1) {
-
-        objState.category.splice(index, 1);
-      } 
-
-
+        let category = [...objGlobal.category];
+        category.splice(index, 1);
+        let obj = {
+          ...objGlobal,
+          category: category,
+        };
+        dispatch(setObjGlobal(obj));
+      }
     }
-    setChecked(!checked);
-    dispatch(getServices(objState));
+    setChecked((prev) => !prev);
   };
 
   return (
