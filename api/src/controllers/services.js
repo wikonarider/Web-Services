@@ -22,15 +22,14 @@ const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
 async function getServices(req, res, next) {
-  const {title} = req.query
-  let dbServices
+  const { title } = req.query;
+  let dbServices;
   if (Object.values(req.query).length) {
-    console.log("llego1")
-    console.log(req.query)
+    console.log("llego1");
+    console.log(req.query);
     //compruebo si query tiene propiedades para filtrar
-    servicesFilters(req.query, res, next);// se encarga de todo lo relacionado con filtros
-  } else{
- 
+    servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
+  } else {
     dbServices = await Service.findAll({
       //Traigo todo de la db
       attributes: ["id", "title", "img", "description", "price", "userId"],
@@ -49,7 +48,6 @@ async function getServices(req, res, next) {
     });
 
     dbServices = await addRating(dbServices);
-
 
     //FILTRO POR FECHA
     /* if (dateOrder) {
@@ -78,7 +76,7 @@ async function getServices(req, res, next) {
         } else return dbServices; //Si no, devuelvo todos los servicios
       }
     }
-}
+  }
 }
 
 async function postServices(req, res, next) {
@@ -157,7 +155,7 @@ async function getServicesById(req, res, next) {
           model: Qualification,
           include: {
             model: Users,
-            attributes: ["userImg", "username"],
+            attributes: ["userImg", "username", "name", "lastname"],
           },
         },
         {
