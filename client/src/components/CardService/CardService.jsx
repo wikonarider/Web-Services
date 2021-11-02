@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFavs, addFavs } from "../../utils/favs";
+import { getUserInfo, addCart } from "../../redux/actions/index";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,18 +10,14 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import { Typography, CardActionArea } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Rating from "@mui/material/Rating";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addCart } from "../../redux/actions/index";
-import { useSelector } from "react-redux";
-import { deleteFavs, addFavs } from "../../utils/favs";
-import { getUserInfo } from "../../redux/actions/index";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Rating from "@mui/material/Rating";
 import DetailService from "../DetailService/DetailService";
+
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 

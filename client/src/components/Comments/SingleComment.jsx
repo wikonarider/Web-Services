@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { parseDate } from "../../utils/timeFormatter";
 import Rating from "@mui/material/Rating";
 

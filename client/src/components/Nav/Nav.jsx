@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Toolbar, Button, AppBar, Modal } from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import AppBar from "@mui/material/AppBar";
+import Modal from "@mui/material/Modal";
 import SearchBar from "../SearchBar/SearchBar";
 import Cart from "../Cart/Cart";
 import SideBar from "../SideBar/SideBar";

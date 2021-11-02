@@ -4,7 +4,7 @@ import s from "./YourAccount.module.css";
 
 //-------------- MATERIAL UI -------------------------------------
 import Button from "@mui/material/Button";
-import { Avatar } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -23,16 +23,12 @@ import { getUserInfo, putUser, getUserFavs } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import CreateService from '../CreateService/CreateService'
-import ModalCreateService from './ModalCreateService'
-
-
-
+import ModalCreateService from "./ModalCreateService";
 
 export default function YourAccount() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
-  
   useEffect(() => {
     (async () => {
       dispatch(await getUserInfo());
@@ -50,7 +46,7 @@ export default function YourAccount() {
 
   //MODAL FORM PARA CAMBIAR DATOS
   const [openForm, setOpenForm] = useState(false);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   //-----------------------------------
 
   //ESTADOS APRA ALMACENAR LA IMAGEN CUANDO LA QUIERA CAMBIAR
@@ -237,20 +233,20 @@ export default function YourAccount() {
         </Button>
 
         {/* <Link to="/service" style={{ textDecoration: "none" }}> */}
-          <Button
-            variant="outlined"
-            startIcon={<PostAddIcon />}
-            sx={{
-              marginRight: 1,
-              marginLeft: 1,
-              marginBottom: 1,
-            }}
-            onClick={() => {
-              setModal(true);
-            }}
-          >
-            Post Service
-          </Button>
+        <Button
+          variant="outlined"
+          startIcon={<PostAddIcon />}
+          sx={{
+            marginRight: 1,
+            marginLeft: 1,
+            marginBottom: 1,
+          }}
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          Post Service
+        </Button>
         {/* </Link> */}
 
         <Button
@@ -336,12 +332,7 @@ export default function YourAccount() {
       {/* ---------------------------------------------- */}
 
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
-      <ModalCreateService
-          modal={modal}
-          setModal={setModal}
-
-
-        />
+      <ModalCreateService modal={modal} setModal={setModal} />
     </div>
   );
 }
