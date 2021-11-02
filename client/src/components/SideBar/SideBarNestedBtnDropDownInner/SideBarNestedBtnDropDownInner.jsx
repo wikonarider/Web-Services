@@ -21,6 +21,7 @@ console.log(objState)
       objState.category.push(name)  }
 
 
+    
     }
 
     if (checked === true) {
