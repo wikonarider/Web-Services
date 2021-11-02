@@ -7,15 +7,9 @@
   gap: 10px;
 }
 
-.container {
-  height: 100%;
-  width: 100%;
-}
-
 .form {
   max-width: 500px;
   width: 80%;
-  background-color: white;
   padding: 25px;
   border-radius: 5px;
 }
