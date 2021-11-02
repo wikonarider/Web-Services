@@ -54,6 +54,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const styleLogin = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  maxWidth: 600,
+  width: "70%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 2,
+};
+
 const Header = ({ cookie, setCookie }) => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
@@ -93,14 +107,7 @@ const Header = ({ cookie, setCookie }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                height: "100%",
-                width: "100%",
-              }}
-            >
+            <Box sx={styleLogin}>
               <Login setLoginModal={setLoginModal} setLogin={setLogin} />
             </Box>
           </Modal>
