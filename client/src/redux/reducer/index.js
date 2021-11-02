@@ -10,13 +10,16 @@ const initialState = {
   categories: [],
   cookie: "",
   objGlobal: {
-    category: [],
-    filter: "price",
-    order: "ASC",
-    province: "",
     startRange: "",
     endRange: "",
-  }
+    category: [],
+    page: "",
+    pageSize: "",
+    order: "",
+    type: "",
+    province: "",
+    city: "",
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -73,6 +76,12 @@ const rootReducer = (state = initialState, action) => {
         cookie: action.payload,
       };
     }
+
+    case type.OBJ_GLOBAL:
+      return {
+        ...state,
+        objGlobal: action.payload,
+      };
     default:
       return state;
   }
