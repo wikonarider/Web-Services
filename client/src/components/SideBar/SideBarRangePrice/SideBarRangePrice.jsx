@@ -10,13 +10,12 @@ import Button from '@mui/material/Button';
 
 export default function SideBarRangePrice() {
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories);
-  const allServices = useSelector((state) => state.services);
-
+  const objState = useSelector((state) => state.objGlobal);
   const [rangePrice, setRangePrice] = useState({
     startRange: '',
     endRange: '',
   });
+ 
 
   const handleMinMaxChange = (event) => {
     if (event.target.id === 'startRange') {
@@ -34,17 +33,13 @@ export default function SideBarRangePrice() {
   };
 
   const handleBtn = () => {
-    let obj = {
-      category: allCategories,
-      order: 'ASC',
-      filter: 'price',
-      startRange: rangePrice.startRange,
-      endRange: rangePrice.endRange,
-    };
+      objState.startRange= rangePrice.startRange
+      objState.endRange= rangePrice.endRange
+    
 
     if (rangePrice.startRange < rangePrice.endRange) {
       // console.log(obj);
-      dispatch(getServices(obj));
+      dispatch(getServices(objState));
       setRangePrice({
         startRange: '',
         endRange: '',
