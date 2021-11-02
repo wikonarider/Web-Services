@@ -1,26 +1,51 @@
-const { Service, Users, Services_users_favourites } = require("../db.js");
-// const services_users_favourites = require('../models/Services_users_favourites.js');
+const { Service, Services_users_favourites } = require("../db.js");
 
 async function addFavs(req, res, next) {
   try {
-    const { serviceId, userId } = req.body;
-    await Service.findByPk(serviceId);
-    await Users.findByPk(userId);
-    const relation = await Services_users_favourites.create({
-      serviceId: serviceId,
-      userId: userId,
-    });
-    relation._options.isNewRecord
-      ? res.status(200).json("add fav")
-      : res.status(500).json({ message: "cannot add" });
+    // usuario logeado, uso el id de la cookie
+    const { userId } = req.cookies;
+    const { serviceId } = req.body;
+    // si es un numero
+    if (typeof serviceId === "number") {
+      const service = await Service.findByPk(serviceId);
+      if (service) {
+        // verifico que no sea el dueño del servicio
+        if (service.userId === userId) {
+          res
+            .status(400)
+            .json({ message: "You cannot add your own service to favorites" });
+        } else {
+          const [fav, created] = await Services_users_favourites.findOrCreate({
+            where: {
+              serviceId: serviceId,
+              userId: userId,
+            },
+          });
+          // Se creo con exito
+          if (created) {
+            res.json({ message: "Service added to favorites" });
+            // Ya existia
+          } else {
+            res
+              .status(400)
+              .json({ message: "Service is already in favorites" });
+          }
+        }
+        // No existe el servicio
+      } else {
+        res.status(404).json({ message: "Service not found" });
+      }
+    } else {
+      res.status(400).json({ message: "ServiceId has to be of type numeric" });
+    }
+    // verifico si el servicio existe
   } catch (e) {
     next(e);
   }
 }
-
 async function getFavs(req, res, next) {
   try {
-    const { userId } = req.params;
+    const { userId } = req.cookies;
     const userFavs = await Services_users_favourites.findAll({
       where: {
         userId: userId,
@@ -34,60 +59,25 @@ async function getFavs(req, res, next) {
   }
 }
 
-async function getFavsServicesData(req,res,next){
-  try {
-    const { userId } = req.params;
-    const userFavs = await Services_users_favourites.findAll({
-      where: {
-        userId: userId,
-      },
-    });
-    let favServicesIds = [];
-    userFavs.map((s) => favServicesIds.push(s.serviceId));
-
-    const servicesData = await Service.findAll({
-      where: {
-        id: favServicesIds,
-      },
-    });
-
-    servicesData
-      ? res.status(200).json(servicesData)
-      : res.status(500).json({ message: "cannot get" });
-  } catch (e) {
-    next(e);
-  }
-}
-
 async function deleteFav(req, res, next) {
   try {
-    const { userId, serviceId } = req.body;
-    const deletedFav = await Services_users_favourites.destroy({
-      where: {
-        userId: userId,
-        serviceId: serviceId,
-      },
-    });
-    deletedFav
-      ? res.status(200).json({ message: "deleted successfully: ", deletedFav })
-      : res.status(500).json({ message: "sorry, try again" });
-  } catch (e) {
-    next(e);
-  }
-}
-
-async function validateFav(req, res, next) {
-  try {
-    const { id } = req.query;
     const { userId } = req.cookies;
-
-    const userFavs = await Services_users_favourites.findOne({
-      where: {
-        userId: userId,
-        serviceId: Number(id),
-      },
-    });
-    userFavs ? res.status(200).json(true) : res.status(200).json(false);
+    const { serviceId } = req.body;
+    if (typeof serviceId === "number") {
+      const deletedFav = await Services_users_favourites.destroy({
+        where: {
+          userId: userId,
+          serviceId: serviceId,
+        },
+      });
+      deletedFav
+        ? res
+            .status(200)
+            .json({ message: "deleted successfully: ", deletedFav })
+        : res.status(500).json({ message: "sorry, try again" });
+    } else {
+      res.status(400).json({ message: "ServiceId has to be of type numeric" });
+    }
   } catch (e) {
     next(e);
   }
@@ -97,6 +87,4 @@ module.exports = {
   addFavs,
   getFavs,
   deleteFav,
-  validateFav,
-  getFavsServicesData,
 };

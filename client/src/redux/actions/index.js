@@ -9,6 +9,8 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
+      console.log('OBJ', obj);
+      console.log('AXIOS', json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -18,8 +20,6 @@ export function getServices(obj) {
     }
   };
 }
-
-
 
 export function getServicesById(id) {
   return async function (dispatch) {
@@ -78,6 +78,14 @@ export function createService(body) {
     });
   };
 }
+
+export function postCategory(category) {
+  return {
+    type: type.POST_CATEGORY,
+    payload: category,
+  };
+}
+
 //_____________________________________________________________________________________actions user
 export function postUser(data) {
   return async () => {
@@ -99,25 +107,11 @@ export function putUser(newData) {
   };
 }
 
-export function getUsers(username) {
-  return async (dispatch) => {
-    try {
-      const res = await axios(`/users?username=${username}`);
-      return dispatch({ type: type.GET_USERS, payload: res.data });
-    } catch (err) {
-      return new Error(err);
-    }
-  };
-}
-
-export function getUsersById(id) {
-  return async (dispatch) => {
-    try {
-      const res = await axios(`/users?id=${id}`);
-      return dispatch({ type: type.GET_USERS_BY_ID, payload: res.data });
-    } catch (err) {
-      return new Error(err);
-    }
+export async function getUserInfo() {
+  const response = await axios.get("/users");
+  return {
+    type: type.GET_USER_INFO,
+    payload: response.data,
   };
 }
 
@@ -131,22 +125,18 @@ export function banUser(id) {
   };
 }
 
-export const getUserFavs = (userId) => {
-  return async function (dispatch) {
-    return await axios(`http://localhost:3001/favs/${userId}`).then(
-      (response) =>
-        dispatch({ type: type.GET_USER_FAVS, payload: response.data })
-    );
+// cookie
+export const setCookie = (cookie) => {
+  return {
+    type: type.SET_COOKIE,
+    payload: cookie,
   };
 };
 
-export const getFavsServicesData = (userId) => {
-  return async function (dispatch) {
-    return await axios(`http://localhost:3001/favs/${userId}/data`).then(
-      (response) =>
-        dispatch({ type: type.GET_FAVS_SERVICES_DATA, payload: response.data })
-    );
-  };
+// favs
+export const getUserFavs = async () => {
+  const response = await axios(`/favs`);
+  return { type: type.GET_USER_FAVS, payload: response.data };
 };
 
 //_____________________________________________________________________________________actions provinces
@@ -164,7 +154,6 @@ export function getProvinces() {
     }
   };
 }
-
 
 // Shopping
 export function addCart(service) {

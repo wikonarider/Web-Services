@@ -10,9 +10,12 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { postLogout } from "../../utils/login";
+import { useDispatch } from "react-redux";
+import { setCookie as setCookieRedux } from "../../redux/actions";
 
 export default function UserMenu({ setLogin, setCookie }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -29,6 +32,7 @@ export default function UserMenu({ setLogin, setCookie }) {
     await postLogout();
     setLogin(() => false);
     setCookie(() => "");
+    dispatch(setCookieRedux(""));
   };
 
   const handleClose = () => {

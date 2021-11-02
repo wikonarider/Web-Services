@@ -12,12 +12,6 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
-const {
-  orderByPrice,
-  filterByPriceRange,
-  filterByDate,
-} = require("../utils/servicesFilter.js");
-
 const { validateServices } = require("../utils/validServices");
 
 //por cada ruta un controler
@@ -25,8 +19,6 @@ async function getServices(req, res, next) {
   const { title } = req.query;
   let dbServices;
   if (Object.values(req.query).length) {
-    console.log("llego1");
-    console.log(req.query);
     //compruebo si query tiene propiedades para filtrar
     servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
   } else {
@@ -49,18 +41,6 @@ async function getServices(req, res, next) {
 
     dbServices = await addRating(dbServices);
 
-    //FILTRO POR FECHA
-    /* if (dateOrder) {
-      filterByDate(order);
-    }
-
-    //FILTRO POR RANGO
-    if (startRange & endRange) {
-      let filteredByPriceRange = await filterByPriceRange(startRange, endRange);
-      return res.send(filteredByPriceRange);
-    }
-    }*/
-
     if (!title) return res.send(dbServices);
     //Devuelvo todos los servicios
     else {
@@ -78,59 +58,64 @@ async function getServices(req, res, next) {
     }
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
-  try {
-    const { userId } = req.cookies;
-
-    const { title, img, description, price, categoryId, provinces } = req.body;
-    // si se pasaron todos los parametros
-    if (title && img && description && price && categoryId && provinces) {
-      const errors = await validateServices(req.body);
-      // si son todos los parametros validos
-      if (!Object.keys(errors).length) {
-        const service = await Service.create({
+  const { userId } = req.cookies;
+  const { title, img, description, price, categoryId, provinces, cities } =
+    req.body;
+  // si se pasaron todos los parametros
+  if (
+    title &&
+    img &&
+    description &&
+    price &&
+    categoryId &&
+    provinces &&
+    Object.values(cities).length
+  ) {
+    const errors = await validateServices(req.body);
+    // si son todos los parametros validos
+    if (!Object.keys(errors).length) {
+      var service;
+      try {
+        service = await Service.create({
           ...req.body,
           userId,
           categoryId,
         });
-
-        const promises = [];
-        // cargo las provincias
-        provinces.forEach((p) => {
-          promises.push(
-            Services_provinces.findOrCreate({
-              where: {
-                serviceId: service.id,
-                provinceId: p.id,
-              },
-            })
-          );
-          // cargo las ciudades
-          p.cities.forEach((c) => {
-            promises.push(
-              Services_cities.findOrCreate({
-                where: {
-                  cityId: c,
-                  serviceId: service.id,
-                },
-              })
-            );
-          });
+        var [p] = await Services_provinces.findOrCreate({
+          where: {
+            serviceId: service.id,
+            provinceId: provinces.id,
+          },
         });
-        await Promise.all(promises);
-        res.json({ data: "Service created " });
-      } else {
-        res.status(400).json({ data: errors });
+      } catch (error) {
+        next(error);
       }
+      var c = cities.map((e) => {
+        return Services_cities.findOrCreate({
+          where: {
+            cityId: e,
+            serviceId: p.dataValues.serviceId,
+          },
+        });
+      });
+      Promise.all(c)
+        .then(([provAndcity]) => {
+          return service.addProvince(provAndcity.dataValues);
+        })
+        .then(() => {
+          res.status(200).send("Created Service");
+        })
+        .catch((e) => next(e));
     } else {
       res.status(400).json({ data: "All parameters are required" });
     }
-  } catch (e) {
-    next(e);
+  } else {
+    res.status(400).json({ data: "All parameters are required" });
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function getServicesById(req, res, next) {
   let { id } = req.params;
 
@@ -145,7 +130,6 @@ async function getServicesById(req, res, next) {
         "img",
         "description",
         "price",
-        "userId",
         "createdAt",
         "updatedAt",
         "userId",
@@ -185,7 +169,7 @@ async function getServicesById(req, res, next) {
     next(e);
   }
 }
-
+//----------------------------------------------------------------------------------------------------------
 async function deleteServices(req, res, next) {
   let { id } = req.params;
   try {
@@ -206,7 +190,7 @@ async function deleteServices(req, res, next) {
   }
 }
 
-//____________________________________________________________________________
+//----------------------------------------------------------------------------------------------------------
 function putServiceById(req, res, next) {
   var { title, description, img, price, id, categoryId } = req.body;
 
@@ -229,7 +213,7 @@ function putServiceById(req, res, next) {
   }
 }
 
-//________________________________________________________________________
+//----------------------------------------------------------------------------------------------------------
 
 module.exports = {
   getServices,

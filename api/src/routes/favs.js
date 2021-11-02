@@ -1,20 +1,15 @@
 var express = require("express");
 var router = express.Router();
-var {
-  addFavs,
-  getFavs,
-  deleteFav,
-  validateFav,
-  getFavsServicesData,
-} = require("../controllers/fav");
+var { addFavs, getFavs, deleteFav } = require("../controllers/fav");
+const { isAuthenticated } = require("../controllers/authentication");
 
-// http://localhost:3001/favs
+// post
+router.post("/", isAuthenticated, addFavs);
 
-// router.get('/', getFavs);
-router.post("/", addFavs);
-router.get("/:userId", getFavs);
-router.get('/:userId/data', getFavsServicesData)
+//get
+router.get("/", isAuthenticated, getFavs);
+
+//delete
 router.delete("/", deleteFav);
-router.get("/", validateFav);
 
 module.exports = router;
