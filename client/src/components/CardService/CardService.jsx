@@ -15,7 +15,9 @@ import { addCart } from "../../redux/actions/index";
 import { useSelector } from "react-redux";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo } from "../../redux/actions/index";
-
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import DetailService from "../DetailService/DetailService";
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
@@ -26,7 +28,7 @@ function CardService({ service }) {
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
   const [favState, setFavState] = useState(false);
-
+  const [open, setOpen] = React.useState(false); //Estado para abrir DetailService modal
   const { title, img, price, id, userId, ratingService } = service;
   const rating = ratingService ? ratingService : 5;
   const fixedTitle = title
@@ -34,6 +36,10 @@ function CardService({ service }) {
       ? `${title.substring(0, 40)}...`
       : title
     : null;
+
+  //Funciones para abrir y cerrar DetailService modal
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   // verificar si ya esta en favorito, prende en rojo
   // el boton de favs de las cards del home o lo deja apagado
@@ -94,7 +100,8 @@ function CardService({ service }) {
   };
   return (
     <Card sx={{ width: 345, height: 420, textDecoration: "none" }}>
-      <CardActionArea component={Link} to={`/services/${id}`}>
+      {/* component={Link} to={`/services/${id}`} */}
+      <CardActionArea onClick={handleOpen}>
         <CardHeader title={fixedTitle} sx={{ pb: "0", height: "64px" }} />
         <Rating
           name="read-only"
@@ -139,6 +146,31 @@ function CardService({ service }) {
           <AddShoppingCartIcon />
         </IconButton>
       </CardActions>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",
+            height: "100%",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            overflowY: "scroll",
+            overflowX: "hidden",
+            m: "60px auto",
+          }}
+        >
+          <DetailService closeModal={handleClose} id={id} />
+        </Box>
+      </Modal>
     </Card>
   );
 }

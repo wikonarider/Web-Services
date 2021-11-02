@@ -43,7 +43,7 @@ export default function CardUser({ user }) {
         gap={1}
         sx={{ m: "5px 0px" }}
       >
-        <Box gridColumn="span 4">
+        <Box gridColumn="span 5">
           <CardMedia
             component="img"
             image={userImg ? userImg : IMG_TEMPLATE}
@@ -59,10 +59,10 @@ export default function CardUser({ user }) {
           />
         </Box>
 
-        <Box gridColumn="span 8" display="flex" flexDirection="column">
+        <Box gridColumn="span 7" display="flex" flexDirection="column">
           <Box gridColumn="span 12" display="flex" flexDirection="column">
             <Typography
-              variant="h6"
+              variant="subtitle1"
               sx={{
                 height: "minContent",
                 textAlign: "left",
