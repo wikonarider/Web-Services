@@ -11,7 +11,7 @@ import List from '@mui/material/List';
 
 export default function SideBarRangeDate({ text, index }) {
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.categories);
+  const objState = useSelector((state) => state.objGlobal);
 
   const [rangeDate, setRangeDate] = useState({
     ascending: true,
@@ -19,11 +19,10 @@ export default function SideBarRangeDate({ text, index }) {
   });
 
   const handleChangeCheck = (event) => {
-    let obj = {
-      category: allCategories,
-      order: event.target.value,
-      filter: 'created',
-    };
+   
+      objState.order= event.target.value
+      objState.filter= 'created'
+   
 
     if (event.target.name === 'ascending') {
       setRangeDate({
@@ -38,7 +37,7 @@ export default function SideBarRangeDate({ text, index }) {
       });
     }
 
-    dispatch(getServices(obj));
+    dispatch(getServices(objState));
   };
 
   return (
