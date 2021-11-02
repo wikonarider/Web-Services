@@ -6,6 +6,7 @@ import useWindowPosition from "./hook/useWindowPosition";
 import { useHistory } from "react-router";
 import { Box, Modal } from "@material-ui/core";
 import Register from "../Register/Register";
+import s from "./Cards.module.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +19,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+const styleRegister = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  maxWidth: 600,
+  width: "70%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 2,
+};
 
 const Cards = ({ cookie }) => {
   const history = useHistory();
@@ -35,18 +50,10 @@ const Cards = ({ cookie }) => {
   const checked = useWindowPosition("header");
   return (
     <div className={classes.root} id="cards">
-      <div
-        onClick={handleRedirect}
-        checked={checked}
-        style={{ cursor: "pointer" }}
-      >
+      <div onClick={handleRedirect} checked={checked} className={s.hover}>
         <CardClick infoCardClick={infoCardClick[1]} checked={checked} />
       </div>
-      <div
-        onClick={handleRegister}
-        checked={checked}
-        style={{ cursor: "pointer" }}
-      >
+      <div onClick={handleRegister} checked={checked} className={s.hover}>
         <CardClick infoCardClick={infoCardClick[0]} checked={checked} />
       </div>
       <Modal
@@ -55,14 +62,7 @@ const Cards = ({ cookie }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            height: "100%",
-            width: "100%",
-          }}
-        >
+        <Box sx={styleRegister}>
           <Register
             setRegisterModal={setRegisterModal}
             handleRedirect={handleRedirect}

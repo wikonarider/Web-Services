@@ -1,0 +1,5 @@
+.hover:hover {
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  transform: translate3d(0, -10px, 0);
+}
