@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import UserProfile from "./components/UserProfile/UserProfile";
-import { setCookie, getServices } from "./redux/actions";
-
+import { setCookie, getServices, getGroups } from "./redux/actions";
 
 function App() {
   // cargamos la cookie en el estado de redux
@@ -27,6 +26,10 @@ function App() {
     dispatch(getServices(objGlobal));
   }, [objGlobal, dispatch]);
 
+  useEffect(() => {
+    dispatch(getGroups());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Route exact path="/" component={Landing} />
@@ -40,7 +43,7 @@ function App() {
         }}
       />
       <Route exact path="/account" component={YourAccount} />
-      <Route exact path='/users/:id' component={UserProfile}/>
+      <Route exact path="/users/:id" component={UserProfile} />
     </div>
   );
 }

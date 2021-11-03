@@ -1,4 +1,36 @@
 const { Category } = require("../db");
+const { Op } = require("sequelize");
+
+function makeWhereFilter(startRange, endRange, title) {
+  let where = {};
+  // all
+  if (startRange && endRange && title) {
+    where = {
+      price: {
+        [Op.between]: [startRange, endRange],
+      },
+      title: {
+        [Op.iLike]: `%${title}%`,
+      },
+    };
+    // no range, title yes
+  } else if (!startRange || (!endRange && title)) {
+    where = {
+      title: {
+        [Op.iLike]: `%${title}%`,
+      },
+    };
+    // no title, range yes
+  } else if (startRange && endRange && !title) {
+    where = {
+      price: {
+        [Op.between]: [startRange, endRange],
+      },
+    };
+  }
+
+  return where;
+}
 
 async function validCategories(category) {
   if (typeof category !== "string") {
@@ -62,4 +94,5 @@ async function validFilters(query, dictonary) {
 
 module.exports = {
   validFilters,
+  makeWhereFilter,
 };

@@ -13,8 +13,8 @@ const initialState = {
     startRange: "",
     endRange: "",
     category: [],
-    page: "",
-    pageSize: "",
+    page: "0",
+    pageSize: "20",
     order: "",
     type: "",
     province: "",
@@ -23,7 +23,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { payload, objState } = action;
+  const { payload } = action;
 
   switch (action.type) {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
