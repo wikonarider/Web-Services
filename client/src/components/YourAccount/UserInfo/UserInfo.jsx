@@ -4,10 +4,11 @@ import { getUserInfo, putUser } from "../../../redux/actions";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import ShareIcon from '@mui/icons-material/Share';
 
 import s from "./UserInfo.module.css";
 
-export default function YourAccount() {
+export default function YourAccount({ userProfile }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
@@ -48,7 +49,7 @@ export default function YourAccount() {
   //--------------------------------------------------------------
 
   return (
-    <div className={s.user}>
+    <div className={userProfile ? s.userProfile : s.user}>
       <div>
         <Avatar
           alt="user name"
@@ -56,42 +57,43 @@ export default function YourAccount() {
           sx={{ width: 200, height: 200, marginBottom: 2 }}
           className={s.avatar}
         ></Avatar>
+        {!userProfile && (
+          <div className={s.changePhoto}>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              name="myImage"
+              ref={fileInput}
+              onChange={(e) => setImg(e.target.files[0])}
+            />
+            <Button
+              variant="text"
+              size="small"
+              color="secondary"
+              startIcon={<PhotoCameraIcon />}
+              sx={{ marginRight: 1 }}
+              onClick={() => {
+                fileInput.current.click();
+              }}
+            >
+              Upload
+            </Button>
 
-        <div className={s.changePhoto}>
-          <input
-            style={{ display: "none" }}
-            type="file"
-            name="myImage"
-            ref={fileInput}
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-          <Button
-            variant="text"
-            size="small"
-            color="secondary"
-            startIcon={<PhotoCameraIcon />}
-            sx={{ marginRight: 1 }}
-            onClick={() => {
-              fileInput.current.click();
-            }}
-          >
-            Upload
-          </Button>
-
-          <Button
-            variant="contained"
-            // startIcon={<PhotoCameraIcon />}
-            size="small"
-            color="secondary"
-            sx={{ boxShadow: "none", marginLeft: 1 }}
-            // onClick={() => {
-            //   fileInput.current.click();
-            // }}
-            onClick={handleImageUpload}
-          >
-            SUBMIT
-          </Button>
-        </div>
+            <Button
+              variant="contained"
+              // startIcon={<PhotoCameraIcon />}
+              size="small"
+              color="secondary"
+              sx={{ boxShadow: "none", marginLeft: 1 }}
+              // onClick={() => {
+              //   fileInput.current.click();
+              // }}
+              onClick={handleImageUpload}
+            >
+              SUBMIT
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className={s.userInfo}>
@@ -99,9 +101,22 @@ export default function YourAccount() {
           <p className={s.name}>{userData.name}</p>
           <p>{userData.lastname}</p>
         </div>
-
-        <p>{userData.username}</p>
-        <p>{userData.email}</p>
+        {!userProfile ? (
+          <div>
+            <p>{userData.username}</p>
+            <p>{userData.email}</p>
+          </div>
+        ) : 
+        <Button
+          variant='contained'
+          startIcon={<ShareIcon/>}
+          size='small'
+          sx={{marginTop:2}}
+          disableElevation
+        >
+          Share Profile
+        </Button>
+        }
       </div>
     </div>
   );
