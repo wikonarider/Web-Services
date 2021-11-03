@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Box,
-  Collapse,
-  IconButton,
-  Modal,
-  Toolbar,
-} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Modal from "@material-ui/core/Modal";
+import Toolbar from "@material-ui/core/Toolbar";
 import SortIcon from "@material-ui/icons/Sort";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link as Scroll } from "react-scroll";

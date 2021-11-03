@@ -1,10 +1,8 @@
-import {
-  IconButton,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  ListItem,
-} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
 import { removeCart } from "../../redux/actions/index";

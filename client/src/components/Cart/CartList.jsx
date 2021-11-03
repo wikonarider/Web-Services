@@ -1,7 +1,7 @@
 import React from "react";
 import CartItem from "./CartItem";
-import { Box, List } from "@mui/material";
-
+import List from "@mui/material/List";
+import Box from "@mui/material/Box";
 function CartList({ cart }) {
   return (
     <Box sx={{ mt: "75px" }}>

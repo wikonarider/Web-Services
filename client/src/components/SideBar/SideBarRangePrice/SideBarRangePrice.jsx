@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { getServices } from '../../../redux/actions';
-
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import Button from '@mui/material/Button';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setObjGlobal } from "../../../redux/actions/index";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Button from "@mui/material/Button";
 
 export default function SideBarRangePrice() {
   const dispatch = useDispatch();
-  const objState = useSelector((state) => state.objGlobal);
+  const objGlobal = useSelector((state) => state.objGlobal);
   const [rangePrice, setRangePrice] = useState({
-    startRange: '',
-    endRange: '',
+    startRange: "",
+    endRange: "",
   });
- 
+
+  useEffect(() => {
+    if (objGlobal.startRange && objGlobal.endRange) {
+      setRangePrice({
+        startRange: objGlobal.startRange,
+        endRange: objGlobal.endRange,
+      });
+    } else {
+      setRangePrice({
+        startRange: "",
+        endRange: "",
+      });
+    }
+  }, [objGlobal]);
 
   const handleMinMaxChange = (event) => {
-    if (event.target.id === 'startRange') {
+    if (event.target.id === "startRange") {
       setRangePrice({
         ...rangePrice,
         [event.target.id]: Number(event.target.value),
       });
     }
-    if (event.target.id === 'endRange') {
+    if (event.target.id === "endRange") {
       setRangePrice({
         ...rangePrice,
         [event.target.id]: Number(event.target.value),
@@ -33,28 +44,23 @@ export default function SideBarRangePrice() {
   };
 
   const handleBtn = () => {
-      objState.startRange= rangePrice.startRange
-      objState.endRange= rangePrice.endRange
-    
+    let obj = {
+      ...objGlobal,
+      startRange: rangePrice.startRange,
+      endRange: rangePrice.endRange,
+    };
 
     if (rangePrice.startRange < rangePrice.endRange) {
-      // console.log(obj);
-      dispatch(getServices(objState));
-      setRangePrice({
-        startRange: '',
-        endRange: '',
-      });
+      dispatch(setObjGlobal(obj));
     }
   };
-
-  // console.log(allServices)
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        '& > :not(style)': { m: 1 },
+        display: "flex",
+        alignItems: "center",
+        "& > :not(style)": { m: 1 },
       }}
     >
       <TextField
@@ -62,7 +68,7 @@ export default function SideBarRangePrice() {
         id="startRange"
         label="Minimum price"
         type="number"
-        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         onChange={handleMinMaxChange}
         value={rangePrice.startRange}
       />
@@ -70,7 +76,7 @@ export default function SideBarRangePrice() {
         required
         id="endRange"
         label="Maximum price"
-        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+        inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         onChange={handleMinMaxChange}
         value={rangePrice.endRange}
       />

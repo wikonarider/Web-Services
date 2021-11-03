@@ -1,21 +1,20 @@
 import { React, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import {
-  TextField,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Autocomplete,
-  Checkbox,
-} from "@mui/material";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import s from "./CreateService.module.css";
 import { createService, getGroups, getProvinces } from "../../redux/actions";
 import ModalService from "./ModalService";
-import { Box } from "@mui/system";
+import Box from "@mui/system/Box";
 
 function CreateService(props) {
   const dispatch = useDispatch();
@@ -261,7 +260,6 @@ function CreateService(props) {
           {/* SELECT DE PROVINCIA */}
           <div>
             <Autocomplete
-              
               options={provinces}
               getOptionLabel={(option) => option.name}
               onChange={(e, value) => handleProvince(value)}
@@ -271,9 +269,7 @@ function CreateService(props) {
                   {...params}
                   label={"Provinces"}
                   placeholder="Search"
-                  
                 />
-                
               )}
             />
           </div>
@@ -360,7 +356,7 @@ function CreateService(props) {
           </div>
 
           <div className={s.imgContainer}>
-            <img className={s.imgRender}id="imgBox" src="hola" alt=""></img>
+            <img className={s.imgRender} id="imgBox" src="hola" alt=""></img>
           </div>
 
           {!errors.title && !errors.description && !errors.price ? (

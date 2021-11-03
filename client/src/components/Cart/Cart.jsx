@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  IconButton,
-  Badge,
-  Drawer,
-  Divider,
-  Box,
-  Typography,
-} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import Drawer from "@mui/material/Drawer";
+import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CartList from "./CartList";
 import { useSelector } from "react-redux";

@@ -11,13 +11,11 @@ import CardService from "../CardService/CardService";
 import { FormDialog } from "./FormDialog/FormDialog";
 import { getUserInfo, getUserFavs } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-// import CreateService from '../CreateService/CreateService'
 import ModalCreateService from "./ModalCreateService";
 import AccountNav from "./AccountNav/AccountNav";
 import UserInfo from "./UserInfo/UserInfo";
 import Botonera from "./Botonera/Botonera";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
 
 export default function YourAccount() {
   const dispatch = useDispatch();
@@ -56,7 +54,6 @@ export default function YourAccount() {
       <UserInfo />
 
       <Botonera
-
         viewServices={viewServices}
         viewOrders={viewOrders}
         viewFavs={viewFavs}
@@ -69,7 +66,7 @@ export default function YourAccount() {
         setOpenForm={setOpenForm}
         setModal={setModal}
       />
-
+          
       {/* -------------------FAVS------------------------ */}
       {viewFavs &&
         (userData.servicesFavs.length > 0 ? (

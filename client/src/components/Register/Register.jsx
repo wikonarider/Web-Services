@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import s from "./Register.module.css";
-import { TextField, Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
 

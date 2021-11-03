@@ -1,43 +1,62 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { getServices } from '../../../redux/actions';
-
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import List from '@mui/material/List';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setObjGlobal } from "../../../redux/actions/index";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
 
 export default function SideBarOrderPrice({ text, index }) {
   const dispatch = useDispatch();
-  const objState = useSelector((state) => state.objGlobal);
+  const objGlobal = useSelector((state) => state.objGlobal);
 
   const [rangePrice, setRangePrice] = useState({
-    ascending: true,
+    ascending: false,
     descending: false,
   });
 
-  const handleChangeCheck = (event) => {
-    
-      objState.order = event.target.value
-      objState.filter = 'price'
-    
-
-    if (event.target.name === 'ascending') {
+  useEffect(() => {
+    if (objGlobal.order === "price") {
+      if (objGlobal.type === "ASC") {
+        setRangePrice({
+          descending: false,
+          ascending: true,
+        });
+      } else {
+        setRangePrice({
+          descending: true,
+          ascending: false,
+        });
+      }
+    } else {
       setRangePrice({
         descending: false,
-        [event.target.name]: event.target.checked,
-      });
-    }
-    if (event.target.name === 'descending') {
-      setRangePrice({
         ascending: false,
-        [event.target.name]: event.target.checked,
       });
     }
-   console.log(objState)
-    dispatch(getServices(objState));
+  }, [objGlobal]);
+
+  const handleChangeCheck = (event) => {
+    let obj = {
+      ...objGlobal,
+      order: event.target.name,
+      type: event.target.value,
+    };
+    dispatch(setObjGlobal(obj));
+
+    if (event.target.value === "ASC") {
+      setRangePrice({
+        descending: false,
+        ascending: true,
+      });
+    }
+    if (event.target.value === "DESC") {
+      setRangePrice({
+        descending: true,
+        ascending: false,
+      });
+    }
   };
 
   return (
@@ -45,7 +64,7 @@ export default function SideBarOrderPrice({ text, index }) {
       <ListItem button key={index}>
         <ListItemText primary={text} />
         <FormControlLabel
-          name="ascending"
+          name="price"
           value="ASC"
           control={<Checkbox />}
           label="asc"
@@ -54,10 +73,10 @@ export default function SideBarOrderPrice({ text, index }) {
           onChange={handleChangeCheck}
         />
         <FormControlLabel
-          name="descending"
+          name="price"
           value="DESC"
           control={<Checkbox />}
-          label="des"
+          label="desc"
           labelPlacement="top"
           checked={rangePrice.descending}
           onChange={handleChangeCheck}
