@@ -6,8 +6,15 @@
     padding: 2%;
 }
 
+.userProfile{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2% 2% 2% 10%;
+}
+
 .userInfo{
-    margin-left: 10%;
+    margin-left: 6%;
 }
 
 .fullName{
@@ -16,7 +23,7 @@
 }
 
     .fullName p{
-        font-size: 25px;
+        font-size: 2.2em;
         font-weight: 600;
         margin-top: 0px;
         margin-bottom: 0px;

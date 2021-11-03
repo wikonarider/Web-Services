@@ -17,7 +17,7 @@ import UserInfo from "./UserInfo/UserInfo";
 import Botonera from "./Botonera/Botonera";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function YourAccount() {
+export default function YourAccount({ userProfile }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
@@ -49,24 +49,26 @@ export default function YourAccount() {
 
   return (
     <div>
-      <AccountNav />
+      {!userProfile && <AccountNav />}
 
-      <UserInfo />
+      <UserInfo userProfile={userProfile}/>
 
-      <Botonera
-        viewServices={viewServices}
-        viewOrders={viewOrders}
-        viewFavs={viewFavs}
-        setViewFavs={setViewFavs}
-        setViewOrders={setViewOrders}
-        setViewservices={setViewservices}
-        // --------------------------------
-        openForm={openForm}
-        modal={modal}
-        setOpenForm={setOpenForm}
-        setModal={setModal}
-      />
-          
+      {!userProfile && (
+        <Botonera
+          viewServices={viewServices}
+          viewOrders={viewOrders}
+          viewFavs={viewFavs}
+          setViewFavs={setViewFavs}
+          setViewOrders={setViewOrders}
+          setViewservices={setViewservices}
+          // --------------------------------
+          openForm={openForm}
+          modal={modal}
+          setOpenForm={setOpenForm}
+          setModal={setModal}
+        />
+      )}
+
       {/* -------------------FAVS------------------------ */}
       {viewFavs &&
         (userData.servicesFavs.length > 0 ? (
@@ -94,7 +96,6 @@ export default function YourAccount() {
           </div>
         ))}
       {/* ------------------------------------------------ */}
-
       {/* ------------------ORDERS---------------------------- */}
       {viewOrders && (
         <Container>
@@ -104,7 +105,6 @@ export default function YourAccount() {
         </Container>
       )}
       {/* ----------------------------------------------------- */}
-
       {/* -------------------SERVICES-------------------------- */}
       {viewServices &&
         (userData.servicesOwn.length > 0 ? (
@@ -130,7 +130,6 @@ export default function YourAccount() {
           </div>
         ))}
       {/* ---------------------------------------------- */}
-
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
       <ModalCreateService modal={modal} setModal={setModal} />
     </div>
