@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
 import Modal from "@material-ui/core/Modal";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 import s from "./Cards.module.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,6 @@ const styleRegister = {
   maxWidth: 600,
   width: "70%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
   borderRadius: "10px",
   boxShadow: 24,
   p: 2,
@@ -38,9 +38,19 @@ const styleRegister = {
 const Cards = ({ cookie }) => {
   const history = useHistory();
   const [registerModal, setRegisterModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [login, setLogin] = useState(false);
+
+  if (login) {
+    history.push("/home");
+  }
 
   const handleRegister = () => {
     setRegisterModal((prev) => !prev);
+  };
+
+  const handleLogin = () => {
+    setLoginModal((prev) => !prev);
   };
 
   const handleRedirect = () => {
@@ -57,6 +67,7 @@ const Cards = ({ cookie }) => {
       <div onClick={handleRegister} checked={checked} className={s.hover}>
         <CardClick infoCardClick={infoCardClick[0]} checked={checked} />
       </div>
+
       <Modal
         open={!cookie ? registerModal : false}
         onClose={handleRegister}
@@ -66,10 +77,22 @@ const Cards = ({ cookie }) => {
         <Box sx={styleRegister}>
           <Register
             setRegisterModal={setRegisterModal}
+            setLoginModal={setLoginModal}
             handleRedirect={handleRedirect}
           />
         </Box>
       </Modal>
+
+      <Modal
+            open={loginModal}
+            onClose={handleLogin}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={styleRegister}>
+              <Login setLoginModal={setLoginModal} setLogin={setLogin} setRegisterModal={setRegisterModal} />
+            </Box>
+          </Modal>
     </div>
   );
 };

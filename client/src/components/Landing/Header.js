@@ -60,7 +60,6 @@ const styleLogin = {
   maxWidth: 600,
   width: "70%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
   borderRadius: "10px",
   boxShadow: 24,
   p: 2,
@@ -71,6 +70,7 @@ const Header = ({ cookie, setCookie }) => {
   const [checked, setChecked] = useState(false);
   const [login, setLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  const [registerModal, setRegisterModal] = useState(false);
   const history = useHistory();
 
   if (login) {
@@ -106,7 +106,7 @@ const Header = ({ cookie, setCookie }) => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={styleLogin}>
-              <Login setLoginModal={setLoginModal} setLogin={setLogin} />
+              <Login setLoginModal={setLoginModal} setLogin={setLogin} setRegisterModal={setRegisterModal} />
             </Box>
           </Modal>
         </Toolbar>
