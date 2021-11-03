@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import IconButton from "@mui/material/IconButton";
 import { height } from "@mui/system";
-
+import { WhatsApp } from "@mui/icons-material";
 const style = {
   position: "absolute",
   top: "50%",
@@ -53,10 +53,15 @@ var tit2 = encodeURIComponent(tit);
         <FacebookIcon color='primary'  style={{ width: "80px" , height: "80px"}} /> 
         Facebook
         </IconButton>
-       
+        <IconButton
+          href={`whatsapp://send?'+${dir2}+'&t='+${tit2}+''`}>
+        <WhatsApp color=""  style={{ width: "80px" , height: "80px"}} /> 
+        WhatsApp
+        </IconButton>
         </Box>
       </Modal>
     </div>
   );
 }
+
 
