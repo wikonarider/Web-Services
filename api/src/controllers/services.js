@@ -128,7 +128,15 @@ async function getServicesByUserId(req, res, next) {
         raw: false,
         group: ["service.id", "category.id", "category->group.id"],
       });
-      res.json(services);
+
+      let user = await Users.findOne({
+        where: {
+          id: userId,
+        },
+        attributes: ["name", "lastname", 'userImg'],
+      });
+
+      res.json([user, services]);
     } else {
       res.status(400).json({ message: "UserId it has to be a UUIDV4 " });
     }

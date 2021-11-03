@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PostAddIcon from "@mui/icons-material/PostAdd";

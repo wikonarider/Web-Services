@@ -8,7 +8,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 import s from "./UserInfo.module.css";
 
-export default function YourAccount({ userProfile }) {
+export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
 
@@ -53,7 +53,7 @@ export default function YourAccount({ userProfile }) {
       <div>
         <Avatar
           alt="user name"
-          src={userData.userImg}
+          src={!userProfile ? userData.userImg : profileInfo.userImg }
           sx={{ width: 200, height: 200, marginBottom: 2 }}
           className={s.avatar}
         ></Avatar>
@@ -98,8 +98,8 @@ export default function YourAccount({ userProfile }) {
 
       <div className={s.userInfo}>
         <div className={s.fullName}>
-          <p className={s.name}>{userData.name}</p>
-          <p>{userData.lastname}</p>
+          <p className={s.name}>{!userProfile ? userData.name : profileInfo.name}</p>
+          <p>{!userProfile ? userData.lastname : profileInfo.lastname}</p>
         </div>
         {!userProfile ? (
           <div>

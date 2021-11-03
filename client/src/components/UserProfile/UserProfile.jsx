@@ -1,39 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo } from "../../redux/actions";
-import Avatar from "@mui/material/Avatar";
 import Nav from "../Nav/Nav";
-import ShareIcon from "@mui/icons-material/Share";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
 
 import CardService from "../CardService/CardService";
 
 import s from "./UserProfile.module.css";
 import YourAccount from "../YourAccount/YourAccount";
 
-export default function UserProfile({ id }) {
-  const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user);
+// function getProfileInfo() {
+//   axios(`http://localhost:3001/users?username=rbeardall2`).then(
+//     (response) => {
+//       setProfileInfo({ ...profileInfo, ...response.data });
+//     }
+//   );
+// }
+
+export default function UserProfile({ id, username }) {
+  const [profileInfo, setProfileInfo] = useState({});
+  const [profileServices, setProfileServices] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  console.log('INFO:', profileInfo);
+  console.log("SERVICES:", profileServices);
+
+  function getProfileServices({ id, setProfileServices }) {}
 
   useEffect(() => {
-    (async () => {
-      dispatch(await getUserInfo());
-    })();
+    axios(`http://localhost:3001/services?userId=${id}`).then((response) => {
+      setProfileServices(response.data[1]);
+      setProfileInfo(response.data[0])
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <Nav />
       <div className={s.account}>
-        <YourAccount userProfile={true} />
+        <YourAccount userProfile={true} profileInfo={profileInfo} />
       </div>
       <div>
-        {userData.servicesOwn &&
-          (userData.servicesOwn.length > 0 ? (
+        {profileServices &&
+          (profileServices.length > 0 ? (
             <div>
               <div className={s.publishedServices}>
                 <p>Published Services</p>
@@ -41,7 +56,7 @@ export default function UserProfile({ id }) {
               <div>
                 <Container>
                   <Grid container justifyContent="center" spacing={3}>
-                    {userData.servicesOwn.map((s) => (
+                    {profileServices.map((s) => (
                       <Grid item key={s.id}>
                         <CardService service={s} />
                       </Grid>
@@ -52,7 +67,7 @@ export default function UserProfile({ id }) {
             </div>
           ) : (
             <div className={s.addFavContainer}>
-              <h3>This user is not offering any other setViewservices</h3>
+              <h3>This user is not offering any services</h3>
             </div>
           ))}
       </div>
