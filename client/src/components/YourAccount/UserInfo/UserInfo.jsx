@@ -1,0 +1,108 @@
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, putUser } from "../../../redux/actions";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+
+import s from "./UserInfo.module.css";
+
+export default function YourAccount() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user);
+
+  useEffect(() => {
+    (async () => {
+      dispatch(await getUserInfo());
+    })();
+
+    // eslint-disable-next-line
+  }, []);
+
+  const [img, setImg] = useState("");
+
+  //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
+  const fileInput = useRef();
+  //----------------------------------------------------
+
+  //HANDLE IMAGEN CLOUDINARY
+  const handleImageUpload = () => {
+    const { files } = document.querySelector('input[type="file"]');
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    // replace this with your upload preset name
+    formData.append("upload_preset", "hn1tlyfq");
+    const options = {
+      method: "POST",
+      body: formData,
+    };
+
+    return fetch(
+      "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
+      options
+    )
+      .then((res) => res.json())
+      .then((res) => dispatch(putUser({ userImg: res.secure_url })))
+      .catch((err) => console.log(err));
+  };
+  //--------------------------------------------------------------
+
+  return (
+    <div className={s.user}>
+      <div>
+        <Avatar
+          alt="user name"
+          src={userData.userImg}
+          sx={{ width: 200, height: 200, marginBottom: 2 }}
+          className={s.avatar}
+        ></Avatar>
+
+        <div className={s.changePhoto}>
+          <input
+            style={{ display: "none" }}
+            type="file"
+            name="myImage"
+            ref={fileInput}
+            onChange={(e) => setImg(e.target.files[0])}
+          />
+          <Button
+            variant="text"
+            size="small"
+            color="secondary"
+            startIcon={<PhotoCameraIcon />}
+            sx={{ marginRight: 1 }}
+            onClick={() => {
+              fileInput.current.click();
+            }}
+          >
+            Upload
+          </Button>
+
+          <Button
+            variant="contained"
+            // startIcon={<PhotoCameraIcon />}
+            size="small"
+            color="secondary"
+            sx={{ boxShadow: "none", marginLeft: 1 }}
+            // onClick={() => {
+            //   fileInput.current.click();
+            // }}
+            onClick={handleImageUpload}
+          >
+            SUBMIT
+          </Button>
+        </div>
+      </div>
+
+      <div className={s.userInfo}>
+        <div className={s.fullName}>
+          <p className={s.name}>{userData.name}</p>
+          <p>{userData.lastname}</p>
+        </div>
+
+        <p>{userData.username}</p>
+        <p>{userData.email}</p>
+      </div>
+    </div>
+  );
+}

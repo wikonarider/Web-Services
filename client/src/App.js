@@ -10,6 +10,7 @@ import CreateService from "./components/CreateService/CreateService";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setCookie } from "./redux/actions";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 function App() {
   // cargamos la cookie en el estado de redux
@@ -33,6 +34,7 @@ function App() {
         }}
       />
       <Route exact path="/account" component={YourAccount} />
+      <Route exact path='/users/:id' component={UserProfile}/>
     </div>
   );
 }
