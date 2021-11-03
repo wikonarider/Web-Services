@@ -36,12 +36,13 @@ export default function MiniDrawer() {
       startRange: "",
       endRange: "",
       category: [],
-      page: "",
-      pageSize: "",
+      page: "0",
+      pageSize: "20",
       order: "",
       type: "",
       province: "",
       city: "",
+      title: "",
     };
     dispatch(setObjGlobal(obj));
   };
