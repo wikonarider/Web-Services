@@ -1,0 +1,27 @@
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #808080;
+    padding: 2%;
+}
+
+.userInfo{
+    margin-left: 10%;
+}
+
+.fullName{
+    display: flex;
+    justify-content: center;
+}
+
+    .fullName p{
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+.name{
+    margin-right: 5%;
+}
