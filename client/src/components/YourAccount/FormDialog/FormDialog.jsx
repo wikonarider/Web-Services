@@ -84,7 +84,6 @@ export function FormDialog({ openForm, setOpenForm }) {
             }}
             type="submit"
             variant="contained"
-            className={s.submit}
             sx={{ margin: "auto" }}
           >
             SUBMIT
