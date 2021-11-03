@@ -67,9 +67,9 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     try {
       const token = googleData.tokenId;
       const res = await axios.post(`/login?token=${token}`);
-      setLogin(() => true);
       setLoginModal(() => false);
       dispatch(setCookie(document.cookie.split("userId=")[1]));
+      setLogin && setLogin(true);
     } catch (e) {
       alert("Unregistered user");
     }
