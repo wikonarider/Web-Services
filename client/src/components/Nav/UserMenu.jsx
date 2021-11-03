@@ -12,8 +12,10 @@ import { Link } from "react-router-dom";
 import { postLogout } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie as setCookieRedux } from "../../redux/actions";
+import { useHistory } from "react-router";
 
 export default function UserMenu() {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
@@ -31,6 +33,7 @@ export default function UserMenu() {
     document.cookie = "userId=; max-age=0";
     await postLogout();
     dispatch(setCookieRedux(""));
+    history.push("/home");
   };
 
   const handleClose = () => {
