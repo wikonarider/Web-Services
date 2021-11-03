@@ -13,7 +13,7 @@ import { postLogout } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie as setCookieRedux } from "../../redux/actions";
 
-export default function UserMenu({ setLogin, setCookie }) {
+export default function UserMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
@@ -30,8 +30,6 @@ export default function UserMenu({ setLogin, setCookie }) {
   const logOutClear = async () => {
     document.cookie = "userId=; max-age=0";
     await postLogout();
-    setLogin(() => false);
-    setCookie(() => "");
     dispatch(setCookieRedux(""));
   };
 

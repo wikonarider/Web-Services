@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,6 +10,7 @@ import SideBar from "../SideBar/SideBar";
 import UserMenu from "./UserMenu";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -24,14 +25,9 @@ const style = {
 };
 
 export default function Nav() {
-  const [login, setLogin] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
-  const [cookie, setCookie] = useState(document.cookie);
-
-  useEffect(() => {
-    setCookie(() => document.cookie);
-  }, []);
+  const cookie = useSelector((state) => state.cookie);
 
   // Descomentar para ver las cookies en la consola del navegador
   // console.log("Cookies: ", document.cookie);
@@ -66,7 +62,7 @@ export default function Nav() {
 
           {/* Register */}
 
-          {login || cookie ? null : (
+          {cookie ? null : (
             <Button
               variant="contained"
               size="medium"
@@ -92,7 +88,7 @@ export default function Nav() {
 
           {/* Login */}
 
-          {!login && !cookie ? (
+          {!cookie ? (
             <Button
               variant="contained"
               size="medium"
@@ -110,7 +106,6 @@ export default function Nav() {
           >
             <Box sx={style}>
               <Login
-                setLogin={setLogin}
                 setLoginModal={setLoginModal}
                 setRegisterModal={setRegisterModal}
               />
@@ -118,9 +113,7 @@ export default function Nav() {
           </Modal>
 
           <Cart />
-          {login || cookie ? (
-            <UserMenu setLogin={setLogin} setCookie={setCookie} />
-          ) : null}
+          {cookie ? <UserMenu /> : null}
         </Toolbar>
       </AppBar>
     </Box>

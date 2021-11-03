@@ -46,9 +46,9 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
         password: "",
       });
 
-      setLogin(() => true);
       setLoginModal(() => false);
       dispatch(setCookie(document.cookie));
+      setLogin && setLogin(true);
     } catch (e) {
       setInputErrors(() => {
         let error = {};
@@ -63,9 +63,9 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   };
 
   const handleCreateAccount = () => {
-    setRegisterModal((prev) => !prev)
-    setLoginModal((prev) => !prev)
-  }
+    setRegisterModal((prev) => !prev);
+    setLoginModal((prev) => !prev);
+  };
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import Header from "./Header";
 import Cards from "./Cards";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,16 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Landing = () => {
   const classes = useStyles();
-  const [cookie, setCookie] = useState(document.cookie);
-
-  useEffect(() => {
-    setCookie(() => document.cookie);
-  }, []);
+  const cookie = useSelector((state) => state.cookie);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header cookie={cookie} setCookie={setCookie} />
+      <Header cookie={cookie} />
       <Cards cookie={cookie} />
     </div>
   );
