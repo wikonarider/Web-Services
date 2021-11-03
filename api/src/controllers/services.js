@@ -175,6 +175,7 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
+        [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
       include: [
         {
@@ -193,9 +194,15 @@ async function getServicesById(req, res, next) {
           },
         },
       ],
+      raw: false,
+      group: [
+        "service.id",
+        "category.id",
+        "category->group.id",
+        "qualifications.id",
+        "qualifications->user.id",
+      ],
     });
-
-    service = await addRating(service, service.id);
 
     let user = await Users.findOne({
       where: {
