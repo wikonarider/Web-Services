@@ -17,10 +17,11 @@ function App() {
   // cada vez hau haya alguna modificaficion de algun componente
   const dispatch = useDispatch();
   const objGlobal = useSelector((state) => state.objGlobal);
+  const cookie = useSelector((state) => state.cookie);
 
   useEffect(() => {
     dispatch(setCookie(document.cookie));
-  });
+  }, [cookie, dispatch]);
 
   useEffect(() => {
     dispatch(getServices(objGlobal));
