@@ -48,7 +48,7 @@ export default function Nav() {
 
   return (
     <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="fixed" sx={{ zIndex: "9999" }}>
+      <AppBar position="fixed" sx={{ zIndex: "1201" }}>
         <Toolbar
           sx={{
             display: "flex",
@@ -83,7 +83,10 @@ export default function Nav() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Register setRegisterModal={setRegisterModal} setLoginModal={setLoginModal} />
+              <Register
+                setRegisterModal={setRegisterModal}
+                setLoginModal={setLoginModal}
+              />
             </Box>
           </Modal>
 
@@ -106,7 +109,11 @@ export default function Nav() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Login setLogin={setLogin} setLoginModal={setLoginModal} setRegisterModal={setRegisterModal} />
+              <Login
+                setLogin={setLogin}
+                setLoginModal={setLoginModal}
+                setRegisterModal={setRegisterModal}
+              />
             </Box>
           </Modal>
 
