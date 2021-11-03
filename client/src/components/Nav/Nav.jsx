@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AppBar from "@mui/material/AppBar";
-import Modal from "@mui/material/Modal";
-import SearchBar from "../SearchBar/SearchBar";
-import Cart from "../Cart/Cart";
-import SideBar from "../SideBar/SideBar";
-import UserMenu from "./UserMenu";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
+import Modal from '@mui/material/Modal';
+import SearchBar from '../SearchBar/SearchBar';
+import Cart from '../Cart/Cart';
+import SideBar from '../SideBar/SideBar';
+import UserMenu from './UserMenu';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import { useSelector } from 'react-redux';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   maxWidth: 600,
-  width: "70%",
-  bgcolor: "background.paper",
-  borderRadius: "10px",
+  width: '70%',
+  bgcolor: 'background.paper',
+  borderRadius: '10px',
   boxShadow: 24,
 };
 
@@ -43,20 +43,20 @@ export default function Nav() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="fixed" sx={{ zIndex: "1201" }}>
+    <Box sx={{ flexGrow: 1, width: '101%' }}>
+      <AppBar position="fixed" sx={{ zIndex: '1201' }}>
         <Toolbar
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "5px",
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '5px',
           }}
         >
           <Box>
             <SideBar />
           </Box>
-          <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
+          <Box sx={{ width: '50%', ml: 'auto', mr: 'auto' }}>
             <SearchBar />
           </Box>
 

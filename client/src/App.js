@@ -1,16 +1,17 @@
-import "./App.css";
-import { Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import DetailService from "./components/DetailService/DetailService";
-import YourAccount from "./components/YourAccount/YourAccount";
-import Chat from "./components/chat/chat";
-import React from "react";
-import Landing from "./components/Landing/Landing";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import './App.css';
+import { Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import DetailService from './components/DetailService/DetailService';
+import YourAccount from './components/YourAccount/YourAccount';
+import Chat from './components/chat/chat';
+import React from 'react';
+import Landing from './components/Landing/Landing';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import UserProfile from "./components/UserProfile/UserProfile";
-import { setCookie, getServices, getGroups } from "./redux/actions";
+import UserProfile from './components/UserProfile/UserProfile';
+import { setCookie, getServices, getGroups } from './redux/actions';
+import CheckoutDetail from './components/CheckoutDetail/CheckoutDetail';
 
 function App() {
   // cargamos la cookie en el estado de redux
@@ -44,6 +45,7 @@ function App() {
         }}
       />
       <Route exact path="/account" component={YourAccount} />
+      <Route exact path="/checkout" component={CheckoutDetail} />
       <Route exact path="/users/:id" component={UserProfile} />
     </div>
   );

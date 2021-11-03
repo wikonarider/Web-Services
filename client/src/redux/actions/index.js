@@ -1,6 +1,6 @@
-import { type } from "./variables";
-import serviceURL from "./urlQuery";
-import axios from "axios";
+import { type } from './variables';
+import serviceURL from './urlQuery';
+import axios from 'axios';
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -91,7 +91,7 @@ export function postCategory(category) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post("/users/", data);
+      return await axios.post('/users/', data);
     } catch (err) {
       return new Error(err);
     }
@@ -101,7 +101,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put("/users/", newData);
+      return await axios.put('/users/', newData);
     } catch (err) {
       return new Error(err);
     }
@@ -118,7 +118,7 @@ export function putUser(newData) {
 
 export async function getUserInfo() {
   return async function (dispatch) {
-    const response = await axios.get("/users");
+    const response = await axios.get('/users');
     dispatch({
       type: type.GET_USER_INFO,
       payload: response.data,
