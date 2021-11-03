@@ -14,7 +14,7 @@ const {
 
 // User post
 router.post("/", isNotAuthenticated, userCreated);
-router.post("/purchase", postPurchase);
+router.post("/purchase", isAuthenticated, postPurchase);
 
 // User get
 router.get("/", isAuthenticated, getUserInfo);
