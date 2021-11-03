@@ -20,7 +20,7 @@ function App() {
   const cookie = useSelector((state) => state.cookie);
 
   useEffect(() => {
-    dispatch(setCookie(document.cookie));
+    dispatch(setCookie(document.cookie.split("userId=")[1]));
   }, [cookie, dispatch]);
 
   useEffect(() => {

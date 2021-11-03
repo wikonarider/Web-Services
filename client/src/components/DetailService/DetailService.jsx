@@ -154,9 +154,7 @@ export default function DetailService({ id, closeModal }) {
                 onClick={handleFavs}
                 aria-label="add to favorites"
                 sx={
-                  cookie && cookie.split("=")[1] !== service.userId
-                    ? {}
-                    : { display: "none" }
+                  cookie && cookie !== service.userId ? {} : { display: "none" }
                 }
               >
                 <Favorite color={favState ? "error" : ""} />

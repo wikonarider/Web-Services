@@ -49,7 +49,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       });
 
       setLoginModal(() => false);
-      dispatch(setCookie(document.cookie));
+      dispatch(setCookie(document.cookie.split("userId=")[1]));
       setLogin && setLogin(true);
     } catch (e) {
       setInputErrors(() => {
@@ -69,7 +69,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       const res = await axios.post(`/login?token=${token}`);
       setLogin(() => true);
       setLoginModal(() => false);
-      dispatch(setCookie(document.cookie));
+      dispatch(setCookie(document.cookie.split("userId=")[1]));
     } catch (e) {
       alert("Unregistered user");
     }

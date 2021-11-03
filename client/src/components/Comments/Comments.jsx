@@ -19,7 +19,7 @@ export default function Comments({
   const [rating, setRating] = useState(0);
 
   function handleClick(comment, rating, serviceId) {
-    let userId = document.cookie.split("=")[1];
+    let userId = document.cookie.split("userId=")[1];
     if (rating > 0) {
       setLoading(true);
       axios

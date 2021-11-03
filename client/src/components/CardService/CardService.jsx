@@ -139,11 +139,7 @@ function CardService({ service }) {
           <IconButton
             onClick={handleFavs}
             aria-label="add to favorites"
-            sx={
-              cookie && cookie.split("=")[1] !== userId
-                ? {}
-                : { display: "none" }
-            }
+            sx={cookie && cookie !== userId ? {} : { display: "none" }}
           >
             <FavoriteIcon color={favState ? "error" : ""} />
           </IconButton>
@@ -166,9 +162,7 @@ function CardService({ service }) {
             color={!added ? "primary" : "success"}
             aria-label="add to shopping cart"
             sx={
-              cart && cookie.split("=")[1] !== userId
-                ? { ml: "auto" }
-                : { display: "none" }
+              cart && cookie !== userId ? { ml: "auto" } : { display: "none" }
             }
           >
             <AddShoppingCartIcon />

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const handleFav = async (favState, serviceId) => {
-  let userId = document.cookie.split("=")[1];
+  let userId = document.cookie.split("userId=")[1];
 
   if (favState.filter((f) => serviceId === f.serviceId).length > 0) {
     let deleteResponse = await axios.delete(`/favs`, {
