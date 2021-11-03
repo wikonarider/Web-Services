@@ -5,6 +5,7 @@ import SideBarNested from "./SideBarNested/SideBarNested";
 import SideBarOrderPrice from "./SideBarOrderPrice/SideBarOrderPrice";
 import SideBarRangePrice from "./SideBarRangePrice/SideBarRangePrice";
 import SideBarRangeDate from "./SideBarRangeDate/SideBarRangeDate";
+import SideBarOrderRating from "./SideBarOrderRating/SideBarOrderRating";
 
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -60,6 +61,8 @@ export default function MiniDrawer() {
       </IconButton>
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
+        <Divider />
+        <SideBarOrderRating text={"Rating order"} />
         <Divider />
         <SideBarOrderPrice text={"Price order"} />
         <Divider />
