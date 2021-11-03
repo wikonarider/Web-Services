@@ -65,7 +65,16 @@ async function getUserInfo(req, res, next) {
   try {
     const { userId } = req.cookies;
     const user = await Users.findOne({
-      attributes: ["id", "userImg", "name", "lastname", "username", "email"],
+      attributes: [
+        "id",
+        "userImg",
+        "name",
+        "lastname",
+        "username",
+        "email",
+        "admin",
+        "ban",
+      ],
       where: {
         id: userId,
       },

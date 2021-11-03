@@ -1,5 +1,16 @@
 const users = [
   {
+    id: "fdf3709a-ed60-4178-8cb6-6751fc32d078",
+    userImg: "https://avatars.dicebear.com/api/micah/.svg?b=%23e81111",
+    name: "Admin",
+    lastname: "User",
+    username: "adminuser",
+    password: "admin123",
+    email: "admin@webservice.co.uk",
+    ban: false,
+    admin: true,
+  },
+  {
     id: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     userImg: "https://avatars.dicebear.com/api/micah/a.svg",
     name: "Miguel",

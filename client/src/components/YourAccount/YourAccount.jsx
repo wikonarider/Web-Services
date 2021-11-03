@@ -1,20 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import s from './YourAccount.module.css';
+import s from "./YourAccount.module.css";
 
 //-------------- MATERIAL UI -------------------------------------
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 //-------------------------------------------------------
-import CardService from '../CardService/CardService';
-import { FormDialog } from './FormDialog/FormDialog';
-import { getUserInfo, getUserFavs } from '../../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import ModalCreateService from './ModalCreateService';
-import AccountNav from './AccountNav/AccountNav';
-import UserInfo from './UserInfo/UserInfo';
-import Botonera from './Botonera/Botonera';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import CardService from "../CardService/CardService";
+import { FormDialog } from "./FormDialog/FormDialog";
+import { getUserInfo, getUserFavs } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import ModalCreateService from "./ModalCreateService";
+import AccountNav from "./AccountNav/AccountNav";
+import UserInfo from "./UserInfo/UserInfo";
+import Botonera from "./Botonera/Botonera";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Admin from "../Admin/Admin";
 
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
   const [viewServices, setViewservices] = useState(false);
   const [viewOrders, setViewOrders] = useState(false);
   const [viewFavs, setViewFavs] = useState(false);
+  const [viewAdmin, setViewAdmin] = useState(false);
   //----------------------------------------------
 
   //MODAL FORM PARA CAMBIAR DATOS
@@ -50,86 +52,90 @@ export default function YourAccount({ userProfile, profileInfo }) {
     <div>
       {!userProfile && <AccountNav />}
 
-
       <UserInfo userProfile={userProfile} profileInfo={profileInfo} />
-
 
       {!userProfile && (
         <Botonera
           viewServices={viewServices}
           viewOrders={viewOrders}
           viewFavs={viewFavs}
+          viewAdmin={viewAdmin}
           setViewFavs={setViewFavs}
           setViewOrders={setViewOrders}
           setViewservices={setViewservices}
+          setViewAdmin={setViewAdmin}
           // --------------------------------
           openForm={openForm}
           modal={modal}
           setOpenForm={setOpenForm}
           setModal={setModal}
+          user={userData}
         />
       )}
-
-      {/* -------------------FAVS------------------------ */}
-      {viewFavs &&
-        (userData.servicesFavs.length > 0 ? (
+      <div>
+        {/* -------------------FAVS------------------------ */}
+        {viewFavs &&
+          (userData.servicesFavs.length > 0 ? (
+            <Container>
+              <div>
+                <Grid container justifyContent="center" spacing={3}>
+                  {userData.servicesFavs.map((s) => (
+                    <Grid item key={s.id}>
+                      <CardService service={s} />
+                    </Grid>
+                  ))}
+                </Grid>
+              </div>
+            </Container>
+          ) : (
+            <div className={s.addFavContainer}>
+              <h3>Your Fav-list is currently empty</h3>
+              <div className={s.addToFav}>
+                <p>
+                  Add Services that you like and want to see later by clicking
+                  on the
+                </p>
+                <FavoriteIcon sx={{ marginLeft: 1 }} />
+              </div>
+            </div>
+          ))}
+        {/* ------------------------------------------------ */}
+        {/* ------------------ORDERS---------------------------- */}
+        {viewOrders && (
           <Container>
             <div>
-              <Grid container justifyContent="center" spacing={3}>
-                {userData.servicesFavs.map((s) => (
-                  <Grid item key={s.id}>
-                    <CardService service={s} />
-                  </Grid>
-                ))}
-              </Grid>
+              <h1>YOUR ORDERS</h1>
             </div>
           </Container>
-        ) : (
-          <div className={s.addFavContainer}>
-            <h3>Your Fav-list is currently empty</h3>
-            <div className={s.addToFav}>
-              <p>
-                Add Services that you like and want to see later by clicking on
-                the
-              </p>
-              <FavoriteIcon sx={{ marginLeft: 1 }} />
+        )}
+        {/* ----------------------------------------------------- */}
+        {/* -------------------SERVICES-------------------------- */}
+        {viewServices &&
+          (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
+            <div>
+              <Container>
+                <Grid container justifyContent="center" spacing={3}>
+                  {userData.servicesOwn.map((s) => (
+                    <Grid item key={s.id}>
+                      <CardService service={s} />
+                    </Grid>
+                  ))}
+                </Grid>
+              </Container>
             </div>
-          </div>
-        ))}
-      {/* ------------------------------------------------ */}
-      {/* ------------------ORDERS---------------------------- */}
-      {viewOrders && (
-        <Container>
-          <div>
-            <h1>YOUR ORDERS</h1>
-          </div>
-        </Container>
-      )}
-      {/* ----------------------------------------------------- */}
-      {/* -------------------SERVICES-------------------------- */}
-      {viewServices &&
-        (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
-          <div>
-            <Container>
-              <Grid container justifyContent="center" spacing={3}>
-                {userData.servicesOwn.map((s) => (
-                  <Grid item key={s.id}>
-                    <CardService service={s} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-          </div>
-        ) : (
-          <div className={s.addFavContainer}>
-            <h3>You are currently not offering any services</h3>
-            <div className={s.addToFav}>
-              <p>
-                Post Services that you want to offer by clicking on POST SERVICE
-              </p>
+          ) : (
+            <div className={s.addFavContainer}>
+              <h3>You are currently not offering any services</h3>
+              <div className={s.addToFav}>
+                <p>
+                  Post Services that you want to offer by clicking on POST
+                  SERVICE
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        {viewAdmin && userData.admin && <Admin />}
+      </div>
       {/* ---------------------------------------------- */}
       <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
       <ModalCreateService modal={modal} setModal={setModal} />
