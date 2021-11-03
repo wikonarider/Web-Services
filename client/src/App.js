@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getGroups());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

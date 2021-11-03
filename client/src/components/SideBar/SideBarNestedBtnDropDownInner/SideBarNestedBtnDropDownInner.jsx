@@ -16,6 +16,7 @@ export default function SideBarNestedBtnDropDownInner({ name }) {
     if (index !== -1) {
       setChecked(() => true);
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = () => {
