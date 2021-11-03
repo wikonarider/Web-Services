@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getServices } from "../../redux/actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import { setObjGlobal } from "../../redux/actions/index";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -48,14 +48,16 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 export default function SearchBar() {
+  const objGlobal = useSelector((state) => state.objGlobal);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const obj = {
-  filter: "title",
-  name: name,
-   }
+
   useEffect(() => {
-    dispatch(getServices(obj));
+    const obj = {
+      ...objGlobal,
+      title: name,
+    };
+    dispatch(setObjGlobal(obj));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
