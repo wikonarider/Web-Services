@@ -14,7 +14,7 @@ function makeWhereFilter(startRange, endRange, title) {
       },
     };
     // no range, title yes
-  } else if (!startRange || (!endRange && title)) {
+  } else if ((!startRange || !endRange) && title) {
     where = {
       title: {
         [Op.iLike]: `%${title}%`,
@@ -28,7 +28,7 @@ function makeWhereFilter(startRange, endRange, title) {
       },
     };
   }
-
+  console.log("Entro", where);
   return where;
 }
 
