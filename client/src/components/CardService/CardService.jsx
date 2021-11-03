@@ -29,8 +29,8 @@ function CardService({ service }) {
   const [added, setAdded] = useState(false);
   const [favState, setFavState] = useState(false);
   const [open, setOpen] = React.useState(false); //Estado para abrir DetailService modal
-  const { title, img, price, id, userId, ratingService } = service;
-  const rating = ratingService ? ratingService : 5;
+  const { title, img, price, id, userId, rating } = service;
+
   const fixedTitle = title
     ? title.length > 40
       ? `${title.substring(0, 40)}...`
@@ -105,7 +105,7 @@ function CardService({ service }) {
         <CardHeader title={fixedTitle} sx={{ pb: "0", height: "64px" }} />
         <Rating
           name="read-only"
-          value={rating}
+          value={Number(rating)}
           precision={0.5}
           readOnly
           sx={{ p: "8px" }}
