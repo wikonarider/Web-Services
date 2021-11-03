@@ -8,7 +8,7 @@ const {
   Services_provinces,
   Services_cities,
 } = require("../db.js");
-const { validateServices } = require("../utils/validServices");
+const { validateServices, validateUUID } = require("../utils/validServices");
 const { validFilters, makeWhereFilter } = require("../utils/validFilters");
 
 const dictonary = {
@@ -34,6 +34,7 @@ async function getServices(req, res, next) {
     } = req.query;
     if (userId) {
       next();
+      return;
     }
     const errors = await validFilters(req.query, dictonary);
 
@@ -93,6 +94,48 @@ async function getServices(req, res, next) {
   }
 }
 
+async function getServicesByUserId(req, res, next) {
+  try {
+    const { userId } = req.query;
+    if (validateUUID(userId)) {
+      const services = await Service.findAll({
+        attributes: [
+          "id",
+          "title",
+          "img",
+          "price",
+          "userId",
+          [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+        ],
+        where: {
+          userId: userId,
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+            include: {
+              model: Group,
+              attributes: ["name"],
+            },
+          },
+          {
+            model: Qualification,
+            attributes: [],
+          },
+        ],
+
+        raw: false,
+        group: ["service.id", "category.id", "category->group.id"],
+      });
+      res.json(services);
+    } else {
+      res.status(400).json({ message: "UserId it has to be a UUIDV4 " });
+    }
+  } catch (e) {
+    next(e);
+  }
+}
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
   const { userId } = req.cookies;
@@ -263,4 +306,5 @@ module.exports = {
   getServicesById,
   deleteServices,
   putServiceById,
+  getServicesByUserId,
 };
