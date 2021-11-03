@@ -83,7 +83,7 @@ export default function Nav() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Register setRegisterModal={setRegisterModal} />
+              <Register setRegisterModal={setRegisterModal} setLoginModal={setLoginModal} />
             </Box>
           </Modal>
 
@@ -106,7 +106,7 @@ export default function Nav() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Login setLogin={setLogin} setLoginModal={setLoginModal} />
+              <Login setLogin={setLogin} setLoginModal={setLoginModal} setRegisterModal={setRegisterModal} />
             </Box>
           </Modal>
 

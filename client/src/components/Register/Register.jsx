@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
 
-function Register({ setRegisterModal, handleRedirect }) {
+function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
     name: "",
@@ -69,7 +69,8 @@ function Register({ setRegisterModal, handleRedirect }) {
   };
 
   const HandleSingIn = () => {
-    
+    setLoginModal((prev) => !prev)
+    setRegisterModal((prev) => !prev)
   }
 
   return (

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { setCookie } from "../../redux/actions";
 import Divider from "@mui/material/Divider";
 
-function Login({ setLogin, setLoginModal }) {
+function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const dispatch = useDispatch();
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
@@ -63,7 +63,8 @@ function Login({ setLogin, setLoginModal }) {
   };
 
   const handleCreateAccount = () => {
-
+    setRegisterModal((prev) => !prev)
+    setLoginModal((prev) => !prev)
   }
 
   return (
