@@ -9,8 +9,7 @@ const {
   Services_cities,
 } = require("../db.js");
 const { validateServices } = require("../utils/validServices");
-const { validFilters } = require("../utils/validFilters");
-const { Op } = require("sequelize");
+const { validFilters, makeWhereFilter } = require("../utils/validFilters");
 
 const dictonary = {
   price: "service.price",
@@ -31,6 +30,7 @@ async function getServices(req, res, next) {
       page,
       pageSize,
       userId,
+      title,
     } = req.query;
     if (userId) {
       next();
@@ -48,14 +48,7 @@ async function getServices(req, res, next) {
           [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
         ],
 
-        where:
-          startRange && endRange
-            ? {
-                price: {
-                  [Op.between]: [startRange, endRange],
-                },
-              }
-            : {},
+        where: makeWhereFilter(startRange, endRange, title),
         include: [
           {
             model: Category,
