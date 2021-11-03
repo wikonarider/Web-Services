@@ -3,6 +3,7 @@ const {
   validateUser,
   checkUnique,
   validateUserEdit,
+  validatePurchase,
 } = require("../utils/validUser");
 
 async function userCreated(req, res, next) {
@@ -141,35 +142,23 @@ async function userBanned(req, res, next) {
 
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
-  const { userId, serviceId, logged } = req.body;
-
   try {
-    if (logged === true) {
-      const userFound = await Users.findOne({
-        // busco el usuario
-        where: { id: userId },
-      });
+    const { userId } = req.cookies;
+    const { servicesId } = req.body;
 
-      const serviceFound = await Service.findOne({
-        // busco el servicio
-        where: { id: serviceId },
-      });
-
-      //si usuario y servicio existe los asocio
-      if (userFound && serviceFound) {
-        await userFound.addService(serviceFound);
-
-        return res
-          .status(200)
-          .send({ message: "User associated to Service successful" });
-      } else {
-        //sino existe el usuario o no está logueado
-        return res
-          .status(200)
-          .send({ message: "You need to be logged to purchase a service" });
-      }
+    // validamos que sea un arreglo de servicios y
+    // que el esos servicios no pertenezcan al usuario
+    if (await validatePurchase(servicesId, userId)) {
+      const user = await Users.findByPk(userId);
+      // console.log para ver los metodos disponibles
+      // console.log(Object.keys(user.__proto__));
+      await user.setServicesBought(servicesId);
+      res.json({ message: "Success purchase" });
     } else {
-      return res.status(200).send({ message: "Logged false" });
+      res.status(400).json({
+        message:
+          "Only arrangement of valid services, or services that are not the owner ",
+      });
     }
   } catch (e) {
     next(e);
