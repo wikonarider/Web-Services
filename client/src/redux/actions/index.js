@@ -9,12 +9,12 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
-      console.log("OBJ", obj);
-      console.log("AXIOS", json.data);
+      // console.log("OBJ", obj);
+      // console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
-        objState: obj
+        objState: obj,
       });
     } catch (err) {
       return new Error(err);
@@ -178,5 +178,13 @@ export function removeCart(idService) {
   return {
     type: type.REMOVE_CART,
     payload: idService,
+  };
+}
+
+// obj global
+export function setObjGlobal(obj) {
+  return {
+    type: type.OBJ_GLOBAL,
+    payload: obj,
   };
 }

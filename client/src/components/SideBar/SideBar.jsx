@@ -16,15 +16,34 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
+import { setObjGlobal } from "../../redux/actions/index";
+import { useDispatch } from "react-redux";
 //maneja el ancho de la expansión al tocar el hamburguer button
 const drawerWidth = 350;
 
 export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleDrawer = () => {
     setOpen((prev) => !prev);
+  };
+
+  const handleReset = () => {
+    const obj = {
+      startRange: "",
+      endRange: "",
+      category: [],
+      page: "",
+      pageSize: "",
+      order: "",
+      type: "",
+      province: "",
+      city: "",
+    };
+    dispatch(setObjGlobal(obj));
   };
 
   return (
@@ -46,6 +65,14 @@ export default function MiniDrawer() {
         <SideBarRangeDate text={"Date order"} />
         <Divider />
         <SideBarRangePrice />
+        <Divider />
+        <Button
+          variant="outlined"
+          onClick={handleReset}
+          sx={{ width: "20%", margin: "10px auto 10px auto" }}
+        >
+          Reset
+        </Button>
         <Divider />
         <List>
           {["Info", "About", "Something"].map((text, index) => (

@@ -1,5 +1,3 @@
-const { addRating } = require("../utils/index");
-const servicesFilters = require("../utils/routeFilterAndOrder.js");
 const {
   Service,
   Users,
@@ -11,18 +9,36 @@ const {
   Services_cities,
 } = require("../db.js");
 const { validateServices } = require("../utils/validServices");
+const { validFilters } = require("../utils/validFilters");
+const { Op } = require("sequelize");
 
-//por cada ruta un controler
+const dictonary = {
+  price: "service.price",
+  rating: "qualifications.score",
+  date: "service.createdAt",
+};
+
 async function getServices(req, res, next) {
   try {
-    const { title } = req.query;
-    let dbServices;
-    if (Object.values(req.query).length) {
-      //compruebo si query tiene propiedades para filtrar
-      servicesFilters(req.query, res, next); // se encarga de todo lo relacionado con filtros
-    } else {
-      dbServices = await Service.findAll({
-        //Traigo todo de la db
+    const {
+      order,
+      province,
+      cities,
+      category,
+      startRange,
+      endRange,
+      type,
+      page,
+      pageSize,
+      userId,
+    } = req.query;
+    if (userId) {
+      next();
+    }
+    const errors = await validFilters(req.query, dictonary);
+
+    if (!Object.keys(errors).length) {
+      const services = await Service.findAll({
         attributes: [
           "id",
           "title",
@@ -32,7 +48,14 @@ async function getServices(req, res, next) {
           [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
         ],
 
-        // include: { all: true },
+        where:
+          startRange && endRange
+            ? {
+                price: {
+                  [Op.between]: [startRange, endRange],
+                },
+              }
+            : {},
         include: [
           {
             model: Category,
@@ -41,6 +64,9 @@ async function getServices(req, res, next) {
               model: Group,
               attributes: ["name"],
             },
+            where: category && {
+              name: category.split(","),
+            },
           },
           {
             model: Qualification,
@@ -48,38 +74,32 @@ async function getServices(req, res, next) {
           },
         ],
         raw: false,
-        group: [
-          "service.id",
-          "category.name",
-          "category->group.id",
-          "category.id",
+        group: ["service.id", "category.id", "category->group.id"],
+        subQuery: false,
+        // paginado
+        offset: page && pageSize ? page * pageSize : null,
+        limit: page && pageSize ? pageSize : null,
+        order: order && [
+          order === "rating"
+            ? [
+                conn.fn("AVG", conn.col(dictonary[order])),
+                type ? type + " NULLS LAST" : "DESC NULLS LAST",
+              ]
+            : [
+                conn.col(dictonary[order]),
+                type ? type + " NULLS LAST" : "DESC NULLS LAST",
+              ],
         ],
-        // Utilizar para ordernar por rating
-        // order: [
-        //   [conn.fn("AVG", conn.col("qualifications.score")), "DESC NULLS LAST"],
-        // ],
       });
-
-      if (!title) return res.send(dbServices);
-      //Devuelvo todos los servicios
-      else {
-        if (dbServices.length > 0) {
-          if (title) {
-            //si me pasan un title busco en la db los que coincidan
-            const filteredServices = [];
-            dbServices.map((service) => {
-              if (service.title.toLowerCase().includes(title.toLowerCase()))
-                filteredServices.push(service);
-            });
-            return res.send(filteredServices); //Si coincide mando el servicio con ese title
-          } else return dbServices; //Si no, devuelvo todos los servicios
-        }
-      }
+      res.json(services);
+    } else {
+      res.status(400).json(errors);
     }
   } catch (e) {
     next(e);
   }
 }
+
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
   const { userId } = req.cookies;
@@ -155,6 +175,7 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
+        [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
       include: [
         {
@@ -173,9 +194,15 @@ async function getServicesById(req, res, next) {
           },
         },
       ],
+      raw: false,
+      group: [
+        "service.id",
+        "category.id",
+        "category->group.id",
+        "qualifications.id",
+        "qualifications->user.id",
+      ],
     });
-
-    service = await addRating(service, service.id);
 
     let user = await Users.findOne({
       where: {

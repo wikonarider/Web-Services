@@ -1,44 +1,62 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { getServices } from '../../../redux/actions';
-
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import List from '@mui/material/List';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setObjGlobal } from "../../../redux/actions/index";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
 
 export default function SideBarRangeDate({ text, index }) {
   const dispatch = useDispatch();
-  const objState = useSelector((state) => state.objGlobal);
+  const objGlobal = useSelector((state) => state.objGlobal);
 
   const [rangeDate, setRangeDate] = useState({
-    ascending: true,
+    ascending: false,
     descending: false,
   });
 
-  const handleChangeCheck = (event) => {
-      objState.order = event.target.value
-      objState.filter = 'created'
-
-   
-
-
-    if (event.target.name === 'ascending') {
+  useEffect(() => {
+    if (objGlobal.order === "date") {
+      if (objGlobal.type === "ASC") {
+        setRangeDate({
+          descending: false,
+          ascending: true,
+        });
+      } else {
+        setRangeDate({
+          descending: true,
+          ascending: false,
+        });
+      }
+    } else {
       setRangeDate({
         descending: false,
-        [event.target.name]: event.target.checked,
-      });
-    }
-    if (event.target.name === 'descending') {
-      setRangeDate({
         ascending: false,
-        [event.target.name]: event.target.checked,
       });
     }
+  }, [objGlobal]);
 
-    dispatch(getServices(objState));
+  const handleChangeCheck = (event) => {
+    let obj = {
+      ...objGlobal,
+      order: event.target.name,
+      type: event.target.value,
+    };
+    dispatch(setObjGlobal(obj));
+
+    if (event.target.value === "ASC") {
+      setRangeDate({
+        descending: false,
+        ascending: true,
+      });
+    }
+    if (event.target.value === "DESC") {
+      setRangeDate({
+        descending: true,
+        ascending: false,
+      });
+    }
   };
 
   return (
@@ -46,7 +64,7 @@ export default function SideBarRangeDate({ text, index }) {
       <ListItem button key={index}>
         <ListItemText primary={text} />
         <FormControlLabel
-          name="ascending"
+          name="date"
           value="ASC"
           control={<Checkbox />}
           label="asc"
@@ -55,7 +73,7 @@ export default function SideBarRangeDate({ text, index }) {
           onChange={handleChangeCheck}
         />
         <FormControlLabel
-          name="descending"
+          name="date"
           value="DESC"
           control={<Checkbox />}
           label="des"

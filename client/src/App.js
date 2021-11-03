@@ -6,19 +6,23 @@ import YourAccount from "./components/YourAccount/YourAccount";
 import Chat from "./components/chat/chat";
 import React from "react";
 import Landing from "./components/Landing/Landing";
-import CreateService from "./components/CreateService/CreateService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setCookie } from "./redux/actions";
+import { setCookie, getServices } from "./redux/actions";
 
 function App() {
   // cargamos la cookie en el estado de redux
   // cada vez hau haya alguna modificaficion de algun componente
   const dispatch = useDispatch();
+  const objGlobal = useSelector((state) => state.objGlobal);
 
   useEffect(() => {
     dispatch(setCookie(document.cookie));
   });
+
+  useEffect(() => {
+    dispatch(getServices(objGlobal));
+  }, [objGlobal, dispatch]);
 
   return (
     <div className="App">
