@@ -7,6 +7,8 @@ import Carrousel from "../Carrousel/Carrousel";
 export default function Home() {
   const servicesState = useSelector((state) => state.services);
 
+  const topSixServices = servicesState.slice(0,6);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,7 +16,7 @@ export default function Home() {
   return (
     <div>
       <Nav />
-      <Carrousel />
+      <Carrousel topSix={topSixServices} />
       {servicesState.length > 0 ? (
         <Cards services={servicesState} />
       ) : (
