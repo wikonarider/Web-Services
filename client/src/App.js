@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import UserProfile from "./components/UserProfile/UserProfile";
 import { setCookie, getServices, getGroups } from "./redux/actions";
 import CheckoutDetail from "./components/CheckoutDetail/CheckoutDetail";
+import axios from "axios";
 
 function App() {
   // cargamos la cookie en el estado de redux
@@ -20,8 +21,11 @@ function App() {
   const cookie = useSelector((state) => state.cookie);
 
   useEffect(() => {
-    dispatch(setCookie(document.cookie.split("userId=")[1]));
-  }, [cookie, dispatch]);
+    axios
+      .get("/login")
+      .then((response) => dispatch(setCookie(response.data.cookie)))
+      .catch(() => dispatch(setCookie("")));
+  }, []);
 
   useEffect(() => {
     dispatch(getServices(objGlobal));

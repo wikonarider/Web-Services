@@ -7,7 +7,6 @@ import { useHistory } from "react-router";
 import { setCookie as setCookieRedux } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 
-
 import s from "./AccountNav.module.css";
 
 export default function AccountNav() {
@@ -15,7 +14,6 @@ export default function AccountNav() {
   const history = useHistory();
 
   const logOutClear = async () => {
-    document.cookie = "userId=; max-age=0";
     await postLogout();
     dispatch(setCookieRedux(""));
     history.push("/home");
