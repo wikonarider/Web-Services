@@ -3,14 +3,22 @@ import Button from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { postLogout } from "../../../utils/login";
+import { useHistory } from "react-router";
+import { setCookie as setCookieRedux } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 
 import s from "./AccountNav.module.css";
 
 export default function AccountNav() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const logOutClear = async () => {
     document.cookie = "userId=; max-age=0";
     await postLogout();
+    dispatch(setCookieRedux(""));
+    history.push("/home");
   };
 
   return (
@@ -22,16 +30,14 @@ export default function AccountNav() {
         <p className={s.yourAccount}>Your Account</p>
 
         <div className={s.logOut}>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="small"
-              onClick={logOutClear}
-            >
-              LOG OUT
-            </Button>
-          </Link>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={logOutClear}
+          >
+            LOG OUT
+          </Button>
         </div>
       </div>
     </div>
