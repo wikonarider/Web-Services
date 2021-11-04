@@ -150,6 +150,17 @@ export const getUserFavs = async () => {
   return { type: type.GET_USER_FAVS, payload: response.data };
 };
 
+//purchase
+export const postPurchase = async (array) => {
+  return async () => {
+    try {
+      return await axios.post(`/users/purchase`, array);
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+};
+
 //_____________________________________________________________________________________actions provinces
 
 export function getProvinces() {

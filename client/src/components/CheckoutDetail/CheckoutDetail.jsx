@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import UserMenu from '../Nav/UserMenu';
 import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
-import { getUserInfo } from '../../redux/actions';
+import { getUserInfo, postPurchase, removeCart } from '../../redux/actions';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -32,6 +32,17 @@ export default function CheckoutDetail() {
 
   const total = [];
 
+  const handleBuyClick = () => {
+    cart.map(async (c) => {
+      dispatch(await postPurchase({ servicesId: [c.id] }));
+      dispatch(await removeCart(c.id));
+    });
+
+    setTimeout(() => {
+      alert('Purchase made correctly');
+    }, 1000);
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -47,7 +58,7 @@ export default function CheckoutDetail() {
               color="inherit"
               aria-label="menu"
             >
-              <HomeIcon show={true} />
+              <HomeIcon />
             </IconButton>
             <UserMenu />
           </Toolbar>
@@ -74,7 +85,7 @@ export default function CheckoutDetail() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography variant="body2" color="text.primary">
+                <Typography variant="h5" color="text.primary">
                   TOTAL:
                   {total.length > 0 && (
                     <Typography gutterBottom variant="h4" component="div">
@@ -85,7 +96,11 @@ export default function CheckoutDetail() {
               </Grid>
               <Grid item>
                 {total.length > 0 ? (
-                  <Button variant="contained" size="large">
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={handleBuyClick}
+                  >
                     BUY
                   </Button>
                 ) : (

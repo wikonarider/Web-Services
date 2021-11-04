@@ -1,10 +1,10 @@
-const { Users, Service, Qualification, conn } = require("../db");
+const { Users, Service, Qualification, conn } = require('../db');
 const {
   validateUser,
   checkUnique,
   validateUserEdit,
   validatePurchase,
-} = require("../utils/validUser");
+} = require('../utils/validUser');
 
 async function userCreated(req, res, next) {
   try {
@@ -15,7 +15,7 @@ async function userCreated(req, res, next) {
       const errors = validateUser(req.body);
       if (!Object.keys(errors).length) {
         await Users.create(req.body);
-        res.json({ data: "created" }); // responde con 200, y created
+        res.json({ data: 'created' }); // responde con 200, y created
       } else {
         res.status(400).json({ data: errors });
         // algun parametro invalido.
@@ -23,7 +23,7 @@ async function userCreated(req, res, next) {
     } else {
       res
         .status(400)
-        .json({ data: "username or email already exist or is empty" });
+        .json({ data: 'username or email already exist or is empty' });
     }
   } catch (e) {
     next(e);
@@ -47,12 +47,12 @@ async function userEdit(req, res, next) {
         user.password = password ? password : user.password;
 
         await user.save();
-        res.json({ data: "User edited" });
+        res.json({ data: 'User edited' });
       } else {
         res.status(400).json({ data: errors });
       }
     } else {
-      res.status(400).json({ data: "Empty parameters, user not edited" });
+      res.status(400).json({ data: 'Empty parameters, user not edited' });
     }
   } catch (e) {
     next(e);
@@ -66,14 +66,14 @@ async function getUserInfo(req, res, next) {
     const { userId } = req.cookies;
     const user = await Users.findOne({
       attributes: [
-        "id",
-        "userImg",
-        "name",
-        "lastname",
-        "username",
-        "email",
-        "admin",
-        "ban",
+        'id',
+        'userImg',
+        'name',
+        'lastname',
+        'username',
+        'email',
+        'admin',
+        'ban',
       ],
       where: {
         id: userId,
@@ -81,41 +81,41 @@ async function getUserInfo(req, res, next) {
       include: [
         {
           model: Service,
-          as: "servicesOwn",
-          attributes: ["id", "title", "img", "price", "userId"],
+          as: 'servicesOwn',
+          attributes: ['id', 'title', 'img', 'price', 'userId'],
           include: {
             model: Qualification,
-            attributes: ["score"],
+            attributes: ['score'],
           },
         },
         {
           model: Service,
-          as: "servicesFavs",
-          attributes: ["id", "title", "img", "price", "userId"],
+          as: 'servicesFavs',
+          attributes: ['id', 'title', 'img', 'price', 'userId'],
           through: {
             attributes: [],
           },
           include: {
             model: Qualification,
-            attributes: ["score"],
+            attributes: ['score'],
           },
         },
         {
           model: Service,
-          as: "servicesBought",
-          attributes: ["id", "title", "img", "price", "userId"],
+          as: 'servicesBought',
+          attributes: ['id', 'title', 'img', 'price', 'userId'],
           through: {
             attributes: [],
           },
           include: {
             model: Qualification,
-            attributes: ["score"],
+            attributes: ['score'],
           },
         },
       ],
     });
 
-    user ? res.json(user) : res.status(404).json({ message: "User not found" });
+    user ? res.json(user) : res.status(404).json({ message: 'User not found' });
   } catch (e) {
     next(e);
   }
@@ -129,9 +129,9 @@ async function userBanned(req, res, next) {
       where: { id: id },
     });
 
-    res.json({ response: "user banned" });
+    res.json({ response: 'user banned' });
     if (usersInDb === null) {
-      res.json({ respones: "user not founded" });
+      res.json({ respones: 'user not founded' });
     } else {
       await Users.update(
         {
@@ -142,7 +142,7 @@ async function userBanned(req, res, next) {
           where: { id: id },
         }
       );
-      res.json({ response: "user banned" });
+      res.json({ response: 'user banned' });
     }
   } catch (e) {
     next(e);
@@ -158,15 +158,17 @@ async function postPurchase(req, res, next) {
     // validamos que sea un arreglo de servicios y
     // que el esos servicios no pertenezcan al usuario
     if (await validatePurchase(servicesId, userId)) {
+      console.log('USERID', userId);
+      console.log('SERVICESID', servicesId);
       const user = await Users.findByPk(userId);
       // console.log para ver los metodos disponibles
       // console.log(Object.keys(user.__proto__));
       await user.setServicesBought(servicesId);
-      res.json({ message: "Success purchase" });
+      res.json({ message: 'Success purchase' });
     } else {
       res.status(400).json({
         message:
-          "Only arrangement of valid services, or services that are not the owner ",
+          'Only arrangement of valid services, or services that are not the owner ',
       });
     }
   } catch (e) {
