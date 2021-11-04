@@ -12,6 +12,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -41,10 +42,6 @@ function CardService({ service }) {
       ? `${title.substring(0, 40)}...`
       : title
     : null;
-
-  //Funciones para abrir y cerrar DetailService modal
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   // verificar si ya esta en favorito, prende en rojo
   // el boton de favs de las cards del home o lo deja apagado
@@ -112,7 +109,7 @@ function CardService({ service }) {
     <div>
       <Card sx={{ width: 345, height: 420, textDecoration: "none" }}>
         {/* component={Link} to={`/services/${id}`} */}
-        <CardActionArea onClick={handleOpen}>
+        <CardActionArea component={Link} to={`/services/${id}`}>
           <CardHeader title={fixedTitle} sx={{ pb: "0", height: "64px" }} />
 
           <Rating
@@ -168,31 +165,6 @@ function CardService({ service }) {
             <AddShoppingCartIcon />
           </IconButton>
         </CardActions>
-
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "100%",
-              height: "100%",
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              overflowY: "scroll",
-              overflowX: "hidden",
-              m: "60px auto",
-            }}
-          >
-            <DetailService closeModal={handleClose} id={id} />
-          </Box>
-        </Modal>
       </Card>
       <ModalCardService modal={modal} setModal={setModal} />
     </div>
