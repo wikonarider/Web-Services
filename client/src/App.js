@@ -55,6 +55,7 @@ function App() {
           return <UserProfile id={match.params.id} />;
         }}
       />
+
       <Route exact path="/checkout" component={CheckoutDetail} />
     </div>
   );

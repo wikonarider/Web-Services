@@ -166,7 +166,7 @@ export default function DetailService({ id, closeModal }) {
 
             <Box gridColumn="span 6">
               {/* () => handleClose() */}
-              <IconButton onClick={closeModal}>
+              <IconButton onClick={handleClose}>
                 <Close />
               </IconButton>
             </Box>
