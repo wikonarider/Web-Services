@@ -9,8 +9,6 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
-      // console.log("OBJ", obj);
-      // console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -163,7 +161,7 @@ export const getUserFavs = async () => {
 export function postPurchase(body) {
   return async function (dispatch) {
     var json = await axios.post(`/checkout`, body);
-    window.location.replace(json.data)
+    window.location.replace(json.data);
     return dispatch({
       type: type.POST_PURCHASE,
       payload: json.data,
