@@ -151,15 +151,25 @@ export const getUserFavs = async () => {
 };
 
 //purchase
-export const postPurchase = async (array) => {
-  return async () => {
-    try {
-      return await axios.post(`/users/purchase`, array);
-    } catch (err) {
-      return new Error(err);
-    }
+// export const postPurchase = async (array) => {
+//   return async () => {
+//     try {
+//       return await axios.post(`/checkout`, array);
+//     } catch (err) {
+//       return new Error(err);
+//     }
+//   };
+// };
+export function postPurchase(body) {
+  return async function (dispatch) {
+    var json = await axios.post(`/checkout`, body);
+    window.location.replace(json.data)
+    return dispatch({
+      type: type.POST_PURCHASE,
+      payload: json.data,
+    });
   };
-};
+}
 
 //_____________________________________________________________________________________actions provinces
 

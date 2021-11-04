@@ -19,6 +19,7 @@ const initialState = {
     type: "DESC",
     province: "",
     city: "",
+
   },
 };
 
@@ -82,6 +83,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         objGlobal: action.payload,
       };
+
+      case type.POST_PURCHASE:
+        return{
+          ...state,
+        }
     default:
       return state;
   }

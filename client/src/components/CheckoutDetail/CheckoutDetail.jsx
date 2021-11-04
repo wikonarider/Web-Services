@@ -19,8 +19,10 @@ import Button from '@mui/material/Button';
 
 export default function CheckoutDetail() {
   const cart = useSelector((state) => state.cart);
+  console.log('CartState', cart)
   const dispatch = useDispatch();
   const cookie = useSelector((state) => state.cookie);
+
 
   useEffect(() => {
     if (cookie) {
@@ -33,8 +35,9 @@ export default function CheckoutDetail() {
   const total = [];
 
   const handleBuyClick = () => {
+  
     cart.map(async (c) => {
-      dispatch(await postPurchase({ servicesId: [c.id] }));
+      dispatch(await postPurchase({ servicesId: [c.id], totalPrice : c.price, title : c.title, quantity : 1 }));
       dispatch(await removeCart(c.id));
     });
 
