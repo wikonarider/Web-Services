@@ -4,12 +4,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { postLogout } from "../../../utils/login";
 
-
 import s from "./AccountNav.module.css";
 
 export default function AccountNav() {
   const logOutClear = async () => {
-    document.cookie = "userId=; max-age=0";
     await postLogout();
   };
 

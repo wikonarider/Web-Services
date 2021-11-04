@@ -41,7 +41,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await postLogin(inputs);
+      const response = await postLogin(inputs);
 
       setInputs({
         username: "",
@@ -49,7 +49,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       });
 
       setLoginModal(() => false);
-      dispatch(setCookie(document.cookie.split("userId=")[1]));
+      dispatch(setCookie(response.data));
       setLogin && setLogin(true);
     } catch (e) {
       setInputErrors(() => {
@@ -67,8 +67,9 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     try {
       const token = googleData.tokenId;
       const res = await axios.post(`/login?token=${token}`);
+      console.log(res.data);
       setLoginModal(() => false);
-      dispatch(setCookie(document.cookie.split("userId=")[1]));
+      dispatch(setCookie(res.data));
       setLogin && setLogin(true);
     } catch (e) {
       alert("Unregistered user");

@@ -30,7 +30,6 @@ export default function UserMenu() {
   };
 
   const logOutClear = async () => {
-    document.cookie = "userId=; max-age=0";
     await postLogout();
     dispatch(setCookieRedux(""));
     history.push("/home");
