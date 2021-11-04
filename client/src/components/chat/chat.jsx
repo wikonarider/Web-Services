@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Button, Input } from "@material-ui/core";
+import dotenv from "dotenv";
 dotenv.config();
 var clienteIO = io(process.env.REACT_APP_API); //conexion al servidor para bidireccional peticiones
 
