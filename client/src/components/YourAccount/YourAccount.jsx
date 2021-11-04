@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import s from "./YourAccount.module.css";
 
@@ -7,10 +7,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 //-------------------------------------------------------
 import CardService from "../CardService/CardService";
-import { FormDialog } from "./FormDialog/FormDialog";
 import { getUserInfo, getUserFavs } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import ModalCreateService from "./ModalCreateService";
 import AccountNav from "./AccountNav/AccountNav";
 import UserInfo from "./UserInfo/UserInfo";
 import Botonera from "./Botonera/Botonera";
@@ -137,8 +135,6 @@ export default function YourAccount({ userProfile, profileInfo }) {
         {viewAdmin && userData.admin && <Admin />}
       </div>
       {/* ---------------------------------------------- */}
-      <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
-      <ModalCreateService modal={modal} setModal={setModal} />
     </div>
   );
 }
