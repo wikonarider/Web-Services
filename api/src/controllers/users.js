@@ -151,26 +151,38 @@ async function userBanned(req, res, next) {
 
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
+  const {state, servicesId, collection_status, userId} = req.query
+  // const { userId } = req.cookies;
+  console.log('idEnPruchase', req.cookies)
+  console.log('serviceIdenPruchase', servicesId)
+  console.log('collection_status', collection_status)
+ 
+
   try {
-    const { userId } = req.cookies;
-    const { servicesId } = req.body;
+    if (collection_status == 'approved'){
+    console.log('POSTPURCHASEID', userId)
+    console.log('SERVICEIDPURCHASE', servicesId)
 
     // validamos que sea un arreglo de servicios y
     // que el esos servicios no pertenezcan al usuario
-    if (await validatePurchase(servicesId, userId)) {
+    
       console.log('USERID', userId);
       console.log('SERVICESID', servicesId);
-      const user = await Users.findByPk(userId);
+      const user = await Users.findOne({
+        where: {
+          id : userId
+        }
+      });
       // console.log para ver los metodos disponibles
       // console.log(Object.keys(user.__proto__));
+      console.log('USERenPurchase' , user)
       await user.setServicesBought(servicesId);
-      res.json({ message: 'Success purchase' });
-    } else {
-      res.status(400).json({
-        message:
-          'Only arrangement of valid services, or services that are not the owner ',
-      });
-    }
+      res.redirect("http://localhost:3000/home");
+    
+  } else {
+    res.status(400).redirect("http://localhost:3000/fail")
+  }
+
   } catch (e) {
     next(e);
   }

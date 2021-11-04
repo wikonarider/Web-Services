@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 
 import TextField from "@mui/material/TextField";
@@ -15,8 +15,13 @@ import s from "./CreateService.module.css";
 import { createService, getGroups, getProvinces } from "../../redux/actions";
 import ModalService from "./ModalService";
 import Box from "@mui/system/Box";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import IconButton from "@mui/material/IconButton";
+import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
+import { useHistory } from "react-router";
 
 function CreateService(props) {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +56,9 @@ function CreateService(props) {
     cities: [],
     subCategory: "",
   });
+
+  console.log(inputs);
+
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -111,6 +119,13 @@ function CreateService(props) {
       setInputs({ ...inputs, cities: [] });
     }
   };
+  //-----------------HANDLE SELECT ALL --------------------------------
+
+  const handleSelectAll = () => {
+    let idCities = provinces[index.indexProv].cities.map((c) => c.id);
+    setInputs({ ...inputs, cities: idCities });
+  };
+
   //-----------------------------------------------------------------handleinput
   function handleInput(e) {
     setInputs((prev) => {
@@ -142,7 +157,6 @@ function CreateService(props) {
     ) {
       setModal(true);
       dispatch(createService({ ...inputs, price: parseInt(inputs.price) }));
-
       setInputs({
         title: "",
         description: "",
@@ -158,6 +172,8 @@ function CreateService(props) {
       alert("Faltan parmetros");
     }
   }
+
+  //---------HANDLE IMAGE -------------------------------------
 
   const loadImg = async (files) => {
     const reader = new FileReader();
@@ -209,177 +225,234 @@ function CreateService(props) {
   }
   //-----------------------------------------------------
 
+  //-----------REF-------------------------------
+  const fileInput = useRef();
+  //---------------------------------
+
   if (provinces && groups) {
     return (
-      <div className={s.container}>
-        <form onSubmit={(e) => handleSubmit(e)} className={s.formWrapper}>
-          {/* SELECT DE CATEGORIA */}
-          <div>
-            <Box sx={{ minWidth: 200 }}>
-              <FormControl fullWidth>
-                <InputLabel>Category</InputLabel>
-                <Select
-                  value={inputs.categoryId}
-                  label="Category"
-                  onChange={(e) => handleCategory(e.target.value)}
-                >
-                  {groups &&
-                    groups.map((el) => (
-                      <MenuItem key={el.name} value={el.id}>
-                        {el.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
+      <>
+        <div className={s.arrow}>
+          <IconButton color="primary" onClick={() => history.push("/account")}>
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
 
-          {/* SELECT DE SUBCATEGORIA */}
-          {inputs.categoryId && (
-            <div>
-              <Box sx={{ minWidth: 200 }}>
-                <FormControl fullWidth>
-                  <InputLabel>Type</InputLabel>
-                  <Select
-                    label="Type"
-                    value={inputs.subCategory}
-                    onChange={(e) => handleSubCategory(e.target.value)}
-                    defaultValue=""
-                  >
-                    {groups[index.indexCat].categories.map((el) => (
-                      <MenuItem key={el.name} value={el.id}>
-                        {el.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </div>
-          )}
+        <div className={s.container}>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className={s.group}>
+              <div className={s.category}>
+                {/* SELECT DE CATEGORIA */}
+                <div>
+                  <Box sx={{ width: 350 }}>
+                    <FormControl fullWidth>
+                      <InputLabel>Category</InputLabel>
+                      <Select
+                        value={inputs.categoryId}
+                        label="Category"
+                        onChange={(e) => handleCategory(e.target.value)}
+                      >
+                        {groups &&
+                          groups.map((el) => (
+                            <MenuItem key={el.name} value={el.id}>
+                              {el.name}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
 
-          {/* SELECT DE PROVINCIA */}
-          <div>
-            <Autocomplete
-              options={provinces}
-              getOptionLabel={(option) => option.name}
-              onChange={(e, value) => handleProvince(value)}
-              style={{ width: 500 }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label={"Provinces"}
-                  placeholder="Search"
-                />
-              )}
-            />
-          </div>
+                {/* SELECT DE SUBCATEGORIA */}
+                {inputs.categoryId && (
+                  <div className={s.type}>
+                    <Box sx={{ width: 350 }}>
+                      <FormControl fullWidth>
+                        <InputLabel>Type</InputLabel>
+                        <Select
+                          label="Type"
+                          value={inputs.subCategory}
+                          onChange={(e) => handleSubCategory(e.target.value)}
+                          defaultValue=""
+                        >
+                          {groups[index.indexCat].categories.map((el) => (
+                            <MenuItem key={el.name} value={el.id}>
+                              {el.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Box>
+                  </div>
+                )}
+              </div>
 
-          {/* SELECT DE CIUDAD */}
-          {inputs.provinces && (
-            <div>
-              <Autocomplete
-                multiple
-                options={provinces[index.indexProv].cities}
-                onChange={(e, value) => handleCity(value)}
-                disableCloseOnSelect
-                getOptionLabel={(option) => option.name}
-                renderInput={(props, option, { selected }) => (
-                  <li {...props}>
-                    <Checkbox
-                      icon={icon}
-                      checkedIcon={checkedIcon}
-                      style={{ marginRight: 8 }}
-                      checked={selected}
+              <div className={s.province}>
+                {/* SELECT DE PROVINCIA */}
+                <div>
+                  <Autocomplete
+                    style={{ width: 350 }}
+                    options={provinces}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(e, value) => handleProvince(value)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label={"Provinces"}
+                        placeholder="Search"
+                      />
+                    )}
+                  />
+                </div>
+
+                {/* SELECT DE CIUDAD */}
+                {inputs.provinces && (
+                  <div className={s.city}>
+                    <Autocomplete
+                      style={{ width: 350 }}
+                      multiple
+                      limitTags={2}
+                      options={provinces[index.indexProv].cities}
+                      onChange={(e, value) => handleCity(value)}
+                      disableCloseOnSelect
+                      getOptionLabel={(option) => option.name}
+                      renderInput={(props, option, { selected }) => (
+                        <li {...props}>
+                          <Checkbox
+                            icon={icon}
+                            checkedIcon={checkedIcon}
+                            checked={selected}
+                          />
+                          {option.name}
+                        </li>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Cities"
+                          placeholder="Search"
+                        />
+                      )}
                     />
-                    {option.name}
-                  </li>
+                  </div>
                 )}
-                style={{ width: 500 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Cities" placeholder="Search" />
-                )}
+                {/* --------------------------------- */}
+              </div>
+              {inputs.provinces && (
+                <div className={s.selectAllButton}>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={handleSelectAll}
+                  >
+                    select all
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            <div className={s.serviceInfo}>
+              <div className={s.inputsContainer}>
+                <TextField
+                  name="title"
+                  placeholder="Title"
+                  value={inputs.title}
+                  onChange={handleInput}
+                  error={errors.title ? true : false}
+                  helperText={errors.title}
+                  label="Title"
+                  variant="outlined"
+                  required
+                  fullWidth
+                ></TextField>
+              </div>
+
+              <div className={s.inputsContainer}>
+                <TextField
+                  name="description"
+                  placeholder="Description"
+                  value={inputs.description}
+                  onChange={handleInput}
+                  error={errors.description ? true : false}
+                  helperText={errors.description}
+                  label="Description"
+                  variant="outlined"
+                  required
+                  fullWidth
+                ></TextField>
+              </div>
+
+              <div className={s.inputsContainer}>
+                <TextField
+                  name="price"
+                  placeholder="Price"
+                  value={inputs.price}
+                  onChange={handleInput}
+                  error={errors.price ? true : false}
+                  helperText={errors.price}
+                  label="Price"
+                  variant="outlined"
+                  required
+                  fullWidth
+                ></TextField>
+              </div>
+            </div>
+
+            <div className={s.file}>
+              <TextField
+                style={{ display: "none" }}
+                name="img"
+                type="file"
+                inputRef={fileInput}
+                onChange={(e) => loadImg(e.target.files[0])}
               />
             </div>
-          )}
-          <div className={s.inputsContainer}>
-            <TextField
-              name="title"
-              placeholder="Title"
-              value={inputs.title}
-              onChange={handleInput}
-              error={errors.title ? true : false}
-              helperText={errors.title}
-              label="Title"
-              variant="outlined"
-              required
-              fullWidth
-            ></TextField>
-          </div>
 
-          <div className={s.inputsContainer}>
-            <TextField
-              name="description"
-              placeholder="Description"
-              value={inputs.description}
-              onChange={handleInput}
-              error={errors.description ? true : false}
-              helperText={errors.description}
-              label="Description"
-              variant="outlined"
-              required
-              fullWidth
-            ></TextField>
-          </div>
-
-          <div className={s.inputsContainer}>
-            <TextField
-              name="price"
-              placeholder="Price"
-              value={inputs.price}
-              onChange={handleInput}
-              error={errors.price ? true : false}
-              helperText={errors.price}
-              label="Price"
-              variant="outlined"
-              required
-              fullWidth
-            ></TextField>
-          </div>
-
-          <div className={s.inputsContainer}>
-            <TextField
-              name="img"
-              type="file"
-              fullWidth
-              onChange={(e) => loadImg(e.target.files[0])}
-            />
-          </div>
-
-          <div className={s.imgContainer}>
-            <img className={s.imgRender} id="imgBox" src="hola" alt=""></img>
-          </div>
-
-          {!errors.title && !errors.description && !errors.price ? (
-            <div className={s.submitButton}>
-              <Button type="submit" variant="contained">
-                Create Service
+            <div className={s.selectfile}>
+              <Button
+                variant="outlined"
+                startIcon={<PhotoSizeSelectActualIcon />}
+                color="secondary"
+                onClick={() => {
+                  fileInput.current.click();
+                }}
+                fullWidth={true}
+              >
+                Select File
               </Button>
             </div>
-          ) : (
-            <div className={s.submitButton}>
-              <Button disabled type="submit" variant="contained">
-                Create Service
-              </Button>
-            </div>
-          )}
-        </form>
 
-        <ModalService
-          modal={modal}
-          setModal={setModal}
-          message={"Service created successfully!"}
-        />
-      </div>
+            <div className={s.imgContainer}>
+              <img className={s.imgRender} id="imgBox" src="hola" alt=""></img>
+            </div>
+
+            {!errors.title && !errors.description && !errors.price && inputs.img ? (
+              <div className={s.submitButton}>
+                <Button type="submit" variant="contained" fullWidth={true}>
+                  Create Service
+                </Button>
+              </div>
+            ) : (
+              <div className={s.submitButton}>
+                <Button
+                  disabled
+                  type="submit"
+                  variant="contained"
+                  fullWidth={true}
+                >
+                  Create Service
+                </Button>
+              </div>
+            )}
+          </form>
+
+          <ModalService
+            modal={modal}
+            setModal={setModal}
+            message={"Service created successfully!"}
+          />
+        </div>
+      </>
     );
   } else {
     return <label>cargando</label>;

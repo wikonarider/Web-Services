@@ -12,6 +12,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import { setCookie, getServices, getGroups } from "./redux/actions";
 import CheckoutDetail from "./components/CheckoutDetail/CheckoutDetail";
 import axios from "axios";
+import CreateService from "./components/CreateService/CreateService";
 
 function App() {
   // cargamos la cookie en el estado de redux
@@ -57,6 +58,7 @@ function App() {
       />
 
       <Route exact path="/checkout" component={CheckoutDetail} />
+      <Route exact path='/createservice' component={CreateService} />
     </div>
   );
 }
