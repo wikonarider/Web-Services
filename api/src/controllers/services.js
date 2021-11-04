@@ -10,6 +10,7 @@ const {
 } = require("../db.js");
 const { validateServices, validateUUID } = require("../utils/validServices");
 const { validFilters, makeWhereFilter } = require("../utils/validFilters");
+const { addRating } = require("../utils/OldFilters/index");
 
 const dictonary = {
   price: "service.price",
@@ -133,7 +134,7 @@ async function getServicesByUserId(req, res, next) {
         where: {
           id: userId,
         },
-        attributes: ["name", "lastname", 'userImg'],
+        attributes: ["name", "lastname", "userImg"],
       });
 
       res.json([user, services]);
@@ -219,7 +220,6 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
-        [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
       include: [
         {
@@ -238,15 +238,9 @@ async function getServicesById(req, res, next) {
           },
         },
       ],
-      raw: false,
-      group: [
-        "service.id",
-        "category.id",
-        "category->group.id",
-        "qualifications.id",
-        "qualifications->user.id",
-      ],
     });
+
+    service = await addRating(service, service.id);
 
     let user = await Users.findOne({
       where: {
