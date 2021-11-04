@@ -15,7 +15,7 @@ import "@fontsource/roboto/700.css";
 dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 //axios("/services")
 
 ReactDOM.render(

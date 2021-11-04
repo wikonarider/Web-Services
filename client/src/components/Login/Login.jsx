@@ -54,7 +54,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     } catch (e) {
       setInputErrors(() => {
         let error = {};
-        if (e.response.data === "user incorrect") {
+        if (e.response && e.response.data === "user incorrect") {
           error.username = "User incorrect";
         } else {
           error.password = "Password incorrect";

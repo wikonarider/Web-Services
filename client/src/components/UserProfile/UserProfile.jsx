@@ -23,15 +23,15 @@ export default function UserProfile({ id, username }) {
   const [profileServices, setProfileServices] = useState({});
   const [loading, setLoading] = useState(true);
 
-  console.log('INFO:', profileInfo);
+  console.log("INFO:", profileInfo);
   console.log("SERVICES:", profileServices);
 
   function getProfileServices({ id, setProfileServices }) {}
 
   useEffect(() => {
-    axios(`http://localhost:3001/services?userId=${id}`).then((response) => {
+    axios(`/services?userId=${id}`).then((response) => {
       setProfileServices(response.data[1]);
-      setProfileInfo(response.data[0])
+      setProfileInfo(response.data[0]);
       setLoading(false);
     });
   }, []);

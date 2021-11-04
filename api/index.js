@@ -44,7 +44,7 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
         console.log(`Force ${flat}, datos no cargados`);
       } else {
         await Group.bulkCreate(groups).then(() => {
-          console.log(`force ${flat},Grupos cargados`);
+          console.log(`-Force ${flat}-\nGrupos cargados`);
           Promise.resolve(linkAllGroups()).then(() =>
             console.log("Categorias cargadas")
           );

@@ -30,7 +30,7 @@ export default function DetailService({ id, closeModal }) {
 
   let history = useHistory();
   function updateService() {
-    axios(`http://localhost:3001/services/${id}`).then((response) => {
+    axios(`/services/${id}`).then((response) => {
       console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
     });
