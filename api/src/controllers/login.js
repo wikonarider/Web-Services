@@ -22,6 +22,7 @@ async function postLogin(req, res, next) {
       if ((userFinded.username = username && checkPass === true)) {
         res.cookie("userId", userFinded.id, {
           expire: new Date() + 9999,
+          httpOnly: true,
           sameSite: app.get("env") === "development" ? true : "none",
           secure: app.get("env") === "development" ? false : true,
         }); // HttpOnly el acceso al script del cliente no esta permitido
@@ -58,6 +59,15 @@ async function postLogin(req, res, next) {
   }
 }
 
+function checkLogin(req, res, next) {
+  const { userId } = req.cookies;
+
+  userId
+    ? res.json({ cookie: userId })
+    : res.status(404).json({ cookie: "User not logged" });
+}
+
 module.exports = {
   postLogin,
+  checkLogin,
 };
