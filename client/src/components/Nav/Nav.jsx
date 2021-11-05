@@ -13,6 +13,9 @@ import IconButton from "@mui/material/IconButton";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Fab from "@mui/material/Fab";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ScrollTop from "./ScrollTop";
 
 // MATERIAL UI
 import { Button, makeStyles } from "@material-ui/core";
@@ -70,7 +73,7 @@ export default function Nav({ route }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }}>
+    <Box sx={{ flexGrow: 1, width: "101%" }} id="back-to-top-anchor">
       <AppBar
         position="fixed"
         sx={{ zIndex: "1201", backgroundColor: "#cfd8dc" }}
@@ -152,6 +155,11 @@ export default function Nav({ route }) {
           ) : null}
         </Toolbar>
       </AppBar>
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </Box>
   );
 }
