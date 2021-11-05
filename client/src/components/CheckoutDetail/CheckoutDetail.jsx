@@ -1,72 +1,42 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 
-import UserMenu from '../Nav/UserMenu';
-import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
-import { getUserInfo, postPurchase, removeCart } from '../../redux/actions';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import HomeIcon from '@mui/icons-material/Home';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
+import { postPurchase, removeCart } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function CheckoutDetail() {
   const cart = useSelector((state) => state.cart);
-  console.log('CartState', cart)
   const dispatch = useDispatch();
-  const cookie = useSelector((state) => state.cookie);
-
-
-  useEffect(() => {
-    if (cookie) {
-      (async () => {
-        dispatch(await getUserInfo());
-      })();
-    }
-  }, [cookie, dispatch]);
 
   const total = [];
 
   const handleBuyClick = () => {
-  
     cart.map(async (c) => {
-      dispatch(await postPurchase({ servicesId: [c.id], totalPrice : c.price, title : c.title, quantity : 1 }));
+      dispatch(
+        await postPurchase({
+          servicesId: [c.id],
+          totalPrice: c.price,
+          title: c.title,
+          quantity: 1,
+        })
+      );
       dispatch(await removeCart(c.id));
     });
 
     setTimeout(() => {
-      alert('Purchase made correctly');
+      alert("Purchase made correctly");
     }, 1000);
   };
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar
-            sx={{ mr: 2, display: 'flex', justifyContent: 'space-between' }}
-          >
-            <IconButton
-              component={Link}
-              to="/home"
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <HomeIcon />
-            </IconButton>
-            <UserMenu />
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <Box sx={{ flexGrow: 1 }}></Box>
       {cart.length > 0 &&
         cart.map((item, index) => {
           total.push(item.price);
@@ -82,7 +52,7 @@ export default function CheckoutDetail() {
         })}
 
       <Paper
-        sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
+        sx={{ p: 2, margin: "auto", maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
       >
         <Grid container spacing={2} sx={{ gap: 1 }}>
           <Grid item xs={12} sm container>
