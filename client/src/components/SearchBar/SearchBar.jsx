@@ -6,6 +6,8 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
+import styles from "./SearchBar.module.css";
+
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -62,11 +64,16 @@ export default function SearchBar() {
   }, [name]);
 
   return (
-    <Search>
-      <SearchIconWrapper>
+    <Search
+      sx={{ backgroundColor: "transparent" }}
+      className={styles.searchBox}
+    >
+      <SearchIconWrapper sx={{ backgroundColor: "transparent" }}>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
+        sx={{ backgroundColor: "transparent" }}
+        className={styles.searchInput}
         value={name}
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
