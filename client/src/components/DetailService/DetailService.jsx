@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-// import { handleFav } from "../../utils/buttonHandlers";
 import {
   Box,
   CardMedia,
@@ -13,7 +11,7 @@ import {
   CardActions,
   IconButton,
 } from "@mui/material";
-import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
+import { AddShoppingCart, Favorite, Share } from "@mui/icons-material";
 import CardUser from "../CardUser/CardUser";
 import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
@@ -32,8 +30,6 @@ export default function DetailService({ id, closeModal }) {
   const cookie = useSelector((state) => state.cookie);
   const favs = useSelector((state) => state.user.servicesFavs);
   const dispatch = useDispatch();
-
-  let history = useHistory();
 
   function updateService() {
     axios(`/services/${id}`).then((response) => {
@@ -65,13 +61,10 @@ export default function DetailService({ id, closeModal }) {
   //----------- SERVICIOS RELACIONADOS ------------------------
   const getRelatedServices = useCallback(() => {
     axios(`/services?category=${category}`).then((response) => {
-      let NumberId = Number(id)
-      setRelated(response.data.filter(s => s.id !== NumberId).slice(0,4));
+      let NumberId = Number(id);
+      setRelated(response.data.filter((s) => s.id !== NumberId).slice(0, 4));
     });
   }, [category, id]);
-
-  // function getRelatedServices() {
-  // }
 
   useEffect(() => {
     if (category) {
@@ -104,17 +97,6 @@ export default function DetailService({ id, closeModal }) {
     }
   };
 
-  // const theme = {
-  //   favorite: {
-  //     1: { color: "red" },
-  //     0: { color: "grey" },
-  //   },
-  // };
-
-  const handleClose = () => {
-    history.push("/home");
-  };
-
   //-------------------HANDLE FAVS-------------------------
   const handleFavs = async () => {
     try {
@@ -143,7 +125,6 @@ export default function DetailService({ id, closeModal }) {
 
   return (
     <>
-      {/* <Nav /> */}
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -192,13 +173,6 @@ export default function DetailService({ id, closeModal }) {
               </IconButton>
               <IconButton aria-label="share">
                 <Share />
-              </IconButton>
-            </Box>
-
-            <Box gridColumn="span 6">
-              {/* () => handleClose() */}
-              <IconButton onClick={handleClose}>
-                <Close />
               </IconButton>
             </Box>
           </Box>
