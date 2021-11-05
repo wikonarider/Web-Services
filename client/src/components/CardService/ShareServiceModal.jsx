@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalCardService({ modal, setModal}) {
+export default function ShareServiceModal({ modal, setModal}) {
 
   const handleClose = () => {
     setModal(false);
