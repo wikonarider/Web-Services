@@ -1,8 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
-import { postPurchase, removeCart } from "../../redux/actions";
-import s from "./CheckoutPopOver/checkoutDetail.module.css";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,6 +9,7 @@ import Button from "@mui/material/Button";
 import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
 import { postPurchase, removeCart } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
+import s from "./CheckoutPopOver/checkoutDetail.module.css";
 
 export default function CheckoutDetail() {
   const cart = useSelector((state) => state.cart);
