@@ -214,6 +214,13 @@ export function removeCart(idService) {
   };
 }
 
+export function setCartStorage(cart) {
+  return {
+    type: type.SET_CART_STORAGE,
+    payload: cart,
+  };
+}
+
 // obj global
 export function setObjGlobal(obj) {
   return {
