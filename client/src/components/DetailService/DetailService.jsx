@@ -3,13 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
-
-
+import RightInfoBar from "./RightInfoBar/RightInfoBar";
 
 export default function DetailService({ id, closeModal }) {
   let [service, setService] = useState({ service: {}, user: {} });
@@ -28,7 +26,6 @@ export default function DetailService({ id, closeModal }) {
 
   function updateService() {
     axios(`/services/${id}`).then((response) => {
-      // console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
       setCategory(response.data.service.category.name);
     });
@@ -115,15 +112,13 @@ export default function DetailService({ id, closeModal }) {
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-  let { img, title, price, description, rating, qualifications } =
-    service.service;
+  let { img, title, price, qualifications } = service.service;
 
   //-------------------------------------------
 
-  
-
   return (
     <>
+      {/* <Nav /> */}
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -133,7 +128,10 @@ export default function DetailService({ id, closeModal }) {
         m="0px auto"
       >
         {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
-        <Box gridColumn={{xs:'span 12', sm:"span 12", md:'span 8'}} p={{xs:0, sm:2}}>
+        <Box
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
+          p={{ xs: 0, sm: 2 }}
+        >
           <CardMedia
             component="img"
             image={img ? img : IMG_TEMPLATE}
@@ -152,132 +150,15 @@ export default function DetailService({ id, closeModal }) {
         {/* ----------------------------------------------------- */}
 
         {/* ---------------------- BARRA LATERAL DERECHA ------------------- */}
-<<<<<<< HEAD
-        <Box gridColumn="span 4" m={2} p={2} border="solid 1px lightgrey">
-          {/* ---- BOTONES FAV SHARE CLOSE---------------------- */}
-          <Box
-            gridColumn="span 12"
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
-          >
-            <Box gridColumn="span 6">
-              <IconButton
-                onClick={handleFavs}
-                aria-label="add to favorites"
-                sx={
-                  cookie && cookie !== service.userId ? {} : { display: "none" }
-                }
-              >
-                <Favorite color={favState ? "error" : ""} />
-              </IconButton>
-              <IconButton aria-label="share">
-                <Share />
-              </IconButton>
-            </Box>
-          </Box>
-          {/* -------------------------------------- */}
-
-          {/* -----------TITLE QUALIFICATION--------------------- */}
-          <Box
-            gridColumn="span 12"
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            alignContent="start"
-          >
-            <Typography variant="h5" sx={{ width: "100%", textAlign: "left" }}>
-              {" "}
-              {title}{" "}
-            </Typography>
-          </Box>
-          <Box
-            gridColumn="span 12"
-            display="flex"
-            flexDirection="row"
-            justifyContent="left"
-          >
-            <Rating
-              name="read-only"
-              value={Number(rating)}
-              precision={0.5}
-              readOnly
-              sx={{}}
-            />
-            <Typography variant="subtitle 1" sx={{ ml: "10px" }}>
-              {qualifications
-                ? qualifications.length === 1
-                  ? ` ${qualifications.length} opinion`
-                  : ` ${qualifications.length} opinions`
-                : "0 opiniones"}
-            </Typography>
-          </Box>
-          {/* -------------------------------------------- */}
-
-          {/* -------------- PRICE - CART ------------------------ */}
-          <Box
-            gridColumn="span 12"
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            alignContent="start"
-          >
-            <CardActions disableSpacing>
-              <Typography variant="h5" sx={{}}>
-                {" "}
-                {`$${price ? price : 0}`}{" "}
-              </Typography>
-              <IconButton
-                onClick={handleClick}
-                color={!added ? "primary" : "success"}
-                aria-label="add to shopping cart"
-                sx={{ ml: "auto" }}
-              >
-                <AddShoppingCart />
-              </IconButton>
-            </CardActions>
-          </Box>
-          {/* ---------------------------------------- */}
-
-          {/* -------------- DESCRIPTION ----------- */}
-          <Box gridColumn="span 12">
-            <Typography
-              variant="subtitle1"
-              component="div"
-              sx={{ textAlign: "left" }}
-            >
-              {" "}
-              Description:{" "}
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              component="div"
-              sx={{ textAlign: "left" }}
-            >
-              {" "}
-              {description}{" "}
-            </Typography>
-          </Box>
-          {/* ------------------------------------------- */}
-
-          {/* ---------- USER CARD -------------------- */}
-          <Box gridColumn="span 12">
-            <CardUser user={service.user} />
-          </Box>
-          {/* -------------------------------------- */}
-        </Box>
-=======
         <RightInfoBar
           handleFavs={handleFavs}
           handleClick={handleClick}
           cookie={cookie}
           service={service}
           favState={favState}
-          handleClose={handleClose}
           added={added}
         />
         {/* ------------------------------------------------------ */}
->>>>>>> 24a6693fb8f95cdec8169a77716c33c826f8b70a
       </Box>
 
       {related && <RelatedServices related={related} />}
