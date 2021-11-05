@@ -91,7 +91,6 @@ export default function Nav() {
             <Button
               variant="contained"
               size="medium"
-              color="primary"
               className={clsx(classes.default, classes.primary)}
               onClick={handleRegister}
             >
@@ -118,7 +117,6 @@ export default function Nav() {
             <Button
               variant="contained"
               size="medium"
-              color="secondary"
               className={clsx(classes.default, classes.primary)}
               onClick={handleLogin}
             >
