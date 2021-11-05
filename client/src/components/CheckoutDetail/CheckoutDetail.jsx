@@ -36,7 +36,29 @@ export default function CheckoutDetail() {
 
   return (
     <>
+<<<<<<< HEAD
       <Box sx={{ flexGrow: 1 }}></Box>
+=======
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar
+            sx={{ mr: 2, display: "flex", justifyContent: "space-between" }}
+          >
+            <IconButton
+              component={Link}
+              to="/home"
+              size="large"
+              edge="start"
+              color="secondary"
+              aria-label="menu"
+            >
+              <HomeIcon />
+            </IconButton>
+            <UserMenu />
+          </Toolbar>
+        </AppBar>
+      </Box>
+>>>>>>> 24a6693fb8f95cdec8169a77716c33c826f8b70a
       {cart.length > 0 &&
         cart.map((item, index) => {
           total.push(item.price);

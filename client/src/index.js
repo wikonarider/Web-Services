@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { store } from './redux/store/index';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import axios from 'axios';
-import dotenv from 'dotenv';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { store } from "./redux/store/index";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import axios from "axios";
+import dotenv from "dotenv";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 // MATERIAL UI
 import {
@@ -21,15 +21,15 @@ import {
   lime,
   deepOrange,
   green,
-} from '@mui/material/colors';
+} from "@mui/material/colors";
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: blueGrey[100],
-      contrastText: brown[500],
+      main: blueGrey[500],
+      contrastText: brown[300],
     },
     secondary: {
       main: lime[500],
@@ -44,7 +44,7 @@ const theme = createTheme({
 
 dotenv.config();
 
-axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 axios.defaults.withCredentials = true;
 //axios("/services")
 
@@ -58,7 +58,7 @@ ReactDOM.render(
       </ThemeProvider>
     </React.StrictMode>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

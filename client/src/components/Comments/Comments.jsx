@@ -20,6 +20,7 @@ export default function Comments({
   const [rating, setRating] = useState(0);
   const cookieRedux = useSelector((state) => state.cookie);
 
+
   function handleClick(comment, rating, serviceId) {
     let userId = cookieRedux;
     if (rating > 0) {
@@ -72,21 +73,21 @@ export default function Comments({
               name="rating"
               value={rating}
               precision={1}
-              size="large"
+              size='large'
               onChange={(event, newValue) => {
                 setRating((rating) => newValue);
               }}
             />
 
             <Typography
-              variant="h5"
+              variant={{xs:'subtitle1', sm:"h5"}}
               sx={{ pl: "10px", verticalAlign: "middle" }}
             >
               {`${rating} stars`}
             </Typography>
           </Box>
 
-          <Box gridColumn="span 10">
+          <Box gridColumn={{xs:'span 12', sm:"span 12", md:'span 10'}}>
             <TextareaAutosize
               minRows={4}
               maxRows={8}
@@ -112,8 +113,8 @@ export default function Comments({
       )}
       <Box gridColumn="span 12">
         {qualifications &&
-          qualifications.map((q) => {
-            return <SingleComment qualification={q} />;
+          qualifications.map((q, index) => {
+            return <SingleComment qualification={q} key={index} />;
           })}
       </Box>
     </Box>

@@ -24,7 +24,7 @@ export default function CheckoutBtn() {
         </Link>
       ) : (
         <Button variant="contained" disabled={true}>
-          Checkout
+          You need to be logged in
         </Button>
       )}
     </>

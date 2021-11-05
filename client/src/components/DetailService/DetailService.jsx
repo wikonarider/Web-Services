@@ -3,18 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-import {
-  Box,
-  CardMedia,
-  Typography,
-  Rating,
-  CardActions,
-  IconButton,
-} from "@mui/material";
-import { AddShoppingCart, Favorite, Share } from "@mui/icons-material";
-import CardUser from "../CardUser/CardUser";
+
+import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
 import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
+
+
 
 export default function DetailService({ id, closeModal }) {
   let [service, setService] = useState({ service: {}, user: {} });
@@ -123,6 +118,10 @@ export default function DetailService({ id, closeModal }) {
   let { img, title, price, description, rating, qualifications } =
     service.service;
 
+  //-------------------------------------------
+
+  
+
   return (
     <>
       <Box
@@ -134,7 +133,7 @@ export default function DetailService({ id, closeModal }) {
         m="0px auto"
       >
         {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
-        <Box gridColumn="span 8" p={2}>
+        <Box gridColumn={{xs:'span 12', sm:"span 12", md:'span 8'}} p={{xs:0, sm:2}}>
           <CardMedia
             component="img"
             image={img ? img : IMG_TEMPLATE}
@@ -153,6 +152,7 @@ export default function DetailService({ id, closeModal }) {
         {/* ----------------------------------------------------- */}
 
         {/* ---------------------- BARRA LATERAL DERECHA ------------------- */}
+<<<<<<< HEAD
         <Box gridColumn="span 4" m={2} p={2} border="solid 1px lightgrey">
           {/* ---- BOTONES FAV SHARE CLOSE---------------------- */}
           <Box
@@ -266,6 +266,18 @@ export default function DetailService({ id, closeModal }) {
           </Box>
           {/* -------------------------------------- */}
         </Box>
+=======
+        <RightInfoBar
+          handleFavs={handleFavs}
+          handleClick={handleClick}
+          cookie={cookie}
+          service={service}
+          favState={favState}
+          handleClose={handleClose}
+          added={added}
+        />
+        {/* ------------------------------------------------------ */}
+>>>>>>> 24a6693fb8f95cdec8169a77716c33c826f8b70a
       </Box>
 
       {related && <RelatedServices related={related} />}
