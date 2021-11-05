@@ -33,7 +33,9 @@ router.post("/", async (req, res) => {
         },
       ],
       back_urls: {
-        success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&userId=${userId}`,
+
+        success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}`,
+
         failure: `${ORIGIN}/fail`,
         pending: `${ORIGIN}/home`,
       },

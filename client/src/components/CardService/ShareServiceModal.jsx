@@ -55,7 +55,9 @@ console.log(tit)
         Facebook
         </IconButton>
         <IconButton
-          href={`whatsapp://send?'+${dir}`}>
+
+          href={`whatsapp://send?text='+${dir}`}>
+
         <WhatsApp color=""  style={{ width: "80px" , height: "80px"}} /> 
         WhatsApp
         </IconButton>
