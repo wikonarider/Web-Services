@@ -1,9 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import FacebookIcon from '@mui/icons-material/Facebook';
+import FacebookIcon from "@mui/icons-material/Facebook";
 import IconButton from "@mui/material/IconButton";
-import WhatsApp  from "@mui/icons-material/WhatsApp";
+import WhatsApp from "@mui/icons-material/WhatsApp";
 
 const style = {
   position: "absolute",
@@ -17,25 +17,17 @@ const style = {
   p: 4,
 };
 
-export default function ShareServiceModal({ modal, setModal, serviceId}) {
-
+export default function ShareServiceModal({ modal, setModal, serviceId }) {
   const handleClose = () => {
     setModal(false);
   };
 
-
-
-var dir = `https://pf-web-service.vercel.app/services/${serviceId}`
-var dir2 = encodeURIComponent(dir);
-var tit = window.document.title;
-var tit2 = encodeURIComponent(tit);
-console.log(dir)
-console.log(tit)
-
-
-
-
-
+  var dir = `https://pf-web-service.vercel.app/services/${serviceId}`;
+  // var dir2 = encodeURIComponent(dir);
+  // var tit = window.document.title;
+  // var tit2 = encodeURIComponent(tit);
+  // console.log(dir)
+  // console.log(tit)
 
   return (
     <div>
@@ -46,25 +38,22 @@ console.log(tit)
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          
           <h3>Share with</h3>
           <IconButton
-          href={`https://www.facebook.com/sharer/sharer.php?u=https://pf-web-service.vercel.app/services/${serviceId}`}>
-    
-        <FacebookIcon color='primary'  style={{ width: "80px" , height: "80px"}} /> 
-        Facebook
-        </IconButton>
-        <IconButton
-
-          href={`whatsapp://send?text='+${dir}`}>
-
-        <WhatsApp color=""  style={{ width: "80px" , height: "80px"}} /> 
-        WhatsApp
-        </IconButton>
+            href={`https://www.facebook.com/sharer/sharer.php?u=https://pf-web-service.vercel.app/services/${serviceId}`}
+          >
+            <FacebookIcon
+              color="primary"
+              style={{ width: "80px", height: "80px" }}
+            />
+            Facebook
+          </IconButton>
+          <IconButton href={`whatsapp://send?text='+${dir}`}>
+            <WhatsApp color="" style={{ width: "80px", height: "80px" }} />
+            WhatsApp
+          </IconButton>
         </Box>
       </Modal>
     </div>
   );
 }
-
-

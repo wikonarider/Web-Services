@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Cards from "../Cards/Cards";
-import Nav from "../Nav/Nav";
 import Carrousel from "../Carrousel/Carrousel";
 import Footer from "../Footer/Footer";
 
@@ -16,7 +15,6 @@ export default function Home() {
 
   return (
     <div>
-      <Nav />
       <Carrousel topSix={topSixServices} />
       {servicesState.length > 0 ? (
         <Cards services={servicesState} />

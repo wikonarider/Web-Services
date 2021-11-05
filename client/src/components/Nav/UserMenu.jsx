@@ -13,8 +13,9 @@ import { postLogout } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie as setCookieRedux } from "../../redux/actions";
 import { useHistory } from "react-router";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
-export default function UserMenu() {
+export default function UserMenu({ route, userImg, name }) {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
@@ -43,7 +44,11 @@ export default function UserMenu() {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small">
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar
+              sx={{ width: 32, height: 32 }}
+              alt={name ? name[0] : ""}
+              src={userImg ? userImg : ""}
+            ></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -81,12 +86,20 @@ export default function UserMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Link to="/account" style={{ textDecoration: "none", color: "black" }}>
-          <MenuItem>
-            <Avatar /> My account
-          </MenuItem>
-        </Link>
-        <Divider />
+        {route !== "account" ? (
+          <Box>
+            <Link
+              to="/account"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuItem>
+                <DashboardIcon sx={{ mr: "8px" }} />
+                My account
+              </MenuItem>
+            </Link>
+            <Divider />
+          </Box>
+        ) : null}
 
         <MenuItem onClick={logOutClear}>
           <ListItemIcon>
@@ -95,18 +108,6 @@ export default function UserMenu() {
           Logout
         </MenuItem>
       </Menu>
-
-      {/* {setLogin && setCookie ? (
-          <>
-            <Divider />
-            <MenuItem onClick={logOutClear}>
-              <ListItemIcon>
-                <Logout fontSize="small" />
-              </ListItemIcon>
-              Logout
-            </MenuItem>
-          </>
-        ) : null} */}
     </React.Fragment>
   );
 }

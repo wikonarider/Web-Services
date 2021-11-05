@@ -1,16 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-// import { handleFav } from "../../utils/buttonHandlers";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
 import RightInfoBar from "./RightInfoBar/RightInfoBar";
-
 
 export default function DetailService({ id, closeModal }) {
   let [service, setService] = useState({ service: {}, user: {} });
@@ -27,11 +24,8 @@ export default function DetailService({ id, closeModal }) {
   const favs = useSelector((state) => state.user.servicesFavs);
   const dispatch = useDispatch();
 
-  let history = useHistory();
-
   function updateService() {
     axios(`/services/${id}`).then((response) => {
-      // console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
       setCategory(response.data.service.category.name);
     });
@@ -64,9 +58,6 @@ export default function DetailService({ id, closeModal }) {
     });
   }, [category, id]);
 
-  // function getRelatedServices() {
-  // }
-
   useEffect(() => {
     if (category) {
       getRelatedServices();
@@ -98,17 +89,6 @@ export default function DetailService({ id, closeModal }) {
     }
   };
 
-  // const theme = {
-  //   favorite: {
-  //     1: { color: "red" },
-  //     0: { color: "grey" },
-  //   },
-  // };
-
-  const handleClose = () => {
-    history.push("/home");
-  };
-
   //-------------------HANDLE FAVS-------------------------
   const handleFavs = async () => {
     try {
@@ -132,12 +112,9 @@ export default function DetailService({ id, closeModal }) {
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-  let { img, title, price, description, rating, qualifications } =
-    service.service;
+  let { img, title, price, qualifications } = service.service;
 
   //-------------------------------------------
-
-  
 
   return (
     <>
@@ -151,7 +128,10 @@ export default function DetailService({ id, closeModal }) {
         m="0px auto"
       >
         {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
-        <Box gridColumn={{xs:'span 12', sm:"span 12", md:'span 8'}} p={{xs:0, sm:2}}>
+        <Box
+          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
+          p={{ xs: 0, sm: 2 }}
+        >
           <CardMedia
             component="img"
             image={img ? img : IMG_TEMPLATE}
@@ -176,7 +156,6 @@ export default function DetailService({ id, closeModal }) {
           cookie={cookie}
           service={service}
           favState={favState}
-          handleClose={handleClose}
           added={added}
         />
         {/* ------------------------------------------------------ */}

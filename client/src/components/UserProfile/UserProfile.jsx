@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Nav from "../Nav/Nav";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
@@ -8,7 +7,9 @@ import CardService from "../CardService/CardService";
 import s from "./UserProfile.module.css";
 import YourAccount from "../YourAccount/YourAccount";
 
-
+// export default function UserProfile({ id, username }) {
+//   return <div></div>;
+// }
 export default function UserProfile({ id, username }) {
   const [profileInfo, setProfileInfo] = useState({});
   const [profileServices, setProfileServices] = useState({});
@@ -28,7 +29,6 @@ export default function UserProfile({ id, username }) {
 
   return (
     <div>
-      <Nav />
       <div className={s.account}>
         <YourAccount userProfile={true} profileInfo={profileInfo} />
       </div>

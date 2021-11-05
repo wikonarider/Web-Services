@@ -4,13 +4,12 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import CardActions from "@mui/material/CardActions";
-import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
+import { AddShoppingCart, Favorite, Share } from "@mui/icons-material";
 import CardUser from "../../CardUser/CardUser";
 
 export default function RightInfoBar({
   cookie,
   favState,
-  handleClose,
   service,
   handleFavs,
   handleClick,
@@ -21,7 +20,7 @@ export default function RightInfoBar({
   return (
     <Box
       gridColumn={{ xs: "span 12", sm: "span 12", md: "span 4" }}
-      m={{xs:0, sm:2}}
+      m={{ xs: 0, sm: 2 }}
       p={{ xs: 0, sm: 0, md: 2 }}
       border="solid 1px lightgrey"
     >
@@ -45,12 +44,7 @@ export default function RightInfoBar({
           </IconButton>
         </Box>
 
-        <Box gridColumn="span 6">
-          {/* () => handleClose() */}
-          <IconButton onClick={handleClose}>
-            <Close />
-          </IconButton>
-        </Box>
+        <Box gridColumn="span 6"></Box>
       </Box>
       {/* -------------------------------------- */}
 
