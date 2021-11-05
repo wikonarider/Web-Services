@@ -12,6 +12,7 @@ import { Link as Scroll } from "react-scroll";
 import Login from "../Login/Login";
 import { useHistory } from "react-router";
 import UserMenu from "../Nav/UserMenu";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +68,7 @@ const styleLogin = {
 
 const Header = ({ cookie }) => {
   const classes = useStyles();
+  const { userImg, name } = useSelector((state) => state.user);
   const [checked, setChecked] = useState(false);
   const [login, setLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
@@ -99,7 +101,7 @@ const Header = ({ cookie }) => {
               LOGIN
             </IconButton>
           ) : (
-            <UserMenu />
+            <UserMenu userImg={userImg} name={name} />
           )}
           <Modal
             open={loginModal}
