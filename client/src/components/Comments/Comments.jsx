@@ -112,8 +112,8 @@ export default function Comments({
       )}
       <Box gridColumn="span 12">
         {qualifications &&
-          qualifications.map((q) => {
-            return <SingleComment qualification={q} />;
+          qualifications.map((q, index) => {
+            return <SingleComment qualification={q} key={index} />;
           })}
       </Box>
     </Box>
