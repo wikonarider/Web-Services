@@ -12,6 +12,10 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import { setCookie, getServices, getGroups } from "./redux/actions";
 import CheckoutDetail from "./components/CheckoutDetail/CheckoutDetail";
 
+// MATERIAL UI
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./utils/MuiTheme";
+
 function App() {
   // cargamos la cookie en el estado de redux
   // cada vez hau haya alguna modificaficion de algun componente
@@ -32,27 +36,29 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/chat" component={Chat} />
-      <Route
-        exact
-        path="/services/:id"
-        render={({ match }) => {
-          return <DetailService id={match.params.id} />;
-        }}
-      />
-      <Route exact path="/account" component={YourAccount} />
-      <Route
-        exact
-        path="/users/:id"
-        render={({ match }) => {
-          return <UserProfile id={match.params.id} />;
-        }}
-      />
-      <Route exact path="/checkout" component={CheckoutDetail} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/chat" component={Chat} />
+        <Route
+          exact
+          path="/services/:id"
+          render={({ match }) => {
+            return <DetailService id={match.params.id} />;
+          }}
+        />
+        <Route exact path="/account" component={YourAccount} />
+        <Route
+          exact
+          path="/users/:id"
+          render={({ match }) => {
+            return <UserProfile id={match.params.id} />;
+          }}
+        />
+        <Route exact path="/checkout" component={CheckoutDetail} />
+      </div>
+    </ThemeProvider>
   );
 }
 
