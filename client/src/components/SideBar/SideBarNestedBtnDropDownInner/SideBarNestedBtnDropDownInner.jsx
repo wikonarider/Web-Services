@@ -1,9 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { setObjGlobal } from "../../../redux/actions";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { setObjGlobal } from '../../../redux/actions';
 
 export default function SideBarNestedBtnDropDownInner({ name }) {
   const [checked, setChecked] = useState(false);
