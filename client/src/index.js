@@ -29,7 +29,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: blueGrey[500],
-      contrastText: brown[500],
+      contrastText: brown[300],
     },
     secondary: {
       main: lime[500],
