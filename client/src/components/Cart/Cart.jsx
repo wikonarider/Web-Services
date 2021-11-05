@@ -35,8 +35,8 @@ function Cart() {
     setOpenCart((prev) => !prev);
   };
 
-  console.log(user);
-  console.log(cart);
+  // console.log(user);
+  // console.log(cart);
   //lógica para eliminar items del carro si el usuario los eligió sin loguearse pero se loguéa y eran de él
 
   if (user.servicesOwn && user.servicesOwn.length > 0) {

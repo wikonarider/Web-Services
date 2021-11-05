@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
-import { GoogleLogin, googleData } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   const [start, setStart] = useState(true);
@@ -70,8 +70,8 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   };
 
   const handleLogin = async (googleData) => {
-    const token = googleData.tokenId;
-    console.log(token);
+    // const token = googleData.tokenId;
+    // console.log(token);
     setInputs({
       name: googleData.profileObj.givenName,
       lastname: googleData.profileObj.familyName,
@@ -154,7 +154,6 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             }
             type="submit"
             variant="contained"
-            fullwidth={true}
             sx={{ marginTop: "2%" }}
           >
             Register

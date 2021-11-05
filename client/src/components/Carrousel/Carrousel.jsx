@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import CarrouselItem from "./CarrouselItem";
@@ -8,7 +8,6 @@ export default function Carrousel({ topSix }) {
   const history = useHistory();
 
   const handleClickItem = (index, item) => {
-    console.log(item);
     history.push(`/services/${item.props.service.id}`);
   };
 

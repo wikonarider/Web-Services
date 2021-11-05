@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-import Nav from "../Nav/Nav";
 // import { handleFav } from "../../utils/buttonHandlers";
 import {
   Box,
@@ -13,12 +12,10 @@ import {
   Rating,
   CardActions,
   IconButton,
-  Grid,
 } from "@mui/material";
 import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
 import CardUser from "../CardUser/CardUser";
 import Comments from "../Comments/Comments";
-import CardService from "../CardService/CardService";
 import RelatedServices from "./RelatedServices/RelatedServices";
 
 export default function DetailService({ id, closeModal }) {
@@ -29,7 +26,6 @@ export default function DetailService({ id, closeModal }) {
   // ---------------- SERVICIOS RELACIONADOS -------------
   const [category, setCategory] = useState();
   const [related, setRelated] = useState([]);
-  console.log("RELATED", related);
   // --------------------------------
 
   const cart = useSelector((state) => state.cart);
@@ -41,7 +37,7 @@ export default function DetailService({ id, closeModal }) {
 
   function updateService() {
     axios(`/services/${id}`).then((response) => {
-      console.log("respuestaEnDetail", response);
+      // console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
       setCategory(response.data.service.category.name);
     });
@@ -67,17 +63,20 @@ export default function DetailService({ id, closeModal }) {
   }, []);
 
   //----------- SERVICIOS RELACIONADOS ------------------------
-  function getRelatedServices() {
+  const getRelatedServices = useCallback(() => {
     axios(`/services?category=${category}`).then((response) => {
       setRelated(response.data.slice(0, 4));
     });
-  }
+  },[category])
+
+  // function getRelatedServices() {
+  // }
 
   useEffect(() => {
     if (category) {
       getRelatedServices();
     }
-  }, [category]);
+  }, [category, getRelatedServices]);
   //-------------------------------------------------------
 
   // para agregarlo o sacarlo del carrito
@@ -104,12 +103,12 @@ export default function DetailService({ id, closeModal }) {
     }
   };
 
-  const theme = {
-    favorite: {
-      1: { color: "red" },
-      0: { color: "grey" },
-    },
-  };
+  // const theme = {
+  //   favorite: {
+  //     1: { color: "red" },
+  //     0: { color: "grey" },
+  //   },
+  // };
 
   const handleClose = () => {
     history.goBack();

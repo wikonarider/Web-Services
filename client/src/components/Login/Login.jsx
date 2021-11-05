@@ -6,7 +6,7 @@ import { validateLogin } from "../../utils/registerValidations";
 import { postLogin } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie } from "../../redux/actions";
-import { GoogleLogin, googleData } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 
@@ -67,7 +67,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     try {
       const token = googleData.tokenId;
       const res = await axios.post(`/login?token=${token}`);
-      console.log(res.data);
+      // console.log(res.data);
       setLoginModal(() => false);
       dispatch(setCookie(res.data));
       setLogin && setLogin(true);

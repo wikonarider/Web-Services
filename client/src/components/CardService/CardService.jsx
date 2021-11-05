@@ -13,13 +13,10 @@ import ShareIcon from "@mui/icons-material/Share";
 import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Rating from "@mui/material/Rating";
-import DetailService from "../DetailService/DetailService";
 
-import ModalCardService from "./CardServiceModal";
+import ShareServiceModal from "./ShareServiceModal";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -34,7 +31,6 @@ function CardService({ service, related }) {
 
   const [modal, setModal] = useState(false);
 
-  const [open, setOpen] = React.useState(false); //Estado para abrir DetailService modal
   const { title, img, price, id, userId, rating } = service;
 
   const fixedTitle = title
@@ -109,7 +105,6 @@ function CardService({ service, related }) {
 
   function handleModal(e) {
     setModal(true);
-    console.log("holaaaa");
   }
 
   const cardStyle = { width: 345, height: 420, textDecoration: "none" };
@@ -192,7 +187,7 @@ function CardService({ service, related }) {
           </CardActions>
         )}
       </Card>
-      <ModalCardService modal={modal} setModal={setModal} />
+      <ShareServiceModal modal={modal} setModal={setModal} />
     </div>
   );
 }

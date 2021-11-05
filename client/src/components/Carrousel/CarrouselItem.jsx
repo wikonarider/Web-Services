@@ -7,7 +7,7 @@ const style = {
 
 function CarrouselItem({ service }) {
 
-  const detail = `services/${service.id}`
+  // const detail = `services/${service.id}`
   return (
     <div>
       <img style={style} src={service.img} alt={service.title} />

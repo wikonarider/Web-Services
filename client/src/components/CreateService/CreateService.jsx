@@ -57,7 +57,6 @@ function CreateService(props) {
     subCategory: "",
   });
 
-  console.log(inputs);
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -316,7 +315,7 @@ function CreateService(props) {
                       onChange={(e, value) => handleCity(value)}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option.name}
-                      renderInput={(props, option, { selected }) => (
+                      renderOption={(props, option, { selected }) => (
                         <li {...props}>
                           <Checkbox
                             icon={icon}

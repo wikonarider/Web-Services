@@ -6,7 +6,7 @@ import CardService from "../../CardService/CardService";
 
 
 
-export default function ({related}) {
+export default function RelatedServices ({related}) {
   return (
     <Box
       display="grid"
