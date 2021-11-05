@@ -12,6 +12,36 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+
+// MATERIAL UI
+import {
+  blueGrey,
+  brown,
+  amber,
+  lime,
+  deepOrange,
+  green,
+} from '@mui/material/colors';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: blueGrey[100],
+      contrastText: brown[500],
+    },
+    secondary: {
+      main: lime[500],
+      contrastText: brown[500],
+    },
+    error: deepOrange,
+    warning: amber,
+    succcess: green,
+  },
+});
+//
+
 dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
@@ -21,9 +51,11 @@ axios.defaults.withCredentials = true;
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeProvider>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')
