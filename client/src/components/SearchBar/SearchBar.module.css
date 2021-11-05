@@ -12,7 +12,7 @@
 
 .searchBox:hover > .searchInput {
   justify-content: left;
-  width: 600px;
+  width: 100%;
   /* padding: 0 6px; */
   background-color: rgba(255, 255, 255, 0.308);
   border-radius: 0px;
