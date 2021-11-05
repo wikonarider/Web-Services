@@ -71,14 +71,16 @@ export default function Nav({ route }) {
 
   return (
     <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="fixed" sx={{ zIndex: "1201" }}>
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: "1201", backgroundColor: "#cfd8dc" }}
+      >
         <Toolbar
           sx={{
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
             gap: "5px",
-            backgroundColor: "#cfd8dc",
           }}
         >
           <Box>
