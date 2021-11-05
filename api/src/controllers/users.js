@@ -5,6 +5,8 @@ const {
   validateUserEdit,
   validatePurchase,
 } = require('../utils/validUser');
+require("dotenv").config();
+const { ORIGIN } = process.env;
 
 async function userCreated(req, res, next) {
   try {
@@ -151,7 +153,7 @@ async function userBanned(req, res, next) {
 
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
-  const {state, servicesId, collection_status, userId} = req.query
+  const { servicesId, collection_status, userId} = req.query
   // const { userId } = req.cookies;
   console.log('idEnPruchase', req.cookies)
   console.log('serviceIdenPruchase', servicesId)
@@ -177,10 +179,10 @@ async function postPurchase(req, res, next) {
       // console.log(Object.keys(user.__proto__));
       console.log('USERenPurchase' , user)
       await user.setServicesBought(servicesId);
-      res.redirect("http://localhost:3000/home");
+      res.redirect(`${ORIGIN}/home`);
     
   } else {
-    res.status(400).redirect("http://localhost:3000/fail")
+    res.status(400).redirect(`${ORIGIN}/fail`)
   }
 
   } catch (e) {

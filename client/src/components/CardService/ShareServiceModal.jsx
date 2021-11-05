@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function ShareServiceModal({ modal, setModal}) {
+export default function ShareServiceModal({ modal, setModal, serviceId}) {
 
   const handleClose = () => {
     setModal(false);
@@ -25,10 +25,12 @@ export default function ShareServiceModal({ modal, setModal}) {
 
 
 
-var dir = window.document.URL;
+var dir = `https://pf-web-service.vercel.app/services/${serviceId}`
 var dir2 = encodeURIComponent(dir);
 var tit = window.document.title;
 var tit2 = encodeURIComponent(tit);
+console.log(dir)
+console.log(tit)
 
 
 
@@ -47,13 +49,13 @@ var tit2 = encodeURIComponent(tit);
           
           <h3>Share with</h3>
           <IconButton
-          href={`https://www.facebook.com/sharer/sharer.php?u='+${dir2}+'&t='+${tit2}+''`}>
+          href={`https://www.facebook.com/sharer/sharer.php?u='+${dir}+'&t='+${tit2}+''`}>
     
         <FacebookIcon color='primary'  style={{ width: "80px" , height: "80px"}} /> 
         Facebook
         </IconButton>
         <IconButton
-          href={`whatsapp://send?'+${dir2}+'&t='+${tit2}+''`}>
+          href={`whatsapp://send?'+${dir}`}>
         <WhatsApp color=""  style={{ width: "80px" , height: "80px"}} /> 
         WhatsApp
         </IconButton>

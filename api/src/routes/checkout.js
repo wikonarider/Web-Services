@@ -1,4 +1,6 @@
 const { Users } = require('../db');
+require("dotenv").config();
+const { ORIGIN, SUCCESS_MERCADOPAGO } = process.env;
 
 var express = require('express');
 var router = express.Router();
@@ -31,9 +33,9 @@ router.post("/", async (req, res) => {
         },
       ],
       back_urls: {
-        success: `http://localhost:3001/users/purchase?state=success&servicesId=${servicesId}&userId=${userId}`,
-        failure: "http://localhost:3000/rechazo",
-        pending: "http://localhost:3000/home",
+        success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&userId=${userId}`,
+        failure: `${ORIGIN}/fail`,
+        pending: `${ORIGIN}/home`,
       },
       auto_return: "approved",
     };

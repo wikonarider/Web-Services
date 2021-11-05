@@ -187,7 +187,7 @@ function CardService({ service, related }) {
           </CardActions>
         )}
       </Card>
-      <ShareServiceModal modal={modal} setModal={setModal} />
+      <ShareServiceModal modal={modal} setModal={setModal} serviceId= {id} />
     </div>
   );
 }
