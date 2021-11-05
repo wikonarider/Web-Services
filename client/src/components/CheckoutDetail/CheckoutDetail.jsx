@@ -1,4 +1,8 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
+import { postPurchase, removeCart } from "../../redux/actions";
+import s from "./CheckoutPopOver/checkoutDetail.module.css";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -29,9 +33,7 @@ export default function CheckoutDetail() {
       dispatch(await removeCart(c.id));
     });
 
-    setTimeout(() => {
-      alert("Purchase made correctly");
-    }, 1000);
+    setTimeout(() => {}, 1000);
   };
 
   return (
@@ -58,14 +60,18 @@ export default function CheckoutDetail() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography variant="h5" color="text.primary">
-                  TOTAL:
-                  {total.length > 0 && (
-                    <Typography gutterBottom variant="h4" component="div">
-                      {total.reduce((a, b) => a + b, 0)} $
-                    </Typography>
-                  )}
-                </Typography>
+                {cart.length > 0 ? (
+                  <Typography variant="h5" color="text.primary">
+                    TOTAL:
+                    {total.length > 0 && (
+                      <Typography gutterBottom variant="h4" component="div">
+                        {total.reduce((a, b) => a + b, 0)} $
+                      </Typography>
+                    )}
+                  </Typography>
+                ) : (
+                  <div className={s.spinner}></div>
+                )}
               </Grid>
               <Grid item>
                 {total.length > 0 ? (
@@ -74,11 +80,11 @@ export default function CheckoutDetail() {
                     size="large"
                     onClick={handleBuyClick}
                   >
-                    BUY
+                    BUY WITH MERCADO PAGO
                   </Button>
                 ) : (
                   <Button variant="contained" size="large" disabled>
-                    BUY
+                    BUY WITH MERCADO PAGO
                   </Button>
                 )}
               </Grid>
