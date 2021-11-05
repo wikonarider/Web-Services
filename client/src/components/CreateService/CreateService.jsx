@@ -19,6 +19,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import { useHistory } from "react-router";
+import { Skeleton } from "@mui/material";
 
 function CreateService(props) {
   const history = useHistory();
@@ -29,6 +30,18 @@ function CreateService(props) {
     dispatch(getProvinces());
     // eslint-disable-next-line
   }, []);
+
+  //--------- SKELETON -----------
+  const [skeleton, setSkeleton] = useState(false);
+
+  const handleSkeleton = () => {
+    setSkeleton(true)
+  }
+
+
+  //----------------------------
+
+
 
   const { provinces, groups } = props;
 
@@ -56,7 +69,6 @@ function CreateService(props) {
     cities: [],
     subCategory: "",
   });
-
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -198,6 +210,7 @@ function CreateService(props) {
         options
       );
       const res_1 = await res.json();
+      setSkeleton(false);
       return setInputs({ ...inputs, img: res_1.secure_url });
     } catch (err) {
       return console.log(err);
@@ -414,6 +427,7 @@ function CreateService(props) {
                 color="secondary"
                 onClick={() => {
                   fileInput.current.click();
+                  handleSkeleton();
                 }}
                 fullWidth={true}
               >
@@ -421,11 +435,18 @@ function CreateService(props) {
               </Button>
             </div>
 
-            <div className={s.imgContainer}>
+            {skeleton && (
+              <Skeleton variant="rectangular" width={345} height={194} className={s.imgRender} />
+            )}
+
+            <div className={inputs.img ? s.imgContainer : s.imgContainer2}>
               <img className={s.imgRender} id="imgBox" src="hola" alt=""></img>
             </div>
 
-            {!errors.title && !errors.description && !errors.price && inputs.img ? (
+            {!errors.title &&
+            !errors.description &&
+            !errors.price &&
+            inputs.img ? (
               <div className={s.submitButton}>
                 <Button type="submit" variant="contained" fullWidth={true}>
                   Create Service
