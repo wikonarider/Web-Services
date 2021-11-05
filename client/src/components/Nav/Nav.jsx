@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Modal from "@mui/material/Modal";
 import SearchBar from "../SearchBar/SearchBar";
@@ -11,6 +11,28 @@ import UserMenu from "./UserMenu";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import { useSelector } from "react-redux";
+
+// MATERIAL UI
+import { Button, makeStyles } from "@material-ui/core";
+import { blueGrey, brown, lime } from "@mui/material/colors";
+import clsx from "clsx";
+
+const useStyles = makeStyles({
+  default: {
+    borderRadius: 0,
+    textTransfrom: "none",
+  },
+  primary: {
+    "&:hover": {
+      backgroundColor: lime[500],
+      color: blueGrey[100],
+    },
+  },
+  secondary: {
+    main: lime[500],
+    contrastText: brown[500],
+  },
+});
 
 const style = {
   position: "absolute",
@@ -28,6 +50,11 @@ export default function Nav() {
   const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const cookie = useSelector((state) => state.cookie);
+
+  const classes = useStyles();
+
+  // Descomentar para ver las cookies en la consola del navegador
+  // console.log("Cookies: ", document.cookie);
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -48,6 +75,7 @@ export default function Nav() {
             justifyContent: "center",
             flexWrap: "wrap",
             gap: "5px",
+            backgroundColor: "#cfd8dc",
           }}
         >
           <Box>
@@ -63,10 +91,11 @@ export default function Nav() {
             <Button
               variant="contained"
               size="medium"
-              color="secondary"
+              color="primary"
+              className={clsx(classes.default, classes.primary)}
               onClick={handleRegister}
             >
-              Register
+              REGISTER
             </Button>
           )}
           <Modal
@@ -90,6 +119,7 @@ export default function Nav() {
               variant="contained"
               size="medium"
               color="secondary"
+              className={clsx(classes.default, classes.primary)}
               onClick={handleLogin}
             >
               Login
