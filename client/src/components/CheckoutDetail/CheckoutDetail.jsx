@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import UserMenu from "../Nav/UserMenu";
 import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
 import { getUserInfo, postPurchase, removeCart } from "../../redux/actions";
+import s from './CheckoutPopOver/checkoutDetail.module.css'
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -47,7 +48,7 @@ export default function CheckoutDetail() {
     });
 
     setTimeout(() => {
-      alert("Purchase made correctly");
+   
     }, 1000);
   };
 
@@ -93,7 +94,9 @@ export default function CheckoutDetail() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
+                { cart.length > 0?
                 <Typography variant="h5" color="text.primary">
+                
                   TOTAL:
                   {total.length > 0 && (
                     <Typography gutterBottom variant="h4" component="div">
@@ -101,6 +104,7 @@ export default function CheckoutDetail() {
                     </Typography>
                   )}
                 </Typography>
+                 : <div className={s.spinner}></div>}
               </Grid>
               <Grid item>
                 {total.length > 0 ? (
@@ -109,11 +113,11 @@ export default function CheckoutDetail() {
                     size="large"
                     onClick={handleBuyClick}
                   >
-                    BUY
+                    BUY WITH MERCADO PAGO
                   </Button>
                 ) : (
                   <Button variant="contained" size="large" disabled>
-                    BUY
+                    BUY WITH MERCADO PAGO
                   </Button>
                 )}
               </Grid>
