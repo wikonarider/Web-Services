@@ -19,14 +19,13 @@ function App() {
   // cada vez hau haya alguna modificaficion de algun componente
   const dispatch = useDispatch();
   const objGlobal = useSelector((state) => state.objGlobal);
-  const cookie = useSelector((state) => state.cookie);
 
   useEffect(() => {
     axios
       .get("/login")
       .then((response) => dispatch(setCookie(response.data.cookie)))
       .catch(() => dispatch(setCookie("")));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getServices(objGlobal));
@@ -58,7 +57,7 @@ function App() {
       />
 
       <Route exact path="/checkout" component={CheckoutDetail} />
-      <Route exact path='/createservice' component={CreateService} />
+      <Route exact path="/createservice" component={CreateService} />
     </div>
   );
 }

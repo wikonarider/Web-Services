@@ -1,66 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Modal from '@material-ui/core/Modal';
-import Toolbar from '@material-ui/core/Toolbar';
-import SortIcon from '@material-ui/icons/Sort';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link as Scroll } from 'react-scroll';
-import Login from '../Login/Login';
-import { useHistory } from 'react-router';
-import UserMenu from '../Nav/UserMenu';
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Modal from "@material-ui/core/Modal";
+import Toolbar from "@material-ui/core/Toolbar";
+import SortIcon from "@material-ui/icons/Sort";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link as Scroll } from "react-scroll";
+import Login from "../Login/Login";
+import { useHistory } from "react-router";
+import UserMenu from "../Nav/UserMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '150vh',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "150vh",
   },
   appbar: {
-    background: 'none',
-    fontFamily: 'Nunito',
+    background: "none",
+    fontFamily: "Nunito",
   },
   appbarWrapper: {
-    width: '100%',
-    textAlign: 'left',
+    width: "100%",
+    textAlign: "left",
   },
   appbarTitle: {
-    flexGrow: '1',
+    flexGrow: "1",
   },
   icon: {
-    color: '#fff',
-    fontSize: '2rem',
+    color: "#fff",
+    fontSize: "2rem",
   },
   colorText: {
-    color: '#8d6e63',
+    color: "#8d6e63",
   },
   container: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
-    color: '#fff',
-    fontSize: '3rem',
-    fontFamily: 'Nunito',
+    color: "#fff",
+    fontSize: "3rem",
+    fontFamily: "Nunito",
   },
   goDown: {
-    color: '#5AFF3D',
-    fontSize: '4rem',
+    color: "#5AFF3D",
+    fontSize: "4rem",
   },
 }));
 
 const styleLogin = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   maxWidth: 600,
-  width: '70%',
-  bgcolor: 'background.paper',
-  borderRadius: '10px',
+  width: "70%",
+  bgcolor: "background.paper",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 2,
 };
@@ -70,11 +70,12 @@ const Header = ({ cookie }) => {
   const [checked, setChecked] = useState(false);
   const [login, setLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  // eslint-disable-next-line
   const [registerModal, setRegisterModal] = useState(false);
   const history = useHistory();
 
   if (login) {
-    history.push('/home');
+    history.push("/home");
   }
 
   const handleLogin = () => {
