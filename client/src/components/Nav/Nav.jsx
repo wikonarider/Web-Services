@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Modal from "@mui/material/Modal";
 import SearchBar from "../SearchBar/SearchBar";
@@ -10,11 +9,14 @@ import SideBar from "../SideBar/SideBar";
 import UserMenu from "./UserMenu";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import IconButton from "@mui/material/IconButton";
+import HomeIcon from "@mui/icons-material/Home";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // MATERIAL UI
 import { Button, makeStyles } from "@material-ui/core";
-import { blueGrey, brown, lime } from "@mui/material/colors";
+import { brown, lime } from "@mui/material/colors";
 import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -46,15 +48,16 @@ const style = {
   boxShadow: 24,
 };
 
-export default function Nav() {
+export default function Nav({ route }) {
   const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const cookie = useSelector((state) => state.cookie);
+  const { userImg, name } = useSelector((state) => state.user);
 
   const classes = useStyles();
 
   // Descomentar para ver las cookies en la consola del navegador
-  // console.log("Cookies: ", document.cookie);
+  // console.log("Cookies: ", cookie);
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -79,15 +82,21 @@ export default function Nav() {
           }}
         >
           <Box>
-            <SideBar />
+            {route === "home" ? (
+              <SideBar />
+            ) : (
+              <IconButton color="inherit" component={Link} to="/home">
+                <HomeIcon />
+              </IconButton>
+            )}
           </Box>
           <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
-            <SearchBar />
+            {route === "home" ? <SearchBar /> : null}
           </Box>
 
           {/* Register */}
 
-          {cookie ? null : (
+          {cookie || route === "checkout" ? null : (
             <Button
               variant="contained"
               size="medium"
@@ -112,9 +121,7 @@ export default function Nav() {
             </Box>
           </Modal>
 
-          {/* Login */}
-
-          {!cookie ? (
+          {!cookie && route !== "checkout" ? (
             <Button
               variant="contained"
               size="medium"
@@ -139,8 +146,10 @@ export default function Nav() {
             </Box>
           </Modal>
 
-          <Cart />
-          {cookie ? <UserMenu /> : null}
+          {route === "checkout" ? null : <Cart />}
+          {cookie ? (
+            <UserMenu route={route} userImg={userImg} name={name} />
+          ) : null}
         </Toolbar>
       </AppBar>
     </Box>
