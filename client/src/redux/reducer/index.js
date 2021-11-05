@@ -68,6 +68,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((s) => s.id !== action.payload),
       };
+    case type.SET_CART_STORAGE:
+      return {
+        ...state,
+        cart: payload,
+      };
 
     case type.GET_USER_FAVS:
       return {
