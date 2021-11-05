@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import SortIcon from "@material-ui/icons/Sort";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -57,7 +57,7 @@ export default function MiniDrawer() {
         aria-label="menu"
         onClick={handleDrawer}
       >
-        <MenuIcon />
+        <SortIcon />
       </IconButton>
       <Drawer open={open} sx={{ width: drawerWidth }}>
         <SideBarNested openFromFather={open} />
