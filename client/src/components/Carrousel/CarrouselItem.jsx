@@ -3,22 +3,23 @@ import React from "react";
 const style = {
   // objectFit: "contain",
   height: "450px",
-
 };
 
-function CarrouselItem({ title, img }) {
+function CarrouselItem({ service }) {
+
+  // const detail = `services/${service.id}`
   return (
     <div>
-      <img style={style} src={img} alt={title} />
-      <p
+      <img style={style} src={service.img} alt={service.title} />
+      {/* <p
         className="legend"
         style={{
           fontWeight: "bold",
           fontSize: "20px",
         }}
       >
-        {title}
-      </p>
+        {service.title}
+      </p> */}
     </div>
   );
 }

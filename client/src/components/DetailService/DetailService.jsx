@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
-import Nav from "../Nav/Nav";
 // import { handleFav } from "../../utils/buttonHandlers";
 import {
   Box,
@@ -17,11 +16,17 @@ import {
 import { AddShoppingCart, Favorite, Share, Close } from "@mui/icons-material";
 import CardUser from "../CardUser/CardUser";
 import Comments from "../Comments/Comments";
+import RelatedServices from "./RelatedServices/RelatedServices";
 
 export default function DetailService({ id, closeModal }) {
   let [service, setService] = useState({ service: {}, user: {} });
   const [favState, setFavState] = useState(false);
   const [added, setAdded] = useState(false);
+
+  // ---------------- SERVICIOS RELACIONADOS -------------
+  const [category, setCategory] = useState();
+  const [related, setRelated] = useState([]);
+  // --------------------------------
 
   const cart = useSelector((state) => state.cart);
   const cookie = useSelector((state) => state.cookie);
@@ -29,12 +34,15 @@ export default function DetailService({ id, closeModal }) {
   const dispatch = useDispatch();
 
   let history = useHistory();
+
   function updateService() {
     axios(`/services/${id}`).then((response) => {
-      console.log("respuestaEnDetail", response);
+      // console.log("respuestaEnDetail", response);
       setService({ ...service, ...response.data });
+      setCategory(response.data.service.category.name);
     });
   }
+
   useEffect(() => {
     if (cookie) {
       if (favs) {
@@ -53,6 +61,23 @@ export default function DetailService({ id, closeModal }) {
     updateService();
     // eslint-disable-next-line
   }, []);
+
+  //----------- SERVICIOS RELACIONADOS ------------------------
+  const getRelatedServices = useCallback(() => {
+    axios(`/services?category=${category}`).then((response) => {
+      setRelated(response.data.slice(0, 4));
+    });
+  },[category])
+
+  // function getRelatedServices() {
+  // }
+
+  useEffect(() => {
+    if (category) {
+      getRelatedServices();
+    }
+  }, [category, getRelatedServices]);
+  //-------------------------------------------------------
 
   // para agregarlo o sacarlo del carrito
   useEffect(() => {
@@ -78,17 +103,18 @@ export default function DetailService({ id, closeModal }) {
     }
   };
 
-  const theme = {
-    favorite: {
-      1: { color: "red" },
-      0: { color: "grey" },
-    },
-  };
+  // const theme = {
+  //   favorite: {
+  //     1: { color: "red" },
+  //     0: { color: "grey" },
+  //   },
+  // };
 
   const handleClose = () => {
     history.goBack();
   };
 
+  //-------------------HANDLE FAVS-------------------------
   const handleFavs = async () => {
     try {
       if (cookie) {
@@ -106,6 +132,7 @@ export default function DetailService({ id, closeModal }) {
       console.log(e.response.data);
     }
   };
+  //-----------------------------------------
 
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -121,10 +148,10 @@ export default function DetailService({ id, closeModal }) {
         gridTemplateColumns="repeat(12, 1fr)"
         gap={2}
         p={2}
-        border="solid 1px lightgrey"
         maxWidth="80%"
         m="0px auto"
       >
+        {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
         <Box gridColumn="span 8" p={2}>
           <CardMedia
             component="img"
@@ -141,8 +168,11 @@ export default function DetailService({ id, closeModal }) {
             cookie={cookie}
           />
         </Box>
+        {/* ----------------------------------------------------- */}
 
+        {/* ---------------------- BARRA LATERAL DERECHA ------------------- */}
         <Box gridColumn="span 4" m={2} p={2} border="solid 1px lightgrey">
+          {/* ---- BOTONES FAV SHARE CLOSE---------------------- */}
           <Box
             gridColumn="span 12"
             display="flex"
@@ -166,12 +196,14 @@ export default function DetailService({ id, closeModal }) {
 
             <Box gridColumn="span 6">
               {/* () => handleClose() */}
-              <IconButton onClick={closeModal}>
+              <IconButton onClick={handleClose}>
                 <Close />
               </IconButton>
             </Box>
           </Box>
+          {/* -------------------------------------- */}
 
+          {/* -----------TITLE QUALIFICATION--------------------- */}
           <Box
             gridColumn="span 12"
             display="flex"
@@ -205,7 +237,9 @@ export default function DetailService({ id, closeModal }) {
                 : "0 opiniones"}
             </Typography>
           </Box>
+          {/* -------------------------------------------- */}
 
+          {/* -------------- PRICE - CART ------------------------ */}
           <Box
             gridColumn="span 12"
             display="flex"
@@ -228,7 +262,9 @@ export default function DetailService({ id, closeModal }) {
               </IconButton>
             </CardActions>
           </Box>
+          {/* ---------------------------------------- */}
 
+          {/* -------------- DESCRIPTION ----------- */}
           <Box gridColumn="span 12">
             <Typography
               variant="subtitle1"
@@ -247,11 +283,17 @@ export default function DetailService({ id, closeModal }) {
               {description}{" "}
             </Typography>
           </Box>
+          {/* ------------------------------------------- */}
+
+          {/* ---------- USER CARD -------------------- */}
           <Box gridColumn="span 12">
             <CardUser user={service.user} />
           </Box>
+          {/* -------------------------------------- */}
         </Box>
       </Box>
+
+      {related && <RelatedServices related={related} />}
     </>
   );
 }

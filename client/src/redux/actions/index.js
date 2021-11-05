@@ -1,6 +1,6 @@
-import { type } from './variables';
-import serviceURL from './urlQuery';
-import axios from 'axios';
+import { type } from "./variables";
+import serviceURL from "./urlQuery";
+import axios from "axios";
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -9,8 +9,6 @@ export function getServices(obj) {
   return async function (dispatch) {
     try {
       var json = await axios(serviceURL(obj));
-      // console.log("OBJ", obj);
-      // console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -80,6 +78,20 @@ export function createService(body) {
   };
 }
 
+export function setServicesPage(services) {
+  return {
+    type: type.SET_SERVICES_PAGE,
+    payload: services,
+  };
+}
+
+export function setEndPage(value) {
+  return {
+    type: type.SET_END_PAGE,
+    payload: value,
+  };
+}
+
 export function postCategory(category) {
   return {
     type: type.POST_CATEGORY,
@@ -91,7 +103,7 @@ export function postCategory(category) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post('/users/', data);
+      return await axios.post("/users/", data);
     } catch (err) {
       return new Error(err);
     }
@@ -101,7 +113,7 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put('/users/', newData);
+      return await axios.put("/users/", newData);
     } catch (err) {
       return new Error(err);
     }
@@ -118,7 +130,7 @@ export function putUser(newData) {
 
 export async function getUserInfo() {
   return async function (dispatch) {
-    const response = await axios.get('/users');
+    const response = await axios.get("/users");
     dispatch({
       type: type.GET_USER_INFO,
       payload: response.data,
@@ -151,15 +163,25 @@ export const getUserFavs = async () => {
 };
 
 //purchase
-export const postPurchase = async (array) => {
-  return async () => {
-    try {
-      return await axios.post(`/users/purchase`, array);
-    } catch (err) {
-      return new Error(err);
-    }
+// export const postPurchase = async (array) => {
+//   return async () => {
+//     try {
+//       return await axios.post(`/checkout`, array);
+//     } catch (err) {
+//       return new Error(err);
+//     }
+//   };
+// };
+export function postPurchase(body) {
+  return async function (dispatch) {
+    var json = await axios.post(`/checkout`, body);
+    window.location.replace(json.data);
+    return dispatch({
+      type: type.POST_PURCHASE,
+      payload: json.data,
+    });
   };
-};
+}
 
 //_____________________________________________________________________________________actions provinces
 

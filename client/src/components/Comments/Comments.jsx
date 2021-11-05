@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import SingleComment from "./SingleComment";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 
 export default function Comments({
   qualifications,
@@ -17,9 +18,10 @@ export default function Comments({
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const cookieRedux = useSelector((state) => state.cookie);
 
   function handleClick(comment, rating, serviceId) {
-    let userId = document.cookie.split("userId=")[1];
+    let userId = cookieRedux;
     if (rating > 0) {
       setLoading(true);
       axios

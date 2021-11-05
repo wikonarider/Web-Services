@@ -6,6 +6,7 @@ import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import s from "./Botonera.module.css";
+import { useHistory } from "react-router";
 
 export default function YourAccount({
   viewServices,
@@ -16,12 +17,16 @@ export default function YourAccount({
   setViewOrders,
   setViewservices,
   setViewAdmin,
-  openForm,
-  modal,
   setOpenForm,
-  setModal,
   user,
 }) {
+
+  const history = useHistory();
+
+  const handleClickPostService = () => {
+    history.push("/createservice");
+  };
+
   return (
     <div className={s.botonera}>
       {user.admin && (
@@ -107,9 +112,7 @@ export default function YourAccount({
           marginLeft: 1,
           marginBottom: 1,
         }}
-        onClick={() => {
-          setModal(true);
-        }}
+        onClick={handleClickPostService}
       >
         Post Service
       </Button>

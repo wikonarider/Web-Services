@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "category",
+    'category',
     {
       //permitimos que el id se genere automáticamente?
       name: {

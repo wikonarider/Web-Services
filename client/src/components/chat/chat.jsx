@@ -2,12 +2,11 @@ import { io } from "socket.io-client";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Button, Input } from "@material-ui/core";
-var clienteIO = io("http://localhost:3001"); //conexion al servidor para bidireccional peticiones
-
+import dotenv from "dotenv";
+dotenv.config();
+var clienteIO = io(process.env.REACT_APP_API); //conexion al servidor para bidireccional peticiones
 
 //en controller/chat.js  comente como hacer las response y request que es la misma mecanica que cliente.IO
-
-
 
 function Chat() {
   const [msg, setMsg] = useState("");
@@ -19,14 +18,11 @@ function Chat() {
     });
   }, [conversacion]);
 
-
-
   function enviar() {
     clienteIO.emit("conectado", msg);
     setMsg("");
   }
 
-  
   return (
     <Box
       sx={{

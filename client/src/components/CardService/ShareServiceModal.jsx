@@ -1,11 +1,10 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import IconButton from "@mui/material/IconButton";
-import { height } from "@mui/system";
-import { WhatsApp } from "@mui/icons-material";
+import WhatsApp  from "@mui/icons-material/WhatsApp";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -13,12 +12,12 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
+  borderRadius: 2,
   p: 4,
 };
 
-export default function ModalCardService({ modal, setModal}) {
+export default function ShareServiceModal({ modal, setModal}) {
 
   const handleClose = () => {
     setModal(false);

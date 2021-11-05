@@ -5,7 +5,7 @@ const { transport } = require("./transport");
 const { eventsOrganization } = require("./eventsOrganization");
 const { houseServices } = require("./houseServices");
 const { touring } = require("./touring");
-
+const { topRatingServices } = require("./topRatingServices");
 
 const bulk = [
   ...lessons,
@@ -14,6 +14,7 @@ const bulk = [
   ...eventsOrganization,
   ...houseServices,
   ...touring,
+  ...topRatingServices,
 ];
 
 function loadServices() {
