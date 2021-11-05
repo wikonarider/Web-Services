@@ -90,7 +90,6 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
-      <Divider />
     </Box>
   );
 }
