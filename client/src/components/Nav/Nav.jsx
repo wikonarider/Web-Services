@@ -24,12 +24,12 @@ const useStyles = makeStyles({
   },
   primary: {
     "&:hover": {
-      backgroundColor: lime[500],
-      color: blueGrey[100],
+      backgroundColor: lime[600],
+      color: brown[500],
     },
   },
   secondary: {
-    main: lime[500],
+    main: lime[600],
     contrastText: brown[500],
   },
 });

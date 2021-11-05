@@ -15,7 +15,7 @@ const theme = createTheme({
       contrastText: brown[500],
     },
     secondary: {
-      main: lime[500],
+      main: lime[600],
       contrastText: brown[500],
     },
     error: deepOrange,
