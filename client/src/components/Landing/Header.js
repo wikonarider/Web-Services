@@ -96,6 +96,7 @@ const Header = ({ cookie }) => {
           {!cookie ? (
             <IconButton onClick={handleLogin}>
               <SortIcon className={classes.icon} />
+              LOGIN
             </IconButton>
           ) : (
             <UserMenu />
