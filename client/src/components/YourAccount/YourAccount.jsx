@@ -14,6 +14,7 @@ import UserInfo from "./UserInfo/UserInfo";
 import Botonera from "./Botonera/Botonera";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Admin from "../Admin/Admin";
+import { FormDialog } from "./FormDialog/FormDialog";
 
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
@@ -99,13 +100,27 @@ export default function YourAccount({ userProfile, profileInfo }) {
           ))}
         {/* ------------------------------------------------ */}
         {/* ------------------ORDERS---------------------------- */}
-        {viewOrders && (
-          <Container>
+        {viewOrders &&
+          (userData.servicesBought && userData.servicesBought.length > 0 ? (
             <div>
-              <h1>YOUR ORDERS</h1>
+              <Container>
+                <Grid container justifyContent="center" spacing={3}>
+                  {userData.servicesBought.map((s) => (
+                    <Grid item key={s.id}>
+                      <CardService service={s} />
+                    </Grid>
+                  ))}
+                </Grid>
+              </Container>
             </div>
-          </Container>
-        )}
+          ) : (
+            <div className={s.addFavContainer}>
+              <h3>You haven't bought any services yet</h3>
+              <div className={s.addToFav}>
+                <p>When you acquire a service it will show here.</p>
+              </div>
+            </div>
+          ))}
         {/* ----------------------------------------------------- */}
         {/* -------------------SERVICES-------------------------- */}
         {viewServices &&
@@ -127,7 +142,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
               <div className={s.addToFav}>
                 <p>
                   Post Services that you want to offer by clicking on POST
-                  SERVICE
+                  SERVICE.
                 </p>
               </div>
             </div>
@@ -135,6 +150,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
         {viewAdmin && userData.admin && <Admin />}
       </div>
       {/* ---------------------------------------------- */}
+      <FormDialog setOpenForm={setOpenForm} openForm={openForm} />
     </div>
   );
 }

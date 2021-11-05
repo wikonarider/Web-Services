@@ -45,51 +45,47 @@ export function FormDialog({ openForm, setOpenForm }) {
   };
 
   return (
-    <Dialog
-      open={openForm}
-      onClose={() => setOpenForm(false)}
-      className={s.form}
-    >
-      <form onSubmit={(e) => handleSubmit(e)} className={s.form}>
-        <DialogTitle>CHANGE YOUR DATA</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="New Name"
-            variant="filled"
-            onChange={(e) => handleInputChange(e)}
-            name="name"
-            sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
-          />
-          <TextField
-            label="New LastName"
-            variant="filled"
-            onChange={(e) => handleInputChange(e)}
-            name="lastname"
-            sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
-          />
-          <TextField
-            label="New Password"
-            variant="filled"
-            type="password"
-            onChange={(e) => handleInputChange(e)}
-            name="password"
-            sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              setOpenForm(false);
-              refreshPage();
-            }}
-            type="submit"
-            variant="contained"
-            sx={{ margin: "auto" }}
-          >
-            SUBMIT
-          </Button>
-        </DialogActions>
-      </form>
+    <Dialog open={openForm} onClose={() => setOpenForm(false)}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <DialogTitle>CHANGE YOUR DATA</DialogTitle>
+          <DialogContent>
+            <TextField
+              label="New Name"
+              variant="filled"
+              onChange={(e) => handleInputChange(e)}
+              name="name"
+              sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
+            />
+            <TextField
+              label="New LastName"
+              variant="filled"
+              onChange={(e) => handleInputChange(e)}
+              name="lastname"
+              sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
+            />
+            <TextField
+              label="New Password"
+              variant="filled"
+              type="password"
+              onChange={(e) => handleInputChange(e)}
+              name="password"
+              sx={{ display: "block", marginTop: 2, marginBottom: 2 }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setOpenForm(false);
+                refreshPage();
+              }}
+              type="submit"
+              variant="contained"
+              sx={{ margin: "auto" }}
+            >
+              SUBMIT
+            </Button>
+          </DialogActions>
+        </form>
     </Dialog>
   );
 }
