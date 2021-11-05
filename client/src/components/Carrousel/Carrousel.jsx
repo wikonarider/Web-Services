@@ -13,7 +13,10 @@ export default function Carrousel({ topSix }) {
   };
 
   return (
-    <div style={{ width: "100%", marginTop: "4%", objectFit: "cover" }}>
+    <div
+      style={{ width: "100%", marginTop: "4%", objectFit: "cover" }}
+      id="back-to-top-anchor"
+    >
       <Carousel
         dynamicHeight={true}
         autoPlay={true}
