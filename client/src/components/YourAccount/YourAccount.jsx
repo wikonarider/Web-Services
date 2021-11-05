@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 import CardService from "../CardService/CardService";
 import { getUserInfo, getUserFavs } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import AccountNav from "./AccountNav/AccountNav";
 import UserInfo from "./UserInfo/UserInfo";
 import Botonera from "./Botonera/Botonera";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -21,13 +20,13 @@ export default function YourAccount({ userProfile, profileInfo }) {
   const userData = useSelector((state) => state.user);
 
   useEffect(() => {
-    (async () => {
-      dispatch(await getUserInfo());
-      dispatch(await getUserFavs());
-    })();
-
-    // eslint-disable-next-line
-  }, []);
+    if (userProfile !== true) {
+      (async () => {
+        dispatch(await getUserInfo());
+        dispatch(await getUserFavs());
+      })();
+    }
+  }, [dispatch, userProfile]);
 
   //BOTONES --> YOUR ORDERS - YOUR FAVS - YOUR SERVICES
   const [viewServices, setViewservices] = useState(false);
@@ -49,8 +48,6 @@ export default function YourAccount({ userProfile, profileInfo }) {
 
   return (
     <div>
-      {!userProfile && <AccountNav />}
-
       <UserInfo userProfile={userProfile} profileInfo={profileInfo} />
 
       {!userProfile && (

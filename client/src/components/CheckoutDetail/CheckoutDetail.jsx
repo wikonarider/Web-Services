@@ -1,36 +1,19 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
-import UserMenu from "../Nav/UserMenu";
-import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
-import { getUserInfo, postPurchase, removeCart } from "../../redux/actions";
-import s from './CheckoutPopOver/checkoutDetail.module.css'
-
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
+import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
+import { postPurchase, removeCart } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import s from "./CheckoutPopOver/checkoutDetail.module.css";
+
 export default function CheckoutDetail() {
   const cart = useSelector((state) => state.cart);
-  console.log("CartState", cart);
   const dispatch = useDispatch();
-  const cookie = useSelector((state) => state.cookie);
-
-  useEffect(() => {
-    if (cookie) {
-      (async () => {
-        dispatch(await getUserInfo());
-      })();
-    }
-  }, [cookie, dispatch]);
 
   const total = [];
 
@@ -47,32 +30,12 @@ export default function CheckoutDetail() {
       dispatch(await removeCart(c.id));
     });
 
-    setTimeout(() => {
-   
-    }, 1000);
+    setTimeout(() => {}, 1000);
   };
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar
-            sx={{ mr: 2, display: "flex", justifyContent: "space-between" }}
-          >
-            <IconButton
-              component={Link}
-              to="/home"
-              size="large"
-              edge="start"
-              color="secondary"
-              aria-label="menu"
-            >
-              <HomeIcon />
-            </IconButton>
-            <UserMenu />
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <Box sx={{ flexGrow: 1 }}></Box>
       {cart.length > 0 &&
         cart.map((item, index) => {
           total.push(item.price);
@@ -94,17 +57,18 @@ export default function CheckoutDetail() {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                { cart.length > 0?
-                <Typography variant="h5" color="text.primary">
-                
-                  TOTAL:
-                  {total.length > 0 && (
-                    <Typography gutterBottom variant="h4" component="div">
-                      {total.reduce((a, b) => a + b, 0)} $
-                    </Typography>
-                  )}
-                </Typography>
-                 : <div className={s.spinner}></div>}
+                {cart.length > 0 ? (
+                  <Typography variant="h5" color="text.primary">
+                    TOTAL:
+                    {total.length > 0 && (
+                      <Typography gutterBottom variant="h4" component="div">
+                        {total.reduce((a, b) => a + b, 0)} $
+                      </Typography>
+                    )}
+                  </Typography>
+                ) : (
+                  <div className={s.spinner}></div>
+                )}
               </Grid>
               <Grid item>
                 {total.length > 0 ? (

@@ -13,12 +13,13 @@ export default function YourAccount({ userProfile, profileInfo }) {
   const userData = useSelector((state) => state.user);
 
   useEffect(() => {
-    (async () => {
-      dispatch(await getUserInfo());
-    })();
+    if (userProfile !== true) {
+      (async () => {
+        dispatch(await getUserInfo());
+      })();
+    }
+  }, [dispatch, userProfile]);
 
-    // eslint-disable-next-line
-  }, []);
   // eslint-disable-next-line
   const [img, setImg] = useState("");
 

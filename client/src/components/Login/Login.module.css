@@ -1,18 +1,17 @@
 .form {
-  background-color: white;
   border-radius: 5px;
   padding: 8%;
 }
 
-.new{
+.new {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-  .new p{
-    font-size: 0.9em;
-    color: #a3a3a3;
-    margin: 0;
-    margin-right: 4%;
-  }
+.new p {
+  font-size: 0.9em;
+  color: #a3a3a3;
+  margin: 0;
+  margin-right: 4%;
+}
