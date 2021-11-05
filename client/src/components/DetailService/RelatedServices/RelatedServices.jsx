@@ -16,7 +16,7 @@ export default function RelatedServices ({related}) {
       maxWidth="80%"
       m="0px auto"
     >
-      <Box gridColumn="span 10" p={2}>
+      <Box gridColumn="span 12" p={2}>
         <Typography variant="h6" textAlign="left" sx={{ marginBottom: "2%" }}>
           Related Services
         </Typography>

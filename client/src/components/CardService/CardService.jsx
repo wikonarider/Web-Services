@@ -108,7 +108,7 @@ function CardService({ service, related }) {
   }
 
   const cardStyle = { width: 345, height: 420, textDecoration: 'none' };
-  const relatedCardStyle = { width: 162, height: 200, textDecoration: 'none' };
+  const relatedCardStyle = { width: 172, height: 210, textDecoration: 'none' };
 
   return (
     <div>
