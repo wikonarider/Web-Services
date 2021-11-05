@@ -70,6 +70,7 @@ const Header = ({ cookie }) => {
   const [checked, setChecked] = useState(false);
   const [login, setLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  // eslint-disable-next-line
   const [registerModal, setRegisterModal] = useState(false);
   const history = useHistory();
 

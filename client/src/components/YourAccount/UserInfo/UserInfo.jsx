@@ -4,7 +4,7 @@ import { getUserInfo, putUser } from "../../../redux/actions";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import ShareIcon from '@mui/icons-material/Share';
+import ShareIcon from "@mui/icons-material/Share";
 
 import s from "./UserInfo.module.css";
 
@@ -19,7 +19,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
 
     // eslint-disable-next-line
   }, []);
-
+  // eslint-disable-next-line
   const [img, setImg] = useState("");
 
   //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
@@ -53,7 +53,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
       <div>
         <Avatar
           alt="user name"
-          src={!userProfile ? userData.userImg : profileInfo.userImg }
+          src={!userProfile ? userData.userImg : profileInfo.userImg}
           sx={{ width: 200, height: 200, marginBottom: 2 }}
           className={s.avatar}
         ></Avatar>
@@ -98,7 +98,9 @@ export default function YourAccount({ userProfile, profileInfo }) {
 
       <div className={s.userInfo}>
         <div className={s.fullName}>
-          <p className={s.name}>{!userProfile ? userData.name : profileInfo.name}</p>
+          <p className={s.name}>
+            {!userProfile ? userData.name : profileInfo.name}
+          </p>
           <p>{!userProfile ? userData.lastname : profileInfo.lastname}</p>
         </div>
         {!userProfile ? (
@@ -106,17 +108,17 @@ export default function YourAccount({ userProfile, profileInfo }) {
             <p>{userData.username}</p>
             <p>{userData.email}</p>
           </div>
-        ) : 
-        <Button
-          variant='contained'
-          startIcon={<ShareIcon/>}
-          size='small'
-          sx={{marginTop:2}}
-          disableElevation
-        >
-          Share Profile
-        </Button>
-        }
+        ) : (
+          <Button
+            variant="contained"
+            startIcon={<ShareIcon />}
+            size="small"
+            sx={{ marginTop: 2 }}
+            disableElevation
+          >
+            Share Profile
+          </Button>
+        )}
       </div>
     </div>
   );
