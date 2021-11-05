@@ -111,12 +111,19 @@
  .selectfile{
      width: 74%;
     align-self: center;
+    margin-bottom: 2%;
  }
 
  .imgContainer{
     width: 345px;
     height: 194px; 
-    margin: 2% 0% 2% 0%;
+    align-self: center; 
+}
+
+.imgContainer2{
+    display: none;
+    width: 345px;
+    height: 194px; 
     align-self: center; 
 }
 
@@ -131,4 +138,5 @@
 .submitButton{
     width: 74%;
     align-self: center;
+    margin-top: 2%;
 }
