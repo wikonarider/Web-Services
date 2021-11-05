@@ -49,7 +49,7 @@ console.log(tit)
           
           <h3>Share with</h3>
           <IconButton
-          href={`https://www.facebook.com/sharer/sharer.php?u='+${dir}+'&t='+${tit2}+''`}>
+          href={`https://www.facebook.com/sharer/sharer.php?u=https://pf-web-service.vercel.app/services/${serviceId}`}>
     
         <FacebookIcon color='primary'  style={{ width: "80px" , height: "80px"}} /> 
         Facebook
