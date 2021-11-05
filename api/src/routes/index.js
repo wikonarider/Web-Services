@@ -8,7 +8,8 @@ const login = require("./login");
 const logout = require("./logout");
 const provinces = require("./provinces");
 const comment = require("./comment");
-const checkout = require("./checkout")
+const checkout = require("./checkout");
+const admin = require("./admin");
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -27,6 +28,7 @@ router.use("/login", login);
 router.use("/logout", logout);
 router.use("/provinces", provinces);
 router.use("/comment", comment);
-router.use("/checkout", checkout)
+router.use("/checkout", checkout);
+router.use("/admin", admin);
 
 module.exports = router;
