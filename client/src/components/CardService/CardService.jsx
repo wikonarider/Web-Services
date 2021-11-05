@@ -119,7 +119,7 @@ function CardService({ service, related }) {
             title={related ? fixedTitleRelated : fixedTitle}
             sx={
               related
-                ? { pb: "0", height: "32px", marginBottom: '10px' }
+                ? { pb: "0", height: "32px", marginBottom: '18px' }
                 : { pb: "0", height: "64px" }
             }
             titleTypographyProps={related && {variant:'body'}}
@@ -140,12 +140,12 @@ function CardService({ service, related }) {
             height={related ? "97" : "194"}
             image={img ? img : IMG_TEMPLATE}
             alt={title}
-            sx={{ objectFit: "cover" }}
+            sx={{ objectFit: "cover"}}
           />
           <Typography
-            variant={related ? "h6" : "h5"}
+            variant={related ? "subtitle1" : "h5"}
             component="div"
-            sx={related ? { p: "2px" } : { p: "5px" }}
+            sx={{ p: "5px" }}
           >
             {`$${price ? price : 0}`}
           </Typography>

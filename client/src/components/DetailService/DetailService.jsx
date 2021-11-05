@@ -60,14 +60,15 @@ export default function DetailService({ id, closeModal }) {
   useEffect(() => {
     updateService();
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   //----------- SERVICIOS RELACIONADOS ------------------------
   const getRelatedServices = useCallback(() => {
     axios(`/services?category=${category}`).then((response) => {
-      setRelated(response.data.slice(0, 4));
+      let NumberId = Number(id)
+      setRelated(response.data.filter(s => s.id !== NumberId).slice(0,4));
     });
-  },[category])
+  }, [category, id]);
 
   // function getRelatedServices() {
   // }
@@ -76,7 +77,7 @@ export default function DetailService({ id, closeModal }) {
     if (category) {
       getRelatedServices();
     }
-  }, [category, getRelatedServices]);
+  }, [category, getRelatedServices, id]);
   //-------------------------------------------------------
 
   // para agregarlo o sacarlo del carrito
@@ -111,7 +112,7 @@ export default function DetailService({ id, closeModal }) {
   // };
 
   const handleClose = () => {
-    history.goBack();
+    history.push("/home");
   };
 
   //-------------------HANDLE FAVS-------------------------
