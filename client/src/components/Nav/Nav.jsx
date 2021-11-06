@@ -86,7 +86,7 @@ export default function Nav({ route }) {
             gap: "5px",
           }}
         >
-          <Box>
+          <Box mr="auto">
             {route === "home" ? (
               <SideBar />
             ) : (
@@ -95,64 +95,71 @@ export default function Nav({ route }) {
               </IconButton>
             )}
           </Box>
-          <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
+          <Box
+            sx={
+              route === "home"
+                ? { width: "50%", ml: "auto", mr: "auto" }
+                : { display: "none" }
+            }
+          >
             {route === "home" ? <SearchBar /> : null}
           </Box>
 
-          {/* Register */}
-
-          {cookie || route === "checkout" ? null : (
-            <Button
-              variant="contained"
-              size="medium"
-              className={clsx(classes.default, classes.primary)}
-              onClick={handleRegister}
+          <Box display="flex" gap="5px">
+            {/* Register */}
+            {cookie || route === "checkout" ? null : (
+              <Button
+                variant="contained"
+                size="medium"
+                className={clsx(classes.default, classes.primary)}
+                onClick={handleRegister}
+              >
+                REGISTER
+              </Button>
+            )}
+            <Modal
+              open={registerModal}
+              onClose={handleRegister}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              REGISTER
-            </Button>
-          )}
-          <Modal
-            open={registerModal}
-            onClose={handleRegister}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Register
-                setRegisterModal={setRegisterModal}
-                setLoginModal={setLoginModal}
-              />
-            </Box>
-          </Modal>
+              <Box sx={style}>
+                <Register
+                  setRegisterModal={setRegisterModal}
+                  setLoginModal={setLoginModal}
+                />
+              </Box>
+            </Modal>
 
-          {!cookie && route !== "checkout" ? (
-            <Button
-              variant="contained"
-              size="medium"
-              className={clsx(classes.default, classes.primary)}
-              onClick={handleLogin}
+            {!cookie && route !== "checkout" ? (
+              <Button
+                variant="contained"
+                size="medium"
+                className={clsx(classes.default, classes.primary)}
+                onClick={handleLogin}
+              >
+                Login
+              </Button>
+            ) : null}
+            <Modal
+              open={loginModal}
+              onClose={handleLogin}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              Login
-            </Button>
-          ) : null}
-          <Modal
-            open={loginModal}
-            onClose={handleLogin}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Login
-                setLoginModal={setLoginModal}
-                setRegisterModal={setRegisterModal}
-              />
-            </Box>
-          </Modal>
+              <Box sx={style}>
+                <Login
+                  setLoginModal={setLoginModal}
+                  setRegisterModal={setRegisterModal}
+                />
+              </Box>
+            </Modal>
 
-          {route === "checkout" ? null : <Cart />}
-          {cookie ? (
-            <UserMenu route={route} userImg={userImg} name={name} />
-          ) : null}
+            {route === "checkout" ? null : <Cart />}
+            {cookie ? (
+              <UserMenu route={route} userImg={userImg} name={name} />
+            ) : null}
+          </Box>
         </Toolbar>
       </AppBar>
       <ScrollTop>
