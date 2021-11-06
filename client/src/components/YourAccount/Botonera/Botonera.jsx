@@ -4,6 +4,7 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import s from "./Botonera.module.css";
 import { useHistory } from "react-router";
@@ -32,7 +33,7 @@ export default function YourAccount({
         <Button
           variant={viewAdmin ? "contained" : "outlined"}
           color={viewAdmin ? "secondary" : "primary"}
-          startIcon={<ShoppingBagIcon />}
+          startIcon={<AdminPanelSettingsIcon />}
           onClick={() => {
             setViewFavs(false);
             setViewOrders(false);
