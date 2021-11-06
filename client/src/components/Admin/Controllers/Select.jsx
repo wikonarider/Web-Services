@@ -28,7 +28,11 @@ export default function SelectLabels({
             <em>Clear</em>
           </MenuItem>
           {valuesArr.map((v) => {
-            return <MenuItem value={v}>{v}</MenuItem>;
+            return (
+              <MenuItem key={`select-op-${id}-${v}`} value={v}>
+                {v}
+              </MenuItem>
+            );
           })}
         </Select>
         <FormHelperText>{formHelperText}</FormHelperText>

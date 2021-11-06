@@ -2,24 +2,30 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import SelectDates from "./Controllers/Select";
-import Chart from "./Chart";
+import LineChart from "./Charts/Line";
+import RadarChart from "./Charts/Radar";
 import Box from "@mui/material/Box";
 
-export default function Dashboard() {
+export default function Dashboard({
+  dateFilter,
+  setDateFilter,
+  groupFilter,
+  setGroupFilter,
+}) {
   let [newServicesMonthly, setNewServicesMonthly] = useState([]);
   let [newServicesGroup, setNewServicesGroup] = useState([]);
-  let [groups, setGroups] = useState([]);
-  let [dateFilter, setDateFilter] = useState({
-    start: "",
-    end: "",
-  });
-  let [groupFilter, setGroupFilter] = useState(null);
+  let [groups, setGroups] = useState({ list: [], total: [] });
+  let [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios(`/admin`).then((response) => {
       setNewServicesMonthly(response.data.newServices);
       setNewServicesGroup(response.data.groupNewServices);
-      setGroups(response.data.groups);
+      setGroups({
+        list: response.data.groups,
+        total: response.data.groupServicesCount,
+      });
+      setUsers(response.data.newUsers);
     });
   }, []);
 
@@ -49,15 +55,21 @@ export default function Dashboard() {
   return (
     <>
       <h1>Dashboard</h1>
-      {Chart(
-        groupFilter
-          ? newServicesGroup[groupFilter.split("-")[0]]
-          : newServicesMonthly,
-        "month",
-        "n_services",
-        dateFilter
-      )}
-
+      <Box display="flex" flexDirection="row">
+        {(newServicesGroup || newServicesMonthly) &&
+          LineChart(
+            groupFilter
+              ? newServicesGroup[groupFilter.split("-")[0]]
+              : newServicesMonthly,
+            "month",
+            "n_services",
+            dateFilter,
+            "New services"
+          )}
+        {users && LineChart(users, "month", "n_users", dateFilter, "New users")}
+        {groups.total &&
+          RadarChart(groups.total, "groupName", "n_services", "Services/Group")}
+      </Box>
       <Box display="flex" flexDirection="row">
         <SelectDates
           id={"start-date"}
@@ -79,7 +91,7 @@ export default function Dashboard() {
           id={"groupSelector"}
           defaultValue={groupFilter}
           handleChange={(e) => handleGroupSelect(e)}
-          valuesArr={groups.map((m) => `${m.id}-${m.name}`)}
+          valuesArr={groups.list.map((m) => `${m.id}-${m.name}`)}
           label="Category:"
           formHelperText="Select category"
         />

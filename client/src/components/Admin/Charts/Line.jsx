@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
-export default function Chart(info, x, yDomain, date) {
+export default function Chart(info, x, yDomain, date, title) {
   return (
     <Box
       sx={{
@@ -42,15 +35,29 @@ export default function Chart(info, x, yDomain, date) {
           stroke="#FFFFFF"
           margin={{ left: 0 }}
         />
-        <Tooltip />
+        <Tooltip
+          cursor={{ stroke: "red", strokeWidth: 2 }}
+          content={({ active, payload, label }) => {
+            if (active && payload && payload.length) {
+              return (
+                <Chip
+                  color="success"
+                  label={`${label} : ${payload[0].value}`}
+                />
+              );
+            }
+
+            return null;
+          }}
+        />
         <Legend
-          content={<Typography variant="h6">New services</Typography>}
+          content={() => <Typography variant="h6">{title}</Typography>}
           verticalAlign="top"
         />
 
         <Line
           type="monotone"
-          dataKey="n_services"
+          dataKey={yDomain}
           stroke="#FFFFFF"
           strokeWidth={3}
         />

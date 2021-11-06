@@ -9,6 +9,7 @@ const users = [
     email: "admin@webservice.co.uk",
     ban: false,
     admin: true,
+    createdAt: "2020-01-01T00:00:00.000Z",
   },
   {
     id: "be19f20c-36aa-11ec-8d3d-0242ac130003",
@@ -19,6 +20,7 @@ const users = [
     password: "3g5APZ4fdg",
     email: "mmecozzi0@webeden.co.uk",
     ban: false,
+    createdAt: "2020-06-30T11:11:03.574Z",
   },
   {
     id: "be19f554-36aa-11ec-8d3d-0242ac130003",
@@ -29,6 +31,7 @@ const users = [
     password: "xFi1L334gdfg",
     email: "msandiford1@businesswire.com",
     ban: false,
+    createdAt: "2020-03-30T03:56:53.611Z",
   },
   {
     id: "be19f6da-36aa-11ec-8d3d-0242ac130003",
@@ -39,6 +42,7 @@ const users = [
     password: "K2BUfq7CkoV",
     email: "rbeardall2@flickr.com",
     ban: false,
+    createdAt: "2021-05-04T13:44:37.766Z",
   },
   {
     id: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
@@ -49,6 +53,7 @@ const users = [
     password: "5N97iZzzrMsdfg",
     email: "ngascoyne3@angelfire.com",
     ban: false,
+    createdAt: "2020-10-18T22:28:19.044Z",
   },
   {
     id: "4e218642-36ad-11ec-8d3d-0242ac130003",
@@ -59,6 +64,7 @@ const users = [
     password: "GhMqdMdfsd",
     email: "nsherington4@ning.com",
     ban: true,
+    createdAt: "2020-10-18T22:28:19.044Z",
   },
   {
     id: "4e21899e-36ad-11ec-8d3d-0242ac130003",
@@ -69,8 +75,8 @@ const users = [
     password: "GhMqdMdfsd",
     email: "bdoggart5@microsoft.com",
     ban: false,
+    createdAt: "2020-01-23T19:57:11.713Z",
   },
-
   {
     id: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     userImg: "https://avatars.dicebear.com/api/micah/sldkm.svg?b=%23ffd91a",
@@ -80,6 +86,7 @@ const users = [
     password: "9SDOUZuLK",
     email: "lhuburn6@irs.gov",
     ban: false,
+    createdAt: "2020-07-09T17:02:41.378Z",
   },
   {
     id: "4e218c00-36ad-11ec-8d3d-0242ac130003",
@@ -90,6 +97,7 @@ const users = [
     password: "DJM1j7OZYlO",
     email: "eroskilly7@twitpic.com",
     ban: false,
+    createdAt: "2020-04-30T15:25:12.445Z",
   },
   {
     id: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
@@ -100,8 +108,8 @@ const users = [
     password: "I4bTZsD2JRL",
     email: "rlamerton8@lycos.com",
     ban: false,
+    createdAt: "2020-04-30T15:25:12.445Z",
   },
-
   {
     id: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     userImg: "https://avatars.dicebear.com/api/micah/sl.svg?b=%23ff471a",
@@ -111,6 +119,7 @@ const users = [
     password: "oUl2b3PLV1",
     email: "kmcginn9@usgs.gov",
     ban: false,
+    createdAt: "2020-03-30T03:56:53.611Z",
   },
   {
     id: "4e218f98-36ad-11ec-8d3d-0242ac130003",
@@ -121,6 +130,7 @@ const users = [
     password: "CvNbJSffOe",
     email: "pstronacha@hc360.com",
     ban: false,
+    createdAt: "2020-01-23T19:57:11.713Z",
   },
   {
     id: "4e219056-36ad-11ec-8d3d-0242ac130003",
@@ -131,6 +141,7 @@ const users = [
     password: "345qRoffhJbA",
     email: "egozneyb@cam.ac.uk",
     ban: false,
+    createdAt: "2020-07-24T21:03:10.438Z",
   },
   {
     id: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
@@ -141,6 +152,7 @@ const users = [
     password: "huCxmJfur5X",
     email: "ssidwellc@vinaora.com",
     ban: false,
+    createdAt: "2021-03-04T18:11:20.621Z",
   },
   {
     id: "4e21929a-36ad-11ec-8d3d-0242ac170003",
@@ -151,8 +163,8 @@ const users = [
     password: "n88Hf8CfC4",
     email: "lpawled@hugedomains.com",
     ban: false,
+    createdAt: "2020-03-10T05:42:59.530Z",
   },
-
   {
     id: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     userImg: "https://avatars.dicebear.com/api/micah/j7.svg?b=%23ff471a",
@@ -162,6 +174,7 @@ const users = [
     password: "f1Z1g0nJ8jzD",
     email: "aclowsere@mlb.com",
     ban: false,
+    createdAt: "2020-07-24T21:03:10.438Z",
   },
   {
     id: "4e219448-36ad-11ec-8d3d-0242ac130003",
@@ -172,6 +185,7 @@ const users = [
     password: "JmdVh9HwJheL",
     email: "acanerof@sina.com.cn",
     ban: false,
+    createdAt: "2020-02-19T00:25:38.581Z",
   },
   {
     id: "4e219510-36ad-11ec-8d3d-0242ac110003",
@@ -182,6 +196,7 @@ const users = [
     password: "5UTtLf45gdf2",
     email: "kpittawayg@baidu.com",
     ban: false,
+    createdAt: "2020-02-19T00:25:38.581Z",
   },
   {
     id: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
@@ -192,6 +207,7 @@ const users = [
     password: "8zBBHX8sdf2",
     email: "kdanilchenkoh@sciencedirect.com",
     ban: false,
+    createdAt: "2020-03-30T03:56:53.611Z",
   },
   {
     id: "4e219678-36ad-11ec-8d3d-0242ac130003",
@@ -202,8 +218,8 @@ const users = [
     password: "wQkqbowWZ434fd",
     email: "dmocheri@berkeley.edu",
     ban: false,
+    createdAt: "2020-04-28T14:47:25.378Z",
   },
-
   {
     id: "4e219812-36ad-11ec-8d3d-0242ac139003",
     userImg: "https://avatars.dicebear.com/api/micah/b3.svg?b=%23c21aff",
@@ -213,6 +229,7 @@ const users = [
     password: "O5x6gch7Yr5",
     email: "mdomnickj@liveinternet.ru",
     ban: false,
+    createdAt: "2020-02-19T00:25:38.581Z",
   },
 ];
 

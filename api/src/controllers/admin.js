@@ -66,35 +66,26 @@ async function admin(req, res, next) {
     let bannedUsers = await Users.findAll({
       attributes: ["ban", [conn.fn("COUNT", conn.col("id")), "n_users"]],
       group: ["ban"],
+      where: { admin: false },
+    });
+
+    let newUsers = await Users.findAll({
+      attributes: [
+        [conn.fn("COUNT", conn.col("id")), "n_users"],
+        [conn.fn("TO_CHAR", conn.col("createdAt"), "Mon-YY"), "month"],
+        [conn.fn("TO_CHAR", conn.col("createdAt"), "YYYY-MM"), "year"],
+      ],
+      where: { admin: false },
+      group: ["month", "year"],
+      order: [[conn.literal("year"), "ASC"]],
     });
 
     let servicesPerUser = await Service.findAll({
       attributes: ["userId", [conn.fn("COUNT", conn.col("id")), "n_services"]],
 
       group: ["userId"],
+      order: [[conn.literal("n_services"), "DESC"]],
     });
-
-    // let groupNewServices = await Category.findAll({
-    //   attributes: [
-    //     // "name",
-    //     [conn.fn("TO_CHAR", conn.col("services.createdAt"), "Mon-YY"), "month"],
-    //     [conn.fn("TO_CHAR", conn.col("services.createdAt"), "YYYY-MM"), "year"],
-    //     [conn.fn("COUNT", conn.col("services.id")), "n_services"],
-    //   ],
-    //   group: ["month", "year", "group.id"],
-    //   where: { groupId: 1 },
-    //   include: [
-    //     {
-    //       model: Service,
-    //       attributes: [],
-    //     },
-    //     {
-    //       model: Group,
-    //       attributes: ["id", "name"],
-    //     },
-    //   ],
-    //   raw: true,
-    // });
 
     const groupServices = async (groups) => {
       let groupResponse = {};
@@ -135,10 +126,34 @@ async function admin(req, res, next) {
       attributes: ["id", "name"],
     });
 
+    let groupServicesCount = await Category.findAll({
+      attributes: [
+        "groupId",
+        [conn.col("group.name"), "groupName"],
+        [conn.fn("COUNT", conn.col("services.id")), "n_services"],
+      ],
+      group: ["groupId", "group.id"],
+      include: [
+        {
+          model: Service,
+          attributes: [],
+        },
+        {
+          model: Group,
+          attributes: [],
+        },
+      ],
+      order: [[conn.literal("n_services"), "DESC"]],
+
+      raw: true,
+    });
+
     let groupNewServices = await groupServices(groups);
 
     // { services: servicesCount, category: categoryCount }
     res.status(200).send({
+      groupServicesCount,
+      newUsers,
       groups,
       groupNewServices,
       servicesPerUser,
