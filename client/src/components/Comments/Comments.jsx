@@ -20,7 +20,6 @@ export default function Comments({
   const [rating, setRating] = useState(0);
   const cookieRedux = useSelector((state) => state.cookie);
 
-
   function handleClick(comment, rating, serviceId) {
     let userId = cookieRedux;
     if (rating > 0) {
@@ -36,7 +35,7 @@ export default function Comments({
         .then(() => {
           setLoading(false);
           setComment("");
-          setRating(null);
+          setRating(0);
         })
         .catch((e) => {
           alert("Please try again");
@@ -57,12 +56,16 @@ export default function Comments({
       gap={1}
       p={2}
       border="solid 1px lightgrey"
-      maxWidth="100%"
-      m="10px auto"
     >
       {cookie && (
         <>
-          <Box gridColumn="span 12" display="flex" flexDirection="row">
+          <Box
+            gridColumn="span 12"
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
             <Typography
               variant="subtitle1"
               sx={{ alignSelf: "center", mr: "5px" }}
@@ -73,36 +76,46 @@ export default function Comments({
               name="rating"
               value={rating}
               precision={1}
-              size='large'
+              size="large"
               onChange={(event, newValue) => {
                 setRating((rating) => newValue);
               }}
             />
 
             <Typography
-              variant={{xs:'subtitle1', sm:"h5"}}
+              variant="subtitle1"
               sx={{ pl: "10px", verticalAlign: "middle" }}
             >
               {`${rating} stars`}
             </Typography>
           </Box>
 
-          <Box gridColumn={{xs:'span 12', sm:"span 12", md:'span 10'}}>
+          <Box
+            gridColumn={{
+              xs: "span 12",
+              sm: "span 12",
+              md: "span 12",
+            }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
             <TextareaAutosize
               minRows={4}
               maxRows={8}
               aria-label="comment area"
               placeholder="Leave your comment here..."
-              style={{ width: "100%" }}
+              style={{ width: "85%", resize: "vertical" }}
               value={comment}
               onChange={(event) => handleChange(event)}
             />
-          </Box>
-
-          <Box gridColumn="span 2">
             <Button
               onClick={() => handleClick(comment, rating, serviceId)}
               variant="contained"
+              color="secondary"
               endIcon={<SendIcon />}
               disabled={loading}
             >

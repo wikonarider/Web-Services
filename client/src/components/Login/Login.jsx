@@ -82,41 +82,42 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
-      <TextField
-        required
-        fullWidth
-        error={inputsErrors.username ? true : false}
-        helperText={inputsErrors.username}
-        name="username"
-        value={inputs.username}
-        label="Username"
-        variant="outlined"
-        onChange={handleChange}
-      />
-      <TextField
-        required
-        fullWidth
-        error={inputsErrors.password ? true : false}
-        helperText={inputsErrors.password}
-        name="password"
-        value={inputs.password}
-        label="Password"
-        type="password"
-        variant="outlined"
-        onChange={handleChange}
-        sx={{ marginTop: "4%", marginBottom: "4%" }}
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        color="secondary"
-        disabled={Object.keys(inputsErrors).length ? true : false}
-        fullWidth={true}
-      >
-        Sing in
-      </Button>
-
+    <div className={s.container}>
+      <form className={s.form} onSubmit={handleSubmit}>
+        <TextField
+          required
+          fullWidth
+          error={inputsErrors.username ? true : false}
+          helperText={inputsErrors.username}
+          name="username"
+          value={inputs.username}
+          label="Username"
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <TextField
+          required
+          fullWidth
+          error={inputsErrors.password ? true : false}
+          helperText={inputsErrors.password}
+          name="password"
+          value={inputs.password}
+          label="Password"
+          type="password"
+          variant="outlined"
+          onChange={handleChange}
+          sx={{ marginTop: "4%", marginBottom: "4%" }}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="secondary"
+          disabled={Object.keys(inputsErrors).length ? true : false}
+          fullWidth={true}
+        >
+          Sing in
+        </Button>
+      </form>
       <Divider
         sx={{
           width: "100%",
@@ -149,7 +150,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           helperText={inputsErrors.google}
         />
       </div>
-    </form>
+    </div>
   );
 }
 
