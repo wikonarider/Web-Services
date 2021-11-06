@@ -18,11 +18,13 @@ export default function CheckoutDetail() {
   const total = [];
 
   const handleBuyClick = () => {
+    let prices = []
     cart.map(async (c) => {
+      prices.push(c.price)
       dispatch(
         await postPurchase({
           servicesId: [c.id],
-          totalPrice: c.price,
+          totalPrice: prices,
           title: c.title,
           quantity: 1,
         })

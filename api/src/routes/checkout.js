@@ -22,13 +22,20 @@ router.post("/", async (req, res) => {
     console.log('totalPrice' ,req.body)
     const {userId} = req.cookies
     // var unit_price = totalPrice / quantity;
-
+  
+    let prices = 0
+    for (let i=0; i < totalPrice.length; i++){
+      prices = prices + totalPrice[i]
+    }
+    
+        console.log('totalPricessssssss',prices)
+    
     var preference = {
       items: [
         {
           title: title,
           quantity: quantity,
-          unit_price: totalPrice,
+          unit_price: prices,
           serviceId : servicesId
         },
       ],
@@ -36,7 +43,7 @@ router.post("/", async (req, res) => {
 
         success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}`,
 
-        failure: `${ORIGIN}/fail`,
+        failure: `${ORIGIN}/home`,
         pending: `${ORIGIN}/home`,
       },
       auto_return: "approved",
