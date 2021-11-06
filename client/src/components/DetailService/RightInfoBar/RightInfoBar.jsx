@@ -23,13 +23,18 @@ export default function RightInfoBar({
       m={{ xs: 0, sm: 2 }}
       p={{ xs: 0, sm: 0, md: 2 }}
       border="solid 1px lightgrey"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
     >
-      {/* ---- BOTONES FAV SHARE CLOSE---------------------- */}
+      {/* ---- BOTONES FAV SHARE --------------------------- */}
       <Box
         gridColumn="span 12"
         display="flex"
         flexDirection="row"
         justifyContent="space-between"
+        sx={{ mr: "auto" }}
       >
         <Box gridColumn="span 6">
           <IconButton
@@ -57,15 +62,17 @@ export default function RightInfoBar({
         alignContent="start"
       >
         <Typography variant="h5" sx={{ width: "100%", textAlign: "left" }}>
-          {" "}
-          {title}{" "}
+          {title}
         </Typography>
       </Box>
       <Box
         gridColumn="span 12"
         display="flex"
         flexDirection="row"
-        justifyContent="left"
+        alignItems="center"
+        mr="auto"
+        pt="15px"
+        pb="5px"
       >
         <Rating
           name="read-only"
@@ -85,13 +92,7 @@ export default function RightInfoBar({
       {/* -------------------------------------------- */}
 
       {/* -------------- PRICE - CART ------------------------ */}
-      <Box
-        gridColumn="span 12"
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
-        alignContent="start"
-      >
+      <Box gridColumn="span 12" width="100%">
         <CardActions disableSpacing>
           <Typography variant="h5" sx={{}}>
             {" "}
@@ -101,7 +102,6 @@ export default function RightInfoBar({
             onClick={handleClick}
             color={!added ? "primary" : "success"}
             aria-label="add to shopping cart"
-            sx={{ ml: "auto" }}
           >
             <AddShoppingCart />
           </IconButton>
@@ -116,22 +116,24 @@ export default function RightInfoBar({
           component="div"
           sx={{ textAlign: "left" }}
         >
-          {" "}
-          Description:{" "}
+          Description:
         </Typography>
         <Typography
           variant="subtitle2"
           component="div"
-          sx={{ textAlign: "left" }}
+          sx={{
+            textAlign: "left",
+            maxHeight: "200px",
+            overflowY: "scroll",
+          }}
         >
-          {" "}
-          {description}{" "}
+          {description}
         </Typography>
       </Box>
       {/* ------------------------------------------- */}
 
       {/* ---------- USER CARD -------------------- */}
-      <Box gridColumn="span 12">
+      <Box gridColumn="span 12" mb="auto" width="minContent">
         <CardUser user={service.user} />
       </Box>
       {/* -------------------------------------- */}

@@ -59,7 +59,7 @@ export default function DetailService({ id, closeModal }) {
   }, [category, id]);
 
   useEffect(() => {
-    if (category) {
+    if (category && category !== "Other") {
       getRelatedServices();
     }
   }, [category, getRelatedServices, id]);
@@ -118,7 +118,6 @@ export default function DetailService({ id, closeModal }) {
 
   return (
     <>
-      {/* <Nav /> */}
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -131,13 +130,20 @@ export default function DetailService({ id, closeModal }) {
         <Box
           gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
           p={{ xs: 0, sm: 2 }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
         >
           <CardMedia
             component="img"
             image={img ? img : IMG_TEMPLATE}
             height="400"
             alt={id}
-            sx={{ objectFit: "cover" }}
+            sx={{
+              objectFit: "cover",
+              mb: "auto",
+              pb: 5,
+            }}
           />
 
           <Comments
