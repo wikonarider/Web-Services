@@ -154,6 +154,7 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             }
             type="submit"
             variant="contained"
+            color="secondary"
             sx={{ marginTop: "2%" }}
           >
             Register

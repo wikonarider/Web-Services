@@ -110,6 +110,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       <Button
         type="submit"
         variant="contained"
+        color="secondary"
         disabled={Object.keys(inputsErrors).length ? true : false}
         fullWidth={true}
       >
