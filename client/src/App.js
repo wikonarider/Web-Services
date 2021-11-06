@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import axios from "axios";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Home from "./components/Home/Home";
@@ -81,7 +81,7 @@ function App() {
               <YourAccount />
             </div>
           ) : (
-            <Redirect to="/home" />
+            <Nav route={""} />
           )}
         </Route>
 
@@ -106,12 +106,12 @@ function App() {
               <CheckoutDetail />
             </div>
           ) : (
-            <Redirect to="/home" />
+            <Nav route={""} />
           )}
         </Route>
 
         <Route exact path="/createservice">
-          {cookie ? <CreateService /> : <Redirect to="/home" />}
+          {cookie ? <CreateService /> : <Nav route={""} />}
         </Route>
       </Switch>
     </div>
