@@ -30,14 +30,37 @@ export default function CheckoutCard({ title, img, price, id }) {
     <Paper
       sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 3, mt: 3 }}
     >
-      <Grid container spacing={2} sx={{ gap: 1 }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ gap: 1 }}
+        direction="row"
+        alignItems="center"
+        justify="center"
+      >
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 140 }}>
             <Img alt="complex" src={img} />
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
+        <Grid
+          item
+          xs={12}
+          sm
+          container
+          justifyContent="space-around"
+          alignItems="stretch"
+        >
+          <Grid
+            item
+            xs
+            container
+            direction="column"
+            spacing={2}
+            direction="column"
+            alignItems="center"
+            justify="center"
+          >
             <Grid item xs>
               <Typography variant="body2" color="text.secondary">
                 ID: {id}
