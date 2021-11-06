@@ -6,6 +6,7 @@ import Rating from "@mui/material/Rating";
 import CardActions from "@mui/material/CardActions";
 import { AddShoppingCart, Favorite, Share } from "@mui/icons-material";
 import CardUser from "../../CardUser/CardUser";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function RightInfoBar({
   cookie,
@@ -16,6 +17,7 @@ export default function RightInfoBar({
   added,
 }) {
   let { title, price, description, rating, qualifications } = service.service;
+  const query = useMediaQuery("(max-width: 890px)");
 
   return (
     <Box
@@ -27,6 +29,7 @@ export default function RightInfoBar({
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      sx={query ? { gridArea: "1" } : {}}
     >
       {/* ---- BOTONES FAV SHARE --------------------------- */}
       <Box
@@ -110,6 +113,7 @@ export default function RightInfoBar({
       {/* ---------------------------------------- */}
 
       {/* -------------- DESCRIPTION ----------- */}
+
       <Box gridColumn="span 12">
         <Typography
           variant="subtitle1"
@@ -133,7 +137,12 @@ export default function RightInfoBar({
       {/* ------------------------------------------- */}
 
       {/* ---------- USER CARD -------------------- */}
-      <Box gridColumn="span 12" mb="auto" width="minContent">
+      <Box
+        gridColumn="span 12"
+        mb="auto"
+        width="100%"
+        sx={{ transform: "scale(0.8)" }}
+      >
         <CardUser user={service.user} />
       </Box>
       {/* -------------------------------------- */}
