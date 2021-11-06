@@ -51,6 +51,7 @@ function Footer() {
       <Button
         onClick={handleClick}
         variant="contained"
+        color="secondary"
         sx={endPage ? { display: "none" } : {}}
       >
         Load more

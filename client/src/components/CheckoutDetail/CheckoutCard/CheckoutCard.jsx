@@ -1,23 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import { useDispatch } from "react-redux";
 
-import { removeCart } from '../../../redux/actions';
-import CheckoutPopOver from '../CheckoutPopOver/CheckoutPopOver';
+import { removeCart } from "../../../redux/actions";
+import CheckoutPopOver from "../CheckoutPopOver/CheckoutPopOver";
 
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import Button from '@mui/material/Button';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { styled } from '@mui/material/styles';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import ButtonBase from "@mui/material/ButtonBase";
+import Button from "@mui/material/Button";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { styled } from "@mui/material/styles";
 
 export default function CheckoutCard({ title, img, price, id }) {
-  const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+  const Img = styled("img")({
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
   });
 
   const dispatch = useDispatch();
@@ -28,16 +28,38 @@ export default function CheckoutCard({ title, img, price, id }) {
 
   return (
     <Paper
-      sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 3, mt: 3 }}
+      sx={{ p: 2, margin: "auto", maxWidth: 1000, flexGrow: 1, mb: 3, mt: 3 }}
     >
-      <Grid container spacing={2} sx={{ gap: 1 }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ gap: 1 }}
+        direction="row"
+        alignItems="center"
+        justify="center"
+      >
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 140 }}>
             <Img alt="complex" src={img} />
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
+        <Grid
+          item
+          xs={12}
+          sm
+          container
+          justifyContent="space-around"
+          alignItems="stretch"
+        >
+          <Grid
+            item
+            xs
+            container
+            direction="column"
+            spacing={2}
+            alignItems="center"
+            justify="center"
+          >
             <Grid item xs>
               <Typography variant="body2" color="text.secondary">
                 ID: {id}
@@ -52,7 +74,7 @@ export default function CheckoutCard({ title, img, price, id }) {
                 variant="text"
                 size="small"
                 endIcon={<DeleteOutlinedIcon />}
-                sx={{ textTransform: 'none' }}
+                sx={{ textTransform: "none" }}
                 onClick={handleOnClink}
               >
                 <CheckoutPopOver />

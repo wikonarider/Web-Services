@@ -114,6 +114,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
             variant="contained"
             startIcon={<ShareIcon />}
             size="small"
+            color="secondary"
             sx={{ marginTop: 2 }}
             disableElevation
           >

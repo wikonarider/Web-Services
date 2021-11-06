@@ -62,7 +62,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function AdminSideBar() {
+export default function AdminSideBar({ page, setPage }) {
   // eslint-disable-next-line
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -88,7 +88,12 @@ export default function AdminSideBar() {
             </IconButton>
           </ListItem>
           {Object.keys(sideBarOptions).map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem
+              selected={page === text}
+              onClick={() => setPage(text)}
+              button
+              key={text}
+            >
               <ListItemIcon sx={{ fontSize: "large" }}>
                 {sideBarOptions[text]}
               </ListItemIcon>
