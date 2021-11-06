@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
-import { postPurchase, removeCart } from '../../redux/actions';
+import { postPurchase, removeCart} from '../../redux/actions';
+import {paypal} from '../../redux/actions/index'
 import { useSelector, useDispatch } from 'react-redux';
 import s from './CheckoutPopOver/checkoutDetail.module.css';
 
@@ -17,6 +18,24 @@ export default function CheckoutDetail() {
 
   const total = [];
 
+
+  const handleBuyPaypal = () => {
+    let prices = []
+    cart.map(async (c) => {
+      prices.push(c.price)
+      dispatch(
+        await paypal({
+          servicesId: [c.id],
+          prices: prices,
+          name: c.title,
+          quantity: 1,
+        })
+      );
+      dispatch(await removeCart(c.id));
+    });
+ 
+
+  }
   const handleBuyClick = () => {
     let prices = []
     cart.map(async (c) => {
@@ -109,6 +128,20 @@ export default function CheckoutDetail() {
                   ) : (
                     <Button variant="contained" size="large" disabled>
                       BUY WITH MERCADO PAGO
+                    </Button>
+                  )}
+                        {total.length > 0 ? (
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      size="large"
+                      onClick={handleBuyPaypal}
+                    >
+                      BUY WITH PAYPAL
+                    </Button>
+                  ) : (
+                    <Button variant="contained" size="large" disabled>
+                      BUY WITH PAYPAL
                     </Button>
                   )}
                 </Grid>
