@@ -97,7 +97,6 @@ export default function CardUser({ user }) {
             gridColumn="span 12"
             display="flex"
             flexDirection="row"
-            flexWrap="wrap"
             gap="10px"
             pr="15px"
             width="100%"
