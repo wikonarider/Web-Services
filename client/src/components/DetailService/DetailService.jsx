@@ -8,6 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
 import RightInfoBar from "./RightInfoBar/RightInfoBar";
+import Typography from "@mui/material/Typography";
 
 export default function DetailService({ id, closeModal }) {
   let [service, setService] = useState({ service: {}, user: {} });
@@ -146,12 +147,18 @@ export default function DetailService({ id, closeModal }) {
             }}
           />
 
-          <Comments
-            updateService={updateService}
-            serviceId={id}
-            qualifications={qualifications}
-            cookie={cookie}
-          />
+          {qualifications && qualifications.length ? (
+            <Comments
+              updateService={updateService}
+              serviceId={id}
+              qualifications={qualifications}
+              cookie={cookie}
+            />
+          ) : (
+            <Box border="solid 1px lightgrey" p="20px">
+              <Typography variant="h5">No coments</Typography>
+            </Box>
+          )}
         </Box>
         {/* ----------------------------------------------------- */}
 
