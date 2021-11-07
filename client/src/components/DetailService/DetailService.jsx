@@ -60,9 +60,7 @@ export default function DetailService({ id, closeModal }) {
   }, [category, id]);
 
   useEffect(() => {
-    if (category && category !== "Other") {
-      getRelatedServices();
-    }
+    getRelatedServices();
   }, [category, getRelatedServices, id]);
   //-------------------------------------------------------
 
