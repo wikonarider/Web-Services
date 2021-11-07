@@ -6,6 +6,7 @@ const {
   isNotAuthenticated,
 } = require("../controllers/authentication");
 
+// isAuthenticated, isAdmin,
 router.get("/", admin);
 
 module.exports = router;

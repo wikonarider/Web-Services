@@ -79,7 +79,11 @@ export default function AdminSideBar({ page, setPage }) {
     <Box sx={{ display: "flex", position: "relative" }}>
       <Drawer variant="permanent" open={open}>
         <List>
-          <ListItem button key={"openDrawerButton"}>
+          <ListItem
+            onClick={open ? handleDrawerClose : handleDrawerOpen}
+            button
+            key={"openDrawerButton"}
+          >
             <IconButton
               onClick={open ? handleDrawerClose : handleDrawerOpen}
               sx={{ ml: "auto" }}
