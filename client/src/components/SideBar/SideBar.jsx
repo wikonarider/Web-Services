@@ -59,7 +59,7 @@ export default function MiniDrawer() {
       >
         <SortIcon />
       </IconButton>
-      <Drawer open={open} sx={{ width: drawerWidth }}>
+      <Drawer open={open} sx={{ width: drawerWidth }} onClose={handleDrawer}>
         <SideBarNested openFromFather={open} />
         <Divider />
         <SideBarOrderRating text={"Rating order"} />
