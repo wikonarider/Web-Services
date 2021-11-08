@@ -35,7 +35,8 @@
 
 .changePhoto {
   display: flex;
-  gap: 50px;
+  justify-content: center;
+  gap: 5%;
 }
 
 .spinner {
