@@ -13,6 +13,7 @@ import Login from "../Login/Login";
 import { useHistory } from "react-router";
 import UserMenu from "../Nav/UserMenu";
 import { useSelector } from "react-redux";
+import Register from "../Register/Register";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +85,14 @@ const Header = ({ cookie }) => {
     setLoginModal((prev) => !prev);
   };
 
+  const handleRegister = () => {
+    setRegisterModal((prev) => !prev);
+  };
+
+  const handleRedirect = () => {
+    history.push("/home");
+  };
+
   useEffect(() => {
     setChecked(true);
   }, []);
@@ -136,6 +145,21 @@ const Header = ({ cookie }) => {
           </Scroll>
         </div>
       </Collapse>
+
+      <Modal
+        open={!cookie ? registerModal : false}
+        onClose={handleRegister}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styleLogin}>
+          <Register
+            setRegisterModal={setRegisterModal}
+            setLoginModal={setLoginModal}
+            handleRedirect={handleRedirect}
+          />
+        </Box>
+      </Modal>
     </div>
   );
 };

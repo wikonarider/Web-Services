@@ -52,8 +52,6 @@ function CreateService(props) {
   const [names, setNames] = useState({
     province: "",
     category: "",
-    subCategory: "",
-    city: "",
   }); //names
 
   //props input client
@@ -154,7 +152,7 @@ function CreateService(props) {
     });
   }
 
-  //---------------------------------------------------------------submit
+  //--------------------------------------------------------------------submit
   function handleSubmit(e) {
     e.preventDefault();
     if (
@@ -168,6 +166,10 @@ function CreateService(props) {
     ) {
       setModal(true);
       dispatch(createService({ ...inputs, price: parseInt(inputs.price) }));
+      setNames({
+        province: "",
+        category: "",
+      });
       setInputs({
         title: "",
         description: "",
@@ -217,10 +219,9 @@ function CreateService(props) {
     }
   };
   //---------------------------------------------------------------------------------validate
-  function isNumber(price) {
+ function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);
   }
-
   function errorsValidate(inputs) {
     let errors = {};
     if (!inputs.title) {
@@ -235,7 +236,7 @@ function CreateService(props) {
 
     return errors;
   }
-  //-----------------------------------------------------
+  //-----------------------------------------------------------------------------------
 
   //-----------REF-------------------------------
   const fileInput = useRef();

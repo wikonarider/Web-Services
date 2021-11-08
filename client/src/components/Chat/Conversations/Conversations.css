@@ -1,0 +1,12 @@
+.avatar{
+    width: 70px;
+    height: 70px;
+    border:unset;
+    background: #e8f5e9;
+    text-align: start;
+    align-items: flex-end;
+    display: grid;
+
+
+  
+}
