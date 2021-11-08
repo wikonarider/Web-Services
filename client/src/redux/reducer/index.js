@@ -20,6 +20,9 @@ const initialState = {
     province: "",
     city: "",
   },
+  convertations: [],
+  contacts: [],
+  posts: [],
   endPage: false,
 };
 
@@ -97,6 +100,22 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         objGlobal: action.payload,
+      };
+
+    case type.GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+      };
+    case type.GET_CONVERTATIONS:
+      return {
+        ...state,
+        convertations: action.payload,
+      };
+    case type.GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
       };
 
     case type.POST_PURCHASE:

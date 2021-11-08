@@ -1,5 +1,5 @@
 import { type } from "./variables";
-import serviceURL from "./urlQuery";
+import urlQuery from "./urlQuery";
 import axios from "axios";
 
 //_____________________________________________________________________________________actions service
@@ -8,7 +8,9 @@ import axios from "axios";
 export function getServices(obj) {
   return async function (dispatch) {
     try {
-      var json = await axios(serviceURL(obj));
+      var json = await axios(urlQuery(obj));
+      // console.log("OBJ", obj);
+      // console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
@@ -119,7 +121,6 @@ export function putUser(newData) {
     }
   };
 }
-
 export async function getUserInfo() {
   const response = await axios.get("/users");
   return {
@@ -127,20 +128,6 @@ export async function getUserInfo() {
     payload: response.data,
   };
 }
-
-// export function getUserInfo() {
-//   return function (dispatch) {
-//     axios
-//       .get("/users")
-//       .then((response) => response.data)
-//       .then((data) =>
-//         dispatch({
-//           type: type.GET_USER_INFO,
-//           payload: data,
-//         })
-//       );
-//   };
-// }
 
 export function banUser(id) {
   return async () => {
@@ -232,18 +219,88 @@ export function setObjGlobal(obj) {
     payload: obj,
   };
 }
-
-export function paypal (body) {
-  console.log('body=>>> ',body);
+//------------------------------------------------------------------------------------------------------actions chat
+export function getConvertations() {
   return async function (dispatch) {
-      try {
-  
-          const response = await axios.post(`/paypal`, body);
-          window.location.replace(response.data);
-          return dispatch({ type: type.PAYPAL, payload: response.data });
-          
-      } catch (err) {
-          console.log(err);
-      }
+    try {
+      var resp = await axios(`chat/convertations`);
+      return dispatch({ type: type.GET_CONVERTATIONS, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+//----------------------------------------------------------------------------------
+export function getContacts() {
+  return async function (dispatch) {
+    try {
+      var resp = await axios(`chat/contacts`);
+      return dispatch({ type: type.GET_CONTACTS, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//------------------------------------------------------------------------------------
+export function getPots(idConv, offset) {
+  if (!offset) {
+    offset = 0;
+  }
+  return async function (dispatch) {
+    try {
+      var posts = await axios(
+        `chat/posts?idConvertation1=${idConv}&offset=${offset}`
+      );
+      return dispatch({ type: type.GET_POSTS, payload: posts.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//---------------------------------------------------------------------------------delete convertation
+export function deleteConvertation(idconvertation) {
+  return async () => {
+    try {
+      return await axios.delete(`chat/convertations/${idconvertation}`);
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
+//-----------------------------------------------------------------------------------------new convertation
+export function newConvertation(contact) {
+  return async function () {
+    try {
+      return await axios.post(`chat/convertations/${contact}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//-----------------------------------------------------------------------------------------------send message
+export function sendMessage(msn) {
+  return async function () {
+    await axios
+      .post(`chat`, msn)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+}
+//--------------------------------------------------------------------------------------
+export function paypal(body) {
+  console.log("body=>>> ", body);
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/paypal`, body);
+      window.location.replace(response.data);
+      return dispatch({ type: type.PAYPAL, payload: response.data });
+    } catch (err) {
+      console.log(err);
+    }
   };
 }

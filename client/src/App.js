@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import Home from "./components/Home/Home";
 import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
-import Chat from "./components/chat/chat";
+import Chat from "./components/Chat/UserChat/Chat";
 import Landing from "./components/Landing/Landing";
 import UserProfile from "./components/UserProfile/UserProfile";
 import CheckoutDetail from "./components/CheckoutDetail/CheckoutDetail";
@@ -57,7 +57,11 @@ function App() {
           <Home />
         </Route>
 
-        <Route exact path="/chat" component={Chat} />
+        <Route
+          exact
+          path="/chat/:id"
+          render={({ match }) => <Chat id={match.params.id} />}
+        />
 
         <Route
           exact

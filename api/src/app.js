@@ -7,7 +7,7 @@ const routes = require("./routes/index.js");
 const http = require("http");
 const app = express();
 const socketIO = require("socket.io");
-const serverchat = require("./controllers/chat.js");
+const {serverchat} = require("./controllers/chat.js");
 const cors = require("cors");
 const { ORIGIN } = process.env;
 

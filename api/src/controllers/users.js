@@ -1,10 +1,11 @@
-const { Users, Service, Qualification, conn, Op } = require("../db");
+const { Chat, Users,Service, Qualification, conn , Op} = require("../db");
 const {
   validateUser,
   checkUnique,
   validateUserEdit,
   validatePurchase,
 } = require("../utils/validUser");
+
 require("dotenv").config();
 const { ORIGIN } = process.env;
 
@@ -115,6 +116,7 @@ async function getUserInfo(req, res, next) {
             attributes: ["score"],
           },
         },
+      
       ],
     });
 
@@ -273,6 +275,9 @@ async function getUserAdminSearch(req, res, next) {
     next(e);
   }
 }
+
+
+
 
 module.exports = {
   userCreated,
