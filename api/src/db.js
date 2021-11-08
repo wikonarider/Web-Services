@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const bcrypt = require("bcrypt");
-const convertations = require("./models/convertations");
 
 const sequelize =
   process.env.NODE_ENV === "production"
@@ -132,7 +131,6 @@ City.belongsToMany(Service, { through: "services_cities" });
 
 Convertations.hasMany(Chat);
 Chat.belongsTo(Convertations);
-
 
 // hooks users
 // Encripta la contraseña antes de crear el usuario
