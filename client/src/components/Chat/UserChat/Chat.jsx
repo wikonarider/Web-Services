@@ -35,7 +35,7 @@ function Chat(props) {
   console.log(chating.length ? true : false);
   useEffect(() => {
     //client conection
-    socket.current = io("http://localhost:3001");
+    socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         userId: data.senderId,
