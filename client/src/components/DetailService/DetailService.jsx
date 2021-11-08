@@ -154,7 +154,7 @@ export default function DetailService({ id, closeModal }) {
             />
           ) : (
             <Box border="solid 1px lightgrey" p="20px">
-              <Typography variant="h5">No coments</Typography>
+              <Typography variant="h5">No comments</Typography>
             </Box>
           )}
         </Box>
