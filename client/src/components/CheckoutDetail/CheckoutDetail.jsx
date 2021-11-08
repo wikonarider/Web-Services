@@ -23,14 +23,14 @@ export default function CheckoutDetail() {
     cart.map(async (c) => {
       prices.push(c.price);
       dispatch(
-        await paypal({
+         paypal({
           servicesId: [c.id],
           prices: prices,
           name: c.title,
           quantity: 1,
         })
       );
-      dispatch(await removeCart(c.id));
+      dispatch(removeCart(c.id));
     });
   };
   const handleBuyClick = () => {
@@ -94,7 +94,7 @@ export default function CheckoutDetail() {
                     alignItems: 'flex-start',
                   }}
                 >
-                  {cart.length > 0 ? (
+                  {/* {cart.length > 0 ? ( */}
                     <Typography
                       variant="h5"
                       color="text.primary"
@@ -107,9 +107,10 @@ export default function CheckoutDetail() {
                         </Typography>
                       )}
                     </Typography>
-                  ) : (
-                    <div className={s.spinner}></div>
-                  )}
+                
+                   {/* : ( */}
+                    {/* <div className={s.spinner}></div> */}
+                  {/* )} */}
                 </Grid>
                 <Grid
                   item
