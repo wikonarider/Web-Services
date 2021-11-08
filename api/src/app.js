@@ -7,7 +7,7 @@ const routes = require("./routes/index.js");
 const http = require("http");
 const app = express();
 const socketIO = require("socket.io");
-const {serverchat} = require("./controllers/chat.js");
+const { serverchat } = require("./controllers/chat.js");
 const cors = require("cors");
 const { ORIGIN } = process.env;
 
@@ -18,6 +18,7 @@ const corsOptions = {
 
 app.name = "API";
 app.set("port", process.env.PORT || 3001); // permite que la nube asigne un port cuando deploye
+app.set("trust proxy", 1);
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -28,8 +29,7 @@ app.use((req, res, next) => {
   // res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept",   
-  
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
