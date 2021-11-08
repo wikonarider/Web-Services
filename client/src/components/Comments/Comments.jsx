@@ -7,14 +7,21 @@ import SendIcon from "@mui/icons-material/Send";
 import SingleComment from "./SingleComment";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 
-export default function Comments({ qualifications, serviceId, updateService }) {
+export default function Comments({
+  qualifications,
+  serviceId,
+  updateService,
+  cookie,
+}) {
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const cookieRedux = useSelector((state) => state.cookie);
 
   function handleClick(comment, rating, serviceId) {
-    let userId = document.cookie.split("=")[1];
+    let userId = cookieRedux;
     if (rating > 0) {
       setLoading(true);
       axios
@@ -28,7 +35,7 @@ export default function Comments({ qualifications, serviceId, updateService }) {
         .then(() => {
           setLoading(false);
           setComment("");
-          setRating(null);
+          setRating(0);
         })
         .catch((e) => {
           alert("Please try again");
@@ -49,51 +56,78 @@ export default function Comments({ qualifications, serviceId, updateService }) {
       gap={1}
       p={2}
       border="solid 1px lightgrey"
-      maxWidth="100%"
-      m="10px auto"
     >
-      <Box gridColumn="span 3" display="flex" flexDirection="row">
-        <Typography variant="subtitle2">Rating: </Typography>
-        <Rating
-          name="rating"
-          value={rating}
-          precision={1}
-          onChange={(event, newValue) => {
-            setRating((rating) => newValue);
-          }}
-        />
+      {cookie && (
+        <>
+          <Box
+            gridColumn="span 12"
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <Typography
+              variant="subtitle1"
+              sx={{ alignSelf: "center", mr: "5px" }}
+            >
+              Rating:
+            </Typography>
+            <Rating
+              name="rating"
+              value={rating}
+              precision={1}
+              size="large"
+              onChange={(event, newValue) => {
+                setRating((rating) => newValue);
+              }}
+            />
 
-        <Typography variant="h5" sx={{ pl: "10px" }}>
-          {rating}
-        </Typography>
-      </Box>
+            <Typography
+              variant="subtitle1"
+              sx={{ pl: "10px", verticalAlign: "middle" }}
+            >
+              {`${rating} stars`}
+            </Typography>
+          </Box>
 
-      <Box gridColumn="span 10">
-        <TextareaAutosize
-          minRows={4}
-          maxRows={8}
-          aria-label="comment area"
-          placeholder="Leave your comment here..."
-          style={{ width: "100%" }}
-          value={comment}
-          onChange={(event) => handleChange(event)}
-        />
-      </Box>
-      <Box gridColumn="span 2">
-        <Button
-          onClick={() => handleClick(comment, rating, serviceId)}
-          variant="contained"
-          endIcon={<SendIcon />}
-          disabled={loading}
-        >
-          {loading ? "Wait" : "Send"}
-        </Button>
-      </Box>
-
+          <Box
+            gridColumn={{
+              xs: "span 12",
+              sm: "span 12",
+              md: "span 12",
+            }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <TextareaAutosize
+              minRows={4}
+              maxRows={8}
+              aria-label="comment area"
+              placeholder="Leave your comment here..."
+              style={{ width: "85%", resize: "vertical" }}
+              value={comment}
+              onChange={(event) => handleChange(event)}
+            />
+            <Button
+              onClick={() => handleClick(comment, rating, serviceId)}
+              variant="contained"
+              color="secondary"
+              endIcon={<SendIcon />}
+              disabled={loading}
+            >
+              {loading ? "Wait" : "Send"}
+            </Button>
+          </Box>
+        </>
+      )}
       <Box gridColumn="span 12">
         {qualifications &&
-          qualifications.map((q) => {
-            return <SingleComment qualification={q} />;
+          qualifications.map((q, index) => {
+            return <SingleComment qualification={q} key={index} />;
           })}
       </Box>
     </Box>

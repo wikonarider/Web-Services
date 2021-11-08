@@ -4,6 +4,7 @@ var {
   userCreated,
   userBanned,
   getUserInfo,
+  getUserAdminSearch,
   postPurchase,
   userEdit,
 } = require("../controllers/users");
@@ -14,11 +15,11 @@ const {
 
 // User post
 router.post("/", isNotAuthenticated, userCreated);
-router.post("/purchase", postPurchase);
+router.get("/purchase", postPurchase);
 
 // User get
 router.get("/", isAuthenticated, getUserInfo);
-
+router.get("/search", isAuthenticated, getUserAdminSearch);
 // User delete
 router.delete("/:id", userBanned);
 

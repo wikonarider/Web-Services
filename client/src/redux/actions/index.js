@@ -1,5 +1,5 @@
 import { type } from "./variables";
-import serviceURL from "./urlQuery";
+import urlQuery from "./urlQuery";
 import axios from "axios";
 
 //_____________________________________________________________________________________actions service
@@ -8,13 +8,13 @@ import axios from "axios";
 export function getServices(obj) {
   return async function (dispatch) {
     try {
-      var json = await axios(serviceURL(obj));
-      console.log("OBJ", obj);
-      console.log("AXIOS", json.data);
+      var json = await axios(urlQuery(obj));
+      // console.log("OBJ", obj);
+      // console.log("AXIOS", json.data);
       return dispatch({
         type: type.GET_SERVICES,
         payload: json.data,
-        objState: obj
+        objState: obj,
       });
     } catch (err) {
       return new Error(err);
@@ -80,6 +80,20 @@ export function createService(body) {
   };
 }
 
+export function setServicesPage(services) {
+  return {
+    type: type.SET_SERVICES_PAGE,
+    payload: services,
+  };
+}
+
+export function setEndPage(value) {
+  return {
+    type: type.SET_END_PAGE,
+    payload: value,
+  };
+}
+
 export function postCategory(category) {
   return {
     type: type.POST_CATEGORY,
@@ -107,22 +121,11 @@ export function putUser(newData) {
     }
   };
 }
-
-// export async function getUserInfo() {
-//   const response = await axios.get("/users");
-//   return {
-//     type: type.GET_USER_INFO,
-//     payload: response.data,
-//   };
-// }
-
 export async function getUserInfo() {
-  return async function (dispatch) {
-    const response = await axios.get("/users");
-    dispatch({
-      type: type.GET_USER_INFO,
-      payload: response.data,
-    });
+  const response = await axios.get("/users");
+  return {
+    type: type.GET_USER_INFO,
+    payload: response.data,
   };
 }
 
@@ -149,6 +152,27 @@ export const getUserFavs = async () => {
   const response = await axios(`/favs`);
   return { type: type.GET_USER_FAVS, payload: response.data };
 };
+
+//purchase
+// export const postPurchase = async (array) => {
+//   return async () => {
+//     try {
+//       return await axios.post(`/checkout`, array);
+//     } catch (err) {
+//       return new Error(err);
+//     }
+//   };
+// };
+export function postPurchase(body) {
+  return async function (dispatch) {
+    var json = await axios.post(`/checkout`, body);
+    window.location.replace(json.data);
+    return dispatch({
+      type: type.POST_PURCHASE,
+      payload: json.data,
+    });
+  };
+}
 
 //_____________________________________________________________________________________actions provinces
 
@@ -178,5 +202,105 @@ export function removeCart(idService) {
   return {
     type: type.REMOVE_CART,
     payload: idService,
+  };
+}
+
+export function setCartStorage(cart) {
+  return {
+    type: type.SET_CART_STORAGE,
+    payload: cart,
+  };
+}
+
+// obj global
+export function setObjGlobal(obj) {
+  return {
+    type: type.OBJ_GLOBAL,
+    payload: obj,
+  };
+}
+//------------------------------------------------------------------------------------------------------actions chat
+export function getConvertations() {
+  return async function (dispatch) {
+    try {
+      var resp = await axios(`chat/convertations`);
+      return dispatch({ type: type.GET_CONVERTATIONS, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+//----------------------------------------------------------------------------------
+export function getContacts() {
+  return async function (dispatch) {
+    try {
+      var resp = await axios(`chat/contacts`);
+      return dispatch({ type: type.GET_CONTACTS, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//------------------------------------------------------------------------------------
+export function getPots(idConv, offset) {
+  if (!offset) {
+    offset = 0;
+  }
+  return async function (dispatch) {
+    try {
+      var posts = await axios(
+        `chat/posts?idConvertation1=${idConv}&offset=${offset}`
+      );
+      return dispatch({ type: type.GET_POSTS, payload: posts.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//---------------------------------------------------------------------------------delete convertation
+export function deleteConvertation(idconvertation) {
+  return async () => {
+    try {
+      return await axios.delete(`chat/convertations/${idconvertation}`);
+    } catch (err) {
+      return new Error(err);
+    }
+  };
+}
+//-----------------------------------------------------------------------------------------new convertation
+export function newConvertation(contact) {
+  return async function () {
+    try {
+      return await axios.post(`chat/convertations/${contact}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//-----------------------------------------------------------------------------------------------send message
+export function sendMessage(msn) {
+  return async function () {
+    await axios
+      .post(`chat`, msn)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+}
+//--------------------------------------------------------------------------------------
+export function paypal(body) {
+  console.log("body=>>> ", body);
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/paypal`, body);
+      window.location.replace(response.data);
+      return dispatch({ type: type.PAYPAL, payload: response.data });
+    } catch (err) {
+      console.log(err);
+    }
   };
 }

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { getServices } from '../../../redux/actions';
-
+import { setObjGlobal } from '../../../redux/actions/index';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -10,12 +8,25 @@ import Button from '@mui/material/Button';
 
 export default function SideBarRangePrice() {
   const dispatch = useDispatch();
-  const objState = useSelector((state) => state.objGlobal);
+  const objGlobal = useSelector((state) => state.objGlobal);
   const [rangePrice, setRangePrice] = useState({
     startRange: '',
     endRange: '',
   });
- 
+
+  useEffect(() => {
+    if (objGlobal.startRange && objGlobal.endRange) {
+      setRangePrice({
+        startRange: objGlobal.startRange,
+        endRange: objGlobal.endRange,
+      });
+    } else {
+      setRangePrice({
+        startRange: '',
+        endRange: '',
+      });
+    }
+  }, [objGlobal]);
 
   const handleMinMaxChange = (event) => {
     if (event.target.id === 'startRange') {
@@ -33,21 +44,16 @@ export default function SideBarRangePrice() {
   };
 
   const handleBtn = () => {
-      objState.startRange= rangePrice.startRange
-      objState.endRange= rangePrice.endRange
-    
+    let obj = {
+      ...objGlobal,
+      startRange: rangePrice.startRange,
+      endRange: rangePrice.endRange,
+    };
 
     if (rangePrice.startRange < rangePrice.endRange) {
-      // console.log(obj);
-      dispatch(getServices(objState));
-      setRangePrice({
-        startRange: '',
-        endRange: '',
-      });
+      dispatch(setObjGlobal(obj));
     }
   };
-
-  // console.log(allServices)
 
   return (
     <Box
@@ -78,6 +84,7 @@ export default function SideBarRangePrice() {
         variant="outlined"
         endIcon={<ArrowRightIcon />}
         onClick={handleBtn}
+        color="secondary"
       >
         Search
       </Button>

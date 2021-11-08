@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import { Typography, CardActionArea } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Rating from "@mui/material/Rating";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addCart } from "../../redux/actions/index";
-import { useSelector } from "react-redux";
-import { deleteFavs, addFavs } from "../../utils/favs";
-import { getUserInfo } from "../../redux/actions/index";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteFavs, addFavs } from '../../utils/favs';
+import { getUserInfo, addCart } from '../../redux/actions/index';
+
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import CardActionArea from '@mui/material/CardActionArea';
+import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Rating from '@mui/material/Rating';
+
+import ShareServiceModal from './ShareServiceModal';
 
 const IMG_TEMPLATE =
-  "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
+  'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
 
-function CardService({ service }) {
+function CardService({ service, related }) {
   const cart = useSelector((state) => state.cart);
   const favs = useSelector((state) => state.user.servicesFavs);
   const cookie = useSelector((state) => state.cookie);
@@ -27,11 +29,19 @@ function CardService({ service }) {
   const [added, setAdded] = useState(false);
   const [favState, setFavState] = useState(false);
 
-  const { title, img, price, id, userId, ratingService } = service;
-  const rating = ratingService ? ratingService : 5;
+  const [modal, setModal] = useState(false);
+
+  const { title, img, price, id, userId, rating } = service;
+
   const fixedTitle = title
     ? title.length > 40
       ? `${title.substring(0, 40)}...`
+      : title
+    : null;
+
+  const fixedTitleRelated = title
+    ? title.length > 30
+      ? `${title.substring(0, 30)}...`
       : title
     : null;
 
@@ -92,54 +102,93 @@ function CardService({ service }) {
       console.log(e.response.data);
     }
   };
+
+  function handleModal(e) {
+    setModal(true);
+  }
+
+  const cardStyle = { width: 345, height: 420, textDecoration: 'none' };
+  const relatedCardStyle = { width: 172, height: 210, textDecoration: 'none' };
+
   return (
-    <Card sx={{ width: 345, height: 420, textDecoration: "none" }}>
-      <CardActionArea component={Link} to={`/services/${id}`}>
-        <CardHeader title={fixedTitle} sx={{ pb: "0", height: "64px" }} />
-        <Rating
-          name="read-only"
-          value={rating}
-          precision={0.5}
-          readOnly
-          sx={{ p: "8px" }}
-        />
+    <div>
+      <Card sx={related ? relatedCardStyle : cardStyle}>
+        {/* component={Link} to={`/services/${id}`} */}
+        <CardActionArea component={Link} to={`/services/${id}`}>
+          <CardHeader
+            title={related ? fixedTitleRelated : fixedTitle}
+            sx={
+              related
+                ? { pb: '0', height: '32px', marginBottom: '18px' }
+                : { pb: '0', height: '64px' }
+            }
+            titleTypographyProps={related && { variant: 'body' }}
+          />
 
-        <CardMedia
-          component="img"
-          height="194"
-          image={img ? img : IMG_TEMPLATE}
-          alt={title}
-          sx={{ objectFit: "cover" }}
-        />
-        <Typography variant="h5" component="div" sx={{ p: "5px" }}>
-          {`$${price ? price : 0}`}
-        </Typography>
-      </CardActionArea>
+          {!related && (
+            <Rating
+              name="read-only"
+              value={Number(rating)}
+              precision={0.5}
+              readOnly
+              sx={{ p: '8px' }}
+            />
+          )}
 
-      <CardActions disableSpacing>
-        <IconButton
-          onClick={handleFavs}
-          aria-label="add to favorites"
-          sx={
-            cookie && cookie.split("=")[1] !== userId ? {} : { display: "none" }
-          }
-        >
-          <FavoriteIcon color={favState ? "error" : ""} />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+          <CardMedia
+            component="img"
+            height={related ? '97' : '194'}
+            image={img ? img : IMG_TEMPLATE}
+            alt={title}
+            sx={{ objectFit: 'cover' }}
+          />
+          <Typography
+            variant={related ? 'subtitle1' : 'h5'}
+            component="div"
+            sx={{ p: '5px' }}
+          >
+            {`$${price ? price : 0}`}
+          </Typography>
+        </CardActionArea>
 
-        <IconButton
+        {!related && (
+          <CardActions disableSpacing>
+            <IconButton
+              onClick={handleFavs}
+              aria-label="add to favorites"
+              sx={cookie && cookie !== userId ? {} : { display: 'none' }}
+            >
+              <FavoriteIcon color={favState ? 'error' : ''} />
+            </IconButton>
+            <IconButton aria-label="share" onClick={(e) => handleModal(e)}>
+              <ShareIcon />
+            </IconButton>
+
+            {/*
+        //J0n: no borrar
+         <IconButton
           onClick={handleClick}
           color={!added ? "primary" : "success"}
           aria-label="add to shopping cart"
           sx={{ ml: "auto" }}
-        >
-          <AddShoppingCartIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+        > */}
+            {}
+
+            <IconButton
+              onClick={handleClick}
+              color={!added ? 'primary' : 'secondary'}
+              aria-label="add to shopping cart"
+              sx={
+                cart && cookie !== userId ? { ml: 'auto' } : { display: 'none' }
+              }
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
+          </CardActions>
+        )}
+      </Card>
+      <ShareServiceModal modal={modal} setModal={setModal} serviceId= {id} />
+    </div>
   );
 }
 

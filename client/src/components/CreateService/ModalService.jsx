@@ -2,6 +2,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useHistory } from "react-router";
+
 
 const style = {
   position: "absolute",
@@ -10,14 +12,18 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: 2,
   boxShadow: 24,
-  p: 4,
+  textAlign: 'center',
+  p: 6,
 };
 
 export default function ModalService({ modal, setModal, message }) {
+
+  const history = useHistory();
+
   const handleClose = () => {
-    setModal(false);
+    history.push('/account')
   };
 
   return (

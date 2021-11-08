@@ -1,5 +1,5 @@
 //servicios disponibles
-const { Category } = require('../src/db');
+const { Category } = require("../src/db");
 
 function linkCategoryWithGroup(array, groupId) {
   let promises = [];
@@ -12,136 +12,136 @@ function linkCategoryWithGroup(array, groupId) {
         e.setGroup(groupId);
       });
     })
-    .catch((e) => console.log('Error linkCategory ', e));
+    .catch((e) => console.log("Error linkCategory ", e));
 }
 
 const clases = [
   {
-    name: 'Dance',
+    name: "Dance",
   },
   {
-    name: 'Language',
+    name: "Language",
   },
   {
-    name: 'Computing',
+    name: "Computing",
   },
   {
-    name: 'Music',
+    name: "Music",
   },
 
   {
-    name: 'Academics Tutoring',
+    name: "Academics Tutoring",
   },
   {
-    name: 'Theater',
+    name: "Theater",
   },
   {
-    name: 'Other',
+    name: "Other Courses",
   },
 ];
 
 const reparaciones = [
   {
-    name: 'Carpentry',
+    name: "Carpentry",
   },
   {
-    name: 'Locksmith',
+    name: "Locksmith",
   },
   {
-    name: 'Construction & Bricklayer',
+    name: "Construction and Bricklayer",
   },
   {
-    name: 'Electrical',
+    name: "Electrical",
   },
   {
-    name: 'Appliance Repair',
+    name: "Appliance Repair",
   },
   {
-    name: 'Electrical & Computers',
+    name: "Electrical and Computers",
   },
   {
-    name: 'Smithy',
+    name: "Smithy",
   },
   {
-    name: 'Auto Repair',
+    name: "Auto Repair",
   },
   {
-    name: 'Painting',
+    name: "Painting",
   },
   {
-    name: 'Plumbing y Gas',
+    name: "Plumbing y Gas",
   },
   {
-    name: 'Other',
+    name: "Other Technician",
   },
 ];
 
 const organizaciones = [
   {
-    name: 'Ambience & Decoration',
+    name: "Ambience and Decoration",
   },
   {
-    name: 'Catering',
+    name: "Catering",
   },
   {
-    name: 'Entertainment',
+    name: "Entertainment",
   },
   {
-    name: 'Photography',
+    name: "Photography",
   },
   {
-    name: 'Organization',
+    name: "Organization",
   },
   {
-    name: 'Salon',
+    name: "Salon",
   },
   {
-    name: 'Other',
+    name: "Other Events",
   },
 ];
 
 const transporte = [
   {
-    name: 'Freight - Lading',
+    name: "Freight - Lading",
   },
   {
-    name: 'Moving',
+    name: "Moving",
   },
   {
-    name: 'Other',
+    name: "Other Transport",
   },
   {
-    name: 'Transport',
+    name: "Transport",
   },
 ];
 
 const domestico = [
   {
-    name: 'Gardener',
+    name: "Gardener",
   },
   {
-    name: 'Baby sister',
+    name: "Baby sister",
   },
   {
-    name: 'Cleaning & Maid Service',
+    name: "Cleaning and Maid Service",
   },
 ];
 
 const turismo = [
   {
-    name: 'Mendoza',
+    name: "Mendoza",
   },
   {
-    name: 'Misiones',
+    name: "Misiones",
   },
   {
-    name: 'Córdoba',
+    name: "Córdoba",
   },
   {
-    name: 'Mar Del Plata',
+    name: "Mar Del Plata",
   },
   {
-    name: 'Bariloche',
+    name: "Bariloche",
   },
 ];
 

@@ -1,0 +1,34 @@
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #808080; */
+    padding: 2%;
+}
+
+.userProfile{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2% 2% 2% 10%;
+}
+
+.userInfo{
+    margin-left: 6%;
+}
+
+.fullName{
+    display: flex;
+    justify-content: center;
+}
+
+    .fullName p{
+        font-size: 2.2em;
+        font-weight: 600;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+.name{
+    margin-right: 5%;
+}

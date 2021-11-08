@@ -1,21 +1,16 @@
-.container,
-.form {
+.container {
+  padding: 40px;
+}
+
+.new {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  width: 100%;
 }
 
-.container {
-  height: 100%;
-}
-
-.form {
-  max-width: 500px;
-  width: 80%;
-  background-color: white;
-  padding: 25px;
-  border-radius: 5px;
+.new p {
+  font-size: 0.9em;
+  color: #a3a3a3;
+  margin: 0;
+  margin-right: 4%;
 }

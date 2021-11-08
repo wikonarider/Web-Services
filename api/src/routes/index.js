@@ -8,6 +8,10 @@ const login = require("./login");
 const logout = require("./logout");
 const provinces = require("./provinces");
 const comment = require("./comment");
+const checkout = require("./checkout");
+const chat=require("./Chat");
+const admin = require("./admin");
+const paypal = require("./paypal")
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -26,5 +30,9 @@ router.use("/login", login);
 router.use("/logout", logout);
 router.use("/provinces", provinces);
 router.use("/comment", comment);
+router.use("/checkout", checkout);
+router.use("/chat",chat)
+router.use("/admin", admin);
+router.use("/paypal", paypal)
 
 module.exports = router;

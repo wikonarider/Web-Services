@@ -1,6 +1,6 @@
 //construye URL para query dependiendo las props del objeto que recibe getService(obj)
 
-export default function serviceURL(obj) {
+export default function urlQuery(obj) {
   var URL = "services";
 
   if (obj && Object.values(obj).length) {

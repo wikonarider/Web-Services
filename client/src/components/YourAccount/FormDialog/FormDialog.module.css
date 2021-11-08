@@ -1,4 +1,9 @@
-.form{
+form{
     padding: 50px;
 }
 
+.div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

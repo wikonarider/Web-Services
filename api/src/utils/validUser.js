@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Users } = require("../db");
+const { Users, Service } = require("../db");
 
 // valida si es una url
 function validateUrl(str) {
@@ -113,9 +113,26 @@ async function checkUnique(username, email) {
   return false;
 }
 
+// purchase
+async function validatePurchase(arrayServices, userId) {
+  if (!Array.isArray(arrayServices)) return false;
+  else if (!arrayServices.every((id) => typeof id === "number")) return false;
+
+  const services = await Service.findAll({
+    where: {
+      id: arrayServices,
+      userId: { [Op.ne]: userId },
+    },
+  });
+
+  Op.n;
+  return services.length === arrayServices.length;
+}
+
 module.exports = {
   validateUrl,
   validateUser,
   checkUnique,
   validateUserEdit,
+  validatePurchase,
 };

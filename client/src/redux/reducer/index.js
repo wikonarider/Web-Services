@@ -10,28 +10,45 @@ const initialState = {
   categories: [],
   cookie: "",
   objGlobal: {
-    category: [],
-    filter: "price",
-    order: "ASC",
-    province: "",
     startRange: "",
     endRange: "",
-  }
+    category: [],
+    page: "0",
+    pageSize: "20",
+    order: "rating",
+    type: "DESC",
+    province: "",
+    city: "",
+  },
+  convertations: [],
+  contacts: [],
+  posts: [],
+  endPage: false,
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { payload, objState } = action;
+  const { payload } = action;
 
   switch (action.type) {
     //usar importacion type que incluye las constantes para facilitarte,agregar constantes si es necesario en variables.js ""
 
     case type.GET_SERVICES:
-      // usar para testing no mas
-      // console.log("Payload en reducer", payload);
-
       return {
         ...state,
         services: payload,
+        endPage: false,
+      };
+
+    case type.SET_SERVICES_PAGE:
+      return {
+        ...state,
+        services: [...state.services, ...payload],
+      };
+
+    case type.SET_END_PAGE:
+      return {
+        ...state,
+        endPage: payload,
       };
 
     case type.CREATE_SERVICE:
@@ -54,6 +71,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((s) => s.id !== action.payload),
       };
+    case type.SET_CART_STORAGE:
+      return {
+        ...state,
+        cart: payload,
+      };
 
     case type.GET_USER_FAVS:
       return {
@@ -73,6 +95,40 @@ const rootReducer = (state = initialState, action) => {
         cookie: action.payload,
       };
     }
+
+    case type.OBJ_GLOBAL:
+      return {
+        ...state,
+        objGlobal: action.payload,
+      };
+
+    case type.GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+      };
+    case type.GET_CONVERTATIONS:
+      return {
+        ...state,
+        convertations: action.payload,
+      };
+    case type.GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload,
+      };
+
+    case type.POST_PURCHASE:
+      return {
+        ...state,
+      };
+
+      case type.PAYPAL:
+        return {
+          ...state
+        }
+
+        
     default:
       return state;
   }

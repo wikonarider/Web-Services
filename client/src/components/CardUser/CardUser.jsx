@@ -1,15 +1,12 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-
-import { Typography, CardActionArea } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import { IconButton } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -27,52 +24,120 @@ export default function CardUser({ user }) {
   return (
     <Card
       sx={{
-        width: "90%",
         height: "minContent",
         textDecoration: "none",
         m: "10px auto 10px auto",
-        p: "5px",
+        p: "0px",
         border: "solid 1px lightgrey",
       }}
     >
-      <CardActionArea component={Link} to={`/users/${id}`}>
-        <CardMedia
-          component="img"
-          height="194"
-          image={userImg ? userImg : IMG_TEMPLATE}
-          alt={username}
-          sx={{
-            objectFit: "cover",
-            borderRadius: "50%",
-            height: "auto",
-            width: "60%",
-            m: "auto",
-          }}
-        />
-        <CardHeader
-          title={fixedTitle}
-          sx={{ p: "5px 0px 0px 0px", height: "minContent" }}
-        />
-        <Typography variant="subtitle2" component="p" sx={{}}>
-          {username}
-        </Typography>
-      </CardActionArea>
+      <Box
+        id={id}
+        key={id}
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gap={1}
+        sx={{
+          m: "5px 0px",
+          height: "minContent",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box gridColumn="span 5">
+          {/* User imagen */}
+          <CardMedia
+            component="img"
+            image={userImg ? userImg : IMG_TEMPLATE}
+            alt={username}
+            sx={{
+              objectFit: "cover",
+              borderRadius: "50%",
+              height: "150px",
+              width: "auto",
+              m: "auto 0px auto 3px",
+              alignSelf: "center",
+            }}
+          />
+        </Box>
+        <Box
+          gridColumn="span 7"
+          display="flex"
+          flexDirection="column"
+          height="100%"
+        >
+          {/* title */}
+          <Box
+            gridColumn="span 12"
+            display="flex"
+            flexDirection="column"
+            m="10px auto 40px auto"
+          >
+            <Typography
+              variant="subtitle1"
+              sx={{
+                height: "minContent",
+                textAlign: "left",
+              }}
+            >
+              {fixedTitle}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              component="p"
+              sx={{ textAlign: "left" }}
+            >
+              {username}
+            </Typography>
+          </Box>
+          {/* Button chat profile */}
+          <Box
+            gridColumn="span 12"
+            display="flex"
+            flexDirection="row"
+            gap="10px"
+            pr="15px"
+            width="100%"
+          >
+            {/* chat */}
 
-      <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-          <ChatIcon sx={{}} />
-          <Typography variant="caption">Chat</Typography>
-        </IconButton> */}
-        <IconButton aria-label="share" sx={{ m: "0px auto 0px auto" }}>
-          <AccountBoxIcon />
-          <Typography variant="caption">Profile</Typography>
-        </IconButton>
+            <CardActionArea
+              component={Link}
+              to={`/chat/${id}`}
+              sx={{
+                width: "80px",
+                mt: "auto",
+                transform: "scale(1.3)",
+                display: "flex",
+                gap: "5px",
+              }}
+            >
+              <ChatIcon />
 
-        <IconButton aria-label="More services" sx={{ m: "0px auto 0px auto" }}>
-          <ListAltIcon />
-          <Typography variant="caption"> Services</Typography>
-        </IconButton>
-      </CardActions>
+              <Typography variant="caption">Chat</Typography>
+            </CardActionArea>
+
+            {/* Profile */}
+
+            <CardActionArea
+              component={Link}
+              to={`/users/${id}`}
+              sx={{
+                width: "80px",
+                mt: "auto",
+                transform: "scale(1.3)",
+                display: "flex",
+                gap: "5px",
+              }}
+            >
+              <AccountBoxIcon />
+              <Typography variant="caption">Profile</Typography>
+            </CardActionArea>
+          </Box>
+        </Box>
+      </Box>
     </Card>
   );
 }

@@ -2,14 +2,14 @@ const comments = [
   {
     comment:
       "Mi esposa y yo quedamos muy contentos con el trabajo de hugo y su hermano. Son cumplidos, serios, organizados y responsables. Nos asesoraron desde el principio del trabajo con los materiales a comprar, nos explicaron con detalle como se realizaría la instalación del piso en el apartamento y nos dieron las recomendaciones para el cuidado del mismo. Tan seguros están de su trabajo que no nos pidieron adelanto de dinero para empezar la obra sino que les pagamos al final del trabajo, y algo que destacar es que terminaron antes de lo previsto. Por lo tanto los recomiendo al 100%.",
-    score: 5,
+    score: 4,
     serviceId: 26,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
   },
   {
     comment:
       "Es el tercer trabajo que realizan para la familia, orden, excelentes acabados, aseo y cumplimiento.",
-    score: 5,
+    score: 4,
     serviceId: 26,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
   },
@@ -23,21 +23,21 @@ const comments = [
   {
     comment:
       "La instalación del piso quedo muy bien y los acabados quedaron perfectos, se cumplió el tiempo pactado, buena actitud de servicio, quedamos muy contentos con el trabajo y lo recomendamos.",
-    score: 5,
+    score: 4,
     serviceId: 25,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Trabajadores cumplidos, dedidcados y muy pulidos. Fué un trabajo impecable, me siento satisfecho. Solicitan materiales de muy nuena calidad. Son responsables y confiables. La seriedad y puntualidad brindan un excelente valor agregado. Cuentan con la experiencia para todo tipo de trabajo de obra y remodelación. La dedicación exclusiva a los trabajos hace que se cumplan los tiempos previstos y con alto grado de responsabilidad",
-    score: 5,
+    score: 4,
     serviceId: 25,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
   },
   {
     comment:
       "Agradecidos al 500% con su trabajo, totalmente pulidos, gracias a su experiencia pudimos mejorar nuestras ideas y obtener una remodelación que superó totalmente nuestras expectativas. Realmente si no hubiera sido por ustedes nada de lo que se hizo hubiera sido posible. Ideas innovadoras, todo fuera de lo común, un trabajo realmente de admirar. Mil y mil gracias !!",
-    score: 5,
+    score: 4,
     serviceId: 25,
     userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
   },
@@ -72,7 +72,7 @@ const comments = [
   {
     comment:
       "Exelente servicio. El vehiculo esta muy bien adecuado para cualquier trasteo y el encargado es muy colaborador y eficiente ¡super recomendado!.",
-    score: 5,
+    score: 4,
     serviceId: 2,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
   },
@@ -92,21 +92,21 @@ const comments = [
   },
   {
     comment: "Recomendado. . Gracias.",
-    score: 5,
+    score: 4,
     serviceId: 11,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Me encanto el servicio, hombre muy puntual, cumple con todas mis espectativas, excelente repertorio. Recomendado. . Gracias.",
-    score: 5,
+    score: 4,
     serviceId: 11,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Jez excelente toque, mi familia, mis amigos y yo hemos quedado muy contentos, tu energía, la magia de tu voz y la guitarra hicieron que pasaramos un gran momento, gracias por todo. Recomendadísimo tu show.",
-    score: 5,
+    score: 4,
     serviceId: 20,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
   },
@@ -120,13 +120,13 @@ const comments = [
   {
     comment:
       "Hice un pedido el lunes 26 de octubre 2020 para hoy miércoles 28 y a pesar de que estaba un poco encima, hacen pedidos con mínimo un día de anticipación lo que es una gran ventaja para salir de un apuro y les agradezco. Apenas escribí, me enviaron el catálogo y más imágenes de referencia. Pedí el menú #4 y llego exactamente como lo ofertan. El pago fue muy sencillo de hacer. Me permitieron escoger la decoración de los globos ya que yo quería ponerle unos números con globos metalizados y quedó muy bonito. Me dijeron que el pedido llegaba en la franja horaria de 7:00 a 8:30 y efectivamente así fue, un poco después de las 8:30 la persona a la que le envíe el regalo lo estaba recibiendo. Quedo muy agradecida con ustedes, la persona que recibió el regalo quedo muy contenta.",
-    score: 5,
+    score: 4,
     serviceId: 20,
     userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
   },
   {
     comment: "Son muy buenos en lo que hacen y profesionales.",
-    score: 5,
+    score: 4,
     serviceId: 2,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
   },
@@ -146,14 +146,14 @@ const comments = [
   {
     comment:
       "Tuve un inconveniente con mi portatil no cargaba windows, y tenia una informacion importante y enverdad que era importante, por recomendacion contrate sus servicion y me ayudo con la recuperacion de mi informacion. Comprometido con sus tareas.",
-    score: 5,
+    score: 4,
     serviceId: 4,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Juan me arregló mi computador pc de un daño en la board dificil de detectar. Queso satisfecho por su trabajo y lo recomiendo ampliamente.",
-    score: 5,
+    score: 4,
     serviceId: 4,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
   },
@@ -181,7 +181,7 @@ const comments = [
   {
     comment:
       "Excelente trabajo, atento, responsable y profesional en lo que hace. Recomendado por su buen labor.",
-    score: 5,
+    score: 4,
     serviceId: 15,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
   },
@@ -195,21 +195,21 @@ const comments = [
   {
     comment:
       "Estudio virtual, y me sacaron todas las materias sobre 4. 5, los recomiendo.",
-    score: 5,
+    score: 4,
     serviceId: 7,
     userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Muy recomendados, me gusta el sistema que tiene para pagar a los tutores y el de reclamos, excelentes. ",
-    score: 5,
+    score: 4,
     serviceId: 8,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Tenia un montón de ensayos y un anteproyecto final de materia, y lo sacaron adelante, los recomiendo.",
-    score: 5,
+    score: 4,
     serviceId: 8,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
   },
@@ -236,14 +236,14 @@ const comments = [
   {
     comment:
       "Me gustaron mucho las clases, fue muy práctico, aprendí y reforcé los contenidos que necesitaba. Lo recomiendo mucho para tomar clases de matemáticas. ",
-    score: 5,
+    score: 4,
     serviceId: 12,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
   },
   {
     comment:
       "Realmente los recomiendo por que si hicieron bien el trabajo y al precio que se debia.",
-    score: 5,
+    score: 4,
     serviceId: 13,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
   },
@@ -276,8 +276,134 @@ const comments = [
   {
     comment:
       "Nuestro grupo de trabajo agradecemos por arduo trabajo por el cuidado q le presto a los escritorios que me transporte el muchacho le recomiendo por mucho muy puntual",
-    score: 5,
+    score: 4,
     serviceId: 25,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "el mejor carpintero",
+    score: 5,
+    serviceId: 177,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "me quedo la cocina hermosa, super agradecido",
+    score: 5,
+    serviceId: 177,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 177,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "el mejor plomero",
+    score: 5,
+    serviceId: 178,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "me quedo la cocina hermosa, super agradecido",
+    score: 5,
+    serviceId: 178,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 178,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "los mejores para hacer una mudanza",
+    score: 5,
+    serviceId: 179,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "hicieron todo muy rapido y son cuidadosos",
+    score: 5,
+    serviceId: 179,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 179,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "el mejor jardinero",
+    score: 5,
+    serviceId: 180,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "me quedo el patio hermos0, super agradecido",
+    score: 5,
+    serviceId: 180,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 180,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "el mejor electricista",
+    score: 5,
+    serviceId: 181,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "me arreglo un problema enorme, super agradecido",
+    score: 5,
+    serviceId: 181,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 181,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "el mejor limpiador del pais",
+    score: 5,
+    serviceId: 182,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "me quedo la finca sin un grano de polvo, hermosa, super agradecido",
+    score: 5,
+    serviceId: 182,
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+  },
+  {
+    comment:
+      "un trabajo impecable",
+    score: 5,
+    serviceId: 182,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
   },
 ];

@@ -1,11 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { Box, Toolbar, Button, AppBar, Modal } from "@mui/material";
+import React, { useState } from "react";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Modal from "@mui/material/Modal";
 import SearchBar from "../SearchBar/SearchBar";
 import Cart from "../Cart/Cart";
 import SideBar from "../SideBar/SideBar";
 import UserMenu from "./UserMenu";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import IconButton from "@mui/material/IconButton";
+import HomeIcon from "@mui/icons-material/Home";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Fab from "@mui/material/Fab";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import ScrollTop from "./ScrollTop";
+
+// MATERIAL UI
+import { Button, makeStyles } from "@material-ui/core";
+import { brown, lime } from "@mui/material/colors";
+import clsx from "clsx";
+
+const useStyles = makeStyles({
+  default: {
+    borderRadius: 0,
+    textTransfrom: "none",
+  },
+  primary: {
+    "&:hover": {
+      backgroundColor: lime[600],
+      color: brown[500],
+    },
+  },
+  secondary: {
+    main: lime[600],
+    contrastText: brown[500],
+  },
+});
 
 const style = {
   position: "absolute",
@@ -15,24 +47,20 @@ const style = {
   maxWidth: 600,
   width: "70%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
   borderRadius: "10px",
   boxShadow: 24,
-  p: 2,
 };
 
-export default function Nav() {
-  const [login, setLogin] = useState(false);
+export default function Nav({ route }) {
   const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
-  const [cookie, setCookie] = useState(document.cookie);
+  const cookie = useSelector((state) => state.cookie);
+  const { userImg, name } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    setCookie(() => document.cookie);
-  }, []);
+  const classes = useStyles();
 
   // Descomentar para ver las cookies en la consola del navegador
-  // console.log("Cookies: ", document.cookie);
+  // console.log("Cookies: ", cookie);
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -45,8 +73,11 @@ export default function Nav() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }}>
-      <AppBar position="fixed" sx={{ zIndex: "9999" }}>
+    <Box sx={{ flexGrow: 1, width: "101%" }} id="back-to-top-anchor">
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: "1201", backgroundColor: "#cfd8dc" }}
+      >
         <Toolbar
           sx={{
             display: "flex",
@@ -55,65 +86,87 @@ export default function Nav() {
             gap: "5px",
           }}
         >
-          <Box>
-            <SideBar />
+          <Box mr="auto">
+            {route === "home" ? (
+              <SideBar />
+            ) : (
+              <IconButton color="inherit" component={Link} to="/home">
+                <HomeIcon />
+              </IconButton>
+            )}
           </Box>
-          <Box sx={{ width: "50%", ml: "auto", mr: "auto" }}>
-            <SearchBar />
+          <Box
+            sx={
+              route === "home"
+                ? { width: "50%", ml: "auto", mr: "auto" }
+                : { display: "none" }
+            }
+          >
+            {route === "home" ? <SearchBar /> : null}
           </Box>
 
-          {/* Register */}
-
-          {login || cookie ? null : (
-            <Button
-              variant="contained"
-              size="medium"
-              color="secondary"
-              onClick={handleRegister}
+          <Box display="flex" gap="5px">
+            {/* Register */}
+            {cookie || route === "checkout" ? null : (
+              <Button
+                variant="contained"
+                size="medium"
+                className={clsx(classes.default, classes.primary)}
+                onClick={handleRegister}
+              >
+                REGISTER
+              </Button>
+            )}
+            <Modal
+              open={registerModal}
+              onClose={handleRegister}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              Register
-            </Button>
-          )}
-          <Modal
-            open={registerModal}
-            onClose={handleRegister}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Register setRegisterModal={setRegisterModal} />
-            </Box>
-          </Modal>
+              <Box sx={style}>
+                <Register
+                  setRegisterModal={setRegisterModal}
+                  setLoginModal={setLoginModal}
+                />
+              </Box>
+            </Modal>
 
-          {/* Login */}
-
-          {!login && !cookie ? (
-            <Button
-              variant="contained"
-              size="medium"
-              color="secondary"
-              onClick={handleLogin}
+            {!cookie && route !== "checkout" ? (
+              <Button
+                variant="contained"
+                size="medium"
+                className={clsx(classes.default, classes.primary)}
+                onClick={handleLogin}
+              >
+                Login
+              </Button>
+            ) : null}
+            <Modal
+              open={loginModal}
+              onClose={handleLogin}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              Login
-            </Button>
-          ) : null}
-          <Modal
-            open={loginModal}
-            onClose={handleLogin}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Login setLogin={setLogin} setLoginModal={setLoginModal} />
-            </Box>
-          </Modal>
+              <Box sx={style}>
+                <Login
+                  setLoginModal={setLoginModal}
+                  setRegisterModal={setRegisterModal}
+                />
+              </Box>
+            </Modal>
 
-          <Cart />
-          {login || cookie ? (
-            <UserMenu setLogin={setLogin} setCookie={setCookie} />
-          ) : null}
+            {route === "checkout" ? null : <Cart />}
+            {cookie ? (
+              <UserMenu route={route} userImg={userImg} name={name} />
+            ) : null}
+          </Box>
         </Toolbar>
       </AppBar>
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </Box>
   );
 }

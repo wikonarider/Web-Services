@@ -13,6 +13,12 @@ function validateUrl(str) {
   return !!pattern.test(str);
 }
 
+function validateUUID(id) {
+  if (typeof id !== "string") return false;
+  const REGEX = /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/g;
+  return REGEX.test(id);
+}
+
 async function validateCategoryId(id) {
   const category = await Category.findByPk(id);
   return category ? true : false;
@@ -87,4 +93,5 @@ async function validateServices(service) {
 
 module.exports = {
   validateServices,
+  validateUUID,
 };

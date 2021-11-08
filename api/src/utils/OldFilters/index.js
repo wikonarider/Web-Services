@@ -1,4 +1,4 @@
-const { Qualification, conn } = require("../db.js");
+const { Qualification, conn } = require("../../db");
 
 const addRating = async (dbServices, id) => {
   let rating = [];

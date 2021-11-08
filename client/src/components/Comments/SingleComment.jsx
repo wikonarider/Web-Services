@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import { parseDate } from "../../utils/timeFormatter";
 import Rating from "@mui/material/Rating";
 
@@ -40,7 +40,7 @@ export default function SingleComment({ qualification }) {
           }}
         />
       </Box>
-      <Box gridColumn="span 11" sx={{ textAlign: "justify" }}>
+      <Box gridColumn="span 11" sx={{ textAlign: "justify", width: "100%" }}>
         <Box
           gridColumn="span 12"
           sx={{
@@ -67,7 +67,11 @@ export default function SingleComment({ qualification }) {
         {comment.length > 0 && (
           <Box
             gridColumn="span 12"
-            sx={{ textAlign: "justify", display: "flex", flexDirection: "row" }}
+            sx={{
+              textAlign: "justify",
+              display: "flex",
+              flexDirection: "row",
+            }}
           >
             <Typography variant="body2" noWrap={wrap}>
               {comment}
