@@ -3,10 +3,12 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { CardActionArea } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { newConvertation } from "../../redux/actions";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -14,13 +16,18 @@ const IMG_TEMPLATE =
 export default function CardUser({ user }) {
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;
-
+  let dispatch = useDispatch();
+  let history = useHistory();
   const fixedTitle = fullname
     ? fullname.length > 40
       ? `${fullname.substring(0, 40)}...`
       : fullname
     : null;
 
+  const newConv = () => {
+    dispatch(newConvertation(id));
+    history.push(`/chat/${id}`);
+  };
   return (
     <Card
       sx={{
@@ -104,8 +111,7 @@ export default function CardUser({ user }) {
             {/* chat */}
 
             <CardActionArea
-              component={Link}
-              to={`/chat/${id}`}
+              onClick={() => newConv()}
               sx={{
                 width: "80px",
                 mt: "auto",

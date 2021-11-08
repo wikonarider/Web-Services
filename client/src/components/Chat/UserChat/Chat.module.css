@@ -1,0 +1,48 @@
+.box_messanger_father {
+  display: flex;
+  max-height: 935px;
+  min-height: 935px;
+  overflow: hidden;
+}
+
+.box_contacts_a {
+  flex: "2.0";
+}
+/*box-contacts-menu*/
+.menu_contacts_wrapper {
+  padding: "1%";
+  height: "100%";
+  border: "none";
+  background: red;
+}
+.menu_contacts_wrapper:hover {
+  background: "#1e88e5";
+}
+/*input search*/
+.searchContact {
+}
+
+/*---------------------------------------------------------------box conversations*/
+.box_conversations_b {
+  flex: 5.5;
+  height: "90%";
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+/*box conversatios wrapper*/
+.menu_chating_wrapper {
+  height: "100%";
+  padding: "1%";
+}
+
+/*----------------------------------------------------------------box contacts online-offline*/
+.box_contactsStates_c {
+  flex: 2;
+}
+
+/*box contactsOnline wrapper*/
+.menu_contactsOnline_wrapper {
+  padding: "1%";
+  height: "100%";
+  background: white;
+}

@@ -32,7 +32,6 @@ function Chat(props) {
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   //const socket = useRef(io(process.env.REACT_APP_API));
   //----------------------------------------------------------------------------socket
-  console.log(chating.length ? true : false);
   useEffect(() => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
@@ -86,15 +85,15 @@ function Chat(props) {
       return;
     }
 
-    if (user && id) {
+    if (user && id ) {
       console.log("entre a user+id");
       dispatch(getConvertations());
       dispatch(getContacts());
-      dispatch(newConvertation(id));
+      setCurrentContact(id)
       return;
     } else {
       console.log("entre a user solo");
-      if (user) {
+      if (!user) {
         dispatch(getConvertations());
         dispatch(getContacts());
       }
@@ -183,7 +182,7 @@ function Chat(props) {
           ) : (
             <h3>Open a convertation to start a chat</h3>
           )}
-          {currentContact && (
+          {currentContact &&(
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
