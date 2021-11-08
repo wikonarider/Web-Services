@@ -11,6 +11,7 @@ import s from "./UserInfo.module.css";
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (userProfile !== true) {
@@ -29,6 +30,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
 
   //HANDLE IMAGEN CLOUDINARY
   const handleImageUpload = () => {
+    setLoading(true);
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
     formData.append("file", files[0]);
@@ -45,6 +47,11 @@ export default function YourAccount({ userProfile, profileInfo }) {
     )
       .then((res) => res.json())
       .then((res) => dispatch(putUser({ userImg: res.secure_url })))
+      .then(() =>
+        getUserInfo()
+          .then((userInfo) => dispatch(userInfo))
+          .then(() => setLoading(false))
+      )
       .catch((err) => console.log(err));
   };
   //--------------------------------------------------------------
@@ -80,19 +87,23 @@ export default function YourAccount({ userProfile, profileInfo }) {
               Upload
             </Button>
 
-            <Button
-              variant="contained"
-              // startIcon={<PhotoCameraIcon />}
-              size="small"
-              color="secondary"
-              sx={{ boxShadow: "none", marginLeft: 1 }}
-              // onClick={() => {
-              //   fileInput.current.click();
-              // }}
-              onClick={handleImageUpload}
-            >
-              SUBMIT
-            </Button>
+            {!loading ? (
+              <Button
+                variant="contained"
+                // startIcon={<PhotoCameraIcon />}
+                size="small"
+                color="secondary"
+                sx={{ boxShadow: "none", marginLeft: 1 }}
+                // onClick={() => {
+                //   fileInput.current.click();
+                // }}
+                onClick={handleImageUpload}
+              >
+                SUBMIT
+              </Button>
+            ) : (
+              <div className={s.spinner}></div>
+            )}
           </div>
         )}
       </div>
