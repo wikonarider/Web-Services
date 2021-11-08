@@ -27,6 +27,12 @@ export default function YourAccount({
     history.push("/createservice");
   };
 
+  const buttonStyle = {
+    marginRight: 1,
+    marginLeft: 1,
+    marginBottom: 1,
+  }
+
   return (
     <div className={s.botonera}>
       {user.admin && (
@@ -40,11 +46,7 @@ export default function YourAccount({
             setViewAdmin(!viewAdmin);
             setViewservices(false);
           }}
-          sx={{
-            marginRight: 1,
-            marginLeft: 1,
-            marginBottom: 1,
-          }}
+          sx={buttonStyle}
         >
           Admin
         </Button>
@@ -59,11 +61,7 @@ export default function YourAccount({
           setViewservices(false);
           setViewAdmin(false);
         }}
-        sx={{
-          marginRight: 1,
-          marginLeft: 1,
-          marginBottom: 1,
-        }}
+        sx={buttonStyle}
       >
         Your Orders
       </Button>
@@ -77,11 +75,7 @@ export default function YourAccount({
           setViewservices(false);
           setViewAdmin(false);
         }}
-        sx={{
-          marginRight: 1,
-          marginLeft: 1,
-          marginBottom: 1,
-        }}
+        sx={buttonStyle}
       >
         Your Favs
       </Button>
@@ -95,11 +89,7 @@ export default function YourAccount({
           setViewservices(!viewServices);
           setViewAdmin(false);
         }}
-        sx={{
-          marginRight: 1,
-          marginLeft: 1,
-          marginBottom: 1,
-        }}
+        sx={buttonStyle}
       >
         Your Services
       </Button>
@@ -107,11 +97,7 @@ export default function YourAccount({
       <Button
         variant="outlined"
         startIcon={<PostAddIcon />}
-        sx={{
-          marginRight: 1,
-          marginLeft: 1,
-          marginBottom: 1,
-        }}
+        sx={buttonStyle}
         onClick={handleClickPostService}
       >
         Post Service
@@ -123,11 +109,7 @@ export default function YourAccount({
         onClick={() => {
           setOpenForm(true);
         }}
-        sx={{
-          marginRight: 1,
-          marginLeft: 1,
-          marginBottom: 1,
-        }}
+        sx={buttonStyle}
       >
         Change Your Data
       </Button>
