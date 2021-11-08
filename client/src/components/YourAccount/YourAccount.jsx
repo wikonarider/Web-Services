@@ -73,8 +73,8 @@ export default function YourAccount({ userProfile, profileInfo }) {
         {viewFavs &&
           (userData.servicesFavs.length > 0 ? (
             <Container>
-              <div>
-                <Grid container justifyContent="center" spacing={3}>
+              <div className={s.servicesShown}>
+                <Grid container justifyContent="flex-start" spacing={3}>
                   {userData.servicesFavs.map((s) => (
                     <Grid item key={s.id}>
                       <CardService service={s} />
@@ -99,9 +99,9 @@ export default function YourAccount({ userProfile, profileInfo }) {
         {/* ------------------ORDERS---------------------------- */}
         {viewOrders &&
           (userData.servicesBought && userData.servicesBought.length > 0 ? (
-            <div>
+            <div className={s.servicesShown}>
               <Container>
-                <Grid container justifyContent="center" spacing={3}>
+                <Grid container justifyContent="flex-start" spacing={3}>
                   {userData.servicesBought.map((s) => (
                     <Grid item key={s.id}>
                       <CardService service={s} />
@@ -122,9 +122,9 @@ export default function YourAccount({ userProfile, profileInfo }) {
         {/* -------------------SERVICES-------------------------- */}
         {viewServices &&
           (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
-            <div>
+            <div className={s.servicesShown}>
               <Container>
-                <Grid container justifyContent="center" spacing={3}>
+                <Grid container justifyContent="flex-start" spacing={3}>
                   {userData.servicesOwn.map((s) => (
                     <Grid item key={s.id}>
                       <CardService service={s} />

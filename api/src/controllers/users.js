@@ -157,23 +157,25 @@ async function userBanned(req, res, next) {
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
 
-  const { servicesId, collection_status } = req.query;
-  const { userId } = req.cookies;
+  const { servicesId, collection_status, status} = req.query
+   const { userId } = req.cookies;
 
   console.log("idEnPruchase", req.cookies);
   console.log("serviceIdenPruchase", servicesId);
   console.log("collection_status", collection_status);
 
   try {
-    if (collection_status == "approved") {
-      console.log("POSTPURCHASEID", userId);
-      console.log("SERVICEIDPURCHASE", servicesId);
+    if (collection_status == 'approved' || status){
+    console.log('POSTPURCHASEID', userId)
+    console.log('SERVICEIDPURCHASE', servicesId)
 
-      // validamos que sea un arreglo de servicios y
-      // que el esos servicios no pertenezcan al usuario
+    // validamos que sea un arreglo de servicios y
+    // que el esos servicios no pertenezcan al usuario
+    
+      console.log('USERID', userId);
+      console.log('SERVICESID', servicesId);
 
-      console.log("USERID", userId);
-      console.log("SERVICESID", servicesId);
+
       const user = await Users.findOne({
         where: {
           id: userId,

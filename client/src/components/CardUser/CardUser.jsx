@@ -56,7 +56,7 @@ export default function CardUser({ user }) {
               objectFit: "cover",
               borderRadius: "50%",
               height: "150px",
-              width: "auto",
+              width: "150px",
               m: "auto 0px auto 3px",
               alignSelf: "center",
             }}

@@ -11,7 +11,7 @@ import {
 const theme = createTheme({
   palette: {
     primary: {
-      main: blueGrey[100],
+      main: '#4F6D7A',
       contrastText: brown[500],
     },
     secondary: {

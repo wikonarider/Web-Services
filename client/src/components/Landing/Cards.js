@@ -84,15 +84,19 @@ const Cards = ({ cookie }) => {
       </Modal>
 
       <Modal
-            open={loginModal}
-            onClose={handleLogin}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={styleRegister}>
-              <Login setLoginModal={setLoginModal} setLogin={setLogin} setRegisterModal={setRegisterModal} />
-            </Box>
-          </Modal>
+        open={loginModal}
+        onClose={handleLogin}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styleRegister}>
+          <Login
+            setLoginModal={setLoginModal}
+            setLogin={setLogin}
+            setRegisterModal={setRegisterModal}
+          />
+        </Box>
+      </Modal>
     </div>
   );
 };

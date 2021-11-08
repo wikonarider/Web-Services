@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
             payment_method: "paypal"
         },
         redirect_urls: {
-            return_url:`${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}`,
+            return_url:`${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&status=success`,
             cancel_url: `${ORIGIN}/home`
         },
         transactions: [
