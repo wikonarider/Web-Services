@@ -1,34 +1,60 @@
-.user{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: #808080; */
-    padding: 2%;
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #808080; */
+  padding: 2%;
 }
 
-.userProfile{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 2% 2% 2% 10%;
+.userProfile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2% 2% 2% 10%;
 }
 
-.userInfo{
-    margin-left: 6%;
+.userInfo {
+  margin-left: 6%;
 }
 
-.fullName{
-    display: flex;
-    justify-content: center;
+.fullName {
+  display: flex;
+  justify-content: center;
 }
 
-    .fullName p{
-        font-size: 2.2em;
-        font-weight: 600;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
+.fullName p {
+  font-size: 2.2em;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
-.name{
-    margin-right: 5%;
+.name {
+  margin-right: 5%;
+}
+
+.changePhoto {
+  display: flex;
+  gap: 50px;
+}
+
+.spinner {
+  align-self: center;
+  border: 4px solid rgba(0, 0, 0, 0.089);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border-left-color: #cddc39;
+
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
