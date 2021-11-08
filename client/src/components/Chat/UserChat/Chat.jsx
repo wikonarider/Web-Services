@@ -8,7 +8,7 @@ import { Button, Input } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
-import Message from "../Message/message.jsx";
+import Message from "../Message/Message";
 
 import {
   getContacts,
@@ -51,6 +51,7 @@ function Chat(props) {
     if (cookie) {
       socket.current.emit("addUser", user.id);
     }
+    // eslint-disable-next-line
   }, [user]);
   //----------------------------------------------------------------scroll
   useEffect(() => {
