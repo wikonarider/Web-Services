@@ -28,7 +28,6 @@ function makeWhereFilter(startRange, endRange, title) {
       },
     };
   }
-  console.log("Entro", where);
   return where;
 }
 

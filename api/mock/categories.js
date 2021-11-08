@@ -36,7 +36,7 @@ const clases = [
     name: "Theater",
   },
   {
-    name: "Other",
+    name: "Other Courses",
   },
 ];
 
@@ -72,7 +72,7 @@ const reparaciones = [
     name: "Plumbing y Gas",
   },
   {
-    name: "Other",
+    name: "Other Technician",
   },
 ];
 
@@ -96,7 +96,7 @@ const organizaciones = [
     name: "Salon",
   },
   {
-    name: "Other",
+    name: "Other Events",
   },
 ];
 
@@ -108,7 +108,7 @@ const transporte = [
     name: "Moving",
   },
   {
-    name: "Other",
+    name: "Other Transport",
   },
   {
     name: "Transport",

@@ -55,10 +55,7 @@ const purchases = [
     serviceId: 11,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
   },
-  {
-    serviceId: 11,
-    userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
-  },
+
   {
     serviceId: 20,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
@@ -128,10 +125,6 @@ const purchases = [
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
   },
   {
-    serviceId: 9,
-    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
     serviceId: 10,
     userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
   },
@@ -155,10 +148,7 @@ const purchases = [
     serviceId: 14,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
   },
-  {
-    serviceId: 14,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
-  },
+
   {
     serviceId: 25,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
@@ -167,32 +157,9 @@ const purchases = [
     serviceId: 117,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
   },
-  {
-    serviceId: 117,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 117,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
+
   {
     serviceId: 118,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 118,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 118,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 119,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 119,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
   },
   {
@@ -204,31 +171,7 @@ const purchases = [
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
   },
   {
-    serviceId: 120,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 120,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
     serviceId: 121,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 121,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 121,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 122,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 122,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
   },
   {

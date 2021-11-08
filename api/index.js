@@ -24,6 +24,7 @@ const { linkAllGroups } = require("./mock/categories");
 const { groups } = require("./mock/groups");
 const { users } = require("./mock/usersJson");
 const { comments } = require("./mock/qualifications");
+const { purchases } = require("./mock/purchases");
 const {
   Service,
   Users,
@@ -31,6 +32,7 @@ const {
   Province,
   City,
   Qualification,
+  Services_users_bought,
 } = require("./src/db");
 const { loadProvinces } = require("./mock/provinces");
 const { loadCities } = require("./mock/cities");
@@ -57,6 +59,10 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
 
         await Qualification.bulkCreate(comments).then(() => {
           console.log(`Comentarios cargados`);
+        });
+
+        await Services_users_bought.bulkCreate(purchases).then(() => {
+          console.log(`Compras cargadas`);
         });
 
         await loadProvinces()
