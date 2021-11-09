@@ -20,6 +20,8 @@ export default function Comments({
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const cookieRedux = useSelector((state) => state.cookie);
+  const servicesBought = useSelector((state) => state.user.servicesBought);
+  const admin = useSelector((state) => state.user.admin);
 
   function handleClick(comment, rating, serviceId) {
     let userId = cookieRedux;
@@ -56,6 +58,13 @@ export default function Comments({
     setComment(value);
   }
 
+  let buyer =
+    servicesBought &&
+    servicesBought.filter((s) => {
+      console.log(s.id, serviceId);
+      return s.id.toString() === serviceId;
+    }).length > 0;
+
   return (
     <Box
       display="grid"
@@ -64,7 +73,7 @@ export default function Comments({
       p={2}
       border="solid 1px lightgrey"
     >
-      {cookie ? (
+      {cookie && buyer ? (
         <>
           <Box
             gridColumn="span 12"
