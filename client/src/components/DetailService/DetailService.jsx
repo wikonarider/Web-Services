@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import { deleteFavs, addFavs } from "../../utils/favs";
 import { getUserInfo, addCart } from "../../redux/actions/index";
 import Box from "@mui/material/Box";
@@ -9,14 +8,14 @@ import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
 import RightInfoBar from "./RightInfoBar/RightInfoBar";
 import Typography from "@mui/material/Typography";
+import { getServiceById, getRelatedServices } from "../../utils/servicesPage";
 
 export default function DetailService({ id, closeModal }) {
-  let [service, setService] = useState({ service: {}, user: {} });
+  const [service, setService] = useState({ service: {}, user: {} });
   const [favState, setFavState] = useState(false);
   const [added, setAdded] = useState(false);
 
   // ---------------- SERVICIOS RELACIONADOS -------------
-  const [category, setCategory] = useState();
   const [related, setRelated] = useState([]);
   // --------------------------------
 
@@ -25,12 +24,28 @@ export default function DetailService({ id, closeModal }) {
   const favs = useSelector((state) => state.user.servicesFavs);
   const dispatch = useDispatch();
 
-  function updateService() {
-    axios(`/services/${id}`).then((response) => {
-      setService({ ...service, ...response.data });
-      setCategory(response.data.service.category.name);
-    });
-  }
+  // ----------- CARGA DEL SERVICIO AL COMIENZO ---------------
+  useEffect(() => {
+    getServiceById(id)
+      .then((data) => setService({ service: data.service, user: data.user }))
+      .catch((e) => console.log(e.response.data.message));
+  }, [id]);
+
+  //----------- SERVICIOS RELACIONADOS ------------------------
+  useEffect(() => {
+    if (Object.keys(service.service).length) {
+      const category = service.service.category.name;
+
+      if (category) {
+        getRelatedServices(category)
+          .then((data) => data.filter((s) => s.id !== Number(id)))
+          .then((filter) => setRelated(filter))
+          .catch((e) => console.log(e.response.data));
+      }
+    }
+  }, [service, id]);
+
+  //-------------------------------------------------------
 
   useEffect(() => {
     if (cookie) {
@@ -44,25 +59,6 @@ export default function DetailService({ id, closeModal }) {
       }
     }
   }, [favs, cookie, id]);
-
-  //componentDidMount para traer la información del servicio por id
-  useEffect(() => {
-    updateService();
-    // eslint-disable-next-line
-  }, [id]);
-
-  //----------- SERVICIOS RELACIONADOS ------------------------
-  const getRelatedServices = useCallback(() => {
-    axios(`/services?category=${category}`).then((response) => {
-      let NumberId = Number(id);
-      setRelated(response.data.filter((s) => s.id !== NumberId).slice(0, 4));
-    });
-  }, [category, id]);
-
-  useEffect(() => {
-    getRelatedServices();
-  }, [category, getRelatedServices, id]);
-  //-------------------------------------------------------
 
   // para agregarlo o sacarlo del carrito
   useEffect(() => {
@@ -145,18 +141,12 @@ export default function DetailService({ id, closeModal }) {
             }}
           />
 
-          {qualifications && qualifications.length ? (
-            <Comments
-              updateService={updateService}
-              serviceId={id}
-              qualifications={qualifications}
-              cookie={cookie}
-            />
-          ) : (
-            <Box border="solid 1px lightgrey" p="20px">
-              <Typography variant="h5">No comments</Typography>
-            </Box>
-          )}
+          <Comments
+            setService={setService}
+            serviceId={id}
+            qualifications={qualifications}
+            cookie={cookie}
+          />
         </Box>
         {/* ----------------------------------------------------- */}
 
