@@ -21,7 +21,7 @@ export default function Comments({
   const [rating, setRating] = useState(0);
   const cookieRedux = useSelector((state) => state.cookie);
   const servicesBought = useSelector((state) => state.user.servicesBought);
-  const admin = useSelector((state) => state.user.admin);
+  // const admin = useSelector((state) => state.user.admin);
 
   function handleClick(comment, rating, serviceId) {
     let userId = cookieRedux;
