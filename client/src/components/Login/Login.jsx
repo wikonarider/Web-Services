@@ -41,20 +41,24 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const response = await postLogin(inputs);
+      const { id, token } = await postLogin(inputs);
 
       setInputs({
         username: "",
         password: "",
       });
-
       setLoginModal(() => false);
-      dispatch(setCookie(response.data));
+      // guardo token en localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", id);
+      // configuramos axios
+      axios.defaults.headers.common["authorization"] = "Bearer " + token;
+      dispatch(setCookie(id));
       setLogin && setLogin(true);
     } catch (e) {
       setInputErrors(() => {
         let error = {};
-        if (e.response && e.response.data === "user incorrect") {
+        if (e.response && e.response.data.message === "User does not exist") {
           error.username = "User incorrect";
         } else {
           error.password = "Password incorrect";
@@ -66,10 +70,14 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const handleLogin = async (googleData) => {
     try {
       const token = googleData.tokenId;
-      const res = await axios.post(`/login?token=${token}`);
-      // console.log(res.data);
+      const { data } = await axios.post(`/auth/login?token=${token}`);
       setLoginModal(() => false);
-      dispatch(setCookie(res.data));
+      // guardo token en localStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.id);
+      // configuramos axios
+      axios.defaults.headers.common["authorization"] = "Bearer " + data.token;
+      dispatch(setCookie(data.id));
       setLogin && setLogin(true);
     } catch (e) {
       alert("Unregistered user");
