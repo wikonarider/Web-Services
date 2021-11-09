@@ -5,11 +5,10 @@ import IconButton from "@mui/material/IconButton";
 import Share from "@mui/icons-material/Share";
 import Rating from "@mui/material/Rating";
 import s from "./Orders.module.css";
-import CardActionArea from "@mui/material/CardActionArea";
 import { Link } from "react-router-dom";
 
 export default function Orders({ service }) {
-  const { title, img, price, id, userId, rating, createdAt } = service;
+  const { title, img, price, id, rating, createdAt } = service;
 
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -28,7 +27,7 @@ export default function Orders({ service }) {
         component={Link}
         to={`/services/${id}`}
       >
-        <img src={img} className={s.img} />
+        <img src={img ? img : IMG_TEMPLATE} alt='userImage' className={s.img} />
       </Box>
 
       <Box
@@ -54,7 +53,7 @@ export default function Orders({ service }) {
         <Typography>{createdAt.split("T")[0]}</Typography>
       </Box>
 
-      <Box gridColumn={{xs:'span 6' ,md:"span 1"}}>
+      <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
         <IconButton aria-label="share">
           <Share />
         </IconButton>

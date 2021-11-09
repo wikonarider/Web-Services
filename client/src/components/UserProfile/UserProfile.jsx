@@ -6,7 +6,6 @@ import CardService from "../CardService/CardService";
 
 import s from "./UserProfile.module.css";
 import YourAccount from "../YourAccount/YourAccount";
-import Box from "@mui/material/Box";
 
 // export default function UserProfile({ id, username }) {
 //   return <div></div>;

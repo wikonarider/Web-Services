@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Home from './components/Home/Home';
 import DetailService from './components/DetailService/DetailService';
 import YourAccount from './components/YourAccount/YourAccount';
