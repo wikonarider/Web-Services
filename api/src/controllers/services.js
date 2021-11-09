@@ -147,7 +147,7 @@ async function getServicesByUserId(req, res, next) {
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
-  const { userId } = req.cookies;
+  const userId = req.user;
   const { title, img, description, price, categoryId, provinces, cities } =
     req.body;
   // si se pasaron todos los parametros

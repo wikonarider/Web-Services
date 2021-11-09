@@ -35,10 +35,13 @@ function App() {
     // eslint-disable-next-line
   }, [cookie]);
   useEffect(() => {
-    axios
-      .get("/login")
-      .then((response) => dispatch(setCookie(response.data.cookie)))
-      .catch(() => dispatch(setCookie("")));
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    // hay token en localStorage
+    if (token && userId) {
+      axios.defaults.headers.common["authorization"] = "Bearer " + token;
+      dispatch(setCookie(userId));
+    }
     dispatch(getGroups());
     // eslint-disable-next-line
   }, []);
@@ -60,8 +63,7 @@ function App() {
         <Route
           exact
           path="/chat/:id"
-          render={({ match }) => <Chat
-           id={match.params.id} />}
+          render={({ match }) => <Chat id={match.params.id} />}
         />
 
         <Route

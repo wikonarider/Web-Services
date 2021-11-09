@@ -8,7 +8,7 @@ var {
   putServiceById,
   deleteServices,
 } = require("../controllers/services");
-const { isAuthenticated } = require("../controllers/authentication");
+const { verifyToken } = require("../controllers/authentication");
 
 // get Services
 router.get("/", getServices);
@@ -16,10 +16,10 @@ router.get("/", getServicesByUserId);
 router.get("/:id", getServicesById);
 
 // post Services
-router.post("/", isAuthenticated, postServices);
+router.post("/", verifyToken, postServices);
 
 // put Services
-router.put("/", putServiceById); //colocar isAuthenticated
+router.put("/", putServiceById); //colocar verifyToken
 // delete Services
 router.delete("/:id", deleteServices);
 

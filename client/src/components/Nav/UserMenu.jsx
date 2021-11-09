@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
-import { postLogout } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie as setCookieRedux } from "../../redux/actions";
 import { useHistory } from "react-router";
@@ -31,7 +30,8 @@ export default function UserMenu({ route, userImg, name }) {
   };
 
   const logOutClear = async () => {
-    await postLogout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     dispatch(setCookieRedux(""));
     history.push("/home");
   };
