@@ -16,7 +16,8 @@ export default function RightInfoBar({
   handleClick,
   added,
 }) {
-  let { title, price, description, rating, qualifications } = service.service;
+  let { title, price, description, rating, qualifications, userId } =
+    service.service;
   const query = useMediaQuery("(max-width: 890px)");
 
   return (
@@ -40,13 +41,17 @@ export default function RightInfoBar({
         sx={{ mr: "auto" }}
       >
         <Box gridColumn="span 6">
-          <IconButton
-            onClick={handleFavs}
-            aria-label="add to favorites"
-            sx={cookie && cookie !== service.userId ? {} : { display: "none" }}
-          >
-            <Favorite color={favState ? "error" : ""} />
-          </IconButton>
+          {cookie && cookie !== userId ? (
+            <IconButton
+              onClick={handleFavs}
+              aria-label="add to favorites"
+              sx={
+                cookie && cookie !== service.userId ? {} : { display: "none" }
+              }
+            >
+              <Favorite color={favState ? "error" : ""} />
+            </IconButton>
+          ) : null}
           <IconButton aria-label="share">
             <Share />
           </IconButton>
@@ -101,13 +106,15 @@ export default function RightInfoBar({
             {" "}
             {`$${price ? price : 0}`}{" "}
           </Typography>
-          <IconButton
-            onClick={handleClick}
-            color={!added ? "primary" : "success"}
-            aria-label="add to shopping cart"
-          >
-            <AddShoppingCart />
-          </IconButton>
+          {cookie && cookie !== userId ? (
+            <IconButton
+              onClick={handleClick}
+              color={!added ? "primary" : "success"}
+              aria-label="add to shopping cart"
+            >
+              <AddShoppingCart />
+            </IconButton>
+          ) : null}
         </CardActions>
       </Box>
       {/* ---------------------------------------- */}
