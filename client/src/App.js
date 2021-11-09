@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import Home from "./components/Home/Home";
 import DetailService from "./components/DetailService/DetailService";
 import YourAccount from "./components/YourAccount/YourAccount";
-import Chat from "./components/Chat/UserChat/Chat";
 import Landing from "./components/Landing/Landing";
 import UserProfile from "./components/UserProfile/UserProfile";
 import CheckoutDetail from "./components/CheckoutDetail/CheckoutDetail";
@@ -20,6 +19,7 @@ import {
   getGroups,
   getUserInfo,
 } from "./redux/actions";
+import Chat from "./components/Chat/UserChat/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,7 +60,8 @@ function App() {
         <Route
           exact
           path="/chat/:id"
-          render={({ match }) => <Chat id={match.params.id} />}
+          render={({ match }) => <Chat
+           id={match.params.id} />}
         />
 
         <Route

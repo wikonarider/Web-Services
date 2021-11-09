@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CartList from "./CartList";
-import { useSelector } from "react-redux";
-import CheckoutBtn from "../CheckoutDetail/CheckoutBtn/CheckoutBtn";
+import React, { useState, useEffect } from 'react';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CartList from './CartList';
+import { useSelector } from 'react-redux';
+import CheckoutBtn from '../CheckoutDetail/CheckoutBtn/CheckoutBtn';
 
-import { useDispatch } from "react-redux";
-import { removeCart } from "../../redux/actions";
+import { useDispatch } from 'react-redux';
+import { removeCart } from '../../redux/actions';
 
 function Cart() {
   const user = useSelector((state) => state.user);
@@ -55,14 +55,19 @@ function Cart() {
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
-      <Drawer anchor="right" open={openCart} onClose={handleCart}>
+      <Drawer
+        anchor="right"
+        open={openCart}
+        onClose={handleCart}
+        sx={{ opacity: 0.96 }}
+      >
         <CartList cart={cart} />
-        <Divider sx={{ marginTop: "auto", width: "370px" }} />
+        <Divider sx={{ marginTop: 'auto', width: '370px' }} />
         <Typography
           variant="h4"
           component="div"
           gutterBottom
-          sx={{ ml: "auto", mr: "auto" }}
+          sx={{ ml: 'auto', mr: 'auto' }}
         >
           {`Total $${total ? total : 0}`}
         </Typography>

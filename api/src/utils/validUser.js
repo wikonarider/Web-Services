@@ -129,10 +129,17 @@ async function validatePurchase(arrayServices, userId) {
   return services.length === arrayServices.length;
 }
 
+async function validateAdmin(adminId) {
+  const user = await Users.findByPk(adminId);
+
+  return user.admin;
+}
+
 module.exports = {
   validateUrl,
   validateUser,
   checkUnique,
   validateUserEdit,
   validatePurchase,
+  validateAdmin,
 };
