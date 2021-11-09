@@ -105,7 +105,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
             <div className={s.servicesShown}>
               <Container>
                 {userData.servicesBought.map((s) => (
-                  <Box sx={{ marginBottom: 20 }}>
+                  <Box sx={{ marginBottom: 5 }}>
                     <Orders service={s} />
                   </Box>
                 ))}
