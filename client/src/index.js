@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import theme from './utils/MuiTheme';
 import { store } from './redux/store/index';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -14,8 +13,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { ThemeProvider } from '@mui/material/styles';
-
 dotenv.config();
 
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
@@ -25,11 +22,9 @@ axios.defaults.withCredentials = true;
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <App />
-        </Router>
-      </ThemeProvider>
+      <Router>
+        <App />
+      </Router>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

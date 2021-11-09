@@ -1,9 +1,9 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer from "../reducer/index";
-import thunk from "redux-thunk";
-import { loadState, saveState } from "../../utils/localStorage";
-import { setCartStorage } from "../actions";
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from '../reducer/index';
+import thunk from 'redux-thunk';
+import { loadState, saveState } from '../../utils/localStorage';
+import { setCartStorage } from '../actions';
 
 // creo la store
 export const store = createStore(

@@ -21,10 +21,11 @@ import Button from '@mui/material/Button';
 
 import { setObjGlobal } from '../../redux/actions/index';
 import { useDispatch } from 'react-redux';
+
 //maneja el ancho de la expansión al tocar el hamburguer button
 const drawerWidth = 350;
 
-export default function MiniDrawer() {
+export default function SideBar({ check, change }) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 

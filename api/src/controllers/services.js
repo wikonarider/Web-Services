@@ -7,15 +7,15 @@ const {
   conn,
   Services_provinces,
   Services_cities,
-} = require("../db.js");
-const { validateServices, validateUUID } = require("../utils/validServices");
-const { validFilters, makeWhereFilter } = require("../utils/validFilters");
-const { addRating } = require("../utils/OldFilters/index");
+} = require('../db.js');
+const { validateServices, validateUUID } = require('../utils/validServices');
+const { validFilters, makeWhereFilter } = require('../utils/validFilters');
+const { addRating } = require('../utils/OldFilters/index');
 
 const dictonary = {
-  price: "service.price",
-  rating: "qualifications.score",
-  date: "service.createdAt",
+  price: 'service.price',
+  rating: 'qualifications.score',
+  date: 'service.createdAt',
 };
 
 async function getServices(req, res, next) {
@@ -42,25 +42,25 @@ async function getServices(req, res, next) {
     if (!Object.keys(errors).length) {
       const services = await Service.findAll({
         attributes: [
-          "id",
-          "title",
-          "img",
-          "price",
-          "userId",
-          [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+          'id',
+          'title',
+          'img',
+          'price',
+          'userId',
+          [conn.fn('AVG', conn.col('qualifications.score')), 'rating'],
         ],
 
         where: makeWhereFilter(startRange, endRange, title),
         include: [
           {
             model: Category,
-            attributes: ["name"],
+            attributes: ['name'],
             include: {
               model: Group,
-              attributes: ["name"],
+              attributes: ['name'],
             },
             where: category && {
-              name: category.split(","),
+              name: category.split(','),
             },
           },
           {
@@ -69,20 +69,20 @@ async function getServices(req, res, next) {
           },
         ],
         raw: false,
-        group: ["service.id", "category.id", "category->group.id"],
+        group: ['service.id', 'category.id', 'category->group.id'],
         subQuery: false,
         // paginado
         offset: page && pageSize ? page * pageSize : null,
         limit: page && pageSize ? pageSize : null,
         order: order && [
-          order === "rating"
+          order === 'rating'
             ? [
-                conn.fn("AVG", conn.col(dictonary[order])),
-                type ? type + " NULLS LAST" : "DESC NULLS LAST",
+                conn.fn('AVG', conn.col(dictonary[order])),
+                type ? type + ' NULLS LAST' : 'DESC NULLS LAST',
               ]
             : [
                 conn.col(dictonary[order]),
-                type ? type + " NULLS LAST" : "DESC NULLS LAST",
+                type ? type + ' NULLS LAST' : 'DESC NULLS LAST',
               ],
         ],
       });
@@ -101,12 +101,12 @@ async function getServicesByUserId(req, res, next) {
     if (validateUUID(userId)) {
       const services = await Service.findAll({
         attributes: [
-          "id",
-          "title",
-          "img",
-          "price",
-          "userId",
-          [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+          'id',
+          'title',
+          'img',
+          'price',
+          'userId',
+          [conn.fn('AVG', conn.col('qualifications.score')), 'rating'],
         ],
         where: {
           userId: userId,
@@ -114,10 +114,10 @@ async function getServicesByUserId(req, res, next) {
         include: [
           {
             model: Category,
-            attributes: ["name"],
+            attributes: ['name'],
             include: {
               model: Group,
-              attributes: ["name"],
+              attributes: ['name'],
             },
           },
           {
@@ -127,19 +127,19 @@ async function getServicesByUserId(req, res, next) {
         ],
 
         raw: false,
-        group: ["service.id", "category.id", "category->group.id"],
+        group: ['service.id', 'category.id', 'category->group.id'],
       });
 
       let user = await Users.findOne({
         where: {
           id: userId,
         },
-        attributes: ["name", "lastname", "userImg"],
+        attributes: ['name', 'lastname', 'userImg'],
       });
 
       res.json([user, services]);
     } else {
-      res.status(400).json({ message: "UserId it has to be a UUIDV4 " });
+      res.status(400).json({ message: 'UserId it has to be a UUIDV4 ' });
     }
   } catch (e) {
     next(e);
@@ -151,6 +151,7 @@ async function postServices(req, res, next) {
   const { title, img, description, price, categoryId, provinces, cities } =
     req.body;
   // si se pasaron todos los parametros
+  console.log(req.body);
   if (
     title &&
     img &&
@@ -192,14 +193,14 @@ async function postServices(req, res, next) {
           return service.addProvince(provAndcity.dataValues);
         })
         .then(() => {
-          res.status(200).send("Created Service");
+          res.status(200).send('Created Service');
         })
         .catch((e) => next(e));
     } else {
-      res.status(400).json({ data: "All parameters are required" });
+      res.status(400).json({ data: 'All parameters are required' });
     }
   } else {
-    res.status(400).json({ data: "All parameters are required" });
+    res.status(400).json({ data: 'All parameters are required' });
   }
 }
 //----------------------------------------------------------------------------------------------------------
@@ -212,29 +213,29 @@ async function getServicesById(req, res, next) {
         id: id,
       },
       attributes: [
-        "id",
-        "title",
-        "img",
-        "description",
-        "price",
-        "createdAt",
-        "updatedAt",
-        "userId",
+        'id',
+        'title',
+        'img',
+        'description',
+        'price',
+        'createdAt',
+        'updatedAt',
+        'userId',
       ],
       include: [
         {
           model: Qualification,
           include: {
             model: Users,
-            attributes: ["userImg", "username", "name", "lastname"],
+            attributes: ['userImg', 'username', 'name', 'lastname'],
           },
         },
         {
           model: Category,
-          attributes: ["name"],
+          attributes: ['name'],
           include: {
             model: Group,
-            attributes: ["name"],
+            attributes: ['name'],
           },
         },
       ],
@@ -246,7 +247,7 @@ async function getServicesById(req, res, next) {
       where: {
         id: service.dataValues.userId,
       },
-      attributes: ["id", "userImg", "username", "name", "lastname", "email"],
+      attributes: ['id', 'userImg', 'username', 'name', 'lastname', 'email'],
     });
 
     service
@@ -266,12 +267,12 @@ async function deleteServices(req, res, next) {
       },
     });
     if (service === null) {
-      res.send("service not founded");
+      res.send('service not founded');
     }
     await Service.destroy({
       where: { id: id },
     });
-    res.send("service deleted");
+    res.send('service deleted');
   } catch (err) {
     next(err);
   }
@@ -296,7 +297,7 @@ function putServiceById(req, res, next) {
       res.status(500).send(errors);
     }
   } else {
-    res.status(500).send("All parameters are required");
+    res.status(500).send('All parameters are required');
   }
 }
 
