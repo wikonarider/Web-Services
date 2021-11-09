@@ -6,20 +6,9 @@ const style = {
 };
 
 function CarrouselItem({ service }) {
-
-  // const detail = `services/${service.id}`
   return (
-    <div>
+    <div style={{ cursor: "pointer" }}>
       <img style={style} src={service.img} alt={service.title} />
-      {/* <p
-        className="legend"
-        style={{
-          fontWeight: "bold",
-          fontSize: "20px",
-        }}
-      >
-        {service.title}
-      </p> */}
     </div>
   );
 }

@@ -20,7 +20,7 @@ import Box from "@mui/material/Box";
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
-  console.log(userData);
+  // console.log(userData);
 
   useEffect(() => {
     if (userProfile !== true) {
