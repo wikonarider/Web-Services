@@ -8,22 +8,19 @@ var {
   postPurchase,
   userEdit,
 } = require("../controllers/users");
-const {
-  isAuthenticated,
-  isNotAuthenticated,
-} = require("../controllers/authentication");
+const { verifyToken } = require("../controllers/authentication");
 
 // User post
-router.post("/", isNotAuthenticated, userCreated);
+router.post("/", userCreated);
 router.get("/purchase", postPurchase);
 
 // User get
-router.get("/", isAuthenticated, getUserInfo);
-router.get("/search", isAuthenticated, getUserAdminSearch);
+router.get("/", verifyToken, getUserInfo);
+router.get("/search", verifyToken, getUserAdminSearch);
 // User delete
 router.delete("/:id", userBanned);
 
 // User put
-router.put("/", isAuthenticated, userEdit);
+router.put("/", verifyToken, userEdit);
 
 module.exports = router;
