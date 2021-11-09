@@ -20,35 +20,45 @@ export default function CheckoutDetail() {
 
   const handleBuyPaypal = () => {
     let prices = [];
+    let services = [];
+    let tittles = [];
+    let quantities = 1;
     cart.map(async (c) => {
       prices.push(c.price);
-      dispatch(
-         paypal({
-          servicesId: [c.id],
-          prices: prices,
-          name: c.title,
-          quantity: 1,
-        })
-      );
+      services.push(c.id)
+      tittles.push(c.title);
+  
       dispatch(removeCart(c.id));
     });
+    dispatch(
+      paypal({
+       servicesId: services,
+       totalPrice: prices,
+       title: tittles,
+       quantity: 1,
+     }))
   };
   const handleBuyClick = () => {
     let prices = [];
+    let services = [];
+    let tittles = [];
+    let quantities = 1;
     cart.map(async (c) => {
       prices.push(c.price);
-      dispatch(
-        await postPurchase({
-          servicesId: [c.id],
-          totalPrice: prices,
-          title: c.title,
-          quantity: 1,
-        })
-      );
-      dispatch(await removeCart(c.id));
+      services.push(c.id)
+      tittles.push(c.title);
+  
+      dispatch(removeCart(c.id));
     });
+    dispatch(
+      postPurchase({
+       servicesId: services,
+       totalPrice: prices,
+       title: tittles,
+       quantity: 1,
+     }))
 
-    setTimeout(() => {}, 1000);
+    //setTimeout(() => {}, 1000);
   };
 
   return (

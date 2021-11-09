@@ -27,13 +27,16 @@ router.post("/", async (req, res) => {
     for (let i=0; i < totalPrice.length; i++){
       prices = prices + totalPrice[i]
     }
+   // for (let i=0; i < servicesId.length; i++){
+   //   services = services + servicesId[i]
+   // }
     
         console.log('totalPricessssssss',prices)
     
     var preference = {
       items: [
         {
-          title: title,
+          title: title.join(", "),
           quantity: quantity,
           unit_price: prices,
           serviceId : servicesId
