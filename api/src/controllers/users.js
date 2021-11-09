@@ -34,7 +34,7 @@ async function userCreated(req, res, next) {
 }
 
 async function userEdit(req, res, next) {
-  const { userId } = req.cookies;
+  const userId = req.user;
   const userIdQuery = req.query.id;
   try {
     const user = await Users.findByPk(userIdQuery || userId);
@@ -51,7 +51,7 @@ async function userEdit(req, res, next) {
         user.password = password ? password : user.password;
         user.username = username ? username : user.username;
         user.email = email ? email : user.email;
-        user.ban = ban;
+        userIdQuery ? (user.ban = ban) : null;
 
         await user.save();
         res.json({ data: "User edited" });
@@ -71,7 +71,8 @@ async function userEdit(req, res, next) {
 async function getUserInfo(req, res, next) {
   try {
     const userIdQuery = req.query.id;
-    const { userId } = req.cookies;
+    const userId = req.user;
+
     const user = await Users.findOne({
       attributes: [
         "id",
@@ -199,7 +200,7 @@ async function postPurchase(req, res, next) {
 async function getUserAdminSearch(req, res, next) {
   try {
     const { search } = req.query;
-    const { userId } = req.cookies;
+    const userId = req.user;
 
     let validAdmin = await validateAdmin(userId);
 
