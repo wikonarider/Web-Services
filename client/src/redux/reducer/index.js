@@ -1,4 +1,4 @@
-import { type } from "../actions/variables";
+import { type } from '../actions/variables';
 
 const initialState = {
   services: [],
@@ -8,22 +8,23 @@ const initialState = {
   favs: [],
   cart: [],
   categories: [],
-  cookie: "",
+  cookie: '',
   objGlobal: {
-    startRange: "",
-    endRange: "",
+    startRange: '',
+    endRange: '',
     category: [],
-    page: "0",
-    pageSize: "20",
-    order: "rating",
-    type: "DESC",
-    province: "",
-    city: "",
+    page: '0',
+    pageSize: '20',
+    order: 'rating',
+    type: 'DESC',
+    province: '',
+    city: '',
   },
   convertations: [],
   contacts: [],
   posts: [],
   endPage: false,
+  darkTheme: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -123,12 +124,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
-      case type.PAYPAL:
-        return {
-          ...state
-        }
+    case type.PAYPAL:
+      return {
+        ...state,
+      };
 
-        
+    case type.PUT_DARK:
+      return {
+        ...state,
+        darkTheme: action.payload,
+      };
+
     default:
       return state;
   }

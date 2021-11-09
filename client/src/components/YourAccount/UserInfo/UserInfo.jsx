@@ -7,6 +7,9 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ShareIcon from "@mui/icons-material/Share";
 
 import s from "./UserInfo.module.css";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
@@ -57,16 +60,21 @@ export default function YourAccount({ userProfile, profileInfo }) {
   //--------------------------------------------------------------
 
   return (
-    <div className={userProfile ? s.userProfile : s.user}>
-      <div>
+    <Grid
+      container
+      gridTemplateColumns="repeat(12, 1fr)"
+      alignItems="center"
+      justifyContent={!userProfile ? "center" : "flex-start"}
+      gap={5}
+    >
+      <Grid item gridColumn="span 6">
         <Avatar
           alt="user name"
           src={!userProfile ? userData.userImg : profileInfo.userImg}
           sx={{ width: 200, height: 200, marginBottom: 2 }}
-          className={s.avatar}
         ></Avatar>
         {!userProfile && (
-          <div className={s.changePhoto}>
+          <Box >
             <input
               style={{ display: "none" }}
               type="file"
@@ -104,22 +112,28 @@ export default function YourAccount({ userProfile, profileInfo }) {
             ) : (
               <div className={s.spinner}></div>
             )}
-          </div>
+          </Box>
         )}
-      </div>
+      </Grid>
 
-      <div className={s.userInfo}>
-        <div className={s.fullName}>
-          <p className={s.name}>
+      <Grid item gridColumn="span 6">
+        <Box className={s.fullName} gap={2}>
+          <Typography variant="h4">
             {!userProfile ? userData.name : profileInfo.name}
-          </p>
-          <p>{!userProfile ? userData.lastname : profileInfo.lastname}</p>
-        </div>
+          </Typography>
+          <Typography variant="h4">
+            {!userProfile ? userData.lastname : profileInfo.lastname}
+          </Typography>
+        </Box>
         {!userProfile ? (
-          <div>
-            <p>{userData.username}</p>
-            <p>{userData.email}</p>
-          </div>
+          <>
+            <Box sx={{ marginBottom: 1, marginTop: 1 }}>
+              <Typography variant="body">{userData.username}</Typography>
+            </Box>
+            <Box>
+              <Typography variant="body">{userData.email}</Typography>
+            </Box>
+          </>
         ) : (
           <Button
             variant="contained"
@@ -132,7 +146,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
             Share Profile
           </Button>
         )}
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }

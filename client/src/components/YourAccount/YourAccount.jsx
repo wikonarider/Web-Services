@@ -14,10 +14,13 @@ import Botonera from "./Botonera/Botonera";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Admin from "../Admin/Admin";
 import { FormDialog } from "./FormDialog/FormDialog";
+import Orders from "./Orders/Orders";
+import Box from "@mui/material/Box";
 
 export default function YourAccount({ userProfile, profileInfo }) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
+  console.log(userData);
 
   useEffect(() => {
     if (userProfile !== true) {
@@ -101,13 +104,11 @@ export default function YourAccount({ userProfile, profileInfo }) {
           (userData.servicesBought && userData.servicesBought.length > 0 ? (
             <div className={s.servicesShown}>
               <Container>
-                <Grid container justifyContent="flex-start" spacing={3}>
-                  {userData.servicesBought.map((s) => (
-                    <Grid item key={s.id}>
-                      <CardService service={s} />
-                    </Grid>
-                  ))}
-                </Grid>
+                {userData.servicesBought.map((s) => (
+                  <Box key={s.id} sx={{ marginBottom: '2%' }}>
+                    <Orders service={s}  />
+                  </Box>
+                ))}
               </Container>
             </div>
           ) : (

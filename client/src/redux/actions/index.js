@@ -1,6 +1,6 @@
-import { type } from "./variables";
-import urlQuery from "./urlQuery";
-import axios from "axios";
+import { type } from './variables';
+import urlQuery from './urlQuery';
+import axios from 'axios';
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -105,7 +105,7 @@ export function postCategory(category) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post("/users/", data);
+      return await axios.post('/users/', data);
     } catch (err) {
       return new Error(err);
     }
@@ -115,14 +115,14 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put("/users/", newData);
+      return await axios.put('/users/', newData);
     } catch (err) {
       return new Error(err);
     }
   };
 }
 export async function getUserInfo() {
-  const response = await axios.get("/users");
+  const response = await axios.get('/users');
   return {
     type: type.GET_USER_INFO,
     payload: response.data,
@@ -293,7 +293,7 @@ export function sendMessage(msn) {
 }
 //--------------------------------------------------------------------------------------
 export function paypal(body) {
-  console.log("body=>>> ", body);
+  console.log('body=>>> ', body);
   return async function (dispatch) {
     try {
       const response = await axios.post(`/paypal`, body);
@@ -304,3 +304,11 @@ export function paypal(body) {
     }
   };
 }
+
+//DARK-MODE
+export const putDark = (mode) => {
+  return {
+    type: type.PUT_DARK,
+    payload: mode,
+  };
+};
