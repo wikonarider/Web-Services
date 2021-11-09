@@ -1,4 +1,4 @@
-import { type } from '../actions/variables';
+import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
@@ -8,17 +8,17 @@ const initialState = {
   favs: [],
   cart: [],
   categories: [],
-  cookie: '',
+  cookie: "",
   objGlobal: {
-    startRange: '',
-    endRange: '',
+    startRange: "",
+    endRange: "",
     category: [],
-    page: '0',
-    pageSize: '20',
-    order: 'rating',
-    type: 'DESC',
-    province: '',
-    city: '',
+    page: "0",
+    pageSize: "20",
+    order: "rating",
+    type: "DESC",
+    province: "",
+    city: "",
   },
   convertations: [],
   contacts: [],
@@ -41,9 +41,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case type.SET_SERVICES_PAGE:
+      // cheat for pages bug
+      const pages = payload.filter(
+        (s) => state.services.findIndex((e) => e.id === s.id) === -1
+      );
       return {
         ...state,
-        services: [...state.services, ...payload],
+        services: [...state.services, ...pages],
       };
 
     case type.SET_END_PAGE:
