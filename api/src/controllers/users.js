@@ -42,7 +42,7 @@ async function userEdit(req, res, next) {
     const { name, lastname, userImg, password, email, ban, username } =
       req.body;
     const errors = validateUserEdit(req.body);
-    if (name || lastname || userImg || password) {
+    if (name || lastname || userImg || password || email || ban || username) {
       if (!Object.keys(errors).length) {
         // Cambios los datos, si fueron pasados
         user.name = name ? name : user.name;
@@ -176,7 +176,7 @@ async function postPurchase(req, res, next) {
       // validamos que sea un arreglo de servicios y
       // que el esos servicios no pertenezcan al usuario
 
-     // console.log("USERID", userId);
+      // console.log("USERID", userId);
       //console.log("SERVICESID", servicesId);
 
       const user = await Users.findOne({
@@ -185,11 +185,10 @@ async function postPurchase(req, res, next) {
         },
       });
       // console.log para ver los metodos disponibles
-   
-      //console.log("USERenPurchase", user);
-      
-      await user.addServicesBought(servicesId.split(","));
 
+      //console.log("USERenPurchase", user);
+
+      await user.addServicesBought(servicesId.split(","));
 
       res.redirect(`${ORIGIN}/home`);
     } else {
