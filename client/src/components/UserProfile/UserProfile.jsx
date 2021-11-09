@@ -6,6 +6,7 @@ import CardService from "../CardService/CardService";
 
 import s from "./UserProfile.module.css";
 import YourAccount from "../YourAccount/YourAccount";
+import Box from "@mui/material/Box";
 
 // export default function UserProfile({ id, username }) {
 //   return <div></div>;
@@ -28,11 +29,20 @@ export default function UserProfile({ id, username }) {
   }
 
   return (
-    <div>
-      <div className={s.account}>
+    <Grid
+      container
+      gridTemplateColumns="repeat(12, 1fr)"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Grid
+        item
+        gridColumn="span 12"
+        sx={{ marginTop: "6%", marginRight: "auto", marginLeft:'10%' }}
+      >
         <YourAccount userProfile={true} profileInfo={profileInfo} />
-      </div>
-      <div>
+      </Grid>
+      <Grid item gridColumn="span 12" sx={{marginBottom:'5%'}}>
         {profileServices &&
           (profileServices.length > 0 ? (
             <div>
@@ -56,7 +66,7 @@ export default function UserProfile({ id, username }) {
               <h3>This user is not offering any services</h3>
             </div>
           ))}
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
