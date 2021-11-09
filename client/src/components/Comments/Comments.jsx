@@ -8,12 +8,13 @@ import SingleComment from "./SingleComment";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
+import { getServiceById } from "../../utils/servicesPage";
 
 export default function Comments({
   qualifications,
   serviceId,
-  updateService,
   cookie,
+  setService,
 }) {
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
@@ -31,7 +32,13 @@ export default function Comments({
           userId: userId,
           serviceId: serviceId,
         })
-        .then(() => updateService())
+        .then(() => {
+          getServiceById(serviceId)
+            .then((data) =>
+              setService({ service: data.service, user: data.user })
+            )
+            .catch((e) => console.log(e.response.data.message));
+        })
         .then(() => {
           setLoading(false);
           setComment("");
@@ -57,7 +64,7 @@ export default function Comments({
       p={2}
       border="solid 1px lightgrey"
     >
-      {cookie && (
+      {cookie ? (
         <>
           <Box
             gridColumn="span 12"
@@ -123,12 +130,16 @@ export default function Comments({
             </Button>
           </Box>
         </>
-      )}
+      ) : null}
+
       <Box gridColumn="span 12">
-        {qualifications &&
+        {qualifications && qualifications.length ? (
           qualifications.map((q, index) => {
             return <SingleComment qualification={q} key={index} />;
-          })}
+          })
+        ) : (
+          <Typography variant="h5">No comments</Typography>
+        )}
       </Box>
     </Box>
   );
