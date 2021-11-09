@@ -58,8 +58,12 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     } catch (e) {
       setInputErrors(() => {
         let error = {};
-        if (e.response && e.response.data.message === "User does not exist") {
+        const message = e.response.data.message;
+        if (e.response && message === "User does not exist") {
           error.username = "User incorrect";
+        } else if (message === "Banned user") {
+          error.username = "Banned user";
+          error.password = "Banned user";
         } else {
           error.password = "Password incorrect";
         }
@@ -80,7 +84,11 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       dispatch(setCookie(data.id));
       setLogin && setLogin(true);
     } catch (e) {
-      alert("Unregistered user");
+      setInputs({
+        username: "",
+        password: "",
+      });
+      setInputErrors(() => ({ username: "Unregistered user" }));
     }
   };
 
