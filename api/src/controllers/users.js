@@ -169,14 +169,14 @@ async function postPurchase(req, res, next) {
 
   try {
     if (collection_status == "approved" || status) {
-      console.log("POSTPURCHASEID", userId);
-      console.log("SERVICEIDPURCHASE", servicesId);
+      //console.log("POSTPURCHASEID", userId);
+      //console.log("SERVICEIDPURCHASE", servicesId);
 
       // validamos que sea un arreglo de servicios y
       // que el esos servicios no pertenezcan al usuario
 
-      console.log("USERID", userId);
-      console.log("SERVICESID", servicesId);
+     // console.log("USERID", userId);
+      //console.log("SERVICESID", servicesId);
 
       const user = await Users.findOne({
         where: {
@@ -184,9 +184,12 @@ async function postPurchase(req, res, next) {
         },
       });
       // console.log para ver los metodos disponibles
-      // console.log(Object.keys(user.__proto__));
-      console.log("USERenPurchase", user);
-      await user.setServicesBought(servicesId);
+   
+      //console.log("USERenPurchase", user);
+      
+      await user.addServicesBought(servicesId.split(","));
+
+
       res.redirect(`${ORIGIN}/home`);
     } else {
       res.status(400).redirect(`${ORIGIN}/home`);
