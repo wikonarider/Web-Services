@@ -2,9 +2,16 @@ require("dotenv").config();
 const { Users } = require("../db");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = process.env;
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 async function generateToken(req, res, next) {
   const { username, password } = req.body;
+  const { token } = req.query;
+  if (token) {
+    next();
+    return;
+  }
   if (username && password) {
     // Busco el usuario
     const user = await Users.findOne({
@@ -31,6 +38,34 @@ async function generateToken(req, res, next) {
   }
 }
 
+async function googleAuthentication(req, res, next) {
+  const { token } = req.query;
+
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience:
+      "316128007785-fif02sojlsoinu9s5eugus3qaagiclid.apps.googleusercontent.com",
+  });
+
+  const { email } = ticket.getPayload();
+
+  const user = await Users.findOne({
+    where: {
+      email: email,
+    },
+  });
+
+  if (user) {
+    const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
+    res.json({
+      id: user.id,
+      token: accessToken,
+    });
+  } else {
+    res.status(400).json({ message: "Unregistered user" });
+  }
+}
+
 function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
   if (authHeader) {
@@ -50,4 +85,5 @@ function verifyToken(req, res, next) {
 module.exports = {
   generateToken,
   verifyToken,
+  googleAuthentication,
 };
