@@ -40,7 +40,7 @@ export default function UserMenu({ route, userImg, name }) {
     setAnchorEl(null);
   };
   return (
-    <React.Fragment sx={{ color: 'primary' }}>
+    <Box sx={{ color: 'primary' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small">
@@ -108,6 +108,6 @@ export default function UserMenu({ route, userImg, name }) {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </Box>
   );
 }

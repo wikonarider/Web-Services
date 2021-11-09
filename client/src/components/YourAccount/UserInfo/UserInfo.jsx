@@ -65,6 +65,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
       gridTemplateColumns="repeat(12, 1fr)"
       alignItems="center"
       justifyContent={!userProfile ? "center" : "flex-start"}
+      sx={{marginTop:'2%'}}
       gap={5}
     >
       <Grid item gridColumn="span 6">

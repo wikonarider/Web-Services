@@ -4,8 +4,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
-import { parseDate } from "../../utils/timeFormatter";
 import Rating from "@mui/material/Rating";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 export default function SingleComment({ qualification }) {
   let [wrap, setWrap] = useState(true);
@@ -52,7 +55,7 @@ export default function SingleComment({ qualification }) {
           <Typography variant="subtitle2">
             {`${name} ${lastname}`}
             <Typography variant="caption">
-              {` - ${parseDate(createdAt)}`}
+              {` - ${dayjs(createdAt).fromNow()}`}
             </Typography>
           </Typography>
           <Rating
