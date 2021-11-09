@@ -3,7 +3,7 @@ const { Service, Services_users_favourites } = require("../db.js");
 async function addFavs(req, res, next) {
   try {
     // usuario logeado, uso el id de la cookie
-    const { userId } = req.cookies;
+    const userId = req.user;
     const { serviceId } = req.body;
     // si es un numero
     if (typeof serviceId === "number") {
@@ -45,7 +45,7 @@ async function addFavs(req, res, next) {
 }
 async function getFavs(req, res, next) {
   try {
-    const { userId } = req.cookies;
+    const userId = req.user;
     const userFavs = await Services_users_favourites.findAll({
       where: {
         userId: userId,
@@ -61,7 +61,7 @@ async function getFavs(req, res, next) {
 
 async function deleteFav(req, res, next) {
   try {
-    const { userId } = req.cookies;
+    const userId = req.user;
     const { serviceId } = req.body;
     if (typeof serviceId === "number") {
       const deletedFav = await Services_users_favourites.destroy({
