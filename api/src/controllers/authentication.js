@@ -21,15 +21,19 @@ async function generateToken(req, res, next) {
         },
       });
       if (user) {
-        const check = await user.validPassword(password);
-        if (check) {
-          const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
-          res.json({
-            id: user.id,
-            token: accessToken,
-          });
+        if (user.ban) {
+          res.status(401).json({ message: "Banned user" });
         } else {
-          res.status(400).json({ message: "Invalid password" });
+          const check = await user.validPassword(password);
+          if (check) {
+            const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
+            res.json({
+              id: user.id,
+              token: accessToken,
+            });
+          } else {
+            res.status(400).json({ message: "Invalid password" });
+          }
         }
       } else {
         res.status(400).json({ message: "User does not exist" });

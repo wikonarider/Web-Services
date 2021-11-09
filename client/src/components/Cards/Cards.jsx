@@ -7,7 +7,7 @@ export default function Cards({ services }) {
       {services &&
         services.map((service, i) => (
           <CardService
-            key={`${service.id}_${service.title}_${i}`}
+            key={`${service.id}_${service.title}`}
             service={service}
           />
         ))}

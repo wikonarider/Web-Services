@@ -15,7 +15,7 @@ import {
   getConvertations,
   getPots,
   getUserInfo,
-  newConvertation,
+  // newConvertation,
   sendMessage,
 } from "../../../redux/actions";
 dotenv.config();
@@ -85,11 +85,11 @@ function Chat(props) {
       return;
     }
 
-    if (user && id ) {
+    if (user && id) {
       console.log("entre a user+id");
       dispatch(getConvertations());
       dispatch(getContacts());
-      setCurrentContact(id)
+      setCurrentContact(id);
       return;
     } else {
       console.log("entre a user solo");
@@ -182,7 +182,7 @@ function Chat(props) {
           ) : (
             <h3>Open a convertation to start a chat</h3>
           )}
-          {currentContact &&(
+          {currentContact && (
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
