@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import TextInput from "./TextInput";
 import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
+// import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+// import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import List from "@mui/material/List";
@@ -17,8 +17,8 @@ import SaveIcon from "@mui/icons-material/Save";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+// const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+// const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function Results({
   search,
