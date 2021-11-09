@@ -12,12 +12,12 @@ paypal.configure({
 
 router.post("/", (req, res) => {
   
-    let {prices, name, quantity, servicesId} = {...req.body}
+    let {totalPrice, title, quantity, servicesId} = {...req.body}
     console.log('ESTOY EN BACK',req.body)
 
     let price = 0
-    for (let i=0; i < prices.length; i++){
-      price = price + prices[i]
+    for (let i=0; i < totalPrice.length; i++){
+      price = price + totalPrice[i]
     }
     
     // data.price = Math.round(data.price / 170)
@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
                 item_list: {
                     items: [
                         {
-                            name: name,
+                            name: title.join(", "),
                             sku: "item",
                             price: price,
                             currency: "USD",
