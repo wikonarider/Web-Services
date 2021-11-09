@@ -8,6 +8,7 @@ import Comments from "../Comments/Comments";
 import RelatedServices from "./RelatedServices/RelatedServices";
 import RightInfoBar from "./RightInfoBar/RightInfoBar";
 import { getServiceById, getRelatedServices } from "../../utils/servicesPage";
+import Typography from "@mui/material/Typography";
 
 export default function DetailService({ id, closeModal }) {
   const [service, setService] = useState({ service: {}, user: {} });
@@ -112,56 +113,62 @@ export default function DetailService({ id, closeModal }) {
 
   return (
     <>
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gap={2}
-        p={2}
-        maxWidth="80%"
-        m="0px auto"
-      >
-        {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
-        <Box
-          gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
-          p={{ xs: 0, sm: 2 }}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-        >
-          <CardMedia
-            component="img"
-            image={img ? img : IMG_TEMPLATE}
-            height="400"
-            alt={id}
-            sx={{
-              objectFit: "cover",
-              mb: "auto",
-              pb: 5,
-            }}
-          />
+      {Object.keys(service.service).length ? (
+        <>
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(12, 1fr)"
+            gap={2}
+            p={2}
+            maxWidth="80%"
+            m="0px auto"
+          >
+            {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
+            <Box
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
+              p={{ xs: 0, sm: 2 }}
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+            >
+              <CardMedia
+                component="img"
+                image={img ? img : IMG_TEMPLATE}
+                height="400"
+                alt={id}
+                sx={{
+                  objectFit: "cover",
+                  mb: "auto",
+                  pb: 5,
+                }}
+              />
 
-          <Comments
-            setService={setService}
-            serviceId={id}
-            qualifications={qualifications}
-            cookie={cookie}
-          />
-        </Box>
-        {/* ----------------------------------------------------- */}
+              <Comments
+                setService={setService}
+                serviceId={id}
+                qualifications={qualifications}
+                cookie={cookie}
+              />
+            </Box>
+            {/* ----------------------------------------------------- */}
 
-        {/* ---------------------- BARRA LATERAL DERECHA ------------------- */}
-        <RightInfoBar
-          handleFavs={handleFavs}
-          handleClick={handleClick}
-          cookie={cookie}
-          service={service}
-          favState={favState}
-          added={added}
-        />
-        {/* ------------------------------------------------------ */}
-      </Box>
+            {/* ---------------------- BARRA LATERAL DERECHA ------------------- */}
+            <RightInfoBar
+              handleFavs={handleFavs}
+              handleClick={handleClick}
+              cookie={cookie}
+              service={service}
+              favState={favState}
+              added={added}
+            />
+            {/* ------------------------------------------------------ */}
+          </Box>
 
-      {related && <RelatedServices related={related} />}
+          {related && <RelatedServices related={related} />}
+        </>
+      ) : (
+        <Typography variant="h2">No Service Found</Typography>
+      )}
     </>
   );
 }
