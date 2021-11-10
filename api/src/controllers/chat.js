@@ -1,7 +1,7 @@
 const { Users, Chat, Convertations, Service } = require("../db.js");
 const { Op } = require("sequelize");
 var users = [];
-//-----------------------socket--------------------------------------function users online
+//-----------------------socket------------------------------------------------------------------------------------function users online
 const addUsers = async (userId, socketid) => {
   var flat = true;
   for (let i = 0; i < users.length; i++) {
@@ -13,7 +13,7 @@ const addUsers = async (userId, socketid) => {
     users.push({ user: userId, socket: socketid });
   }
 };
-//-----------------------------------------------------------------------------function remove user online
+//---------------------------------------------------------------------------------function remove user online
 const removeUser = async (socketId) => {
   if (socketId) {
     users = users.filter((usr) => usr.socket !== socketId);
@@ -29,7 +29,7 @@ const getUser = (receiveId) => {
   }
   return usr;
 };
-//----------------------------------------------------------------------------server IO
+//----------------------------------------------------------------------------------server IO
 function serverchat(serverIO) {
   serverIO.on("connection", (socketIO) => {
     console.log("user " + socketIO.id + " connect");
@@ -45,7 +45,7 @@ function serverchat(serverIO) {
       console.log("disconected", users);
       serverIO.emit("getUsers", users);
     });
-    //------------------------------------------------------------------------------------send msn
+    //------------------------------------------------------------------------------send msn
 
     socketIO.on("sendMsn", ({ senderId, receiverId, text }) => {
       console.log("sendMsn", senderId, receiverId, text);
@@ -81,7 +81,7 @@ function getPots(req, res, next) {
       next(err);
     });
 }
-//----------------------------------------------------------------------------------------get contacts bought
+//---------------------------------------------------------------------------------get contacts bought
 function getContactsbought(req, res, next) {
   const userId = req.user;
   console.log(userId);
@@ -119,21 +119,25 @@ function getContactsbought(req, res, next) {
       })
       .then((users) => {
         //quitando repetidos
-        var contactsNotRepeat = [users[0].dataValues.user];
-        var flat = false;
-        users.map((usr) => {
-          for (let i = 0; i < contactsNotRepeat.length; i++) {
-            if (contactsNotRepeat[i].id === usr.dataValues.user.id) {
-              flat = true;
+        if (users.length) {
+          var contactsNotRepeat = [users[0].dataValues.user];
+          var flat = false;
+          users.map((usr) => {
+            for (let i = 0; i < contactsNotRepeat.length; i++) {
+              if (contactsNotRepeat[i].id === usr.dataValues.user.id) {
+                flat = true;
+              }
             }
-          }
-          if (!flat) {
-            contactsNotRepeat.push(usr.dataValues.user);
-          }
-          flat = false;
-        });
+            if (!flat) {
+              contactsNotRepeat.push(usr.dataValues.user);
+            }
+            flat = false;
+          });
 
-        res.status(200).send(contactsNotRepeat);
+          res.status(200).send(contactsNotRepeat);
+        } else {
+          res.status(200).send([]);
+        }
       })
       .catch((err) => {
         next(err);

@@ -41,6 +41,11 @@ function Chat(props) {
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
     socket.current.on("getMessage", (data) => {
       console.log("new post");
+      if (!user) {
+        console.log("1-!user");
+        getUserInfo().then((userInfo) => dispatch(userInfo));
+        return;
+      }
       setArrivalMessage({
         userId: data.senderId,
         remit: data.remit,
@@ -72,7 +77,6 @@ function Chat(props) {
   }, [chating]);
   //-----------------------------------------------------------------------------new msg receive
 
-
   useEffect(() => {
     if (currentContact) {
       currentContact.id === arrivalMessage.userId &&
@@ -91,27 +95,22 @@ function Chat(props) {
   useEffect(() => {
     convertationsAndContacts();
     // eslint-disable-next-line
-  }, []);
+  }, [convertations]);
   //-------------------------------------------------------------------------------------------------
   function convertationsAndContacts() {
-    if (!user) {
-      getUserInfo().then((userInfo) => dispatch(userInfo));
-      return;
+    if (user && convertations.length && !contacts.length) {
+      console.log("2-user&&conv.len");
+      dispatch(getContacts());
     }
 
-    if (user && id) {
-      console.log("entre a user+id");
-      dispatch(getConvertations());
-      dispatch(getContacts());
-      dispatch(getContactsBougth())
-      setCurrentContact(id);
-      return;
-    } else {
+    if (user && !convertations.length) {
       console.log("entre a user solo");
-      if (!user) {
-        dispatch(getConvertations());
-        dispatch(getContacts());
-      }
+      dispatch(getConvertations());
+      dispatch(getContactsBougth());
+    }
+    if (user&&id) {
+      console.log("entre a user+id");
+      chatContact(id);
     }
   }
 
@@ -229,16 +228,17 @@ function Chat(props) {
             name="menu-contactsOnline-wrapper"
             sx={_style.menu_contactsOnline_wrapper}
           >
-            {contactsBougth.map((con) => (
-              <Box
-                key={con.id}
-                onClick={() => {
-                  chatContact(con.id);
-                }}
-              >
-                <Conversations key={con.id} contacts={con} />
-              </Box>
-            ))}
+            {contactsBougth.length &&
+              contactsBougth.map((con) => (
+                <Box
+                  key={con.id}
+                  onClick={() => {
+                    chatContact(con.id);
+                  }}
+                >
+                  <Conversations key={con.id} contacts={con} />
+                </Box>
+              ))}
           </Box>
         </Box>
       </Box>
