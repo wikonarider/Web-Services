@@ -1,8 +1,9 @@
-const { Qualification, User } = require('../db');
+const { Qualification, User } = require("../db");
 
 async function postComment(req, res, next) {
   try {
-    const { comment, score, userId, serviceId } = req.body;
+    const userId = req.user;
+    const { comment, score, serviceId } = req.body;
     await Qualification.create({
       comment,
       score,
@@ -10,7 +11,7 @@ async function postComment(req, res, next) {
       serviceId,
     });
 
-    res.json({ response: 'comment posted' });
+    res.json({ response: "comment posted" });
   } catch (e) {
     next(e);
   }
@@ -19,25 +20,20 @@ async function postComment(req, res, next) {
 async function putComment(req, res, next) {
   try {
     //recibo el nuevo comentario y el id del comentario a modificar
-    const { newComment, id } = req.body;
+    const { newComment, id, newScore } = req.body;
 
-    if (newComment && id) {
-      //update busca el comentario que pertenezca a ese id y luego lo modifica en su atributo comment
-      const commentFound = await Qualification.update(
-        {
-          comment: newComment,
-        },
-        {
-          where: { id: id },
-        }
-      );
+    if (id) {
+      const comment = await Qualification.findByPk(id, {
+        attributes: ["comment", "score", "id", "serviceId", "userId"],
+      });
 
-      //si el comentario fue encontrado devuelve 1 sino 0
-      if (commentFound[0] === 1) {
-        return res.json({ response: 'comment modified' });
-      } else {
-        return res.json({ response: 'comment can not be found' });
-      }
+      comment.comment = newComment ? newComment : comment.comment;
+      comment.score = newScore ? newScore : comment.score;
+
+      await comment.save();
+      res.json({ data: "Comment edited" });
+    } else {
+      res.status(400).json({ data: "Comment id not received" });
     }
   } catch (e) {
     next(e);
@@ -52,13 +48,13 @@ async function deleteComment(req, res, next) {
       where: { id: id },
     });
     if (commentInDb === null) {
-      res.json({ respones: 'comment not founded' });
+      res.json({ response: "comment not found" });
     } else {
       await Qualification.destroy({
         // si existe lo deleteo
         where: { id: id },
       });
-      res.json({ response: 'comment deleted' });
+      res.json({ response: "comment deleted" });
     }
   } catch (e) {
     next(e);
