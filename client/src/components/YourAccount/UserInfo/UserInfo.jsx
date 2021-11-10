@@ -71,13 +71,6 @@ export default function YourAccount({
   };
   //--------------------------------------------------------------
 
-  // console.log(userData.id);
-  // const shareUrl = profileServices[0].userId
-  //   ? `https://pf-web-service.vercel.app/users/${profileServices[0].userId}`
-  //   : null;
-
-  // console.log(shareUrl);
-
   return (
     <Grid
       container
@@ -154,7 +147,7 @@ export default function YourAccount({
               <Typography variant="body">{userData.email}</Typography>
             </Box>
           </>
-        ) : (
+        ) : !profileServices[0].userId ? (
           <Box
             display="flex"
             flexDirection="row"
@@ -167,9 +160,32 @@ export default function YourAccount({
             <WhatsappShareButton url={'shareUrl'}>
               <WhatsappIcon size={35} round={true} />
             </WhatsappShareButton>
-            {/* <LinkedinShareButton url={shareUrl}>
+            <LinkedinShareButton url={'shareUrl'}>
               <LinkedinIcon size={35} round={true} />
-            </LinkedinShareButton> */}
+            </LinkedinShareButton>
+          </Box>
+        ) : (
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            gap="0.5rem"
+          >
+            <FacebookShareButton
+              url={`https://pf-web-service.vercel.app/users/${profileServices[0].userId}`}
+            >
+              <FacebookIcon size={35} round={true} />
+            </FacebookShareButton>
+            <WhatsappShareButton
+              url={`https://pf-web-service.vercel.app/users/${profileServices[0].userId}`}
+            >
+              <WhatsappIcon size={35} round={true} />
+            </WhatsappShareButton>
+            <LinkedinShareButton
+              url={`https://pf-web-service.vercel.app/users/${profileServices[0].userId}`}
+            >
+              <LinkedinIcon size={35} round={true} />
+            </LinkedinShareButton>
           </Box>
         )}
       </Grid>

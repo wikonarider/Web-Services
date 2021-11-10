@@ -1,11 +1,15 @@
-let express = require('express');
+let express = require("express");
 let router = express.Router();
 
-var { postComment, deleteComment, putComment } = require('../controllers/qualification');
+var {
+  postComment,
+  deleteComment,
+  putComment,
+} = require("../controllers/qualification");
+const { verifyToken } = require("../controllers/authentication");
 
-router.post('/', postComment);
-router.delete('/:id', deleteComment)
-router.put('/', putComment);
-
+router.post("/", verifyToken, postComment);
+router.delete("/:id", verifyToken, deleteComment);
+router.put("/", verifyToken, putComment);
 
 module.exports = router;

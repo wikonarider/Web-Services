@@ -8,6 +8,20 @@ async function validServiceId(userId, serviceId) {
   return false;
 }
 
+async function validServicesId(userId, arrayServices) {
+  if (arrayServices) {
+    for (let i = 0; i < arrayServices.length; i++) {
+      const check = await validServiceId(userId, arrayServices[i]);
+      if (!check) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   validServiceId,
+  validServicesId,
 };
