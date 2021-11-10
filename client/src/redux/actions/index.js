@@ -223,7 +223,7 @@ export function setObjGlobal(obj) {
 export function getConvertations() {
   return async function (dispatch) {
     try {
-      var resp = await axios(`chat/convertations`);
+      var resp = await axios.get(`chat/convertations`);
       return dispatch({ type: type.GET_CONVERTATIONS, payload: resp.data });
     } catch (err) {
       console.log(err);
@@ -231,11 +231,26 @@ export function getConvertations() {
   };
 }
 
-//----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------clear chat
+export function clearChatInfo(){
+       return{type:type.CLEAR}
+}
+//------------------------------------------------------------------------------------get contacts bougth
+export function getContactsBougth() {
+  return async function (dispatch) {
+    try {
+      var resp = await axios.get(`chat/contactsBougth`);
+      return dispatch({ type: type.GET_CONTACTS_BOUGTH, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//----------------------------------------------------------------------------------get contacts convertation
 export function getContacts() {
   return async function (dispatch) {
     try {
-      var resp = await axios(`chat/contacts`);
+      var resp = await axios.get(`chat/contacts`);
       return dispatch({ type: type.GET_CONTACTS, payload: resp.data });
     } catch (err) {
       console.log(err);
@@ -249,7 +264,7 @@ export function getPots(idConv, offset) {
   }
   return async function (dispatch) {
     try {
-      var posts = await axios(
+      var posts = await axios.get(
         `chat/posts?idConvertation1=${idConv}&offset=${offset}`
       );
       return dispatch({ type: type.GET_POSTS, payload: posts.data });

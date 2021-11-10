@@ -1,4 +1,4 @@
-const { Users, Chat, Convertations } = require("../db.js");
+const { Users, Chat, Convertations, Service } = require("../db.js");
 const { Op } = require("sequelize");
 var users = [];
 //-----------------------socket--------------------------------------function users online
@@ -36,17 +36,19 @@ function serverchat(serverIO) {
     //-----------------------------------------------------------------------------add new User
     socketIO.on("addUser", (userId) => {
       addUsers(userId, socketIO.id);
-      console.log(users);
+      console.log("users add", users);
       return serverIO.emit("getUsers", users);
     });
     //-----------------------------------------------------------------------------disconect user
-    socketIO.on("disconnect",() => {
+    socketIO.on("disconnect", () => {
       removeUser(socketIO.id);
+      console.log("disconected", users);
       serverIO.emit("getUsers", users);
     });
     //------------------------------------------------------------------------------------send msn
 
-    socketIO.on("sendMsn",({ senderId, receiverId, text }) => {
+    socketIO.on("sendMsn", ({ senderId, receiverId, text }) => {
+      console.log("sendMsn", senderId, receiverId, text);
       if (senderId && receiverId && text) {
         var user = getUser(receiverId);
         if (Object.values(user).length) {
@@ -79,9 +81,68 @@ function getPots(req, res, next) {
       next(err);
     });
 }
+//----------------------------------------------------------------------------------------get contacts bought
+function getContactsbought(req, res, next) {
+  const userId = req.user;
+  console.log(userId);
+  if (userId) {
+    Users.findOne({
+      where: {
+        id: userId,
+      },
+      include: [
+        {
+          model: Service,
+          as: "servicesBought",
+          attributes: ["id"],
+        },
+      ],
+    })
+      .then((service) => {
+        var { servicesBought } = service;
+        return servicesBought.map((serv) => {
+          const { id } = serv.dataValues;
+          return Service.findOne({
+            where: {
+              id: id,
+            },
+            attributes: [],
+            include: {
+              model: Users,
+              attributes: ["userImg", "username", "name", "lastname", "id"],
+            },
+          });
+        });
+      })
+      .then((contactsBought) => {
+        return Promise.all(contactsBought);
+      })
+      .then((users) => {
+        //quitando repetidos
+        var contactsNotRepeat = [users[0].dataValues.user];
+        var flat = false;
+        users.map((usr) => {
+          for (let i = 0; i < contactsNotRepeat.length; i++) {
+            if (contactsNotRepeat[i].id === usr.dataValues.user.id) {
+              flat = true;
+            }
+          }
+          if (!flat) {
+            contactsNotRepeat.push(usr.dataValues.user);
+          }
+          flat = false;
+        });
+
+        res.status(200).send(contactsNotRepeat);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+}
 //----------------------------------------------------------------------------get id convertations
 function getConvertations(req, res, next) {
-  const { userId } = req.cookies;
+  const userId = req.user;
   Convertations.findAll({
     where: {
       [Op.or]: [{ userA: userId }, { userB: userId }],
@@ -95,11 +156,11 @@ function getConvertations(req, res, next) {
       next(err);
     });
 }
-//-----------------------------------------------------------------------------------------new convertation  ****************************falta****************************
+//-----------------------------------------------------------------------------------------new convertation
 function newConvertation(req, res, next) {
-
-  var {id}  = req.params;
-  var { userId } = req.cookies;
+  var { id } = req.params;
+  const userId = req.user;
+  console.log("id:", id, "userId:", userId);
   Convertations.findOrCreate({
     where: {
       [Op.or]: [
@@ -117,10 +178,10 @@ function newConvertation(req, res, next) {
     });
 }
 
-//--------------------------------------------------------------------------------------------------------------delete convertation   *******************falta**********************
+//--------------------------------------------------------------------------------------------------------------delete convertation
 function deleteConvertation(req, res, next) {
   var { id } = req.params;
-  var { userId } = req.cookies;
+  const userId = req.user;
   Convertations.destroy({
     where: {
       id: id,
@@ -133,10 +194,10 @@ function deleteConvertation(req, res, next) {
       next(err);
     });
 }
-//---------------------------------------------------------------------------send [{ userId: userId }, { sender: remit }],
+//---------------------------------------------------------------------------send,
 function sendMessage(req, res, next) {
   var { remit, message } = req.body;
-  var { userId } = req.cookies;
+  const userId = req.user;
   var user;
   Convertations.findOrCreate({
     where: {
@@ -169,48 +230,51 @@ function sendMessage(req, res, next) {
     });
 }
 
-//---------------------------------------------------------------------------------get contact
+//---------------------------------------------------------------------------------get contact convertation
 function getContacts(req, res, next) {
-  const { userId } = req.cookies;
-  console.log(userId);
- Convertations.findAll({
-    where: { [Op.or]: [{ userA: userId }, { userB: userId }] },
-    attributes: ["userA", "userB"],
-  })
-    .then((contacts) => {
-
-      return contacts.map((con) => {
-        var { userA, userB } = con.dataValues;
-        if (userB === userId) {
-          userB = userA;
-        }
-        if(!userA|| !userB){
-            return res.status(500).send("invalid params")
-        }
-        return Users.findOne({
-          where: {
-            id: userB,
-          },
-          attributes: [
-            "userImg",
-            "name",
-            "lastname",
-            "username",
-            "email",
-            "id",
-          ],
+  const userId = req.user;
+  console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", userId);
+  if (userId) {
+    Convertations.findAll({
+      where: { [Op.or]: [{ userA: userId }, { userB: userId }] },
+      attributes: ["userA", "userB"],
+    })
+      .then((contacts) => {
+        return contacts.map((con) => {
+          var { userA, userB } = con.dataValues;
+          if (userB === userId) {
+            userB = userA;
+          }
+          if (!userA || !userB) {
+            return res.status(500).send("invalid params");
+          }
+          return Users.findOne({
+            where: {
+              id: userB,
+            },
+            attributes: [
+              "userImg",
+              "name",
+              "lastname",
+              "username",
+              "email",
+              "id",
+            ],
+          });
         });
+      })
+      .then((resp) => {
+        return Promise.all(resp);
+      })
+      .then((contacts) => {
+        res.status(200).send(contacts);
+      })
+      .catch((err) => {
+        next(err);
       });
-    })
-    .then((resp) => {
-      return Promise.all(resp);
-    })
-    .then((contacts) => {
-      res.status(200).send(contacts);
-    })
-    .catch((err) => {
-      next(err);
-    });
+  } else {
+    res.status(500).send("Error get Contacts");
+  }
 }
 //-----------------------------------------------------------------------------------------
 module.exports = {
@@ -221,4 +285,5 @@ module.exports = {
   getContacts,
   deleteConvertation,
   newConvertation,
+  getContactsbought,
 };

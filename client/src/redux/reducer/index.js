@@ -22,6 +22,7 @@ const initialState = {
   },
   convertations: [],
   contacts: [],
+  contactsBougth:[],
   posts: [],
   endPage: false,
   darkTheme: false,
@@ -112,6 +113,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         contacts: action.payload,
       };
+    case type.GET_CONTACTS_BOUGTH:
+      return {
+        ...state,
+        contactsBougth: action.payload,
+      };
     case type.GET_CONVERTATIONS:
       return {
         ...state,
@@ -121,6 +127,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.payload,
+      };
+    case type.CLEAR:
+      return {
+        ...state,
+        convertations: [],
+        contacts: [],
+        posts: [],
       };
 
     case type.POST_PURCHASE:
