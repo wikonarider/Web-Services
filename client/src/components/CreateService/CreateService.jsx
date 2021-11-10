@@ -21,6 +21,8 @@ import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual
 import { useHistory } from "react-router";
 import Skeleton from "@mui/material/Skeleton";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Popover from "@mui/material/Popover";
 
 function CreateService(props) {
   const history = useHistory();
@@ -128,9 +130,27 @@ function CreateService(props) {
   };
   //-----------------HANDLE SELECT ALL --------------------------------
 
+  const [selectAll, setSelectAll] = useState(false);
+
   const handleSelectAll = () => {
     let idCities = provinces[index.indexProv].cities.map((c) => c.id);
     setInputs({ ...inputs, cities: idCities });
+    if (!selectAll) {
+      setAnchorEl(buttonRef.current);
+    }
+    setSelectAll(!selectAll);
+  };
+
+  //----------------- SELECT ALL POPOVER --------------------------
+  const [anchorEl, setAnchorEl] = useState(null);
+  const buttonRef = useRef();
+
+  const openPopover = Boolean(anchorEl);
+
+  const idPopover = openPopover ? "simple-popover" : undefined;
+
+  const handleClosePopover = () => {
+    setAnchorEl(null);
   };
 
   //-----------------------------------------------------------------handleinput
@@ -257,7 +277,7 @@ function CreateService(props) {
 
   if (provinces && groups) {
     return (
-      <Box sx={{marginLeft: '10%'}}>
+      <Box sx={{ marginLeft: "10%" }}>
         <Box
           display="grid"
           justifyContent="flex-start"
@@ -334,6 +354,7 @@ function CreateService(props) {
                   <Autocomplete
                     sx={selecStyle}
                     fullwidth="true"
+                    disabled={selectAll ? true : false}
                     multiple
                     limitTags={2}
                     options={provinces[index.indexProv].cities}
@@ -364,23 +385,39 @@ function CreateService(props) {
                 {/* --------SELECT ALL BUTTON -------------------- */}
               </Grid>
               {inputs.provinces && (
-                <Grid
-                  item
-                  xs={12}
-                  md={2}
-                  alignSelf="flex-end"
-                >
+                <Grid item xs={12} md={2} alignSelf="flex-end">
                   <Button
+                    ref={buttonRef}
                     variant="outlined"
+                    color="secondary"
                     size="small"
                     onClick={handleSelectAll}
                   >
-                    select all
+                    {selectAll ? "deselect all" : "select all"}
                   </Button>
                 </Grid>
               )}
             </Grid>
             {/* ----------------------------------------- */}
+
+            {/* ---------------SELECT ALL POPOVER ------------*/}
+            <Popover
+              id={idPopover}
+              open={openPopover}
+              anchorEl={anchorEl}
+              onClose={handleClosePopover}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+              transformOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+            >
+              <Typography sx={{ p: 2 }}>You selected all cities!</Typography>
+            </Popover>
+            {/* ----------------------------------------------- */}
 
             <Grid item xs={12} md={12}>
               <TextField
