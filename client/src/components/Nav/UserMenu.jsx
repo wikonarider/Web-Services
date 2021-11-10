@@ -1,18 +1,18 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCookie as setCookieRedux } from '../../redux/actions';
-import { useHistory } from 'react-router';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import React from "react";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Logout from "@mui/icons-material/Logout";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCookie as setCookieRedux } from "../../redux/actions";
+import { useHistory } from "react-router";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function UserMenu({ route, userImg, name }) {
   const history = useHistory();
@@ -30,24 +30,25 @@ export default function UserMenu({ route, userImg, name }) {
   };
 
   const logOutClear = async () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    dispatch(setCookieRedux(''));
-    history.push('/home');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    dispatch(setCookieRedux(""));
+    dispatch({ type: "GET_USER_INFO", payload: [] });
+    history.push("/home");
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
   return (
-    <Box sx={{ color: 'primary' }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+    <Box sx={{ color: "primary" }}>
+      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small">
             <Avatar
               sx={{ width: 32, height: 32 }}
-              alt={name ? name[0] : ''}
-              src={userImg ? userImg : ''}
+              alt={name ? name[0] : ""}
+              src={userImg ? userImg : ""}
             ></Avatar>
           </IconButton>
         </Tooltip>
@@ -60,40 +61,40 @@ export default function UserMenu({ route, userImg, name }) {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {route !== 'account' ? (
+        {route !== "account" ? (
           <Box>
             <Link
               to="/account"
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
               <MenuItem>
-                <DashboardIcon sx={{ mr: '8px', color: 'secondary' }} />
+                <DashboardIcon sx={{ mr: "8px", color: "secondary" }} />
                 My account
               </MenuItem>
             </Link>
