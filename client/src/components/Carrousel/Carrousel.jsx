@@ -1,8 +1,8 @@
-import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import CarrouselItem from "./CarrouselItem";
-import { useHistory } from "react-router";
+import React from 'react';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import CarrouselItem from './CarrouselItem';
+import { useHistory } from 'react-router';
 
 export default function Carrousel({ topSix }) {
   const history = useHistory();
@@ -12,7 +12,7 @@ export default function Carrousel({ topSix }) {
   };
 
   return (
-    <div style={{ width: "100%", marginTop: "4%", objectFit: "cover" }}>
+    <div style={{ width: '100%', objectFit: 'cover' }}>
       <Carousel
         dynamicHeight={true}
         autoPlay={true}
