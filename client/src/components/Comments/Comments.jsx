@@ -176,6 +176,8 @@ export default function Comments({
         </>
       ) : null}
 
+
+      <Box gridColumn="span 12" display='flex' flexDirection='column-reverse' >
       {/* ----------POPOVER RATE FIRST-------------------------- */}
       <Popover
         id={idRate}
@@ -219,6 +221,7 @@ export default function Comments({
       {/* --------------------------------------------------------- */}
 
       <Box gridColumn="span 12">
+
         {qualifications && qualifications.length ? (
           qualifications.map((q, index) => {
             return <SingleComment qualification={q} key={index} />;
