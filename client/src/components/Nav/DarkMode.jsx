@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import Brightness2TwoToneIcon from '@mui/icons-material/Brightness2TwoTone';
+import Box from '@mui/material/Box';
 
 export default function DarkMode() {
   const darkGlobal = useSelector((state) => state.darkTheme);
@@ -32,18 +33,21 @@ export default function DarkMode() {
   };
 
   return (
-    <FormControlLabel
-      value="end"
-      control={
-        <PinkSwitch
-          color="default"
-          onClick={setDark}
-          checked={darkGlobal}
-          sx={{ ml: '1.5rem' }}
-        />
-      }
-      label={<Brightness2TwoToneIcon />}
-      labelPlacement="end"
-    />
+    <Box>
+      <FormControlLabel
+        sx={{ alignItems: 'end' }}
+        value="end"
+        control={
+          <PinkSwitch
+            color="default"
+            onClick={setDark}
+            checked={darkGlobal}
+            sx={{ ml: '1.5rem' }}
+          />
+        }
+        label={<Brightness2TwoToneIcon />}
+        labelPlacement="end"
+      />
+    </Box>
   );
 }
