@@ -25,7 +25,7 @@ import { useDispatch } from 'react-redux';
 //maneja el ancho de la expansión al tocar el hamburguer button
 const drawerWidth = 350;
 
-export default function SideBar({ check, change }) {
+export default function SideBar() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -52,10 +52,10 @@ export default function SideBar({ check, change }) {
   return (
     <Box>
       <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
+        size='large'
+        edge='start'
+        color='inherit'
+        aria-label='menu'
         onClick={handleDrawer}
       >
         <SortIcon />
@@ -76,10 +76,10 @@ export default function SideBar({ check, change }) {
         <SideBarRangePrice />
         <Divider />
         <Button
-          variant="outlined"
+          variant='outlined'
           onClick={handleReset}
           sx={{ width: '20%', margin: '10px auto 10px auto' }}
-          color="secondary"
+          color='secondary'
         >
           Reset
         </Button>
