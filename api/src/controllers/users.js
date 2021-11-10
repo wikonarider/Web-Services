@@ -161,10 +161,9 @@ async function userBanned(req, res, next) {
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
 
-  const { servicesId, collection_status, status } = req.query;
-  const { userId } = req.cookies;
+  const { servicesId, collection_status, status, username } = req.query;
+  
 
-  console.log("idEnPruchase", req.cookies);
   console.log("serviceIdenPruchase", servicesId);
   console.log("collection_status", collection_status);
 
@@ -181,7 +180,7 @@ async function postPurchase(req, res, next) {
 
       const user = await Users.findOne({
         where: {
-          id: userId,
+          username: username,
         },
       });
       // console.log para ver los metodos disponibles

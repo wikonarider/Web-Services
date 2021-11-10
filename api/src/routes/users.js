@@ -12,7 +12,7 @@ const { verifyToken } = require("../controllers/authentication");
 
 // User post
 router.post("/", userCreated);
-router.get("/purchase", postPurchase);
+router.get("/purchase",postPurchase);
 
 // User get
 router.get("/", verifyToken, getUserInfo);

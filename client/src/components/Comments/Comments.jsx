@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Box from "@mui/material/Box";
@@ -9,6 +9,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { getServiceById } from "../../utils/servicesPage";
+import { Popover } from "@mui/material";
 
 export default function Comments({
   qualifications,
@@ -23,9 +24,41 @@ export default function Comments({
   const servicesBought = useSelector((state) => state.user.servicesBought);
   // const admin = useSelector((state) => state.user.admin);
 
+  // -------------  POPOVER SATE ------------------
+  const [anchorElRate, setAnchorElRate] = React.useState(null);
+  const [anchorElComment, setAnchorElComment] = React.useState(null);
+  const starsRef = useRef();
+  const commentBoxRef = useRef();
+
+  //--------------------------------------------
+
+  //------ POPOVERS ----------------------
+
+  const handleClosePopoverRate = () => {
+    setAnchorElRate(null);
+  };
+  const openPopoverRate = Boolean(anchorElRate);
+  const idRate = openPopoverRate ? "simple-popover" : undefined;
+
+  const handleClosePopoverComment = () => {
+    setAnchorElComment(null);
+  };
+  const openPopoverComment = Boolean(anchorElComment);
+  const idComment = openPopoverComment ? "simple-popover" : undefined;
+
+  //---------------------------------
+
   function handleClick(comment, rating, serviceId) {
     let userId = cookieRedux;
-    if (rating > 0) {
+
+    if (!rating && !comment) {
+      setAnchorElRate(starsRef.current);
+      setAnchorElComment(commentBoxRef.current);
+    } else if (!rating) {
+      setAnchorElRate(starsRef.current);
+    } else if (!comment) {
+      setAnchorElComment(commentBoxRef.current);
+    } else if (rating > 0 && comment) {
       setLoading(true);
       axios
         .post("/qualification", {
@@ -83,6 +116,7 @@ export default function Comments({
             alignItems="center"
           >
             <Typography
+              ref={starsRef}
               variant="subtitle1"
               sx={{ alignSelf: "center", mr: "5px" }}
             >
@@ -115,11 +149,12 @@ export default function Comments({
             sx={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "flex-start",
               gap: "10px",
             }}
           >
             <TextareaAutosize
+              ref={commentBoxRef}
               minRows={4}
               maxRows={8}
               aria-label="comment area"
@@ -141,7 +176,52 @@ export default function Comments({
         </>
       ) : null}
 
+
       <Box gridColumn="span 12" display='flex' flexDirection='column-reverse' >
+      {/* ----------POPOVER RATE FIRST-------------------------- */}
+      <Popover
+        id={idRate}
+        open={openPopoverRate}
+        anchorEl={anchorElRate}
+        onClose={handleClosePopoverRate}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <Typography sx={{ p: 2, color: "#FF6F00" }}>
+          You have to rate the service!
+        </Typography>
+      </Popover>
+      {/* --------------------------------------------------------- */}
+
+      {/* ----------POPOVER COMMENT FIRST-------------------------- */}
+      <Popover
+        id={idComment}
+        open={openPopoverComment}
+        anchorEl={anchorElComment}
+        onClose={handleClosePopoverComment}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        <Typography sx={{ p: 2, color: "#FF6F00" }}>
+          You have to leave a comment!
+        </Typography>
+      </Popover>
+      {/* --------------------------------------------------------- */}
+
+      <Box gridColumn="span 12">
+
         {qualifications && qualifications.length ? (
           qualifications.map((q, index) => {
             return <SingleComment qualification={q} key={index} />;
