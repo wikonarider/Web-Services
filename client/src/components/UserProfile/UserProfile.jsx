@@ -33,6 +33,7 @@ export default function UserProfile({ id, username }) {
         <Grid
           container
           gridTemplateColumns="repeat(12, 1fr)"
+          flexDirection="column"
           alignItems="center"
           justifyContent="center"
         >

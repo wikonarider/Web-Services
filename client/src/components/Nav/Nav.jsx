@@ -81,7 +81,7 @@ export default function Nav({ route, check, change }) {
           sx={{
             display: "flex",
             justifyContent: "center",
-            flexWrap: "wrap",
+            // flexWrap: "wrap",
             gap: "5px",
           }}
         >
