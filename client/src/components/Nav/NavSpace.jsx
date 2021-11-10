@@ -1,7 +1,16 @@
-import React from "react";
+import React from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-function NavSpace() {
-  return <div style={{ width: "100%", height: "75px" }}></div>;
+function NavSpace({ route }) {
+  const query = useMediaQuery('(max-width: 820px)');
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: query && route === 'home' ? '150px' : '80px',
+      }}
+    ></div>
+  );
 }
 
 export default NavSpace;
