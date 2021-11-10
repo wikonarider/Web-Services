@@ -141,7 +141,7 @@ export default function Comments({
         </>
       ) : null}
 
-      <Box gridColumn="span 12">
+      <Box gridColumn="span 12" display='flex' flexDirection='column-reverse' >
         {qualifications && qualifications.length ? (
           qualifications.map((q, index) => {
             return <SingleComment qualification={q} key={index} />;
