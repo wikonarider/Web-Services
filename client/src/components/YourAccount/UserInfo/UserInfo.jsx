@@ -71,7 +71,12 @@ export default function YourAccount({
   };
   //--------------------------------------------------------------
 
-  const shareUrl = `https://pf-web-service.vercel.app/users/${profileServices[0].userId}`;
+  // console.log(userData.id);
+  // const shareUrl = profileServices[0].userId
+  //   ? `https://pf-web-service.vercel.app/users/${profileServices[0].userId}`
+  //   : null;
+
+  // console.log(shareUrl);
 
   return (
     <Grid
@@ -156,10 +161,10 @@ export default function YourAccount({
             justifyContent="center"
             gap="0.5rem"
           >
-            <FacebookShareButton url={shareUrl}>
+            <FacebookShareButton url={'shareUrl'}>
               <FacebookIcon size={35} round={true} />
             </FacebookShareButton>
-            <WhatsappShareButton url={shareUrl}>
+            <WhatsappShareButton url={'shareUrl'}>
               <WhatsappIcon size={35} round={true} />
             </WhatsappShareButton>
             {/* <LinkedinShareButton url={shareUrl}>
