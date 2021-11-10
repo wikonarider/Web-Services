@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import s from "./Login.module.css";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { validateLogin } from "../../utils/registerValidations";
-import { postLogin } from "../../utils/login";
-import { useDispatch } from "react-redux";
-import { setCookie } from "../../redux/actions";
-import { GoogleLogin } from "react-google-login";
-import axios from "axios";
-import Divider from "@mui/material/Divider";
+import React, { useState } from 'react';
+import s from './Login.module.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { validateLogin } from '../../utils/registerValidations';
+import { postLogin } from '../../utils/login';
+import { useDispatch } from 'react-redux';
+import { setCookie } from '../../redux/actions';
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const dispatch = useDispatch();
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
   const [inputsErrors, setInputErrors] = useState({});
 
@@ -44,28 +45,28 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       const { id, token } = await postLogin(inputs);
 
       setInputs({
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       });
       setLoginModal(() => false);
       // guardo token en localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("userId", id);
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', id);
       // configuramos axios
-      axios.defaults.headers.common["authorization"] = "Bearer " + token;
+      axios.defaults.headers.common['authorization'] = 'Bearer ' + token;
       dispatch(setCookie(id));
       setLogin && setLogin(true);
     } catch (e) {
       setInputErrors(() => {
         let error = {};
         const message = e.response.data.message;
-        if (e.response && message === "User does not exist") {
-          error.username = "User incorrect";
-        } else if (message === "Banned user") {
-          error.username = "Banned user";
-          error.password = "Banned user";
+        if (e.response && message === 'User does not exist') {
+          error.username = 'User incorrect';
+        } else if (message === 'Banned user') {
+          error.username = 'Banned user';
+          error.password = 'Banned user';
         } else {
-          error.password = "Password incorrect";
+          error.password = 'Password incorrect';
         }
         return error;
       });
@@ -77,18 +78,18 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       const { data } = await axios.post(`/auth/login?token=${token}`);
       setLoginModal(() => false);
       // guardo token en localStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.id);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.id);
       // configuramos axios
-      axios.defaults.headers.common["authorization"] = "Bearer " + data.token;
+      axios.defaults.headers.common['authorization'] = 'Bearer ' + data.token;
       dispatch(setCookie(data.id));
       setLogin && setLogin(true);
     } catch (e) {
       setInputs({
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       });
-      setInputErrors(() => ({ username: "Unregistered user" }));
+      setInputErrors(() => ({ username: 'Unregistered user' }));
     }
   };
 
@@ -98,7 +99,11 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   };
 
   return (
-    <div className={s.container}>
+    <Box
+      sx={{
+        p: '40px',
+      }}
+    >
       <form className={s.form} onSubmit={handleSubmit}>
         <TextField
           required
@@ -122,7 +127,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           type="password"
           variant="outlined"
           onChange={handleChange}
-          sx={{ marginTop: "4%", marginBottom: "4%" }}
+          sx={{ marginTop: '4%', marginBottom: '4%' }}
         />
         <Button
           type="submit"
@@ -136,11 +141,11 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       </form>
       <Divider
         sx={{
-          width: "100%",
-          border: "1px solid rgba(0,0,0,.1)",
+          width: '100%',
+          border: '1px solid rgba(0,0,0,.1)',
           borderRadius: 12,
-          marginBottom: "5%",
-          marginTop: "5%",
+          marginBottom: '5%',
+          marginTop: '5%',
         }}
       />
 
@@ -152,7 +157,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           color="secondary"
           disableElevation
           size="small"
-          sx={{ marginRight: "4%" }}
+          sx={{ marginRight: '4%' }}
           onClick={handleCreateAccount}
         >
           CREATE ACCOUNT
@@ -166,7 +171,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           helperText={inputsErrors.google}
         />
       </div>
-    </div>
+    </Box>
   );
 }
 
