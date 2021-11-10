@@ -2,9 +2,12 @@ import React from 'react';
 import CartItem from './CartItem';
 import List from '@mui/material/List';
 import Box from '@mui/material/Box';
-function CartList({ cart }) {
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+function CartList({ cart, route }) {
+  const query = useMediaQuery('(max-width: 820px)');
   return (
-    <Box sx={{ mt: '75px' }}>
+    <Box sx={{ mt: query && route === 'home' ? '150px' : '75px' }}>
       <List>
         {cart &&
           cart.map((s) => (

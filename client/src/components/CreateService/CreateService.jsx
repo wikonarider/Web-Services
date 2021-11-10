@@ -1,25 +1,25 @@
-import { React, useEffect, useRef, useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { React, useEffect, useRef, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Autocomplete from "@mui/material/Autocomplete";
-import Checkbox from "@mui/material/Checkbox";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import s from "./CreateService.module.css";
-import { createService, getGroups, getProvinces } from "../../redux/actions";
-import ModalService from "./ModalService";
-import Box from "@mui/system/Box";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
-import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
-import { useHistory } from "react-router";
-import { Skeleton } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Autocomplete from '@mui/material/Autocomplete';
+import Checkbox from '@mui/material/Checkbox';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import s from './CreateService.module.css';
+import { createService, getGroups, getProvinces } from '../../redux/actions';
+import ModalService from './ModalService';
+import Box from '@mui/system/Box';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import { useHistory } from 'react-router';
+import { Skeleton } from '@mui/material';
 
 function CreateService(props) {
   const history = useHistory();
@@ -35,37 +35,34 @@ function CreateService(props) {
   const [skeleton, setSkeleton] = useState(false);
 
   const handleSkeleton = () => {
-    setSkeleton(true)
-  }
-
+    setSkeleton(true);
+  };
 
   //----------------------------
-
-
 
   const { provinces, groups } = props;
 
   const [index, setIndex] = useState({
-    indexCat: "",
-    indexProv: "",
+    indexCat: '',
+    indexProv: '',
   });
   const [names, setNames] = useState({
-    province: "",
-    category: "",
+    province: '',
+    category: '',
   }); //names
 
   //props input client
   const [errors, setErrors] = useState({});
   const [modal, setModal] = useState(false);
   const [inputs, setInputs] = useState({
-    title: "",
-    description: "",
-    price: "",
-    img: "",
-    categoryId: "",
-    provinces: "",
+    title: '',
+    description: '',
+    price: '',
+    img: '',
+    categoryId: '',
+    provinces: '',
     cities: [],
-    subCategory: "",
+    subCategory: '',
   });
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -114,7 +111,7 @@ function CreateService(props) {
       setInputs({
         //borra si selecciona otra provincia
         ...inputs,
-        provinces: "",
+        provinces: '',
         cities: [],
       });
     }
@@ -167,22 +164,22 @@ function CreateService(props) {
       setModal(true);
       dispatch(createService({ ...inputs, price: parseInt(inputs.price) }));
       setNames({
-        province: "",
-        category: "",
+        province: '',
+        category: '',
       });
       setInputs({
-        title: "",
-        description: "",
-        price: "",
-        userId: "",
-        img: "",
-        categoryId: "",
-        subCategory: "",
-        provinces: "",
+        title: '',
+        description: '',
+        price: '',
+        userId: '',
+        img: '',
+        categoryId: '',
+        subCategory: '',
+        provinces: '',
         cities: [],
       });
     } else {
-      alert("Faltan parmetros");
+      alert('Faltan parmetros');
     }
   }
 
@@ -191,24 +188,24 @@ function CreateService(props) {
   const loadImg = async (files) => {
     const reader = new FileReader();
     reader.onload = function () {
-      let imgDiv = document.querySelector("#imgBox");
+      let imgDiv = document.querySelector('#imgBox');
       imgDiv.src = reader.result; //Básicamente lo que hago acá es
       //convertir la img en una URL para poder mandarla
     };
     reader.readAsDataURL(files);
 
     const formData = new FormData();
-    formData.append("file", files);
+    formData.append('file', files);
     // replace this with your upload preset name
-    formData.append("upload_preset", "hn1tlyfq");
+    formData.append('upload_preset', 'hn1tlyfq');
     const options = {
-      method: "POST",
+      method: 'POST',
       body: formData,
     };
 
     try {
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
+        'https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload',
         options
       );
       const res_1 = await res.json();
@@ -219,19 +216,19 @@ function CreateService(props) {
     }
   };
   //---------------------------------------------------------------------------------validate
- function isNumber(price) {
+  function isNumber(price) {
     return /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/.test(price);
   }
   function errorsValidate(inputs) {
     let errors = {};
     if (!inputs.title) {
-      errors.title = "Title is required";
+      errors.title = 'Title is required';
     } else if (!inputs.description) {
-      errors.description = "Description is required";
+      errors.description = 'Description is required';
     } else if (!inputs.price) {
-      errors.price = "Price is required";
+      errors.price = 'Price is required';
     } else if (!isNumber(inputs.price)) {
-      errors.price = "Price must to be a number";
+      errors.price = 'Price must to be a number';
     }
 
     return errors;
@@ -246,7 +243,7 @@ function CreateService(props) {
     return (
       <>
         <div className={s.arrow}>
-          <IconButton color="primary" onClick={() => history.push("/account")}>
+          <IconButton color="primary" onClick={() => history.push('/account')}>
             <ArrowBackIcon />
           </IconButton>
         </div>
@@ -311,7 +308,7 @@ function CreateService(props) {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label={"Provinces"}
+                        label={'Provinces'}
                         placeholder="Search"
                       />
                     )}
@@ -413,7 +410,7 @@ function CreateService(props) {
 
             <div className={s.file}>
               <TextField
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
                 name="img"
                 type="file"
                 inputRef={fileInput}
@@ -437,7 +434,12 @@ function CreateService(props) {
             </div>
 
             {skeleton && (
-              <Skeleton variant="rectangular" width={345} height={194} className={s.imgRender} />
+              <Skeleton
+                variant="rectangular"
+                width={345}
+                height={194}
+                className={s.imgRender}
+              />
             )}
 
             <div className={inputs.img ? s.imgContainer : s.imgContainer2}>
@@ -470,7 +472,7 @@ function CreateService(props) {
           <ModalService
             modal={modal}
             setModal={setModal}
-            message={"Service created successfully!"}
+            message={'Service created successfully!'}
           />
         </div>
       </>

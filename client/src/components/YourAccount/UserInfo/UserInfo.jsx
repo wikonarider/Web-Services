@@ -1,14 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo, putUser } from "../../../redux/actions";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import ShareIcon from "@mui/icons-material/Share";
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo, putUser } from '../../../redux/actions';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
-import s from "./UserInfo.module.css";
+import s from './UserInfo.module.css';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
-export default function YourAccount({ userProfile, profileInfo }) {
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from 'react-share';
+
+export default function YourAccount({
+  userProfile,
+  profileInfo,
+  profileServices,
+}) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
@@ -22,7 +37,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
   }, [dispatch, userProfile]);
 
   // eslint-disable-next-line
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState('');
 
   //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
   const fileInput = useRef();
@@ -33,16 +48,16 @@ export default function YourAccount({ userProfile, profileInfo }) {
     setLoading(true);
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append("file", files[0]);
+    formData.append('file', files[0]);
     // replace this with your upload preset name
-    formData.append("upload_preset", "hn1tlyfq");
+    formData.append('upload_preset', 'hn1tlyfq');
     const options = {
-      method: "POST",
+      method: 'POST',
       body: formData,
     };
 
     return fetch(
-      "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
+      'https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload',
       options
     )
       .then((res) => res.json())
@@ -56,19 +71,32 @@ export default function YourAccount({ userProfile, profileInfo }) {
   };
   //--------------------------------------------------------------
 
+  // console.log(userData.id);
+  // const shareUrl = profileServices[0].userId
+  //   ? `https://pf-web-service.vercel.app/users/${profileServices[0].userId}`
+  //   : null;
+
+  // console.log(shareUrl);
+
   return (
-    <div className={userProfile ? s.userProfile : s.user}>
-      <div>
+    <Grid
+      container
+      gridTemplateColumns="repeat(12, 1fr)"
+      alignItems="center"
+      justifyContent={!userProfile ? 'center' : 'flex-start'}
+      sx={{ marginTop: '2%' }}
+      gap={5}
+    >
+      <Grid item gridColumn="span 6">
         <Avatar
           alt="user name"
           src={!userProfile ? userData.userImg : profileInfo.userImg}
           sx={{ width: 200, height: 200, marginBottom: 2 }}
-          className={s.avatar}
         ></Avatar>
         {!userProfile && (
-          <div className={s.changePhoto}>
+          <Box>
             <input
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               type="file"
               name="myImage"
               ref={fileInput}
@@ -93,7 +121,7 @@ export default function YourAccount({ userProfile, profileInfo }) {
                 // startIcon={<PhotoCameraIcon />}
                 size="small"
                 color="secondary"
-                sx={{ boxShadow: "none", marginLeft: 1 }}
+                sx={{ boxShadow: 'none', marginLeft: 1 }}
                 // onClick={() => {
                 //   fileInput.current.click();
                 // }}
@@ -104,35 +132,47 @@ export default function YourAccount({ userProfile, profileInfo }) {
             ) : (
               <div className={s.spinner}></div>
             )}
-          </div>
+          </Box>
         )}
-      </div>
+      </Grid>
 
-      <div className={s.userInfo}>
-        <div className={s.fullName}>
-          <p className={s.name}>
+      <Grid item gridColumn="span 6">
+        <Box className={s.fullName} gap={2}>
+          <Typography variant="h4">
             {!userProfile ? userData.name : profileInfo.name}
-          </p>
-          <p>{!userProfile ? userData.lastname : profileInfo.lastname}</p>
-        </div>
+          </Typography>
+          <Typography variant="h4">
+            {!userProfile ? userData.lastname : profileInfo.lastname}
+          </Typography>
+        </Box>
         {!userProfile ? (
-          <div>
-            <p>{userData.username}</p>
-            <p>{userData.email}</p>
-          </div>
+          <>
+            <Box sx={{ marginBottom: 1, marginTop: 1 }}>
+              <Typography variant="body">{userData.username}</Typography>
+            </Box>
+            <Box>
+              <Typography variant="body">{userData.email}</Typography>
+            </Box>
+          </>
         ) : (
-          <Button
-            variant="contained"
-            startIcon={<ShareIcon />}
-            size="small"
-            color="secondary"
-            sx={{ marginTop: 2 }}
-            disableElevation
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            gap="0.5rem"
           >
-            Share Profile
-          </Button>
+            <FacebookShareButton url={'shareUrl'}>
+              <FacebookIcon size={35} round={true} />
+            </FacebookShareButton>
+            <WhatsappShareButton url={'shareUrl'}>
+              <WhatsappIcon size={35} round={true} />
+            </WhatsappShareButton>
+            {/* <LinkedinShareButton url={shareUrl}>
+              <LinkedinIcon size={35} round={true} />
+            </LinkedinShareButton> */}
+          </Box>
         )}
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }

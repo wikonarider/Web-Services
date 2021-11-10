@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
-import { postLogout } from "../../utils/login";
 import { useDispatch } from "react-redux";
 import { setCookie as setCookieRedux } from "../../redux/actions";
 import { useHistory } from "react-router";
@@ -31,8 +30,10 @@ export default function UserMenu({ route, userImg, name }) {
   };
 
   const logOutClear = async () => {
-    await postLogout();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     dispatch(setCookieRedux(""));
+    dispatch({ type: "GET_USER_INFO", payload: [] });
     history.push("/home");
   };
 
@@ -40,7 +41,7 @@ export default function UserMenu({ route, userImg, name }) {
     setAnchorEl(null);
   };
   return (
-    <React.Fragment>
+    <Box sx={{ color: "primary" }}>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small">
@@ -90,10 +91,10 @@ export default function UserMenu({ route, userImg, name }) {
           <Box>
             <Link
               to="/account"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
               <MenuItem>
-                <DashboardIcon sx={{ mr: "8px" }} />
+                <DashboardIcon sx={{ mr: "8px", color: "secondary" }} />
                 My account
               </MenuItem>
             </Link>
@@ -108,6 +109,6 @@ export default function UserMenu({ route, userImg, name }) {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </Box>
   );
 }

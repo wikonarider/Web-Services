@@ -1,6 +1,8 @@
 const paypal = require("paypal-rest-sdk");
 const router = require("express").Router();
+const { Users } = require('../db');
 const { ORIGIN, SUCCESS_MERCADOPAGO } = process.env;
+const { verifyToken } = require("../controllers/authentication");
 
 paypal.configure({
     mode:"sandbox",
@@ -10,19 +12,26 @@ paypal.configure({
 
 
 
-router.post("/", (req, res) => {
-  
-    let {prices, name, quantity, servicesId} = {...req.body}
+router.post("/", verifyToken, async (req, res) => {
+  try{
+    let {totalPrice, title, quantity, servicesId} = {...req.body}
     console.log('ESTOY EN BACK',req.body)
-
+    const  userId  = req.user;
     let price = 0
-    for (let i=0; i < prices.length; i++){
-      price = price + prices[i]
+    for (let i=0; i < totalPrice.length; i++){
+      price = price + totalPrice[i]
     }
     
     // data.price = Math.round(data.price / 170)
     // data.price = prices
-
+    const user = await Users.findOne({
+        attributes: [
+          "username",
+        ],
+        where: {
+          id: userId,
+        },
+      })
    
 
     var create_payment_json = {
@@ -31,7 +40,7 @@ router.post("/", (req, res) => {
             payment_method: "paypal"
         },
         redirect_urls: {
-            return_url:`${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&status=success`,
+            return_url:`${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&username=${user.username}&status=success`,
             cancel_url: `${ORIGIN}/home`
         },
         transactions: [
@@ -39,7 +48,7 @@ router.post("/", (req, res) => {
                 item_list: {
                     items: [
                         {
-                            name: name,
+                            name: title.join(", "),
                             sku: "item",
                             price: price,
                             currency: "USD",
@@ -65,6 +74,9 @@ router.post("/", (req, res) => {
             res.json(payment.links[1].href);
         }
     });
+} catch(error) {
+    console.log(error)
+  }
 });
 
 

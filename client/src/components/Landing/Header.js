@@ -67,7 +67,7 @@ const styleLogin = {
   transform: 'translate(-50%, -50%)',
   maxWidth: 600,
   width: '70%',
-  bgcolor: 'background.paper',
+  // bgcolor: 'background.paper',
   borderRadius: '10px',
   boxShadow: 24,
   p: 2,

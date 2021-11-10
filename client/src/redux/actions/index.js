@@ -1,6 +1,6 @@
-import { type } from "./variables";
-import urlQuery from "./urlQuery";
-import axios from "axios";
+import { type } from './variables';
+import urlQuery from './urlQuery';
+import axios from 'axios';
 
 //_____________________________________________________________________________________actions service
 // usar axios("/route"), no es necesario http://localhost:3001, ya
@@ -105,7 +105,7 @@ export function postCategory(category) {
 export function postUser(data) {
   return async () => {
     try {
-      return await axios.post("/users/", data);
+      return await axios.post('/users/', data);
     } catch (err) {
       return new Error(err);
     }
@@ -115,14 +115,14 @@ export function postUser(data) {
 export function putUser(newData) {
   return async () => {
     try {
-      return await axios.put("/users/", newData);
+      return await axios.put('/users/', newData);
     } catch (err) {
       return new Error(err);
     }
   };
 }
 export async function getUserInfo() {
-  const response = await axios.get("/users");
+  const response = await axios.get('/users');
   return {
     type: type.GET_USER_INFO,
     payload: response.data,
@@ -223,7 +223,7 @@ export function setObjGlobal(obj) {
 export function getConvertations() {
   return async function (dispatch) {
     try {
-      var resp = await axios(`chat/convertations`);
+      var resp = await axios.get(`chat/convertations`);
       return dispatch({ type: type.GET_CONVERTATIONS, payload: resp.data });
     } catch (err) {
       console.log(err);
@@ -231,11 +231,26 @@ export function getConvertations() {
   };
 }
 
-//----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------clear chat
+export function clearChatInfo(){
+       return{type:type.CLEAR}
+}
+//------------------------------------------------------------------------------------get contacts bougth
+export function getContactsBougth() {
+  return async function (dispatch) {
+    try {
+      var resp = await axios.get(`chat/contactsBougth`);
+      return dispatch({ type: type.GET_CONTACTS_BOUGTH, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+//----------------------------------------------------------------------------------get contacts convertation
 export function getContacts() {
   return async function (dispatch) {
     try {
-      var resp = await axios(`chat/contacts`);
+      var resp = await axios.get(`chat/contacts`);
       return dispatch({ type: type.GET_CONTACTS, payload: resp.data });
     } catch (err) {
       console.log(err);
@@ -249,7 +264,7 @@ export function getPots(idConv, offset) {
   }
   return async function (dispatch) {
     try {
-      var posts = await axios(
+      var posts = await axios.get(
         `chat/posts?idConvertation1=${idConv}&offset=${offset}`
       );
       return dispatch({ type: type.GET_POSTS, payload: posts.data });
@@ -293,7 +308,7 @@ export function sendMessage(msn) {
 }
 //--------------------------------------------------------------------------------------
 export function paypal(body) {
-  console.log("body=>>> ", body);
+  console.log('body=>>> ', body);
   return async function (dispatch) {
     try {
       const response = await axios.post(`/paypal`, body);
@@ -304,3 +319,11 @@ export function paypal(body) {
     }
   };
 }
+
+//DARK-MODE
+export const putDark = (mode) => {
+  return {
+    type: type.PUT_DARK,
+    payload: mode,
+  };
+};

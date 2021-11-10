@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import s from "./YourAccount.module.css";
+import s from './YourAccount.module.css';
 
 //-------------- MATERIAL UI -------------------------------------
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 //-------------------------------------------------------
-import CardService from "../CardService/CardService";
-import { getUserInfo, getUserFavs } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-import UserInfo from "./UserInfo/UserInfo";
-import Botonera from "./Botonera/Botonera";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Admin from "../Admin/Admin";
-import { FormDialog } from "./FormDialog/FormDialog";
+import CardService from '../CardService/CardService';
+import { getUserInfo, getUserFavs } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import UserInfo from './UserInfo/UserInfo';
+import Botonera from './Botonera/Botonera';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Admin from '../Admin/Admin';
+import { FormDialog } from './FormDialog/FormDialog';
+import Orders from './Orders/Orders';
+import Box from '@mui/material/Box';
 
-export default function YourAccount({ userProfile, profileInfo }) {
+export default function YourAccount({
+  userProfile,
+  profileInfo,
+  profileServices,
+}) {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
+  // console.log(userData);
 
   useEffect(() => {
     if (userProfile !== true) {
@@ -48,7 +55,11 @@ export default function YourAccount({ userProfile, profileInfo }) {
 
   return (
     <div>
-      <UserInfo userProfile={userProfile} profileInfo={profileInfo} />
+      <UserInfo
+        userProfile={userProfile}
+        profileInfo={profileInfo}
+        profileServices={profileServices}
+      />
 
       {!userProfile && (
         <Botonera
@@ -101,13 +112,11 @@ export default function YourAccount({ userProfile, profileInfo }) {
           (userData.servicesBought && userData.servicesBought.length > 0 ? (
             <div className={s.servicesShown}>
               <Container>
-                <Grid container justifyContent="flex-start" spacing={3}>
-                  {userData.servicesBought.map((s) => (
-                    <Grid item key={s.id}>
-                      <CardService service={s} />
-                    </Grid>
-                  ))}
-                </Grid>
+                {userData.servicesBought.map((s) => (
+                  <Box sx={{ marginBottom: 5 }}>
+                    <Orders service={s} />
+                  </Box>
+                ))}
               </Container>
             </div>
           ) : (

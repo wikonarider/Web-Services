@@ -1,6 +1,7 @@
 const { Users } = require('../db');
 require("dotenv").config();
 const { ORIGIN, SUCCESS_MERCADOPAGO } = process.env;
+const { verifyToken } = require("../controllers/authentication");
 
 var express = require('express');
 var router = express.Router();
@@ -16,24 +17,34 @@ mercadopago.configure({
     "APP_USR-6630129852838408-110415-697a3bf876a306168b38ca0aff892c43-1012143804",
 });
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   try {
     const { totalPrice, title, quantity, servicesId} = req.body;
     console.log('totalPrice' ,req.body)
-    const {userId} = req.cookies
+    const  userId  = req.user;
     // var unit_price = totalPrice / quantity;
   
     let prices = 0
     for (let i=0; i < totalPrice.length; i++){
       prices = prices + totalPrice[i]
     }
-    
-        console.log('totalPricessssssss',prices)
+   // for (let i=0; i < servicesId.length; i++){
+   //   services = services + servicesId[i]
+   // }
+   const user = await Users.findOne({
+    attributes: [
+      "username",
+    ],
+    where: {
+      id: userId,
+    },
+  })
+        
     
     var preference = {
       items: [
         {
-          title: title,
+          title: title.join(", "),
           quantity: quantity,
           unit_price: prices,
           serviceId : servicesId
@@ -41,7 +52,7 @@ router.post("/", async (req, res) => {
       ],
       back_urls: {
 
-        success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}`,
+        success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&username=${user.username}`,
 
         failure: `${ORIGIN}/home`,
         pending: `${ORIGIN}/home`,

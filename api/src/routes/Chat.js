@@ -8,14 +8,17 @@ const {
   getContacts,
   deleteConvertation,
   newConvertation,
+  getContactsbought,
 } = require("../controllers/chat");
+const { verifyToken } = require("../controllers/authentication");
 
 
-router.post("/", sendMessage);
-router.get("/convertations", getConvertations);
-router.post("/convertations/:id", newConvertation);
-router.delete("/convertations/:id", deleteConvertation);
-router.get("/posts", getPots);
-router.get("/contacts", getContacts);
+router.post("/",  sendMessage);
+router.get("/convertations",  getConvertations);
+router.post("/convertations/:id",  newConvertation);
+router.delete("/convertations/:id",  deleteConvertation);
+router.get("/posts",  getPots);
+router.get("/contacts",  getContacts);
+router.get("/contactsBougth", getContactsbought);
 
 module.exports = router;

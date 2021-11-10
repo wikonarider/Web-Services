@@ -1,37 +1,34 @@
-import React, { useState } from "react";
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import Modal from "@mui/material/Modal";
-import SearchBar from "../SearchBar/SearchBar";
-import Cart from "../Cart/Cart";
-import SideBar from "../SideBar/SideBar";
-import UserMenu from "./UserMenu";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Fab from "@mui/material/Fab";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import ScrollTop from "./ScrollTop";
+import React, { useState } from 'react';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Modal from '@mui/material/Modal';
+import SearchBar from '../SearchBar/SearchBar';
+import Cart from '../Cart/Cart';
+import SideBar from '../SideBar/SideBar';
+import UserMenu from './UserMenu';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import IconButton from '@mui/material/IconButton';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ScrollTop from './ScrollTop';
 
 // MATERIAL UI
-import { Button, makeStyles } from "@material-ui/core";
-import { brown, lime } from "@mui/material/colors";
-import clsx from "clsx";
+import { Button, makeStyles } from '@material-ui/core';
+import { brown, lime } from '@mui/material/colors';
+import clsx from 'clsx';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import DarkMode from './DarkMode';
 
 const useStyles = makeStyles({
   default: {
     borderRadius: 0,
-    textTransfrom: "none",
-  },
-  primary: {
-    "&:hover": {
-      backgroundColor: lime[600],
-      color: brown[500],
-    },
+    textTransfrom: 'none',
   },
   secondary: {
     main: lime[600],
@@ -40,27 +37,25 @@ const useStyles = makeStyles({
 });
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   maxWidth: 600,
-  width: "70%",
-  bgcolor: "background.paper",
-  borderRadius: "10px",
+  width: '70%',
+  bgcolor: 'background.paper',
+  borderRadius: '10px',
   boxShadow: 24,
 };
 
-export default function Nav({ route }) {
+export default function Nav({ route, check, change }) {
   const [registerModal, setRegisterModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const cookie = useSelector((state) => state.cookie);
   const { userImg, name } = useSelector((state) => state.user);
+  const query = useMediaQuery('(max-width: 820px)');
 
   const classes = useStyles();
-
-  // Descomentar para ver las cookies en la consola del navegador
-  // console.log("Cookies: ", cookie);
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -73,44 +68,62 @@ export default function Nav({ route }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }} id="back-to-top-anchor">
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: "1201", backgroundColor: "#cfd8dc" }}
-      >
+    <Box sx={{ flexGrow: 1, width: '101%' }} id='back-to-top-anchor'>
+      <AppBar position='fixed' sx={{ zIndex: '1201' }}>
         <Toolbar
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "5px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 9fr 2fr',
+            gridTemplateRows: query && route === 'home' ? '80px 80px' : '',
           }}
         >
-          <Box mr="auto">
-            {route === "home" ? (
-              <SideBar />
+          <Box mr='auto' display='flex' alignItems='center'>
+            {route === 'home' ? (
+              <>
+                <SideBar />
+                <DarkMode />
+              </>
             ) : (
-              <IconButton color="inherit" component={Link} to="/home">
-                <HomeIcon />
-              </IconButton>
+              <>
+                <IconButton color='inherit' component={Link} to='/home'>
+                  <HomeIcon />
+                </IconButton>
+                <DarkMode />
+              </>
             )}
           </Box>
           <Box
             sx={
-              route === "home"
-                ? { width: "50%", ml: "auto", mr: "auto" }
-                : { display: "none" }
+              route === 'home'
+                ? {
+                    width: '100%',
+                    maxWidth: '920px',
+                    ml: 'auto',
+                    mr: 'auto',
+                    gridColumnStart: query ? '1' : '',
+                    gridColumnEnd: query ? '4' : '',
+                  }
+                : { display: 'none' }
             }
           >
-            {route === "home" ? <SearchBar /> : null}
+            {route === 'home' ? <SearchBar /> : null}
           </Box>
 
-          <Box display="flex" gap="5px">
+          <Box
+            display='flex'
+            gap='5px'
+            p='5px'
+            ml='auto'
+            sx={{
+              gridColumnStart: '3',
+              gridRowStart: '1',
+            }}
+          >
             {/* Register */}
-            {cookie || route === "checkout" ? null : (
+            {cookie || route === 'checkout' ? null : (
               <Button
-                variant="contained"
-                size="medium"
+                variant='contained'
+                size='medium'
                 className={clsx(classes.default, classes.primary)}
                 onClick={handleRegister}
               >
@@ -120,8 +133,8 @@ export default function Nav({ route }) {
             <Modal
               open={registerModal}
               onClose={handleRegister}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
                 <Register
@@ -131,10 +144,10 @@ export default function Nav({ route }) {
               </Box>
             </Modal>
 
-            {!cookie && route !== "checkout" ? (
+            {!cookie && route !== 'checkout' ? (
               <Button
-                variant="contained"
-                size="medium"
+                variant='contained'
+                size='medium'
                 className={clsx(classes.default, classes.primary)}
                 onClick={handleLogin}
               >
@@ -144,8 +157,8 @@ export default function Nav({ route }) {
             <Modal
               open={loginModal}
               onClose={handleLogin}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
                 <Login
@@ -155,7 +168,7 @@ export default function Nav({ route }) {
               </Box>
             </Modal>
 
-            {route === "checkout" ? null : <Cart />}
+            {route === 'checkout' ? null : <Cart route={route} />}
             {cookie ? (
               <UserMenu route={route} userImg={userImg} name={name} />
             ) : null}
@@ -163,7 +176,7 @@ export default function Nav({ route }) {
         </Toolbar>
       </AppBar>
       <ScrollTop>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab color='secondary' size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

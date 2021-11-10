@@ -13,7 +13,7 @@ import CheckoutBtn from '../CheckoutDetail/CheckoutBtn/CheckoutBtn';
 import { useDispatch } from 'react-redux';
 import { removeCart } from '../../redux/actions';
 
-function Cart() {
+function Cart({ route }) {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -51,21 +51,21 @@ function Cart() {
   return (
     <Box>
       <IconButton onClick={handleCart}>
-        <Badge color="secondary" badgeContent={cart ? cart.length : 0}>
+        <Badge color='secondary' badgeContent={cart ? cart.length : 0}>
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
       <Drawer
-        anchor="right"
+        anchor='right'
         open={openCart}
         onClose={handleCart}
         sx={{ opacity: 0.96 }}
       >
-        <CartList cart={cart} />
+        <CartList cart={cart} route={route} />
         <Divider sx={{ marginTop: 'auto', width: '370px' }} />
         <Typography
-          variant="h4"
-          component="div"
+          variant='h4'
+          component='div'
           gutterBottom
           sx={{ ml: 'auto', mr: 'auto' }}
         >

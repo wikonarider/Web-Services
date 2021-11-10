@@ -147,10 +147,11 @@ async function getServicesByUserId(req, res, next) {
 }
 //----------------------------------------------------------------------------------------------------------
 async function postServices(req, res, next) {
-  const { userId } = req.cookies;
+  const userId = req.user;
   const { title, img, description, price, categoryId, provinces, cities } =
     req.body;
   // si se pasaron todos los parametros
+  console.log(req.body);
   if (
     title &&
     img &&
@@ -240,18 +241,20 @@ async function getServicesById(req, res, next) {
       ],
     });
 
-    service = await addRating(service, service.id);
+    if (service) {
+      service = await addRating(service, service.id);
 
-    let user = await Users.findOne({
-      where: {
-        id: service.dataValues.userId,
-      },
-      attributes: ["id", "userImg", "username", "name", "lastname", "email"],
-    });
+      let user = await Users.findOne({
+        where: {
+          id: service.dataValues.userId,
+        },
+        attributes: ["id", "userImg", "username", "name", "lastname", "email"],
+      });
 
-    service
-      ? res.status(200).send({ service, user })
-      : res.status(404).send({ message: `Service (id: ${id}) not found` });
+      res.status(200).send({ service, user });
+    } else {
+      res.status(404).send({ message: `Service (id: ${id}) not found` });
+    }
   } catch (e) {
     next(e);
   }

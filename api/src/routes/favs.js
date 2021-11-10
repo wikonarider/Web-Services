@@ -1,15 +1,15 @@
 var express = require("express");
 var router = express.Router();
 var { addFavs, getFavs, deleteFav } = require("../controllers/fav");
-const { isAuthenticated } = require("../controllers/authentication");
+const { verifyToken } = require("../controllers/authentication");
 
 // post
-router.post("/", isAuthenticated, addFavs);
+router.post("/", verifyToken, addFavs);
 
 //get
-router.get("/", isAuthenticated, getFavs);
+router.get("/", verifyToken, getFavs);
 
 //delete
-router.delete("/", deleteFav);
+router.delete("/", verifyToken, deleteFav);
 
 module.exports = router;
