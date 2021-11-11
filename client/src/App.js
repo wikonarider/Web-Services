@@ -77,7 +77,7 @@ function App() {
 
           // Tenia cosas en localstorage
           if (cart) {
-            createOrder(cart)
+            createOrder(cart.map((s) => s.id))
               .then(() => dispatch(setStatusOrder(true)))
               .catch((e) => console.log(e.response.data.message));
 
