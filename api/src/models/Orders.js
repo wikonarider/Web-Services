@@ -9,5 +9,9 @@ module.exports = (sequelize) => {
     services: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
+    total: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
   });
 };

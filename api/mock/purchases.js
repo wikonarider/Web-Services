@@ -4,11 +4,18 @@ const purchases = [
     userId: '4e2191dc-36ad-11ec-8d3d-0242ac230003',
     status: 'success',
   },
+  // Mecozzi
   {
     services: [31, 70, 35],
     userId: 'be19f20c-36aa-11ec-8d3d-0242ac130003',
     status: 'success',
   },
+  {
+    services: [142, 131],
+    userId: 'be19f20c-36aa-11ec-8d3d-0242ac130003',
+    status: 'success',
+  },
+  // ------------------------
   {
     services: [142, 131, 132],
     userId: 'be19f554-36aa-11ec-8d3d-0242ac130003',

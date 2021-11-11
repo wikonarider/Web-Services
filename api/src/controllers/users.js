@@ -1,11 +1,11 @@
 const { Users, Service, Qualification, conn, Op, Orders } = require('../db');
 const {
-  validateUser,
   checkUnique,
+  validateUser,
   validateUserEdit,
-  validatePurchase,
   validateAdmin,
 } = require('../utils/validUser');
+const { allServicesBought } = require('../utils/validOrders');
 require('dotenv').config();
 const { ORIGIN } = process.env;
 
@@ -110,25 +110,18 @@ async function getUserInfo(req, res, next) {
           },
         },
         {
-          model: Service,
-          as: 'servicesBought',
-          attributes: ['id', 'title', 'img', 'price', 'userId', 'createdAt'],
-          through: {
-            attributes: [],
-          },
-          include: {
-            model: Qualification,
-            attributes: ['score'],
-          },
-        },
-        {
           model: Orders,
           attributes: { exclude: ['userId'] },
         },
       ],
     });
 
-    user ? res.json(user) : res.status(404).json({ message: 'User not found' });
+    const newUser = JSON.parse(JSON.stringify(user));
+    newUser.servicesBought = await allServicesBought(user.id);
+
+    user
+      ? res.json(newUser)
+      : res.status(404).json({ message: 'User not found' });
   } catch (e) {
     next(e);
   }
@@ -165,7 +158,8 @@ async function userBanned(req, res, next) {
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
 
-  const { servicesId, collection_status, status, username } = req.query;
+  const { servicesId, collection_status, status, username, orderId } =
+    req.query;
 
   console.log('serviceIdenPruchase', servicesId);
   console.log('collection_status', collection_status);
@@ -186,13 +180,14 @@ async function postPurchase(req, res, next) {
           username: username,
         },
       });
-      // console.log para ver los metodos disponibles
 
-      //console.log("USERenPurchase", user);
+      const order = await Orders.findByPk(orderId);
 
-      await user.addServicesBought(servicesId.split(','));
-
-      res.status(400).redirect(`${ORIGIN}/chat`);
+      if (order) {
+        order.status = 'success';
+        await order.save();
+      }
+      res.status(200).redirect(`${ORIGIN}/chat`);
     } else {
       res.status(400).redirect(`${ORIGIN}/home`);
     }

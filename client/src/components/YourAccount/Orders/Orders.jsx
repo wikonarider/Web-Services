@@ -1,5 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Share from "@mui/icons-material/Share";
@@ -8,7 +9,7 @@ import s from "./Orders.module.css";
 import { Link } from "react-router-dom";
 
 export default function Orders({ service }) {
-  const { title, img, price, id, rating, createdAt } = service;
+  const { title, img, price, id, rating, updatedAt } = service;
 
   const IMG_TEMPLATE =
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -20,6 +21,9 @@ export default function Orders({ service }) {
       alignItems="center"
       boxShadow={1}
       sx={{ borderRadius: 2 }}
+      component={Paper}
+      elevation={1}
+      gap={2}
     >
       <Box
         gridColumn={{ xs: "span 12", md: "span 2" }}
@@ -34,9 +38,9 @@ export default function Orders({ service }) {
         gridColumn={{ xs: "span 12", md: "span 6" }}
         component={Link}
         to={`/services/${id}`}
-        sx={{ textDecoration: "none", color: "black" }}
+        sx={{ textDecoration: "none" }}
       >
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6" color='primary' >{title}</Typography>
       </Box>
 
       <Box gridColumn={{ xs: "span 12", md: "span 1" }}>
@@ -49,9 +53,9 @@ export default function Orders({ service }) {
         />
       </Box>
 
-      <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
-        <Typography>{createdAt.split("T")[0]}</Typography>
-      </Box>
+      {/* <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
+        <Typography>{updatedAt.split("T")[0]}</Typography>
+      </Box> */}
 
       <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
         <IconButton aria-label="share">
