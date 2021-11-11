@@ -1,49 +1,57 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Share from "@mui/icons-material/Share";
-import Rating from "@mui/material/Rating";
-import s from "./Orders.module.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Share from '@mui/icons-material/Share';
+import Rating from '@mui/material/Rating';
+import s from './Orders.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Orders({ service }) {
   const { title, img, price, id, rating, updatedAt } = service;
 
   const IMG_TEMPLATE =
-    "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
+    'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
 
   return (
     <Box
+      marginTop="3rem"
       display="grid"
+      gap={3}
       gridTemplateColumns="repeat(12, 1fr)"
       alignItems="center"
       boxShadow={1}
-      sx={{ borderRadius: 2 }}
+      sx={{
+        borderRadius: 2,
+        margin: '1rem',
+        border: '1px solid #D5D0DA',
+      }}
       component={Paper}
       elevation={1}
       gap={2}
     >
       <Box
-        gridColumn={{ xs: "span 12", md: "span 2" }}
-        sx={{ width: 200, height: 100 }}
+        gridColumn={{ xs: 'span 12', md: 'span 2' }}
+        // sx={{ width: 200, height: 140 }}
         component={Link}
         to={`/services/${id}`}
       >
-        <img src={img ? img : IMG_TEMPLATE} alt='userImage' className={s.img} />
+        <img src={img ? img : IMG_TEMPLATE} alt="userImage" className={s.img} />
       </Box>
 
       <Box
-        gridColumn={{ xs: "span 12", md: "span 6" }}
+        gridColumn={{ xs: 'span 12', md: 'span 6' }}
         component={Link}
         to={`/services/${id}`}
-        sx={{ textDecoration: "none" }}
+        sx={{ textDecoration: 'none', color: 'inherit' }}
       >
-        <Typography variant="h6" color='primary' >{title}</Typography>
+        <Typography variant="h6" color="primary">
+          {title}
+        </Typography>
       </Box>
 
-      <Box gridColumn={{ xs: "span 12", md: "span 1" }}>
+      <Box gridColumn={{ xs: 'span 12', md: 'span 1' }}>
         <Rating
           name="read-only"
           value={Number(rating)}
@@ -53,17 +61,17 @@ export default function Orders({ service }) {
         />
       </Box>
 
-      {/* <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
-        <Typography>{updatedAt.split("T")[0]}</Typography>
+      {/* <Box gridColumn={{ xs: 'span 6', md: 'span 1' }}>
+        <Typography>{createdAt.split('T')[0]}</Typography>
       </Box> */}
 
-      <Box gridColumn={{ xs: "span 6", md: "span 1" }}>
+      <Box gridColumn={{ xs: 'span 6', md: 'span 1' }}>
         <IconButton aria-label="share">
           <Share />
         </IconButton>
       </Box>
 
-      <Box gridColumn={{ xs: "span 12", md: "span 1" }}>
+      <Box gridColumn={{ xs: 'span 12', md: 'span 1' }}>
         <Typography variant="h6">${price}</Typography>
       </Box>
     </Box>

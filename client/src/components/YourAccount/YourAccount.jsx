@@ -94,7 +94,12 @@ export default function YourAccount({
           (userData.servicesFavs.length > 0 ? (
             <Container>
               <div className={s.servicesShown}>
-                <Grid container justifyContent='flex-start' spacing={3}>
+                <Grid
+                  container
+                  justifyContent="flex-start"
+                  spacing={3}
+                  margin="0"
+                >
                   {userData.servicesFavs.map((s) => (
                     <Grid item key={s.id}>
                       <CardService service={s} />
@@ -168,7 +173,12 @@ export default function YourAccount({
           (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
             <div className={s.servicesShown}>
               <Container>
-                <Grid container justifyContent='flex-start' spacing={3}>
+                <Grid
+                  container
+                  justifyContent="flex-start"
+                  spacing={3}
+                  margin="0"
+                >
                   {userData.servicesOwn.map((s) => (
                     <Grid item key={s.id}>
                       <CardService service={s} />
