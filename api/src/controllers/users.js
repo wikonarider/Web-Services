@@ -192,7 +192,7 @@ async function postPurchase(req, res, next) {
 
       await user.addServicesBought(servicesId.split(','));
 
-      res.redirect(`${ORIGIN}/home`);
+      res.status(400).redirect(`${ORIGIN}/chat`);
     } else {
       res.status(400).redirect(`${ORIGIN}/home`);
     }
