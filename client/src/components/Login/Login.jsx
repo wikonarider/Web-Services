@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import s from "./Login.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { validateLogin } from "../../utils/registerValidations";
@@ -11,7 +10,7 @@ import axios from "axios";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import ForgotPasswordModal from "./ForgotPasswordModal";
-import  Typography  from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 
 function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const dispatch = useDispatch();
@@ -112,7 +111,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-        }}        
+        }}
       >
         <form onSubmit={handleSubmit}>
           <TextField
@@ -137,9 +136,8 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
             type="password"
             variant="outlined"
             onChange={handleChange}
-            sx={{marginTop:'2%'}}
+            sx={{ marginTop: "2%" }}
           />
-         
 
           <Button
             type="submit"
@@ -147,7 +145,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
             color="secondary"
             disabled={Object.keys(inputsErrors).length ? true : false}
             fullWidth={true}
-            sx={{marginTop:'2%'}}
+            sx={{ marginTop: "2%" }}
           >
             Sing in
           </Button>
@@ -157,11 +155,17 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
             color="primary"
             onClick={handleForgotPassword}
             underline="always"
-            size='small'
-            sx={{marginTop:'2%'}}
+            size="small"
+            sx={{ marginTop: "2%" }}
           >
             Forgot your password?
           </Button>
+
+          <ForgotPasswordModal
+            modal={modal}
+            setModal={setModal}
+            message={"Ingresa tu email para reestablecer tu contraseña"}
+          />
         </form>
       </Box>
 
