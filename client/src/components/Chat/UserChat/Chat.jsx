@@ -84,7 +84,7 @@ function Chat(props) {
     if (arrivalMessage.length) {
       if (currentContact.length) {
         currentContact[0].id === arrivalMessage[0].userId &&
-          setChating([...chating,...arrivalMessage]);
+          setChating([...chating, ...arrivalMessage]);
       }
     }
     // eslint-disable-next-line
@@ -130,7 +130,9 @@ function Chat(props) {
     var [contact] = contacts.filter((contacts) => {
       return contacts.id === idContact;
     });
-    setCurrentContact([contact]);
+    if (contact) {
+      setCurrentContact([contact]);
+    }
 
     conv.length > 0 && dispatch(getPots(conv[0]));
   }
@@ -198,7 +200,7 @@ function Chat(props) {
           ) : (
             <h3>Open a convertation to start a chat</h3>
           )}
-          {currentContact.length && (
+          {currentContact.length ? (
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
@@ -222,6 +224,8 @@ function Chat(props) {
                 </Button>
               </Box>
             </form>
+          ) : (
+            <></>
           )}
         </div>
         <Box name="contacts-online" sx={_style.box_contactsStates_c}>
