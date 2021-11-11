@@ -212,6 +212,13 @@ export function setCartStorage(cart) {
   };
 }
 
+export function setStatusOrder(status) {
+  return {
+    type: type.SET_STATUS_ORDER,
+    payload: status,
+  };
+}
+
 // obj global
 export function setObjGlobal(obj) {
   return {
@@ -232,8 +239,8 @@ export function getConvertations() {
 }
 
 //-------------------------------------------------------------------------------------------------------clear chat
-export function clearChatInfo(){
-       return{type:type.CLEAR}
+export function clearChatInfo() {
+  return { type: type.CLEAR };
 }
 //------------------------------------------------------------------------------------get contacts bougth
 export function getContactsBougth() {
