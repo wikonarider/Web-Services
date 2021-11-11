@@ -40,8 +40,8 @@ function Chat(props) {
   useEffect(() => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    socket.current.on("getMessage", (data) => {
-      console.log("new post");
+    socket.current.on("getMessage", function(dat) {
+      console.log("new post" , dat);
       if (!user) {
         console.log("1-!user");
         getUserInfo().then((userInfo) => dispatch(userInfo));
@@ -50,9 +50,9 @@ function Chat(props) {
       setArrivalMessage([
         ...arrivalMessage,
         {
-          userId: data.senderId,
-          remit: data.remit,
-          text: data.text,
+          userId: dat.senderId,
+          remit: dat.remit,
+          text: dat.text,
           createdAt: Date.now(),
         },
       ]);
