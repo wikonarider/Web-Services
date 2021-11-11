@@ -1,9 +1,7 @@
-
 .fullName {
   display: flex;
   justify-content: center;
 }
-
 
 .spinner {
   align-self: center;

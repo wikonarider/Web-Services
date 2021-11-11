@@ -36,11 +36,17 @@ export default function UserProfile({ id, username }) {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
+          xs={12}
         >
           <Grid
             item
             gridColumn="span 12"
-            sx={{ marginTop: '6%', marginRight: 'auto', marginLeft: '10%' }}
+            // sx={{ marginTop: '6%', marginRight: 'auto', marginLeft: '10%' }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            xs={12}
           >
             <YourAccount
               userProfile={true}
@@ -49,12 +55,11 @@ export default function UserProfile({ id, username }) {
             />
           </Grid>
           <Grid item gridColumn="span 12" sx={{ marginBottom: '5%' }}>
+            <h2>Published Services</h2>
             {profileServices &&
               (profileServices.length > 0 ? (
                 <div>
-                  <div className={s.publishedServices}>
-                    <p>Published Services</p>
-                  </div>
+                  <div className={s.publishedServices}></div>
                   <div>
                     <Container>
                       <Grid container justifyContent="center" spacing={3}>
