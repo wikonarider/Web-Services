@@ -32,6 +32,8 @@ async function allServicesBought(userId) {
       SELECT unnest(services)
       FROM orders 
       WHERE orders."userId" = '${userId}'  
+      AND
+      orders.status = 'success'
     )
     AS dt(c)
     `
