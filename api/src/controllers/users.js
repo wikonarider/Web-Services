@@ -1,11 +1,11 @@
 const { Users, Service, Qualification, conn, Op, Orders } = require('../db');
 const {
-  validateUser,
   checkUnique,
+  validateUser,
   validateUserEdit,
-  validatePurchase,
   validateAdmin,
 } = require('../utils/validUser');
+const { allServicesBought } = require('../utils/validOrders');
 require('dotenv').config();
 const { ORIGIN } = process.env;
 
@@ -110,25 +110,18 @@ async function getUserInfo(req, res, next) {
           },
         },
         {
-          model: Service,
-          as: 'servicesBought',
-          attributes: ['id', 'title', 'img', 'price', 'userId', 'createdAt'],
-          through: {
-            attributes: [],
-          },
-          include: {
-            model: Qualification,
-            attributes: ['score'],
-          },
-        },
-        {
           model: Orders,
           attributes: { exclude: ['userId'] },
         },
       ],
     });
 
-    user ? res.json(user) : res.status(404).json({ message: 'User not found' });
+    const newUser = JSON.parse(JSON.stringify(user));
+    newUser.servicesBought = await allServicesBought(user.id);
+
+    user
+      ? res.json(newUser)
+      : res.status(404).json({ message: 'User not found' });
   } catch (e) {
     next(e);
   }

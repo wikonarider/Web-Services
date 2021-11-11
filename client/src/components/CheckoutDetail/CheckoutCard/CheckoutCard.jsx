@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { removeCart } from '../../../redux/actions';
 import CheckoutPopOver from '../CheckoutPopOver/CheckoutPopOver';
+import { removeServiceOrder } from '../../../utils/orders';
 
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -21,9 +22,15 @@ export default function CheckoutCard({ title, img, price, id }) {
   });
 
   const dispatch = useDispatch();
+  const cookie = useSelector((state) => state.cookie);
 
   const handleOnClink = () => {
     dispatch(removeCart(id));
+    if (cookie) {
+      removeServiceOrder(id)
+        .then((data) => console.log(data))
+        .catch((e) => console.log(e.response.data.message));
+    }
   };
 
   return (
@@ -34,13 +41,13 @@ export default function CheckoutCard({ title, img, price, id }) {
         container
         spacing={2}
         sx={{ gap: 1 }}
-        direction="row"
-        alignItems="center"
-        justify="center"
+        direction='row'
+        alignItems='center'
+        justify='center'
       >
         <Grid item xs={12} md={3}>
           <ButtonBase sx={{ width: 128, height: 140 }}>
-            <Img alt="complex" src={img} />
+            <Img alt='complex' src={img} />
           </ButtonBase>
         </Grid>
         <Grid
@@ -48,31 +55,31 @@ export default function CheckoutCard({ title, img, price, id }) {
           xs={12}
           sm
           container
-          justifyContent="space-around"
-          alignItems="stretch"
+          justifyContent='space-around'
+          alignItems='stretch'
         >
           <Grid
             item
             xs
             container
-            direction="column"
+            direction='column'
             spacing={2}
-            alignItems="center"
-            justify="center"
+            alignItems='center'
+            justify='center'
           >
             <Grid item xs>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant='body2' color='text.secondary'>
                 ID: {id}
               </Typography>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant='h5' component='div'>
                 {title}
               </Typography>
             </Grid>
             <Grid item>
               <Button
-                color="secondary"
-                variant="text"
-                size="small"
+                color='secondary'
+                variant='text'
+                size='small'
                 endIcon={<DeleteOutlinedIcon />}
                 sx={{ textTransform: 'none' }}
                 onClick={handleOnClink}
@@ -82,7 +89,7 @@ export default function CheckoutCard({ title, img, price, id }) {
             </Grid>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1" component="span">
+            <Typography variant='subtitle1' component='span'>
               ${price}
             </Typography>
           </Grid>
