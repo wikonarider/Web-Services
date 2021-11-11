@@ -28,9 +28,9 @@ function Chat(props) {
   const { cookie, convertations, contacts, posts, user, id, contactsBougth } =
     props;
   const [msg, setMsg] = useState("");
-  const [currentContact, setCurrentContact] = useState(null);
+  const [currentContact, setCurrentContact] = useState([]);
   const [chating, setChating] = useState([]);
-  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [arrivalMessage, setArrivalMessage] = useState([]);
   const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
@@ -46,18 +46,21 @@ function Chat(props) {
         getUserInfo().then((userInfo) => dispatch(userInfo));
         return;
       }
-      setArrivalMessage({
-        userId: data.senderId,
-        remit: data.remit,
-        text: data.text,
-        createdAt: Date.now(),
-      });
+      setArrivalMessage([
+        ...arrivalMessage,
+        {
+          userId: data.senderId,
+          remit: data.remit,
+          text: data.text,
+          createdAt: Date.now(),
+        },
+      ]);
     });
 
     return () => {
       setChating([]);
-      setArrivalMessage(null);
-      setCurrentContact(null);
+      setArrivalMessage([]);
+      setCurrentContact([]);
       setMsg("");
       dispatch(clearChatInfo());
     };
@@ -78,9 +81,11 @@ function Chat(props) {
   //-----------------------------------------------------------------------------new msg receive
 
   useEffect(() => {
-    if (currentContact) {
-      currentContact.id === arrivalMessage.userId &&
-        setChating([...chating, arrivalMessage]);
+    if (arrivalMessage.length) {
+      if (currentContact.length) {
+        currentContact[0].id === arrivalMessage[0].userId &&
+          setChating([...chating,...arrivalMessage]);
+      }
     }
     // eslint-disable-next-line
   }, [arrivalMessage]);
@@ -99,17 +104,13 @@ function Chat(props) {
   //-------------------------------------------------------------------------------------------------
   function convertationsAndContacts() {
     if (user && convertations.length && !contacts.length) {
-      console.log("2-user&&conv.len");
       dispatch(getContacts());
     }
-
     if (user && !convertations.length) {
-      console.log("entre a user solo");
       dispatch(getConvertations());
       dispatch(getContactsBougth());
     }
-    if (user&&id) {
-      console.log("entre a user+id");
+    if (user && id && !convertations.length) {
       chatContact(id);
     }
   }
@@ -129,7 +130,7 @@ function Chat(props) {
     var [contact] = contacts.filter((contacts) => {
       return contacts.id === idContact;
     });
-    setCurrentContact(contact);
+    setCurrentContact([contact]);
 
     conv.length > 0 && dispatch(getPots(conv[0]));
   }
@@ -139,7 +140,7 @@ function Chat(props) {
     if (user && currentContact) {
       socket.current.emit("sendMsn", {
         senderId: user.id,
-        receiverId: currentContact.id,
+        receiverId: currentContact[0].id,
         text: msg,
       });
 
@@ -147,12 +148,12 @@ function Chat(props) {
         ...prev,
         {
           userId: user.id,
-          remit: currentContact.id,
+          remit: currentContact[0].id,
           text: msg,
           createdAt: Date.now(),
         },
       ]);
-      dispatch(sendMessage({ remit: currentContact.id, message: msg }));
+      dispatch(sendMessage({ remit: currentContact[0].id, message: msg }));
       setMsg("");
     }
   }
@@ -181,14 +182,14 @@ function Chat(props) {
           {chating.length ? (
             <div name="conversations" style={_style.box_conversations_b}>
               <Box name="message" sx={_style.menu_chating_wrapper}>
-                {convertations &&
-                  currentContact &&
+                {convertations.length &&
+                  currentContact.length &&
                   chating.map((msn, i) => (
                     <Message
                       scrollRef={scrollRef}
                       key={i}
                       user={user}
-                      contact={currentContact}
+                      contact={currentContact[0]}
                       message={msn}
                     />
                   ))}
@@ -197,7 +198,7 @@ function Chat(props) {
           ) : (
             <h3>Open a convertation to start a chat</h3>
           )}
-          {currentContact && (
+          {currentContact.length && (
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
@@ -228,6 +229,7 @@ function Chat(props) {
             name="menu-contactsOnline-wrapper"
             sx={_style.menu_contactsOnline_wrapper}
           >
+            contacts bougth
             {contactsBougth.length &&
               contactsBougth.map((con) => (
                 <Box
