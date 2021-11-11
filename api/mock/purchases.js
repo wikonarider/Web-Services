@@ -1,182 +1,83 @@
 const purchases = [
   {
-    serviceId: 26,
-    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    services: [126, 91, 26],
+    userId: '4e2191dc-36ad-11ec-8d3d-0242ac230003',
+    status: 'success',
   },
   {
-    serviceId: 26,
-    userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
+    services: [31, 70, 35],
+    userId: 'be19f20c-36aa-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 26,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
+    services: [142, 131, 132],
+    userId: 'be19f554-36aa-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 25,
-    userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
+    services: [63, 24, 156],
+    userId: 'be19f6da-36aa-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 25,
-    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    services: [156, 113, 153],
+    userId: 'be19f8e2-36aa-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 25,
-    userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
+    services: [42, 154, 44],
+    userId: '4e218642-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 27,
-    userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
+    services: [12, 72, 158],
+    userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 27,
-    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    services: [97, 38, 130],
+    userId: '4e218b24-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 27,
-    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
+    services: [134, 108, 137],
+    userId: '4e218c00-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 2,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    services: [97, 11, 170],
+    userId: '4e218d5e-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 2,
-    userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
+    services: [57, 16, 13],
+    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 2,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+    services: [134, 95, 105],
+    userId: '4e218f98-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 11,
-    userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
+    services: [164, 60, 29],
+    userId: '4e219056-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
   {
-    serviceId: 11,
-    userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
-  },
-
-  {
-    serviceId: 20,
-    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    services: [149, 40, 77],
+    userId: '4e2191dc-36ad-11ec-8d3d-0242ac230003',
+    status: 'success',
   },
   {
-    serviceId: 20,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    services: [46, 178, 160],
+    userId: '4e21929a-36ad-11ec-8d3d-0242ac170003',
+    status: 'success',
   },
   {
-    serviceId: 20,
-    userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 2,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 3,
-    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
-  },
-  {
-    serviceId: 3,
-    userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 4,
-    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 4,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 5,
-    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
-  },
-  {
-    serviceId: 5,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 15,
-    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 15,
-    userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 6,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 7,
-    userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 8,
-    userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 8,
-    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
-  },
-  {
-    serviceId: 9,
-    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 10,
-    userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 12,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 13,
-    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 13,
-    userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 14,
-    userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
-  },
-  {
-    serviceId: 14,
-    userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
-  },
-
-  {
-    serviceId: 25,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 117,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-
-  {
-    serviceId: 118,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 119,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 120,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 121,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
-  },
-  {
-    serviceId: 122,
-    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+    services: [82, 151, 21],
+    userId: '4e219448-36ad-11ec-8d3d-0242ac130003',
+    status: 'success',
   },
 ];
 
