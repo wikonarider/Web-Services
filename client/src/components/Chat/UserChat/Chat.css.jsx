@@ -1,17 +1,22 @@
+import { blueGrey, brown, amber } from "@material-ui/core/colors";
 
-const backGround = "#1e88e5";
+const backGround = blueGrey[50];
 
 const _style = {
   ////box wrapper chat////////////////////////////////////
   box_messanger_father: {
     display: "flex",
     maxHeight: "935px",
-    minHeight:"935px",
+    minHeight: "935px",
     overflow: "hidden",
+    backgroundColor: "whitesmoke",
+    color: brown[600],
   },
   //---------------------------------------------------------------------box contacts
   box_contacts_a: {
     flex: "2.0",
+    backgroundColor: amber[800],
+    color: brown[600],
   },
   //box-contacts-menu
   menu_contacts_wrapper: {
@@ -31,12 +36,13 @@ const _style = {
     flex: "5.5",
     height: "90%",
     overflowY: "scroll",
-    scrollBehavior : "smooth"
+    scrollBehavior: "smooth",
   },
   //box conversatios wrapper
   menu_chating_wrapper: {
     height: "100%",
     padding: "1%",
+    color: brown[300],
   },
 
   //----------------------------------------------------------------box contacts online-offline
@@ -48,7 +54,7 @@ const _style = {
   menu_contactsOnline_wrapper: {
     padding: "1%",
     height: "100%",
-    background: backGround,
+    backgroundColor: backGround,
   },
 };
 

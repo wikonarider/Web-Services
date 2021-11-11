@@ -2,7 +2,7 @@ import { Avatar, Box } from "@material-ui/core";
 import React from "react";
 export default function Message({ user, contact, message, scrollRef }) {
   var boxMSN = {
-    background: message.userId === user.id ? "#1e7ee5" : "#1eeee5",
+    background: message.userId === user.id ? "#FF8F77" : "#FFDA77 ",
     borderRadius: "0.3em",
     marginTop: "1.5%",
     minHeigth: "50%",

@@ -3,9 +3,11 @@ import s from "./Register.module.css";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { validateInput, registerUser } from "../../utils/registerValidations";
 import ModalRegister from "./ModalRegister";
 import { GoogleLogin } from "react-google-login";
+import { Typography } from "@mui/material";
 
 function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   const [start, setStart] = useState(true);
@@ -88,8 +90,14 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   };
 
   return (
-    <div className={s.modal}>
-      <div className={s.container}>
+    <Box sx={{ marginTop: "5%", marginBottom: "4%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <form className={s.form} onSubmit={handleSubmit}>
           <TextField
             required
@@ -155,49 +163,61 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             type="submit"
             variant="contained"
             color="secondary"
-            sx={{ marginTop: "2%" }}
+            sx={{ marginTop: "2%"}}
+            fullWidth={true}
           >
             Register
           </Button>
         </form>
-        <ModalRegister
-          modal={modal}
-          setModal={setRegisterModal}
-          message={"Successful registration"}
-        />
-        <Divider
-          sx={{
-            width: "100%",
-            border: "1px solid rgba(0,0,0,.1)",
-            borderRadius: 12,
-            marginBottom: "2%",
-          }}
-        />
-      </div>
-      <div>
-        <div className={s.new}>
-          <p>Already have an account?</p>
+      </Box>
 
-          <Button
-            variant="outlined"
-            color="secondary"
-            disableElevation
-            size="small"
-            sx={{ marginRight: "4%" }}
-            onClick={HandleSingIn}
-          >
-            SING IN
-          </Button>
-          <GoogleLogin
-            clientId="316128007785-fif02sojlsoinu9s5eugus3qaagiclid.apps.googleusercontent.com"
-            buttonText="Fill fields with Google"
-            onSuccess={handleLogin}
-            onFailure={inputsErrors.google}
-            helperText={inputsErrors.google}
-          />
-        </div>
-      </div>
-    </div>
+      <ModalRegister
+        modal={modal}
+        setModal={setRegisterModal}
+        message={"Successful registration"}
+      />
+      <Divider
+        sx={{
+          width: "80%",
+          marginLeft: "10%",
+          border: "1px solid rgba(0,0,0,.1)",
+          marginBottom: "3%",
+        }}
+      />
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
+        gap={{ xs: 1, md: 2 }}
+      >
+        <Typography variant="body2" color="primary">
+          Already have an account?
+        </Typography>
+
+        <Button
+          variant="outlined"
+          color="secondary"
+          disableElevation
+          size="small"
+          onClick={HandleSingIn}
+        >
+          SING IN
+        </Button>
+
+        <GoogleLogin
+          clientId="316128007785-fif02sojlsoinu9s5eugus3qaagiclid.apps.googleusercontent.com"
+          buttonText="Fill fields with Google"
+          onSuccess={handleLogin}
+          onFailure={inputsErrors.google}
+          helperText={inputsErrors.google}
+        />
+      </Box>
+    </Box>
   );
 }
 

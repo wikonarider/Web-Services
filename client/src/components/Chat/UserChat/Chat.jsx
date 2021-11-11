@@ -5,7 +5,7 @@ import Conversations from "../Conversations/conversations.jsx";
 import { Box } from "@mui/system";
 import SendIcon from "@mui/icons-material/Send";
 import _style from "./Chat.css.jsx";
-import { Button, Input } from "@material-ui/core";
+import { Button, Input, makeStyles } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import { connect, useDispatch} from "react-redux";
 import dotenv from "dotenv";
@@ -22,8 +22,20 @@ import {
   sendMessage,
   deleteConvertation,
 } from "../../../redux/actions";
+
+// Material UI for SEND BTN
+import { brown } from "@material-ui/core/colors";
 dotenv.config();
 require("./Chat.css");
+
+// Material UI for SEND BTN
+const useStyles = makeStyles({
+  btn: {
+    borderRadius: 0,
+    textTransfrom: "none",
+    color: brown[500],
+  },
+});
 
 function Chat(props) {
   var { cookie, convertations, contacts, posts, user, id, contactsBougth } =
@@ -37,20 +49,20 @@ function Chat(props) {
   //const history=useHistory();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-
+  // Material UI for SEND BTN
+  const classes = useStyles();
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    socket.current.on("getMessage", function(dat) {
-      console.log("new post" , dat);
-      if (!user) {
-        console.log("1-!user");
-        getUserInfo().then((userInfo) => dispatch(userInfo));
-        return;
-      }
+    if (!user) {
+      getUserInfo().then((userInfo) => dispatch(userInfo));
+      return;
+    }
+    socket.current.on("getMessage", function (dat) {
+      //new msn from back server.io
+      console.log("new post", dat);
       setArrivalMessage([
-        ...arrivalMessage,
         {
           userId: dat.senderId,
           remit: dat.remit,
@@ -59,24 +71,15 @@ function Chat(props) {
         },
       ]);
     });
-
     return () => {
       setChating([]);
       setArrivalMessage([]);
       setCurrentContact([]);
       setMsg("");
       dispatch(clearChatInfo());
-     // history.push("/home")
-
+      // history.push("/home")
     };
   }, []);
-  //----------------------------------------------------------add user socket
-  useEffect(() => {
-    if (user) {
-      socket.current.emit("addUser", user.id);
-    }
-    // eslint-disable-next-line
-  }, [user]);
   //----------------------------------------------------------------scroll
   useEffect(() => {
     if (scrollRef.current) {
@@ -86,39 +89,37 @@ function Chat(props) {
   //-----------------------------------------------------------------------------new msg receive
 
   useEffect(() => {
-    if (arrivalMessage.length) {
-      if (currentContact.length) {
-        currentContact[0].id === arrivalMessage[0].userId &&
-          setChating([...chating, ...arrivalMessage]);
-      }
+    console.log("arrival ", arrivalMessage);
+
+    if (arrivalMessage.length && currentContact.length) {
+      currentContact[0].id === arrivalMessage[0].userId &&
+        setChating([...chating, ...arrivalMessage]);
     }
+
     // eslint-disable-next-line
   }, [arrivalMessage]);
-
-  //----------------------------------------------------------------------------------chat with a user in online
-  useEffect(() => {
-    setChating(posts);
-  }, [posts]);
   //---------------------------------------------------------------------------get id all convertations and contacts
   useEffect(() => {
     convertationsAndContacts();
     // eslint-disable-next-line
-  }, [convertations, contacts]);
+  }, [convertations, contacts, posts, user]);
   //-------------------------------------------------------------------------------------------------convertation of contacts
   function convertationsAndContacts() {
     if (user && convertations.length && !contacts.length) {
-      console.log(1);
       dispatch(getContacts());
     }
     if (user && !convertations.length) {
-      console.log(2);
       dispatch(getConvertations());
-      dispatch(getContactsBougth());
+      //dispatch(getContactsBougth());
     }
     if (contacts.length && !contactsConv.length) {
-      console.log(4);
       setContactCov(contacts);
     }
+
+    if (user) {
+      socket.current.emit("addUser", user.id);
+    }
+    setChating(posts);
   }
   //-------------------------------------------------------------------------------------------------------------new convertations
   function newConvertationbougth(newContact) {
@@ -199,7 +200,11 @@ function Chat(props) {
         {/*  <Nav /> */}
         <Box name="contacts" sx={_style.box_contacts_a}>
           <Box name="menu-contacts-wrapper" sx={_style.menu_contacts_wrapper}>
-            <Input name="inputSearch"></Input>
+            <Input
+              type="text"
+              name="inputSearch"
+              placeholder="search contact!"
+            ></Input>
             {contactsConv.length &&
               contactsConv.map((con) => (
                 <Box key={con.id}>
@@ -208,16 +213,15 @@ function Chat(props) {
                       chatContact(con.id);
                     }}
                   >
+                    <Button
+                      onClick={() => {
+                        deleteConvert(con);
+                      }}
+                    >
+                      X
+                    </Button>
                     <Conversations key={con.id} contacts={con} />
                   </Box>
-
-                  <Button
-                    onClick={() => {
-                      deleteConvert(con);
-                    }}
-                  >
-                    X
-                  </Button>
                 </Box>
               ))}
           </Box>
@@ -239,7 +243,7 @@ function Chat(props) {
               </Box>
             </div>
           ) : (
-            <h3>Open a convertation to start a chat</h3>
+            <h3>Click a contact to start a chat</h3>
           )}
 
           {currentContact.length ? (
@@ -260,9 +264,11 @@ function Chat(props) {
                 <Button
                   variant="contained"
                   type="submit"
+                  size="small"
+                  className={classes.btn}
                   endIcon={<SendIcon />}
                 >
-                  ENVIAR
+                  send
                 </Button>
               </Box>
             </form>
