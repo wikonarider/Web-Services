@@ -17,6 +17,7 @@ import {
   getConvertations,
   getPots,
   getUserInfo,
+  newConvertation,
   // newConvertation,
   sendMessage,
 } from "../../../redux/actions";
@@ -25,11 +26,12 @@ dotenv.config();
 require("./Chat.css");
 
 function Chat(props) {
-  const { cookie, convertations, contacts, posts, user, id, contactsBougth } =
+  var { cookie, convertations, contacts, posts, user, id, contactsBougth } =
     props;
   const [msg, setMsg] = useState("");
   const [currentContact, setCurrentContact] = useState([]);
-  const [chating, setChating] = useState([]);
+  const [chating, setChating] = useState(null);
+  const [contactsConv, setContactCov] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const dispatch = useDispatch();
   var scrollRef = useRef();
@@ -92,31 +94,55 @@ function Chat(props) {
 
   //----------------------------------------------------------------------------------chat with a user in online
   useEffect(() => {
-    if (posts) {
-      setChating(posts);
-    }
+    setChating(posts);
   }, [posts]);
   //---------------------------------------------------------------------------get id all convertations and contacts
   useEffect(() => {
     convertationsAndContacts();
     // eslint-disable-next-line
-  }, [convertations]);
-  //-------------------------------------------------------------------------------------------------
+  }, [convertations, contacts]);
+  //-------------------------------------------------------------------------------------------------convertation of contacts
   function convertationsAndContacts() {
     if (user && convertations.length && !contacts.length) {
+      console.log(1);
       dispatch(getContacts());
     }
     if (user && !convertations.length) {
+      console.log(2);
       dispatch(getConvertations());
       dispatch(getContactsBougth());
     }
-    if (user && id && !convertations.length) {
-      chatContact(id);
+    if (contacts.length && !contactsConv.length) {
+      console.log(4);
+      setContactCov(contacts);
     }
   }
-
+  //-------------------------------------------------------------------------------------------------------------new convertations
+  function newConvertationbougth(newContact) {
+    console.log(newContact);
+    var contatsInclude = contactsConv.filter(
+      (cont) => cont.id === newContact.id
+    );
+    dispatch(clearChatInfo());
+    setCurrentContact(newContact);
+    if (!contatsInclude.length) {
+      setContactCov([...contactsConv, newContact]);
+      dispatch(newConvertation(newContact.id));
+      chatContact(newContact.id);
+    }
+  }
+  //-------------------------------------------------------------------------------------------------------------delete convertations
+  function deleteConvertation(contact) {
+    chatContact(contact.id, true);
+    setContactCov(
+      contactsConv.filter((cont) => {
+        return cont.id !== contact.id;
+      })
+    );
+  }
   //--------------------------------------------------------------------------------------------conversation of a contact
-  function chatContact(idContact) {
+  function chatContact(idContact, _delete) {
+    //chat BD
     var conv = [];
     for (let i = 0; i < convertations.length; i++) {
       var { userA, userB } = convertations[i];
@@ -127,14 +153,17 @@ function Chat(props) {
         conv.push(convertations[i].id);
       }
     }
-    var [contact] = contacts.filter((contacts) => {
-      return contacts.id === idContact;
+    var conta = contactsConv.filter((c) => {
+      return c.id === idContact;
     });
-    if (contact) {
-      setCurrentContact([contact]);
+    if (conta.length) {
+      setCurrentContact([conta[0]]);
     }
-
-    conv.length > 0 && dispatch(getPots(conv[0]));
+    if (conv.length > 0) {
+      _delete && dispatch(deleteConvertation(conv[0]));
+      !_delete && dispatch(getPots(conv[0]));
+      return;
+    }
   }
   //------------------------------------------------------------------------------------------send msn
   function handleSubmit(e) {
@@ -167,39 +196,39 @@ function Chat(props) {
         <Box name="contacts" sx={_style.box_contacts_a}>
           <Box name="menu-contacts-wrapper" sx={_style.menu_contacts_wrapper}>
             <Input name="inputSearch"></Input>
-            {contacts.map((con) => (
-              <Box
-                key={con.email}
-                onClick={() => {
-                  chatContact(con.id);
-                }}
-              >
-                <Conversations key={con.email} contacts={con} />
-              </Box>
-            ))}
+            {contactsConv.length &&
+              contactsConv.map((con) => (
+                <Box
+                  key={con.id}
+                  onClick={() => {
+                    chatContact(con.id);
+                  }}
+                >
+                  <Conversations key={con.id} contacts={con} />
+                </Box>
+              ))}
           </Box>
         </Box>
 
         <div style={{ flex: "5.5" }}>
-          {chating.length ? (
+          {chating && currentContact.length ? (
             <div name="conversations" style={_style.box_conversations_b}>
               <Box name="message" sx={_style.menu_chating_wrapper}>
-                {convertations.length &&
-                  currentContact.length &&
-                  chating.map((msn, i) => (
-                    <Message
-                      scrollRef={scrollRef}
-                      key={i}
-                      user={user}
-                      contact={currentContact[0]}
-                      message={msn}
-                    />
-                  ))}
+                {chating.map((msn, i) => (
+                  <Message
+                    scrollRef={scrollRef}
+                    key={i}
+                    user={user}
+                    contact={currentContact[0]}
+                    message={msn}
+                  />
+                ))}
               </Box>
             </div>
           ) : (
             <h3>Open a convertation to start a chat</h3>
           )}
+
           {currentContact.length ? (
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
@@ -235,14 +264,14 @@ function Chat(props) {
           >
             contacts bougth
             {contactsBougth.length &&
-              contactsBougth.map((con) => (
+              contactsBougth.map((contac) => (
                 <Box
-                  key={con.id}
+                  key={contac.id}
                   onClick={() => {
-                    chatContact(con.id);
+                    newConvertationbougth(contac);
                   }}
                 >
-                  <Conversations key={con.id} contacts={con} />
+                  <Conversations key={contac.id} contacts={contac} />
                 </Box>
               ))}
           </Box>

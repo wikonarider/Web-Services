@@ -237,7 +237,6 @@ function sendMessage(req, res, next) {
 //---------------------------------------------------------------------------------get contact convertation
 function getContacts(req, res, next) {
   const userId = req.user;
-  console.log("token>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", userId);
   if (userId) {
     Convertations.findAll({
       where: { [Op.or]: [{ userA: userId }, { userB: userId }] },
