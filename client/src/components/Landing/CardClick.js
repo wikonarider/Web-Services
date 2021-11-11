@@ -1,9 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+// import Collapse from "@mui/material/Collapse";
 
 const useStyles = makeStyles({
   root: {
@@ -12,7 +14,7 @@ const useStyles = makeStyles({
     margin: "20px",
   },
   media: {
-    width: 421,
+    width: 440,
     height: 390,
   },
   title: {
@@ -26,6 +28,7 @@ const useStyles = makeStyles({
 export default function CardClick({ infoCardClick, checked }) {
   const classes = useStyles();
   return (
+    //    <Collapse in={checked} {...(checked ? { timeout: 2500 } : {})}>
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
@@ -43,5 +46,6 @@ export default function CardClick({ infoCardClick, checked }) {
         </Typography>
       </CardContent>
     </Card>
+    //    </Collapse>
   );
 }
