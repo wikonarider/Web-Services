@@ -139,7 +139,7 @@ export default function SingleComment({ qualification, cookie }) {
             name="rating"
             value={edit.score || updated.score || score}
             readOnly={edit.id ? false : true}
-            precision={0.5}
+            precision={1}
             sx={{ ml: "auto" }}
             onChange={(e) => handleEdit(e, "score")}
           />
