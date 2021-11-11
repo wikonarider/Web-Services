@@ -158,7 +158,8 @@ async function userBanned(req, res, next) {
 async function postPurchase(req, res, next) {
   //necesitamos estos datos para asociar el servicio comprado a la categoría
 
-  const { servicesId, collection_status, status, username } = req.query;
+  const { servicesId, collection_status, status, username, orderId } =
+    req.query;
 
   console.log('serviceIdenPruchase', servicesId);
   console.log('collection_status', collection_status);
@@ -179,13 +180,14 @@ async function postPurchase(req, res, next) {
           username: username,
         },
       });
-      // console.log para ver los metodos disponibles
 
-      //console.log("USERenPurchase", user);
+      const order = await Orders.findByPk(orderId);
 
-      await user.addServicesBought(servicesId.split(','));
-
-      res.status(400).redirect(`${ORIGIN}/chat`);
+      if (order) {
+        order.status = 'success';
+        await order.save();
+      }
+      res.status(200).redirect(`${ORIGIN}/chat`);
     } else {
       res.status(400).redirect(`${ORIGIN}/home`);
     }
