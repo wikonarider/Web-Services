@@ -22,6 +22,7 @@ export default function SingleComment({ qualification, cookie }) {
     "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
   const handleEdit = (event, type) => {
+    let value = event.target.value;
     switch (type) {
       case "edit":
         setEdit({
@@ -50,13 +51,14 @@ export default function SingleComment({ qualification, cookie }) {
         return;
       case "score":
         setEdit((edit) => {
-          return { ...edit, score: Number(event.target.value) };
+          return { ...edit, score: Number(value) };
         });
         return;
       case "comment":
         setEdit((edit) => {
-          return { ...edit, comment: event.target.value };
+          return { ...edit, comment: value };
         });
+
       default:
         return;
     }
@@ -118,6 +120,7 @@ export default function SingleComment({ qualification, cookie }) {
                   aria-label="edit comment"
                   sx={{ m: "0px", p: "0px" }}
                   onClick={(e) => handleEdit(e, "save")}
+                  disabled={edit.comment.length === 0 ? true : false}
                 >
                   <SaveIcon />
                 </IconButton>
@@ -147,12 +150,16 @@ export default function SingleComment({ qualification, cookie }) {
             <TextField
               id={`edit-comment-${id}`}
               label="Edit comment"
+              error={edit.comment.length === 0 ? true : false}
               fullWidth
               multiline
               maxRows={4}
               value={edit.comment}
               onChange={(e) => handleEdit(e, "comment")}
               sx={{ mt: "10px" }}
+              helperText={
+                edit.comment.length === 0 ? "Comment cannot be empty" : null
+              }
             />
           ) : (
             <>
