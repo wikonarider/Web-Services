@@ -100,19 +100,31 @@ function getContactsbought(req, res, next) {
     })
       .then((service) => {
         var { servicesBought } = service;
-        return servicesBought.map((serv) => {
-          const { id } = serv.dataValues;
-          return Service.findOne({
-            where: {
-              id: id,
-            },
-            attributes: [],
-            include: {
-              model: Users,
-              attributes: ["userImg", "username", "name", "lastname", "id"],
-            },
+        if (servicesBought.length) {
+          return servicesBought.map((serv) => {
+            const { id } = serv.dataValues;
+            return Service.findOne({
+              where: {
+                id: id,
+              },
+              attributes: [],
+              include: {
+                model: Users,
+                attributes: [
+                  "userImg",
+                  "username",
+                  "name",
+                  "lastname",
+                  "id",
+                  "email",
+                  "name",
+                ],
+              },
+            });
           });
-        });
+        } else {
+          return new Error("Not bought")
+        }
       })
       .then((contactsBought) => {
         return Promise.all(contactsBought);

@@ -18,10 +18,9 @@ import {
   getPots,
   getUserInfo,
   newConvertation,
-  // newConvertation,
   sendMessage,
+  deleteConvertation,
 } from "../../../redux/actions";
-import Nav from "../../Nav/Nav.jsx";
 dotenv.config();
 require("./Chat.css");
 
@@ -119,7 +118,6 @@ function Chat(props) {
   }
   //-------------------------------------------------------------------------------------------------------------new convertations
   function newConvertationbougth(newContact) {
-    console.log(newContact);
     var contatsInclude = contactsConv.filter(
       (cont) => cont.id === newContact.id
     );
@@ -132,8 +130,10 @@ function Chat(props) {
     }
   }
   //-------------------------------------------------------------------------------------------------------------delete convertations
-  function deleteConvertation(contact) {
+  function deleteConvert(contact) {
+    setChating(null);
     chatContact(contact.id, true);
+    setCurrentContact([]);
     setContactCov(
       contactsConv.filter((cont) => {
         return cont.id !== contact.id;
@@ -198,13 +198,22 @@ function Chat(props) {
             <Input name="inputSearch"></Input>
             {contactsConv.length &&
               contactsConv.map((con) => (
-                <Box
-                  key={con.id}
-                  onClick={() => {
-                    chatContact(con.id);
-                  }}
-                >
-                  <Conversations key={con.id} contacts={con} />
+                <Box key={con.id}>
+                  <Box
+                    onClick={() => {
+                      chatContact(con.id);
+                    }}
+                  >
+                    <Conversations key={con.id} contacts={con} />
+                  </Box>
+
+                  <Button
+                    onClick={() => {
+                      deleteConvert(con);
+                    }}
+                  >
+                    X
+                  </Button>
                 </Box>
               ))}
           </Box>
