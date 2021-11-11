@@ -78,7 +78,7 @@ function App() {
 
         <Route
           exact
-          path='/chat/:id'
+          path='/chat'
           render={({ match }) => <Chat id={match.params.id} />}
         />
 
