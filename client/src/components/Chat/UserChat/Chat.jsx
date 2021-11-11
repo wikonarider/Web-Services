@@ -1,12 +1,13 @@
 import { io } from "socket.io-client";
 import React, { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Conversations from "../Conversations/conversations.jsx";
 import { Box } from "@mui/system";
 import SendIcon from "@mui/icons-material/Send";
 import _style from "./Chat.css.jsx";
 import { Button, Input } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch} from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 
@@ -33,6 +34,7 @@ function Chat(props) {
   const [contactsConv, setContactCov] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState([]);
   const dispatch = useDispatch();
+  //const history=useHistory();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
 
@@ -64,6 +66,8 @@ function Chat(props) {
       setCurrentContact([]);
       setMsg("");
       dispatch(clearChatInfo());
+     // history.push("/home")
+
     };
   }, []);
   //----------------------------------------------------------add user socket
