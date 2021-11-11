@@ -10,6 +10,7 @@ import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 function Login({ setLogin, setLoginModal, setRegisterModal }) {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     password: '',
   });
   const [inputsErrors, setInputErrors] = useState({});
+  const [modal, setModal] = useState(false)
 
   const handleChange = (e) => {
     if (start) {
@@ -98,6 +100,10 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
     setLoginModal((prev) => !prev);
   };
 
+  function handleForgotPassword(){
+    setModal(true)
+  }
+
   return (
     <Box
       sx={{
@@ -129,6 +135,18 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           onChange={handleChange}
           sx={{ marginTop: '4%', marginBottom: '4%' }}
         />
+          <Button
+          type="submit"
+          // variant="contained"
+          color="secondary"
+          // fullWidth={true}
+          onClick={handleForgotPassword}
+          underline="always"
+          sx={{ marginBottom: '4%' }}
+        >
+          Forgot your password?
+        </Button>
+
         <Button
           type="submit"
           variant="contained"
@@ -171,6 +189,11 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           helperText={inputsErrors.google}
         />
       </div>
+      <ForgotPasswordModal
+          modal={modal}
+          setModal={setModal}
+          message={"Ingresa tu email para reestablecer tu contraseña"}
+        />
     </Box>
   );
 }

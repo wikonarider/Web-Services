@@ -334,3 +334,15 @@ export const putDark = (mode) => {
     payload: mode,
   };
 };
+
+export function forgotPassword(body) {
+  console.log('body=>>> ', body);
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`/forgotPassword`, body);
+      return dispatch({ type: type.FORGOT_PASSWORD, payload: response.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
