@@ -55,15 +55,14 @@ function Chat(props) {
   useEffect(() => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    socket.current.on("getMessage", function(dat) {
-      console.log("new post" , dat);
-      if (!user) {
-        console.log("1-!user");
-        getUserInfo().then((userInfo) => dispatch(userInfo));
-        return;
-      }
+    if (!user) {
+      getUserInfo().then((userInfo) => dispatch(userInfo));
+      return;
+    }
+    socket.current.on("getMessage", function (dat) {
+      //new msn from back server.io
+      console.log("new post", dat);
       setArrivalMessage([
-        ...arrivalMessage,
         {
           userId: dat.senderId,
           remit: dat.remit,
@@ -72,24 +71,15 @@ function Chat(props) {
         },
       ]);
     });
-
     return () => {
       setChating([]);
       setArrivalMessage([]);
       setCurrentContact([]);
       setMsg("");
       dispatch(clearChatInfo());
-     // history.push("/home")
-
+      // history.push("/home")
     };
   }, []);
-  //----------------------------------------------------------add user socket
-  useEffect(() => {
-    if (user) {
-      socket.current.emit("addUser", user.id);
-    }
-    // eslint-disable-next-line
-  }, [user]);
   //----------------------------------------------------------------scroll
   useEffect(() => {
     if (scrollRef.current) {
@@ -99,39 +89,37 @@ function Chat(props) {
   //-----------------------------------------------------------------------------new msg receive
 
   useEffect(() => {
-    if (arrivalMessage.length) {
-      if (currentContact.length) {
-        currentContact[0].id === arrivalMessage[0].userId &&
-          setChating([...chating, ...arrivalMessage]);
-      }
+    console.log("arrival ", arrivalMessage);
+
+    if (arrivalMessage.length && currentContact.length) {
+      currentContact[0].id === arrivalMessage[0].userId &&
+        setChating([...chating, ...arrivalMessage]);
     }
+
     // eslint-disable-next-line
   }, [arrivalMessage]);
-
-  //----------------------------------------------------------------------------------chat with a user in online
-  useEffect(() => {
-    setChating(posts);
-  }, [posts]);
   //---------------------------------------------------------------------------get id all convertations and contacts
   useEffect(() => {
     convertationsAndContacts();
     // eslint-disable-next-line
-  }, [convertations, contacts]);
+  }, [convertations, contacts, posts, user]);
   //-------------------------------------------------------------------------------------------------convertation of contacts
   function convertationsAndContacts() {
     if (user && convertations.length && !contacts.length) {
-      console.log(1);
       dispatch(getContacts());
     }
     if (user && !convertations.length) {
-      console.log(2);
       dispatch(getConvertations());
-      dispatch(getContactsBougth());
+      //dispatch(getContactsBougth());
     }
     if (contacts.length && !contactsConv.length) {
-      console.log(4);
       setContactCov(contacts);
     }
+
+    if (user) {
+      socket.current.emit("addUser", user.id);
+    }
+    setChating(posts);
   }
   //-------------------------------------------------------------------------------------------------------------new convertations
   function newConvertationbougth(newContact) {
