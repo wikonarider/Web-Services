@@ -40,11 +40,6 @@ function App() {
   // ------------------ Cuando tiene cookie(logueado) ------------//
   useEffect(() => {
     if (cookie) {
-      // ---------------------- Info del user ----------------------- //
-      getUserInfo()
-        .then((userInfo) => dispatch(userInfo))
-        .catch(() => console.log('Error getUserInfo'));
-
       // ------------- Manejo de la orden del carrito -------------- //
       getOrder()
         .then((data) => {
@@ -70,6 +65,9 @@ function App() {
               dispatch(setStatusOrder(true));
               // Tenia orden, y localStorage vacio
             } else {
+              getUserInfo()
+                .then((userInfo) => dispatch(userInfo))
+                .catch(() => console.log('Error getUserInfo'));
               dispatch(setCartStorage(data));
               dispatch(setStatusOrder(true));
             }
@@ -93,10 +91,6 @@ function App() {
               .then(() => getUserInfo().then((userInfo) => dispatch(userInfo)))
               .catch((e) => console.log(e.response.data.message));
           }
-          // ---------------------- Info del user ----------------------- //
-          getUserInfo()
-            .then((userInfo) => dispatch(userInfo))
-            .catch(() => console.log('Error getUserInfo'));
         });
     }
     // eslint-disable-next-line
