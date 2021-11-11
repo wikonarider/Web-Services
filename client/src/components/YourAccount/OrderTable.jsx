@@ -7,15 +7,18 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import { getServicesByIds } from '../../utils/servicesPage';
 
 export default function OrderTable({ rows }) {
   // con este funcion, llamariamos a una ruta del back,
-  // para mostrar esos servicios solos (en proceso)
+  // para mostrar esos servicios solos. (ya esta la ruta, func getServicesByIds)
   // Luego, podriamos hacer un modal, o ahi mismo
   // mostrar los servicios con el otro componente que estaba antes,
   // asi puede ir a ver el chat
   const handleClick = (services) => {
-    console.log(services);
+    getServicesByIds(services)
+      .then((data) => console.log(data)) // aca ya te trae los servicios
+      .catch((e) => console.log('algo fallo'));
   };
 
   return (
