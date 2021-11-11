@@ -65,6 +65,9 @@ function App() {
 
               dispatch(setCartStorage(filter));
               dispatch(setStatusOrder(true));
+            } else {
+              dispatch(setCartStorage(data));
+              dispatch(setStatusOrder(true));
             }
           }
         })
