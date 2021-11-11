@@ -7,7 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import _style from "./Chat.css.jsx";
 import { Button, Input, makeStyles } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-import { connect, useDispatch} from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 
@@ -38,8 +38,7 @@ const useStyles = makeStyles({
 });
 
 function Chat(props) {
-  var { cookie, convertations, contacts, posts, user, id, contactsBougth } =
-    props;
+  var { convertations, contacts, posts, user, id, contactsBougth } = props;
   const [msg, setMsg] = useState("");
   const [currentContact, setCurrentContact] = useState([]);
   const [chating, setChating] = useState(null);
@@ -113,6 +112,8 @@ function Chat(props) {
       //dispatch(getContactsBougth());
     }
     if (contacts.length && !contactsConv.length) {
+      console.log(contacts);
+
       setContactCov(contacts);
     }
 
@@ -126,6 +127,7 @@ function Chat(props) {
     var contatsInclude = contactsConv.filter(
       (cont) => cont.id === newContact.id
     );
+
     dispatch(clearChatInfo());
     setCurrentContact(newContact);
     if (!contatsInclude.length) {
@@ -139,11 +141,15 @@ function Chat(props) {
     setChating(null);
     chatContact(contact.id, true);
     setCurrentContact([]);
-    setContactCov(
-      contactsConv.filter((cont) => {
-        return cont.id !== contact.id;
-      })
-    );
+    if (contacts.length > 1) {
+      setContactCov(
+        contactsConv.filter((cont) => {
+          return cont.id !== contact.id;
+        })
+      );
+    } else {
+      setContactCov(null);
+    }
   }
   //--------------------------------------------------------------------------------------------conversation of a contact
   function chatContact(idContact, _delete) {
@@ -197,7 +203,7 @@ function Chat(props) {
   if (user) {
     return (
       <Box sx={_style.box_messanger_father} name="box-father">
-        {/*  <Nav /> */}
+        {/* conversation list */}
         <Box name="contacts" sx={_style.box_contacts_a}>
           <Box name="menu-contacts-wrapper" sx={_style.menu_contacts_wrapper}>
             <Input
@@ -226,7 +232,7 @@ function Chat(props) {
               ))}
           </Box>
         </Box>
-
+        {/*message list*/}
         <div style={{ flex: "5.5" }}>
           {chating && currentContact.length ? (
             <div name="conversations" style={_style.box_conversations_b}>
@@ -276,6 +282,7 @@ function Chat(props) {
             <></>
           )}
         </div>
+        {/*contact list of purchased services */}
         <Box name="contacts-online" sx={_style.box_contactsStates_c}>
           <Box
             name="menu-contactsOnline-wrapper"
