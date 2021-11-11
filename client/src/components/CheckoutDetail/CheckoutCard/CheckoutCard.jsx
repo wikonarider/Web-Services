@@ -1,23 +1,23 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { removeCart } from "../../../redux/actions";
-import CheckoutPopOver from "../CheckoutPopOver/CheckoutPopOver";
+import { removeCart } from '../../../redux/actions';
+import CheckoutPopOver from '../CheckoutPopOver/CheckoutPopOver';
 
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
-import Button from "@mui/material/Button";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { styled } from "@mui/material/styles";
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
+import Button from '@mui/material/Button';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { styled } from '@mui/material/styles';
 
 export default function CheckoutCard({ title, img, price, id }) {
-  const Img = styled("img")({
-    margin: "auto",
-    display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
+  const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
   });
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function CheckoutCard({ title, img, price, id }) {
 
   return (
     <Paper
-      sx={{ p: 2, margin: "auto", maxWidth: 1000, flexGrow: 1, mb: 3, mt: 3 }}
+      sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 3, mt: 3 }}
     >
       <Grid
         container
@@ -38,7 +38,7 @@ export default function CheckoutCard({ title, img, price, id }) {
         alignItems="center"
         justify="center"
       >
-        <Grid item>
+        <Grid item xs={12} md={3}>
           <ButtonBase sx={{ width: 128, height: 140 }}>
             <Img alt="complex" src={img} />
           </ButtonBase>
@@ -74,7 +74,7 @@ export default function CheckoutCard({ title, img, price, id }) {
                 variant="text"
                 size="small"
                 endIcon={<DeleteOutlinedIcon />}
-                sx={{ textTransform: "none" }}
+                sx={{ textTransform: 'none' }}
                 onClick={handleOnClink}
               >
                 <CheckoutPopOver />

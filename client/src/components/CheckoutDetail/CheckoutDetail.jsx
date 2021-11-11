@@ -1,18 +1,30 @@
-import React from "react";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { postPurchase, removeCart } from '../../redux/actions';
+import { paypal } from '../../redux/actions/index';
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-import CheckoutCard from "../CheckoutDetail/CheckoutCard/CheckoutCard";
-import { postPurchase, removeCart } from "../../redux/actions";
-import { paypal } from "../../redux/actions/index";
-import { useSelector, useDispatch } from "react-redux";
+import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
+
 // import s from './CheckoutPopOver/checkoutDetail.module.css';
 
+const useStyles = makeStyles((theme) => ({
+  probando: {
+    [theme.breakpoints.down('xs')]: {
+      alignItems: 'center !important',
+    },
+  },
+}));
+
 export default function CheckoutDetail() {
+  const classes = useStyles();
+
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -81,7 +93,7 @@ export default function CheckoutDetail() {
           })}
       </Box>
       <Paper
-        sx={{ p: 2, margin: "auto", maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
+        sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
       >
         <Grid container spacing={2} sx={{ gap: 1 }}>
           <Grid item xs={12} sm container>
@@ -90,23 +102,23 @@ export default function CheckoutDetail() {
               direction="column"
               spacing={1}
               alignItems="flex-end"
+              className={classes.probando}
             >
               <Grid
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
                 }}
               >
                 <Grid
                   style={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'flex-start',
                   }}
                 >
-                  {/* {cart.length > 0 ? ( */}
                   <Typography
                     variant="h5"
                     color="text.primary"
@@ -127,11 +139,11 @@ export default function CheckoutDetail() {
                 <Grid
                   item
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gridGap: "1rem",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gridGap: '1rem',
                   }}
                 >
                   {total.length > 0 ? (
