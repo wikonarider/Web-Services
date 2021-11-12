@@ -13,6 +13,7 @@ import CheckoutDetail from './components/CheckoutDetail/CheckoutDetail';
 import CreateService from './components/CreateService/CreateService';
 import Nav from './components/Nav/Nav';
 import NavSpace from './components/Nav/NavSpace';
+import ResetPassword from './components/resetPassword/resetPassword'
 import {
   setCookie,
   getServices,
@@ -123,6 +124,8 @@ function App() {
       <CssBaseline />
       <div className='App'>
         <Route exact path='/' component={Landing} />
+        <Route exact path='/resetPassword' component={ResetPassword} />
+
 
         <Route exact path='/home'>
           <Nav route={'home'} />
