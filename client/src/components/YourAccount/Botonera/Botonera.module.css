@@ -12,4 +12,7 @@
     flex-direction: column;
     width: 100vw;
   }
+  .divider{
+    display:none;
+  }
 }

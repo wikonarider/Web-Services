@@ -143,11 +143,13 @@ export default function YourAccount({
       </div>
       <Divider
         sx={{
-          border: '1px solid #cfd8dc',
+          width:'90%',
+          marginLeft:'5%',
+          border: '1px solid',
           borderRadius: 12,
           marginBottom: '3%',
         }}
-        className={classes.divider}
+        className={s.divider}
       />
     </>
   );
