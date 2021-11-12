@@ -15,6 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Admin from '../Admin/Admin';
 import { FormDialog } from './FormDialog/FormDialog';
 import OrderTable from './OrderTable';
+import CollapsibleTable from './CollapsibleTable';
 
 export default function YourAccount({
   userProfile,
@@ -135,7 +136,7 @@ export default function YourAccount({
         {viewOrders &&
           (userData.orders && userData.orders.length > 0 ? (
             <Container>
-              <OrderTable rows={userData.orders} />
+              <CollapsibleTable rows={userData.orders} />
             </Container>
           ) : (
             <div className={s.addFavContainer}>
