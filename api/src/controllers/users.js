@@ -183,11 +183,13 @@ async function postPurchase(req, res, next) {
 
       const order = await Orders.findByPk(orderId);
 
+
       if (order) {
         order.status = 'success';
         await order.save();
       }
       res.status(200).redirect(`${ORIGIN}/chat`);
+
     } else {
       res.status(400).redirect(`${ORIGIN}/home`);
     }
