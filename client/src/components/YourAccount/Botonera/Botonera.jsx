@@ -11,6 +11,8 @@ import s from './Botonera.module.css';
 import { useHistory } from 'react-router';
 import { Divider } from '@mui/material';
 
+import { animateScroll as scroll } from 'react-scroll';
+
 const useStyles = makeStyles((theme) => ({
   buttonStyle: {
     marginRight: 1,
@@ -66,6 +68,7 @@ export default function YourAccount({
               setViewOrders(false);
               setViewAdmin(!viewAdmin);
               setViewservices(false);
+              scroll.scrollToBottom();
             }}
             className={classes.buttonStyle}
           >
@@ -81,6 +84,7 @@ export default function YourAccount({
             setViewOrders(!viewOrders);
             setViewservices(false);
             setViewAdmin(false);
+            scroll.scrollToBottom();
           }}
           className={classes.buttonStyle}
         >
@@ -95,6 +99,7 @@ export default function YourAccount({
             setViewOrders(false);
             setViewservices(false);
             setViewAdmin(false);
+            scroll.scrollMore(400);
           }}
           className={classes.buttonStyle}
         >
@@ -109,6 +114,7 @@ export default function YourAccount({
             setViewOrders(false);
             setViewservices(!viewServices);
             setViewAdmin(false);
+            scroll.scrollToBottom();
           }}
           className={classes.buttonStyle}
         >
