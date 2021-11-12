@@ -80,7 +80,7 @@ export default function ForgotPasswordModal({ modal, setModal, message }) {
      if (!errors.email){
       dispatch(forgotPassword({email : email.email}))
       setSpan({
-          msg : 'Hemos enviado en enlace de recuperacion al email indicado'
+          msg : 'The recovery link has been sent'
         })
     }
     else {
@@ -129,7 +129,7 @@ export default function ForgotPasswordModal({ modal, setModal, message }) {
                             marginTop: 3
                           }}
                     >
-                       Enviar
+                       Send
                     </Button>
                 </Box>
             </Modal>
