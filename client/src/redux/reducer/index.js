@@ -1,4 +1,4 @@
-import { type } from "../actions/variables";
+import { type } from '../actions/variables';
 
 const initialState = {
   services: [],
@@ -8,24 +8,25 @@ const initialState = {
   favs: [],
   cart: [],
   categories: [],
-  cookie: "",
+  cookie: '',
   objGlobal: {
-    startRange: "",
-    endRange: "",
+    startRange: '',
+    endRange: '',
     category: [],
-    page: "0",
-    pageSize: "20",
-    order: "rating",
-    type: "DESC",
-    province: "",
-    city: "",
+    page: '0',
+    pageSize: '20',
+    order: 'rating',
+    type: 'DESC',
+    province: '',
+    city: '',
   },
   convertations: [],
   contacts: [],
-  contactsBougth:[],
+  contactsBougth: [],
   posts: [],
   endPage: false,
   darkTheme: false,
+  order: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -81,6 +82,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: payload,
+      };
+
+    case type.SET_STATUS_ORDER:
+      return {
+        ...state,
+        order: payload,
       };
 
     case type.GET_USER_FAVS:

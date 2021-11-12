@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteFavs, addFavs } from '../../utils/favs';
+import { addServiceOrder } from '../../utils/orders';
 import { getUserInfo, addCart } from '../../redux/actions/index';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
@@ -62,7 +63,7 @@ export default function DetailService({ id, closeModal }) {
 
   // para agregarlo o sacarlo del carrito
   useEffect(() => {
-    const index = cart.findIndex((s) => s.id === id);
+    const index = cart.findIndex((s) => s.id === Number(id));
     if (index === -1) {
       setAdded(() => false);
     } else {
@@ -77,9 +78,14 @@ export default function DetailService({ id, closeModal }) {
         title,
         img,
         price,
-        id,
+        id: Number(id),
       };
       dispatch(addCart(service));
+      if (cookie) {
+        addServiceOrder(Number(id))
+          .then((data) => console.log(data))
+          .catch((e) => console.log(e.response.data.message));
+      }
       setAdded(() => true);
     }
   };
@@ -116,25 +122,25 @@ export default function DetailService({ id, closeModal }) {
       {Object.keys(service.service).length ? (
         <>
           <Box
-            display="grid"
-            gridTemplateColumns="repeat(12, 1fr)"
+            display='grid'
+            gridTemplateColumns='repeat(12, 1fr)'
             gap={2}
             p={2}
-            maxWidth="80%"
-            m="0px auto"
+            maxWidth='80%'
+            m='0px auto'
           >
             {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
             <Box
               gridColumn={{ xs: 'span 12', sm: 'span 12', md: 'span 8' }}
               p={{ xs: 0, sm: 2 }}
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
+              display='flex'
+              flexDirection='column'
+              justifyContent='center'
             >
               <CardMedia
-                component="img"
+                component='img'
                 image={img ? img : IMG_TEMPLATE}
-                height="400"
+                height='400'
                 alt={id}
                 sx={{
                   objectFit: 'cover',
@@ -167,7 +173,7 @@ export default function DetailService({ id, closeModal }) {
           {related && <RelatedServices related={related} />}
         </>
       ) : (
-        <Typography variant="h2">No Service Found</Typography>
+        <Typography variant='h2'>No Service Found</Typography>
       )}
     </>
   );

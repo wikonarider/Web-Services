@@ -17,25 +17,24 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const { server, port } = require("./src/app.js");
-const { conn } = require("./src/db.js");
-const { loadServices } = require("./mock/services/index");
-const { linkAllGroups } = require("./mock/categories");
-const { groups } = require("./mock/groups");
-const { users } = require("./mock/usersJson");
-const { comments } = require("./mock/qualifications");
-const { purchases } = require("./mock/purchases");
+const { server, port } = require('./src/app.js');
+const { conn } = require('./src/db.js');
+const { loadServices } = require('./mock/services/index');
+const { linkAllGroups } = require('./mock/categories');
+const { groups } = require('./mock/groups');
+const { users } = require('./mock/usersJson');
+const { comments } = require('./mock/qualifications');
+const { purchases } = require('./mock/purchases');
 const {
-  Service,
   Users,
   Group,
   Province,
   City,
   Qualification,
-  Services_users_bought,
-} = require("./src/db");
-const { loadProvinces } = require("./mock/provinces");
-const { loadCities } = require("./mock/cities");
+  Orders,
+} = require('./src/db');
+const { loadProvinces } = require('./mock/provinces');
+const { loadCities } = require('./mock/cities');
 const { ENV_VARIABLE } = process.env;
 
 conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
@@ -48,30 +47,30 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
         await Group.bulkCreate(groups).then(() => {
           console.log(`-Force ${flat}-\nGrupos cargados`);
           Promise.resolve(linkAllGroups()).then(() =>
-            console.log("Categorias cargadas")
+            console.log('Categorias cargadas')
           );
         });
 
         await Users.bulkCreate(users, { individualHooks: true }).then(() =>
-          console.log("Users Cargados")
+          console.log('Users Cargados')
         );
-        await loadServices().then(() => console.log("Servicios Cargados"));
+        await loadServices().then(() => console.log('Servicios Cargados'));
 
         await Qualification.bulkCreate(comments).then(() => {
           console.log(`Comentarios cargados`);
         });
 
-        await Services_users_bought.bulkCreate(purchases).then(() => {
+        await Orders.bulkCreate(purchases).then(() => {
           console.log(`Compras cargadas`);
         });
 
         await loadProvinces()
           .then((data) => Province.bulkCreate(data))
-          .then(() => console.log("Provincias Cargadas"));
+          .then(() => console.log('Provincias Cargadas'));
 
         await loadCities()
           .then((data) => City.bulkCreate(data))
-          .then(() => console.log("Ciudades Cargadas"));
+          .then(() => console.log('Ciudades Cargadas'));
       }
       console.log(`--------listening on port ${port}---------`); // eslint-disable-line no-console
     } catch (e) {

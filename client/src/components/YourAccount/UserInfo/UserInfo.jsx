@@ -74,11 +74,14 @@ export default function YourAccount({
   return (
     <Grid
       container
-      gridTemplateColumns="repeat(12, 1fr)"
+      // gridTemplateColumns="repeat(12, 1fr)"
+      display="flex"
       alignItems="center"
       justifyContent={!userProfile ? 'center' : 'flex-start'}
       sx={{ marginTop: '2%' }}
+      justifyContent="center"
       gap={5}
+      xs={12}
     >
       <Grid item gridColumn="span 6">
         <Avatar
@@ -169,6 +172,7 @@ export default function YourAccount({
             display="flex"
             flexDirection="row"
             justifyContent="center"
+            alignItems="center"
             gap="0.5rem"
           >
             <FacebookShareButton

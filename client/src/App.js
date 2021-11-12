@@ -18,8 +18,11 @@ import {
   getServices,
   getGroups,
   getUserInfo,
+  setStatusOrder,
+  setCartStorage,
 } from './redux/actions';
 import Chat from './components/Chat/UserChat/Chat';
+import { getOrder, createOrder } from './utils/orders';
 
 //DARK-MODE
 import { putDark } from './redux/actions';
@@ -32,15 +35,68 @@ function App() {
   const objGlobal = useSelector((state) => state.objGlobal);
   const cookie = useSelector((state) => state.cookie);
   const darkGlobal = useSelector((state) => state.darkTheme);
+  const order = useSelector((state) => state.order);
 
+  // ------------------ Cuando tiene cookie(logueado) ------------//
   useEffect(() => {
     if (cookie) {
-      getUserInfo()
-        .then((userInfo) => dispatch(userInfo))
-        .catch(() => console.log('Error getUserInfo'));
+      // ------------- Manejo de la orden del carrito -------------- //
+      getOrder()
+        .then((data) => {
+          if (!order) {
+            const cart = JSON.parse(localStorage.getItem('state'));
+            // Tenia orden, y agrego cosas deslogueado
+            if (Array.isArray(cart) && cart.length > 0) {
+              const filter = [...cart];
+              data.forEach((element) => {
+                const index = filter.findIndex((e) => e.id === element.id);
+                if (index === -1) {
+                  filter.push(element);
+                }
+              });
+              createOrder(filter.map((s) => s.id))
+                .then((data) => console.log(data))
+                .then(() =>
+                  getUserInfo().then((userInfo) => dispatch(userInfo))
+                )
+                .catch((e) => console.log(e.response.data.message));
+
+              dispatch(setCartStorage(filter));
+              dispatch(setStatusOrder(true));
+              // Tenia orden, y localStorage vacio
+            } else {
+              getUserInfo()
+                .then((userInfo) => dispatch(userInfo))
+                .catch(() => console.log('Error getUserInfo'));
+              dispatch(setCartStorage(data));
+              dispatch(setStatusOrder(true));
+            }
+          }
+        })
+        // No tenia orden en el back
+        .catch(() => {
+          const cart = JSON.parse(localStorage.getItem('state'));
+
+          // Tenia cosas en localstorage
+          if (cart) {
+            createOrder(cart.map((s) => s.id))
+              .then(() => dispatch(setStatusOrder(true)))
+              .then(() => getUserInfo().then((userInfo) => dispatch(userInfo)))
+              .catch((e) => console.log(e.response.data.message));
+
+            // No tenia orden, no habia nada en localstorage
+          } else {
+            createOrder([])
+              .then(() => dispatch(setStatusOrder(true)))
+              .then(() => getUserInfo().then((userInfo) => dispatch(userInfo)))
+              .catch((e) => console.log(e.response.data.message));
+          }
+        });
     }
     // eslint-disable-next-line
   }, [cookie]);
+
+  // ---------------- UseEffect Inicial --------------------- //
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
@@ -60,6 +116,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  // --------------- Carga los servicios --------------- //
   useEffect(() => {
     dispatch(getServices(objGlobal));
   }, [objGlobal, dispatch]);
@@ -78,7 +135,7 @@ function App() {
 
         <Route
           exact
-          path='/chat/:id'
+          path='/chat'
           render={({ match }) => <Chat id={match.params.id} />}
         />
 

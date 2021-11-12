@@ -26,7 +26,7 @@ export default function CardUser({ user }) {
 
   const newConv = () => {
     dispatch(newConvertation(id));
-    history.push(`/chat/${id}`);
+    history.push(`/chat`);
   };
   return (
     <Card

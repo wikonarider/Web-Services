@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFavs, addFavs } from '../../utils/favs';
 import { getUserInfo, addCart } from '../../redux/actions/index';
+import { addServiceOrder } from '../../utils/orders';
 
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -80,6 +81,11 @@ function CardService({ service, related }) {
         id,
       };
       dispatch(addCart(service));
+      if (cookie) {
+        addServiceOrder(id)
+          .then((data) => console.log(data))
+          .catch((e) => console.log(e.response.data.message));
+      }
       setAdded(() => true);
     }
   };
@@ -113,7 +119,6 @@ function CardService({ service, related }) {
   return (
     <div>
       <Card sx={related ? relatedCardStyle : cardStyle}>
-        {/* component={Link} to={`/services/${id}`} */}
         <CardActionArea component={Link} to={`/services/${id}`}>
           <CardHeader
             title={related ? fixedTitleRelated : fixedTitle}
@@ -127,7 +132,7 @@ function CardService({ service, related }) {
 
           {!related && (
             <Rating
-              name="read-only"
+              name='read-only'
               value={Number(rating)}
               precision={0.5}
               readOnly
@@ -136,7 +141,7 @@ function CardService({ service, related }) {
           )}
 
           <CardMedia
-            component="img"
+            component='img'
             height={related ? '97' : '194'}
             image={img ? img : IMG_TEMPLATE}
             alt={title}
@@ -144,7 +149,7 @@ function CardService({ service, related }) {
           />
           <Typography
             variant={related ? 'subtitle1' : 'h5'}
-            component="div"
+            component='div'
             sx={{ p: '5px' }}
           >
             {`$${price ? price : 0}`}
@@ -155,29 +160,19 @@ function CardService({ service, related }) {
           <CardActions disableSpacing>
             <IconButton
               onClick={handleFavs}
-              aria-label="add to favorites"
+              aria-label='add to favorites'
               sx={cookie && cookie !== userId ? {} : { display: 'none' }}
             >
               <FavoriteIcon color={favState ? 'error' : ''} />
             </IconButton>
-            <IconButton aria-label="share" onClick={(e) => handleModal(e)}>
+            <IconButton aria-label='share' onClick={(e) => handleModal(e)}>
               <ShareIcon />
             </IconButton>
-
-            {/*
-        //J0n: no borrar
-         <IconButton
-          onClick={handleClick}
-          color={!added ? "primary" : "success"}
-          aria-label="add to shopping cart"
-          sx={{ ml: "auto" }}
-        > */}
-            {}
 
             <IconButton
               onClick={handleClick}
               color={!added ? 'primary' : 'secondary'}
-              aria-label="add to shopping cart"
+              aria-label='add to shopping cart'
               sx={
                 cart && cookie !== userId ? { ml: 'auto' } : { display: 'none' }
               }
@@ -187,7 +182,7 @@ function CardService({ service, related }) {
           </CardActions>
         )}
       </Card>
-      <ShareServiceModal modal={modal} setModal={setModal} serviceId= {id} />
+      <ShareServiceModal modal={modal} setModal={setModal} serviceId={id} />
     </div>
   );
 }
