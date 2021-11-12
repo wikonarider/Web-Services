@@ -10,18 +10,15 @@ import TextField from "@mui/material/TextField";
 import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
-
 import {
-  clearChatInfo,
   getContacts,
   getContactsBougth,
   getConvertations,
   getPots,
-  getUserInfo,
   newConvertation,
   sendMessage,
   deleteConvertation,
-} from "../../../redux/actions";
+} from "./StateLocal.jsx";
 
 // Material UI for SEND BTN
 import { brown } from "@material-ui/core/colors";
@@ -37,166 +34,165 @@ const useStyles = makeStyles({
   },
 });
 
-function Chat(props) {
-  var { convertations, contacts, posts, user, id, contactsBougth } = props;
-  const [msg, setMsg] = useState("");
-  const [currentContact, setCurrentContact] = useState([]);
-  const [chating, setChating] = useState(null);
-  const [contactsConv, setContactCov] = useState([]);
-  const [arrivalMessage, setArrivalMessage] = useState([]);
+function Chat({ user }) {
+  const [text, setText] = useState("");
+  const [textReceive, setTextReceive] = useState("");
+  const [chat, setChat] = useState({
+    currentCont: "",
+    chatting: [],
+    contactsConv: [],
+    contactsBoungth: [],
+    convertations: [],
+  });
   const dispatch = useDispatch();
-  //const history=useHistory();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  // Material UI for SEND BTN
-  const classes = useStyles();
+  const classes = useStyles(); // Material UI for SEND BTN
+
+  //const history=useHistory();
+
   //----------------------------------------------------------------------------socket
-  useEffect(() => {
+  useEffect( () => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    if (!user) {
-      getUserInfo().then((userInfo) => dispatch(userInfo));
-      return;
-    }
     socket.current.on("getMessage", function (dat) {
       //new msn from back server.io
       console.log("new post", dat);
-      setArrivalMessage([
-        {
-          userId: dat.senderId,
-          remit: dat.remit,
-          text: dat.text,
-          createdAt: Date.now(),
-        },
-      ]);
+      setTextReceive({
+        userId: dat.senderId,
+        remit: dat.remit,
+        text: dat.text,
+        createdAt: Date.now(),
+      });
     });
-    return () => {
-      setChating([]);
-      setArrivalMessage([]);
-      setCurrentContact([]);
-      setMsg("");
-      dispatch(clearChatInfo());
-      // history.push("/home")
-    };
+    getData();
   }, []);
+//----------------------------------------------------------------------------------------------get Data BD
+  async function getData() {
+    var contactsConv = await getContacts();
+    var contactsBoungth = await getContactsBougth();
+    var convertations = await getConvertations();
+    setChat({
+      ...chat,
+      contactsConv: contactsConv.data,
+      contactsBoungth: contactsBoungth.data,
+      convertations: convertations.data,
+    });
+  }
   //----------------------------------------------------------------scroll
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [chating]);
+  }, [chat]);
+
   //-----------------------------------------------------------------------------new msg receive
-
   useEffect(() => {
-    console.log("arrival ", arrivalMessage);
-
-    if (arrivalMessage.length && currentContact.length) {
-      currentContact[0].id === arrivalMessage[0].userId &&
-        setChating([...chating, ...arrivalMessage]);
+    if (textReceive && chat.currentCont) {
+      chat.currentCont.id === textReceive.userId &&
+        setChat({
+          ...chat,
+          chating: chat.chatting.concat(textReceive),
+        });
     }
 
     // eslint-disable-next-line
-  }, [arrivalMessage]);
-  //---------------------------------------------------------------------------get id all convertations and contacts
-  useEffect(() => {
-    convertationsAndContacts();
-    // eslint-disable-next-line
-  }, [convertations, contacts, posts, user]);
-  //-------------------------------------------------------------------------------------------------convertation of contacts
-  function convertationsAndContacts() {
-    if (user && convertations.length && !contacts.length) {
-      dispatch(getContacts());
-    }
-    if (user && !convertations.length) {
-      dispatch(getConvertations());
-      //dispatch(getContactsBougth());
-    }
-    if (contacts.length && !contactsConv.length) {
-      console.log(contacts);
-
-      setContactCov(contacts);
-    }
-
-    if (user) {
-      socket.current.emit("addUser", user.id);
-    }
-    setChating(posts);
-  }
+  }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
-  function newConvertationbougth(newContact) {
-    var contatsInclude = contactsConv.filter(
+  async function newConvertationbougth(newContact) {
+    var contatsInclude = chat.contactsConv.filter(
       (cont) => cont.id === newContact.id
     );
-
-    dispatch(clearChatInfo());
-    setCurrentContact(newContact);
     if (!contatsInclude.length) {
-      setContactCov([...contactsConv, newContact]);
-      dispatch(newConvertation(newContact.id));
-      chatContact(newContact.id);
-    }
-  }
-  //-------------------------------------------------------------------------------------------------------------delete convertations
-  function deleteConvert(contact) {
-    setChating(null);
-    chatContact(contact.id, true);
-    setCurrentContact([]);
-    if (contacts.length > 1) {
-      setContactCov(
-        contactsConv.filter((cont) => {
-          return cont.id !== contact.id;
+      newConvertation(newContact.id)
+        .then((resp) => {
+          return getConvertations();
         })
-      );
-    } else {
-      setContactCov(null);
+        .then((convertations) => {
+          setChat({
+            ...chat,
+            convertations: convertations.data,
+            contactsConv: chat.contactsConv.concat(newContact),
+          });
+        })
+        .catch((err) => console.log(err));
+      setChat({ ...chat, contactsConv: chat.contactsConv.concat(newContact) });
     }
   }
   //--------------------------------------------------------------------------------------------conversation of a contact
-  function chatContact(idContact, _delete) {
-    //chat BD
+  async function chatContact(idUser) {
+    console.log("chat");
+    var id;
+    var newCurrent = chat.contactsConv.filter((c) => {
+      return c.id === idUser;
+    });
+    if (newCurrent.length) {
+      id = idPostConvertation(idUser);
+      if (id > 0) {
+        var post = await getPots(id);
+        console.log(post);
+        setChat({ ...chat, currentCont: newCurrent[0], chatting: post.data });
+      }
+    }
+  }
+  //----------------------------------------------------------------------------------------------id posts convertations
+  function idPostConvertation(idContact) {
     var conv = [];
-    for (let i = 0; i < convertations.length; i++) {
-      var { userA, userB } = convertations[i];
+    for (let i = 0; i < chat.convertations.length; i++) {
+      var { userA, userB } = chat.convertations[i];
       if (
         (userA === idContact && userB === user.id) ||
         (userA === user.id && userB === idContact)
       ) {
-        conv.push(convertations[i].id);
+        conv.push(chat.convertations[i].id);
       }
     }
-    var conta = contactsConv.filter((c) => {
-      return c.id === idContact;
-    });
-    if (conta.length) {
-      setCurrentContact([conta[0]]);
-    }
-    if (conv.length > 0) {
-      _delete && dispatch(deleteConvertation(conv[0]));
-      !_delete && dispatch(getPots(conv[0]));
-      return;
+    return conv.length ? conv[0] : -1;
+  }
+
+  //-------------------------------------------------------------------------------------------------------------delete convertations
+  async function deleteConvert(contact) {
+    console.log("entre a delete");
+    var idConv;
+    if (chat.contactsConv.length > 0) {
+      idConv = idPostConvertation(contact.id);
+      idConv > 0 && (await deleteConvertation(idConv));
+      setChat({
+        ...chat,
+        contactsConv: chat.contactsConv.filter((c) => c.id !== contact.id),
+        convertations: chat.convertations.filter((e) => e.id !== idConv),
+        chating: [],
+        currentCont: "",
+      });
     }
   }
   //------------------------------------------------------------------------------------------send msn
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (user && currentContact) {
+    if (user && chat.currentCont) {
       socket.current.emit("sendMsn", {
+        //send socket io
         senderId: user.id,
-        receiverId: currentContact[0].id,
-        text: msg,
+        receiverId: chat.currentCont.id,
+        text: text,
       });
 
-      setChating((prev) => [
-        ...prev,
-        {
+      setChat({
+        ...chat,
+        chatting: chat.chatting.concat({
+          //set chating local
           userId: user.id,
-          remit: currentContact[0].id,
-          text: msg,
+          remit: chat.currentCont.id,
+          text: text,
           createdAt: Date.now(),
-        },
-      ]);
-      dispatch(sendMessage({ remit: currentContact[0].id, message: msg }));
-      setMsg("");
+        }),
+      });
+      var send = await sendMessage({
+        //send BD
+        remit: chat.currentCont.id,
+        message: text,
+      });
+      setText("");
     }
   }
   //------------------------------------------------------------------------------------------
@@ -211,38 +207,38 @@ function Chat(props) {
               name="inputSearch"
               placeholder="search contact!"
             ></Input>
-            {contactsConv.length &&
-              contactsConv.map((con) => (
+            {chat.contactsConv.length &&
+              chat.contactsConv.map((con) => (
                 <Box key={con.id}>
                   <Box
                     onClick={() => {
                       chatContact(con.id);
                     }}
                   >
-                    <Button
-                      onClick={() => {
-                        deleteConvert(con);
-                      }}
-                    >
-                      X
-                    </Button>
                     <Conversations key={con.id} contacts={con} />
                   </Box>
+                  <Button
+                    onClick={() => {
+                      deleteConvert(con);
+                    }}
+                  >
+                    X
+                  </Button>
                 </Box>
               ))}
           </Box>
         </Box>
         {/*message list*/}
         <div style={{ flex: "5.5" }}>
-          {chating && currentContact.length ? (
+          { chat.currentCont ? (
             <div name="conversations" style={_style.box_conversations_b}>
               <Box name="message" sx={_style.menu_chating_wrapper}>
-                {chating.map((msn, i) => (
+                {chat.chatting.map((msn, i) => (
                   <Message
                     scrollRef={scrollRef}
                     key={i}
                     user={user}
-                    contact={currentContact[0]}
+                    contact={chat.currentCont}
                     message={msn}
                   />
                 ))}
@@ -252,7 +248,7 @@ function Chat(props) {
             <h3>Click a contact to start a chat</h3>
           )}
 
-          {currentContact.length ? (
+          {chat.currentCont ? (
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
@@ -264,8 +260,8 @@ function Chat(props) {
                 <TextField
                   fullWidth
                   size="small"
-                  value={msg}
-                  onChange={(e) => setMsg(e.target.value)}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
                 />
                 <Button
                   variant="contained"
@@ -289,8 +285,8 @@ function Chat(props) {
             sx={_style.menu_contactsOnline_wrapper}
           >
             contacts bougth
-            {contactsBougth.length &&
-              contactsBougth.map((contac) => (
+            {chat.contactsBoungth.length &&
+              chat.contactsBoungth.map((contac) => (
                 <Box
                   key={contac.id}
                   onClick={() => {
@@ -311,12 +307,7 @@ function Chat(props) {
 
 function mapStateToProps(state) {
   return {
-    convertations: state.convertations,
-    contacts: state.contacts,
-    cookie: state.cookie,
-    posts: state.posts,
     user: state.user,
-    contactsBougth: state.contactsBougth,
   };
 }
 

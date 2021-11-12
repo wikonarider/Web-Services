@@ -227,92 +227,19 @@ export function setObjGlobal(obj) {
   };
 }
 //------------------------------------------------------------------------------------------------------actions chat
-export function getConvertations() {
-  return async function (dispatch) {
-    try {
-      var resp = await axios.get(`chat/convertations`);
-      return dispatch({ type: type.GET_CONVERTATIONS, payload: resp.data });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
 
-//-------------------------------------------------------------------------------------------------------clear chat
-export function clearChatInfo() {
-  return { type: type.CLEAR };
-}
-//------------------------------------------------------------------------------------get contacts bougth
-export function getContactsBougth() {
-  return async function (dispatch) {
-    try {
-      var resp = await axios.get(`chat/contactsBougth`);
-      return dispatch({ type: type.GET_CONTACTS_BOUGTH, payload: resp.data });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-//----------------------------------------------------------------------------------get contacts convertation
-export function getContacts() {
-  return async function (dispatch) {
-    try {
-      var resp = await axios.get(`chat/contacts`);
-      return dispatch({ type: type.GET_CONTACTS, payload: resp.data });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-//------------------------------------------------------------------------------------
-export function getPots(idConv, offset) {
-  if (!offset) {
-    offset = 0;
-  }
-  return async function (dispatch) {
-    try {
-      var posts = await axios.get(
-        `chat/posts?idConvertation1=${idConv}&offset=${offset}`
-      );
-      return dispatch({ type: type.GET_POSTS, payload: posts.data });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-}
-//---------------------------------------------------------------------------------delete convertation
-export function deleteConvertation(idconvertation) {
-  return async () => {
-    try {
-      return await axios.delete(`chat/convertations/${idconvertation}`);
-    } catch (err) {
-      return new Error(err);
-    }
-  };
-}
 //-----------------------------------------------------------------------------------------new convertation
 export function newConvertation(contact) {
-  return async function () {
-    try {
-      return await axios.post(`chat/convertations/${contact}`);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+   return async function (dispatch) {
+     try {
+       var resp = await axios.post(`chat/convertations/${contact}`);
+       return dispatch({ type: type.NEW_CONVERTATION, payload: resp.data });
+     } catch (err) {
+       console.log(err);
+     }
+   };
 }
-//-----------------------------------------------------------------------------------------------send message
-export function sendMessage(msn) {
-  return async function () {
-    await axios
-      .post(`chat`, msn)
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
-}
+
 //--------------------------------------------------------------------------------------
 export function paypal(body) {
   console.log('body=>>> ', body);

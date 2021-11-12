@@ -10,7 +10,6 @@ const checkout = require('./checkout');
 const chat = require('./Chat');
 const admin = require('./admin');
 const forgotPassword = require('./forgotPassword');
-
 const paypal = require('./paypal');
 const auth = require('./auth');
 const { verifyToken } = require('../controllers/authentication');

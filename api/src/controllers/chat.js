@@ -1,5 +1,6 @@
 const { Users, Chat, Convertations, Service } = require("../db.js");
 const { Op } = require("sequelize");
+const { allServicesBought } = require("../utils/validOrders.js");
 var users = [];
 //-----------------------socket------------------------------------------------------------------------------------function users online
 const addUsers = async (userId, socketid) => {
@@ -82,53 +83,32 @@ function getPots(req, res, next) {
     });
 }
 //---------------------------------------------------------------------------------get contacts bought
-function getContactsbought(req, res, next) {
+async function getContactsbought(req, res, next) {
   const userId = req.user;
-  console.log(userId);
-  if (userId) {
-    Users.findOne({
-      where: {
-        id: userId,
-      },
-      include: [
-        {
-          model: Service,
-          as: "servicesBought",
-          attributes: ["id"],
+  var bought = await allServicesBought(userId);
+  if (bought) {
+    var servicesBought = bought.map((id) => {
+      return Service.findOne({
+        where: {
+          id,
         },
-      ],
-    })
-      .then((service) => {
-        var { servicesBought } = service;
-        if (servicesBought.length) {
-          return servicesBought.map((serv) => {
-            const { id } = serv.dataValues;
-            return Service.findOne({
-              where: {
-                id: id,
-              },
-              attributes: [],
-              include: {
-                model: Users,
-                attributes: [
-                  "userImg",
-                  "username",
-                  "name",
-                  "lastname",
-                  "id",
-                  "email",
-                  "name",
-                ],
-              },
-            });
-          });
-        } else {
-          return new Error("Not bought")
-        }
-      })
-      .then((contactsBought) => {
-        return Promise.all(contactsBought);
-      })
+        attributes: [],
+        include: {
+          model: Users,
+          attributes: [
+            "userImg",
+            "username",
+            "name",
+            "lastname",
+            "id",
+            "email",
+            "name",
+          ],
+        },
+      });
+    });
+
+    Promise.all(servicesBought)
       .then((users) => {
         //quitando repetidos
         if (users.length) {
@@ -146,16 +126,19 @@ function getContactsbought(req, res, next) {
             flat = false;
           });
 
-          res.status(200).send(contactsNotRepeat);
+          return res.status(200).send(contactsNotRepeat);
         } else {
-          res.status(200).send([]);
+          return res.status(200).send([]);
         }
       })
       .catch((err) => {
         next(err);
       });
+  } else {
+    return res.status(200).send([]);
   }
 }
+
 //----------------------------------------------------------------------------get id convertations
 function getConvertations(req, res, next) {
   const userId = req.user;
@@ -187,7 +170,7 @@ function newConvertation(req, res, next) {
     defaults: { userA: userId, userB: id },
   })
     .then(() => {
-      return res.status(200).send("New convertation created");
+      return res.status(200).send("Created");
     })
     .catch((err) => {
       next(err);
