@@ -33,9 +33,11 @@ async function checkoutMercadoPago(req, res, next) {
       },
     });
     // cambiamos el estado de la orden
-    order.status = 'pending';
-    order.total = prices;
-    await order.save();
+    if (order) {
+      order.status = 'pending';
+      order.total = prices;
+      await order.save();
+    }
 
     var preference = {
       items: [

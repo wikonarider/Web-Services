@@ -112,6 +112,11 @@ async function getUserInfo(req, res, next) {
         {
           model: Orders,
           attributes: { exclude: ['userId'] },
+          where: {
+            status: {
+              [Op.notLike]: 'carrito',
+            },
+          },
         },
       ],
     });
