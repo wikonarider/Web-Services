@@ -22,14 +22,24 @@ const removeUser = async (socketId) => {
 };
 //---------------------------------------------------------------------------------function get user
 const getUser = (receiveId) => {
-  var usr = {};
+  var usr = [];
   for (let i = 0; i < users.length; i++) {
     if (users[i].user === receiveId) {
-      usr = users[i];
+      usr.push(users[i]);
     }
   }
-  return usr;
+  return usr.length > 0 ? usr : -1;
 };
+//---------------------------------------------------------------------------------function disconecct true/false
+function disconnectUser(socket) {
+  var usr = [];
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].socket === socket) {
+      usr.push(users[i]);
+    }
+  }
+  return usr.length > 0 ? usr : -1;
+}
 //----------------------------------------------------------------------------------server IO
 function serverchat(serverIO) {
   serverIO.on("connection", (socketIO) => {
@@ -38,22 +48,25 @@ function serverchat(serverIO) {
     socketIO.on("addUser", (userId) => {
       addUsers(userId, socketIO.id);
       console.log("users add", users);
-      return serverIO.emit("getUsers", users);
+      users.forEach((user) => {
+        serverIO.to(user.socket).emit("UsersOnlines", users);
+      });
     });
     //-----------------------------------------------------------------------------disconect user
     socketIO.on("disconnect", () => {
       removeUser(socketIO.id);
-      console.log("disconected", users);
-      serverIO.emit("getUsers", users);
+      console.log("disconected ,total users connected", users);
+      users.forEach((user) => {
+        serverIO.to(user.socket).emit("getUsers", users);
+      });
     });
     //------------------------------------------------------------------------------send msn
 
     socketIO.on("sendMsn", ({ senderId, receiverId, text }) => {
-      console.log("sendMsn", senderId, receiverId, text);
       if (senderId && receiverId && text) {
         var user = getUser(receiverId);
-        if (Object.values(user).length) {
-          serverIO.to(user.socket).emit("getMessage", {
+        if (user !== -1) {
+          serverIO.to(user[0].socket).emit("newMsnReceive", {
             remit: receiverId,
             senderId,
             text,
@@ -61,8 +74,16 @@ function serverchat(serverIO) {
         }
       }
     });
-  });
-} //server id
+    //--------------------------------------------------------------------------------disconnect current user
+    socketIO.on("disconnectUser", () => {
+      removeUser(socketIO.id);
+      console.log("disconected ,total users connected", users);
+      users.forEach((user) => {
+        serverIO.to(user.socket).emit("usersdisconnect", users);
+      });
+    });
+  }); //server id
+} //funct serverchat
 //---------------------------------------------------------------------------------get messages
 function getPots(req, res, next) {
   var { idConvertation1, offset } = req.query;

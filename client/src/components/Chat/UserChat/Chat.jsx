@@ -1,15 +1,16 @@
 import { io } from "socket.io-client";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Conversations from "../Conversations/conversations.jsx";
+import Conversations from "../Convertations/convertations.jsx";
 import { Box } from "@mui/system";
 import SendIcon from "@mui/icons-material/Send";
-import _style from "./Chat.css.jsx";
 import { Button, Input, makeStyles } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
+import { brown } from "@material-ui/core/colors";
+import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
 import {
   getContacts,
   getContactsBougth,
@@ -20,10 +21,8 @@ import {
   deleteConvertation,
 } from "./StateLocal.jsx";
 
-// Material UI for SEND BTN
-import { brown } from "@material-ui/core/colors";
 dotenv.config();
-require("./Chat.css");
+require("../UserChat/Chat.css");
 
 // Material UI for SEND BTN
 const useStyles = makeStyles({
@@ -35,15 +34,16 @@ const useStyles = makeStyles({
 });
 
 function Chat({ user }) {
-  const [text, setText] = useState("");
-  const [textReceive, setTextReceive] = useState("");
+  const [UsersOnlines, setUsersOnlines] = useState([]); //1
+  const [text, setText] = useState(""); //2
+  const [textReceive, setTextReceive] = useState(""); //3
   const [chat, setChat] = useState({
     currentCont: "",
     chatting: [],
     contactsConv: [],
     contactsBoungth: [],
     convertations: [],
-  });
+  }); //4
   const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
@@ -52,12 +52,13 @@ function Chat({ user }) {
   //const history=useHistory();
 
   //----------------------------------------------------------------------------socket
-  useEffect( () => {
+  useEffect(() => {
     //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    socket.current.on("getMessage", function (dat) {
+    getData();
+    //---------------------------------------------new message receive
+    socket.current.on("newMsnReceive", function (dat) {
       //new msn from back server.io
-      console.log("new post", dat);
       setTextReceive({
         userId: dat.senderId,
         remit: dat.remit,
@@ -65,9 +66,24 @@ function Chat({ user }) {
         createdAt: Date.now(),
       });
     });
-    getData();
+    //--------------------------------------------------user conectad
+    socket.current.on("UsersOnlines", function (usersOnlines) {
+      setUsersOnlines(usersOnlines);
+    });
+    //-------------------------------------------------a user logged out
+    socket.current.on("usersdisconnect", function (newListUsersOnlines) {
+      setUsersOnlines(newListUsersOnlines);
+    });
+    //--------------------------------------------------add user new
+    if (user) {
+      socket.current.emit("addUser", user.id);
+    }
+    return () => {
+      //------------------------------------------------disconnect current user
+      socket.current.emit("disconnectUser", user.id);
+    };
   }, []);
-//----------------------------------------------------------------------------------------------get Data BD
+  //----------------------------------------------------------------------------------------------get Data BD
   async function getData() {
     var contactsConv = await getContacts();
     var contactsBoungth = await getContactsBougth();
@@ -92,7 +108,7 @@ function Chat({ user }) {
       chat.currentCont.id === textReceive.userId &&
         setChat({
           ...chat,
-          chating: chat.chatting.concat(textReceive),
+          chatting: chat.chatting.concat(textReceive),
         });
     }
 
@@ -121,7 +137,6 @@ function Chat({ user }) {
   }
   //--------------------------------------------------------------------------------------------conversation of a contact
   async function chatContact(idUser) {
-    console.log("chat");
     var id;
     var newCurrent = chat.contactsConv.filter((c) => {
       return c.id === idUser;
@@ -152,7 +167,6 @@ function Chat({ user }) {
 
   //-------------------------------------------------------------------------------------------------------------delete convertations
   async function deleteConvert(contact) {
-    console.log("entre a delete");
     var idConv;
     if (chat.contactsConv.length > 0) {
       idConv = idPostConvertation(contact.id);
@@ -195,13 +209,13 @@ function Chat({ user }) {
       setText("");
     }
   }
-  //------------------------------------------------------------------------------------------
+  //---------------------------------------component chat----------------------------------------------------------------------------------------------
   if (user) {
     return (
-      <Box sx={_style.box_messanger_father} name="box-father">
+      <div className="box_messanger_father" name="box-father">
         {/* conversation list */}
-        <Box name="contacts" sx={_style.box_contacts_a}>
-          <Box name="menu-contacts-wrapper" sx={_style.menu_contacts_wrapper}>
+        <div name="contacts" className="box_contacts_a">
+          <div name="menu-contacts-wrapper" className="menu_contacts_wrapper">
             <Input
               type="text"
               name="inputSearch"
@@ -215,7 +229,11 @@ function Chat({ user }) {
                       chatContact(con.id);
                     }}
                   >
-                    <Conversations key={con.id} contacts={con} />
+                    <Conversations
+                      key={con.id}
+                      contacts={con}
+                      contactsOnline={UsersOnlines}
+                    />
                   </Box>
                   <Button
                     onClick={() => {
@@ -226,13 +244,13 @@ function Chat({ user }) {
                   </Button>
                 </Box>
               ))}
-          </Box>
-        </Box>
+          </div>
+        </div>
         {/*message list*/}
         <div style={{ flex: "5.5" }}>
-          { chat.currentCont ? (
-            <div name="conversations" style={_style.box_conversations_b}>
-              <Box name="message" sx={_style.menu_chating_wrapper}>
+          {chat.currentCont ? (
+            <div name="conversations" className="box_conversations_b">
+              <div name="message" className="menu_chating_wrapper">
                 {chat.chatting.map((msn, i) => (
                   <Message
                     scrollRef={scrollRef}
@@ -242,10 +260,10 @@ function Chat({ user }) {
                     message={msn}
                   />
                 ))}
-              </Box>
+              </div>
             </div>
           ) : (
-            <h3>Click a contact to start a chat</h3>
+            <h3 className="startchat">Click a contact to start a chat</h3>
           )}
 
           {chat.currentCont ? (
@@ -279,10 +297,10 @@ function Chat({ user }) {
           )}
         </div>
         {/*contact list of purchased services */}
-        <Box name="contacts-online" sx={_style.box_contactsStates_c}>
-          <Box
+        <div name="contacts-online" className="box_contactsStates_c">
+          <div
             name="menu-contactsOnline-wrapper"
-            sx={_style.menu_contactsOnline_wrapper}
+            className="menu_contactsOnline_wrapper"
           >
             contacts bougth
             {chat.contactsBoungth.length &&
@@ -293,12 +311,16 @@ function Chat({ user }) {
                     newConvertationbougth(contac);
                   }}
                 >
-                  <Conversations key={contac.id} contacts={contac} />
+                  <Contactsbougth
+                    key={contac.id}
+                    contacts={contac}
+                    contactsOnline={UsersOnlines}
+                  />
                 </Box>
               ))}
-          </Box>
-        </Box>
-      </Box>
+          </div>
+        </div>
+      </div>
     );
   } else {
     return <h3>cargando</h3>;
