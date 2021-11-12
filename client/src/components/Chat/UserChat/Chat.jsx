@@ -82,6 +82,7 @@ function Chat({ user }) {
       //------------------------------------------------disconnect current user
       socket.current.emit("disconnectUser", user.id);
     };
+    // eslint-disable-next-line
   }, []);
   //----------------------------------------------------------------------------------------------get Data BD
   async function getData() {

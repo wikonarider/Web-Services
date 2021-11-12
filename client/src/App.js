@@ -40,6 +40,11 @@ function App() {
   // ------------------ Cuando tiene cookie(logueado) ------------//
   useEffect(() => {
     if (cookie) {
+      // --------------------- Info del usuario ---------------------- //
+      getUserInfo()
+        .then((userInfo) => dispatch(userInfo))
+        .catch(() => console.log('Error getUserInfo'));
+
       // ------------- Manejo de la orden del carrito -------------- //
       getOrder()
         .then((data) => {
@@ -56,18 +61,12 @@ function App() {
               });
               createOrder(filter.map((s) => s.id))
                 .then((data) => console.log(data))
-                .then(() =>
-                  getUserInfo().then((userInfo) => dispatch(userInfo))
-                )
                 .catch((e) => console.log(e.response.data.message));
 
               dispatch(setCartStorage(filter));
               dispatch(setStatusOrder(true));
               // Tenia orden, y localStorage vacio
             } else {
-              getUserInfo()
-                .then((userInfo) => dispatch(userInfo))
-                .catch(() => console.log('Error getUserInfo'));
               dispatch(setCartStorage(data));
               dispatch(setStatusOrder(true));
             }
@@ -81,14 +80,12 @@ function App() {
           if (cart) {
             createOrder(cart.map((s) => s.id))
               .then(() => dispatch(setStatusOrder(true)))
-              .then(() => getUserInfo().then((userInfo) => dispatch(userInfo)))
               .catch((e) => console.log(e.response.data.message));
 
             // No tenia orden, no habia nada en localstorage
           } else {
             createOrder([])
               .then(() => dispatch(setStatusOrder(true)))
-              .then(() => getUserInfo().then((userInfo) => dispatch(userInfo)))
               .catch((e) => console.log(e.response.data.message));
           }
         });

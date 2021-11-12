@@ -15,7 +15,7 @@ import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
 // import s from './CheckoutPopOver/checkoutDetail.module.css';
 
 const useStyles = makeStyles((theme) => ({
-  probando: {
+  querie: {
     [theme.breakpoints.down('xs')]: {
       alignItems: 'center !important',
     },
@@ -102,7 +102,7 @@ export default function CheckoutDetail() {
               direction="column"
               spacing={1}
               alignItems="flex-end"
-              className={classes.probando}
+              className={classes.querie}
             >
               <Grid
                 style={{

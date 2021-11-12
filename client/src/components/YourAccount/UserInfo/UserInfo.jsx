@@ -74,18 +74,16 @@ export default function YourAccount({
   return (
     <Grid
       container
-      // gridTemplateColumns="repeat(12, 1fr)"
-      display="flex"
-      alignItems="center"
+      display='flex'
+      alignItems='center'
       justifyContent={!userProfile ? 'center' : 'flex-start'}
       sx={{ marginTop: '2%' }}
-      justifyContent="center"
       gap={5}
       xs={12}
     >
-      <Grid item gridColumn="span 6">
+      <Grid item gridColumn='span 6'>
         <Avatar
-          alt="user name"
+          alt='user name'
           src={!userProfile ? userData.userImg : profileInfo.userImg}
           sx={{ width: 200, height: 200, marginBottom: 2 }}
         ></Avatar>
@@ -93,15 +91,15 @@ export default function YourAccount({
           <Box>
             <input
               style={{ display: 'none' }}
-              type="file"
-              name="myImage"
+              type='file'
+              name='myImage'
               ref={fileInput}
               onChange={(e) => setImg(e.target.files[0])}
             />
             <Button
-              variant="text"
-              size="small"
-              color="secondary"
+              variant='text'
+              size='small'
+              color='secondary'
               startIcon={<PhotoCameraIcon />}
               sx={{ marginRight: 1 }}
               onClick={() => {
@@ -113,10 +111,10 @@ export default function YourAccount({
 
             {!loading ? (
               <Button
-                variant="contained"
+                variant='contained'
                 // startIcon={<PhotoCameraIcon />}
-                size="small"
-                color="secondary"
+                size='small'
+                color='secondary'
                 sx={{ boxShadow: 'none', marginLeft: 1 }}
                 // onClick={() => {
                 //   fileInput.current.click();
@@ -132,30 +130,30 @@ export default function YourAccount({
         )}
       </Grid>
 
-      <Grid item gridColumn="span 6">
+      <Grid item gridColumn='span 6'>
         <Box className={s.fullName} gap={2}>
-          <Typography variant="h4">
+          <Typography variant='h4'>
             {!userProfile ? userData.name : profileInfo.name}
           </Typography>
-          <Typography variant="h4">
+          <Typography variant='h4'>
             {!userProfile ? userData.lastname : profileInfo.lastname}
           </Typography>
         </Box>
         {!userProfile ? (
           <>
             <Box sx={{ marginBottom: 1, marginTop: 1 }}>
-              <Typography variant="body">{userData.username}</Typography>
+              <Typography variant='body'>{userData.username}</Typography>
             </Box>
             <Box>
-              <Typography variant="body">{userData.email}</Typography>
+              <Typography variant='body'>{userData.email}</Typography>
             </Box>
           </>
         ) : !profileServices[0].userId ? (
           <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            gap="0.5rem"
+            display='flex'
+            flexDirection='row'
+            justifyContent='center'
+            gap='0.5rem'
           >
             <FacebookShareButton url={'shareUrl'}>
               <FacebookIcon size={35} round={true} />
@@ -169,11 +167,11 @@ export default function YourAccount({
           </Box>
         ) : (
           <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            alignItems="center"
-            gap="0.5rem"
+            display='flex'
+            flexDirection='row'
+            justifyContent='center'
+            alignItems='center'
+            gap='0.5rem'
           >
             <FacebookShareButton
               url={`https://pf-web-service.vercel.app/users/${profileServices[0].userId}`}
