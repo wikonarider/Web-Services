@@ -14,7 +14,7 @@ import { Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { animateScroll, scroller } from 'react-scroll';
+import { scroller } from 'react-scroll';
 
 const useStyles = makeStyles((theme) => ({
   querie: {
@@ -67,16 +67,16 @@ export default function OrderTable({ rows }) {
       <TableContainer component={Paper} sx={{ marginBottom: '5%' }}>
         <Table
           // sx={{ minWidth: 650 }}
-          aria-label="simple table"
+          aria-label='simple table'
           className={classes.querie}
         >
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell align="center">Services</TableCell>
-              <TableCell align="center">Total</TableCell>
-              <TableCell align="center">Date</TableCell>
-              <TableCell align="right">State</TableCell>
+              <TableCell align='center'>Services</TableCell>
+              <TableCell align='center'>Total</TableCell>
+              <TableCell align='center'>Date</TableCell>
+              <TableCell align='right'>State</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -85,27 +85,27 @@ export default function OrderTable({ rows }) {
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell component='th' scope='row'>
                   {row.id}
                 </TableCell>
-                <TableCell align="center">{row.services.length}</TableCell>
+                <TableCell align='center'>{row.services.length}</TableCell>
                 {/* Todavia no esta implementado, capaz lo sacamos */}
-                <TableCell align="center">${row.total}</TableCell>
+                <TableCell align='center'>${row.total}</TableCell>
                 {/* Convertir la fecha */}
-                <TableCell align="center">
+                <TableCell align='center'>
                   {row.updatedAt.split('T')[0]}
                 </TableCell>
                 <TableCell
-                  align="right"
+                  align='right'
                   sx={row.status === 'success' ? { color: 'green' } : null}
                 >
                   {row.status}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align='center'>
                   <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
+                    variant='contained'
+                    color='secondary'
+                    size='small'
                     disableElevation
                     onClick={() => handleClick(row.services, row.id)}
                     className={classes.btn}
@@ -121,8 +121,8 @@ export default function OrderTable({ rows }) {
 
       {show && servicesBought.length > 0 && (
         <Box
-          name="scroll-to-element"
-          className="element"
+          name='scroll-to-element'
+          className='element'
           sx={{
             display: 'flex',
             justifyContent: 'flex-start',
@@ -130,7 +130,7 @@ export default function OrderTable({ rows }) {
             marginBottom: '1%',
           }}
         >
-          <Typography variant="h6">Order {orderId}</Typography>
+          <Typography variant='h6'>Order {orderId}</Typography>
           <KeyboardArrowDownIcon />
         </Box>
       )}

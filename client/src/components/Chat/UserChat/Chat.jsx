@@ -1,46 +1,47 @@
-import { io } from "socket.io-client";
-import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Conversations from "../Conversations/conversations.jsx";
-import { Box } from "@mui/system";
-import SendIcon from "@mui/icons-material/Send";
-import _style from "./Chat.css.jsx";
-import { Button, Input, makeStyles } from "@material-ui/core";
-import TextField from "@mui/material/TextField";
-import { connect, useDispatch} from "react-redux";
-import dotenv from "dotenv";
-import Message from "../Message/Message";
+import { io } from 'socket.io-client';
+import React, { useEffect, useRef, useState } from 'react';
+// import { useHistory } from "react-router-dom";
+import Conversations from '../Conversations/conversations.jsx';
+import { Box } from '@mui/system';
+import SendIcon from '@mui/icons-material/Send';
+import _style from './Chat.css.jsx';
+import { Button, Input, makeStyles } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
+import { connect, useDispatch } from 'react-redux';
+import dotenv from 'dotenv';
+import Message from '../Message/Message';
 
 import {
   clearChatInfo,
   getContacts,
-  getContactsBougth,
+  // getContactsBougth,
   getConvertations,
   getPots,
   getUserInfo,
   newConvertation,
   sendMessage,
   deleteConvertation,
-} from "../../../redux/actions";
+} from '../../../redux/actions';
 
 // Material UI for SEND BTN
-import { brown } from "@material-ui/core/colors";
+import { brown } from '@material-ui/core/colors';
 dotenv.config();
-require("./Chat.css");
+require('./Chat.css');
 
 // Material UI for SEND BTN
 const useStyles = makeStyles({
   btn: {
     borderRadius: 0,
-    textTransfrom: "none",
+    textTransfrom: 'none',
     color: brown[500],
   },
 });
 
 function Chat(props) {
+  // eslint-disable-next-line
   var { cookie, convertations, contacts, posts, user, id, contactsBougth } =
     props;
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState('');
   const [currentContact, setCurrentContact] = useState([]);
   const [chating, setChating] = useState(null);
   const [contactsConv, setContactCov] = useState([]);
@@ -54,14 +55,14 @@ function Chat(props) {
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
-    socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
+    socket.current = io(process.env.REACT_APP_API || 'http://localhost:3001');
     if (!user) {
       getUserInfo().then((userInfo) => dispatch(userInfo));
       return;
     }
-    socket.current.on("getMessage", function (dat) {
+    socket.current.on('getMessage', function (dat) {
       //new msn from back server.io
-      console.log("new post", dat);
+      console.log('new post', dat);
       setArrivalMessage([
         {
           userId: dat.senderId,
@@ -75,21 +76,22 @@ function Chat(props) {
       setChating([]);
       setArrivalMessage([]);
       setCurrentContact([]);
-      setMsg("");
+      setMsg('');
       dispatch(clearChatInfo());
       // history.push("/home")
     };
+    // eslint-disable-next-line
   }, []);
   //----------------------------------------------------------------scroll
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [chating]);
   //-----------------------------------------------------------------------------new msg receive
 
   useEffect(() => {
-    console.log("arrival ", arrivalMessage);
+    console.log('arrival ', arrivalMessage);
 
     if (arrivalMessage.length && currentContact.length) {
       currentContact[0].id === arrivalMessage[0].userId &&
@@ -117,7 +119,7 @@ function Chat(props) {
     }
 
     if (user) {
-      socket.current.emit("addUser", user.id);
+      socket.current.emit('addUser', user.id);
     }
     setChating(posts);
   }
@@ -174,7 +176,7 @@ function Chat(props) {
   function handleSubmit(e) {
     e.preventDefault();
     if (user && currentContact) {
-      socket.current.emit("sendMsn", {
+      socket.current.emit('sendMsn', {
         senderId: user.id,
         receiverId: currentContact[0].id,
         text: msg,
@@ -190,20 +192,20 @@ function Chat(props) {
         },
       ]);
       dispatch(sendMessage({ remit: currentContact[0].id, message: msg }));
-      setMsg("");
+      setMsg('');
     }
   }
   //------------------------------------------------------------------------------------------
   if (user) {
     return (
-      <Box sx={_style.box_messanger_father} name="box-father">
+      <Box sx={_style.box_messanger_father} name='box-father'>
         {/*  <Nav /> */}
-        <Box name="contacts" sx={_style.box_contacts_a}>
-          <Box name="menu-contacts-wrapper" sx={_style.menu_contacts_wrapper}>
+        <Box name='contacts' sx={_style.box_contacts_a}>
+          <Box name='menu-contacts-wrapper' sx={_style.menu_contacts_wrapper}>
             <Input
-              type="text"
-              name="inputSearch"
-              placeholder="search contact!"
+              type='text'
+              name='inputSearch'
+              placeholder='search contact!'
             ></Input>
             {contactsConv.length &&
               contactsConv.map((con) => (
@@ -227,10 +229,10 @@ function Chat(props) {
           </Box>
         </Box>
 
-        <div style={{ flex: "5.5" }}>
+        <div style={{ flex: '5.5' }}>
           {chating && currentContact.length ? (
-            <div name="conversations" style={_style.box_conversations_b}>
-              <Box name="message" sx={_style.menu_chating_wrapper}>
+            <div name='conversations' style={_style.box_conversations_b}>
+              <Box name='message' sx={_style.menu_chating_wrapper}>
                 {chating.map((msn, i) => (
                   <Message
                     scrollRef={scrollRef}
@@ -250,21 +252,21 @@ function Chat(props) {
             <form onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
-                  display: "flex",
-                  maxWidth: "100%",
-                  flex: "row",
+                  display: 'flex',
+                  maxWidth: '100%',
+                  flex: 'row',
                 }}
               >
                 <TextField
                   fullWidth
-                  size="small"
+                  size='small'
                   value={msg}
                   onChange={(e) => setMsg(e.target.value)}
                 />
                 <Button
-                  variant="contained"
-                  type="submit"
-                  size="small"
+                  variant='contained'
+                  type='submit'
+                  size='small'
                   className={classes.btn}
                   endIcon={<SendIcon />}
                 >
@@ -276,9 +278,9 @@ function Chat(props) {
             <></>
           )}
         </div>
-        <Box name="contacts-online" sx={_style.box_contactsStates_c}>
+        <Box name='contacts-online' sx={_style.box_contactsStates_c}>
           <Box
-            name="menu-contactsOnline-wrapper"
+            name='menu-contactsOnline-wrapper'
             sx={_style.menu_contactsOnline_wrapper}
           >
             contacts bougth

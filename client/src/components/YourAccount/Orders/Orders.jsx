@@ -9,18 +9,18 @@ import s from './Orders.module.css';
 import { Link } from 'react-router-dom';
 
 export default function Orders({ service }) {
-  const { title, img, price, id, rating, updatedAt } = service;
+  const { title, img, price, id, rating } = service;
 
   const IMG_TEMPLATE =
     'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
 
   return (
     <Box
-      marginTop="3rem"
-      display="grid"
+      marginTop='3rem'
+      display='grid'
       gap={3}
-      gridTemplateColumns="repeat(12, 1fr)"
-      alignItems="center"
+      gridTemplateColumns='repeat(12, 1fr)'
+      alignItems='center'
       boxShadow={1}
       sx={{
         borderRadius: 2,
@@ -29,7 +29,6 @@ export default function Orders({ service }) {
       }}
       component={Paper}
       elevation={1}
-      gap={2}
     >
       <Box
         gridColumn={{ xs: 'span 12', md: 'span 2' }}
@@ -37,7 +36,7 @@ export default function Orders({ service }) {
         component={Link}
         to={`/services/${id}`}
       >
-        <img src={img ? img : IMG_TEMPLATE} alt="userImage" className={s.img} />
+        <img src={img ? img : IMG_TEMPLATE} alt='userImage' className={s.img} />
       </Box>
 
       <Box
@@ -46,14 +45,14 @@ export default function Orders({ service }) {
         to={`/services/${id}`}
         sx={{ textDecoration: 'none', color: 'inherit' }}
       >
-        <Typography variant="h6" color="primary">
+        <Typography variant='h6' color='primary'>
           {title}
         </Typography>
       </Box>
 
       <Box gridColumn={{ xs: 'span 12', md: 'span 1' }}>
         <Rating
-          name="read-only"
+          name='read-only'
           value={Number(rating)}
           precision={0.5}
           readOnly
@@ -66,13 +65,13 @@ export default function Orders({ service }) {
       </Box> */}
 
       <Box gridColumn={{ xs: 'span 6', md: 'span 1' }}>
-        <IconButton aria-label="share">
+        <IconButton aria-label='share'>
           <Share />
         </IconButton>
       </Box>
 
       <Box gridColumn={{ xs: 'span 12', md: 'span 1' }}>
-        <Typography variant="h6">${price}</Typography>
+        <Typography variant='h6'>${price}</Typography>
       </Box>
     </Box>
   );

@@ -14,8 +14,6 @@ import Botonera from './Botonera/Botonera';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Admin from '../Admin/Admin';
 import { FormDialog } from './FormDialog/FormDialog';
-import Orders from './Orders/Orders';
-import Box from '@mui/material/Box';
 import OrderTable from './OrderTable';
 
 export default function YourAccount({
@@ -96,9 +94,9 @@ export default function YourAccount({
               <div className={s.servicesShown}>
                 <Grid
                   container
-                  justifyContent="flex-start"
+                  justifyContent='flex-start'
                   spacing={3}
-                  margin="0"
+                  margin='0'
                 >
                   {userData.servicesFavs.map((s) => (
                     <Grid item key={s.id}>
@@ -175,9 +173,9 @@ export default function YourAccount({
               <Container>
                 <Grid
                   container
-                  justifyContent="flex-start"
+                  justifyContent='flex-start'
                   spacing={3}
-                  margin="0"
+                  margin='0'
                 >
                   {userData.servicesOwn.map((s) => (
                     <Grid item key={s.id}>
