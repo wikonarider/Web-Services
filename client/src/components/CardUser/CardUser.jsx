@@ -34,7 +34,7 @@ export default function CardUser({ user }) {
         height: 'minContent',
         textDecoration: 'none',
         m: '10px auto 10px auto',
-        p: '0px',
+        p: '10px',
         border: 'solid 1px lightgrey',
       }}
     >

@@ -71,15 +71,18 @@ export default function SingleComment({ qualification, cookie }) {
     <Box
       id={id}
       key={id}
-      display='grid'
-      gridTemplateColumns='repeat(12, 1fr)'
+      display="grid"
+      gridTemplateColumns="repeat(12, 1fr)"
       gap={1}
       sx={{ m: '5px 0px' }}
+      border="1px solid"
+      borderRadius="4px"
+      padding="4px"
     >
-      <Box gridColumn='span 1'>
+      <Box gridColumn="span 1">
         <CardMedia
-          component='img'
-          height='50px'
+          component="img"
+          height="50px"
           image={userImg ? userImg : IMG_TEMPLATE}
           alt={`${name} ${lastname}`}
           sx={{
@@ -91,18 +94,18 @@ export default function SingleComment({ qualification, cookie }) {
           }}
         />
       </Box>
-      <Box gridColumn='span 11' sx={{ textAlign: 'justify', width: '100%' }}>
+      <Box gridColumn="span 11" sx={{ textAlign: 'justify', width: '100%' }}>
         <Box
-          gridColumn='span 12'
+          gridColumn="span 12"
           sx={{
             textAlign: 'justify',
             display: 'flex',
             flexDirection: 'row',
           }}
         >
-          <Typography variant='subtitle2'>
+          <Typography variant="subtitle2">
             {`${name} ${lastname}`}
-            <Typography variant='caption'>
+            <Typography variant="caption">
               {` - ${dayjs(updated.updatedAt || createdAt).fromNow()}`}
             </Typography>
           </Typography>
@@ -110,14 +113,14 @@ export default function SingleComment({ qualification, cookie }) {
             edit.id === id ? (
               <>
                 <IconButton
-                  aria-label='edit comment'
+                  aria-label="edit comment"
                   sx={{ m: '0px', p: '0px' }}
                   onClick={(e) => handleEdit(e, 'clear')}
                 >
                   <ClearIcon />
                 </IconButton>
                 <IconButton
-                  aria-label='edit comment'
+                  aria-label="edit comment"
                   sx={{ m: '0px', p: '0px' }}
                   onClick={(e) => handleEdit(e, 'save')}
                   disabled={edit.comment.length === 0 ? true : false}
@@ -127,7 +130,7 @@ export default function SingleComment({ qualification, cookie }) {
               </>
             ) : (
               <IconButton
-                aria-label='edit comment'
+                aria-label="edit comment"
                 sx={{ m: '0px', p: '0px' }}
                 onClick={(e) => handleEdit(e, 'edit')}
               >
@@ -136,7 +139,7 @@ export default function SingleComment({ qualification, cookie }) {
             )
           ) : null}
           <Rating
-            name='rating'
+            name="rating"
             value={edit.score || updated.score || score}
             readOnly={edit.id ? false : true}
             precision={1}
@@ -149,7 +152,7 @@ export default function SingleComment({ qualification, cookie }) {
           edit.id === id ? (
             <TextField
               id={`edit-comment-${id}`}
-              label='Edit comment'
+              label="Edit comment"
               error={edit.comment.length === 0 ? true : false}
               fullWidth
               multiline
@@ -165,24 +168,24 @@ export default function SingleComment({ qualification, cookie }) {
             <>
               {' '}
               <Box
-                gridColumn='span 12'
+                gridColumn="span 12"
                 sx={{
                   textAlign: 'justify',
                   display: 'flex',
                   flexDirection: 'row',
                 }}
               >
-                <Typography variant='body2' noWrap={wrap}>
+                <Typography variant="body2" noWrap={wrap}>
                   {edit.comment || updated.comment || comment}
                 </Typography>
               </Box>
               <CardActions disableSpacing sx={{ p: '0px' }}>
                 <IconButton
                   onClick={() => setWrap(!wrap)}
-                  aria-label='share'
+                  aria-label="share"
                   sx={{ mr: '0px auto 0px auto', p: '0px' }}
                 >
-                  <Typography variant='caption' sx={{ p: '0px' }}>
+                  <Typography variant="caption" sx={{ p: '0px' }}>
                     {updated.comment?.length < 90 || comment.length < 90
                       ? ''
                       : wrap

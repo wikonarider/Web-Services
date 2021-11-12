@@ -122,30 +122,32 @@ export default function DetailService({ id, closeModal }) {
       {Object.keys(service.service).length ? (
         <>
           <Box
-            display='grid'
-            gridTemplateColumns='repeat(12, 1fr)'
+            display="grid"
+            gridTemplateColumns="repeat(12, 1fr)"
             gap={2}
-            p={2}
-            maxWidth='80%'
-            m='0px auto'
+            p={1}
+            maxWidth="80%"
+            m="0px auto"
+            borderRadius="2px"
           >
             {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
             <Box
               gridColumn={{ xs: 'span 12', sm: 'span 12', md: 'span 8' }}
               p={{ xs: 0, sm: 2 }}
-              display='flex'
-              flexDirection='column'
-              justifyContent='center'
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
             >
               <CardMedia
-                component='img'
+                component="img"
                 image={img ? img : IMG_TEMPLATE}
-                height='400'
+                height="400"
                 alt={id}
                 sx={{
                   objectFit: 'cover',
                   mb: 'auto',
                   pb: 5,
+                  borderRadius: '4px',
                 }}
               />
 
@@ -173,7 +175,7 @@ export default function DetailService({ id, closeModal }) {
           {related && <RelatedServices related={related} />}
         </>
       ) : (
-        <Typography variant='h2'>No Service Found</Typography>
+        <Typography variant="h2">No Service Found</Typography>
       )}
     </>
   );
