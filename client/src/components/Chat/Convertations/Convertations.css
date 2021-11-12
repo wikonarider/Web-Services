@@ -1,0 +1,28 @@
+.avatar{
+    width: 70px;
+    height: 70px;
+    border:unset;
+    background: #dcebdd;
+    text-align: start;
+    align-items: flex-end;
+    display: grid;
+
+
+  
+}
+.boxBoughtOnline {
+  height: 86%;
+  display: flex;
+  padding: 2%;
+  cursor: pointer;
+  margin: 2%;
+  background: rgba(108, 219, 85, 0.644);
+}
+.boxBoughtOffline {
+  height: 86%;
+  display: flex;
+  padding: 2%;
+  cursor: pointer;
+  margin: 2%;
+  background: rgba(190, 177, 164, 0.658);
+}

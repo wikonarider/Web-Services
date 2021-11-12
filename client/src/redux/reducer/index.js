@@ -1,4 +1,4 @@
-import { type } from '../actions/variables';
+import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
@@ -8,22 +8,19 @@ const initialState = {
   favs: [],
   cart: [],
   categories: [],
-  cookie: '',
+  cookie: "",
   objGlobal: {
-    startRange: '',
-    endRange: '',
+    startRange: "",
+    endRange: "",
     category: [],
-    page: '0',
-    pageSize: '20',
-    order: 'rating',
-    type: 'DESC',
-    province: '',
-    city: '',
+    page: "0",
+    pageSize: "20",
+    order: "rating",
+    type: "DESC",
+    province: "",
+    city: "",
   },
-  convertations: [],
-  contacts: [],
-  contactsBougth: [],
-  posts: [],
+  _newConvertation:"",
   endPage: false,
   darkTheme: false,
   order: false,
@@ -113,35 +110,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         objGlobal: action.payload,
-      };
-
-    case type.GET_CONTACTS:
+      }; 
+    case type.NEW_CONVERTATION:
       return {
         ...state,
-        contacts: action.payload,
+        _newConvertation: action.payload,
       };
-    case type.GET_CONTACTS_BOUGTH:
-      return {
-        ...state,
-        contactsBougth: action.payload,
-      };
-    case type.GET_CONVERTATIONS:
-      return {
-        ...state,
-        convertations: action.payload,
-      };
-    case type.GET_POSTS:
-      return {
-        ...state,
-        posts: action.payload,
-      };
-    case type.CLEAR:
-      return {
-        ...state,
-        convertations: [],
-        contacts: [],
-        posts: [],
-      };
+    
 
     case type.POST_PURCHASE:
       return {

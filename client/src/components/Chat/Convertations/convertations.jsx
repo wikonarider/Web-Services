@@ -2,19 +2,16 @@ import { Avatar } from "@material-ui/core";
 import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import { Stack } from "@mui/material";
-require("./Conversations.css");
-export default function Conversations({ contacts }) {
-  useEffect(() => {});
+require("../Convertations/Convertations.css")
+export default function Conversations({ contacts, contactsOnline }) {
   if (contacts) {
     return (
-      <Box
-        sx={{
-          height: 86,
-          display: "flex",
-          padding: "2%",
-          cursor: "pointer",
-          margin: "2%",
-        }}
+      <div
+        className={
+          contactsOnline.some((e) => e.user === contacts.id)
+            ? "boxBoughtOnline"
+            : "boxBoughtOffline"
+        }
       >
         <Stack direction="row" spacing={5}>
           <Avatar
@@ -23,7 +20,7 @@ export default function Conversations({ contacts }) {
           />
           {contacts.name}
         </Stack>
-      </Box>
+      </div>
     );
   } else {
     return <></>;
