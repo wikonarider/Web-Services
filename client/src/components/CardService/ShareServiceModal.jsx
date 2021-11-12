@@ -1,9 +1,17 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import FacebookIcon from "@mui/icons-material/Facebook";
+
 import IconButton from "@mui/material/IconButton";
 import WhatsApp from "@mui/icons-material/WhatsApp";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from 'react-share';
 
 const style = {
   position: "absolute",
@@ -39,19 +47,24 @@ export default function ShareServiceModal({ modal, setModal, serviceId }) {
       >
         <Box sx={style}>
           <h3>Share with</h3>
-          <IconButton
-            href={`https://www.facebook.com/sharer/sharer.php?u=https://pf-web-service.vercel.app/services/${serviceId}`}
-          >
-            <FacebookIcon
-              color="primary"
-              style={{ width: "80px", height: "80px" }}
-            />
-            Facebook
-          </IconButton>
-          <IconButton href={`whatsapp://send?text='+${dir}`}>
-            <WhatsApp color="" style={{ width: "80px", height: "80px" }} />
-            WhatsApp
-          </IconButton>
+            <FacebookShareButton
+              url={`https://pf-web-service.vercel.app/services/${serviceId}`}
+            >
+              <FacebookIcon size={35} round={true} />
+            </FacebookShareButton>
+            <WhatsappShareButton
+              url={`https://pf-web-service.vercel.app/services/${serviceId}`}
+            >
+              <WhatsappIcon size={35} round={true} />
+            </WhatsappShareButton>
+            <LinkedinShareButton
+              url={`https://pf-web-service.vercel.app/services/${serviceId}`}
+            >
+              <LinkedinIcon size={35} round={true} />
+            </LinkedinShareButton>
+
+
+  
         </Box>
       </Modal>
     </div>
