@@ -1,13 +1,11 @@
 import { Avatar, Box } from "@material-ui/core";
 import React from "react";
-require("../Message/Message.css");
+import useStylesMessage from "./MessageStyled";
 export default function Message({ user, contact, message, scrollRef }) {
-
+ var clasess=useStylesMessage();
   return (
-    <div
-      className={message.userId === user.id ? "boxMsnSend" : "boxMsnReceive"}
-    >
-      <div ref={scrollRef} className={"msn"} >
+    <Box className={message.userId === user.id ? clasess.boxMsnSend : clasess.boxMsnReceive}>
+      <div ref={scrollRef} className={"msn"}>
         <Avatar
           src={message.remit === user.id ? contact.userImg : user.userImg}
           sx={{ width: "54px", height: 54 }}
@@ -22,6 +20,6 @@ export default function Message({ user, contact, message, scrollRef }) {
         </p>
       </div>
       <h5>{message.createdAt}</h5>
-    </div>
+    </Box>
   );
 }

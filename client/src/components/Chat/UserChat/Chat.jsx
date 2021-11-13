@@ -9,8 +9,8 @@ import TextField from "@mui/material/TextField";
 import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
-import { brown } from "@material-ui/core/colors";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
+import  useStylesChat  from "./ChatStyled";
 import {
   getContacts,
   getContactsBougth,
@@ -20,19 +20,7 @@ import {
   sendMessage,
   deleteConvertation,
 } from "./StateLocal.jsx";
-
 dotenv.config();
-require("../UserChat/Chat.css");
-
-// Material UI for SEND BTN
-const useStyles = makeStyles({
-  btn: {
-    borderRadius: 0,
-    textTransfrom: "none",
-    color: brown[500],
-  },
-});
-
 function Chat({ user }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
@@ -47,10 +35,12 @@ function Chat({ user }) {
   const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStyles(); // Material UI for SEND BTN
+  const classes = useStylesChat(); // Material UI for SEND BTN
 
   //const history=useHistory();
+  
 
+  
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
@@ -104,13 +94,33 @@ function Chat({ user }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  useEffect(() => {
+  useEffect(async () => {
     if (textReceive && chat.currentCont) {
       chat.currentCont.id === textReceive.userId &&
         setChat({
           ...chat,
           chatting: chat.chatting.concat(textReceive),
         });
+    }
+    var contac = chat.contactsConv.filter((con) => {
+      return con.id === textReceive.id;
+    });
+    //new msj new contact add contacs array and convertations
+    if (contac.length === 0) {
+      var convertition;
+      getConvertations()
+        .then((conv) => {
+          convertition = conv;
+          return getContacts();
+        })
+        .then((contact) => {
+          setChat({
+            ...chat,
+            contactsConv: contact.data,
+            convertations: convertition.data,
+          });
+        })
+        .catch((err) => console.log(err));
     }
 
     // eslint-disable-next-line
@@ -213,10 +223,13 @@ function Chat({ user }) {
   //---------------------------------------component chat----------------------------------------------------------------------------------------------
   if (user) {
     return (
-      <div className="box_messanger_father" name="box-father">
+      <Box name="box-father" className={classes.box_messanger_father}>
         {/* conversation list */}
-        <div name="contacts" className="box_contacts_a">
-          <div name="menu-contacts-wrapper" className="menu_contacts_wrapper">
+        <Box name="contacts" className={classes.box_contacts_a}>
+          <Box
+            name="menu-contacts-wrapper"
+            className={classes.menu_Contacts_Wrapper}
+          >
             <Input
               type="text"
               name="inputSearch"
@@ -224,7 +237,14 @@ function Chat({ user }) {
             ></Input>
             {chat.contactsConv.length &&
               chat.contactsConv.map((con) => (
-                <Box key={con.id}>
+                <Box
+                  key={con.id}
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: "90% 10%",
+                    marginTop: "7%",
+                  }}
+                >
                   <Box
                     onClick={() => {
                       chatContact(con.id);
@@ -236,22 +256,23 @@ function Chat({ user }) {
                       contactsOnline={UsersOnlines}
                     />
                   </Box>
-                  <Button
+                  <button
+                    sx={{ Width: "5%" }}
                     onClick={() => {
                       deleteConvert(con);
                     }}
                   >
                     X
-                  </Button>
+                  </button>
                 </Box>
               ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
         {/*message list*/}
         <div style={{ flex: "5.5" }}>
           {chat.currentCont ? (
-            <div name="conversations" className="box_conversations_b">
-              <div name="message" className="menu_chating_wrapper">
+            <Box name="conversations" className={classes.box_conversations_b}>
+              <Box name="message" className={classes.menu_chating_wrapper}>
                 {chat.chatting.map((msn, i) => (
                   <Message
                     scrollRef={scrollRef}
@@ -261,8 +282,8 @@ function Chat({ user }) {
                     message={msn}
                   />
                 ))}
-              </div>
-            </div>
+              </Box>
+            </Box>
           ) : (
             <h3 className="startchat">Click a contact to start a chat</h3>
           )}
@@ -298,10 +319,10 @@ function Chat({ user }) {
           )}
         </div>
         {/*contact list of purchased services */}
-        <div name="contacts-online" className="box_contactsStates_c">
-          <div
+        <Box name="contacts-online" className={classes.box_contactsStates_c}>
+          <Box
             name="menu-contactsOnline-wrapper"
-            className="menu_contactsOnline_wrapper"
+            className={classes.menu_contactsOnline_wrapper}
           >
             contacts bougth
             {chat.contactsBoungth.length &&
@@ -319,9 +340,9 @@ function Chat({ user }) {
                   />
                 </Box>
               ))}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     );
   } else {
     return <h3>cargando</h3>;

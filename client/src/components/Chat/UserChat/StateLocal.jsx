@@ -11,25 +11,21 @@ export function getConvertations() {
 }
 //------------------------------------------------------------------------------------get contacts bougth
 export function getContactsBougth() {
- 
-    try {
-      var resp = axios.get(`chat/contactsBougth`);
-      return resp;
-    } catch (err) {
-      console.log(err);
-    }
- 
+  try {
+    var resp = axios.get(`chat/contactsBougth`);
+    return resp;
+  } catch (err) {
+    console.log(err);
+  }
 }
 //----------------------------------------------------------------------------------get contacts convertation
 export function getContacts() {
-
-    try {
-      var resp = axios.get(`chat/contacts`);
-      return resp;
-    } catch (err) {
-      console.log(err);
-    }
- 
+  try {
+    var resp = axios.get(`chat/contacts`);
+    return resp;
+  } catch (err) {
+    console.log(err);
+  }
 }
 //------------------------------------------------------------------------------------
 export function getPots(idConv, offset) {
@@ -47,24 +43,20 @@ export function getPots(idConv, offset) {
 }
 //---------------------------------------------------------------------------------delete convertation
 export function deleteConvertation(idconvertation) {
-
-    try {
-      return axios.delete(`chat/convertations/${idconvertation}`);
-    } catch (err) {
-      console.log(err);
-    }
-  
+  try {
+    return axios.delete(`chat/convertations/${idconvertation}`);
+  } catch (err) {
+    console.log(err);
+  }
 }
 //-----------------------------------------------------------------------------------------new convertation
 export function newConvertation(contact) {
- 
-    try {
-      var resp = axios.post(`chat/convertations/${contact}`);
-      return resp;
-    } catch (err) {
-      console.log(err);
-    }
-  
+  try {
+    var resp = axios.post(`chat/convertations/${contact}`);
+    return resp;
+  } catch (err) {
+    console.log(err);
+  }
 }
 //-----------------------------------------------------------------------------------------------send message
 export function sendMessage(msn) {
