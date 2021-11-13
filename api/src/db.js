@@ -76,15 +76,6 @@ const {
 // Aca vendrian las relaciones
 
 Service.belongsToMany(Users, {
-  as: 'servicesBought',
-  through: 'services_users_bought',
-});
-Users.belongsToMany(Service, {
-  as: 'servicesBought',
-  through: 'services_users_bought',
-});
-
-Service.belongsToMany(Users, {
   as: 'servicesFavs',
   through: 'services_users_favourites',
 });
@@ -116,19 +107,18 @@ Service.belongsTo(Category);
 Province.hasMany(City);
 City.belongsTo(Province);
 
-// Service -> n provinces
-// Provinces -> m services
-Service.belongsToMany(Province, { through: 'services_provinces' });
-Province.belongsToMany(Service, { through: 'services_provinces' });
+// Province -> n services
+// Service -> 1 province
+Province.hasMany(Service);
+Service.belongsTo(Province);
+
+// City -> n services
+// Service -> 1 city
+City.hasMany(Service);
+Service.belongsTo(City);
 
 Users.hasMany(Chat);
 Chat.belongsTo(Users);
-
-// Service -> n cities
-// City -> m services
-Service.belongsToMany(City, { through: 'services_cities' });
-City.belongsToMany(Service, { through: 'services_cities' });
-// Product.hasMany(Reviews);
 
 Convertations.hasMany(Chat);
 Chat.belongsTo(Convertations);

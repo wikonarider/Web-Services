@@ -145,6 +145,12 @@ const turismo = [
   },
 ];
 
+const other = [
+  {
+    name: "Others",
+  },
+];
+
 const arrayCategories = [
   clases,
   reparaciones,
@@ -152,6 +158,7 @@ const arrayCategories = [
   transporte,
   domestico,
   turismo,
+  other,
 ];
 
 function linkAllGroups() {

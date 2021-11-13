@@ -42,6 +42,7 @@ function Chat({ user, darkTheme }) {
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
+  
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
