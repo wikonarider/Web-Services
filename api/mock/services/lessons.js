@@ -1,134 +1,158 @@
 const danzas = [
   {
-    title: 'clases de rock and roll y americanos',
+    title: "clases de rock and roll y americanos",
     description:
-      'queres aprender rock and roll y americano rock y classicos en quilmes centro.son clases personalizadas de 1 hora x persona..vos elegis dia y hora...i',
-    img: 'https://image.freepik.com/free-photo/girl-dancing-hip-hop-stylish-clothes-gradient-background-dance-hall-neon-light_155003-9249.jpg',
+      "queres aprender rock and roll y americano rock y classicos en quilmes centro.son clases personalizadas de 1 hora x persona..vos elegis dia y hora...i",
+    img: "https://image.freepik.com/free-photo/girl-dancing-hip-hop-stylish-clothes-gradient-background-dance-hall-neon-light_155003-9249.jpg",
     price: 500,
     categoryId: 1,
-    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-09-13T08:34:54.602Z',
+    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-09-13T08:34:54.602Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases Danza Árabe individuales o dúos',
+    title: "Clases Danza Árabe individuales o dúos",
     description:
-      'Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.',
-    img: 'https://image.freepik.com/free-photo/sensual-emotional-dance-beautiful-ballerina_155003-31832.jpg',
+      "Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.",
+    img: "https://image.freepik.com/free-photo/sensual-emotional-dance-beautiful-ballerina_155003-31832.jpg",
     price: 1000,
     categoryId: 1,
-    userId: '4e21929a-36ad-11ec-8d3d-0242ad130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'ACRODANCE FUSION NIÑAS PEQUEÑAS',
+    title: "ACRODANCE FUSION NIÑAS PEQUEÑAS",
     description:
-      'Acrodance fusion con la Gimnasia artistica y la danza, niñas pequeñas. Protocolo, clases presenciales, grupos reducidos. Danza clasica. Gimnasia artistica, coreografia, tambien clases de pole dance niñas, clases para adultos de partenaire acrobatico - Contemporaneo - Hip hop - grupo familiar con protocolo grupo reducido INFO x telefono Balbin y congreso',
-    img: 'https://image.freepik.com/free-photo/active-people-taking-part-zumba-class_23-2149074920.jpg',
+      "Acrodance fusion con la Gimnasia artistica y la danza, niñas pequeñas. Protocolo, clases presenciales, grupos reducidos. Danza clasica. Gimnasia artistica, coreografia, tambien clases de pole dance niñas, clases para adultos de partenaire acrobatico - Contemporaneo - Hip hop - grupo familiar con protocolo grupo reducido INFO x telefono Balbin y congreso",
+    img: "https://image.freepik.com/free-photo/active-people-taking-part-zumba-class_23-2149074920.jpg",
     price: 2900,
     categoryId: 1,
-    userId: '4e219448-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
-    title: 'clases de rock and roll y americanos',
+    title: "clases de rock and roll y americanos",
     description:
-      'queres aprender rock and roll y americano rock y classicos en quilmes centro.son clases personalizadas de 1 hora x persona..vos elegis dia y hora...i',
-    img: 'https://image.freepik.com/free-photo/portrait-young-ballerina-warming-up_23-2148461784.jpg',
+      "queres aprender rock and roll y americano rock y classicos en quilmes centro.son clases personalizadas de 1 hora x persona..vos elegis dia y hora...i",
+    img: "https://image.freepik.com/free-photo/portrait-young-ballerina-warming-up_23-2148461784.jpg",
     price: 500,
     categoryId: 1,
-    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases Danza Árabe individuales o dúos',
+    title: "Clases Danza Árabe individuales o dúos",
     description:
-      'Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.',
-    img: 'https://image.freepik.com/free-photo/graceful-ballet-dancer-classic-ballerina-dancing-isolated-grey-studio-background-showing-flexibility-grace-dance-artist-contemporary-movement-action-motion-concept_155003-34483.jpg',
+      "Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app. Clases de Danzas Arabes en Olivos, zona comercial, Profesora Nayla Nader , actividad con protocolo, las clases son individuales o en dúos, vos elegís, consultas al whats app.",
+    img: "https://image.freepik.com/free-photo/graceful-ballet-dancer-classic-ballerina-dancing-isolated-grey-studio-background-showing-flexibility-grace-dance-artist-contemporary-movement-action-motion-concept_155003-34483.jpg",
     price: 1000,
     categoryId: 1,
-    userId: '4e21929a-36ad-11ec-8d3d-0242ad130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'ACRODANCE FUSION NIÑAS PEQUEÑAS',
+    title: "ACRODANCE FUSION NIÑAS PEQUEÑAS",
     description:
-      'Acrodance fusion con la Gimnasia artistica y la danza, niñas pequeñas. Protocolo, clases presenciales, grupos reducidos. Danza clasica. Gimnasia artistica, coreografia, tambien clases de pole dance niñas, clases para adultos de partenaire acrobatico - Contemporaneo - Hip hop - grupo familiar con protocolo grupo reducido INFO x telefono Balbin y congreso',
-    img: 'https://img.freepik.com/free-photo/teen-ballerina-white-pack-sitting-chair_155003-8815.jpg?size=338&ext=jpg',
+      "Acrodance fusion con la Gimnasia artistica y la danza, niñas pequeñas. Protocolo, clases presenciales, grupos reducidos. Danza clasica. Gimnasia artistica, coreografia, tambien clases de pole dance niñas, clases para adultos de partenaire acrobatico - Contemporaneo - Hip hop - grupo familiar con protocolo grupo reducido INFO x telefono Balbin y congreso",
+    img: "https://img.freepik.com/free-photo/teen-ballerina-white-pack-sitting-chair_155003-8815.jpg?size=338&ext=jpg",
     price: 2900,
     categoryId: 1,
-    userId: '4e219448-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const idiomas = [
   {
-    title: 'Clases de inglés americano y británico',
+    title: "Clases de inglés americano y británico",
     description:
-      'Clases de inglés americano y británico. Cursos, exámenes nacionales e internacionales, apoyo escolar, conversación. Solamente clases individuales, a tu ritmo y necesidad. Amplia experiencia.' +
-      '      Estoy en Villa Martelli, pero doy clases por videollamada de WhatsApp también.',
-    img: 'https://image.freepik.com/free-photo/woman-teaching-kids-english-class-online_23-2148962947.jpg',
+      "Clases de inglés americano y británico. Cursos, exámenes nacionales e internacionales, apoyo escolar, conversación. Solamente clases individuales, a tu ritmo y necesidad. Amplia experiencia." +
+      "      Estoy en Villa Martelli, pero doy clases por videollamada de WhatsApp también.",
+    img: "https://image.freepik.com/free-photo/woman-teaching-kids-english-class-online_23-2148962947.jpg",
     price: 500,
     categoryId: 2,
-    userId: 'be19f20c-36aa-11ec-8d3d-0242ac130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de Francés particulares y Traducciones',
+    title: "Clases de Francés particulares y Traducciones",
     description:
-      'Clases particulares de Francés. Soy profesora de francés recibida en la Alianza Francesa.    Práctica de conversación para principiantes, para viajes, para diferentes empleos o trabajos, y para prepararse a exámenes de lengua francesa. También se realizan traducciones del idioma francés al español y del español al francés. Villa Urquiza, Capital Federal, Caba',
-    img: 'https://image.freepik.com/free-photo/female-english-teacher-doing-online-lessons_23-2149019746.jpg',
+      "Clases particulares de Francés. Soy profesora de francés recibida en la Alianza Francesa.    Práctica de conversación para principiantes, para viajes, para diferentes empleos o trabajos, y para prepararse a exámenes de lengua francesa. También se realizan traducciones del idioma francés al español y del español al francés. Villa Urquiza, Capital Federal, Caba",
+    img: "https://image.freepik.com/free-photo/female-english-teacher-doing-online-lessons_23-2149019746.jpg",
     price: 500,
     categoryId: 2,
-    userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Clases de Portugues',
+    title: "Clases de Portugues",
     description:
-      'Clases de portugués on-line personalizadas o en grupo. Clases para adultos y niños.',
-    img: 'https://img.freepik.com/free-photo/teacher-doing-her-english-lessons-online_23-2148999567.jpg?size=626&ext=jpg',
+      "Clases de portugués on-line personalizadas o en grupo. Clases para adultos y niños.",
+    img: "https://img.freepik.com/free-photo/teacher-doing-her-english-lessons-online_23-2148999567.jpg?size=626&ext=jpg",
     price: 600,
     categoryId: 2,
-    userId: '4e219056-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-10-07T20:23:20.559Z',
+    userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-10-07T20:23:20.559Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
-    title: 'Clases de inglés americano y británico',
+    title: "Clases de inglés americano y británico",
     description:
-      'Clases de inglés americano y británico. Cursos, exámenes nacionales e internacionales, apoyo escolar, conversación. Solamente clases individuales, a tu ritmo y necesidad. Amplia experiencia.' +
-      '      Estoy en Villa Martelli, pero doy clases por videollamada de WhatsApp también.',
-    img: 'https://image.freepik.com/free-photo/confident-teacher-explaining-lesson-pupils_74855-9751.jpg',
+      "Clases de inglés americano y británico. Cursos, exámenes nacionales e internacionales, apoyo escolar, conversación. Solamente clases individuales, a tu ritmo y necesidad. Amplia experiencia." +
+      "      Estoy en Villa Martelli, pero doy clases por videollamada de WhatsApp también.",
+    img: "https://image.freepik.com/free-photo/confident-teacher-explaining-lesson-pupils_74855-9751.jpg",
     price: 500,
     categoryId: 2,
-    userId: 'be19f20c-36aa-11ec-8d3d-0242ac130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de Francés particulares y Traducciones',
+    title: "Clases de Francés particulares y Traducciones",
     description:
-      'Clases particulares de Francés. Soy profesora de francés recibida en la Alianza Francesa.    Práctica de conversación para principiantes, para viajes, para diferentes empleos o trabajos, y para prepararse a exámenes de lengua francesa. También se realizan traducciones del idioma francés al español y del español al francés. Villa Urquiza, Capital Federal, Caba',
-    img: 'https://image.freepik.com/free-photo/young-asia-financial-student-ladies-watching-lesson-online-studying-with-laptop-tablet-living-room-from-home-night_7861-3429.jpg',
+      "Clases particulares de Francés. Soy profesora de francés recibida en la Alianza Francesa.    Práctica de conversación para principiantes, para viajes, para diferentes empleos o trabajos, y para prepararse a exámenes de lengua francesa. También se realizan traducciones del idioma francés al español y del español al francés. Villa Urquiza, Capital Federal, Caba",
+    img: "https://image.freepik.com/free-photo/young-asia-financial-student-ladies-watching-lesson-online-studying-with-laptop-tablet-living-room-from-home-night_7861-3429.jpg",
     price: 500,
     categoryId: 2,
-    userId: '4e21899e-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Clases de Portugues',
+    title: "Clases de Portugues",
     description:
-      'Clases de portugués on-line personalizadas o en grupo. Clases para adultos y niños.',
-    img: 'https://img.freepik.com/free-photo/senior-male-professor-explaining-writing-green-chalkboard_23-2148200956.jpg?size=626&ext=jpg',
+      "Clases de portugués on-line personalizadas o en grupo. Clases para adultos y niños.",
+    img: "https://img.freepik.com/free-photo/senior-male-professor-explaining-writing-green-chalkboard_23-2148200956.jpg?size=626&ext=jpg",
     price: 600,
     categoryId: 2,
-    userId: '4e219056-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const informatica = [
   {
-    title: 'CLASES DE EXCEL ADMINISTRATIVO CONTABLES EN MICROCENTRO',
+    title: "CLASES DE EXCEL ADMINISTRATIVO CONTABLES EN MICROCENTRO",
     description: `CLASES ONLINE O PRESENCIALES
 
     CECAH CAPACITACIÓN
@@ -142,36 +166,42 @@ const informatica = [
     ASISTENTE PYMES CON EXCEL ADMINISTRATIVO - WORD ADMINISTRATIVO - TANGO GESTION
     
     CONTAMOS CON BOLSA DE TRABAJO`,
-    img: 'https://image.freepik.com/free-photo/programmer-using-software-with-data-codes-firewall-security_482257-17966.jpg',
+    img: "https://image.freepik.com/free-photo/programmer-using-software-with-data-codes-firewall-security_482257-17966.jpg",
     price: 400,
     categoryId: 3,
-    userId: '4e2195c4-36ad-11ec-8d3d-0242ac120003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de computación',
+    title: "Clases de computación",
     description: `Clases de computación a domicilio o a distancia.
 
     Todas las edades.
     
     10 años de experiencia en el rubro`,
-    img: 'https://image.freepik.com/free-photo/working-code_1098-19858.jpg',
+    img: "https://image.freepik.com/free-photo/working-code_1098-19858.jpg",
     price: 400,
     categoryId: 3,
-    userId: '4e219510-36ad-11ec-8d3d-0242ac110003',
-    createdAt: '2021-10-07T20:23:20.559Z',
+    userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
+    createdAt: "2021-10-07T20:23:20.559Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Cursos de Tango Gestion',
+    title: "Cursos de Tango Gestion",
     description: `Cursos de Tango gestión - Excel - Word - Access - Asistente pymes - auxiliar contable`,
-    img: 'https://image.freepik.com/free-photo/rear-view-programmer-working-all-night-long_1098-18697.jpg',
+    img: "https://image.freepik.com/free-photo/rear-view-programmer-working-all-night-long_1098-18697.jpg",
     price: 300,
     categoryId: 3,
-    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-03-30T03:56:53.611Z',
+    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
-    title: 'CLASES DE EXCEL ADMINISTRATIVO CONTABLES EN MICROCENTRO',
+    title: "CLASES DE EXCEL ADMINISTRATIVO CONTABLES EN MICROCENTRO",
     description: `CLASES ONLINE O PRESENCIALES
 
     CECAH CAPACITACIÓN
@@ -185,39 +215,45 @@ const informatica = [
     ASISTENTE PYMES CON EXCEL ADMINISTRATIVO - WORD ADMINISTRATIVO - TANGO GESTION
     
     CONTAMOS CON BOLSA DE TRABAJO`,
-    img: 'https://image.freepik.com/free-vector/isometric-programming-landing-page-template_23-2148218249.jpg',
+    img: "https://image.freepik.com/free-vector/isometric-programming-landing-page-template_23-2148218249.jpg",
     price: 400,
     categoryId: 3,
-    userId: '4e2195c4-36ad-11ec-8d3d-0242ac120003',
-    createdAt: '2020-03-30T03:56:53.611Z',
+    userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
+    createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de computación',
+    title: "Clases de computación",
     description: `Clases de computación a domicilio o a distancia.
 
     Todas las edades.
     
     10 años de experiencia en el rubro`,
-    img: 'https://image.freepik.com/free-photo/portrait-little-kids-using-vr-headsets-having-fun_74855-16426.jpg',
+    img: "https://image.freepik.com/free-photo/portrait-little-kids-using-vr-headsets-having-fun_74855-16426.jpg",
     price: 400,
     categoryId: 3,
-    userId: '4e219510-36ad-11ec-8d3d-0242ac110003',
-    createdAt: '2020-03-30T03:56:53.611Z',
+    userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
+    createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Cursos de Tango Gestion',
+    title: "Cursos de Tango Gestion",
     description: `Cursos de Tango gestión - Excel - Word - Access - Asistente pymes - auxiliar contable`,
-    img: 'https://image.freepik.com/free-photo/parts-hard-disk-belonging-computer-hardware-exploded-one-by-one-arranged_463209-20.jpg',
+    img: "https://image.freepik.com/free-photo/parts-hard-disk-belonging-computer-hardware-exploded-one-by-one-arranged_463209-20.jpg",
     price: 300,
     categoryId: 3,
-    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-03-30T03:56:53.611Z',
+    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const musica = [
   {
-    title: 'Clases de Guitarra en Ramos Mejia',
+    title: "Clases de Guitarra en Ramos Mejia",
     description: `Clases de guitarra
 
     (a partir de los 8 años)
@@ -227,13 +263,15 @@ const musica = [
     También se preparan ingresos a conservatorios,clases de apoyo en armonía,teoría y solfeo,audio perceptiva: dictados melódicos-armónicos y rítmicos,composición.
     
     Las clases son en Zona Oeste,barrio de Ramos Mejía.`,
-    img: 'https://image.freepik.com/free-photo/caucasian-woman-s-portrait-isolated-blue-background-multicolored-neon-light_155003-32526.jpg',
+    img: "https://image.freepik.com/free-photo/caucasian-woman-s-portrait-isolated-blue-background-multicolored-neon-light_155003-32526.jpg",
     price: 400,
     categoryId: 4,
-    userId: '4e218f98-36ad-11ec-8d3d-0242ac130003',
+    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Curso de bongó nivel inicial, intermedio y avanzado',
+    title: "Curso de bongó nivel inicial, intermedio y avanzado",
     description: `METODOLOGIA
 
     Forma de afinación.
@@ -281,23 +319,27 @@ const musica = [
     Desarrollo de la improvisación.
     
     (EL VALOR ES POR CLASE)`,
-    img: 'https://image.freepik.com/free-vector/flat-minimal-music-festival-youtube-thumbnail_23-2149034936.jpg',
+    img: "https://image.freepik.com/free-vector/flat-minimal-music-festival-youtube-thumbnail_23-2149034936.jpg",
     price: 1000,
     categoryId: 4,
-    userId: '4e21929a-36ad-11ec-8d3d-0242ad130003',
+    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Clases de Canto Popular Online',
+    title: "Clases de Canto Popular Online",
     description: `vocalización-soltura de la voz-afinación-diafragma-interpretación trabajo de la respiración-tecnica vocal-preparación para casting. trabajo escénico- audidiones- clases Individuale. zona belgrano y centro. comienzan en marzo Informate para la Inscripción.
 
     CLASES ONLINE`,
-    img: 'https://image.freepik.com/free-photo/side-view-female-musician-recording-song-home-while-playing-acoustic-guitar_23-2148890847.jpg',
+    img: "https://image.freepik.com/free-photo/side-view-female-musician-recording-song-home-while-playing-acoustic-guitar_23-2148890847.jpg",
     price: 1500,
     categoryId: 4,
-    userId: '4e218d5e-36ad-11ec-8d3d-0242ac130003',
+    userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
-    title: 'Clases de Guitarra',
+    title: "Clases de Guitarra",
     description: `Clases de guitarra
 
     (a partir de los 8 años)
@@ -307,14 +349,16 @@ const musica = [
     También se preparan ingresos a conservatorios,clases de apoyo en armonía,teoría y solfeo,audio perceptiva: dictados melódicos-armónicos y rítmicos,composición.
     
     Las clases son en Zona Oeste,barrio de Ramos Mejía.`,
-    img: 'https://image.freepik.com/free-photo/female-singer-portrait-isolated-green-studio-wall-neon-light_155003-31971.jpg',
+    img: "https://image.freepik.com/free-photo/female-singer-portrait-isolated-green-studio-wall-neon-light_155003-31971.jpg",
     price: 400,
     categoryId: 4,
-    userId: '4e218f98-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-09-13T08:34:54.602Z',
+    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-09-13T08:34:54.602Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Curso de bongó nivel inicial, intermedio y avanzado',
+    title: "Curso de bongó nivel inicial, intermedio y avanzado",
     description: `METODOLOGIA
 
     Forma de afinación.
@@ -362,38 +406,44 @@ const musica = [
     Desarrollo de la improvisación.
     
     (EL VALOR ES POR CLASE)`,
-    img: 'https://image.freepik.com/free-photo/close-up-microphone-concert-stage-with-beautiful-lighting_169016-11074.jpg',
+    img: "https://image.freepik.com/free-photo/close-up-microphone-concert-stage-with-beautiful-lighting_169016-11074.jpg",
     price: 1000,
     categoryId: 4,
-    userId: '4e21929a-36ad-11ec-8d3d-0242ad130003',
-    createdAt: '2020-07-24T21:03:10.438Z',
+    userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Clases de Canto Popular Online',
+    title: "Clases de Canto Popular Online",
     description: `vocalización-soltura de la voz-afinación-diafragma-interpretación trabajo de la respiración-tecnica vocal-preparación para casting. trabajo escénico- audidiones- clases Individuale. zona belgrano y centro. comienzan en marzo Informate para la Inscripción.
 
     CLASES ONLINE`,
-    img: 'https://image.freepik.com/free-psd/music-banner-design-template_23-2149081199.jpg',
+    img: "https://image.freepik.com/free-psd/music-banner-design-template_23-2149081199.jpg",
     price: 1500,
     categoryId: 4,
-    userId: '4e218d5e-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-01-09T14:32:38.409Z',
+    userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const teatro = [
   {
-    title: 'CLASES DE TEATRO MUSICAL INFANTIL Y TEATRO PARA ADULTOS',
+    title: "CLASES DE TEATRO MUSICAL INFANTIL Y TEATRO PARA ADULTOS",
     description: `CLASES DE TEATRO MUSICAL INFANTIL PRESENCIAL Y CON PROTOCOLOS.
     TEATRO ADULTOS POR ZOOM. INSCRIPCIONES ABIERTAS!!`,
-    img: 'https://image.freepik.com/free-photo/skillful-dancers-performing-dark-room-concert-light-smoke-sensual-couple-performing-artistic-emotional-contemporary-dance_146671-14603.jpg',
+    img: "https://image.freepik.com/free-photo/skillful-dancers-performing-dark-room-concert-light-smoke-sensual-couple-performing-artistic-emotional-contemporary-dance_146671-14603.jpg",
     price: 1500,
     categoryId: 6,
-    userId: '4e2195c4-36ad-11ec-8d3d-0242ac120003',
-    createdAt: '2021-10-07T20:23:20.559Z',
+    userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
+    createdAt: "2021-10-07T20:23:20.559Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de teatro',
+    title: "Clases de teatro",
     description: `MAÑANA MAÑANA MAÑANAAAA
     ¡NUEVO TALLER DE ACTUACIÓN EN VILLA MAIPÚ!
     Desde el 13 de octubre, todos los miercoles a las 19:30hs, hasta las 20:30, en nuestro querido Club Atlético Central Argentino! 
@@ -402,14 +452,16 @@ const teatro = [
     Y si compartís nos re ayudas. 😁❤
     @argentino.club #teatro #actuación #clasesdeteatro #villamaipú #chicos #niños #chicas #niñas #hoy #arte #sanma #sanmartin #caseros #ballester #sanandres #vp #tbt #actividadesparachicos #actividadesinfantiles #teatroinfantil #buenprecio
     #norte`,
-    img: 'https://img.freepik.com/free-photo/smiling-female-mime-artist-looking-male-mime-artist-peeking-from-curtain_23-2147891614.jpg?size=626&ext=jpg',
+    img: "https://img.freepik.com/free-photo/smiling-female-mime-artist-looking-male-mime-artist-peeking-from-curtain_23-2147891614.jpg?size=626&ext=jpg",
     price: 200,
     categoryId: 6,
-    userId: 'be19f554-36aa-11ec-8d3d-0242ac130003',
-    createdAt: '2020-03-30T03:56:53.611Z',
+    userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
+    createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Teatro',
+    title: "Teatro",
     description: `✨🎭Clases de teatro para chicos!🎭✨
     .
     .
@@ -417,24 +469,28 @@ const teatro = [
     .
     .
     `,
-    img: 'https://image.freepik.com/free-vector/grand-opening_52683-8448.jpg',
+    img: "https://image.freepik.com/free-vector/grand-opening_52683-8448.jpg",
     price: 200,
     categoryId: 6,
-    userId: '4e219678-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
-    title: 'CLASES DE TEATRO MUSICAL INFANTIL Y TEATRO PARA ADULTOS',
+    title: "CLASES DE TEATRO MUSICAL INFANTIL Y TEATRO PARA ADULTOS",
     description: `CLASES DE TEATRO MUSICAL INFANTIL PRESENCIAL Y CON PROTOCOLOS.
     TEATRO ADULTOS POR ZOOM. INSCRIPCIONES ABIERTAS!!`,
-    img: 'https://img.freepik.com/free-photo/kisses-beautiful-young-woman-carnival-stylish-masquerade-costume-with-feathers-black-wall-neon-light-copyspace-ad-holidays-celebration-dancing-fashion-festive-time-party_155003-28539.jpg?size=626&ext=jpg',
+    img: "https://img.freepik.com/free-photo/kisses-beautiful-young-woman-carnival-stylish-masquerade-costume-with-feathers-black-wall-neon-light-copyspace-ad-holidays-celebration-dancing-fashion-festive-time-party_155003-28539.jpg?size=626&ext=jpg",
     price: 1500,
     categoryId: 6,
-    userId: '4e2195c4-36ad-11ec-8d3d-0242ac120003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
-    title: 'Clases de teatro',
+    title: "Clases de teatro",
     description: `MAÑANA MAÑANA MAÑANAAAA
     ¡NUEVO TALLER DE ACTUACIÓN EN VILLA MAIPÚ!
     Desde el 13 de octubre, todos los miercoles a las 19:30hs, hasta las 20:30, en nuestro querido Club Atlético Central Argentino! 
@@ -443,14 +499,16 @@ const teatro = [
     Y si compartís nos re ayudas. 😁❤
     @argentino.club #teatro #actuación #clasesdeteatro #villamaipú #chicos #niños #chicas #niñas #hoy #arte #sanma #sanmartin #caseros #ballester #sanandres #vp #tbt #actividadesparachicos #actividadesinfantiles #teatroinfantil #buenprecio
     #norte`,
-    img: 'https://image.freepik.com/free-photo/smiling-girl-holding-venetian-mask-her-hands-standing-front-stage-light_23-2147882995.jpg',
+    img: "https://image.freepik.com/free-photo/smiling-girl-holding-venetian-mask-her-hands-standing-front-stage-light_23-2147882995.jpg",
     price: 200,
     categoryId: 6,
-    userId: 'be19f554-36aa-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'Teatro',
+    title: "Teatro",
     description: `✨🎭Clases de teatro para chicos!🎭✨
     .
     .
@@ -458,18 +516,20 @@ const teatro = [
     .
     .
     `,
-    img: 'https://img.freepik.com/free-photo/beautiful-young-women-carnival-stylish-masquerade-costume-with-feathers-black-wall-neon-light_155003-35919.jpg?size=626&ext=jpg',
+    img: "https://img.freepik.com/free-photo/beautiful-young-women-carnival-stylish-masquerade-costume-with-feathers-black-wall-neon-light_155003-35919.jpg?size=626&ext=jpg",
     price: 200,
     categoryId: 6,
-    userId: '4e219678-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const academia = [
   {
     title:
-      'BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA',
+      "BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA",
     description: `Necesitas finalizar tu tesis? Monografía, Manuscrito Reporte de Caso Ensayo
 
     Practica Profesional Seminario Final de Grado Articulo
@@ -487,15 +547,17 @@ const academia = [
     SALVA TU GRADUACION AHORA
     
     contáctanos via WHATSAPP HACIENDO LINK ABAJO O POR CHAT OLX.`,
-    img: 'https://image.freepik.com/free-vector/first-day-school-background_23-2149029822.jpg',
+    img: "https://image.freepik.com/free-vector/first-day-school-background_23-2149029822.jpg",
     price: 3500,
     categoryId: 7,
-    userId: '4e218642-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title:
-      'BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA',
+      "BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA",
     description: `Asesoramiento Trabajos Prácticos Obligatorios y Foros
 
     Conozco las características de funcionamiento y formato de dichos trabajos.
@@ -505,23 +567,27 @@ const academia = [
     Trabajos hechos con calidad y responsabilidad
     
     No se cobran adelantos`,
-    img: 'https://img.freepik.com/free-photo/everyone-is-smiling-listens-group-people-business-conference-modern-classroom-daytime_146671-16288.jpg?size=626&ext=jpg',
+    img: "https://img.freepik.com/free-photo/everyone-is-smiling-listens-group-people-business-conference-modern-classroom-daytime_146671-16288.jpg?size=626&ext=jpg",
     price: 3500,
     categoryId: 7,
-    userId: '4e218c00-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'clases particulares de matemáticas',
+    title: "clases particulares de matemáticas",
     description: `Dicto clases particulares de matemáticas de los niveles primario, secundario, cbc y universitario, las clases pueden ser a domicilio.`,
-    img: 'https://image.freepik.com/free-photo/closeup-man-writing-arrow-up-graph-increase_53876-14001.jpg?1',
+    img: "https://image.freepik.com/free-photo/closeup-man-writing-arrow-up-graph-increase_53876-14001.jpg?1",
     price: 500,
     categoryId: 7,
-    userId: '4e2191dc-36ad-11ec-8d3d-0242ac230003',
+    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title:
-      'BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA',
+      "BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA",
     description: `Necesitas finalizar tu tesis? Monografía, Manuscrito Reporte de Caso Ensayo
 
     Practica Profesional Seminario Final de Grado Articulo
@@ -539,15 +605,17 @@ const academia = [
     SALVA TU GRADUACION AHORA
     
     contáctanos via WHATSAPP HACIENDO LINK ABAJO O POR CHAT OLX.`,
-    img: 'https://image.freepik.com/free-photo/close-up-view-driving-instructor-holding-checklist-while-background-female-student-steering-driving-car_342744-688.jpg',
+    img: "https://image.freepik.com/free-photo/close-up-view-driving-instructor-holding-checklist-while-background-female-student-steering-driving-car_342744-688.jpg",
     price: 3500,
     categoryId: 7,
-    userId: '4e218642-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2020-10-18T22:28:19.044Z',
+    userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title:
-      'BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA',
+      "BUSCAS AYUDA PARA TU TESIS? SI SE PUEDE TE AYUDAMOS CONSULTA AHORA MONOGRAFIAS TESIS MAESTRIA",
     description: `Asesoramiento Trabajos Prácticos Obligatorios y Foros
 
     Conozco las características de funcionamiento y formato de dichos trabajos.
@@ -557,36 +625,42 @@ const academia = [
     Trabajos hechos con calidad y responsabilidad
     
     No se cobran adelantos`,
-    img: 'https://image.freepik.com/free-photo/motorcycle-driving-school_342744-696.jpg',
+    img: "https://image.freepik.com/free-photo/motorcycle-driving-school_342744-696.jpg",
     price: 3500,
     categoryId: 7,
-    userId: '4e218c00-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-07-09T16:02:43.095Z',
+    userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'clases particulares de matemáticas',
+    title: "clases particulares de matemáticas",
     description: `Dicto clases particulares de matemáticas de los niveles primario, secundario, cbc y universitario, las clases pueden ser a domicilio.`,
-    img: 'https://image.freepik.com/free-psd/driving-school-landing-page-design-template_23-2149087411.jpg',
+    img: "https://image.freepik.com/free-psd/driving-school-landing-page-design-template_23-2149087411.jpg",
     price: 500,
     categoryId: 7,
-    userId: '4e2191dc-36ad-11ec-8d3d-0242ac230003',
-    createdAt: '2021-05-06T04:32:55.026Z',
+    userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    createdAt: "2021-05-06T04:32:55.026Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
 const otros = [
   {
-    title: 'clases de tenis',
+    title: "clases de tenis",
     description: `Clasese de tenis en zona de flores y Almagro, en otras zonas consultar`,
-    img: 'https://image.freepik.com/free-photo/tennis-player-is-trying-hit-score_329181-14467.jpg',
+    img: "https://image.freepik.com/free-photo/tennis-player-is-trying-hit-score_329181-14467.jpg",
     price: 400,
     categoryId: 7,
-    userId: '4e218e1c-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-05-06T04:32:55.026Z',
+    userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-05-06T04:32:55.026Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title:
-      'TATUADOR PROFESIONAL//CENTRO EDUCATIVO ALEM( PRESENCIAL/ PROTOCOLOS SANITARIOS APROBADOS)',
+      "TATUADOR PROFESIONAL//CENTRO EDUCATIVO ALEM( PRESENCIAL/ PROTOCOLOS SANITARIOS APROBADOS)",
     description: `24 CLASES(DOS HORAS POR SEMANA) TEÓRICO/PRÁCTICAS
 
     HORARIO DE CURSADA:
@@ -664,20 +738,24 @@ const otros = [
     CLASE 23 MODELO VIVO
     
     CLASE 24 EVALUACIÓN`,
-    img: 'https://image.freepik.com/free-photo/man-with-ginger-beard-apron-gloves_273609-20961.jpg',
+    img: "https://image.freepik.com/free-photo/man-with-ginger-beard-apron-gloves_273609-20961.jpg",
     price: 2000,
     categoryId: 7,
-    userId: '4e219812-36ad-11ec-8d3d-0242ac139003',
-    createdAt: '2021-05-17T10:33:09.794Z',
+    userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
+    createdAt: "2021-05-17T10:33:09.794Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
-    title: 'CURSO ONLINE DE UÑAS ESCULPIDAS EN GEL',
+    title: "CURSO ONLINE DE UÑAS ESCULPIDAS EN GEL",
     description: `Clasese de tenis en zona de flores y Almagro, en otras zonas consultar`,
-    img: 'https://img.freepik.com/free-photo/woman-showing-her-beautiful-nails_23-2148697087.jpg?size=626&ext=jpg',
+    img: "https://img.freepik.com/free-photo/woman-showing-her-beautiful-nails_23-2148697087.jpg?size=626&ext=jpg",
     price: 499,
     categoryId: 7,
-    userId: '4e218f98-36ad-11ec-8d3d-0242ac130003',
-    createdAt: '2021-05-04T13:44:37.766Z',
+    userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
+    createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 

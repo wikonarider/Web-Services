@@ -8,6 +8,8 @@ const freight = [
     categoryId: 27,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-05-11T10:00:56.826Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Fletes",
@@ -18,6 +20,8 @@ const freight = [
     categoryId: 27,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-06T09:21:53.535Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Remolque de Motos",
@@ -28,6 +32,8 @@ const freight = [
     categoryId: 27,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-08-31T03:18:33.852Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Fletes, Repartos, Distribuciones, Trasbordo",
@@ -38,6 +44,8 @@ const freight = [
     categoryId: 27,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-08-31T03:18:33.852Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Fletes",
@@ -48,6 +56,8 @@ const freight = [
     categoryId: 27,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-08-31T03:18:33.852Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Remolque de Motos",
@@ -58,6 +68,8 @@ const freight = [
     categoryId: 27,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-08-31T03:18:33.852Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -70,6 +82,8 @@ const transport = [
     categoryId: 28,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2020-09-01T23:46:02.474Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Te llevo al uruguay : Remis ",
@@ -80,6 +94,8 @@ const transport = [
     categoryId: 27,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-09-01T23:46:02.474Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Traslado de mascotas a todo el país.",
@@ -90,6 +106,8 @@ const transport = [
     categoryId: 27,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-16T04:23:20.531Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Servicio de limusinas",
@@ -99,6 +117,8 @@ const transport = [
     categoryId: 28,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2021-02-16T04:23:20.531Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Te llevo al uruguay : Remis ",
@@ -109,6 +129,8 @@ const transport = [
     categoryId: 27,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-16T04:23:20.531Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Traslado de mascotas a todo el país.",
@@ -119,6 +141,8 @@ const transport = [
     categoryId: 27,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-16T04:23:20.531Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -131,6 +155,8 @@ const moving = [
     price: 500,
     categoryId: 28,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "MINIFLETES ECONOMICOS ",
@@ -140,6 +166,8 @@ const moving = [
     price: 1200,
     categoryId: 28,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Flete o pequeña mudanza a Mar Del Plata.",
@@ -149,6 +177,8 @@ const moving = [
     price: 28000,
     categoryId: 28,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "FLETES Y MUDANZAS CIUDAD Y LARGA DISTANCIA",
@@ -159,6 +189,8 @@ const moving = [
     categoryId: 28,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2021-02-16T04:23:20.531Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "MINIFLETES ECONOMICOS ",
@@ -169,6 +201,8 @@ const moving = [
     categoryId: 28,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-03-10T05:42:59.530Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Flete o pequeña mudanza a Mar Del Plata.",
@@ -179,6 +213,8 @@ const moving = [
     categoryId: 28,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2020-03-10T05:42:59.530Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -192,6 +228,8 @@ const other = [
     categoryId: 29,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-10T05:11:10.689Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Trailer gastronómico o bien para casa rodante",
@@ -202,6 +240,8 @@ const other = [
     categoryId: 29,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2020-04-10T05:11:10.689Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Habilitación de taxi",
@@ -211,6 +251,8 @@ const other = [
     categoryId: 29,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2021-08-31T10:51:53.994Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 module.exports = {

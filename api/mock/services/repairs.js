@@ -8,6 +8,8 @@ const carpentry = [
     categoryId: 8,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2020-06-30T11:11:03.574Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Cala de Carpintero",
@@ -18,6 +20,8 @@ const carpentry = [
     categoryId: 8,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-09-21T13:13:25.802Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Soy carpintero ago trabajos a medidas",
@@ -27,6 +31,8 @@ const carpentry = [
     categoryId: 8,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-02T15:47:37.277Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "carpintero con herramientas busco, zona pilar trabajos por tanto",
@@ -37,6 +43,8 @@ const carpentry = [
     categoryId: 8,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-02T15:47:37.277Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Cala de Carpintero",
@@ -47,6 +55,8 @@ const carpentry = [
     categoryId: 8,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-02T15:47:37.277Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Soy carpintero ago trabajos a medidas",
@@ -56,6 +66,8 @@ const carpentry = [
     categoryId: 8,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-02T15:47:37.277Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
@@ -68,6 +80,8 @@ const locksmith = [
     categoryId: 9,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-02-06T13:14:38.606Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Cerrajeros en Zona Sur, Barrio San Jose",
@@ -91,6 +105,8 @@ const locksmith = [
     categoryId: 9,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-18T06:18:06.438Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Cerrajero 24 Horas",
@@ -100,6 +116,8 @@ const locksmith = [
     categoryId: 9,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-25T00:03:20.962Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
@@ -112,6 +130,8 @@ const construction = [
     categoryId: 10,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-12T05:55:51.597Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "SE NECESITA OFICIAL ALBAÑIl c/experiencia",
@@ -122,6 +142,8 @@ const construction = [
     categoryId: 10,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-09-13T08:34:54.602Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Oficial Constructor Albañil",
@@ -134,6 +156,8 @@ const construction = [
     categoryId: 10,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Oficial Albañil",
@@ -143,6 +167,8 @@ const construction = [
     categoryId: 10,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "SE NECESITA OFICIAL ALBAÑIl c/experiencia",
@@ -153,6 +179,8 @@ const construction = [
     categoryId: 10,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Oficial Constructor Albañil",
@@ -165,6 +193,8 @@ const construction = [
     categoryId: 10,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-24T21:03:10.438Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
@@ -179,6 +209,8 @@ const electrical = [
     categoryId: 11,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2021-01-09T14:32:38.409Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Técnico en refrigeración aires acondicionados y electricista",
@@ -189,6 +221,8 @@ const electrical = [
     categoryId: 11,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2021-10-07T20:23:20.559Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "TerNICO ELECTRICISTA.",
@@ -198,6 +232,8 @@ const electrical = [
     categoryId: 11,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title:
@@ -209,6 +245,8 @@ const electrical = [
     categoryId: 11,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2020-03-30T03:56:53.611Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -221,6 +259,8 @@ const appliance = [
     categoryId: 12,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Reparaciones de electrodomésticos",
@@ -231,6 +271,8 @@ const appliance = [
     categoryId: 12,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-10-18T22:28:19.044Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "REPARACION Y VENTA DE GOMONES Y SEMIRRRIGIDOS VAMOS A DOMICILIO",
@@ -244,6 +286,8 @@ const appliance = [
     categoryId: 12,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Reparación y carga de gas",
@@ -253,6 +297,8 @@ const appliance = [
     categoryId: 12,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Reparaciones de electrodomésticos",
@@ -263,6 +309,8 @@ const appliance = [
     categoryId: 12,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "REPARACION Y VENTA DE GOMONES Y SEMIRRRIGIDOS VAMOS A DOMICILIO",
@@ -276,6 +324,8 @@ const appliance = [
     categoryId: 12,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -307,6 +357,8 @@ const computer = [
     price: 0,
     categoryId: 13,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Servicio Técnico PC",
@@ -349,6 +401,8 @@ const computer = [
     price: 1000,
     categoryId: 13,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Servicio Técnico en PC",
@@ -367,6 +421,8 @@ const computer = [
     price: 1000,
     categoryId: 13,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "SERVICIO TECNICO DE PC A DOMICILIO",
@@ -396,6 +452,8 @@ const computer = [
     categoryId: 13,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-09T16:02:43.095Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Servicio Técnico PC",
@@ -439,6 +497,8 @@ const computer = [
     categoryId: 13,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
     createdAt: "2021-05-06T04:32:55.026Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Servicio Técnico en PC",
@@ -458,6 +518,8 @@ const computer = [
     categoryId: 13,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-06T04:32:55.026Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -471,6 +533,8 @@ const smithy = [
     categoryId: 14,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-04-29T03:07:21.424Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -482,6 +546,8 @@ const smithy = [
     categoryId: 14,
     userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-04-29T03:07:21.424Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "ALBAÑILERIA EN GENERAL , ELECTRICIDAD , HERRERIA Y MAS",
@@ -492,6 +558,8 @@ const smithy = [
     categoryId: 7,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-17T10:33:09.794Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -526,6 +594,8 @@ const auto = [
     categoryId: 15,
     userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-17T10:33:09.794Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -538,6 +608,8 @@ const auto = [
     categoryId: 15,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title:
@@ -549,6 +621,8 @@ const auto = [
     categoryId: 15,
     userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Taller mecánico - Tractores - Máquinas Viales - Camiones - Buses",
@@ -580,6 +654,8 @@ const auto = [
     categoryId: 15,
     userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -592,6 +668,8 @@ const auto = [
     categoryId: 15,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title:
@@ -603,6 +681,8 @@ const auto = [
     categoryId: 15,
     userId: "4e218642-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-04T13:44:37.766Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -616,6 +696,8 @@ const painting = [
     categoryId: 16,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-08-16T20:17:05.819Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "PINTOR DE OBRA",
@@ -631,6 +713,8 @@ const painting = [
     categoryId: 16,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-08-16T20:17:05.819Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "DURLOCK EN MAR DEL PLATA $800",
@@ -644,6 +728,8 @@ const painting = [
     categoryId: 16,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Pintor de obras",
@@ -654,6 +740,8 @@ const painting = [
     categoryId: 16,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "PINTOR DE OBRA",
@@ -669,6 +757,8 @@ const painting = [
     categoryId: 16,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "DURLOCK EN MAR DEL PLATA $800",
@@ -682,6 +772,8 @@ const painting = [
     categoryId: 16,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -695,6 +787,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-19T01:58:00.318Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "plomero gasista en general jose",
@@ -705,6 +799,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-19T01:58:00.318Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "PLOMERO EN GRAL  ",
@@ -714,6 +810,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "ELECTRICISTA PLOMERO REFRIGERACION CONSTRUCCIONES CIVILES DURLOCK",
@@ -724,6 +822,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "plomero gasista en general jose",
@@ -734,6 +834,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "PLOMERO EN GRAL  ",
@@ -743,6 +845,8 @@ const plumbing = [
     categoryId: 17,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -784,6 +888,8 @@ const other = [
     categoryId: 18,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "TRABAJO DE GESTOR",
@@ -794,6 +900,8 @@ const other = [
     categoryId: 18,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-01-23T19:57:11.713Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Tortas infantiles de Kitty, princesas",
@@ -803,6 +911,8 @@ const other = [
     categoryId: 18,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-01-23T19:57:11.713Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 

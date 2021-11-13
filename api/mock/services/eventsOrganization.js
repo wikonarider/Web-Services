@@ -8,6 +8,8 @@ const ambientation = [
     categoryId: 19,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-08-16T20:17:05.819Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "ALQUILER DE LIVING PARA EVENTOS",
@@ -18,6 +20,8 @@ const ambientation = [
     categoryId: 19,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Decoracion de eventos.",
@@ -28,6 +32,8 @@ const ambientation = [
     categoryId: 19,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2021-02-19T01:58:00.318Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Decoración Tematica Monana",
@@ -37,6 +43,8 @@ const ambientation = [
     price: 4.5,
     categoryId: 19,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "ALQUILER DE LIVING PARA EVENTOS",
@@ -46,6 +54,8 @@ const ambientation = [
     price: 3.5,
     categoryId: 19,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 14,
+    cityId: 14014,
   },
 ];
 
@@ -73,6 +83,8 @@ const catering = [
     categoryId: 20,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2020-04-30T15:25:12.445Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Grupo Musical Para Eventos",
@@ -89,6 +101,8 @@ const catering = [
     categoryId: 20,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-01-23T19:57:11.713Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Torta Pavlova",
@@ -97,6 +111,8 @@ const catering = [
     price: 2000,
     categoryId: 20,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -120,6 +136,8 @@ const catering = [
     price: 15.0,
     categoryId: 20,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Grupo Musical Para Eventos",
@@ -144,6 +162,8 @@ const catering = [
     categoryId: 20,
     userId: "be19f8e2-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-05T10:13:12.787Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 
@@ -173,6 +193,8 @@ const entertainment = [
     categoryId: 21,
     userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Servicio de dj sonido iluminación",
@@ -182,6 +204,8 @@ const entertainment = [
     categoryId: 21,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "SERVICIO DE DISCOTECA Y FOTOGRAFIA PROFESIONAL",
@@ -192,6 +216,8 @@ const entertainment = [
     categoryId: 21,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Grupo Musical Para Eventos",
@@ -208,6 +234,8 @@ const entertainment = [
     categoryId: 21,
     userId: "be19f554-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-03-04T18:11:20.621Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Servicio de dj sonido iluminación",
@@ -217,6 +245,8 @@ const entertainment = [
     categoryId: 21,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-04-17T12:08:16.154Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
@@ -230,6 +260,8 @@ const photography = [
     categoryId: 22,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Alquiler de Proyector y Pantalla gigante para eventos!",
@@ -240,6 +272,8 @@ const photography = [
     categoryId: 22,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "CABINA DE FOTOSINFLABLE EN MUY BUEN ESTADO CASI NUEVA",
@@ -250,6 +284,8 @@ const photography = [
     categoryId: 22,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Editor de video Freelance",
@@ -260,6 +296,8 @@ const photography = [
     categoryId: 22,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Alquiler de Proyector y Pantalla gigante para eventos!",
@@ -270,6 +308,8 @@ const photography = [
     categoryId: 22,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-17T16:55:17.737Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "CABINA DE FOTOSINFLABLE EN MUY BUEN ESTADO CASI NUEVA",
@@ -280,6 +320,8 @@ const photography = [
     categoryId: 22,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-09T17:02:41.378Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
@@ -293,6 +335,8 @@ const organization = [
     categoryId: 23,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-01-19T20:36:36.761Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Decoraciones y juegos",
@@ -303,6 +347,8 @@ const organization = [
     categoryId: 23,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2020-02-19T00:25:38.581Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -324,6 +370,8 @@ const organization = [
     categoryId: 23,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Decoraciones y juegos",
@@ -334,6 +382,8 @@ const organization = [
     categoryId: 23,
     userId: "4e219812-36ad-11ec-8d3d-0242ac139003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title:
@@ -345,6 +395,8 @@ const organization = [
     categoryId: 23,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 14,
+    cityId: 14014,
   },
 ];
 
@@ -372,6 +424,8 @@ const saloons = [
     categoryId: 24,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Alquiler de salon",
@@ -381,6 +435,8 @@ const saloons = [
     categoryId: 24,
     userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "alquiler Salon EVENTOS Casa",
@@ -396,6 +452,8 @@ const saloons = [
     categoryId: 24,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title:
@@ -420,6 +478,8 @@ const saloons = [
     categoryId: 24,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-21T18:39:04.429Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Alquiler de salon",
@@ -429,6 +489,8 @@ const saloons = [
     categoryId: 24,
     userId: "be19f6da-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "alquiler Salon EVENTOS Casa",
@@ -444,6 +506,8 @@ const saloons = [
     categoryId: 24,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-08-14T13:23:05.288Z",
+    provinceId: 14,
+    cityId: 14014,
   },
 ];
 
@@ -457,6 +521,8 @@ const other = [
     categoryId: 25,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-11T10:00:56.826Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 
