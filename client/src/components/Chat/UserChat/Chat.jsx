@@ -105,10 +105,11 @@ function Chat({ user, darkTheme }) {
         });
     }
     var contac = chat.contactsConv.filter((con) => {
-      return con.id === textReceive.id;
+      return con.id === textReceive.userId;
     });
     //new msj new contact add contacs array and convertations
     if (contac.length === 0) {
+     
       var convertition;
       getConvertations()
         .then((conv) => {
@@ -228,10 +229,6 @@ function Chat({ user, darkTheme }) {
       <Box name="box-father" className={classes.box_messanger_father}>
         {/* conversation list */}
         <Box name="contacts" className={classes.box_contacts_a}>
-          <Box
-            name="menu-contacts-wrapper"
-            className={classes.menu_Contacts_Wrapper}
-          >
             <Input
               type="text"
               name="inputSearch"
@@ -265,13 +262,13 @@ function Chat({ user, darkTheme }) {
                   </IconButton>
                 </Box>
               ))}
-          </Box>
+         
         </Box>
         {/*message list*/}
-        <div style={{ flex: "5.5" }}>
+        <Box name="chatting" className={classes.container_chatting}>
           {chat.currentCont ? (
             <Box name="conversations" className={classes.box_conversations_b}>
-              <Box name="message" className={classes.menu_chating_wrapper}>
+              
                 {chat.chatting.map((msn, i) => (
                   <Message
                     scrollRef={scrollRef}
@@ -282,7 +279,7 @@ function Chat({ user, darkTheme }) {
                     darkTheme={darkTheme}
                   />
                 ))}
-              </Box>
+            
             </Box>
           ) : (
             <h3 className="startchat">Click a contact to start a chat</h3>
@@ -317,7 +314,7 @@ function Chat({ user, darkTheme }) {
           ) : (
             <></>
           )}
-        </div>
+        </Box>
         {/*contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
           <Box
