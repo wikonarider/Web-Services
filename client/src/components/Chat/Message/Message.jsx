@@ -1,10 +1,14 @@
 import { Avatar, Box } from "@material-ui/core";
 import React from "react";
 import useStylesMessage from "./MessageStyled";
-export default function Message({ user, contact, message, scrollRef }) {
- var clasess=useStylesMessage();
+export default function Message({ user, contact, message, scrollRef, darkTheme }) {
+  var clasess = useStylesMessage(darkTheme)();
   return (
-    <Box className={message.userId === user.id ? clasess.boxMsnSend : clasess.boxMsnReceive}>
+    <Box
+      className={
+        message.userId === user.id ? clasess.boxMsnSend : clasess.boxMsnReceive
+      }
+    >
       <div ref={scrollRef} className={"msn"}>
         <Avatar
           src={message.remit === user.id ? contact.userImg : user.userImg}

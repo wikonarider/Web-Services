@@ -1,24 +1,35 @@
 import { makeStyles } from "@material-ui/core/styles";
-const useStylesConvertations = makeStyles({
-  avatar: {
-    width: "70px",
-    height: "70px",
-    border: "unset",
-    background: "#dcebdd",
-    textAlign: "start",
-    alignItems: "flexEnd",
-    display: "grid",
-  },
-  boxConvOnline: {
-    height: "100%",
-    cursor: "pointer",
-    background: "rgba(35, 148, 15, 0.644)",
-  },
-  boxConvOffline: {
-    height: "100%",
-    cursor: "pointer",
-    background: "rgba(126, 72, 18, 0.658)",
-  },
-});
 
-export default useStylesConvertations;
+export default function useStylesConvertations(darkTheme) {
+  //darkTheme boolean global state
+  return makeStyles((theme) => ({
+    avatar: {
+      width: 76,
+      height: 76,
+    },
+    boxConvOnline: {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-around",
+      height: "100px",
+      cursor: "pointer",
+      background: "#81c784",
+      width: "80%",
+      zIndex: "70%",
+      borderRadius: "0.4em",
+    },
+    boxConvOffline: {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-around",
+      height: "100px",
+      cursor: "pointer",
+      width: "80%",
+      borderRadius: "0.4em",
+      zIndex: "70%",
+      background: "#9e9e9e",
+    },
+  }));
+}

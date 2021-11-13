@@ -10,7 +10,7 @@ import { connect, useDispatch } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
-import  useStylesChat  from "./ChatStyled";
+import useStylesChat from "./ChatStyled";
 import {
   getContacts,
   getContactsBougth,
@@ -20,8 +20,11 @@ import {
   sendMessage,
   deleteConvertation,
 } from "./StateLocal.jsx";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 dotenv.config();
-function Chat({ user }) {
+function Chat({ user, darkTheme }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
@@ -35,10 +38,9 @@ function Chat({ user }) {
   const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStylesChat(); // Material UI for SEND BTN
-
-  //const history=useHistory();
-  
+  const classes = useStylesChat(darkTheme)();
+  // useStylesChat es una funcion que recive el valor booleano
+  // del darkTheme estado global y retorna un makeStyles
 
   
   //----------------------------------------------------------------------------socket
@@ -237,33 +239,30 @@ function Chat({ user }) {
             ></Input>
             {chat.contactsConv.length &&
               chat.contactsConv.map((con) => (
-                <Box
-                  key={con.id}
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: "90% 10%",
-                    marginTop: "7%",
-                  }}
-                >
+                <Box className={classes.containerConvertation} key={con.id}>
                   <Box
+                    className={classes.box_avatar_And_X}
                     onClick={() => {
                       chatContact(con.id);
                     }}
                   >
+                    {" "}
                     <Conversations
                       key={con.id}
                       contacts={con}
                       contactsOnline={UsersOnlines}
-                    />
+                      darkTheme={darkTheme}
+                    />{" "}
                   </Box>
-                  <button
-                    sx={{ Width: "5%" }}
+                  <IconButton
                     onClick={() => {
                       deleteConvert(con);
                     }}
+                    className={classes.btn_x}
+                    size="small"
                   >
-                    X
-                  </button>
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
                 </Box>
               ))}
           </Box>
@@ -280,6 +279,7 @@ function Chat({ user }) {
                     user={user}
                     contact={chat.currentCont}
                     message={msn}
+                    darkTheme={darkTheme}
                   />
                 ))}
               </Box>
@@ -337,6 +337,7 @@ function Chat({ user }) {
                     key={contac.id}
                     contacts={contac}
                     contactsOnline={UsersOnlines}
+                    darkTheme={darkTheme}
                   />
                 </Box>
               ))}
@@ -352,6 +353,7 @@ function Chat({ user }) {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    darkTheme: state.darkTheme,
   };
 }
 
