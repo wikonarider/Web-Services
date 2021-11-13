@@ -23,8 +23,14 @@ const style = {
 };
 
 export default function ResetPassword({resetPassword}) {
+    console.log('resetPassword en front', resetPassword)
+
+
   const dispatch = useDispatch();
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    //   password : '',
+    //   confirmPassword : ''
+  });
 
   const [password, setPassword] = useState({
     password: "",
@@ -41,7 +47,26 @@ export default function ResetPassword({resetPassword}) {
     } else if (password.password !== password.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
+    return errors;
   }
+
+//   function handleChange(e) {
+//     setPassword((prev) => {
+//       //guard el input modificado
+//       const input2 = {
+//         ...prev,
+//         password: e.target.value,
+//       };
+
+//       setErrors(() => {
+//         return validateErrors({
+//           ...password,
+//           [e.target.name]: e.target.value,
+//         });
+//       });
+//       return input2;
+//     });
+//   }
 
   function handleChange(e) {
     setPassword((prev) => {
