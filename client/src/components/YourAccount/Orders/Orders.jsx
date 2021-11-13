@@ -21,14 +21,13 @@ export default function Orders({ service }) {
       gap={3}
       gridTemplateColumns='repeat(12, 1fr)'
       alignItems='center'
-      boxShadow={1}
+      boxShadow={2}
       sx={{
         borderRadius: 2,
         margin: '1rem',
-        border: '1px solid #D5D0DA',
       }}
       component={Paper}
-      elevation={1}
+      elevation={8}
     >
       <Box
         gridColumn={{ xs: 'span 12', md: 'span 2' }}

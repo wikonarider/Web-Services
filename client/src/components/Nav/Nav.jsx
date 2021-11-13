@@ -10,31 +10,30 @@ import UserMenu from "./UserMenu";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "./ScrollTop";
-
-// MATERIAL UI
-import { Button, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { brown, lime } from "@mui/material/colors";
-import clsx from "clsx";
+// import clsx from "clsx";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import DarkMode from "./DarkMode";
 
-const useStyles = makeStyles({
-  default: {
-    borderRadius: 0,
-    textTransfrom: "none",
-  },
-  secondary: {
-    main: lime[600],
-    contrastText: brown[500],
-  },
-});
+// const useStyles = makeStyles({
+//   default: {
+//     borderRadius: 0,
+//     textTransfrom: "none",
+//   },
+//   secondary: {
+//     main: lime[600],
+//     contrastText: brown[500],
+//   },
+// });
 
 const style = {
   position: "absolute",
@@ -55,7 +54,7 @@ export default function Nav({ route, check, change }) {
   const { userImg, name } = useSelector((state) => state.user);
   const query = useMediaQuery("(max-width: 820px)");
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -92,6 +91,8 @@ export default function Nav({ route, check, change }) {
               </>
             )}
           </Box>
+
+          {/* --------------- SEARCH BAR---------------------- */}
           <Box
             sx={
               route === "home"
@@ -108,6 +109,7 @@ export default function Nav({ route, check, change }) {
           >
             {route === "home" ? <SearchBar /> : null}
           </Box>
+          {/* ---------------------------------------- */}
 
           <Box
             display="flex"
@@ -124,12 +126,30 @@ export default function Nav({ route, check, change }) {
               <Button
                 variant="contained"
                 size="medium"
-                className={clsx(classes.default, classes.primary)}
+                color="secondary"
+                size='small'
+                disableElevation
                 onClick={handleRegister}
               >
                 REGISTER
               </Button>
             )}
+
+            {!cookie && route !== "checkout" ? (
+              <Button
+                variant="contained"
+                size="medium"
+                color="secondary"
+                size='small'
+                disableElevation
+                onClick={handleLogin}
+              >
+                Login
+              </Button>
+            ) : null}
+            {/* ------------------------------------------ */}
+
+            {/* ----------- REGISTER MODAL ------------------ */}
             <Modal
               open={registerModal}
               onClose={handleRegister}
@@ -144,16 +164,7 @@ export default function Nav({ route, check, change }) {
               </Box>
             </Modal>
 
-            {!cookie && route !== "checkout" ? (
-              <Button
-                variant="contained"
-                size="medium"
-                className={clsx(classes.default, classes.primary)}
-                onClick={handleLogin}
-              >
-                Login
-              </Button>
-            ) : null}
+            {/* ----------------- LOGIN MODAL -------------------------- */}
             <Modal
               open={loginModal}
               onClose={handleLogin}
@@ -167,6 +178,7 @@ export default function Nav({ route, check, change }) {
                 />
               </Box>
             </Modal>
+            {/* ------------------------------------------------ */}
 
             {route === "checkout" ? null : <Cart route={route} />}
             {cookie ? (
@@ -175,6 +187,7 @@ export default function Nav({ route, check, change }) {
           </Box>
         </Toolbar>
       </AppBar>
+
       <ScrollTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

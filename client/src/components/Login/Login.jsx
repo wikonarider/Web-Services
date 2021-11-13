@@ -164,7 +164,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           <ForgotPasswordModal
             modal={modal}
             setModal={setModal}
-            message={"Ingresa tu email para reestablecer tu contraseña"}
+            message={"Enter the email address associated with your WebService account"}
           />
         </form>
       </Box>

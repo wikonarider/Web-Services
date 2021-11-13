@@ -12,8 +12,7 @@ export default function Contactsbougth({ contacts, contactsOnline }) {
           contactsOnline.some((e) => e.user === contacts.id)
             ? classes.boxBoughtOnline
             : classes.boxBoughtOffline
-        }
-      >
+        }>
         <Stack direction="row" spacing={5}>
           <Avatar
             src={contacts.userImg}

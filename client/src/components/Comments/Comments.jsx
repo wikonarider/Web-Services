@@ -100,40 +100,41 @@ export default function Comments({
 
   return (
     <Box
-      display='grid'
-      gridTemplateColumns='repeat(12, 1fr)'
+      display="grid"
+      gridTemplateColumns="repeat(12, 1fr)"
       gap={1}
       p={2}
-      border='solid 1px lightgrey'
+      border="solid 1px lightgrey"
+      borderRadius="4px"
     >
       {cookie && buyer ? (
         <>
           <Box
-            gridColumn='span 12'
-            display='flex'
-            flexDirection='row'
-            justifyContent='flex-start'
-            alignItems='center'
+            gridColumn="span 12"
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            alignItems="center"
           >
             <Typography
               ref={starsRef}
-              variant='subtitle1'
+              variant="subtitle1"
               sx={{ alignSelf: 'center', mr: '5px' }}
             >
               Rating:
             </Typography>
             <Rating
-              name='rating'
+              name="rating"
               value={rating}
               precision={1}
-              size='large'
+              size="large"
               onChange={(event, newValue) => {
                 setRating((rating) => newValue);
               }}
             />
 
             <Typography
-              variant='subtitle1'
+              variant="subtitle1"
               sx={{ pl: '10px', verticalAlign: 'middle' }}
             >
               {`${rating} stars`}
@@ -157,16 +158,16 @@ export default function Comments({
               ref={commentBoxRef}
               minRows={4}
               maxRows={8}
-              aria-label='comment area'
-              placeholder='Leave your comment here...'
+              aria-label="comment area"
+              placeholder="Leave your comment here..."
               style={{ width: '85%', resize: 'vertical' }}
               value={comment}
               onChange={(event) => handleChange(event)}
             />
             <Button
               onClick={() => handleClick(comment, rating, serviceId)}
-              variant='contained'
-              color='secondary'
+              variant="contained"
+              color="secondary"
               endIcon={<SendIcon />}
               disabled={loading}
             >
@@ -176,7 +177,7 @@ export default function Comments({
         </>
       ) : null}
 
-      <Box gridColumn='span 12' display='flex' flexDirection='column-reverse'>
+      <Box gridColumn="span 12" display="flex" flexDirection="column-reverse">
         {/* ----------POPOVER RATE FIRST-------------------------- */}
         <Popover
           id={idRate}
@@ -219,7 +220,7 @@ export default function Comments({
         </Popover>
         {/* --------------------------------------------------------- */}
 
-        <Box gridColumn='span 12'>
+        <Box gridColumn="span 12">
           {qualifications && qualifications.length ? (
             qualifications.map((q, index) => {
               return (
@@ -227,7 +228,7 @@ export default function Comments({
               );
             })
           ) : (
-            <Typography variant='h5'>No comments</Typography>
+            <Typography variant="h5">No comments</Typography>
           )}
         </Box>
       </Box>

@@ -6,6 +6,7 @@ import useStylesConvertations from "./ConvertationsStyled";
 export default function Conversations({ contacts, contactsOnline }) {
 
     var classes = useStylesConvertations();
+
   if (contacts) {
     return (
       <Box
@@ -13,6 +14,7 @@ export default function Conversations({ contacts, contactsOnline }) {
           contactsOnline.some((e) => e.user === contacts.id)
             ? classes.boxConvOnline
             : classes.boxConvOffline
+
         }
       >
         <Stack direction="row" spacing={5}>

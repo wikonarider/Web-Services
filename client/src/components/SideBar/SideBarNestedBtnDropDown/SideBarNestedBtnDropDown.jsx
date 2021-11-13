@@ -30,9 +30,9 @@ export default function SideBarNestedBtnDropDown({
   return (
     <Box key={index}>
       <ListItemButton onClick={handleClick}>
-        <ListItemIcon>
+        {/* <ListItemIcon>
           <GradeOutlinedIcon />
-        </ListItemIcon>
+        </ListItemIcon> */}
         <ListItemText primary={group.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
