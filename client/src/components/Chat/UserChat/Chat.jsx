@@ -1,12 +1,11 @@
 import { io } from "socket.io-client";
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
 import Conversations from "../Convertations/convertations.jsx";
 import { Box } from "@mui/system";
 import SendIcon from "@mui/icons-material/Send";
-import { Button, Input, makeStyles } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
@@ -35,14 +34,12 @@ function Chat({ user, darkTheme }) {
     contactsBoungth: [],
     convertations: [],
   }); //4
-  const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   const classes = useStylesChat(darkTheme)();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
-  
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
@@ -96,35 +93,36 @@ function Chat({ user, darkTheme }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  useEffect(async () => {
-    if (textReceive && chat.currentCont) {
-      chat.currentCont.id === textReceive.userId &&
-        setChat({
-          ...chat,
-          chatting: chat.chatting.concat(textReceive),
-        });
-    }
-    var contac = chat.contactsConv.filter((con) => {
-      return con.id === textReceive.id;
-    });
-    //new msj new contact add contacs array and convertations
-    if (contac.length === 0) {
-      var convertition;
-      getConvertations()
-        .then((conv) => {
-          convertition = conv;
-          return getContacts();
-        })
-        .then((contact) => {
+  useEffect(() => {
+    (async () => {
+      if (textReceive && chat.currentCont) {
+        chat.currentCont.id === textReceive.userId &&
           setChat({
             ...chat,
-            contactsConv: contact.data,
-            convertations: convertition.data,
+            chatting: chat.chatting.concat(textReceive),
           });
-        })
-        .catch((err) => console.log(err));
-    }
-
+      }
+      var contac = chat.contactsConv.filter((con) => {
+        return con.id === textReceive.id;
+      });
+      //new msj new contact add contacs array and convertations
+      if (contac.length === 0) {
+        var convertition;
+        getConvertations()
+          .then((conv) => {
+            convertition = conv;
+            return getContacts();
+          })
+          .then((contact) => {
+            setChat({
+              ...chat,
+              contactsConv: contact.data,
+              convertations: convertition.data,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+    })();
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
@@ -214,6 +212,7 @@ function Chat({ user, darkTheme }) {
           createdAt: Date.now(),
         }),
       });
+      // eslint-disable-next-line
       var send = await sendMessage({
         //send BD
         remit: chat.currentCont.id,

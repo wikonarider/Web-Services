@@ -13,9 +13,8 @@ export default function Row({ row }) {
   const [open, setOpen] = useState(false);
 
   const [servicesBought, setServicesBought] = useState([]);
-  console.log(servicesBought);
-
-  const [show, setShow] = useState(false);
+  // console.log(servicesBought);
+  // eslint-disable-next-line
   const [orderId, setOrderId] = useState(null);
 
   const handleClick = (services, id) => {
@@ -56,14 +55,14 @@ export default function Row({ row }) {
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              {servicesBought &&
-                servicesBought.map((s, index) => (
-                  <Box key={index} sx={{ marginBottom: '1%' }}>
-                    <Orders service={s} />
-                  </Box>
-                ))}
-            </Collapse>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            {servicesBought &&
+              servicesBought.map((s, index) => (
+                <Box key={index} sx={{ marginBottom: "1%" }}>
+                  <Orders service={s} />
+                </Box>
+              ))}
+          </Collapse>
         </TableCell>
       </TableRow>
     </React.Fragment>

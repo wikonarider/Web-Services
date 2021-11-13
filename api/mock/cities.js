@@ -10,6 +10,8 @@ async function loadCities() {
       id: Number(element.id),
       name: element.nombre,
       provinceId: Number(element.provincia.id),
+      lat: element.centroide.lat,
+      lon: element.centroide.lon,
     });
   });
   return bulk;

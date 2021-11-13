@@ -1,18 +1,16 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
-import SideBarNestedBtnDropDownInner from '../SideBarNestedBtnDropDownInner/SideBarNestedBtnDropDownInner';
+import SideBarNestedBtnDropDownInner from "../SideBarNestedBtnDropDownInner/SideBarNestedBtnDropDownInner";
 
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
 
 export default function SideBarNestedBtnDropDown({
   index,
@@ -40,7 +38,7 @@ export default function SideBarNestedBtnDropDown({
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
-              <Box sx={{ display: 'flex' }}>
+              <Box sx={{ display: "flex" }}>
                 <FormControl
                   sx={{ m: 3 }}
                   component="fieldset"

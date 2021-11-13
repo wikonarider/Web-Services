@@ -1,12 +1,13 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Rating from '@mui/material/Rating';
-import CardActions from '@mui/material/CardActions';
-import { AddShoppingCart, Favorite, Share } from '@mui/icons-material';
-import CardUser from '../../CardUser/CardUser';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React from "react";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Rating from "@mui/material/Rating";
+import CardActions from "@mui/material/CardActions";
+import { AddShoppingCart, Favorite, Share } from "@mui/icons-material";
+import CardUser from "../../CardUser/CardUser";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import MapDetail from "./MapDetail";
 
 export default function RightInfoBar({
   cookie,
@@ -16,13 +17,13 @@ export default function RightInfoBar({
   handleClick,
   added,
 }) {
-  let { title, price, description, rating, qualifications, userId } =
+  let { title, price, description, rating, qualifications, userId, city } =
     service.service;
-  const query = useMediaQuery('(max-width: 890px)');
+  const query = useMediaQuery("(max-width: 890px)");
 
   return (
     <Box
-      gridColumn={{ xs: 'span 12', sm: 'span 12', md: 'span 4' }}
+      gridColumn={{ xs: "span 12", sm: "span 12", md: "span 4" }}
       m={{ xs: 0, sm: 2 }}
       p={{ xs: 1, sm: 0, md: 2 }}
       border="solid 1px lightgrey"
@@ -31,7 +32,7 @@ export default function RightInfoBar({
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      sx={query ? { gridArea: '1' } : {}}
+      sx={query ? { gridArea: "1" } : {}}
       textAlign="center"
     >
       {/* ---- BOTONES FAV SHARE --------------------------- */}
@@ -40,7 +41,7 @@ export default function RightInfoBar({
         display="flex"
         flexDirection="row"
         justifyContent="space-between"
-        sx={{ mr: 'auto' }}
+        sx={{ mr: "auto" }}
       >
         <Box gridColumn="span 6">
           {cookie && cookie !== userId ? (
@@ -48,10 +49,10 @@ export default function RightInfoBar({
               onClick={handleFavs}
               aria-label="add to favorites"
               sx={
-                cookie && cookie !== service.userId ? {} : { display: 'none' }
+                cookie && cookie !== service.userId ? {} : { display: "none" }
               }
             >
-              <Favorite color={favState ? 'error' : ''} />
+              <Favorite color={favState ? "error" : ""} />
             </IconButton>
           ) : null}
           <IconButton aria-label="share">
@@ -71,7 +72,7 @@ export default function RightInfoBar({
         flexWrap="wrap"
         alignContent="start"
       >
-        <Typography variant="h5" sx={{ width: '100%', textAlign: 'left' }}>
+        <Typography variant="h5" sx={{ width: "100%", textAlign: "left" }}>
           {title}
         </Typography>
       </Box>
@@ -91,12 +92,12 @@ export default function RightInfoBar({
           readOnly
           sx={{}}
         />
-        <Typography variant="subtitle 1" sx={{ ml: '10px' }}>
+        <Typography variant="subtitle 1" sx={{ ml: "10px" }}>
           {qualifications
             ? qualifications.length === 1
               ? ` ${qualifications.length} opinion`
               : ` ${qualifications.length} opinions`
-            : '0 opiniones'}
+            : "0 opiniones"}
         </Typography>
       </Box>
       {/* -------------------------------------------- */}
@@ -105,13 +106,13 @@ export default function RightInfoBar({
       <Box gridColumn="span 12" width="100%">
         <CardActions disableSpacing>
           <Typography variant="h5" sx={{}}>
-            {' '}
-            {`$${price ? price : 0}`}{' '}
+            {" "}
+            {`$${price ? price : 0}`}{" "}
           </Typography>
           {cookie && cookie !== userId ? (
             <IconButton
               onClick={handleClick}
-              color={!added ? 'primary' : 'success'}
+              color={!added ? "primary" : "success"}
               aria-label="add to shopping cart"
             >
               <AddShoppingCart />
@@ -119,7 +120,7 @@ export default function RightInfoBar({
           ) : !cookie ? (
             <IconButton
               onClick={handleClick}
-              color={!added ? 'primary' : 'success'}
+              color={!added ? "primary" : "success"}
               aria-label="add to shopping cart"
             >
               <AddShoppingCart />
@@ -135,7 +136,7 @@ export default function RightInfoBar({
         <Typography
           variant="subtitle1"
           component="div"
-          sx={{ textAlign: 'left' }}
+          sx={{ textAlign: "left" }}
         >
           Description:
         </Typography>
@@ -143,9 +144,9 @@ export default function RightInfoBar({
           variant="subtitle2"
           component="div"
           sx={{
-            textAlign: 'left',
-            maxHeight: '200px',
-            overflowY: 'auto',
+            textAlign: "left",
+            maxHeight: "200px",
+            overflowY: "auto",
           }}
         >
           {description}
@@ -158,9 +159,18 @@ export default function RightInfoBar({
         gridColumn="span 12"
         mb="auto"
         width="100%"
-        sx={{ transform: 'scale(0.8)' }}
+        sx={{ transform: "scale(0.8)" }}
       >
         <CardUser user={service.user} />
+      </Box>
+      {/* -------------------------------------- */}
+
+      {/* ---------- Map -------------------- */}
+      <Box>
+        <MapDetail
+          lat={city.name === "Rosario" ? city.lat + 0.2 : city.lat}
+          lon={city.lon}
+        />
       </Box>
       {/* -------------------------------------- */}
     </Box>

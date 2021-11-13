@@ -8,6 +8,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         alowNull: false,
       },
+      lat: {
+        type: DataTypes.FLOAT,
+      },
+      lon: {
+        type: DataTypes.FLOAT,
+      },
     },
     {
       timestamps: false,

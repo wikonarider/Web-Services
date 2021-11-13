@@ -255,7 +255,7 @@ async function getServicesById(req, res, next) {
         },
         {
           model: City,
-          attributes: ["name"],
+          attributes: ["name", "lat", "lon"],
         },
       ],
     });
