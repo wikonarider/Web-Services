@@ -93,36 +93,35 @@ function Chat({ user, darkTheme }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  useEffect(() => {
-    (async () => {
-      if (textReceive && chat.currentCont) {
-        chat.currentCont.id === textReceive.userId &&
+  useEffect(async () => {
+    if (textReceive && chat.currentCont) {
+      chat.currentCont.id === textReceive.userId &&
+        setChat({
+          ...chat,
+          chatting: chat.chatting.concat(textReceive),
+        });
+    }
+    var contac = chat.contactsConv.filter((con) => {
+      return con.id === textReceive.userId;
+    });
+    //new msj new contact add contacs array and convertations
+    if (contac.length === 0) {
+      var convertition;
+      getConvertations()
+        .then((conv) => {
+          convertition = conv;
+          return getContacts();
+        })
+        .then((contact) => {
           setChat({
             ...chat,
-            chatting: chat.chatting.concat(textReceive),
+            contactsConv: contact.data,
+            convertations: convertition.data,
           });
-      }
-      var contac = chat.contactsConv.filter((con) => {
-        return con.id === textReceive.id;
-      });
-      //new msj new contact add contacs array and convertations
-      if (contac.length === 0) {
-        var convertition;
-        getConvertations()
-          .then((conv) => {
-            convertition = conv;
-            return getContacts();
-          })
-          .then((contact) => {
-            setChat({
-              ...chat,
-              contactsConv: contact.data,
-              convertations: convertition.data,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
-    })();
+        })
+        .catch((err) => console.log(err));
+    }
+
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
@@ -227,61 +226,54 @@ function Chat({ user, darkTheme }) {
       <Box name="box-father" className={classes.box_messanger_father}>
         {/* conversation list */}
         <Box name="contacts" className={classes.box_contacts_a}>
-          <Box
-            name="menu-contacts-wrapper"
-            className={classes.menu_Contacts_Wrapper}
-          >
-            <Input
-              type="text"
-              name="inputSearch"
-              placeholder="search contact!"
-            ></Input>
-            {chat.contactsConv.length &&
-              chat.contactsConv.map((con) => (
-                <Box className={classes.containerConvertation} key={con.id}>
-                  <Box
-                    className={classes.box_avatar_And_X}
-                    onClick={() => {
-                      chatContact(con.id);
-                    }}
-                  >
-                    {" "}
-                    <Conversations
-                      key={con.id}
-                      contacts={con}
-                      contactsOnline={UsersOnlines}
-                      darkTheme={darkTheme}
-                    />{" "}
-                  </Box>
-                  <IconButton
-                    onClick={() => {
-                      deleteConvert(con);
-                    }}
-                    className={classes.btn_x}
-                    size="small"
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
+          <Input
+            type="text"
+            name="inputSearch"
+            placeholder="search contact!"
+          ></Input>
+          {chat.contactsConv.length &&
+            chat.contactsConv.map((con) => (
+              <Box className={classes.containerConvertation} key={con.id}>
+                <Box
+                  className={classes.box_avatar_And_X}
+                  onClick={() => {
+                    chatContact(con.id);
+                  }}
+                >
+                  {" "}
+                  <Conversations
+                    key={con.id}
+                    contacts={con}
+                    contactsOnline={UsersOnlines}
+                    darkTheme={darkTheme}
+                  />{" "}
                 </Box>
-              ))}
-          </Box>
+                <IconButton
+                  onClick={() => {
+                    deleteConvert(con);
+                  }}
+                  className={classes.btn_x}
+                  size="small"
+                >
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            ))}
         </Box>
         {/*message list*/}
-        <div style={{ flex: "5.5" }}>
+        <Box name="chatting" className={classes.container_chatting}>
           {chat.currentCont ? (
             <Box name="conversations" className={classes.box_conversations_b}>
-              <Box name="message" className={classes.menu_chating_wrapper}>
-                {chat.chatting.map((msn, i) => (
-                  <Message
-                    scrollRef={scrollRef}
-                    key={i}
-                    user={user}
-                    contact={chat.currentCont}
-                    message={msn}
-                    darkTheme={darkTheme}
-                  />
-                ))}
-              </Box>
+              {chat.chatting.map((msn, i) => (
+                <Message
+                  scrollRef={scrollRef}
+                  key={i}
+                  user={user}
+                  contact={chat.currentCont}
+                  message={msn}
+                  darkTheme={darkTheme}
+                />
+              ))}
             </Box>
           ) : (
             <h3 className="startchat">Click a contact to start a chat</h3>
@@ -316,7 +308,7 @@ function Chat({ user, darkTheme }) {
           ) : (
             <></>
           )}
-        </div>
+        </Box>
         {/*contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
           <Box
