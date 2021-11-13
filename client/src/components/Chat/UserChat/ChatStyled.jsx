@@ -12,11 +12,9 @@ export default function useStylesChat(darkMode) {
     },
     //------------------------------------------------------------------button X
     btn_x: {
-      borderRadius: "18em",
       position: "absolute",
-      left: "85%",
-      bottom: "87%",
-      border: "solid transparent",
+      left: "85.5%",
+      bottom: "85%",
       cursor: "pointer",
     },
     //----------------------------------------------------------------------
