@@ -1,10 +1,10 @@
 .searchBox {
-  position: relative;
+  /* position: relative; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
   align-items: center;
-  margin-top: 35px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: static;
   background: transparent;
   height: 40px;
   border-radius: 0px;

@@ -6,7 +6,7 @@ var {
   getServicesById,
   getServicesByUserId,
   getServicesByIds,
-  putServiceById,
+  putService,
   deleteServices,
 } = require('../controllers/services');
 const { verifyToken } = require('../controllers/authentication');
@@ -21,7 +21,7 @@ router.get('/:id', getServicesById);
 router.post('/', verifyToken, postServices);
 
 // put Services
-router.put('/', putServiceById); //colocar verifyToken
+router.put('/', verifyToken, putService);
 // delete Services
 router.delete('/:id', deleteServices);
 

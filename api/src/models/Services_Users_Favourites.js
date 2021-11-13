@@ -4,16 +4,4 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('services_users_favourites', {});
-  //     id: {
-  //         type: DataTypes.INTEGER,
-  //         primaryKey: true,
-  //         autoIncrement: true,
-  //         unique: true,
-  //       },
-  //       favourite:{
-  //           type: DataTypes.BOOLEAN,
-  //           allowNull: true,
-  //           defaultValue: false,
-  //         }
-  //   });
 };
