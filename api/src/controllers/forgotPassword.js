@@ -1,18 +1,22 @@
 const { Users } = require("../db");
 const nodemailer = require('nodemailer');
+const { SECRET_KEY, ORIGIN } = process.env;
+const jwt = require("jsonwebtoken");
 
 
 
 async function forgotPassword(req, res, next) {
     const { email } = req.body;
     console.log('emailBody', req.body)
+   
     const user = await Users.findOne({where: { email: email}});
     
     if (!user) return res.status(401).json([]);
 
-    // await user.update({ resetPassword: true });
-
-
+    
+    const token = jwt.sign({id : user.id}, SECRET_KEY, {expiresIn : '20m'})
+    console.log('jtwToken', token)
+    
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -22,7 +26,7 @@ async function forgotPassword(req, res, next) {
             pass: 'hola1234@'
         }
     })
-
+    
 
 
     let htmlCreator = `
@@ -35,7 +39,7 @@ async function forgotPassword(req, res, next) {
         padding: 30px;
         position: relative;
         background: #EFEFEF;
-        }
+    }
     h1 {
         color: #000000CC;
     }
@@ -46,7 +50,7 @@ async function forgotPassword(req, res, next) {
         justify-content: center;
         background: #F7F7F7;
         color: #000000CC;
-      }
+    }
     .img-card {
         margin-left: 25%;
         margin-top: 20px    
@@ -60,7 +64,7 @@ async function forgotPassword(req, res, next) {
     <body>
     <div class="containergral">
     <h1>Hola ${user.name}, hemos generado un link para que cambies tu contraseña</h1>
-    <a href="https://pf-web-service.vercel.app" target="_blank" rel="noopener noreferrer" class="ap">Click aqui</a>
+    <a href="${ORIGIN}/resetPassword/${token}" target="_blank" rel="noopener noreferrer" class="ap">Click aqui</a>
     </hr>
     <b>Este enlace dura 24 horas.</b>
   
@@ -70,23 +74,27 @@ async function forgotPassword(req, res, next) {
     </body>
     </html>
     `;
-
+    
+    
     let mailOptions = {
         from: "WebServices <webservices363@gmail.com>",
         to: user.email,
-        subject: `Cambio de contraseña, usuario: ${user.name}`,
+        subject: `Cambio de contraseña WebServices`,
         html: htmlCreator,
     };
+    
+    await user.update({ resetPassword: token });
+
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error){ 
             console.log('errorrr', error.message)
-         return res.status(500).send(error.message);
+            return res.status(500).send(error.message);
         }
         console.log('Email Enviado')
         res.status(200).json(req.body);
     });
-
+    
 }
 
 
