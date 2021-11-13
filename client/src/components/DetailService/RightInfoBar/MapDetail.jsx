@@ -15,10 +15,10 @@ function MapDetail({ lat, lon }) {
         title="map"
         width="425"
         height="250"
-        frameborder="0"
+        frameBorder="0"
         scrolling="no"
-        marginheight="0"
-        marginwidth="0"
+        marginHeight="0"
+        marginWidth="0"
         style={{
           border: "1px solid black",
         }}
