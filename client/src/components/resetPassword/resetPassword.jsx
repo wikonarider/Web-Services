@@ -22,7 +22,7 @@ const style = {
   p: 6,
 };
 
-export default function ResetPassword() {
+export default function ResetPassword({resetPassword}) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
 
@@ -41,6 +41,24 @@ export default function ResetPassword() {
     } else if (password.password !== password.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
+  }
+
+  function handleChange(e) {
+    setPassword((prev) => {
+      //guard el input modificado
+      const input2 = {
+        ...prev,
+        password: e.target.value,
+      };
+
+      setErrors(() => {
+        return validateErrors({
+          ...password,
+          [e.target.name]: e.target.value,
+        });
+      });
+      return input2;
+    });
   }
 
   function handleConfirmPassword(e) {
@@ -65,7 +83,7 @@ export default function ResetPassword() {
     dispatch(
       ressetPassword({
         newPassword: password.password,
-        // resetPassword: resetPassword,
+        resetPassword: resetPassword,
       })
     );
   }
@@ -76,7 +94,7 @@ export default function ResetPassword() {
         <Typography variant="h6" component="h2">
           Change your password
         </Typography>
-        {/* <TextField
+        <TextField
           type="password"
           required
           fullWidth
@@ -88,7 +106,7 @@ export default function ResetPassword() {
           variant="outlined"
           onChange={handleChange}
           sx={{ marginTop: 5 }}
-        /> */}
+        />
 
         <TextField
           type="password"
