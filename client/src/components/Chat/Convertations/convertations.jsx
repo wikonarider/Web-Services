@@ -2,15 +2,19 @@ import { Avatar } from "@material-ui/core";
 import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import { Stack } from "@mui/material";
-require("../Convertations/Convertations.css")
+import useStylesConvertations from "./ConvertationsStyled";
 export default function Conversations({ contacts, contactsOnline }) {
+
+    var classes = useStylesConvertations();
+
   if (contacts) {
     return (
-      <div
+      <Box
         className={
           contactsOnline.some((e) => e.user === contacts.id)
-            ? "boxBoughtOnline"
-            : "boxBoughtOffline"
+            ? classes.boxConvOnline
+            : classes.boxConvOffline
+
         }
       >
         <Stack direction="row" spacing={5}>
@@ -20,7 +24,7 @@ export default function Conversations({ contacts, contactsOnline }) {
           />
           {contacts.name}
         </Stack>
-      </div>
+      </Box>
     );
   } else {
     return <></>;
