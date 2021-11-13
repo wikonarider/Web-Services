@@ -93,35 +93,36 @@ function Chat({ user, darkTheme }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  useEffect(async () => {
-    if (textReceive && chat.currentCont) {
-      chat.currentCont.id === textReceive.userId &&
-        setChat({
-          ...chat,
-          chatting: chat.chatting.concat(textReceive),
-        });
-    }
-    var contac = chat.contactsConv.filter((con) => {
-      return con.id === textReceive.userId;
-    });
-    //new msj new contact add contacs array and convertations
-    if (contac.length === 0) {
-      var convertition;
-      getConvertations()
-        .then((conv) => {
-          convertition = conv;
-          return getContacts();
-        })
-        .then((contact) => {
+  useEffect(() => {
+    (async () => {
+      if (textReceive && chat.currentCont) {
+        chat.currentCont.id === textReceive.userId &&
           setChat({
             ...chat,
-            contactsConv: contact.data,
-            convertations: convertition.data,
+            chatting: chat.chatting.concat(textReceive),
           });
-        })
-        .catch((err) => console.log(err));
-    }
-
+      }
+      var contac = chat.contactsConv.filter((con) => {
+        return con.id === textReceive.userId;
+      });
+      //new msj new contact add contacs array and convertations
+      if (contac.length === 0) {
+        var convertition;
+        getConvertations()
+          .then((conv) => {
+            convertition = conv;
+            return getContacts();
+          })
+          .then((contact) => {
+            setChat({
+              ...chat,
+              contactsConv: contact.data,
+              convertations: convertition.data,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+    })();
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations

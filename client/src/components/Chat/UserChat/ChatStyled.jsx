@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { brown, amber, lime, deepOrange, green } from "@mui/material/colors";
+import { brown } from "@mui/material/colors";
 //darkMode booleano del estado global
 export default function useStylesChat(darkMode) {
   return makeStyles((theme) => ({
