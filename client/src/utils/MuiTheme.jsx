@@ -3,6 +3,7 @@ import { brown, amber, lime, deepOrange, green } from "@mui/material/colors";
 
 export const lightTheme = createTheme({
   palette: {
+    mode: "light",
     primary: {
       main: "#B5C0C5",
       contrastText: brown[500],
