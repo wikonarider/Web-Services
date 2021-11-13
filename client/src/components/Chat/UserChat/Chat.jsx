@@ -1,12 +1,11 @@
 import { io } from "socket.io-client";
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
 import Conversations from "../Convertations/convertations.jsx";
 import { Box } from "@mui/system";
 import SendIcon from "@mui/icons-material/Send";
-import { Button, Input, makeStyles } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
@@ -35,14 +34,12 @@ function Chat({ user, darkTheme }) {
     contactsBoungth: [],
     convertations: [],
   }); //4
-  const dispatch = useDispatch();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   const classes = useStylesChat(darkTheme)();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
-  
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
@@ -109,7 +106,6 @@ function Chat({ user, darkTheme }) {
     });
     //new msj new contact add contacs array and convertations
     if (contac.length === 0) {
-     
       var convertition;
       getConvertations()
         .then((conv) => {
@@ -215,6 +211,7 @@ function Chat({ user, darkTheme }) {
           createdAt: Date.now(),
         }),
       });
+      // eslint-disable-next-line
       var send = await sendMessage({
         //send BD
         remit: chat.currentCont.id,
@@ -229,57 +226,54 @@ function Chat({ user, darkTheme }) {
       <Box name="box-father" className={classes.box_messanger_father}>
         {/* conversation list */}
         <Box name="contacts" className={classes.box_contacts_a}>
-            <Input
-              type="text"
-              name="inputSearch"
-              placeholder="search contact!"
-            ></Input>
-            {chat.contactsConv.length &&
-              chat.contactsConv.map((con) => (
-                <Box className={classes.containerConvertation} key={con.id}>
-                  <Box
-                    className={classes.box_avatar_And_X}
-                    onClick={() => {
-                      chatContact(con.id);
-                    }}
-                  >
-                    {" "}
-                    <Conversations
-                      key={con.id}
-                      contacts={con}
-                      contactsOnline={UsersOnlines}
-                      darkTheme={darkTheme}
-                    />{" "}
-                  </Box>
-                  <IconButton
-                    onClick={() => {
-                      deleteConvert(con);
-                    }}
-                    className={classes.btn_x}
-                    size="small"
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
+          <Input
+            type="text"
+            name="inputSearch"
+            placeholder="search contact!"
+          ></Input>
+          {chat.contactsConv.length &&
+            chat.contactsConv.map((con) => (
+              <Box className={classes.containerConvertation} key={con.id}>
+                <Box
+                  className={classes.box_avatar_And_X}
+                  onClick={() => {
+                    chatContact(con.id);
+                  }}
+                >
+                  {" "}
+                  <Conversations
+                    key={con.id}
+                    contacts={con}
+                    contactsOnline={UsersOnlines}
+                    darkTheme={darkTheme}
+                  />{" "}
                 </Box>
-              ))}
-         
+                <IconButton
+                  onClick={() => {
+                    deleteConvert(con);
+                  }}
+                  className={classes.btn_x}
+                  size="small"
+                >
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            ))}
         </Box>
         {/*message list*/}
         <Box name="chatting" className={classes.container_chatting}>
           {chat.currentCont ? (
             <Box name="conversations" className={classes.box_conversations_b}>
-              
-                {chat.chatting.map((msn, i) => (
-                  <Message
-                    scrollRef={scrollRef}
-                    key={i}
-                    user={user}
-                    contact={chat.currentCont}
-                    message={msn}
-                    darkTheme={darkTheme}
-                  />
-                ))}
-            
+              {chat.chatting.map((msn, i) => (
+                <Message
+                  scrollRef={scrollRef}
+                  key={i}
+                  user={user}
+                  contact={chat.currentCont}
+                  message={msn}
+                  darkTheme={darkTheme}
+                />
+              ))}
             </Box>
           ) : (
             <h3 className="startchat">Click a contact to start a chat</h3>

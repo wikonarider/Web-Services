@@ -17,8 +17,6 @@ import { useSelector } from "react-redux";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "./ScrollTop";
-import { makeStyles } from "@material-ui/core";
-import { brown, lime } from "@mui/material/colors";
 // import clsx from "clsx";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -127,7 +125,6 @@ export default function Nav({ route, check, change }) {
                 variant="contained"
                 size="medium"
                 color="secondary"
-                size="small"
                 disableElevation
                 onClick={handleRegister}
               >
@@ -140,7 +137,6 @@ export default function Nav({ route, check, change }) {
                 variant="contained"
                 size="medium"
                 color="secondary"
-                size="small"
                 disableElevation
                 onClick={handleLogin}
               >

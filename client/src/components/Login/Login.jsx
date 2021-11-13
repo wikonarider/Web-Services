@@ -105,7 +105,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   }
 
   return (
-    <Box sx={{ marginTop: "5%", marginBottom: "4%" }}>
+    <Box sx={{ margin: '5%' }}>
       <Box
         sx={{
           display: "flex",
@@ -182,11 +182,11 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           flexDirection: "row",
           flexWrap: "wrap",
         }}
-        gap={{ xs: 1, md: 2 }}
+        gap={{ xs: 1}}
       >
         <Typography variant="body2" color="primary">
           New to WebService?

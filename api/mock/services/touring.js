@@ -8,6 +8,8 @@ const mendoza = [
     categoryId: 33,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-05T10:13:12.787Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Trekking Aconcagua",
@@ -18,6 +20,8 @@ const mendoza = [
     categoryId: 33,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-05T10:13:12.787Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "San Rafael Cañón del Atuel",
@@ -28,6 +32,8 @@ const mendoza = [
     categoryId: 33,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-05T10:13:12.787Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Las Leñas",
@@ -38,6 +44,8 @@ const mendoza = [
     categoryId: 33,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Termas de Cacheuta",
@@ -48,6 +56,8 @@ const mendoza = [
     categoryId: 33,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 14,
+    cityId: 14014,
   },
 ];
 const misiones = [
@@ -60,6 +70,8 @@ const misiones = [
     categoryId: 34,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
     createdAt: "2021-03-04T18:11:20.621Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Guiraoga",
@@ -70,6 +82,8 @@ const misiones = [
     categoryId: 34,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
     createdAt: "2021-03-04T18:11:20.621Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Saltos del Mocona",
@@ -80,6 +94,8 @@ const misiones = [
     categoryId: 34,
     userId: "4e2191dc-36ad-11ec-8d3d-0242ac230003",
     createdAt: "2021-04-17T12:08:16.154Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Tres Fronteras",
@@ -90,6 +106,8 @@ const misiones = [
     categoryId: 34,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-04-17T12:08:16.154Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Sendero Macuco",
@@ -100,6 +118,8 @@ const misiones = [
     categoryId: 34,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 const cordoba = [
@@ -112,6 +132,8 @@ const cordoba = [
     categoryId: 35,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-09-22T02:48:50.463Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Mar Chiquita",
@@ -122,6 +144,8 @@ const cordoba = [
     categoryId: 35,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-12-17T16:55:17.737Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Cerro Colorado",
@@ -132,6 +156,8 @@ const cordoba = [
     categoryId: 35,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2020-12-17T16:55:17.737Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "EL CHAMPAQUÍ",
@@ -142,6 +168,8 @@ const cordoba = [
     categoryId: 35,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2020-07-09T17:02:41.378Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "QUEBRADA DEL CONDORITO",
@@ -152,6 +180,8 @@ const cordoba = [
     categoryId: 35,
     userId: "4e21929a-36ad-11ec-8d3d-0242ac170003",
     createdAt: "2020-07-09T17:02:41.378Z",
+    provinceId: 2,
+    cityId: 2007,
   },
 ];
 const marDelPlata = [
@@ -164,6 +194,8 @@ const marDelPlata = [
     categoryId: 36,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2021-01-19T20:36:36.761Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Aquasol",
@@ -174,6 +206,8 @@ const marDelPlata = [
     categoryId: 36,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2021-01-19T20:36:36.761Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Puerto Mar del Plata",
@@ -184,6 +218,8 @@ const marDelPlata = [
     categoryId: 36,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2020-02-19T00:25:38.581Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Gruta Lourdes",
@@ -194,6 +230,8 @@ const marDelPlata = [
     categoryId: 36,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-02-19T00:25:38.581Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Torreon del Monje",
@@ -204,6 +242,8 @@ const marDelPlata = [
     categoryId: 36,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 14,
+    cityId: 14014,
   },
 ];
 const bariloche = [
@@ -216,6 +256,8 @@ const bariloche = [
     categoryId: 37,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Bosque de arrayanes",
@@ -226,6 +268,8 @@ const bariloche = [
     categoryId: 37,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Colonia Suiza",
@@ -236,6 +280,8 @@ const bariloche = [
     categoryId: 37,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2021-07-21T18:39:04.429Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Circuito Chico",
@@ -246,6 +292,8 @@ const bariloche = [
     categoryId: 37,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-21T18:39:04.429Z",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Lago Moreno",
@@ -256,6 +304,8 @@ const bariloche = [
     categoryId: 37,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
+    provinceId: 82,
+    cityId: 82084,
   },
 ];
 

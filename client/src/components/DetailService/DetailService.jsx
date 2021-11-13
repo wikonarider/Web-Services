@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteFavs, addFavs } from '../../utils/favs';
-import { addServiceOrder } from '../../utils/orders';
-import { getUserInfo, addCart } from '../../redux/actions/index';
-import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
-import Comments from '../Comments/Comments';
-import RelatedServices from './RelatedServices/RelatedServices';
-import RightInfoBar from './RightInfoBar/RightInfoBar';
-import { getServiceById, getRelatedServices } from '../../utils/servicesPage';
-import Typography from '@mui/material/Typography';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteFavs, addFavs } from "../../utils/favs";
+import { addServiceOrder } from "../../utils/orders";
+import { getUserInfo, addCart } from "../../redux/actions/index";
+import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
+import Comments from "../Comments/Comments";
+import RelatedServices from "./RelatedServices/RelatedServices";
+import RightInfoBar from "./RightInfoBar/RightInfoBar";
+import { getServiceById, getRelatedServices } from "../../utils/servicesPage";
+import Typography from "@mui/material/Typography";
 
 export default function DetailService({ id, closeModal }) {
   const [service, setService] = useState({ service: {}, user: {} });
@@ -29,7 +29,7 @@ export default function DetailService({ id, closeModal }) {
   useEffect(() => {
     getServiceById(id)
       .then((data) => setService({ service: data.service, user: data.user }))
-      .catch((e) => console.log(e.response.data.message));
+      .catch((e) => console.log(e));
   }, [id]);
 
   //----------- SERVICIOS RELACIONADOS ------------------------
@@ -111,7 +111,7 @@ export default function DetailService({ id, closeModal }) {
   //-----------------------------------------
 
   const IMG_TEMPLATE =
-    'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
+    "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
   let { img, title, price, qualifications } = service.service;
 
@@ -132,7 +132,7 @@ export default function DetailService({ id, closeModal }) {
           >
             {/* ----------------- FOTO Y COMENTARIOS ------------------------- */}
             <Box
-              gridColumn={{ xs: 'span 12', sm: 'span 12', md: 'span 8' }}
+              gridColumn={{ xs: "span 12", sm: "span 12", md: "span 8" }}
               p={{ xs: 0, sm: 2 }}
               display="flex"
               flexDirection="column"
@@ -144,10 +144,10 @@ export default function DetailService({ id, closeModal }) {
                 height="400"
                 alt={id}
                 sx={{
-                  objectFit: 'cover',
-                  mb: 'auto',
+                  objectFit: "cover",
+                  mb: "auto",
                   pb: 5,
-                  borderRadius: '4px',
+                  borderRadius: "4px",
                 }}
               />
 

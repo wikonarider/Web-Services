@@ -1,7 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
-import { Stack } from "@mui/material";
+import React from "react";
 import useStylesConvertations from "./ConvertationsStyled";
 export default function Conversations({ contacts, contactsOnline, darkTheme }) {
   //darkTheme boolean global state

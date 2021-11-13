@@ -1,6 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React from "react";
 import { Stack } from "@mui/material";
 import useStylesBougth from "./ContactsStyled";
 export default function Contactsbougth({ contacts, contactsOnline, darkTheme }) {

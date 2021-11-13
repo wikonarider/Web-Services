@@ -27,7 +27,7 @@ async function getServices(req, res, next) {
     const {
       order,
       province,
-      cities,
+      city,
       category,
       startRange,
       endRange,
@@ -72,9 +72,29 @@ async function getServices(req, res, next) {
             model: Qualification,
             attributes: [],
           },
+          {
+            model: Province,
+            attributes: ["name"],
+            where: province && {
+              name: province,
+            },
+          },
+          {
+            model: City,
+            attributes: ["name"],
+            where: city && {
+              name: city,
+            },
+          },
         ],
         raw: false,
-        group: ["service.id", "category.id", "category->group.id"],
+        group: [
+          "service.id",
+          "category.id",
+          "category->group.id",
+          "province.id",
+          "city.id",
+        ],
         subQuery: false,
         // paginado
         offset: page && pageSize ? page * pageSize : null,
@@ -235,7 +255,7 @@ async function getServicesById(req, res, next) {
         },
         {
           model: City,
-          attributes: ["name"],
+          attributes: ["name", "lat", "lon"],
         },
       ],
     });
