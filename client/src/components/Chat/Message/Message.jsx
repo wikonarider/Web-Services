@@ -1,6 +1,8 @@
-import { Avatar, Box } from "@material-ui/core";
 import React from "react";
+import { Avatar, Box } from "@material-ui/core";
 import useStylesMessage from "./MessageStyled";
+import { format } from "timeago.js";
+
 export default function Message({
   user,
   contact,
@@ -10,7 +12,7 @@ export default function Message({
 }) {
   var clasess = useStylesMessage(darkTheme, message, user)();
   return (
-    <Box  className={clasess.box_position_MsnSendReceive}>
+    <Box className={clasess.box_position_MsnSendReceive}>
       <Box
         ref={scrollRef}
         className={
@@ -34,7 +36,7 @@ export default function Message({
           </h4>
         </Box>
 
-        <h5>{message.createdAt}</h5>
+        <h5>{format(message.createdAt)}</h5>
       </Box>
     </Box>
   );

@@ -15,15 +15,17 @@ export default function useStylesChat(darkTheme) {
     //darkTheme prop global
     //SEND BTN
     inputSend: {
-      background: darkTheme ? grey[900] : "#B5C0C5",
-      borderRadius: "0.4em",
+      background: darkTheme ? grey[900] : "whiteSmoke",
+      borderRadius: "0",
       margin: "1%",
+      height: "70px",
       "& input": {
         color: darkTheme ? grey[400] : grey[900],
         marginLeft: "0.9%",
       },
       "& fieldSet": {
-        borderRadius: "0.4em",
+        borderRadius: "0",
+        height: "75px",
       },
     },
     searchContact: {
@@ -45,8 +47,9 @@ export default function useStylesChat(darkTheme) {
     //----------------------------------------------------------------------
     startchat: {
       textAlign: "center",
-      fontSize: 123,
+      fontSize: 40,
       opacity: "0.3",
+      textTransform: "uppercase",
     },
     /*box wrapper chat*/
     box_messanger_father: {
@@ -64,19 +67,19 @@ export default function useStylesChat(darkTheme) {
       display: "flex",
       height: "100vh",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : "#B5C0C5",
+      background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
     },
     containerConvertation: {
       position: "relative",
       display: "flex",
       flexDirection: "row",
-      marginTop: "5%",
+      marginTop: "15%",
       width: "100%",
       transition: "0.4s",
       "&:hover": {
         background: darkTheme ? grey[700] : grey[400],
-        borderRadius: "0.3em",
+        borderRadius: "0",
       },
     },
     box_avatar_And_X: {
@@ -110,7 +113,7 @@ export default function useStylesChat(darkTheme) {
       flex: 1.5,
       display: "flex",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : "#B5C0C5",
+      background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
       height: "100vh",
       maxHeight: "100vh",

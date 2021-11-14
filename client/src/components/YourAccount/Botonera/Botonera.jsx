@@ -1,30 +1,31 @@
-import Button from '@mui/material/Button';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import DataSaverOffIcon from '@mui/icons-material/DataSaverOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from "@mui/material/Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import ChatIcon from "@mui/icons-material/Chat";
+import { makeStyles } from "@material-ui/core/styles";
+import s from "./Botonera.module.css";
+import { useHistory } from "react-router";
+import { Divider } from "@mui/material";
 
-import s from './Botonera.module.css';
-import { useHistory } from 'react-router';
-import { Divider } from '@mui/material';
-
-import { animateScroll as scroll } from 'react-scroll';
+import { animateScroll as scroll } from "react-scroll";
 
 const useStyles = makeStyles((theme) => ({
   buttonStyle: {
     marginRight: 1,
     marginLeft: 1,
     marginBottom: 1,
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
     },
+    color: "#78909c",
   },
   divider: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none',
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
     },
   },
 }));
@@ -42,13 +43,15 @@ export default function YourAccount({
   user,
 }) {
   const history = useHistory();
-
   const handleClickPostService = () => {
-    history.push('/createservice');
+    history.push("/createservice");
   };
 
   const classes = useStyles();
 
+  const goMessages = () => {
+    history.push(`/chat`);
+  };
   // const buttonStyle = {
   //   marginRight: 1,
   //   marginLeft: 1,
@@ -60,8 +63,8 @@ export default function YourAccount({
       <div className={s.botonera}>
         {user.admin && (
           <Button
-            variant={viewAdmin ? 'contained' : 'outlined'}
-            color={viewAdmin ? 'secondary' : 'primary'}
+            variant={viewAdmin ? "contained" : "outlined"}
+            color={viewAdmin ? "secondary" : "primary"}
             startIcon={<AdminPanelSettingsIcon />}
             onClick={() => {
               setViewFavs(false);
@@ -76,8 +79,8 @@ export default function YourAccount({
           </Button>
         )}
         <Button
-          variant={viewOrders ? 'contained' : 'outlined'}
-          color={viewOrders ? 'secondary' : 'primary'}
+          variant={viewOrders ? "contained" : "outlined"}
+          color={viewOrders ? "secondary" : "primary"}
           startIcon={<ShoppingBagIcon />}
           onClick={() => {
             setViewFavs(false);
@@ -88,11 +91,27 @@ export default function YourAccount({
           }}
           className={classes.buttonStyle}
         >
-          Your Orders
+          My Orders
         </Button>
         <Button
-          variant={viewFavs ? 'contained' : 'outlined'}
-          color={viewFavs ? 'secondary' : 'primary'}
+          variant={viewOrders ? "contained" : "outlined"}
+          color={viewOrders ? "secondary" : "primary"}
+          startIcon={<ChatIcon />}
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(!viewOrders);
+            setViewservices(false);
+            setViewAdmin(false);
+            scroll.scrollToBottom();
+            goMessages();
+          }}
+          className={classes.buttonStyle}
+        >
+          My Messages
+        </Button>
+        <Button
+          variant={viewFavs ? "contained" : "outlined"}
+          color={viewFavs ? "secondary" : "primary"}
           startIcon={<FavoriteIcon />}
           onClick={() => {
             setViewFavs(!viewFavs);
@@ -103,11 +122,11 @@ export default function YourAccount({
           }}
           className={classes.buttonStyle}
         >
-          Your Favs
+          My Favs
         </Button>
         <Button
-          variant={viewServices ? 'contained' : 'outlined'}
-          color={viewServices ? 'secondary' : 'primary'}
+          variant={viewServices ? "contained" : "outlined"}
+          color={viewServices ? "secondary" : "primary"}
           startIcon={<VisibilityIcon />}
           onClick={() => {
             setViewFavs(false);
@@ -118,7 +137,7 @@ export default function YourAccount({
           }}
           className={classes.buttonStyle}
         >
-          Your Services
+          My Services
         </Button>
 
         <Button
@@ -127,7 +146,7 @@ export default function YourAccount({
           className={classes.buttonStyle}
           onClick={handleClickPostService}
         >
-          Post Service
+          Add Service
         </Button>
 
         <Button
@@ -138,16 +157,16 @@ export default function YourAccount({
           }}
           className={classes.buttonStyle}
         >
-          Change Your Data
+          Change My Data
         </Button>
       </div>
       <Divider
         sx={{
-          width:'90%',
-          marginLeft:'5%',
-          border: '1px solid',
+          width: "90%",
+          marginLeft: "5%",
+          border: "1px solid",
           borderRadius: 12,
-          marginBottom: '3%',
+          marginBottom: "3%",
         }}
         className={s.divider}
       />
