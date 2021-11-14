@@ -56,6 +56,7 @@ export default function useStylesChat(darkTheme) {
       height: "100vh",
       width: "100vw",
       overflowX: "hidden",
+      overflowY: "hidden",
     },
     //---------------------------------------------------------------------box contacts*/
     box_contacts_a: {
@@ -105,6 +106,7 @@ export default function useStylesChat(darkTheme) {
     },
     /*----------------------------------------------------------------box contacts online-offline*/
     box_contactsStates_c: {
+      height: "100%",
       flex: 1.5,
       display: "flex",
       flexDirection: "column",
