@@ -5,23 +5,18 @@ import { Stack } from "@mui/material";
 import useStylesBougth from "./ContactsStyled";
 export default function Contactsbougth({ contacts, contactsOnline, darkTheme }) {
   //darkTheme boolean global state
-  var classes = useStylesBougth(darkTheme)();
+  var statusUser = contactsOnline.some((e) => e.user === contacts.id);
+  var classes = useStylesBougth(darkTheme, statusUser)();
   if (contacts) {
     return (
-      <Box
-        className={
-          contactsOnline.some((e) => e.user === contacts.id)
-            ? classes.boxBoughtOnline
-            : classes.boxBoughtOffline
-        }
-      >
-        <Stack direction="row" spacing={5}>
-          <Avatar
-            src={contacts.userImg}
-            sx={{ width: "54px", height: 54, cursor: "pointer" }}
-          />
-          {contacts.name}
-        </Stack>
+      <Box className={classes.boxBoughtInline}>
+        <Avatar src={contacts.userImg} className={classes.avatar}>
+
+        </Avatar>
+        {contacts.name}
+
+             <Box className={classes.icon_status_inline}></Box>
+       
       </Box>
     );
   } else {

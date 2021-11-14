@@ -1,7 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default function useStylesMessage(darkTheme, message, user) {
-  //darkTheme boolean global state
+  //darkTheme prop global
+  
   return makeStyles((theme) => ({
     avatar: {
       width: 40,

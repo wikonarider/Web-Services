@@ -36,7 +36,11 @@ function Chat({ user, darkTheme }) {
   }); //4
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStylesChat(darkTheme)();
+  const classes = useStylesChat(
+    darkTheme,
+    UsersOnlines,
+    chat.contactsConv
+  )();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
@@ -93,36 +97,35 @@ function Chat({ user, darkTheme }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  useEffect(() => {
-    (async () => {
-      if (textReceive && chat.currentCont) {
-        chat.currentCont.id === textReceive.userId &&
+  useEffect(async () => {
+    if (textReceive && chat.currentCont) {
+      chat.currentCont.id === textReceive.userId &&
+        setChat({
+          ...chat,
+          chatting: chat.chatting.concat(textReceive),
+        });
+    }
+    var contac = chat.contactsConv.filter((con) => {
+      return con.id === textReceive.userId;
+    });
+    //new msj new contact add contacs array and convertations
+    if (contac.length === 0) {
+      var convertition;
+      getConvertations()
+        .then((conv) => {
+          convertition = conv;
+          return getContacts();
+        })
+        .then((contact) => {
           setChat({
             ...chat,
-            chatting: chat.chatting.concat(textReceive),
+            contactsConv: contact.data,
+            convertations: convertition.data,
           });
-      }
-      var contac = chat.contactsConv.filter((con) => {
-        return con.id === textReceive.userId;
-      });
-      //new msj new contact add contacs array and convertations
-      if (contac.length === 0) {
-        var convertition;
-        getConvertations()
-          .then((conv) => {
-            convertition = conv;
-            return getContacts();
-          })
-          .then((contact) => {
-            setChat({
-              ...chat,
-              contactsConv: contact.data,
-              convertations: convertition.data,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
-    })();
+        })
+        .catch((err) => console.log(err));
+    }
+
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
@@ -277,7 +280,7 @@ function Chat({ user, darkTheme }) {
               ))}
             </Box>
           ) : (
-            <h3 className="startchat">Click a contact to start a chat</h3>
+            <Box className={classes.startchat}>Click a contact to start a chat</Box>
           )}
 
           {chat.currentCont ? (
@@ -312,14 +315,17 @@ function Chat({ user, darkTheme }) {
         </Box>
         {/*contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
+          <Box>your</Box>
+          <h3>contacts bougth</h3>
           <Box
             name="menu-contactsOnline-wrapper"
-            className={classes.menu_contactsOnline_wrapper}
+            className={classes.box_contactsOnline_wrapper}
           >
-            contacts bougth
             {chat.contactsBoungth.length &&
               chat.contactsBoungth.map((contac) => (
                 <Box
+                  name="contactBougth"
+                  className={classes.box_contact_bought}
                   key={contac.id}
                   onClick={() => {
                     newConvertationbougth(contac);

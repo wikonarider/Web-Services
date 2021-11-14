@@ -1,10 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { brown } from "@mui/material/colors";
-//darkMode booleano del estado global
-export default function useStylesChat(darkMode) {
+import {
+  brown,
+  amber,
+  lime,
+  deepOrange,
+  green,
+  grey,
+  red,
+  blueGrey,
+} from "@mui/material/colors";
+export default function useStylesChat(darkTheme) {
+  //darkTheme booleano del estado global
   return makeStyles((theme) => ({
-    //theme prop global
+    //darkTheme prop global
     //SEND BTN
+    searchContact: {},
     btn: {
       borderRadius: 0,
       textTransfrom: "none",
@@ -13,7 +23,7 @@ export default function useStylesChat(darkMode) {
     //------------------------------------------------------------------button X
     btn_x: {
       position: "absolute",
-      left: "85.5%",
+      left: "85%",
       bottom: "85%",
       cursor: "pointer",
     },
@@ -22,8 +32,7 @@ export default function useStylesChat(darkMode) {
     box_messanger_father: {
       display: "flex",
       flexDirection: "row",
-      maxHeight: "90%",
-      minHeight: "935px",
+      height: "937px",
       overflowY: "hidden",
       backgroundColor: "rgb(231, 238, 238)",
     },
@@ -31,59 +40,70 @@ export default function useStylesChat(darkMode) {
     box_contacts_a: {
       flex: 1.5,
       display: "flex",
+      height: "100%",
       flexDirection: "column",
-      background: darkMode ? "#212121" : "#B5C0C5",
+      background: darkTheme ? grey[800] : grey[400],
       padding: "0.5%",
-      height: "95",
     },
     containerConvertation: {
       position: "relative",
       display: "flex",
       flexDirection: "row",
       marginTop: "5%",
+      width: "100%",
+      transition: "0.4s",
+      "&:hover": {
+        background: darkTheme ? grey[700] : grey[300],
+        borderRadius: "0.3em",
+      },
     },
     box_avatar_And_X: {
       display: "flex",
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
-      transition: "0.3s",
-      "&:hover": {
-        backgroundColor: "grey",
-        opacity: "100%",
-        borderRadius: "0.2em",
-      },
     },
 
     /*input search*/
-    searchContact: {},
 
     /*---------------------------------------------------------------box conversations*/
     container_chatting: {
       flex: "5.5",
       display: "flex",
       flexDirection: "column",
-      background: darkMode ? "#212121" : "#fafafa",
+      background: darkTheme ? "#212121" : "#fafafa",
+      height: "100%",
     },
 
     box_conversations_b: {
-      flexDirection: "column",
-      height: "100%",
+      overflowX: "hidden",
       overflowY: "scroll",
+      height: "100%",
     },
     /*----------------------------------------------------------------box contacts online-offline*/
     box_contactsStates_c: {
+      height: "100%",
       flex: 1.5,
+      display: "flex",
+      flexDirection: "column",
+      background: darkTheme ? grey[800] : grey[400],
+      padding: "0.5%",
     },
 
     /*box contactsOnline wrapper*/
-    menu_contactsOnline_wrapper: {
-      padding: "1%",
-      height: "100%",
-      background: darkMode ? "#212121" : "#B5C0C5",
+    box_contactsOnline_wrapper: {
+      display: "flex",
+      flexWrap: "wrap",
     },
     startchat: {
-      size: "3em",
+      textAlign: "center",
+      fontSize: 123,
+      opacity: "0.2",
+    },
+
+    box_contact_bought: {
+      height: "60%",
+      width: "50%",
     },
   }));
 }
