@@ -1,5 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+import {
+  brown,
+  amber,
+  lime,
+  deepOrange,
+  green,
+  grey,
+  red,
+} from "@mui/material/colors";
 export default function useStylesMessage(darkTheme, message, user) {
   //darkTheme prop global
   
@@ -29,6 +37,7 @@ export default function useStylesMessage(darkTheme, message, user) {
       minWidth: "50%",
       maxWidth: "50%",
       height: "100%",
+      boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
     },
     boxMsnReceive: {
       display: "flex",
@@ -39,6 +48,7 @@ export default function useStylesMessage(darkTheme, message, user) {
       borderRadius: "0.7em",
       maxWidth: "50%",
       height: "100%",
+      boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
     },
     message: {},
   }));

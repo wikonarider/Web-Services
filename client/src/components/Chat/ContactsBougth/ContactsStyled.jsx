@@ -19,10 +19,11 @@ export default function useStylesBougth(darkTheme,statusUser) {
       background: statusUser ? green[500] : red[400],
       right: "26%",
       bottom: "82%",
-      border: `3px solid ${darkTheme ? "#212121" : grey[400]}`,
+      border: `3px solid ${darkTheme ? "#212121" : "#B5C0C5"}`,
       transform: "scale(0.8,0.8)",
     },
     avatar: {
+      boxShadow: `0.2em 0.2em 0.1em  ${darkTheme ? grey[800] : grey[600]}`,
       width: 70,
       height: 70,
       cursor: "pointer",
@@ -30,12 +31,17 @@ export default function useStylesBougth(darkTheme,statusUser) {
     boxBoughtInline: {
       position: "relative",
       flexDirection: "column",
-      height: "100%",
-      display: "flex",
       alignItems: "center",
+      display: "flex",
       width: "100%",
       height: "100%",
       cursor: "pointer2",
+    },
+    nameUserBought: {
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      paddingBottom: "25%",
     },
   }));
 }

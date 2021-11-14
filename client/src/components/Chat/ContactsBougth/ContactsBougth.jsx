@@ -13,7 +13,7 @@ export default function Contactsbougth({ contacts, contactsOnline, darkTheme }) 
         <Avatar src={contacts.userImg} className={classes.avatar}>
 
         </Avatar>
-        {contacts.name}
+        <Box className={classes.nameUserBought}>{contacts.name}</Box>
 
              <Box className={classes.icon_status_inline}></Box>
        

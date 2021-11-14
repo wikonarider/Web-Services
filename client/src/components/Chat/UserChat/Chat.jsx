@@ -234,6 +234,7 @@ function Chat({ user, darkTheme }) {
             type="text"
             name="inputSearch"
             placeholder="search contact!"
+            className={classes.searchContact}
           ></Input>
           {chat.contactsConv.length &&
             chat.contactsConv.map((con) => (
@@ -297,6 +298,7 @@ function Chat({ user, darkTheme }) {
                   size="small"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
+                  className={classes.inputSend}
                 />
                 <Button
                   variant="contained"

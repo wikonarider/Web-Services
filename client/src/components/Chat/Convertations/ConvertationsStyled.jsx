@@ -14,7 +14,7 @@ export default function useStylesConvertations(darkTheme,statusUser) {
     avatar: {
       width: 76,
       height: 76,
-      border: `3.5px solid ${!statusUser ? red[600]: green[400]}`,
+      border: `3.5px solid ${!statusUser ? red[600] : green[400]}`,
     },
     boxConvInline: {
       display: "flex",
@@ -24,6 +24,7 @@ export default function useStylesConvertations(darkTheme,statusUser) {
       height: "100px",
       cursor: "pointer",
       background: "#FFDA77",
+      boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
       width: "80%",
       borderRadius: "0.3em",
     },
