@@ -44,5 +44,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: false,
     },
+    resetPassword: {
+      type: DataTypes.STRING,
+      
+    },
   });
 };

@@ -1,3 +1,4 @@
+
 import "./App.css";
 import React from "react";
 import axios from "axios";
@@ -124,9 +125,14 @@ function App() {
   return (
     <ThemeProvider theme={darkGlobal ? darkTheme : lightTheme}>
       <CssBaseline />
-      <div className="App">
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/resetPassword" component={ResetPassword} />
+
+      <div className='App'>
+        <Route exact path='/' component={Landing} />
+        <Route exact
+         path='/resetPassword/:id' 
+         render={({ match }) => <ResetPassword resetPassword={match.params.id} />}
+        />
+
 
         <Route exact path="/home">
           <Nav route={"home"} />

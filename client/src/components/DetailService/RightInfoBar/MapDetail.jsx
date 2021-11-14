@@ -13,7 +13,8 @@ function MapDetail({ lat, lon }) {
     <div>
       <iframe
         title="map"
-        width="425"
+        width="100%"
+        maxWidth="425"
         height="250"
         frameBorder="0"
         scrolling="no"

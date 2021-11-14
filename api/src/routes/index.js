@@ -10,6 +10,7 @@ const checkout = require('./checkout');
 const chat = require('./Chat');
 const admin = require('./admin');
 const forgotPassword = require('./forgotPassword');
+const resetPassword = require('./resetPassword')
 const paypal = require('./paypal');
 const auth = require('./auth');
 const { verifyToken } = require('../controllers/authentication');
@@ -37,5 +38,6 @@ router.use('/chat', verifyToken, chat);
 router.use('/admin', admin);
 router.use('/paypal', paypal);
 router.use('/orders', orders);
+router.use('/resetPassword', resetPassword)
 
 module.exports = router;

@@ -3,11 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Stack } from "@mui/material";
 import useStylesBougth from "./ContactsStyled";
-export default function Contactsbougth({
-  contacts,
-  contactsOnline,
-  darkTheme,
-}) {
+export default function Contactsbougth({ contacts, contactsOnline, darkTheme }) {
   //darkTheme boolean global state
   var statusUser = contactsOnline.some((e) => e.user === contacts.id);
   var classes = useStylesBougth(darkTheme, statusUser)();

@@ -273,3 +273,15 @@ export function forgotPassword(body) {
     }
   };
 }
+
+export function ressetPassword(body) {
+  return async function (dispatch) {
+    var json = await axios.put(`/resetPassword`, body);
+    console.log('response resetPassword action', json.data )
+    window.location.replace('https://pf-web-service.vercel.app/home');
+    return dispatch({
+      type: type.RESET_PASSWORD,
+      payload: json.data,
+    });
+  };
+}
