@@ -267,6 +267,7 @@ export function forgotPassword(body) {
   return async function (dispatch) {
     try {
       const response = await axios.put(`/forgotPassword`, body);
+      window.location.replace('https://pf-web-service.vercel.app/home');
       return dispatch({ type: type.FORGOT_PASSWORD, payload: response.data });
     } catch (err) {
       console.log(err);

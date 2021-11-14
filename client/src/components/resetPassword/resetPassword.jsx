@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { ressetPassword } from "../../redux/actions/index";
+import ResetPasswordModal from './ResetPasswordModal'
 
 const style = {
   position: "absolute",
@@ -25,7 +26,7 @@ const style = {
 export default function ResetPassword({resetPassword}) {
     console.log('resetPassword en front', resetPassword)
 
-
+  const [modal, setModal] = useState(false)
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({
     //   password : '',
@@ -98,6 +99,7 @@ export default function ResetPassword({resetPassword}) {
         resetPassword: resetPassword,
       })
     );
+    setModal(true)
   }
 
   return (
@@ -146,6 +148,13 @@ export default function ResetPassword({resetPassword}) {
         >
           Update Password
         </Button>
+       
+        <ResetPasswordModal
+        modal={modal}
+        setModal={setModal}
+        message={"Password changed successfully!"}
+      />
+
       </Box>
     </div>
   );
