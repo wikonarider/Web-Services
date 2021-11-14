@@ -15,7 +15,7 @@ export default function useStylesBougth(darkTheme,statusUser) {
       position: "absolute",
       width: 25,
       height: 25,
-      borderRadius: "10em",
+      borderRadius: "15em",
       background: statusUser ? green[500] : red[400],
       right: "26%",
       bottom: "82%",

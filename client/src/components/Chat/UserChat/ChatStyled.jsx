@@ -17,6 +17,7 @@ export default function useStylesChat(darkTheme) {
     inputSend: {
       background: darkTheme ? grey[900] : "#B5C0C5",
       borderRadius: "0.4em",
+
       margin: "1%",
       "& input": {
         color: darkTheme ? grey[400] : grey[900],
@@ -46,7 +47,7 @@ export default function useStylesChat(darkTheme) {
     startchat: {
       textAlign: "center",
       fontSize: 123,
-      opacity: "0.3",
+      opacity: darkTheme ? "0.1" : "0.3",
     },
     /*box wrapper chat*/
     box_messanger_father: {
@@ -62,7 +63,9 @@ export default function useStylesChat(darkTheme) {
     box_contacts_a: {
       flex: 1.5,
       display: "flex",
+
       height: "100vh",
+      overflowY: "auto",
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#B5C0C5",
       padding: "0.5%",
