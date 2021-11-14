@@ -1,13 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  brown,
-  amber,
-  lime,
-  deepOrange,
-  green,
-  grey,
-  red,
-} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
+// Descomentar cuando se va a usar
+// import {
+//   brown,
+//   amber,
+//   lime,
+//   deepOrange,
+//   green,
+//   red,
+// } from "@mui/material/colors";
 export default function useStylesMessage(darkTheme, message, user) {
   //darkTheme prop global
 

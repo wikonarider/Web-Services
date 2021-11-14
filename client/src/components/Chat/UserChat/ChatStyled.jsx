@@ -1,14 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  brown,
-  amber,
-  lime,
-  deepOrange,
-  green,
-  grey,
-  red,
-  blueGrey,
-} from "@mui/material/colors";
+import { brown, grey } from "@mui/material/colors";
+// Descomentar cuando se va a usar, evitar los warnings
+// import {
+//   amber,
+//   lime,
+//   deepOrange,
+//   green,
+//   red,
+//   blueGrey,
+// } from "@mui/material/colors";
+
 export default function useStylesChat(darkTheme) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
@@ -115,7 +116,6 @@ export default function useStylesChat(darkTheme) {
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
-      height: "100vh",
       maxHeight: "100vh",
     },
 

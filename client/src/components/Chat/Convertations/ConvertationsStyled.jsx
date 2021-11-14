@@ -1,13 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  brown,
-  amber,
-  lime,
-  deepOrange,
-  green,
-  grey,
-  red,
-} from "@mui/material/colors";
+import { green, grey, red } from "@mui/material/colors";
+
+// Descomentar cuando se va a usar
+// import { brown, amber, lime, deepOrange } from "@mui/material/colors";
+
 export default function useStylesConvertations(darkTheme, statusUser) {
   //darkTheme boolean global state
   return makeStyles((theme) => ({

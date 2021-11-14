@@ -1,5 +1,6 @@
 import React from "react";
-import { Avatar, Box } from "@material-ui/core";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import useStylesMessage from "./MessageStyled";
 import { format } from "timeago.js";
 
