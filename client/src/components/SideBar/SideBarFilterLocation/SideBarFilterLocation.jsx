@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
-import Box from "@mui/system/Box";
+import Box from "@mui/material/Box";
 
 export default function SideBarFilterLocaltion({ text, index }) {
   const dispatch = useDispatch();
