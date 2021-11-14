@@ -47,26 +47,13 @@ export default function ResetPassword({resetPassword}) {
     } else if (password.password !== password.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
+    else if ( /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password.password || password.confirmPassword)){
+        errors.password = "At least 8 characters, it must contain 1 letter and 1 number"
+        errors.confirmPassword = "At least 8 characters, it must contain 1 letter and 1 number"
+    }
     return errors;
   }
 
-//   function handleChange(e) {
-//     setPassword((prev) => {
-//       //guard el input modificado
-//       const input2 = {
-//         ...prev,
-//         password: e.target.value,
-//       };
-
-//       setErrors(() => {
-//         return validateErrors({
-//           ...password,
-//           [e.target.name]: e.target.value,
-//         });
-//       });
-//       return input2;
-//     });
-//   }
 
   function handleChange(e) {
     setPassword((prev) => {
