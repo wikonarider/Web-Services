@@ -116,6 +116,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
+            required
             error={inputsErrors.username ? true : false}
             helperText={inputsErrors.username}
             name="username"
@@ -126,6 +127,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           />
           <TextField
             fullWidth
+            required
             error={inputsErrors.password ? true : false}
             helperText={inputsErrors.password}
             name="password"
