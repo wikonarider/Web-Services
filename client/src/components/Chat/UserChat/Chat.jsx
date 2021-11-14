@@ -36,7 +36,11 @@ function Chat({ user, darkTheme }) {
   }); //4
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStylesChat(darkTheme)();
+  const classes = useStylesChat(
+    darkTheme,
+    UsersOnlines,
+    chat.contactsConv
+  )();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
@@ -276,7 +280,7 @@ function Chat({ user, darkTheme }) {
               ))}
             </Box>
           ) : (
-            <h3 className="startchat">Click a contact to start a chat</h3>
+            <Box className={classes.startchat}>Click a contact to start a chat</Box>
           )}
 
           {chat.currentCont ? (
@@ -311,14 +315,17 @@ function Chat({ user, darkTheme }) {
         </Box>
         {/*contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
+          <Box>your</Box>
+          <h3>contacts bougth</h3>
           <Box
             name="menu-contactsOnline-wrapper"
-            className={classes.menu_contactsOnline_wrapper}
+            className={classes.box_contactsOnline_wrapper}
           >
-            contacts bougth
             {chat.contactsBoungth.length &&
               chat.contactsBoungth.map((contac) => (
                 <Box
+                  name="contactBougth"
+                  className={classes.box_contact_bought}
                   key={contac.id}
                   onClick={() => {
                     newConvertationbougth(contac);
