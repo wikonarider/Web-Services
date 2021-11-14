@@ -19,7 +19,7 @@ export default function useStylesBougth(darkTheme,statusUser) {
       background: statusUser ? green[500] : red[400],
       right: "26%",
       bottom: "82%",
-      border: `3px solid ${darkTheme ? lime[900] : grey[300]}`,
+      border: `3px solid ${darkTheme ? "#212121" : grey[400]}`,
       transform: "scale(0.8,0.8)",
     },
     avatar: {

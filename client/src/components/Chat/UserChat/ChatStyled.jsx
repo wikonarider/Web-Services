@@ -42,7 +42,7 @@ export default function useStylesChat(darkTheme) {
       display: "flex",
       height: "100%",
       flexDirection: "column",
-      background: darkTheme ? "#212121" : grey[300],
+      background: darkTheme ? grey[800] : grey[400],
       padding: "0.5%",
     },
     containerConvertation: {
@@ -53,7 +53,7 @@ export default function useStylesChat(darkTheme) {
       width: "100%",
       transition: "0.4s",
       "&:hover": {
-        background: grey[500],
+        background: darkTheme ? grey[700] : grey[300],
         borderRadius: "0.3em",
       },
     },
@@ -86,7 +86,7 @@ export default function useStylesChat(darkTheme) {
       flex: 1.5,
       display: "flex",
       flexDirection: "column",
-      background: darkTheme ? "#212121" : grey[300],
+      background: darkTheme ? grey[800] : grey[400],
       padding: "0.5%",
     },
 
@@ -97,9 +97,8 @@ export default function useStylesChat(darkTheme) {
     },
     startchat: {
       textAlign: "center",
-      fontSize:123,
-      opacity:"0.2",
-      
+      fontSize: 123,
+      opacity: "0.2",
     },
 
     box_contact_bought: {
