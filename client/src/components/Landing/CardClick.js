@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-// import Collapse from "@mui/material/Collapse";
+import Grow from "@mui/material/Grow";
 
 const useStyles = makeStyles({
   root: {
@@ -25,27 +25,27 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CardClick({ infoCardClick, checked }) {
+export default function CardClick({ infoCardClick, checkedCards }) {
   const classes = useStyles();
   return (
-    //    <Collapse in={checked} {...(checked ? { timeout: 2500 } : {})}>
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={infoCardClick.imageUrl}
-        title="illustrative image"
-      />
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant="h5"
-          component="h1"
-          className={classes.title}
-        >
-          {infoCardClick.title}
-        </Typography>
-      </CardContent>
-    </Card>
-    //    </Collapse>
+    <Grow in={checkedCards} {...(checkedCards ? { timeout: 2500 } : {})}>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          image={infoCardClick.imageUrl}
+          title="illustrative image"
+        />
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h1"
+            className={classes.title}
+          >
+            {infoCardClick.title}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grow>
   );
 }

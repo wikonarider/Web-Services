@@ -7,7 +7,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 function CartList({ cart, route }) {
   const query = useMediaQuery("(max-width: 820px)");
   return (
-    <Box sx={{ mt: query && route === "home" ? "150px" : "70px" }}>
+    <Box sx={{ mt: query && route === "home" ? "160px" : "70px" }}>
       <List>
         {cart &&
           cart.map((s) => (

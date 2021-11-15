@@ -7,21 +7,22 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ChatIcon from "@mui/icons-material/Chat";
 import { makeStyles } from "@material-ui/core/styles";
-import s from "./Botonera.module.css";
 import { useHistory } from "react-router";
 
 import { animateScroll as scroll } from "react-scroll";
-import { useSelector } from "react-redux";
+import { useMediaQuery } from "@mui/material";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Box from "@mui/material/Box";
 
 const useStyles = makeStyles((theme) => ({
   buttonStyle: {
     marginRight: 1,
     marginLeft: 1,
     marginBottom: 1,
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100%",
     },
-  }
+  },
 }));
 
 export default function Botonera({
@@ -35,9 +36,7 @@ export default function Botonera({
   setViewAdmin,
   setOpenForm,
   user,
-  darkTheme,
 }) {
-
   const history = useHistory();
   const handleClickPostService = () => {
     history.push("/createservice");
@@ -54,13 +53,20 @@ export default function Botonera({
   //   marginBottom: 1,
   // };
 
+  const matches = useMediaQuery("(min-width:800px)");
+
   return (
-    <>
-      <div className={s.botonera}>
+    <Box>
+      <ButtonGroup
+        aria-label="outlined primary button group"
+        fullWidth={true}
+        sx={{ padding: "2%" }}
+        orientation={`${matches ? `horizontal` : `vertical`}`}
+      >
         {user.admin && (
           <Button
             variant={viewAdmin ? "contained" : "outlined"}
-            color={viewAdmin ? "secondary" : 'primary'}
+            color={viewAdmin ? "secondary" : "primary"}
             startIcon={<AdminPanelSettingsIcon />}
             onClick={() => {
               setViewFavs(false);
@@ -74,6 +80,7 @@ export default function Botonera({
             Admin
           </Button>
         )}
+
         <Button
           variant={viewOrders ? "contained" : "outlined"}
           color={viewOrders ? "secondary" : "primary"}
@@ -89,21 +96,7 @@ export default function Botonera({
         >
           My Orders
         </Button>
-        <Button
-          startIcon={<ChatIcon />}
-          variant="outlined"
-          onClick={() => {
-            setViewFavs(false);
-            setViewOrders(!viewOrders);
-            setViewservices(false);
-            setViewAdmin(false);
-            scroll.scrollToBottom();
-            goMessages();
-          }}
-          className={classes.buttonStyle}
-        >
-          My Messages
-        </Button>
+
         <Button
           variant={viewFavs ? "contained" : "outlined"}
           color={viewFavs ? "secondary" : "primary"}
@@ -119,6 +112,7 @@ export default function Botonera({
         >
           My Favs
         </Button>
+
         <Button
           variant={viewServices ? "contained" : "outlined"}
           color={viewServices ? "secondary" : "primary"}
@@ -133,6 +127,22 @@ export default function Botonera({
           className={classes.buttonStyle}
         >
           My Services
+        </Button>
+
+        <Button
+          startIcon={<ChatIcon />}
+          variant="outlined"
+          onClick={() => {
+            setViewFavs(false);
+            setViewOrders(!viewOrders);
+            setViewservices(false);
+            setViewAdmin(false);
+            scroll.scrollToBottom();
+            goMessages();
+          }}
+          className={classes.buttonStyle}
+        >
+          My Messages
         </Button>
 
         <Button
@@ -154,7 +164,7 @@ export default function Botonera({
         >
           Change My Data
         </Button>
-      </div>
-    </>
+      </ButtonGroup>
+    </Box>
   );
 }

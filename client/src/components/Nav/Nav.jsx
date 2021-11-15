@@ -22,17 +22,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import DarkMode from './DarkMode';
 
-// const useStyles = makeStyles({
-//   default: {
-//     borderRadius: 0,
-//     textTransfrom: "none",
-//   },
-//   secondary: {
-//     main: lime[600],
-//     contrastText: brown[500],
-//   },
-// });
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -51,8 +40,7 @@ export default function Nav({ route, check, change }) {
   const cookie = useSelector((state) => state.cookie);
   const { userImg, name } = useSelector((state) => state.user);
   const query = useMediaQuery('(max-width: 820px)');
-
-  // const classes = useStyles();
+  const darkTheme = useSelector((state) => state.darkTheme);
 
   const handleLogin = () => {
     setLoginModal((prev) => !prev);
@@ -65,8 +53,21 @@ export default function Nav({ route, check, change }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: '101%' }} id="back-to-top-anchor">
-      <AppBar position="fixed" sx={{ zIndex: '1201', p: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: '101%',
+      }}
+      id="back-to-top-anchor"
+    >
+      <AppBar
+        position="fixed"
+        sx={{
+          zIndex: '1201',
+          p: 1,
+          backgroundColor: darkTheme ? 'primary' : '#CFD8DC',
+        }}
+      >
         <Toolbar
           sx={{
             display: 'grid',

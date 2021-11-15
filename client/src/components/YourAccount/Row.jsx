@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Orders from "./Orders/Orders";
-import { getServicesByIds } from "../../utils/servicesPage";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Orders from './Orders/Orders';
+import { getServicesByIds } from '../../utils/servicesPage';
 
 export default function Row({ row }) {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export default function Row({ row }) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -45,10 +45,10 @@ export default function Row({ row }) {
         </TableCell>
         <TableCell align="center">{row.services.length}</TableCell>
         <TableCell align="center">$ {row.total}</TableCell>
-        <TableCell align="center">{row.updatedAt.split("T")[0]}</TableCell>
+        <TableCell align="center">{row.updatedAt.split('T')[0]}</TableCell>
         <TableCell
           align="right"
-          sx={row.status === "success" ? { color: "green" } : null}
+          sx={row.status === 'success' ? { color: 'green' } : null}
         >
           {row.status}
         </TableCell>
@@ -58,7 +58,7 @@ export default function Row({ row }) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             {servicesBought &&
               servicesBought.map((s, index) => (
-                <Box key={index} sx={{ marginBottom: "1%" }}>
+                <Box key={index} sx={{ marginBottom: '1%' }}>
                   <Orders service={s} />
                 </Box>
               ))}

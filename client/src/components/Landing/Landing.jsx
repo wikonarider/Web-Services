@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import Header from "./Header";
@@ -17,12 +17,13 @@ const useStyles = makeStyles((theme) => ({
 const Landing = () => {
   const classes = useStyles();
   const cookie = useSelector((state) => state.cookie);
+  const [checkedCards, setCheckedCards] = useState(false);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header cookie={cookie} />
-      <Cards cookie={cookie} />
+      <Header cookie={cookie} setCheckedCards={setCheckedCards} />
+      <Cards cookie={cookie} checkedCards={checkedCards} />
     </div>
   );
 };

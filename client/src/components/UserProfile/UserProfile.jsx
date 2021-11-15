@@ -28,7 +28,7 @@ export default function UserProfile({ id, username }) {
   }
 
   return (
-    <Box>
+    <Box paddingTop="10px">
       {profileServices.length ? (
         <Grid
           container
