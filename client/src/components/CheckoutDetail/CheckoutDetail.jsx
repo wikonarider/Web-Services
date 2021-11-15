@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { postPurchase, removeCart } from '../../redux/actions';
 import { paypal } from '../../redux/actions/index';
@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CheckoutCard from '../CheckoutDetail/CheckoutCard/CheckoutCard';
+import s from './CheckoutDetail.module.css';
 
 // import s from './CheckoutPopOver/checkoutDetail.module.css';
 
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CheckoutDetail() {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
 
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ export default function CheckoutDetail() {
     let services = [];
     let tittles = [];
     // let quantities = 1;
+
+    setLoading(!loading);
+
     cart.map(async (c) => {
       prices.push(c.price);
       services.push(c.id);
@@ -56,6 +61,9 @@ export default function CheckoutDetail() {
     let services = [];
     let tittles = [];
     // let quantities = 1;
+
+    setLoading(!loading);
+
     cart.map(async (c) => {
       prices.push(c.price);
       services.push(c.id);
@@ -104,6 +112,7 @@ export default function CheckoutDetail() {
               alignItems="flex-end"
               className={classes.querie}
             >
+              {loading && <div className={s.spinner}></div>}
               <Grid
                 style={{
                   display: 'flex',
@@ -131,10 +140,6 @@ export default function CheckoutDetail() {
                       </Typography>
                     )}
                   </Typography>
-
-                  {/* : ( */}
-                  {/* <div className={s.spinner}></div> */}
-                  {/* )} */}
                 </Grid>
                 <Grid
                   item
