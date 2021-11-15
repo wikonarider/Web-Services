@@ -16,9 +16,7 @@ export default function useStylesMessage(darkTheme, message, user) {
     avatar: {
       width: 40,
       height: 40,
-      position: "absolute",
-      right: "94%",
-      bottom: "75%",
+      left: "0.4%",
     },
     box_position_MsnSendReceive: {
       display: "flex",
@@ -26,33 +24,54 @@ export default function useStylesMessage(darkTheme, message, user) {
       alignItems: "center",
       marginTop: "5%",
       minHeight: "10%",
+      minWidth: "3%",
       margin: "3.5%",
     },
 
     boxMsnSend: {
       display: "flex",
+      flexDirection: "column",
       justifyContent: "space-around",
-      position: "relative",
       background: "#ff8f77",
-      borderRadius: "0rem",
-      minWidth: "50%",
+      borderRadius: "0.3em",
+      minWidth: "9%",
       maxWidth: "50%",
       height: "100%",
+      textAlign: "right",
       boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
+      "& h5": {
+        margin: "0%",
+        padding: "0%",
+        marginRight: "2%",
+      },
     },
     boxMsnReceive: {
       display: "flex",
+      flexDirection: "column",
       justifyContent: "space-around",
-      position: "relative",
+
       background: "#FFDA77",
-      minWidth: "50%",
-      borderRadius: "0rem",
-      maxWidth: "50%",
+      borderRadius: "0.3em",
+      minWidth: "9%",
       height: "100%",
       boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
+      textAlign: "right",
+      "& h5": {
+        margin: "0%",
+        padding: "0%",
+        marginRight: "2%",
+        color: "grey",
+      },
     },
     message: {
-      padding: "1em",
+      padding: "0",
+      textAlign: "justify",
+      textJustify: "inter-word",
+      overflowWrap: "break-word",
+      "& h4": {
+        padding: "1% 1% 0% 3%",
+        margin: "2%",
+      },
     },
   }));
 }

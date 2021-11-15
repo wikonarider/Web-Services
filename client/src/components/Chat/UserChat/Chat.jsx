@@ -230,6 +230,7 @@ function Chat({ user, darkTheme }) {
     return (
       <Box name="box-father" className={classes.box_messanger_father}>
         {/* conversation list */}
+        <div className={classes.spacing}></div>
         <Box name="contacts" className={classes.box_contacts_a}>
           <Input
             type="text"

@@ -17,7 +17,7 @@ export default function useStylesChat(darkTheme) {
     //SEND BTN
     inputSend: {
       background: darkTheme ? grey[900] : "whiteSmoke",
-      borderRadius: "0",
+      borderRadius: "0.5em",
       margin: "1%",
       height: "70px",
       "& input": {
@@ -25,7 +25,7 @@ export default function useStylesChat(darkTheme) {
         marginLeft: "0.9%",
       },
       "& fieldSet": {
-        borderRadius: "0",
+        borderRadius: "0.5em",
         height: "75px",
       },
     },
@@ -41,9 +41,12 @@ export default function useStylesChat(darkTheme) {
     //------------------------------------------------------------------button X
     btn_x: {
       position: "absolute",
-      left: "85%",
+      left: "82%",
       bottom: "85%",
       cursor: "pointer",
+    },
+    spacing:{
+        offset:theme.mixins.toolbar
     },
     //----------------------------------------------------------------------
     startchat: {
@@ -67,7 +70,7 @@ export default function useStylesChat(darkTheme) {
       flex: 1.5,
       display: "flex",
 
-      height: "100vh",
+      height: "100%",
       overflowY: "auto",
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#FFE5A1",
@@ -77,12 +80,13 @@ export default function useStylesChat(darkTheme) {
       position: "relative",
       display: "flex",
       flexDirection: "row",
-      marginTop: "15%",
-      width: "100%",
+      marginTop: "9%",
+      width: "105%",
+      paddingRight:"5%",
       transition: "0.4s",
       "&:hover": {
         background: darkTheme ? grey[700] : grey[400],
-        borderRadius: "0",
+        borderRadius: "0.3em",
       },
     },
     box_avatar_And_X: {
@@ -101,7 +105,7 @@ export default function useStylesChat(darkTheme) {
       flexDirection: "column",
       alignContent: "stretch",
       background: darkTheme ? grey[1000] : grey[100],
-      height: "100vh",
+      height: "100%",
     },
 
     box_conversations_b: {
@@ -118,7 +122,7 @@ export default function useStylesChat(darkTheme) {
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
-      maxHeight: "100vh",
+      maxHeight: "100%",
     },
 
     /*box contactsOnline wrapper*/

@@ -1,21 +1,22 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Link, useHistory } from 'react-router-dom';
-import ChatIcon from '@mui/icons-material/Chat';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import { CardActionArea } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { newConvertation } from '../../redux/actions';
+import React from "react";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { Link, useHistory } from "react-router-dom";
+import ChatIcon from "@mui/icons-material/Chat";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { CardActionArea } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { newConvertation } from "../../redux/actions";
 
 const IMG_TEMPLATE =
-  'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
+  "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
 export default function CardUser({ user }) {
   let { id, userImg, username, name, lastname } = user;
-  let fullname = name + ' ' + lastname;
+  let fullname = name + " " + lastname;
+  const userAccount = useSelector((state) => state.user);
   let dispatch = useDispatch();
   let history = useHistory();
   const fixedTitle = fullname
@@ -25,17 +26,19 @@ export default function CardUser({ user }) {
     : null;
 
   const newConv = () => {
-    dispatch(newConvertation(id));
-    history.push(`/chat`);
+    if (userAccount.id !== id) {
+      dispatch(newConvertation(id));
+      history.push(`/chat`);
+    }
   };
   return (
     <Card
       sx={{
-        height: 'minContent',
-        textDecoration: 'none',
-        m: '10px auto 10px auto',
-        p: '10px',
-        border: 'solid 1px lightgrey',
+        height: "minContent",
+        textDecoration: "none",
+        m: "10px auto 10px auto",
+        p: "10px",
+        border: "solid 1px lightgrey",
       }}
     >
       <Box
@@ -45,12 +48,12 @@ export default function CardUser({ user }) {
         gridTemplateColumns="repeat(12, 1fr)"
         gap={1}
         sx={{
-          m: '5px 0px',
-          height: 'minContent',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
+          m: "5px 0px",
+          height: "minContent",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Box gridColumn="span 5">
@@ -60,12 +63,12 @@ export default function CardUser({ user }) {
             image={userImg ? userImg : IMG_TEMPLATE}
             alt={username}
             sx={{
-              objectFit: 'cover',
-              borderRadius: '50%',
-              height: '150px',
-              width: '150px',
-              m: 'auto 0px auto 3px',
-              alignSelf: 'center',
+              objectFit: "cover",
+              borderRadius: "50%",
+              height: "150px",
+              width: "150px",
+              m: "auto 0px auto 3px",
+              alignSelf: "center",
             }}
           />
         </Box>
@@ -85,8 +88,8 @@ export default function CardUser({ user }) {
             <Typography
               variant="subtitle1"
               sx={{
-                height: 'minContent',
-                textAlign: 'left',
+                height: "minContent",
+                textAlign: "left",
               }}
             >
               {fixedTitle}
@@ -94,7 +97,7 @@ export default function CardUser({ user }) {
             <Typography
               variant="subtitle2"
               component="p"
-              sx={{ textAlign: 'left' }}
+              sx={{ textAlign: "left" }}
             >
               {username}
             </Typography>
@@ -113,11 +116,11 @@ export default function CardUser({ user }) {
             <CardActionArea
               onClick={() => newConv()}
               sx={{
-                width: '80px',
-                mt: 'auto',
-                transform: 'scale(1.3)',
-                display: 'flex',
-                gap: '5px',
+                width: "80px",
+                mt: "auto",
+                transform: "scale(1.3)",
+                display: "flex",
+                gap: "5px",
               }}
             >
               <ChatIcon />
@@ -131,11 +134,11 @@ export default function CardUser({ user }) {
               component={Link}
               to={`/users/${id}`}
               sx={{
-                width: '80px',
-                mt: 'auto',
-                transform: 'scale(1.3)',
-                display: 'flex',
-                gap: '5px',
+                width: "80px",
+                mt: "auto",
+                transform: "scale(1.3)",
+                display: "flex",
+                gap: "5px",
               }}
             >
               <AccountBoxIcon />

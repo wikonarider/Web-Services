@@ -22,7 +22,7 @@ export default function useStylesConvertations(darkTheme, statusUser) {
       background: "#FFDA77",
       boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
       width: "80%",
-      borderRadius: "0rem",
+      borderRadius: "0.3em",
     },
   }));
 }
