@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { ressetPassword } from "../../redux/actions/index";
+import ResetPasswordModal from './ResetPasswordModal'
 
 const style = {
   position: "absolute",
@@ -25,7 +26,7 @@ const style = {
 export default function ResetPassword({resetPassword}) {
     console.log('resetPassword en front', resetPassword)
 
-
+  const [modal, setModal] = useState(false)
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({
     //   password : '',
@@ -47,26 +48,13 @@ export default function ResetPassword({resetPassword}) {
     } else if (password.password !== password.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
+    else if ( /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password.password || password.confirmPassword)){
+        errors.password = "At least 8 characters, it must contain 1 letter and 1 number"
+        errors.confirmPassword = "At least 8 characters, it must contain 1 letter and 1 number"
+    }
     return errors;
   }
 
-//   function handleChange(e) {
-//     setPassword((prev) => {
-//       //guard el input modificado
-//       const input2 = {
-//         ...prev,
-//         password: e.target.value,
-//       };
-
-//       setErrors(() => {
-//         return validateErrors({
-//           ...password,
-//           [e.target.name]: e.target.value,
-//         });
-//       });
-//       return input2;
-//     });
-//   }
 
   function handleChange(e) {
     setPassword((prev) => {
@@ -111,6 +99,7 @@ export default function ResetPassword({resetPassword}) {
         resetPassword: resetPassword,
       })
     );
+    setModal(true)
   }
 
   return (
@@ -159,6 +148,13 @@ export default function ResetPassword({resetPassword}) {
         >
           Update Password
         </Button>
+       
+        <ResetPasswordModal
+        modal={modal}
+        setModal={setModal}
+        message={"Password changed successfully!"}
+      />
+
       </Box>
     </div>
   );

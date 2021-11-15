@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createService } from "../../redux/actions";
 import ModalService from "./ModalService";
-import Box from "@mui/system/Box";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -73,6 +73,7 @@ function CreateService() {
   const [skeleton, setSkeleton] = useState(false);
   const [errors, setErrors] = useState({});
   const [modal, setModal] = useState(false);
+  const [show, setShow] = useState(false);
 
   // Manejador de inputs
   const handleInputs = (e, value, input) => {
@@ -93,10 +94,15 @@ function CreateService() {
         }
       } else {
         if (value && input === "provinceChange") {
+          setShow(false);
           setIndexProv(() => {
             const index = provinces.findIndex((p) => p.id === value.id);
             return index;
           });
+          // Demora aproposito para solventar un pegueño bug
+          setTimeout(() => {
+            setShow(true);
+          }, 150);
           return { ...prev, provinceId: value.id, cityId: "" };
         } else if (value && input === "citiesChange") {
           return { ...prev, cityId: value.id };
@@ -268,7 +274,7 @@ function CreateService() {
           {/* ---------------------------------------------------- */}
 
           {/* ------------------- Ciudad ----------------------- */}
-          {inputs.provinceId ? (
+          {show && inputs.provinceId ? (
             <Autocomplete
               fullwidth="true"
               options={provinces[indexProv].cities}
@@ -308,6 +314,8 @@ function CreateService() {
         />
 
         <TextField
+          multiline
+          minRows={4}
           name="description"
           placeholder="description"
           value={inputs.description}

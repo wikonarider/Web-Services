@@ -1,14 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  brown,
-  amber,
-  lime,
-  deepOrange,
-  green,
-  grey,
-  red,
-} from "@mui/material/colors";
-export default function useStylesBougth(darkTheme,statusUser) {
+import { green, grey, red } from "@mui/material/colors";
+
+// Dscomentar cuando se va a usar
+// import { brown, amber, lime, deepOrange } from "@mui/material/colors";
+export default function useStylesBougth(darkTheme, statusUser) {
   //darkTheme boolean global state
   return makeStyles((theme) => ({
     icon_status_inline: {

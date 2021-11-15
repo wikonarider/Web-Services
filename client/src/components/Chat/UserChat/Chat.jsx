@@ -1,9 +1,10 @@
 import { io } from "socket.io-client";
 import React, { useEffect, useRef, useState } from "react";
 import Conversations from "../Convertations/convertations.jsx";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
-import { Button, Input } from "@material-ui/core";
+import Button from "@mui/material/Button";
+import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
 import { connect } from "react-redux";
 import dotenv from "dotenv";
@@ -36,11 +37,7 @@ function Chat({ user, darkTheme }) {
   }); //4
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStylesChat(
-    darkTheme,
-    UsersOnlines,
-    chat.contactsConv
-  )();
+  const classes = useStylesChat(darkTheme, UsersOnlines, chat.contactsConv)();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
@@ -97,6 +94,10 @@ function Chat({ user, darkTheme }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
+  // Linea comentada. Useffect no acepta un callback async, descomentar la linea
+  // y leer la sugerencia, puede provocar cambios inesperados si es algo async
+  // y se trata como sync
+  // eslint-disable-next-line
   useEffect(async () => {
     if (textReceive && chat.currentCont) {
       chat.currentCont.id === textReceive.userId &&
@@ -281,7 +282,9 @@ function Chat({ user, darkTheme }) {
               ))}
             </Box>
           ) : (
-            <Box className={classes.startchat}>Click a contact to start a chat</Box>
+            <Box className={classes.startchat}>
+              Click a contact to start a chat
+            </Box>
           )}
 
           {chat.currentCont ? (
@@ -317,8 +320,7 @@ function Chat({ user, darkTheme }) {
         </Box>
         {/*contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
-          <Box>your</Box>
-          <h3>contacts bougth</h3>
+          <h3>Contacts</h3>
           <Box
             name="menu-contactsOnline-wrapper"
             className={classes.box_contactsOnline_wrapper}

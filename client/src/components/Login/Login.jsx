@@ -105,7 +105,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   }
 
   return (
-    <Box sx={{ margin: '5%' }}>
+    <Box sx={{ margin: "5%" }}>
       <Box
         sx={{
           display: "flex",
@@ -115,8 +115,8 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
       >
         <form onSubmit={handleSubmit}>
           <TextField
-            required
             fullWidth
+            required
             error={inputsErrors.username ? true : false}
             helperText={inputsErrors.username}
             name="username"
@@ -126,8 +126,8 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
             onChange={handleChange}
           />
           <TextField
-            required
             fullWidth
+            required
             error={inputsErrors.password ? true : false}
             helperText={inputsErrors.password}
             name="password"
@@ -164,7 +164,9 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           <ForgotPasswordModal
             modal={modal}
             setModal={setModal}
-            message={"Enter the email address associated with your WebService account"}
+            message={
+              "Enter the email address associated with your WebService account"
+            }
           />
         </form>
       </Box>
@@ -186,7 +188,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           flexDirection: "row",
           flexWrap: "wrap",
         }}
-        gap={{ xs: 1}}
+        gap={{ xs: 1 }}
       >
         <Typography variant="body2" color="primary">
           New to WebService?
