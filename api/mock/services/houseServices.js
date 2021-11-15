@@ -158,8 +158,8 @@ const cleaningAndMaidService = [
     categoryId: 32,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-04T10:05:19.149Z",
-    provinceId: 82,
-    cityId: 82084,
+    provinceId: 6,
+    cityId: 6412,
   },
   {
     title: "Limpieza dia por medio L,J,V",
@@ -170,8 +170,8 @@ const cleaningAndMaidService = [
     categoryId: 32,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-05-16T15:31:59.642Z",
-    provinceId: 14,
-    cityId: 14014,
+    provinceId: 6,
+    cityId: 6014,
   },
   {
     title: "Limpieza de tuberias",
@@ -182,8 +182,8 @@ const cleaningAndMaidService = [
     categoryId: 32,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-10T05:11:10.689Z",
-    provinceId: 2,
-    cityId: 2007,
+    provinceId: 6,
+    cityId: 6412,
   },
 ];
 
