@@ -9,7 +9,7 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  border-left-color: #cddc39;
+  border-left-color: #ffe082;
 
   animation: spin 1s ease infinite;
 }

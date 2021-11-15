@@ -12,6 +12,7 @@ export const lightTheme = createTheme({
     mode: "light",
     primary: {
       main: blueGrey[100],
+      dark: '#263238',
       contrastText: brown[500],
     },
     secondary: {

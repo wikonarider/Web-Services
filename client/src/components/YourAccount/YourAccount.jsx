@@ -24,6 +24,8 @@ export default function YourAccount({
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   // console.log(userData);
+  const darkTheme = useSelector((state) => state.darkTheme);
+
 
   useEffect(() => {
     if (userProfile !== true) {
@@ -83,8 +85,9 @@ export default function YourAccount({
           modal={modal}
           setOpenForm={setOpenForm}
           setModal={setModal}
-          user={userData}
-        />
+          user={userData}        
+          darkTheme
+          />
       )}
       <div>
         {/* -------------------FAVS------------------------ */}
@@ -145,26 +148,6 @@ export default function YourAccount({
               </div>
             </div>
           ))}
-
-        {/* {viewOrders &&
-          (userData.servicesBought && userData.servicesBought.length > 0 ? (
-            <div className={s.servicesShown}>
-              <Container>
-                {userData.servicesBought.map((s) => (
-                  <Box sx={{ marginBottom: 5 }}>
-                    <Orders service={s} />
-                  </Box>
-                ))}
-              </Container>
-            </div>
-          ) : (
-            <div className={s.addFavContainer}>
-              <h3>You haven't bought any services yet</h3>
-              <div className={s.addToFav}>
-                <p>When you acquire a service it will show here.</p>
-              </div>
-            </div>
-          ))} */}
         {/* ----------------------------------------------------- */}
         {/* -------------------SERVICES-------------------------- */}
         {viewServices &&

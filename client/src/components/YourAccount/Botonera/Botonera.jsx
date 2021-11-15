@@ -9,9 +9,9 @@ import ChatIcon from "@mui/icons-material/Chat";
 import { makeStyles } from "@material-ui/core/styles";
 import s from "./Botonera.module.css";
 import { useHistory } from "react-router";
-import { Divider } from "@mui/material";
 
 import { animateScroll as scroll } from "react-scroll";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   buttonStyle: {
@@ -21,17 +21,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       width: "100%",
     },
-    // color: "#78909c", // Esta bugeado, buscar otra forma de que sea global
-    // o dejarlo como estaba originalmente
-  },
-  divider: {
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
-    },
-  },
+  }
 }));
 
-export default function YourAccount({
+export default function Botonera({
   viewServices,
   viewOrders,
   viewFavs,
@@ -42,7 +35,9 @@ export default function YourAccount({
   setViewAdmin,
   setOpenForm,
   user,
+  darkTheme,
 }) {
+
   const history = useHistory();
   const handleClickPostService = () => {
     history.push("/createservice");
@@ -65,7 +60,7 @@ export default function YourAccount({
         {user.admin && (
           <Button
             variant={viewAdmin ? "contained" : "outlined"}
-            color={viewAdmin ? "secondary" : "primary"}
+            color={viewAdmin ? "secondary" : 'primary'}
             startIcon={<AdminPanelSettingsIcon />}
             onClick={() => {
               setViewFavs(false);
@@ -95,9 +90,8 @@ export default function YourAccount({
           My Orders
         </Button>
         <Button
-          variant={viewOrders ? "contained" : "outlined"}
-          color={viewOrders ? "secondary" : "primary"}
           startIcon={<ChatIcon />}
+          variant="outlined"
           onClick={() => {
             setViewFavs(false);
             setViewOrders(!viewOrders);
@@ -161,16 +155,6 @@ export default function YourAccount({
           Change My Data
         </Button>
       </div>
-      <Divider
-        sx={{
-          width: "90%",
-          marginLeft: "5%",
-          border: "1px solid",
-          borderRadius: 12,
-          marginBottom: "3%",
-        }}
-        className={s.divider}
-      />
     </>
   );
 }

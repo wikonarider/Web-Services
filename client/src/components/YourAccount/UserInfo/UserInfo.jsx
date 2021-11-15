@@ -81,6 +81,7 @@ export default function YourAccount({
       gap={5}
       item
       xs={12}
+
     >
       <Grid item gridColumn="span 6">
         <Avatar
