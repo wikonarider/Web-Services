@@ -73,7 +73,7 @@ export default function Chart({ info, x, yDomain, date, title }) {
         <Line
           type="monotone"
           dataKey={yDomain}
-          stroke={darkGlobal ? "rgb(255, 0, 96)" : "rgb(205, 220, 57)"}
+          stroke={styles[darkLight].iconButton.backgroundColor}
           strokeWidth={3}
         />
       </LineChart>

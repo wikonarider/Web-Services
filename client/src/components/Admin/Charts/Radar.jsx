@@ -40,8 +40,8 @@ export default function Chart({ data, categoryKey, valueKey, name }) {
         <Radar
           name={name}
           dataKey={valueKey}
-          stroke={darkGlobal ? "rgb(255, 0, 96)" : "rgb(205, 220, 57)"}
-          fill={darkGlobal ? "rgb(255, 0, 96)" : "rgb(205, 220, 57)"}
+          stroke={styles[darkLight].iconButton.backgroundColor}
+          fill={styles[darkLight].iconButton.backgroundColor}
           fillOpacity={0.8}
         />
         <Tooltip

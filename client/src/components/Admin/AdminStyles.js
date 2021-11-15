@@ -1,3 +1,5 @@
+import { lightTheme, darkTheme } from "../../utils/MuiTheme";
+
 export const styles = {
   dark: {
     box: {
@@ -17,14 +19,14 @@ export const styles = {
       },
     },
     iconButton: {
-      backgroundColor: "rgb(255, 0, 96)",
+      backgroundColor: darkTheme.palette.secondary.main, //"rgb(255, 0, 96)",
     },
     typography: {
       primary: {
         color: "rgb(255, 255, 255)",
       },
       secondary: {
-        color: "rgb(251, 171, 158)",
+        color: darkTheme.palette.primary.main, //"rgb(251, 171, 158)",
       },
     },
   },
@@ -38,23 +40,23 @@ export const styles = {
     },
     tooltip: {
       cursor: {
-        stroke: "rgb(181, 192, 197)",
+        stroke: lightTheme.palette.primary.main, //"rgb(181, 192, 197)",
         strokeWidth: 2,
       },
       chip: {
-        backgroundColor: "rgb(110, 117, 120)",
+        backgroundColor: lightTheme.palette.primary.main, //"rgb(110, 117, 120)",
         color: "rgb(215, 228, 234)",
       },
     },
     iconButton: {
-      backgroundColor: "rgb(205, 220, 57)",
+      backgroundColor: lightTheme.palette.secondary.main, //"rgb(205, 220, 57)",
     },
     typography: {
       primary: {
-        color: "rgb(98, 100, 101)",
+        color: lightTheme.palette.primary.main, //"rgb(98, 100, 101)",
       },
       secondary: {
-        color: "rgb(161, 174, 48)",
+        color: lightTheme.palette.primary.contrastText, //"rgb(161, 174, 48)",
       },
     },
   },
