@@ -15,7 +15,7 @@ export default function Conversations({ contacts, contactsOnline, darkTheme ,cur
           src={contacts.userImg}
           className={classes.avatar}
         />
-        <Box>{contacts.name}</Box>
+        <Box sx={{margin:"7%"}}>{contacts.name}</Box>
       </Box>
     );
   } else {

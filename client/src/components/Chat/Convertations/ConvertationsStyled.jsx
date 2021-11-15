@@ -17,7 +17,7 @@ export default function useStylesConvertations(darkTheme, statusUser,) {
       display: "flex",
       flexWrap: "wrap",
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
       height: "100%",
     transform:"scale(1,0.9)",
       cursor: "pointer",
