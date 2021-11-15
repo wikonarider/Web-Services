@@ -14,11 +14,13 @@ const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
 export default function CardUser({ user, serviceId }) {
-  const cookie = useSelector((state) => state.cookie);
-  const userRedux = useSelector((state) => state.user);
+  const cookie = useSelector((state) => state.cookie);  
+  const userAccount = useSelector((state) => state.user);
+
 
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;
+
   let dispatch = useDispatch();
   let history = useHistory();
   const fixedTitle = fullname
@@ -28,13 +30,15 @@ export default function CardUser({ user, serviceId }) {
     : null;
 
   const newConv = () => {
-    dispatch(newConvertation(id));
-    history.push(`/chat`);
+    if (userAccount.id !== id) {
+      dispatch(newConvertation(id));
+      history.push(`/chat`);
+    }
   };
 
   let buyer =
-    userRedux.servicesBought &&
-    userRedux.servicesBought.filter((id) => {
+    userAccount.servicesBought &&
+    userAccount.servicesBought.filter((id) => {
       return id === serviceId;
     }).length > 0;
 

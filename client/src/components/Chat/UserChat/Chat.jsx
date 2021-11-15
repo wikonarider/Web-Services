@@ -24,7 +24,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 dotenv.config();
-function Chat({ user, darkTheme }) {
+ function Chat({ user, darkTheme }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
@@ -37,28 +37,27 @@ function Chat({ user, darkTheme }) {
   }); //4
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
-  const classes = useStylesChat(darkTheme, UsersOnlines, chat.contactsConv)();
+  const classes = useStylesChat(darkTheme)();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
   //----------------------------------------------------------------------------socket
   useEffect(() => {
-    //client conection
+      //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    getData();
     //---------------------------------------------new message receive
     socket.current.on("newMsnReceive", function (dat) {
-      //new msn from back server.io
-      setTextReceive({
+		//new msn from back server.io
+		setTextReceive({
         userId: dat.senderId,
         remit: dat.remit,
         text: dat.text,
         createdAt: Date.now(),
-      });
-    });
-    //--------------------------------------------------user conectad
+	});
+});
+//--------------------------------------------------user conectad
     socket.current.on("UsersOnlines", function (usersOnlines) {
-      setUsersOnlines(usersOnlines);
+		setUsersOnlines(usersOnlines);
     });
     //-------------------------------------------------a user logged out
     socket.current.on("usersdisconnect", function (newListUsersOnlines) {
@@ -66,8 +65,9 @@ function Chat({ user, darkTheme }) {
     });
     //--------------------------------------------------add user new
     if (user) {
-      socket.current.emit("addUser", user.id);
-    }
+		getData();
+		socket.current.emit("addUser", user.id);
+    } 
     return () => {
       //------------------------------------------------disconnect current user
       socket.current.emit("disconnectUser", user.id);
@@ -165,6 +165,7 @@ function Chat({ user, darkTheme }) {
       }
     }
   }
+
   //----------------------------------------------------------------------------------------------id posts convertations
   function idPostConvertation(idContact) {
     var conv = [];
@@ -229,7 +230,7 @@ function Chat({ user, darkTheme }) {
   if (user) {
     return (
       <Box name="box-father" className={classes.box_messanger_father}>
-        {/* conversation list */}
+        {/*------------------------ conversation list-------------------------------------------- */}
         <Box name="contacts" className={classes.box_contacts_a}>
           <Input
             type="text"
@@ -266,7 +267,7 @@ function Chat({ user, darkTheme }) {
               </Box>
             ))}
         </Box>
-        {/*message list*/}
+        {/*---------------------------------------------message list--------------------------------------------------*/}
         <Box name="chatting" className={classes.container_chatting}>
           {chat.currentCont ? (
             <Box name="conversations" className={classes.box_conversations_b}>
@@ -318,7 +319,7 @@ function Chat({ user, darkTheme }) {
             <></>
           )}
         </Box>
-        {/*contact list of purchased services */}
+        {/*----------------contact list of purchased services */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
           <h3>Contacts</h3>
           <Box
