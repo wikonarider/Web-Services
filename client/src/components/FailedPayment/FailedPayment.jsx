@@ -2,9 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import SmsFailedIcon from '@mui/icons-material/SmsFailed';
-import {Link} from 'react-router-dom'
-
+import SmsFailedIcon from "@mui/icons-material/SmsFailed";
 
 // import ResetPasswordModal from './ResetPasswordModal'
 
@@ -23,7 +21,6 @@ const style = {
 };
 
 export default function FailedPayment() {
-
   return (
     <div>
       <Box sx={style}>
@@ -32,21 +29,15 @@ export default function FailedPayment() {
         </Typography>
 
         {/* <IconButton color='primary'> */}
-            <SmsFailedIcon
-            sx={{ width:"50%",
-             height:"80%"
-             }}
-             color='primary'/>
+        <SmsFailedIcon sx={{ width: "50%", height: "80%" }} color="primary" />
         {/* </IconButton> */}
-      
-     
 
         <Button
           type="submit"
           variant="contained"
           color="secondary"
           fullWidth={true}
-          onClick={() => window.location.replace('/home')}
+          onClick={() => window.location.replace("/home")}
           sx={{
             marginTop: 3,
           }}

@@ -1,88 +1,73 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setObjGlobal } from "../../../redux/actions/index";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import Box from "@mui/material/Box";
+import axios from "axios";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function SideBarFilterLocaltion({ text, index }) {
   const dispatch = useDispatch();
   const objGlobal = useSelector((state) => state.objGlobal);
-  const provinces = useSelector((state) => state.provinces);
-  const [indexProv, setIndexProv] = useState(null);
   const [inputs, setInputs] = useState({ province: "", city: "" });
-  const [show, setShow] = useState(false);
-  const [start, setStart] = useState(false);
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [provinceId, setProvinceId] = useState(null);
 
-  // Cargo los valores que habia en el global
-  // Si habia provincia, habialito el boton de cities
-  // Seteo el index para mostrar las cities
   useEffect(() => {
     setInputs({
       province: objGlobal.province,
       city: objGlobal.city,
     });
-    if (objGlobal.province) {
-      setShow(true);
-      setIndexProv(() => {
-        const index = provinces.findIndex((p) => p.name === objGlobal.province);
-        return index;
-      });
+    if (!objGlobal.province) {
+      setProvinceId(null);
     }
+  }, [objGlobal]);
+
+  useEffect(() => {
+    axios
+      .get("/provinces?filter=true")
+      .then((response) => response.data)
+      .then((data) => {
+        setProvinces(data.provinces);
+        setCities(data.cities);
+        if (objGlobal.province) {
+          setProvinceId(() => {
+            const index = data.provinces.findIndex(
+              (p) => p.name === objGlobal.province
+            );
+            return data.provinces[index].id;
+          });
+        }
+      })
+      .catch((e) => console.log(e));
     // eslint-disable-next-line
   }, []);
 
-  // Dispatch cuando hay un cambio en el input
-  useEffect(() => {
-    if (start) {
-      const obj = {
-        ...objGlobal,
-        province: inputs.province,
-        city: inputs.city,
-      };
-      dispatch(setObjGlobal(obj));
-    }
-    // eslint-disable-next-line
-  }, [inputs]);
-
-  // Manejador de los inputs
-  const handleInputs = (e, value, input) => {
-    setStart(true);
+  const handleInputs = (e) => {
     setInputs((prev) => {
-      if (input === "province") {
-        if (!value) {
-          setIndexProv(null);
-          return { province: "", city: "" };
-        } else {
-          return { ...prev };
-        }
-      } else if (input === "cities") {
-        if (!value) {
-          return { ...prev, city: "" };
-        } else {
-          return { ...prev };
-        }
-      } else {
-        if (value && input === "provinceChange") {
-          setShow(false);
-          setIndexProv(() => {
-            const index = provinces.findIndex((p) => p.id === value.id);
-            return index;
-          });
-          // Demora aproposito para solventar un pegueño bug
-          setTimeout(() => {
-            setShow(true);
-          }, 150);
-          return { province: value.name, city: "" };
-        } else if (value && input === "citiesChange") {
-          return { ...prev, city: value.name };
-        } else {
-          return { ...prev };
-        }
+      const obj = {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+      if (e.target.name === "province") {
+        obj.city = "";
+        setProvinceId(() => {
+          const index = provinces.findIndex((p) => p.name === e.target.value);
+          return provinces[index].id;
+        });
       }
+      const objG = {
+        ...objGlobal,
+        ...obj,
+      };
+      dispatch(setObjGlobal(objG));
+      return obj;
     });
   };
 
@@ -98,41 +83,54 @@ export default function SideBarFilterLocaltion({ text, index }) {
           alignItems: "center",
           gap: "20px",
           width: "100%",
-          pl: "10px",
-          pr: "10px",
+          padding: "10px 10px 0 10px",
         }}
       >
         {/* ---------------------Province----------------------- */}
-        <Autocomplete
-          sx={{ width: "100%" }}
-          options={provinces}
-          getOptionLabel={(option) => option.name}
-          onChange={(e, value) => {
-            handleInputs(e, value, "provinceChange");
-          }}
-          onInputChange={(e, value) => handleInputs(e, value, "province")}
-          defaultValue={{ name: objGlobal.province }}
-          renderInput={(params) => (
-            <TextField {...params} label={"Provinces"} placeholder="Search" />
-          )}
-        />
+        <FormControl fullWidth>
+          <InputLabel>Province</InputLabel>
+          <Select
+            value={inputs.province}
+            label="Province"
+            name="province"
+            onChange={(e) => handleInputs(e)}
+          >
+            {provinces &&
+              provinces.map((el) => (
+                <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
+                  {`${el.name} (${el.count})`}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {/* ---------------------------------------------------- */}
 
         {/* ---------------------Cities----------------------- */}
-        {show && inputs.province && indexProv !== null ? (
-          <Autocomplete
-            sx={{ width: "100%" }}
-            options={provinces[indexProv].cities}
-            getOptionLabel={(option) => option.name}
-            onChange={(e, value) => {
-              handleInputs(e, value, "citiesChange");
-            }}
-            onInputChange={(e, value) => handleInputs(e, value, "cities")}
-            defaultValue={{ name: objGlobal.city }}
-            renderInput={(params) => (
-              <TextField {...params} label={"Cities"} placeholder="Search" />
-            )}
-          />
+        {provinceId !== null ? (
+          <FormControl fullWidth>
+            <InputLabel>Cities</InputLabel>
+            <Select
+              value={inputs.city}
+              label="Cities"
+              name="city"
+              onChange={(e) => handleInputs(e)}
+            >
+              {cities &&
+                cities.map((el) => {
+                  if (el.provinceId === provinceId) {
+                    return (
+                      <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
+                        {`${el.name} (${el.count})`}
+                      </MenuItem>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+            </Select>
+          </FormControl>
         ) : null}
+        {/* ---------------------------------------------------- */}
       </Box>
     </List>
   );

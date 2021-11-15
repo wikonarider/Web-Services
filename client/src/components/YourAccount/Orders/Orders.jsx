@@ -7,9 +7,12 @@ import Share from '@mui/icons-material/Share';
 import Rating from '@mui/material/Rating';
 import s from './Orders.module.css';
 import { Link } from 'react-router-dom';
+import ShareServiceModal from '../../CardService/ShareServiceModal';
+import { useState } from 'react';
 
 export default function Orders({ service }) {
   const { title, img, price, id, rating } = service;
+  const [modal, setModal] = useState(false)
 
   const IMG_TEMPLATE =
     'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
@@ -64,7 +67,8 @@ export default function Orders({ service }) {
       </Box> */}
 
       <Box gridColumn={{ xs: 'span 6', md: 'span 1' }}>
-        <IconButton aria-label='share'>
+        <IconButton aria-label='share'
+        onClick={() => setModal(true)}>
           <Share />
         </IconButton>
       </Box>
@@ -72,6 +76,7 @@ export default function Orders({ service }) {
       <Box gridColumn={{ xs: 'span 12', md: 'span 1' }}>
         <Typography variant='h6'>${price}</Typography>
       </Box>
+      <ShareServiceModal modal={modal} setModal={setModal} serviceId={id} />
     </Box>
   );
 }

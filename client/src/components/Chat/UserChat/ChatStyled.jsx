@@ -10,14 +10,14 @@ import { brown, grey } from "@mui/material/colors";
 //   blueGrey,
 // } from "@mui/material/colors";
 
-export default function useStylesChat(darkTheme) {
+export default function useStylesChat(darkTheme,selectCurrentChat) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
     //darkTheme prop global
     //SEND BTN
     inputSend: {
       background: darkTheme ? grey[900] : "whiteSmoke",
-      borderRadius: "0",
+      borderRadius: "0.5em",
       margin: "1%",
       height: "70px",
       "& input": {
@@ -25,7 +25,7 @@ export default function useStylesChat(darkTheme) {
         marginLeft: "0.9%",
       },
       "& fieldSet": {
-        borderRadius: "0",
+        borderRadius: "0.5em",
         height: "75px",
       },
     },
@@ -41,15 +41,16 @@ export default function useStylesChat(darkTheme) {
     //------------------------------------------------------------------button X
     btn_x: {
       position: "absolute",
-      left: "85%",
-      bottom: "85%",
+      left: "87%",
+      bottom: "-1%",
       cursor: "pointer",
     },
+    
     //----------------------------------------------------------------------
     startchat: {
       textAlign: "center",
       fontSize: 40,
-      opacity: "0.3",
+      opacity: "0.1",
       textTransform: "uppercase",
     },
     /*box wrapper chat*/
@@ -66,7 +67,8 @@ export default function useStylesChat(darkTheme) {
     box_contacts_a: {
       flex: 1.5,
       display: "flex",
-      height: "100vh",
+      height: "100%",
+      overflowY: "auto",
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
@@ -75,12 +77,15 @@ export default function useStylesChat(darkTheme) {
       position: "relative",
       display: "flex",
       flexDirection: "row",
-      marginTop: "15%",
+      marginTop: "9%",
       width: "100%",
+      height: "13%",
+      borderRadius: "0.3em",
       transition: "0.4s",
+      
       "&:hover": {
-        background: darkTheme ? grey[700] : grey[400],
-        borderRadius: "0",
+        background: darkTheme ? grey[700] : grey[200],
+        borderRadius: "0.3em",
       },
     },
     box_avatar_And_X: {
@@ -88,6 +93,7 @@ export default function useStylesChat(darkTheme) {
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
+      
     },
 
     /*input search*/
@@ -99,7 +105,7 @@ export default function useStylesChat(darkTheme) {
       flexDirection: "column",
       alignContent: "stretch",
       background: darkTheme ? grey[1000] : grey[100],
-      height: "100vh",
+      height: "100%",
     },
 
     box_conversations_b: {
@@ -116,7 +122,7 @@ export default function useStylesChat(darkTheme) {
       flexDirection: "column",
       background: darkTheme ? grey[900] : "#FFE5A1",
       padding: "0.5%",
-      maxHeight: "100vh",
+      maxHeight: "100%",
     },
 
     /*box contactsOnline wrapper*/

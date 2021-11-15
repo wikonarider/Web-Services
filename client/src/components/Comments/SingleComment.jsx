@@ -143,7 +143,8 @@ export default function SingleComment({ qualification, cookie }) {
             value={edit.score || updated.score || score}
             readOnly={edit.id ? false : true}
             precision={1}
-            sx={{ ml: 'auto' }}
+            sx={{ width:'0,2em', ml: 'auto' }}
+           
             onChange={(e) => handleEdit(e, 'score')}
           />
         </Box>

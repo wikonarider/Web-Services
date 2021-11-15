@@ -1,7 +1,11 @@
 var express = require("express");
 var router = express.Router();
-const { getProvinces } = require("../controllers/provinces");
+const {
+  getProvinces,
+  getProvincesFilters,
+} = require("../controllers/provinces");
 
 router.get("/", getProvinces);
+router.get("/", getProvincesFilters);
 
 module.exports = router;
