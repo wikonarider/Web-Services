@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Conversations from "../Convertations/convertations.jsx";
 import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
-import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
 import { connect } from "react-redux";
@@ -11,6 +10,8 @@ import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
 import useStylesChat from "./ChatStyled";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   getContacts,
   getContactsBougth,
@@ -20,11 +21,9 @@ import {
   sendMessage,
   deleteConvertation,
 } from "./StateLocal.jsx";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 dotenv.config();
- function Chat({ user, darkTheme }) {
+function Chat({ user, darkTheme, cookie }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
@@ -43,37 +42,38 @@ dotenv.config();
 
   //----------------------------------------------------------------------------socket
   useEffect(() => {
-      //client conection
-    socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    //---------------------------------------------new message receive
-    socket.current.on("newMsnReceive", function (dat) {
-		//new msn from back server.io
-		setTextReceive({
-        userId: dat.senderId,
-        remit: dat.remit,
-        text: dat.text,
-        createdAt: Date.now(),
-	});
-});
-//--------------------------------------------------user conectad
-    socket.current.on("UsersOnlines", function (usersOnlines) {
-		setUsersOnlines(usersOnlines);
-    });
-    //-------------------------------------------------a user logged out
-    socket.current.on("usersdisconnect", function (newListUsersOnlines) {
-      setUsersOnlines(newListUsersOnlines);
-    });
-    //--------------------------------------------------add user new
-    if (user) {
-		getData();
-		socket.current.emit("addUser", user.id);
-    } 
-    return () => {
-      //------------------------------------------------disconnect current user
-      socket.current.emit("disconnectUser", user.id);
-    };
-    // eslint-disable-next-line
-  }, []);
+    //client conection
+    if (cookie) {
+      socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
+      //---------------------------------------------new message receive
+      socket.current.on("newMsnReceive", function (dat) {
+        //new msn from back server.io
+        setTextReceive({
+          userId: dat.senderId,
+          remit: dat.remit,
+          text: dat.text,
+          createdAt: Date.now(),
+        });
+      });
+      //--------------------------------------------------user conectad
+      socket.current.on("UsersOnlines", function (usersOnlines) {
+        setUsersOnlines(usersOnlines);
+      });
+      //-------------------------------------------------a user logged out
+      socket.current.on("usersdisconnect", function (newListUsersOnlines) {
+        setUsersOnlines(newListUsersOnlines);
+      });
+      //--------------------------------------------------add user new
+      if (user) {
+        getData();
+        socket.current.emit("addUser", user.id);
+      }
+      return () => {
+        //------------------------------------------------disconnect current user
+        socket.current.emit("disconnectUser", user.id);
+      };
+    } // eslint-disable-next-line
+  }, [cookie]);
   //----------------------------------------------------------------------------------------------get Data BD
   async function getData() {
     var contactsConv = await getContacts();
@@ -110,7 +110,7 @@ dotenv.config();
       return con.id === textReceive.userId;
     });
     //new msj new contact add contacs array and convertations
-    if (contac.length === 0) {
+    if (contac.length === 0 && cookie) {
       var convertition;
       getConvertations()
         .then((conv) => {
@@ -126,7 +126,6 @@ dotenv.config();
         })
         .catch((err) => console.log(err));
     }
-
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
@@ -160,7 +159,6 @@ dotenv.config();
       id = idPostConvertation(idUser);
       if (id > 0) {
         var post = await getPots(id);
-        console.log(post);
         setChat({ ...chat, currentCont: newCurrent[0], chatting: post.data });
       }
     }
@@ -238,7 +236,7 @@ dotenv.config();
             placeholder="search contact!"
             className={classes.searchContact}
           ></Input>
-          {chat.contactsConv.length &&
+          {chat.contactsConv.length ? (
             chat.contactsConv.map((con) => (
               <Box className={classes.containerConvertation} key={con.id}>
                 <Box
@@ -265,7 +263,10 @@ dotenv.config();
                   <DeleteIcon fontSize="small" />
                 </IconButton>
               </Box>
-            ))}
+            ))
+          ) : (
+            <></>
+          )}
         </Box>
         {/*---------------------------------------------message list--------------------------------------------------*/}
         <Box name="chatting" className={classes.container_chatting}>
@@ -304,15 +305,14 @@ dotenv.config();
                   onChange={(e) => setText(e.target.value)}
                   className={classes.inputSend}
                 />
-                <Button
+                <IconButton
                   variant="contained"
                   type="submit"
                   size="small"
                   className={classes.btn}
-                  endIcon={<SendIcon />}
                 >
-                  send
-                </Button>
+                  <SendIcon />
+                </IconButton>
               </Box>
             </form>
           ) : (
@@ -326,7 +326,7 @@ dotenv.config();
             name="menu-contactsOnline-wrapper"
             className={classes.box_contactsOnline_wrapper}
           >
-            {chat.contactsBoungth.length &&
+            {chat.contactsBoungth.length ? (
               chat.contactsBoungth.map((contac) => (
                 <Box
                   name="contactBougth"
@@ -343,7 +343,10 @@ dotenv.config();
                     darkTheme={darkTheme}
                   />
                 </Box>
-              ))}
+              ))
+            ) : (
+              <></>
+            )}
           </Box>
         </Box>
       </Box>
@@ -357,6 +360,7 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     darkTheme: state.darkTheme,
+    cookie: state.cookie,
   };
 }
 

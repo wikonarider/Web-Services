@@ -20,7 +20,6 @@ export default function CardUser({ user, serviceId }) {
 
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;
-
   let dispatch = useDispatch();
   let history = useHistory();
   const fixedTitle = fullname

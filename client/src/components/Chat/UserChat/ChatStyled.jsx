@@ -1,14 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { brown, grey } from "@mui/material/colors";
-// Descomentar cuando se va a usar, evitar los warnings
-// import {
-//   amber,
-//   lime,
-//   deepOrange,
-//   green,
-//   red,
-//   blueGrey,
-// } from "@mui/material/colors";
+import {  grey } from "@mui/material/colors";
+
 
 export default function useStylesChat(darkTheme,selectCurrentChat) {
   //darkTheme booleano del estado global
@@ -18,25 +10,30 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
     inputSend: {
       background: darkTheme ? grey[900] : "whiteSmoke",
       borderRadius: "0.5em",
-      margin: "1%",
-      height: "70px",
+      height: "100%",
+      marginLeft:"2%",
       "& input": {
         color: darkTheme ? grey[400] : grey[900],
         marginLeft: "0.9%",
       },
       "& fieldSet": {
         borderRadius: "0.5em",
-        height: "75px",
+        height: "100%",
       },
     },
     searchContact: {
-      color: darkTheme ? grey[400] : grey[900],
+      height: "8%",
       textAlign: "center",
+      "& input": {
+        textAlign: "center",
+        color: darkTheme ? grey[400] : "black",
+        fontSize: "1.4em",
+      },
     },
     btn: {
-      borderRadius: 0,
       textTransfrom: "none",
-      color: brown[500],
+      marginLeft: "1%",
+      marginRight: "1%",
     },
     //------------------------------------------------------------------button X
     btn_x: {
@@ -45,7 +42,6 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       bottom: "-1%",
       cursor: "pointer",
     },
-    
     //----------------------------------------------------------------------
     startchat: {
       textAlign: "center",
@@ -82,7 +78,6 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       height: "13%",
       borderRadius: "0.3em",
       transition: "0.4s",
-      
       "&:hover": {
         background: darkTheme ? grey[700] : grey[200],
         borderRadius: "0.3em",
