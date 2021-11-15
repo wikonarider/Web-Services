@@ -6,13 +6,11 @@ import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
-import { connect, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
 import useStylesChat from "./ChatStyled";
-import { getUserInfo } from "../../../redux/actions/index.js";
 import {
   getContacts,
   getContactsBougth,
@@ -40,8 +38,6 @@ dotenv.config();
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   const classes = useStylesChat(darkTheme)();
-  const history = useHistory();
-  const dispatch=useDispatch();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
 
