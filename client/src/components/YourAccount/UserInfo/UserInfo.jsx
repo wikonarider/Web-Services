@@ -77,9 +77,8 @@ export default function YourAccount({
       display='flex'
       alignItems='center'
       justifyContent={!userProfile ? 'center' : 'flex-start'}
-      sx={{ marginTop: '2%' }}
+      sx={{ paddingTop: '3%'}}
       gap={5}
-      xs={12}
     >
       <Grid item gridColumn='span 6'>
         <Avatar
