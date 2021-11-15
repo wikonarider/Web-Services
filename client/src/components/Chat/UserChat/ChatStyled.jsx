@@ -10,7 +10,7 @@ import { brown, grey } from "@mui/material/colors";
 //   blueGrey,
 // } from "@mui/material/colors";
 
-export default function useStylesChat(darkTheme) {
+export default function useStylesChat(darkTheme,selectCurrentChat) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
     //darkTheme prop global
@@ -41,18 +41,16 @@ export default function useStylesChat(darkTheme) {
     //------------------------------------------------------------------button X
     btn_x: {
       position: "absolute",
-      left: "82%",
-      bottom: "85%",
+      left: "87%",
+      bottom: "-1%",
       cursor: "pointer",
     },
-    spacing:{
-        offset:theme.mixins.toolbar
-    },
+    
     //----------------------------------------------------------------------
     startchat: {
       textAlign: "center",
       fontSize: 40,
-      opacity: "0.3",
+      opacity: "0.1",
       textTransform: "uppercase",
     },
     /*box wrapper chat*/
@@ -69,7 +67,6 @@ export default function useStylesChat(darkTheme) {
     box_contacts_a: {
       flex: 1.5,
       display: "flex",
-
       height: "100%",
       overflowY: "auto",
       flexDirection: "column",
@@ -81,13 +78,14 @@ export default function useStylesChat(darkTheme) {
       display: "flex",
       flexDirection: "row",
       marginTop: "9%",
-      width: "105%",
-      paddingRight:"5%",
+      width: "100%",
+      height: "13%",
+      borderRadius: "0.3em",
       transition: "0.4s",
+      
       "&:hover": {
         background: darkTheme ? grey[700] : grey[200],
         borderRadius: "0.3em",
-        
       },
     },
     box_avatar_And_X: {
@@ -95,6 +93,7 @@ export default function useStylesChat(darkTheme) {
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
+      
     },
 
     /*input search*/

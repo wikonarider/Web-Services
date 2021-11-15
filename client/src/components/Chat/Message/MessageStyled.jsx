@@ -43,13 +43,14 @@ export default function useStylesMessage(darkTheme, message, user) {
         margin: "0%",
         padding: "0%",
         marginRight: "2%",
+        color: `${darkTheme ? "white" : "white"}`,
       },
     },
     boxMsnReceive: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
-
+      maxWidth: "50%",
       background: "#FFDA77",
       borderRadius: "0.3em",
       minWidth: "9%",
@@ -60,7 +61,7 @@ export default function useStylesMessage(darkTheme, message, user) {
         margin: "0%",
         padding: "0%",
         marginRight: "2%",
-        color: "grey",
+        color: `${darkTheme ? grey[800] : grey[600]}`,
       },
     },
     message: {
@@ -69,7 +70,7 @@ export default function useStylesMessage(darkTheme, message, user) {
       textJustify: "inter-word",
       overflowWrap: "break-word",
       "& h4": {
-        padding: "1% 1% 0% 3%",
+        padding: "1% 1% 0% 5%",
         margin: "2%",
       },
     },
