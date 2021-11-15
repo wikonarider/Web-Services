@@ -13,14 +13,14 @@ function MapDetail({ lat, lon }) {
     <div>
       <iframe
         title="map"
-        width="100%"
-        maxWidth="425"
         height="250"
         frameBorder="0"
         scrolling="no"
         marginHeight="0"
         marginWidth="0"
         style={{
+          width: "100%",
+          maxWidth: "425",
           border: "1px solid black",
         }}
         src={`https://www.openstreetmap.org/export/embed.html?bbox=${lon}%2C${lat}%2C${

@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo, putUser } from '../../../redux/actions';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, putUser } from "../../../redux/actions";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
-import s from './UserInfo.module.css';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import s from "./UserInfo.module.css";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 import {
   FacebookShareButton,
@@ -17,7 +17,7 @@ import {
   WhatsappIcon,
   LinkedinShareButton,
   LinkedinIcon,
-} from 'react-share';
+} from "react-share";
 
 export default function YourAccount({
   userProfile,
@@ -37,7 +37,7 @@ export default function YourAccount({
   }, [dispatch, userProfile]);
 
   // eslint-disable-next-line
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState("");
 
   //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
   const fileInput = useRef();
@@ -48,16 +48,16 @@ export default function YourAccount({
     setLoading(true);
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append('file', files[0]);
+    formData.append("file", files[0]);
     // replace this with your upload preset name
-    formData.append('upload_preset', 'hn1tlyfq');
+    formData.append("upload_preset", "hn1tlyfq");
     const options = {
-      method: 'POST',
+      method: "POST",
       body: formData,
     };
 
     return fetch(
-      'https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload',
+      "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
       options
     )
       .then((res) => res.json())
@@ -74,32 +74,33 @@ export default function YourAccount({
   return (
     <Grid
       container
-      display='flex'
-      alignItems='center'
-      justifyContent={!userProfile ? 'center' : 'flex-start'}
-      sx={{ marginTop: '2%' }}
+      display="flex"
+      alignItems="center"
+      justifyContent={!userProfile ? "center" : "flex-start"}
+      sx={{ marginTop: "2%" }}
       gap={5}
+      item
       xs={12}
     >
-      <Grid item gridColumn='span 6'>
+      <Grid item gridColumn="span 6">
         <Avatar
-          alt='user name'
+          alt="user name"
           src={!userProfile ? userData.userImg : profileInfo.userImg}
           sx={{ width: 200, height: 200, marginBottom: 2 }}
         ></Avatar>
         {!userProfile && (
           <Box>
             <input
-              style={{ display: 'none' }}
-              type='file'
-              name='myImage'
+              style={{ display: "none" }}
+              type="file"
+              name="myImage"
               ref={fileInput}
               onChange={(e) => setImg(e.target.files[0])}
             />
             <Button
-              variant='text'
-              size='small'
-              color='secondary'
+              variant="text"
+              size="small"
+              color="secondary"
               startIcon={<PhotoCameraIcon />}
               sx={{ marginRight: 1 }}
               onClick={() => {
@@ -111,11 +112,11 @@ export default function YourAccount({
 
             {!loading ? (
               <Button
-                variant='contained'
+                variant="contained"
                 // startIcon={<PhotoCameraIcon />}
-                size='small'
-                color='secondary'
-                sx={{ boxShadow: 'none', marginLeft: 1 }}
+                size="small"
+                color="secondary"
+                sx={{ boxShadow: "none", marginLeft: 1 }}
                 // onClick={() => {
                 //   fileInput.current.click();
                 // }}
@@ -130,48 +131,48 @@ export default function YourAccount({
         )}
       </Grid>
 
-      <Grid item gridColumn='span 6'>
+      <Grid item gridColumn="span 6">
         <Box className={s.fullName} gap={2}>
-          <Typography variant='h4'>
+          <Typography variant="h4">
             {!userProfile ? userData.name : profileInfo.name}
           </Typography>
-          <Typography variant='h4'>
+          <Typography variant="h4">
             {!userProfile ? userData.lastname : profileInfo.lastname}
           </Typography>
         </Box>
         {!userProfile ? (
           <>
             <Box sx={{ marginBottom: 1, marginTop: 1 }}>
-              <Typography variant='body'>{userData.username}</Typography>
+              <Typography variant="body">{userData.username}</Typography>
             </Box>
             <Box>
-              <Typography variant='body'>{userData.email}</Typography>
+              <Typography variant="body">{userData.email}</Typography>
             </Box>
           </>
         ) : !profileServices[0].userId ? (
           <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='center'
-            gap='0.5rem'
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            gap="0.5rem"
           >
-            <FacebookShareButton url={'shareUrl'}>
+            <FacebookShareButton url={"shareUrl"}>
               <FacebookIcon size={35} round={true} />
             </FacebookShareButton>
-            <WhatsappShareButton url={'shareUrl'}>
+            <WhatsappShareButton url={"shareUrl"}>
               <WhatsappIcon size={35} round={true} />
             </WhatsappShareButton>
-            <LinkedinShareButton url={'shareUrl'}>
+            <LinkedinShareButton url={"shareUrl"}>
               <LinkedinIcon size={35} round={true} />
             </LinkedinShareButton>
           </Box>
         ) : (
           <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='center'
-            alignItems='center'
-            gap='0.5rem'
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            gap="0.5rem"
           >
             <FacebookShareButton
               url={`https://pf-web-service.vercel.app/users/${profileServices[0].userId}`}

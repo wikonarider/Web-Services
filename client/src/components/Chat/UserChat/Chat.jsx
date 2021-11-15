@@ -237,7 +237,7 @@ function Chat({ user, darkTheme }) {
             placeholder="search contact!"
             className={classes.searchContact}
           ></Input>
-          {chat.contactsConv.length &&
+          {chat.contactsConv.length ? (
             chat.contactsConv.map((con) => (
               <Box className={classes.containerConvertation} key={con.id}>
                 <Box
@@ -264,7 +264,10 @@ function Chat({ user, darkTheme }) {
                   <DeleteIcon fontSize="small" />
                 </IconButton>
               </Box>
-            ))}
+            ))
+          ) : (
+            <></>
+          )}
         </Box>
         {/*---------------------------------------------message list--------------------------------------------------*/}
         <Box name="chatting" className={classes.container_chatting}>
@@ -324,7 +327,7 @@ function Chat({ user, darkTheme }) {
             name="menu-contactsOnline-wrapper"
             className={classes.box_contactsOnline_wrapper}
           >
-            {chat.contactsBoungth.length &&
+            {chat.contactsBoungth.length ? (
               chat.contactsBoungth.map((contac) => (
                 <Box
                   name="contactBougth"
@@ -341,7 +344,10 @@ function Chat({ user, darkTheme }) {
                     darkTheme={darkTheme}
                   />
                 </Box>
-              ))}
+              ))
+            ) : (
+              <></>
+            )}
           </Box>
         </Box>
       </Box>

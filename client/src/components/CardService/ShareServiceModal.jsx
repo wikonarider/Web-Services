@@ -40,14 +40,16 @@ export default function ShareServiceModal({ modal, setModal, serviceId }) {
           <h3>Share with</h3>
           <FacebookShareButton
             url={`https://pf-web-service.vercel.app/services/${serviceId}`}
-          >
+         >
             <FacebookIcon size={35} round={true} />
           </FacebookShareButton>
+
           <WhatsappShareButton
             url={`https://pf-web-service.vercel.app/services/${serviceId}`}
           >
             <WhatsappIcon size={35} round={true} />
           </WhatsappShareButton>
+         
           <LinkedinShareButton
             url={`https://pf-web-service.vercel.app/services/${serviceId}`}
           >

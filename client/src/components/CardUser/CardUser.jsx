@@ -13,10 +13,13 @@ import { newConvertation } from "../../redux/actions";
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-export default function CardUser({ user }) {
+export default function CardUser({ user, serviceId }) {
+  const cookie = useSelector((state) => state.cookie);  
+  const userAccount = useSelector((state) => state.user);
+
+
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;
-  const userAccount = useSelector((state) => state.user);
   let dispatch = useDispatch();
   let history = useHistory();
   const fixedTitle = fullname
@@ -31,6 +34,13 @@ export default function CardUser({ user }) {
       history.push(`/chat`);
     }
   };
+
+  let buyer =
+    userAccount.servicesBought &&
+    userAccount.servicesBought.filter((id) => {
+      return id === serviceId;
+    }).length > 0;
+
   return (
     <Card
       sx={{
@@ -113,20 +123,22 @@ export default function CardUser({ user }) {
           >
             {/* chat */}
 
-            <CardActionArea
-              onClick={() => newConv()}
-              sx={{
-                width: "80px",
-                mt: "auto",
-                transform: "scale(1.3)",
-                display: "flex",
-                gap: "5px",
-              }}
-            >
-              <ChatIcon />
+            {cookie && buyer ? (
+              <CardActionArea
+                onClick={() => newConv()}
+                sx={{
+                  width: "80px",
+                  mt: "auto",
+                  transform: "scale(1.3)",
+                  display: "flex",
+                  gap: "5px",
+                }}
+              >
+                <ChatIcon />
 
-              <Typography variant="caption">Chat</Typography>
-            </CardActionArea>
+                <Typography variant="caption">Chat</Typography>
+              </CardActionArea>
+            ) : null}
 
             {/* Profile */}
 

@@ -1,15 +1,15 @@
-import React, { useRef, useState } from 'react';
-import axios from 'axios';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import SingleComment from './SingleComment';
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
-import { useSelector } from 'react-redux';
-import { getServiceById } from '../../utils/servicesPage';
-import { Popover } from '@mui/material';
+import React, { useRef, useState } from "react";
+import axios from "axios";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import SingleComment from "./SingleComment";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
+import { getServiceById } from "../../utils/servicesPage";
+import { Popover } from "@mui/material";
 
 export default function Comments({
   qualifications,
@@ -18,7 +18,7 @@ export default function Comments({
   setService,
 }) {
   const [loading, setLoading] = useState(false);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const cookieRedux = useSelector((state) => state.cookie);
   const servicesBought = useSelector((state) => state.user.servicesBought);
@@ -38,13 +38,13 @@ export default function Comments({
     setAnchorElRate(null);
   };
   const openPopoverRate = Boolean(anchorElRate);
-  const idRate = openPopoverRate ? 'simple-popover' : undefined;
+  const idRate = openPopoverRate ? "simple-popover" : undefined;
 
   const handleClosePopoverComment = () => {
     setAnchorElComment(null);
   };
   const openPopoverComment = Boolean(anchorElComment);
-  const idComment = openPopoverComment ? 'simple-popover' : undefined;
+  const idComment = openPopoverComment ? "simple-popover" : undefined;
 
   //---------------------------------
 
@@ -61,7 +61,7 @@ export default function Comments({
     } else if (rating > 0 && comment) {
       setLoading(true);
       axios
-        .post('/qualification', {
+        .post("/qualification", {
           comment: comment,
           score: rating,
           userId: userId,
@@ -76,11 +76,11 @@ export default function Comments({
         })
         .then(() => {
           setLoading(false);
-          setComment('');
+          setComment("");
           setRating(0);
         })
         .catch((e) => {
-          alert('Please try again');
+          alert("Please try again");
           setLoading(false);
         });
     }
@@ -94,7 +94,7 @@ export default function Comments({
   let buyer =
     servicesBought &&
     servicesBought.filter((id) => {
-      console.log(id, serviceId);
+      // console.log(id, serviceId);
       return id.toString() === serviceId;
     }).length > 0;
 
@@ -119,7 +119,7 @@ export default function Comments({
             <Typography
               ref={starsRef}
               variant="subtitle1"
-              sx={{ alignSelf: 'center', mr: '5px' }}
+              sx={{ alignSelf: "center", mr: "5px" }}
             >
               Rating:
             </Typography>
@@ -135,7 +135,7 @@ export default function Comments({
 
             <Typography
               variant="subtitle1"
-              sx={{ pl: '10px', verticalAlign: 'middle' }}
+              sx={{ pl: "10px", verticalAlign: "middle" }}
             >
               {`${rating} stars`}
             </Typography>
@@ -143,15 +143,15 @@ export default function Comments({
 
           <Box
             gridColumn={{
-              xs: 'span 12',
-              sm: 'span 12',
-              md: 'span 12',
+              xs: "span 12",
+              sm: "span 12",
+              md: "span 12",
             }}
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              gap: '10px',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              gap: "10px",
             }}
           >
             <TextareaAutosize
@@ -160,7 +160,7 @@ export default function Comments({
               maxRows={8}
               aria-label="comment area"
               placeholder="Leave your comment here..."
-              style={{ width: '85%', resize: 'vertical' }}
+              style={{ width: "85%", resize: "vertical" }}
               value={comment}
               onChange={(event) => handleChange(event)}
             />
@@ -171,7 +171,7 @@ export default function Comments({
               endIcon={<SendIcon />}
               disabled={loading}
             >
-              {loading ? 'Wait' : 'Send'}
+              {loading ? "Wait" : "Send"}
             </Button>
           </Box>
         </>
@@ -185,15 +185,15 @@ export default function Comments({
           anchorEl={anchorElRate}
           onClose={handleClosePopoverRate}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: "top",
+            horizontal: "right",
           }}
           transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "left",
           }}
         >
-          <Typography sx={{ p: 2, color: '#FF6F00' }}>
+          <Typography sx={{ p: 2, color: "#FF6F00" }}>
             You have to rate the service!
           </Typography>
         </Popover>
@@ -206,15 +206,15 @@ export default function Comments({
           anchorEl={anchorElComment}
           onClose={handleClosePopoverComment}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
+            vertical: "bottom",
+            horizontal: "right",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+            vertical: "top",
+            horizontal: "left",
           }}
         >
-          <Typography sx={{ p: 2, color: '#FF6F00' }}>
+          <Typography sx={{ p: 2, color: "#FF6F00" }}>
             You have to leave a comment!
           </Typography>
         </Popover>

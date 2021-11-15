@@ -50,7 +50,6 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       bottom: "-1%",
       cursor: "pointer",
     },
-
     //----------------------------------------------------------------------
     startchat: {
       textAlign: "center",
@@ -87,7 +86,6 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       height: "13%",
       borderRadius: "0.3em",
       transition: "0.4s",
-
       "&:hover": {
         background: darkTheme ? grey[700] : grey[200],
         borderRadius: "0.3em",
@@ -98,6 +96,7 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
+      
     },
 
     /*input search*/
