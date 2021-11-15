@@ -230,14 +230,14 @@ export function setObjGlobal(obj) {
 
 //-----------------------------------------------------------------------------------------new convertation
 export function newConvertation(contact) {
-   return async function (dispatch) {
-     try {
-       var resp = await axios.post(`chat/convertations/${contact}`);
-       return dispatch({ type: type.NEW_CONVERTATION, payload: resp.data });
-     } catch (err) {
-       console.log(err);
-     }
-   };
+  return async function (dispatch) {
+    try {
+      var resp = await axios.post(`chat/convertations/${contact}`);
+      return dispatch({ type: type.NEW_CONVERTATION, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 //--------------------------------------------------------------------------------------
@@ -278,7 +278,7 @@ export function forgotPassword(body) {
 export function ressetPassword(body) {
   return async function (dispatch) {
     var json = await axios.put(`/resetPassword`, body);
-    console.log('response resetPassword action', json.data )
+    console.log('response resetPassword action', json.data);
     window.location.replace('https://pf-web-service.vercel.app/home');
     return dispatch({
       type: type.RESET_PASSWORD,

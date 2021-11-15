@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import s from "./Register.module.css";
-import TextField from "@mui/material/TextField";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { validateInput, registerUser } from "../../utils/registerValidations";
-import ModalRegister from "./ModalRegister";
-import { GoogleLogin } from "react-google-login";
-import { Typography } from "@mui/material";
+import React, { useState } from 'react';
+import s from './Register.module.css';
+import TextField from '@mui/material/TextField';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { validateInput, registerUser } from '../../utils/registerValidations';
+import ModalRegister from './ModalRegister';
+import { GoogleLogin } from 'react-google-login';
+import { Typography } from '@mui/material';
 
 function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   const [start, setStart] = useState(true);
   const [inputs, setInputs] = useState({
-    name: "",
-    lastname: "",
-    username: "",
-    password: "",
-    email: "",
+    name: '',
+    lastname: '',
+    username: '',
+    password: '',
+    email: '',
   });
   const [inputsErrors, setInputErrors] = useState({});
   const [modal, setModal] = useState(false);
@@ -44,16 +44,16 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
     try {
       e.preventDefault();
       if (!Object.keys(inputsErrors).length) {
-        const user = { ...inputs, location: [inputs.location], userImg: "" };
+        const user = { ...inputs, location: [inputs.location], userImg: '' };
         const response = await registerUser(user);
-        if (response.data === "created") {
+        if (response.data === 'created') {
           setModal(true);
           setInputs({
-            name: "",
-            lastname: "",
-            username: "",
-            password: "",
-            email: "",
+            name: '',
+            lastname: '',
+            username: '',
+            password: '',
+            email: '',
           });
           setInputErrors({});
           setStart(true);
@@ -77,8 +77,8 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
     setInputs({
       name: googleData.profileObj.givenName,
       lastname: googleData.profileObj.familyName,
-      username: googleData.profileObj.email.replace("@gmail.com", ""),
-      password: "",
+      username: googleData.profileObj.email.replace('@gmail.com', ''),
+      password: '',
       email: googleData.profileObj.email,
     });
     // store returned user somehow
@@ -90,12 +90,12 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   };
 
   return (
-    <Box sx={{ marginTop: "5%", marginBottom: "4%" }}>
+    <Box sx={{ marginTop: '5%', marginBottom: '4%' }}>
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
         <form className={s.form} onSubmit={handleSubmit}>
@@ -163,7 +163,7 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             type="submit"
             variant="contained"
             color="secondary"
-            sx={{ marginTop: "2%"}}
+            sx={{ marginTop: '2%' }}
             fullWidth={true}
           >
             Register
@@ -174,24 +174,24 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
       <ModalRegister
         modal={modal}
         setModal={setRegisterModal}
-        message={"Successful registration"}
+        message={'Successful registration'}
       />
       <Divider
         sx={{
-          width: "80%",
-          marginLeft: "10%",
-          border: "1px solid rgba(0,0,0,.1)",
-          marginBottom: "3%",
+          width: '80%',
+          marginLeft: '10%',
+          border: '1px solid rgba(0,0,0,.1)',
+          marginBottom: '3%',
         }}
       />
 
       <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "row",
-          flexWrap: "wrap",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
         }}
         gap={{ xs: 1, md: 2 }}
       >
@@ -206,7 +206,7 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           size="small"
           onClick={HandleSingIn}
         >
-          SING IN
+          SIGN IN
         </Button>
 
         <GoogleLogin

@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import Cards from "../Cards/Cards";
-import Carrousel from "../Carrousel/Carrousel";
-import Footer from "../Footer/Footer";
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import Cards from '../Cards/Cards';
+import Carrousel from '../Carrousel/Carrousel';
+import Footer from '../Footer/Footer';
 
 export default function Home() {
   const servicesState = useSelector((state) => state.services);
