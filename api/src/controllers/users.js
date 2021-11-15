@@ -42,6 +42,7 @@ async function userEdit(req, res, next) {
     const { name, lastname, userImg, password, email, ban, username } =
       req.body;
     const errors = validateUserEdit(req.body);
+    console.log(ban);
     if (name || lastname || userImg || password || email || ban || username) {
       if (!Object.keys(errors).length) {
         // Cambios los datos, si fueron pasados
@@ -51,7 +52,7 @@ async function userEdit(req, res, next) {
         user.password = password ? password : user.password;
         user.username = username ? username : user.username;
         user.email = email ? email : user.email;
-        userIdQuery ? (user.ban = ban) : null;
+        user.ban = !ban ? user.ban : ban === "Active" ? false : true;
 
         await user.save();
         res.json({ data: "User edited" });
@@ -274,18 +275,18 @@ async function getUserAdminSearch(req, res, next) {
               attributes: ["score"],
             },
           },
-          {
-            model: Service,
-            as: "servicesBought",
-            attributes: ["id", "title", "img", "price", "userId"],
-            through: {
-              attributes: [],
-            },
-            include: {
-              model: Qualification,
-              attributes: ["score"],
-            },
-          },
+          // {
+          //   model: Service,
+          //   as: "servicesBought",
+          //   attributes: ["id", "title", "img", "price", "userId"],
+          //   through: {
+          //     attributes: [],
+          //   },
+          //   include: {
+          //     model: Qualification,
+          //     attributes: ["score"],
+          //   },
+          // },
         ],
       }));
 

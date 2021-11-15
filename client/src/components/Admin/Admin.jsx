@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AdminSideBar from "./AdminSideBar";
 import Dashboard from "./DashBoard";
 import Services from "./Services";
 import Users from "./Users";
 import Categories from "./Categories";
 import Box from "@mui/material/Box";
+import axios from "axios";
 
 export default function Admin() {
   let [page, setPage] = useState("Dashboard");
@@ -13,7 +14,7 @@ export default function Admin() {
     end: "",
   });
   let [groupFilter, setGroupFilter] = useState("");
-
+  let [info, setInfo] = useState({});
   const pagesList = {
     Dashboard: (
       <Dashboard
@@ -21,12 +22,30 @@ export default function Admin() {
         setDateFilter={setDateFilter}
         groupFilter={groupFilter}
         setGroupFilter={setGroupFilter}
+        info={info}
       />
     ),
-    Services: <Services />,
+    Services: <Services info={info} />,
     Users: <Users />,
     "Categories/Groups": <Categories />,
   };
+
+  useEffect(() => {
+    axios(`/admin`).then((response) => {
+      setInfo({
+        totalServices: response.data.totalServices,
+        totalUsers: response.data.bannedUsers,
+        totalSales: response.data.totalSales,
+        monthlySales: response.data.monthlySales,
+        newServicesMonthly: response.data.newServices,
+        newServicesGroup: response.data.groupNewServices,
+        groupList: response.data.groups,
+        groupServicesCount: response.data.groupServicesCount,
+        newUsers: response.data.newUsers,
+        provinceServices: response.data.provinceServices,
+      });
+    });
+  }, []);
 
   return (
     <Box
@@ -35,9 +54,10 @@ export default function Admin() {
       // gridTemplateColumns="repeat(12, 1fr)"
       // gap={1}
       position="relative"
-      width="100%"
       height="100vh"
       m="10px auto"
+
+      // sx={{ overflowX: "hidden" }}
     >
       {/* gridColumn="span 2" */}
       <Box>

@@ -8,6 +8,7 @@ const {
   Group,
   Services_cities,
   Services_provinces,
+  Orders,
   conn,
 } = require("../db");
 const { Op } = require("sequelize");
@@ -21,6 +22,38 @@ const dicc = {
 
 async function admin(req, res, next) {
   try {
+    let totalServices = await Service.findAll({
+      attributes: [[conn.fn("COUNT", conn.col("id")), "totalServices"]],
+    });
+    totalServices = totalServices[0].dataValues.totalServices;
+
+    let totalSales = await Orders.findAll({
+      attributes: [
+        "status",
+        [conn.fn("SUM", conn.col("total")), "totalSales"],
+        [conn.fn("COUNT", conn.col("status")), "n_status"],
+      ],
+      group: ["status"],
+    });
+
+    let monthlySales = await Orders.findAll({
+      attributes: [
+        "status",
+        [conn.fn("TO_CHAR", conn.col("createdAt"), "Mon-YY"), "month"],
+        [conn.fn("TO_CHAR", conn.col("createdAt"), "YYYY-MM"), "year"],
+        // [conn.fn("FORMAT", conn.col("createdAt"), "MM"), "numMes"],
+
+        [conn.fn("SUM", conn.col("total")), "totalSales"],
+      ],
+      group: ["month", "year", "status"],
+      raw: false,
+      subQuery: false,
+      order: [
+        [conn.literal("year"), "ASC"],
+        // [conn.literal("month"), "ASC"],
+      ],
+    });
+
     let newServices = await Service.findAll({
       attributes: [
         [conn.fn("TO_CHAR", conn.col("createdAt"), "Mon-YY"), "month"],
@@ -150,8 +183,22 @@ async function admin(req, res, next) {
 
     let groupNewServices = await groupServices(groups);
 
+    let provinceServices = await Service.findAll({
+      attributes: [
+        "provinceId",
+        [conn.fn("COUNT", conn.col("id")), "n_services"],
+      ],
+
+      group: ["provinceId"],
+      order: [[conn.literal("n_services"), "DESC"]],
+    });
+
     // { services: servicesCount, category: categoryCount }
     res.status(200).send({
+      provinceServices,
+      monthlySales,
+      totalSales,
+      totalServices,
       groupServicesCount,
       newUsers,
       groups,

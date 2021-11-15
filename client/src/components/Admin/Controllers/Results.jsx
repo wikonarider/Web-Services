@@ -88,13 +88,21 @@ export default function Results({
         .then((response) => setOptions(response.data));
     }
 
-    setEdit(event, option);
+    setEdit((edit) => {
+      return {
+        ...edit,
+        [option.id]: { editing: false },
+      };
+    });
   };
 
   const handleStatusChange = (event, id) => {
     let value = event.target.value;
     setEdit((edit) => {
-      return { ...edit, [id]: { ...edit[id], ban: value } };
+      return {
+        ...edit,
+        [id]: { ...edit[id], ban: value },
+      };
     });
   };
 
@@ -229,8 +237,8 @@ export default function Results({
                         sx={{ width: "100px", color: "black" }}
                         onChange={(e) => handleStatusChange(e, o.id)}
                       >
-                        <MenuItem value={false}>Active</MenuItem>
-                        <MenuItem value={true}>Banned</MenuItem>
+                        <MenuItem value={"Active"}>Active</MenuItem>
+                        <MenuItem value={"Banned"}>Banned</MenuItem>
                       </Select>
                     </>
                   ) : (
