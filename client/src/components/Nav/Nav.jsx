@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import Modal from "@mui/material/Modal";
-import SearchBar from "../SearchBar/SearchBar";
-import Cart from "../Cart/Cart";
-import SideBar from "../SideBar/SideBar";
-import UserMenu from "./UserMenu";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import HomeIcon from "@mui/icons-material/Home";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Fab from "@mui/material/Fab";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import ScrollTop from "./ScrollTop";
+import React, { useState } from 'react';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Modal from '@mui/material/Modal';
+import SearchBar from '../SearchBar/SearchBar';
+import Cart from '../Cart/Cart';
+import SideBar from '../SideBar/SideBar';
+import UserMenu from './UserMenu';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ScrollTop from './ScrollTop';
 // import clsx from "clsx";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import DarkMode from "./DarkMode";
+import DarkMode from './DarkMode';
 
 // const useStyles = makeStyles({
 //   default: {
@@ -34,14 +34,14 @@ import DarkMode from "./DarkMode";
 // });
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   maxWidth: 600,
-  width: "70%",
-  bgcolor: "background.paper",
-  borderRadius: "10px",
+  width: '70%',
+  bgcolor: 'background.paper',
+  borderRadius: '10px',
   boxShadow: 24,
 };
 
@@ -50,7 +50,7 @@ export default function Nav({ route, check, change }) {
   const [loginModal, setLoginModal] = useState(false);
   const cookie = useSelector((state) => state.cookie);
   const { userImg, name } = useSelector((state) => state.user);
-  const query = useMediaQuery("(max-width: 820px)");
+  const query = useMediaQuery('(max-width: 820px)');
 
   // const classes = useStyles();
 
@@ -65,17 +65,17 @@ export default function Nav({ route, check, change }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: "101%" }} id="back-to-top-anchor">
-      <AppBar position="fixed" sx={{ zIndex: "1201", p: 1 }}>
+    <Box sx={{ flexGrow: 1, width: '101%' }} id="back-to-top-anchor">
+      <AppBar position="fixed" sx={{ zIndex: '1201', p: 1 }}>
         <Toolbar
           sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 9fr 2fr",
-            gridTemplateRows: query && route === "home" ? "80px 80px" : "",
+            display: 'grid',
+            gridTemplateColumns: '1fr 9fr 2fr',
+            gridTemplateRows: query && route === 'home' ? '72px 80px' : '',
           }}
         >
           <Box mr="auto" display="flex" alignItems="center">
-            {route === "home" ? (
+            {route === 'home' ? (
               <>
                 <SideBar />
                 <DarkMode />
@@ -93,19 +93,19 @@ export default function Nav({ route, check, change }) {
           {/* --------------- SEARCH BAR---------------------- */}
           <Box
             sx={
-              route === "home"
+              route === 'home'
                 ? {
-                    width: "100%",
-                    maxWidth: "920px",
-                    ml: "auto",
-                    mr: "auto",
-                    gridColumnStart: query ? "1" : "",
-                    gridColumnEnd: query ? "4" : "",
+                    width: '100%',
+                    maxWidth: '920px',
+                    ml: 'auto',
+                    mr: 'auto',
+                    gridColumnStart: query ? '1' : '',
+                    gridColumnEnd: query ? '4' : '',
                   }
-                : { display: "none" }
+                : { display: 'none' }
             }
           >
-            {route === "home" ? <SearchBar /> : null}
+            {route === 'home' ? <SearchBar /> : null}
           </Box>
           {/* ---------------------------------------- */}
 
@@ -115,12 +115,12 @@ export default function Nav({ route, check, change }) {
             p="5px"
             ml="auto"
             sx={{
-              gridColumnStart: "3",
-              gridRowStart: "1",
+              gridColumnStart: '3',
+              gridRowStart: '1',
             }}
           >
             {/* Register */}
-            {cookie || route === "checkout" ? null : (
+            {cookie || route === 'checkout' ? null : (
               <Button
                 variant="contained"
                 size="medium"
@@ -132,7 +132,7 @@ export default function Nav({ route, check, change }) {
               </Button>
             )}
 
-            {!cookie && route !== "checkout" ? (
+            {!cookie && route !== 'checkout' ? (
               <Button
                 variant="contained"
                 size="medium"
@@ -176,7 +176,7 @@ export default function Nav({ route, check, change }) {
             </Modal>
             {/* ------------------------------------------------ */}
 
-            {route === "checkout" ? null : <Cart route={route} />}
+            {route === 'checkout' ? null : <Cart route={route} />}
             {cookie ? (
               <UserMenu route={route} userImg={userImg} name={name} />
             ) : null}
