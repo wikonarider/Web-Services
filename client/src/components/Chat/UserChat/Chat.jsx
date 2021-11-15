@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Conversations from "../Convertations/convertations.jsx";
 import Box from "@mui/material/Box";
 import SendIcon from "@mui/icons-material/Send";
-import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
 import { connect } from "react-redux";
@@ -11,6 +10,8 @@ import dotenv from "dotenv";
 import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
 import useStylesChat from "./ChatStyled";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   getContacts,
   getContactsBougth,
@@ -20,11 +21,9 @@ import {
   sendMessage,
   deleteConvertation,
 } from "./StateLocal.jsx";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 dotenv.config();
- function Chat({ user, darkTheme }) {
+function Chat({ user, darkTheme }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
@@ -43,21 +42,21 @@ dotenv.config();
 
   //----------------------------------------------------------------------------socket
   useEffect(() => {
-      //client conection
+    //client conection
     socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
     //---------------------------------------------new message receive
     socket.current.on("newMsnReceive", function (dat) {
-		//new msn from back server.io
-		setTextReceive({
+      //new msn from back server.io
+      setTextReceive({
         userId: dat.senderId,
         remit: dat.remit,
         text: dat.text,
         createdAt: Date.now(),
-	});
-});
-//--------------------------------------------------user conectad
+      });
+    });
+    //--------------------------------------------------user conectad
     socket.current.on("UsersOnlines", function (usersOnlines) {
-		setUsersOnlines(usersOnlines);
+      setUsersOnlines(usersOnlines);
     });
     //-------------------------------------------------a user logged out
     socket.current.on("usersdisconnect", function (newListUsersOnlines) {
@@ -65,9 +64,9 @@ dotenv.config();
     });
     //--------------------------------------------------add user new
     if (user) {
-		getData();
-		socket.current.emit("addUser", user.id);
-    } 
+      getData();
+      socket.current.emit("addUser", user.id);
+    }
     return () => {
       //------------------------------------------------disconnect current user
       socket.current.emit("disconnectUser", user.id);
@@ -304,15 +303,14 @@ dotenv.config();
                   onChange={(e) => setText(e.target.value)}
                   className={classes.inputSend}
                 />
-                <Button
+                <IconButton
                   variant="contained"
                   type="submit"
                   size="small"
                   className={classes.btn}
-                  endIcon={<SendIcon />}
                 >
-                  send
-                </Button>
+                  <SendIcon />
+                </IconButton>
               </Box>
             </form>
           ) : (

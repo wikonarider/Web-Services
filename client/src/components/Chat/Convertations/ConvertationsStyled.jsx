@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { green, grey, red } from "@mui/material/colors";
 
+
 // Descomentar cuando se va a usar
 // import { brown, amber, lime, deepOrange } from "@mui/material/colors";
 
@@ -24,6 +25,9 @@ export default function useStylesConvertations(darkTheme, statusUser,) {
       boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
       width: "80%",
       borderRadius: "0.3em",
+      "& div":{
+          color:`${darkTheme ? grey[800] : grey[600]}`,
+      }
     },
   }));
 }
