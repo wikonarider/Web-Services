@@ -8,7 +8,6 @@ import {
   Radar,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from "recharts";
 import { styles } from "../AdminStyles";
 import Box from "@mui/material/Box";

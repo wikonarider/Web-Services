@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { memo } from "react";
 import { geoCentroid } from "d3-geo";
 import argentina from "./argentina-provinces.json";
 import {
