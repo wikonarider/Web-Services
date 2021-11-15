@@ -23,7 +23,7 @@ import {
 } from "./StateLocal.jsx";
 
 dotenv.config();
-function Chat({ user, darkTheme }) {
+function Chat({ user, darkTheme, cookie }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
@@ -43,35 +43,36 @@ function Chat({ user, darkTheme }) {
   //----------------------------------------------------------------------------socket
   useEffect(() => {
     //client conection
-    socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
-    //---------------------------------------------new message receive
-    socket.current.on("newMsnReceive", function (dat) {
-      //new msn from back server.io
-      setTextReceive({
-        userId: dat.senderId,
-        remit: dat.remit,
-        text: dat.text,
-        createdAt: Date.now(),
+    if (cookie) {
+      socket.current = io(process.env.REACT_APP_API || "http://localhost:3001");
+      //---------------------------------------------new message receive
+      socket.current.on("newMsnReceive", function (dat) {
+        //new msn from back server.io
+        setTextReceive({
+          userId: dat.senderId,
+          remit: dat.remit,
+          text: dat.text,
+          createdAt: Date.now(),
+        });
       });
-    });
-    //--------------------------------------------------user conectad
-    socket.current.on("UsersOnlines", function (usersOnlines) {
-      setUsersOnlines(usersOnlines);
-    });
-    //-------------------------------------------------a user logged out
-    socket.current.on("usersdisconnect", function (newListUsersOnlines) {
-      setUsersOnlines(newListUsersOnlines);
-    });
-    //--------------------------------------------------add user new
-    if (user) {
-      getData();
-      socket.current.emit("addUser", user.id);
-    }
-    return () => {
-      //------------------------------------------------disconnect current user
-      socket.current.emit("disconnectUser", user.id);
-    };
-    // eslint-disable-next-line
+      //--------------------------------------------------user conectad
+      socket.current.on("UsersOnlines", function (usersOnlines) {
+        setUsersOnlines(usersOnlines);
+      });
+      //-------------------------------------------------a user logged out
+      socket.current.on("usersdisconnect", function (newListUsersOnlines) {
+        setUsersOnlines(newListUsersOnlines);
+      });
+      //--------------------------------------------------add user new
+      if (user) {
+        getData();
+        socket.current.emit("addUser", user.id);
+      }
+      return () => {
+        //------------------------------------------------disconnect current user
+        socket.current.emit("disconnectUser", user.id);
+      };
+    } // eslint-disable-next-line
   }, []);
   //----------------------------------------------------------------------------------------------get Data BD
   async function getData() {
@@ -109,7 +110,7 @@ function Chat({ user, darkTheme }) {
       return con.id === textReceive.userId;
     });
     //new msj new contact add contacs array and convertations
-    if (contac.length === 0) {
+    if (contac.length === 0 && cookie) {
       var convertition;
       getConvertations()
         .then((conv) => {
@@ -361,6 +362,7 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     darkTheme: state.darkTheme,
+    cookie: state.cookie,
   };
 }
 
