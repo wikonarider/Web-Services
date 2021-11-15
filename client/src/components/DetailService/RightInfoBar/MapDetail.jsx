@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Web utilizada https://www.openstreetmap.org/
 // Pueden sacar mas info de ahi, google maps me pedia
 // tarjeta de credito para activar la API_KEY
 function MapDetail({ lat, lon }) {
   const darkTheme = useSelector((state) => state.darkTheme);
-  const query = useMediaQuery("(max-width: 600px)");
+  // const query = useMediaQuery("(max-width: 600px)");
 
   return (
     <div>
@@ -18,7 +18,7 @@ function MapDetail({ lat, lon }) {
         marginHeight="0"
         marginWidth="0"
         style={{
-          width: query ? "100%" : "425px",
+          width: "100%",
           height: "250px",
           border: "1px solid black",
         }}
