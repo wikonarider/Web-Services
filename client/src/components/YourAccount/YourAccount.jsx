@@ -24,7 +24,7 @@ export default function YourAccount({
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   // console.log(userData);
-  const darkTheme = useSelector((state) => state.darkTheme);
+  // const darkTheme = useSelector((state) => state.darkTheme);
 
   useEffect(() => {
     if (userProfile !== true) {

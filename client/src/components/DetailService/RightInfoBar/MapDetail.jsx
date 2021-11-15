@@ -1,31 +1,35 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Web utilizada https://www.openstreetmap.org/
 // Pueden sacar mas info de ahi, google maps me pedia
-// tarjeta de cresdito para activar la API_KEY
-// Pueden cambiarle el estilo como quieren.
-// Las LAT y LONG vienen medias chota en la API de Arg,
-// Por eso no quedan bien centradas
+// tarjeta de credito para activar la API_KEY
 function MapDetail({ lat, lon }) {
   const darkTheme = useSelector((state) => state.darkTheme);
+  const query = useMediaQuery("(max-width: 600px)");
+
   return (
     <div>
       <iframe
         title="map"
-        height="250"
         frameBorder="0"
         scrolling="no"
         marginHeight="0"
         marginWidth="0"
         style={{
-          width: "100%",
-          maxWidth: "425",
+          width: query ? "100%" : "425px",
+          height: "250px",
           border: "1px solid black",
         }}
-        src={`https://www.openstreetmap.org/export/embed.html?bbox=${lon}%2C${lat}%2C${
-          lon - 0.2
-        }%2C${lat - 0.2}&amp;layer=mapnik`}
+        src={`https://www.openstreetmap.org/export/embed.html?bbox=
+        ${lon + 0.1}
+        %2C
+        ${lat + 0.1}
+        %2C
+        ${lon - 0.1}
+        %2C
+        ${lat - 0.1}&layer=mapnik&marker=${lat}%2C${lon}`}
       ></iframe>
       <br />
       <small>
