@@ -14,7 +14,7 @@ export default function SideBarNested({ openFromFather }) {
         width: "100%",
         minWidth: 360,
         bgcolor: "background.paper",
-        mt: query ? "150px" : "70px",
+        mt: query ? "160px" : "70px",
       }}
       component="nav"
       aria-labelledby="nested-list-subheader"
