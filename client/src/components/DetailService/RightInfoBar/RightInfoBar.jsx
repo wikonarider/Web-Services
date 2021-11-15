@@ -17,7 +17,7 @@ export default function RightInfoBar({
   handleClick,
   added,
 }) {
-  let { title, price, description, rating, qualifications, userId, city } =
+  let { title, price, description, rating, qualifications, userId, city, id } =
     service.service;
   const query = useMediaQuery("(max-width: 890px)");
 
@@ -161,7 +161,7 @@ export default function RightInfoBar({
         width="100%"
         sx={{ transform: "scale(0.8)" }}
       >
-        <CardUser user={service.user} />
+        <CardUser user={service.user} serviceId={id} />
       </Box>
       {/* -------------------------------------- */}
 

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import s from './YourAccount.module.css';
+import s from "./YourAccount.module.css";
 
 //-------------- MATERIAL UI -------------------------------------
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 //-------------------------------------------------------
-import CardService from '../CardService/CardService';
-import { getUserInfo, getUserFavs } from '../../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import UserInfo from './UserInfo/UserInfo';
-import Botonera from './Botonera/Botonera';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Admin from '../Admin/Admin';
-import { FormDialog } from './FormDialog/FormDialog';
-import CollapsibleTable from './CollapsibleTable';
+import CardService from "../CardService/CardService";
+import { getUserInfo, getUserFavs } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import UserInfo from "./UserInfo/UserInfo";
+import Botonera from "./Botonera/Botonera";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Admin from "../Admin/Admin";
+import { FormDialog } from "./FormDialog/FormDialog";
+import CollapsibleTable from "./CollapsibleTable";
 
 export default function YourAccount({
   userProfile,
