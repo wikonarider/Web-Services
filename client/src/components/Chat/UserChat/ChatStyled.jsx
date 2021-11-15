@@ -85,8 +85,9 @@ export default function useStylesChat(darkTheme) {
       paddingRight:"5%",
       transition: "0.4s",
       "&:hover": {
-        background: darkTheme ? grey[700] : grey[400],
+        background: darkTheme ? grey[700] : grey[200],
         borderRadius: "0.3em",
+        
       },
     },
     box_avatar_And_X: {
