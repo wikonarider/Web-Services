@@ -73,7 +73,7 @@ function Chat({ user, darkTheme, cookie }) {
         socket.current.emit("disconnectUser", user.id);
       };
     } // eslint-disable-next-line
-  }, []);
+  }, [cookie]);
   //----------------------------------------------------------------------------------------------get Data BD
   async function getData() {
     var contactsConv = await getContacts();
@@ -126,7 +126,6 @@ function Chat({ user, darkTheme, cookie }) {
         })
         .catch((err) => console.log(err));
     }
-
     // eslint-disable-next-line
   }, [textReceive]);
   //-------------------------------------------------------------------------------------------------------------new convertations
@@ -160,7 +159,6 @@ function Chat({ user, darkTheme, cookie }) {
       id = idPostConvertation(idUser);
       if (id > 0) {
         var post = await getPots(id);
-        console.log(post);
         setChat({ ...chat, currentCont: newCurrent[0], chatting: post.data });
       }
     }
