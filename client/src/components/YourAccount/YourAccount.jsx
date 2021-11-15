@@ -26,7 +26,6 @@ export default function YourAccount({
   // console.log(userData);
   const darkTheme = useSelector((state) => state.darkTheme);
 
-
   useEffect(() => {
     if (userProfile !== true) {
       (async () => {
@@ -85,30 +84,25 @@ export default function YourAccount({
           modal={modal}
           setOpenForm={setOpenForm}
           setModal={setModal}
-          user={userData}        
-          darkTheme
-          />
+          user={userData}
+        />
       )}
       <div>
         {/* -------------------FAVS------------------------ */}
         {viewFavs &&
           (userData.servicesFavs.length > 0 ? (
-            <Container>
-              <div className={s.servicesShown}>
-                <Grid
-                  container
-                  justifyContent="flex-start"
-                  spacing={3}
-                  margin="0"
-                >
-                  {userData.servicesFavs.map((s) => (
-                    <Grid item key={s.id}>
-                      <CardService service={s} />
-                    </Grid>
-                  ))}
+            <Grid
+              container
+              justifyContent="center"
+              spacing={3}
+              sx={{ marginBottom: "5%" }}
+            >
+              {userData.servicesFavs.map((s) => (
+                <Grid item key={s.id}>
+                  <CardService service={s} />
                 </Grid>
-              </div>
-            </Container>
+              ))}
+            </Grid>
           ) : (
             <div className={s.addFavContainer}>
               <h3>Your Fav-list is currently empty</h3>
@@ -152,22 +146,13 @@ export default function YourAccount({
         {/* -------------------SERVICES-------------------------- */}
         {viewServices &&
           (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
-            <div className={s.servicesShown}>
-              <Container>
-                <Grid
-                  container
-                  justifyContent="flex-start"
-                  spacing={3}
-                  margin="0"
-                >
-                  {userData.servicesOwn.map((s) => (
-                    <Grid item key={s.id}>
-                      <CardService service={s} />
-                    </Grid>
-                  ))}
+            <Grid container justifyContent="center" spacing={3}>
+              {userData.servicesOwn.map((s) => (
+                <Grid item key={s.id}>
+                  <CardService service={s} />
                 </Grid>
-              </Container>
-            </div>
+              ))}
+            </Grid>
           ) : (
             <div className={s.addFavContainer}>
               <h3>You are currently not offering any services</h3>

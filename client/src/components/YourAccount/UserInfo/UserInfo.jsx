@@ -5,10 +5,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
-import s from './UserInfo.module.css';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+
+import s from "./UserInfo.module.css";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { useMediaQuery } from "@mui/material";
+
 
 import {
   FacebookShareButton,
@@ -71,19 +74,24 @@ export default function YourAccount({
   };
   //--------------------------------------------------------------
 
+  const matches = useMediaQuery("(min-width:800px)");
+
   return (
     <Grid
       container
       display="flex"
       alignItems="center"
+      sx={{ marginTop: "2%", marginBottom: `${matches ? null : `2%`}` }}
       justifyContent="center"
-      sx={{ marginTop: '2%' }}
       gap={5}
       item
       xs={12}
-
     >
-      <Grid item gridColumn="span 6">
+      <Grid
+        item
+        gridColumn="span 6"
+        sx={{ marginRight: `${matches ? '2%' : null}` }}
+      >
         <Avatar
           alt="user name"
           src={!userProfile ? userData.userImg : profileInfo.userImg}
@@ -132,7 +140,11 @@ export default function YourAccount({
         )}
       </Grid>
 
-      <Grid item gridColumn="span 6">
+      <Grid
+        item
+        gridColumn="span 6"
+        sx={{ marginLeft: `${matches ? "2%" : null}` }}
+      >
         <Box className={s.fullName} gap={2}>
           <Typography variant="h4">
             {!userProfile ? userData.name : profileInfo.name}
