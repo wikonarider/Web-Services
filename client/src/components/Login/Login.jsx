@@ -114,14 +114,8 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
   }
 
   return (
-    <Box sx={{ margin: "5%" }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
+    <Box sx={{ padding: "5%" }}>
+      <Box>
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
@@ -182,8 +176,7 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
 
       <Divider
         sx={{
-          width: "80%",
-          marginLeft: "10%",
+          width: "100%",
           border: "1px solid rgba(0,0,0,.1)",
           marginBottom: "3%",
         }}
@@ -194,7 +187,6 @@ function Login({ setLogin, setLoginModal, setRegisterModal }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          flexDirection: "row",
           flexWrap: "wrap",
         }}
         gap={{ xs: 1 }}
