@@ -50,7 +50,7 @@ async function checkoutMercadoPago(req, res, next) {
       ],
       back_urls: {
         success: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&username=${user.username}&orderId=${order.id}`,
-        failure: `${ORIGIN}/home`,
+        failure: `${ORIGIN}/failedPayment`,
         pending: `${ORIGIN}/home`,
       },
       auto_return: 'approved',

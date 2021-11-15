@@ -52,7 +52,7 @@ async function checkoutPaypal(req, res, next) {
       },
       redirect_urls: {
         return_url: `${SUCCESS_MERCADOPAGO}/users/purchase?servicesId=${servicesId}&username=${user.username}&status=success&orderId=${order.id}`,
-        cancel_url: `${ORIGIN}/home`,
+        cancel_url: `${ORIGIN}/failedPayment`,
       },
       transactions: [
         {

@@ -14,6 +14,7 @@ import CreateService from "./components/CreateService/CreateService";
 import Nav from "./components/Nav/Nav";
 import NavSpace from "./components/Nav/NavSpace";
 import ResetPassword from "./components/resetPassword/resetPassword";
+import FailedPayment from "./components/FailedPayment/FailedPayment";
 import {
   setCookie,
   getServices,
@@ -134,6 +135,8 @@ function App() {
             <ResetPassword resetPassword={match.params.id} />
           )}
         />
+
+          <Route exact path="/failedPayment" component={FailedPayment} />
 
         <Route exact path="/home">
           <Nav route={"home"} />
