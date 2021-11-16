@@ -106,8 +106,6 @@ export default function Comments({
       p={2}
       border="solid 1px lightgrey"
       borderRadius="4px"
-      sx={{ mb: "auto" }}
-      height="100%"
     >
       {cookie && buyer ? (
         <>
@@ -222,7 +220,10 @@ export default function Comments({
         </Popover>
         {/* --------------------------------------------------------- */}
 
-        <Box gridColumn="span 12" sx={{ mb: "auto" }}>
+        <Box
+          gridColumn="span 12"
+          sx={{ maxHeight: "230px", overflowY: "auto" }}
+        >
           {qualifications && qualifications.length ? (
             qualifications.map((q, index) => {
               return (
