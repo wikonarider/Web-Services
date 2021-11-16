@@ -1,4 +1,4 @@
-import { type } from '../actions/variables';
+import { type } from "../actions/variables";
 
 const initialState = {
   services: [],
@@ -8,19 +8,19 @@ const initialState = {
   favs: [],
   cart: [],
   categories: [],
-  cookie: '',
+  cookie: "",
   objGlobal: {
-    startRange: '',
-    endRange: '',
+    startRange: "",
+    endRange: "",
     category: [],
-    page: '0',
-    pageSize: '20',
-    order: 'rating',
-    type: 'DESC',
-    province: '',
-    city: '',
+    page: "0",
+    pageSize: "20",
+    order: "rating",
+    type: "DESC",
+    province: "",
+    city: "",
   },
-  _newConvertation: '',
+  _newConvertation: "",
   endPage: false,
   darkTheme: false,
   order: false,
@@ -131,6 +131,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         darkTheme: action.payload,
+      };
+
+    case type.PUT_SERV_ID:
+      return {
+        ...state,
+      };
+
+    case type.DELETE_SERVICE:
+      return {
+        ...state,
       };
 
     default:

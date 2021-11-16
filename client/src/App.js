@@ -32,6 +32,7 @@ import { putDark } from "./redux/actions";
 import { lightTheme, darkTheme } from "./utils/MuiTheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import EditService from "./components/EditService/EditService";
 
 function App() {
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ function App() {
           )}
         />
 
-          <Route exact path="/failedPayment" component={FailedPayment} />
+        <Route exact path="/failedPayment" component={FailedPayment} />
 
         <Route exact path="/home">
           <Nav route={"home"} />
@@ -211,6 +212,14 @@ function App() {
         <Route exact path="/createservice">
           {cookie ? <CreateService /> : <Nav route={""} />}
         </Route>
+
+        <Route
+          exact
+          path="/editservice/:id"
+          render={({ match }) => {
+            return <EditService id={match.params.id} />;
+          }}
+        ></Route>
       </div>
     </ThemeProvider>
   );
