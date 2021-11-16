@@ -2,10 +2,16 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import React from "react";
 import useStylesConvertations from "./ConvertationsStyled";
-export default function Conversations({ contacts, contactsOnline, darkTheme ,currentContact}) {
+export default function Conversations({
+  contacts,
+  contactsOnline,
+  darkTheme,
+  contactCurrent,
+}) {
   //darkTheme boolean global state
   var statusUser = contactsOnline.some((e) => e.user === contacts.id);
-  var classes = useStylesConvertations(darkTheme, statusUser)();
+  var contactSelected = contacts.id === contactCurrent.id;
+  var classes = useStylesConvertations(darkTheme, statusUser,contactSelected)();
 
   if (contacts) {
     return (
@@ -15,7 +21,7 @@ export default function Conversations({ contacts, contactsOnline, darkTheme ,cur
           src={contacts.userImg}
           className={classes.avatar}
         />
-        <Box>{contacts.name}</Box>
+        <Box className={classes.nameUser}>{contacts.name}</Box>
       </Box>
     );
   } else {

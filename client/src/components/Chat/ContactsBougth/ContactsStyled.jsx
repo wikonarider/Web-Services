@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { green, grey, red } from "@mui/material/colors";
+import { green, grey, red ,blueGrey} from "@mui/material/colors";
 
 // Dscomentar cuando se va a usar
 // import { brown, amber, lime, deepOrange } from "@mui/material/colors";
@@ -14,11 +14,12 @@ export default function useStylesBougth(darkTheme, statusUser) {
       background: statusUser ? green[500] : red[400],
       right: "20%",
       bottom: "82%",
-      border: `3px solid ${darkTheme ? "#212121" : "#FFE5A1"}`,
+
+      border: `3px solid ${darkTheme ? "#212121" : blueGrey[100]}`,
       transform: "scale(0.8,0.8)",
     },
     avatar: {
-      boxShadow: `0.2em 0.2em 0.1em  ${darkTheme ? grey[800] : grey[600]}`,
+      boxShadow: `0.1em 0.2em 0.18em ${grey[700]}`,
       width: 70,
       height: 70,
       cursor: "pointer",
