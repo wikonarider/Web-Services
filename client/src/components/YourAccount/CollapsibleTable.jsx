@@ -43,9 +43,16 @@ export default function CollapsibleTable({ rows }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {
+            
+          rows.sort(function(a,b){
+                return b.id - a.id
+                
+          }).map((row) => (
             <Row key={`${row.id}_row`} row={row} />
-          ))}
+          )) 
+        }
+  
         </TableBody>
       </Table>
     </TableContainer>
