@@ -102,42 +102,43 @@ export default function CheckoutDetail() {
       </Box>
       <Paper
         sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
-      >
+        >
+        {total.length > 0?
         <Grid container spacing={2} sx={{ gap: 1 }}>
           <Grid item xs={12} sm container>
             <Grid
               container
               direction="column"
               spacing={1}
-              alignItems="flex-end"
+              alignItems="center"
               className={classes.querie}
             >
               {loading && <div className={s.spinner}></div>}
-            
             {!loading?
               <Grid
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
                   flexDirection: 'column',
-                  alignItems: 'flex-start',
+                  alignItems: 'center',
                 }}
               >
                 <Grid
                   style={{
                     display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}
                 >
                   <Typography
                     variant="h5"
                     color="text.primary"
-                    textAlign="start"
+                    textAlign="center"
                   >
                     TOTAL:
                     {total.length > 0 && (
-                      <Typography gutterBottom variant="h4" component="div">
+                      <Typography gutterBottom variant="h4" component="div"
+                      sx={{alingSelf:'center'}}>
                         {total.reduce((a, b) => a + b, 0)} $
                       </Typography>
                     )}
@@ -159,7 +160,7 @@ export default function CheckoutDetail() {
                       variant="contained"
                       size="large"
                       onClick={handleBuyClick}
-                    >
+                      sx={{justifySelf:'center'}} >
                       BUY WITH MERCADO PAGO
                     </Button>
                   ) : (
@@ -189,6 +190,7 @@ export default function CheckoutDetail() {
             </Grid>
           </Grid>
         </Grid>
+             : 'No products added to the cart' }
       </Paper>
     </>
   );

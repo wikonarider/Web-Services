@@ -18,7 +18,7 @@ export default function Message({
         ref={scrollRef}
         id="boxMsnReceive"
         className={
-          message.userId === user.id
+            message.userId === user.id
             ? clasess.boxMsnSend
             : clasess.boxMsnReceive
         }
@@ -27,7 +27,9 @@ export default function Message({
           <h5>{message.text}</h5>
         </Box>
 
-        <h5>{format(message.createdAt)}</h5>
+        <h5> 
+        {format(message.createdAt)}</h5>
+       
       </Box>
     </Box>
   );

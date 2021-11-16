@@ -135,7 +135,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       display: "flex",
       marginRight: "0.2%",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : blueGrey[100],
+      background: darkTheme ? grey[900] : blueGrey[400],
       padding: "0.5%",
       maxHeight: "100%",
       "& div::-webkit-scrollbar ": {
