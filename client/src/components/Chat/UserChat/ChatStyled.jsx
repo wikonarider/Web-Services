@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {  grey } from "@mui/material/colors";
+import {  grey,blueGrey } from "@mui/material/colors";
 
 
 export default function useStylesChat(darkTheme,selectCurrentChat) {
@@ -11,9 +11,9 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       background: darkTheme ? grey[900] : "whiteSmoke",
       borderRadius: "0.5em",
       height: "100%",
-      marginLeft:"2%",
+      marginLeft: "2%",
       "& input": {
-        color: darkTheme ? grey[400] : grey[900],
+        color: darkTheme ? grey[400] : blueGrey[400],
         marginLeft: "0.9%",
       },
       "& fieldSet": {
@@ -66,7 +66,7 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       height: "100%",
       overflowY: "auto",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : "#FFE5A1",
+      background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
     },
     containerConvertation: {
@@ -88,7 +88,6 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       justifyContent: "center",
       flexDirection: "row",
       width: "100%",
-      
     },
 
     /*input search*/
@@ -115,7 +114,7 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       flex: 1.5,
       display: "flex",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : "#FFE5A1",
+      background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
       maxHeight: "100%",
     },

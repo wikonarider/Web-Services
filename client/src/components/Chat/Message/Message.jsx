@@ -14,10 +14,10 @@ export default function Message({
   var clasess = useStylesMessage(darkTheme, message, user)();
   return (
     <Box className={clasess.box_position_MsnSendReceive}>
-         <Avatar
-          src={message.remit === user.id ? contact.userImg : user.userImg}
-          className={clasess.avatar}
-        />
+      <Avatar
+        src={message.remit === user.id ? contact.userImg : user.userImg}
+        className={clasess.avatar}
+      />
       <Box
         ref={scrollRef}
         className={
@@ -26,19 +26,11 @@ export default function Message({
             : clasess.boxMsnReceive
         }
       >
-       
         <Box className={clasess.message}>
-          <h4
-            style={{
-              textAlign: "justify",
-              color: message.userId === user.id ? "white" : " black",
-            }}
-          >
-            {message.text}
-          </h4>
+          <p>{message.text}</p>
         </Box>
 
-        <h5 >{format(message.createdAt)}</h5>
+        <h5>{format(message.createdAt)}</h5>
       </Box>
     </Box>
   );

@@ -64,10 +64,12 @@ function Chat({ user, darkTheme, cookie }) {
         setUsersOnlines(newListUsersOnlines);
       });
       //--------------------------------------------------add user new
+
+      getData();
       if (user) {
-        getData();
-        socket.current.emit("addUser", user.id);
+        socket.current.emit("addUser", cookie);
       }
+
       return () => {
         //------------------------------------------------disconnect current user
         socket.current.emit("disconnectUser", user.id);
@@ -251,6 +253,7 @@ function Chat({ user, darkTheme, cookie }) {
                     contacts={con}
                     contactsOnline={UsersOnlines}
                     darkTheme={darkTheme}
+                    contactCurrent={chat.currentCont}
                   />{" "}
                 </Box>
                 <IconButton

@@ -1,14 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { grey } from "@mui/material/colors";
-// Descomentar cuando se va a usar
-// import {
-//   brown,
-//   amber,
-//   lime,
-//   deepOrange,
-//   green,
-//   red,
-// } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
+
 export default function useStylesMessage(darkTheme, message, user) {
   //darkTheme prop global
 
@@ -23,27 +15,31 @@ export default function useStylesMessage(darkTheme, message, user) {
       justifyContent: message.userId === user.id ? "flex-end" : "flex-start",
       alignItems: "center",
       marginTop: "5%",
+      marginLeft: "19%",
+      marginRight: "19%",
       minHeight: "10%",
       minWidth: "3%",
       margin: "3.5%",
+      transform: "scale(1.5,1.4)",
     },
 
     boxMsnSend: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
-      background: "#ff8f77",
-      borderRadius: "0.3em",
+      borderRadius: "0.5em",
       minWidth: "9%",
       maxWidth: "50%",
       height: "100%",
       textAlign: "right",
-      boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
+      background: `${darkTheme ? grey[800] : blueGrey[100]}`,
+      boxShadow: `0.2em 0.2em 0.1em  ${darkTheme ? grey[800] : grey[600]}`,
       "& h5": {
         margin: "0%",
         padding: "0%",
-        marginRight: "2%",
-        color: `${darkTheme ? "white" : "white"}`,
+        marginRight: "3%",
+        fontSize: "0.5em",
+        color: `${darkTheme ? grey[100] : grey[600]}`,
       },
     },
     boxMsnReceive: {
@@ -51,17 +47,19 @@ export default function useStylesMessage(darkTheme, message, user) {
       flexDirection: "column",
       justifyContent: "space-around",
       maxWidth: "50%",
-      background: "#FFDA77",
-      borderRadius: "0.3em",
+      background: `${darkTheme ? "#FF0060" : "#FFDA77"}`,
+      borderRadius: "0.5em",
       minWidth: "9%",
       height: "100%",
-      boxShadow: `0.3em 0.3em 0.2em  ${darkTheme ? grey[800] : grey[600]}`,
+      boxShadow: `0.2em 0.2em 0.1em  ${darkTheme ? "#e91e63" : grey[600]}`,
+
       textAlign: "right",
       "& h5": {
         margin: "0%",
         padding: "0%",
-        marginRight: "2%",
-        color: `${darkTheme ? grey[800] : grey[600]}`,
+        marginRight: "3%",
+        fontSize: "0.5em",
+        color: `${darkTheme ? grey[100] : grey[600]}`,
       },
     },
     message: {
@@ -69,9 +67,11 @@ export default function useStylesMessage(darkTheme, message, user) {
       textAlign: "justify",
       textJustify: "inter-word",
       overflowWrap: "break-word",
-      "& h4": {
-        padding: "1% 1% 0% 5%",
+      "& p": {
+        padding: "1% 1% 0% 4%",
         margin: "2%",
+        color: `${darkTheme ? grey[100] : grey[100]}`,
+        fontSize: "0.7em",
       },
     },
   }));
