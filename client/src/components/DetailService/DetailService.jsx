@@ -145,7 +145,7 @@ export default function DetailService({ id, closeModal }) {
                 alt={id}
                 sx={{
                   objectFit: "cover",
-                  mb: "auto",
+
                   pb: 5,
                   borderRadius: "4px",
                 }}

@@ -37,6 +37,7 @@ export default function RightInfoBar({
       alignItems="center"
       sx={query ? { gridArea: "1" } : {}}
       textAlign="center"
+      height="min-content"
     >
       {/* ---- BOTONES FAV SHARE --------------------------- */}
       <Box
@@ -160,7 +161,7 @@ export default function RightInfoBar({
       {/* ---------- USER CARD -------------------- */}
       <Box
         gridColumn="span 12"
-        mb="auto"
+        // mb="auto"
         width="100%"
         sx={{ transform: "scale(0.8)" }}
       >
@@ -169,7 +170,7 @@ export default function RightInfoBar({
       {/* -------------------------------------- */}
 
       {/* ---------- Map -------------------- */}
-      <Box>
+      <Box mb="auto">
         <MapDetail
           lat={city.name === "Rosario" ? city.lat + 0.15 : city.lat}
           lon={city.lon}
