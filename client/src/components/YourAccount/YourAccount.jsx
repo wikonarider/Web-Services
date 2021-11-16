@@ -33,7 +33,7 @@ export default function YourAccount({
         dispatch(await getUserFavs());
       })();
     }
-  }, [dispatch, userProfile]);
+  }, [dispatch, userProfile, userData]);
 
   //BOTONES --> YOUR ORDERS - YOUR FAVS - YOUR SERVICES
   const [viewServices, setViewservices] = useState(false);
@@ -146,7 +146,12 @@ export default function YourAccount({
         {/* -------------------SERVICES-------------------------- */}
         {viewServices &&
           (userData.servicesOwn && userData.servicesOwn.length > 0 ? (
-            <Grid container justifyContent="center" spacing={3}>
+            <Grid
+              container
+              justifyContent="center"
+              spacing={3}
+              sx={{ marginBottom: "5%" }}
+            >
               {userData.servicesOwn.map((s) => (
                 <Grid item key={s.id}>
                   <CardService service={s} />

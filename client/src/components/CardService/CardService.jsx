@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteFavs, addFavs } from '../../utils/favs';
-import { getUserInfo, addCart } from '../../redux/actions/index';
-import { addServiceOrder } from '../../utils/orders';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFavs, addFavs } from "../../utils/favs";
+import { getUserInfo, addCart, deleteService } from "../../redux/actions/index";
+import { addServiceOrder } from "../../utils/orders";
+import { useHistory } from "react-router";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import EditIcon from "@mui/icons-material/Edit";
+import Rating from "@mui/material/Rating";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import CardActionArea from '@mui/material/CardActionArea';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Rating from '@mui/material/Rating';
-
-import ShareServiceModal from './ShareServiceModal';
+import ShareServiceModal from "./ShareServiceModal";
 
 const IMG_TEMPLATE =
-  'https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png';
+  "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
 function CardService({ service, related }) {
+  const history = useHistory();
+
   const cart = useSelector((state) => state.cart);
   const favs = useSelector((state) => state.user.servicesFavs);
   const cookie = useSelector((state) => state.cookie);
@@ -113,8 +117,20 @@ function CardService({ service, related }) {
     setModal(true);
   }
 
-  const cardStyle = { width: 345, height: 420, textDecoration: 'none' };
-  const relatedCardStyle = { width: 172, height: 210, textDecoration: 'none' };
+  //--------HANDLE EDIT CLICK -------------------
+
+  const handleEditClick = () => {
+    history.push(`/editservice/${id}`);
+  };
+
+  //------ HANDLE DELETE CLICK ------------------
+
+  const handleDeleteClick = () =>{
+    dispatch(deleteService(service.id));
+  }
+
+  const cardStyle = { width: 345, height: 420, textDecoration: "none" };
+  const relatedCardStyle = { width: 172, height: 210, textDecoration: "none" };
 
   return (
     <div>
@@ -124,33 +140,33 @@ function CardService({ service, related }) {
             title={related ? fixedTitleRelated : fixedTitle}
             sx={
               related
-                ? { pb: '0', height: '32px', marginBottom: '18px' }
-                : { pb: '0', height: '64px' }
+                ? { pb: "0", height: "32px", marginBottom: "18px" }
+                : { pb: "0", height: "64px" }
             }
-            titleTypographyProps={related && { variant: 'body' }}
+            titleTypographyProps={related && { variant: "body" }}
           />
 
           {!related && (
             <Rating
-              name='read-only'
+              name="read-only"
               value={Number(rating)}
               precision={0.5}
               readOnly
-              sx={{ p: '8px' }}
+              sx={{ p: "8px" }}
             />
           )}
 
           <CardMedia
-            component='img'
-            height={related ? '97' : '194'}
+            component="img"
+            height={related ? "97" : "194"}
             image={img ? img : IMG_TEMPLATE}
             alt={title}
-            sx={{ objectFit: 'cover' }}
+            sx={{ objectFit: "cover" }}
           />
           <Typography
-            variant={related ? 'subtitle1' : 'h5'}
-            component='div'
-            sx={{ p: '5px' }}
+            variant={related ? "subtitle1" : "h5"}
+            component="div"
+            sx={{ p: "5px" }}
           >
             {`$${price ? price : 0}`}
           </Typography>
@@ -160,21 +176,39 @@ function CardService({ service, related }) {
           <CardActions disableSpacing>
             <IconButton
               onClick={handleFavs}
-              aria-label='add to favorites'
-              sx={cookie && cookie !== userId ? {} : { display: 'none' }}
+              aria-label="add to favorites"
+              sx={cookie && cookie !== userId ? {} : { display: "none" }}
             >
-              <FavoriteIcon color={favState ? 'error' : ''} />
+              <FavoriteIcon color={favState ? "error" : ""} />
             </IconButton>
-            <IconButton aria-label='share' onClick={(e) => handleModal(e)}>
+            <IconButton aria-label="share" onClick={(e) => handleModal(e)}>
               <ShareIcon />
             </IconButton>
 
             <IconButton
-              onClick={handleClick}
-              color={!added ? 'primary' : 'secondary'}
-              aria-label='add to shopping cart'
+              onClick={handleEditClick}
               sx={
-                cart && cookie !== userId ? { ml: 'auto' } : { display: 'none' }
+                cart && cookie !== userId ? { display: "none" } : { ml: "auto" }
+              }
+            >
+              <EditIcon />
+            </IconButton>
+
+            <IconButton
+              onClick={handleDeleteClick}
+              sx={
+                cart && cookie !== userId ? { display: "none" } : { ml: "0%" }
+              }
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+
+            <IconButton
+              onClick={handleClick}
+              color={!added ? "primary" : "secondary"}
+              aria-label="add to shopping cart"
+              sx={
+                cart && cookie !== userId ? { ml: "auto" } : { display: "none" }
               }
             >
               <AddShoppingCartIcon />

@@ -53,7 +53,7 @@ export function getGroups() {
 export function putService(data) {
   return async () => {
     try {
-      return await axios.post(`/services`, data);
+      return await axios.put(`/services`, data);
     } catch (err) {
       return new Error(err);
     }
@@ -63,7 +63,7 @@ export function putService(data) {
 export function deleteService(id) {
   return async () => {
     try {
-      return await axios.post(`/services/${id}`);
+      return await axios.delete(`/services/${id}`);
     } catch (err) {
       return new Error(err);
     }
