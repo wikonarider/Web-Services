@@ -154,7 +154,7 @@ export default function YourAccount({
             >
               {userData.servicesOwn.map((s) => (
                 <Grid item key={s.id}>
-                  <CardService service={s} />
+                  <CardService service={s} route={"account"} />
                 </Grid>
               ))}
             </Grid>
