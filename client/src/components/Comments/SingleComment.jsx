@@ -86,7 +86,8 @@ export default function SingleComment({ qualification, cookie }) {
           image={userImg ? userImg : IMG_TEMPLATE}
           alt={`${name} ${lastname}`}
           sx={{
-            objectFit: 'contain',
+            // objectFit: 'contain',
+            minWidth: '41px',
             borderRadius: '20%',
             height: 'minContent',
             width: '100%',
@@ -143,8 +144,7 @@ export default function SingleComment({ qualification, cookie }) {
             value={edit.score || updated.score || score}
             readOnly={edit.id ? false : true}
             precision={1}
-            sx={{ width:'0,2em', ml: 'auto' }}
-           
+            sx={{ width: '0,2em', ml: 'auto' }}
             onChange={(e) => handleEdit(e, 'score')}
           />
         </Box>
@@ -186,7 +186,10 @@ export default function SingleComment({ qualification, cookie }) {
                   aria-label="share"
                   sx={{ mr: '0px auto 0px auto', p: '0px' }}
                 >
-                  <Typography variant="caption" sx={{ p: '0px' }}>
+                  <Typography
+                    variant="caption"
+                    sx={{ p: '0px', color: 'violet' }}
+                  >
                     {updated.comment?.length < 90 || comment.length < 90
                       ? ''
                       : wrap

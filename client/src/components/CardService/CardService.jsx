@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
 import Rating from "@mui/material/Rating";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import ShareServiceModal from "./ShareServiceModal";
 
@@ -125,9 +125,11 @@ function CardService({ service, related }) {
 
   //------ HANDLE DELETE CLICK ------------------
 
-  const handleDeleteClick = () =>{
-    dispatch(deleteService(service.id));
-  }
+  // const handleDeleteClick = () =>{
+  //   dispatch(deleteService(service.id));
+  // }
+
+  //--------------------------------
 
   const cardStyle = { width: 345, height: 420, textDecoration: "none" };
   const relatedCardStyle = { width: 172, height: 210, textDecoration: "none" };
@@ -194,15 +196,17 @@ function CardService({ service, related }) {
               <EditIcon />
             </IconButton>
 
-            <IconButton
+            {/* ------- DELETE ICON ------------------- */}
+            {/* <IconButton
               onClick={handleDeleteClick}
               sx={
                 cart && cookie !== userId ? { display: "none" } : { ml: "0%" }
               }
             >
               <DeleteForeverIcon />
-            </IconButton>
+            </IconButton> */}
 
+            {/*----------- EDIT ICON -----------------  */}
             <IconButton
               onClick={handleClick}
               color={!added ? "primary" : "secondary"}

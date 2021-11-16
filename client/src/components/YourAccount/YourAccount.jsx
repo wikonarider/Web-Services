@@ -33,7 +33,7 @@ export default function YourAccount({
         dispatch(await getUserFavs());
       })();
     }
-  }, [dispatch, userProfile, userData]);
+  }, [dispatch, userProfile]);
 
   //BOTONES --> YOUR ORDERS - YOUR FAVS - YOUR SERVICES
   const [viewServices, setViewservices] = useState(false);

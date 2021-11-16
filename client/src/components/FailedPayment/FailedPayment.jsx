@@ -11,13 +11,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "50%",
-  height: "50%",
   bgcolor: "background.paper",
   borderRadius: 2,
   boxShadow: 24,
   textAlign: "center",
   p: 6,
+  display: "block",
 };
 
 export default function FailedPayment() {
@@ -28,9 +27,8 @@ export default function FailedPayment() {
           Oh, it seems your payment has failed
         </Typography>
 
-        {/* <IconButton color='primary'> */}
-        <SmsFailedIcon sx={{ width: "50%", height: "80%" }} color="primary" />
-        {/* </IconButton> */}
+        <SmsFailedIcon sx={{ width: "50%", height: "80%"}} color="primary" />
+
 
         <Button
           type="submit"

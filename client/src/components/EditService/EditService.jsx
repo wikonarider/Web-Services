@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { putService } from "../../redux/actions";
+import { putService, getUserInfo } from "../../redux/actions";
 import { getServiceById } from "../../utils/servicesPage";
 import ModalService from "../CreateService/ModalService";
 import Box from "@mui/material/Box";
@@ -17,6 +17,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import Skeleton from "@mui/material/Skeleton";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import s from "./EditService.module.css";
 
 function validateServices(input) {
   for (let key in input) {
@@ -54,22 +55,18 @@ function EditService({ id }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // const [provincesPrev, setProvincesPrev] = useSelector(state => state.provinces);
-  // const [categoriesPrev, setCategoriesPrev] = useSelector(state => state.categories);
-  // console.log(provincesPrev);
-  // console.log(categoriesPrev);
-
-
   //---------- TRAIGO INFO DEL SERVICIO ---------------
 
   useEffect(() => {
     getServiceById(id)
-      .then((data) => setInputs({
-            title: data.service.title,
-            description: data.service.description,
-            price: data.service.price,
-            img: data.service.img,
-          }))
+      .then((data) =>
+        setInputs({
+          title: data.service.title,
+          description: data.service.description,
+          price: data.service.price,
+          img: data.service.img,
+        })
+      )
       .catch((e) => console.log(e));
   }, [id]);
 
@@ -186,17 +183,21 @@ function EditService({ id }) {
 
   const handleSubmit = () => {
     try {
-      dispatch(putService({ ...inputs, price: Number(inputs.price), serviceId: id }));
+      dispatch(
+        putService({ ...inputs, price: Number(inputs.price), serviceId: id })
+      );
       setModal(true);
     } catch (e) {
-      console.log(e.response.data);
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      {inputs.title.length <= 0 ? (
-        <div>Loading...</div>
+      {!inputs.title ? (
+        <Box sx={{ display: "flex", justifyContent: "center", marginTop:'20%' }}>
+          <div className={s.spinner}></div>
+        </Box>
       ) : (
         <Box
           sx={{

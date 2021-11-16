@@ -19,7 +19,7 @@ function MapDetail({ lat, lon }) {
         marginWidth="0"
         style={{
           width: "100%",
-          height: "250px",
+          height: "200px",
           border: "1px solid black",
         }}
         src={`https://www.openstreetmap.org/export/embed.html?bbox=
