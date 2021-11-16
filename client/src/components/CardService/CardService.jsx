@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavs, addFavs } from "../../utils/favs";
-import { getUserInfo, addCart, deleteService } from "../../redux/actions/index";
+import { getUserInfo, addCart } from "../../redux/actions/index";
 import { addServiceOrder } from "../../utils/orders";
 import { useHistory } from "react-router";
 import Card from "@mui/material/Card";
@@ -17,14 +17,13 @@ import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
 import Rating from "@mui/material/Rating";
-// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import ShareServiceModal from "./ShareServiceModal";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
-function CardService({ service, related }) {
+function CardService({ service, related, route }) {
   const history = useHistory();
 
   const cart = useSelector((state) => state.cart);
@@ -123,14 +122,6 @@ function CardService({ service, related }) {
     history.push(`/editservice/${id}`);
   };
 
-  //------ HANDLE DELETE CLICK ------------------
-
-  // const handleDeleteClick = () =>{
-  //   dispatch(deleteService(service.id));
-  // }
-
-  //--------------------------------
-
   const cardStyle = { width: 345, height: 420, textDecoration: "none" };
   const relatedCardStyle = { width: 172, height: 210, textDecoration: "none" };
 
@@ -187,26 +178,14 @@ function CardService({ service, related }) {
               <ShareIcon />
             </IconButton>
 
-            <IconButton
-              onClick={handleEditClick}
-              sx={
-                cart && cookie !== userId ? { display: "none" } : { ml: "auto" }
-              }
-            >
-              <EditIcon />
-            </IconButton>
-
-            {/* ------- DELETE ICON ------------------- */}
-            {/* <IconButton
-              onClick={handleDeleteClick}
-              sx={
-                cart && cookie !== userId ? { display: "none" } : { ml: "0%" }
-              }
-            >
-              <DeleteForeverIcon />
-            </IconButton> */}
-
             {/*----------- EDIT ICON -----------------  */}
+            {cookie && cookie === userId && route === "account" ? (
+              <IconButton onClick={handleEditClick} sx={{ ml: "auto" }}>
+                <EditIcon />
+              </IconButton>
+            ) : null}
+
+            {/* ------------------------------------- */}
             <IconButton
               onClick={handleClick}
               color={!added ? "primary" : "secondary"}
