@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import axios from 'axios';
-import CardService from '../CardService/CardService';
-import Box from '@mui/material/Box';
-import s from './UserProfile.module.css';
-import YourAccount from '../YourAccount/YourAccount';
-import Typography from '@mui/material/Typography';
+import React, { useEffect, useState } from "react";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import axios from "axios";
+import CardService from "../CardService/CardService";
+import Box from "@mui/material/Box";
+import s from "./UserProfile.module.css";
+import YourAccount from "../YourAccount/YourAccount";
+import Typography from "@mui/material/Typography";
 
 export default function UserProfile({ id, username }) {
   const [profileInfo, setProfileInfo] = useState({});
@@ -36,16 +36,17 @@ export default function UserProfile({ id, username }) {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
+          item
           xs={12}
         >
           <Grid
-            item
             gridColumn="span 12"
             // sx={{ marginTop: '6%', marginRight: 'auto', marginLeft: '10%' }}
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            item
             xs={12}
           >
             <YourAccount
@@ -54,7 +55,7 @@ export default function UserProfile({ id, username }) {
               profileServices={profileServices}
             />
           </Grid>
-          <Grid item gridColumn="span 12" sx={{ marginBottom: '5%' }}>
+          <Grid item gridColumn="span 12" sx={{ marginBottom: "5%" }}>
             <h2>Published Services</h2>
             {profileServices &&
               (profileServices.length > 0 ? (
