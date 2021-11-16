@@ -254,11 +254,11 @@ async function getServicesById(req, res, next) {
         },
         {
           model: Province,
-          attributes: ["name"],
+          attributes: ["name", "id"],
         },
         {
           model: City,
-          attributes: ["name", "lat", "lon"],
+          attributes: ["id", "name", "lat", "lon"],
         },
       ],
     });
