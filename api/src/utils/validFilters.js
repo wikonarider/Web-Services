@@ -12,6 +12,9 @@ function makeWhereFilter(startRange, endRange, title) {
       title: {
         [Op.iLike]: `%${title}%`,
       },
+      avaliable: {
+        [Op.not]: false,
+      },
     };
     // no range, title yes
   } else if ((!startRange || !endRange) && title) {
@@ -19,12 +22,24 @@ function makeWhereFilter(startRange, endRange, title) {
       title: {
         [Op.iLike]: `%${title}%`,
       },
+      avaliable: {
+        [Op.not]: false,
+      },
     };
     // no title, range yes
   } else if (startRange && endRange && !title) {
     where = {
       price: {
         [Op.between]: [startRange, endRange],
+      },
+      avaliable: {
+        [Op.not]: false,
+      },
+    };
+  } else {
+    where = {
+      avaliable: {
+        [Op.not]: false,
       },
     };
   }
