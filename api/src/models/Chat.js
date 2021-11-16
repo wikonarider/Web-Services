@@ -1,4 +1,4 @@
-const { DataTypes, UUID, UUIDV1 } = require("sequelize");
+const { DataTypes, UUID, UUIDV1, TEXT } = require("sequelize");
 const { STRING } = DataTypes;
 module.exports = (sequelize) => {
   sequelize.define(
@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       },
 
       text: {
-        type: STRING,
+        type: TEXT,
         alowNull: false,
       }
     },
