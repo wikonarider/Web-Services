@@ -8,7 +8,6 @@ import ChatIcon from "@mui/icons-material/Chat";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { newConvertation } from "../../redux/actions";
 
 const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
@@ -20,20 +19,12 @@ export default function CardUser({ user, serviceId }) {
 
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;
-  let dispatch = useDispatch();
-  let history = useHistory();
   const fixedTitle = fullname
     ? fullname.length > 40
       ? `${fullname.substring(0, 40)}...`
       : fullname
     : null;
 
-  const newConv = () => {
-    if (userAccount.id !== id) {
-      dispatch(newConvertation(id));
-      history.push(`/chat`);
-    }
-  };
 
   let buyer =
     userAccount.servicesBought &&
@@ -125,7 +116,6 @@ export default function CardUser({ user, serviceId }) {
 
             {cookie && buyer ? (
               <CardActionArea
-                onClick={() => newConv()}
                 sx={{
                   width: "80px",
                   mt: "auto",

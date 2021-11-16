@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { green, grey, red } from "@mui/material/colors";
+import { green, grey, red ,blueGrey} from "@mui/material/colors";
 
 // Descomentar cuando se va a usar
 // import { brown, amber, lime, deepOrange } from "@mui/material/colors";
@@ -12,8 +12,10 @@ export default function useStylesConvertations(
   //darkTheme boolean global state
   return makeStyles((theme) => ({
     avatar: {
-      width: 76,
-      height: 76,
+      width: "76px",
+      height: "76px",
+      minHeight:"76px",
+      minWidth:"76px",
       border: `4.0px solid ${!statusUser ? red[200] : green[800]}`,
     },
     boxConvInline: {
@@ -27,36 +29,36 @@ export default function useStylesConvertations(
       background: `${
         darkTheme
           ? contactSelected
-            ? "#b20043"
-            : "#FF0060"
+            ? "#c51162"
+            : "#890b44"
           : contactSelected
-          ? "#ff9800"
+          ? "#ff7043"
           : "#FFDA77"
       }`,
-      boxShadow: `0.2em 0.2em 0.18em ${
+      boxShadow: `0.1em 0.1em 0.28em ${
         darkTheme
           ? contactSelected
-            ? "#b20043"
-            : "#e91e63"
+            ? "#d04081"
+            : "#5f0937"
           : contactSelected
-          ? "#ff9800"
+          ? "#b24e2e"
           : grey[600]
       }`,
 
       width: "80%",
       borderRadius: "0.3em",
       "& div": {
-        color: `${darkTheme ? grey[100] : grey[100]}`,
+        color: `${darkTheme ? grey[100] : blueGrey[700]}`,
         textOverflow: "ellipsis",
       },
     },
     nameUser: {
       margin: "7%",
-      fontSize: "1.3em",
+      fontSize: "1.2em",
       overflow: "hidden",
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
-      width: "42.2%",
+      minWidth: "50px",
     },
   }));
 }

@@ -11,7 +11,11 @@ export default function Conversations({
   //darkTheme boolean global state
   var statusUser = contactsOnline.some((e) => e.user === contacts.id);
   var contactSelected = contacts.id === contactCurrent.id;
-  var classes = useStylesConvertations(darkTheme, statusUser,contactSelected)();
+  var classes = useStylesConvertations(
+    darkTheme,
+    statusUser,
+    contactSelected
+  )();
 
   if (contacts) {
     return (

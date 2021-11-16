@@ -293,30 +293,25 @@ function Chat({ user, darkTheme, cookie }) {
           )}
 
           {chat.currentCont ? (
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <Box
-                sx={{
-                  display: "flex",
-                  maxWidth: "100%",
-                  flex: "row",
-                }}
+            <form
+              className={classes.inputForm}
+              onSubmit={(e) => handleSubmit(e)}
+            >
+              <TextField
+                fullWidth
+                size="small"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className={classes.inputSend}
+              />
+              <IconButton
+                variant="contained"
+                type="submit"
+                size="small"
+                className={classes.btn}
               >
-                <TextField
-                  fullWidth
-                  size="small"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  className={classes.inputSend}
-                />
-                <IconButton
-                  variant="contained"
-                  type="submit"
-                  size="small"
-                  className={classes.btn}
-                >
-                  <SendIcon />
-                </IconButton>
-              </Box>
+                <SendIcon />
+              </IconButton>
             </form>
           ) : (
             <></>
@@ -331,21 +326,13 @@ function Chat({ user, darkTheme, cookie }) {
           >
             {chat.contactsBoungth.length ? (
               chat.contactsBoungth.map((contac) => (
-                <Box
-                  name="contactBougth"
-                  className={classes.box_contact_bought}
+                <Contactsbougth
                   key={contac.id}
-                  onClick={() => {
-                    newConvertationbougth(contac);
-                  }}
-                >
-                  <Contactsbougth
-                    key={contac.id}
-                    contacts={contac}
-                    contactsOnline={UsersOnlines}
-                    darkTheme={darkTheme}
-                  />
-                </Box>
+                  contacts={contac}
+                  contactsOnline={UsersOnlines}
+                  darkTheme={darkTheme}
+                  newConvBou={newConvertationbougth}
+                />
               ))
             ) : (
               <></>

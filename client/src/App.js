@@ -127,7 +127,7 @@ function App() {
     <ThemeProvider theme={darkGlobal ? darkTheme : lightTheme}>
       <CssBaseline />
 
-      <div className="App">
+      <div className="App" >
         <Route exact path="/" component={Landing} />
         <Route
           exact
@@ -149,7 +149,7 @@ function App() {
           exact
           path="/chat"
           render={({ match }) => (
-            <div>
+            <div className="App">
               <Nav route={""} />
               <NavSpace />
               <Chat id={match.params.id} />

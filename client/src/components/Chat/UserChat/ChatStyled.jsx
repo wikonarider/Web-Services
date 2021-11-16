@@ -1,23 +1,35 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {  grey,blueGrey } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
 
-
-export default function useStylesChat(darkTheme,selectCurrentChat) {
+export default function useStylesChat(darkTheme, selectCurrentChat) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
     //darkTheme prop global
     //SEND BTN
+    inputForm: {
+      display: "flex",
+      width: "100%",
+      height: "5%",
+      alignItems: "center",
+      margin: "1%",
+    },
     inputSend: {
-      background: darkTheme ? grey[900] : "whiteSmoke",
+      display: "flex",
+      background: darkTheme ? grey[900] : blueGrey[400],
       borderRadius: "0.5em",
       height: "100%",
+      minHeight: "100%",
       marginLeft: "2%",
+
       "& input": {
-        color: darkTheme ? grey[400] : blueGrey[400],
-        marginLeft: "0.9%",
+        color: darkTheme ? grey[400] : blueGrey[100],
+        fontFamily: "roboto",
+        margin: "1% 0 0 2%",
+        padding: "0",
+        height: "100%",
       },
       "& fieldSet": {
-        borderRadius: "0.5em",
+        border: "none",
         height: "100%",
       },
     },
@@ -32,13 +44,14 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
     },
     btn: {
       textTransfrom: "none",
+      height: "40%",
       marginLeft: "1%",
-      marginRight: "1%",
+      marginRight: "2%",
     },
     //------------------------------------------------------------------button X
     btn_x: {
       position: "absolute",
-      left: "87%",
+      left: "82%",
       bottom: "-1%",
       cursor: "pointer",
     },
@@ -53,11 +66,9 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
     box_messanger_father: {
       display: "flex",
       flexDirection: "row",
-      flexWrap: "wrap",
-      height: "100vh",
+      height: "calc(100vh - 70px)",
       width: "100vw",
       overflowX: "hidden",
-      overflowY: "hidden",
     },
     //---------------------------------------------------------------------box contacts*/
     box_contacts_a: {
@@ -65,17 +76,18 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       display: "flex",
       height: "100%",
       overflowY: "auto",
+      marginRight: "0.2%",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : blueGrey[100],
+      background: darkTheme ? grey[900] : blueGrey[400],
       padding: "0.5%",
     },
     containerConvertation: {
       position: "relative",
       display: "flex",
       flexDirection: "row",
-      marginTop: "9%",
       width: "100%",
-      height: "13%",
+      marginBottom: "3%",
+      height: "11%",
       borderRadius: "0.3em",
       transition: "0.4s",
       "&:hover": {
@@ -94,44 +106,66 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
 
     /*---------------------------------------------------------------box conversations*/
     container_chatting: {
-      flex: "5.5",
+      flex: 5.5,
       display: "flex",
+      width: "100%",
+      marginRight: "0.2%",
       flexDirection: "column",
-      alignContent: "stretch",
       background: darkTheme ? grey[1000] : grey[100],
       height: "100%",
+
+      "& div::-webkit-scrollbar ": {
+        WebkitAppearance: "none",
+      },
+      "& div::-webkit-scrollbar:vertical": {
+        width: "8px",
+      },
+
+      "& div::-webkit-scrollbar-thumb": {
+        backgroundColor: darkTheme ? grey[900] : blueGrey[400],
+        borderRadius: "2em",
+      },
     },
 
     box_conversations_b: {
       overflowX: "hidden",
       overflowY: "scroll",
-      height: "100vh",
-      maxHeight: "100vh",
+      marginTop: "15px",
+      height: "100%",
+      width: "100%",
+      maxHeight: "100%",
     },
     /*----------------------------------------------------------------box contacts online-offline*/
     box_contactsStates_c: {
       height: "100%",
       flex: 1.5,
       display: "flex",
+      marginRight: "0.2%",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : blueGrey[100],
+      background: darkTheme ? grey[900] : blueGrey[400],
       padding: "0.5%",
       maxHeight: "100%",
+      "& div::-webkit-scrollbar ": {
+        WebkitAppearance: "none",
+      },
+      "& div::-webkit-scrollbar:vertical": {
+        width: "10px",
+      },
+
+      "& div::-webkit-scrollbar-thumb": {
+        backgroundColor: grey[800],
+        borderRadius: "2em",
+      },
     },
 
     /*box contactsOnline wrapper*/
     box_contactsOnline_wrapper: {
       display: "flex",
+      overflowY: "auto",
       flexWrap: "wrap",
       alignContent: "flex-start",
-
       maxHeight: "100%",
-      overflowY: "hidde",
-    },
-
-    box_contact_bought: {
-      height: "55%",
-      width: "50%",
+      height: "100%",
     },
   }));
 }
