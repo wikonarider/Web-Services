@@ -113,6 +113,8 @@ export default function CheckoutDetail() {
               className={classes.querie}
             >
               {loading && <div className={s.spinner}></div>}
+            
+            {!loading?
               <Grid
                 style={{
                   display: 'flex',
@@ -180,8 +182,10 @@ export default function CheckoutDetail() {
                       BUY WITH PAYPAL
                     </Button>
                   )}
+              
                 </Grid>
               </Grid>
+              : null }
             </Grid>
           </Grid>
         </Grid>
