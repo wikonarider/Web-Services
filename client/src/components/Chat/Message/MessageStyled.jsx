@@ -14,13 +14,11 @@ export default function useStylesMessage(darkTheme, message, user) {
       display: "flex",
       justifyContent: message.userId === user.id ? "flex-end" : "flex-start",
       alignItems: "center",
-      marginTop: "5%",
-      marginLeft: "19%",
-      marginRight: "19%",
-      minHeight: "10%",
-      minWidth: "3%",
-      margin: "3.5%",
-      transform: "scale(1.5,1.4)",
+      marginTop: "3%",
+      minHeight: "15%",
+      minWidth: "13%",
+      width:"100%",
+   
     },
 
     boxMsnSend: {

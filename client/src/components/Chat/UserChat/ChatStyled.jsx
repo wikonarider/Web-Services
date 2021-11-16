@@ -1,13 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {  grey,blueGrey } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
 
-
-export default function useStylesChat(darkTheme,selectCurrentChat) {
+export default function useStylesChat(darkTheme, selectCurrentChat) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
     //darkTheme prop global
     //SEND BTN
+    inputForm: { display: "flex", width: "100%" },
     inputSend: {
+      display: "flex",
       background: darkTheme ? grey[900] : "whiteSmoke",
       borderRadius: "0.5em",
       height: "100%",
@@ -54,10 +55,9 @@ export default function useStylesChat(darkTheme,selectCurrentChat) {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      height: "100vh",
+      height: "calc(100vh - 70px)",
       width: "100vw",
       overflowX: "hidden",
-      overflowY: "hidden",
     },
     //---------------------------------------------------------------------box contacts*/
     box_contacts_a: {

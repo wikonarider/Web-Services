@@ -293,12 +293,13 @@ function Chat({ user, darkTheme, cookie }) {
           )}
 
           {chat.currentCont ? (
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form className={classes.inputForm} onSubmit={(e) => handleSubmit(e)}>
               <Box
                 sx={{
                   display: "flex",
                   maxWidth: "100%",
                   flex: "row",
+                  width:"100%"
                 }}
               >
                 <TextField
