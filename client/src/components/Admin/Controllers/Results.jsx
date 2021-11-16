@@ -16,6 +16,9 @@ import ClearIcon from "@mui/icons-material/Clear";
 import SaveIcon from "@mui/icons-material/Save";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import Dialog from "@mui/material/Dialog";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 
 // const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 // const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -56,12 +59,13 @@ export default function Results({
   const handleEdit = (event, option) => {
     if (edit[option.id] && edit[option.id].editing) {
       setEdit((edit) => {
-        return { ...edit, [option.id]: { editing: false } };
+        return { ...edit, edit: false, [option.id]: { editing: false } };
       });
     } else {
       setEdit((edit) => {
         return {
           ...edit,
+          edit: true,
           [option.id]: { ...edit[option.id], editing: true, ban: option.ban },
         };
       });
@@ -116,6 +120,48 @@ export default function Results({
     },
   };
 
+  const inputComponents = {
+    textInput: (defaultValue, userId, description) => {
+      return (
+        <TextInput
+          defaultValue={defaultValue}
+          setEdit={setEdit}
+          edit={edit}
+          optionId={userId}
+          optionProp={description}
+        />
+      );
+    },
+    iconButton: (type, handleOnClick, userInfo) => {
+      let icons = {
+        clear: <ClearIcon />,
+        save: <SaveIcon />,
+        edit: <EditIcon />,
+      };
+      return (
+        <IconButton onClick={(e) => handleOnClick(e, userInfo)}>
+          {icons[type]}
+        </IconButton>
+      );
+    },
+    select: (userInfo, options) => {
+      return (
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          defaultValue={edit[userInfo.id].ban}
+          value={edit[userInfo.id].ban}
+          sx={{ width: "100px", color: "black" }}
+          onChange={(e) => handleStatusChange(e, userInfo.id)}
+        >
+          {options.map((option) => (
+            <MenuItem value={option}>{option}</MenuItem>
+          ))}
+        </Select>
+      );
+    },
+  };
+
   return (
     <>
       <List sx={{ display: open ? "block" : "none" }}>
@@ -128,165 +174,131 @@ export default function Results({
             const userName = parse(`${o.username}`, match(o.username, search));
 
             return (
-              <Box
-                display="grid"
-                gridTemplateColumns="auto repeat(13, 1fr) auto"
-                gap={0}
-                p={0}
-                key={`option-${o.id}`}
-              >
-                <Box gridColumn="span 1" display="flex">
-                  <Checkbox
-                    checked={checked[o.id] || false}
-                    onChange={(event) => handleCheck(event, o)}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                  <Avatar alt={`${o.name}-avatar`} src={o.userImg} />
-                </Box>
-
-                <Box gridColumn="span 4" display="flex">
-                  {edit[o.id] && edit[o.id].editing ? (
-                    <>
-                      <TextInput
-                        defaultValue={o.name}
-                        setEdit={setEdit}
-                        edit={edit}
-                        optionId={o.id}
-                        optionProp="name"
-                      />{" "}
-                      <TextInput
-                        defaultValue={o.lastname}
-                        setEdit={setEdit}
-                        edit={edit}
-                        optionId={o.id}
-                        optionProp="lastname"
-                      />
-                    </>
-                  ) : (
-                    <ListItemText sx={styleObj.listItem.text}>
-                      {fullName.map((part, index) => (
-                        <span
-                          style={{
-                            fontWeight: part.highlight ? 700 : 400,
-                            //   color: part.highlight ? "green" : "black",
-                          }}
-                        >
-                          {part.text}
-                        </span>
-                      ))}
-                    </ListItemText>
-                  )}
-                </Box>
-
-                <Box gridColumn="span 2" display="flex">
-                  {edit[o.id] && edit[o.id].editing ? (
-                    <TextInput
-                      defaultValue={o.username}
-                      setEdit={setEdit}
-                      edit={edit}
-                      optionId={o.id}
-                      optionProp="username"
+              <>
+                <Box
+                  display="grid"
+                  gridTemplateColumns="auto repeat(13, 1fr) auto"
+                  gap={0}
+                  p={0}
+                  key={`option-${o.id}`}
+                >
+                  <Box gridColumn="span 1" display="flex">
+                    <Checkbox
+                      checked={checked[o.id] || false}
+                      onChange={(event) => handleCheck(event, o)}
+                      inputProps={{ "aria-label": "controlled" }}
                     />
-                  ) : (
-                    <ListItemText sx={styleObj.listItem.text}>
-                      {userName.map((part, index) => (
-                        <span
-                          style={{
-                            fontWeight: part.highlight ? 700 : 400,
-                            //   color: part.highlight ? "green" : "black",
-                          }}
-                        >
-                          {part.text}
-                        </span>
-                      ))}
-                    </ListItemText>
-                  )}
-                </Box>
+                    <Avatar alt={`${o.name}-avatar`} src={o.userImg} />
+                  </Box>
 
-                <Box gridColumn="span 4" display="flex">
-                  {edit[o.id] && edit[o.id].editing ? (
-                    <TextInput
-                      defaultValue={o.email}
-                      setEdit={setEdit}
-                      edit={edit}
-                      optionId={o.id}
-                      optionProp="email"
-                    />
-                  ) : (
-                    <ListItemText sx={styleObj.listItem.text}>
-                      {o.email}
-                    </ListItemText>
-                  )}
-                </Box>
+                  <Box gridColumn="span 4" display="flex">
+                    {edit[o.id] && edit[o.id].editing ? (
+                      <>
+                        {inputComponents.textInput(o.name, o.id, "name")}{" "}
+                        {inputComponents.textInput(
+                          o.lastname,
+                          o.id,
+                          "lastname"
+                        )}
+                      </>
+                    ) : (
+                      <ListItemText sx={styleObj.listItem.text}>
+                        {fullName.map((part, index) => (
+                          <span
+                            style={{
+                              fontWeight: part.highlight ? 700 : 400,
+                            }}
+                          >
+                            {part.text}
+                          </span>
+                        ))}
+                      </ListItemText>
+                    )}
+                  </Box>
 
-                <Box gridColumn="span 1" display="flex">
-                  {edit[o.id] && edit[o.id].editing ? (
-                    <>
-                      {/* <TextInput
-                        defaultValue={o.ban ? "Banned" : "Active"}
-                        setEdit={setEdit}
-                        edit={edit}
-                        optionId={o.id}
-                        optionProp="ban"
-                      /> */}
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        defaultValue={edit[o.id].ban}
-                        value={edit[o.id].ban}
-                        sx={{ width: "100px", color: "black" }}
-                        onChange={(e) => handleStatusChange(e, o.id)}
+                  <Box gridColumn="span 2" display="flex">
+                    {edit[o.id] && edit[o.id].editing ? (
+                      inputComponents.textInput(o.username, o.id, "username")
+                    ) : (
+                      <ListItemText sx={styleObj.listItem.text}>
+                        {userName.map((part, index) => (
+                          <span
+                            style={{
+                              fontWeight: part.highlight ? 700 : 400,
+                            }}
+                          >
+                            {part.text}
+                          </span>
+                        ))}
+                      </ListItemText>
+                    )}
+                  </Box>
+
+                  <Box gridColumn="span 4" display="flex">
+                    {edit[o.id] && edit[o.id].editing ? (
+                      inputComponents.textInput(o.email, o.id, "email")
+                    ) : (
+                      <ListItemText sx={styleObj.listItem.text}>
+                        {o.email}
+                      </ListItemText>
+                    )}
+                  </Box>
+
+                  <Box gridColumn="span 1" display="flex">
+                    {edit[o.id] && edit[o.id].editing ? (
+                      inputComponents.select(o, ["Active", "Banned"])
+                    ) : (
+                      <ListItemText
+                        sx={{
+                          ...styleObj.listItem.text,
+                          color: o.ban ? "red" : "green",
+                        }}
                       >
-                        <MenuItem value={"Active"}>Active</MenuItem>
-                        <MenuItem value={"Banned"}>Banned</MenuItem>
-                      </Select>
-                    </>
-                  ) : (
-                    <ListItemText
-                      sx={{
-                        ...styleObj.listItem.text,
-                        color: o.ban ? "red" : "green",
-                      }}
-                    >
-                      {o.ban ? "Banned" : "Active"}
+                        {o.ban ? "Banned" : "Active"}
+                      </ListItemText>
+                    )}
+                  </Box>
+                  <Box gridColumn="span 1" display="flex">
+                    <ListItemText sx={styleObj.listItem.text}>
+                      {o.admin ? "Admin" : "User"}
                     </ListItemText>
-                  )}
-                </Box>
-                <Box gridColumn="span 1" display="flex">
-                  <ListItemText sx={styleObj.listItem.text}>
-                    {o.admin ? "Admin" : "User"}
-                  </ListItemText>
+                  </Box>
+
+                  <Box gridColumn="span 1" display="flex">
+                    {edit[o.id] &&
+                      edit[o.id].editing &&
+                      inputComponents.textInput("password", o.id, "password")}
+                  </Box>
+
+                  <Box gridColumn="span 1" display="flex">
+                    {edit[o.id] && edit[o.id].editing ? (
+                      <>
+                        {inputComponents.iconButton("clear", handleEdit, o)}
+                        {inputComponents.iconButton("save", handleSave, o)}
+                      </>
+                    ) : (
+                      inputComponents.iconButton("edit", handleEdit, o)
+                    )}
+                  </Box>
                 </Box>
 
-                <Box gridColumn="span 1" display="flex">
-                  {edit[o.id] && edit[o.id].editing && (
-                    <TextInput
-                      defaultValue={"password"}
-                      setEdit={setEdit}
-                      edit={edit}
-                      optionId={o.id}
-                      optionProp="password"
-                    />
-                  )}
-                </Box>
-
-                <Box gridColumn="span 1" display="flex">
-                  {edit[o.id] && edit[o.id].editing ? (
-                    <>
-                      <IconButton onClick={(e) => handleEdit(e, o)}>
-                        <ClearIcon />
-                      </IconButton>
-                      <IconButton>
-                        <SaveIcon onClick={(e) => handleSave(e, o)} />
-                      </IconButton>
-                    </>
-                  ) : (
-                    <IconButton onClick={(e) => handleEdit(e, o)}>
-                      <EditIcon />
-                    </IconButton>
-                  )}
-                </Box>
-              </Box>
+                {edit[o.id] && edit[o.id].editing && (
+                  <Dialog fullScreen open={edit.edit}>
+                    <AppBar sx={{ position: "relative" }}>
+                      <Toolbar>
+                        {inputComponents.iconButton("clear", handleEdit, o)}
+                        {inputComponents.iconButton("save", handleSave, o)}
+                      </Toolbar>
+                    </AppBar>
+                    {inputComponents.textInput(o.name, o.id, "name")}{" "}
+                    {inputComponents.textInput(o.lastname, o.id, "lastname")}
+                    {inputComponents.textInput(o.username, o.id, "username")}
+                    {inputComponents.textInput(o.email, o.id, "email")}
+                    {inputComponents.select(o, ["Active", "Banned"])}
+                    {inputComponents.textInput("password", o.id, "password")}
+                  </Dialog>
+                )}
+              </>
             );
           })}
       </List>
