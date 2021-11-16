@@ -379,7 +379,7 @@ function CreateService() {
           justifyContent="center"
           alignItems="center"
         >
-          {inputs.img ? (
+          {inputs.img && !skeleton ? (
             <img
               style={{ maxWidth: "345px", width: "100%" }}
               src={inputs.img}
