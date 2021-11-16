@@ -141,7 +141,7 @@ export default function DetailService({ id, closeModal }) {
               <CardMedia
                 component="img"
                 image={img ? img : IMG_TEMPLATE}
-                height="400"
+                height="800"
                 alt={id}
                 sx={{
                   objectFit: "cover",
