@@ -11,7 +11,6 @@ import Message from "../Message/Message";
 import Contactsbougth from "../ContactsBougth/ContactsBougth.jsx";
 import useStylesChat from "./ChatStyled";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {
   getContacts,
   getContactsBougth,
@@ -241,30 +240,16 @@ function Chat({ user, darkTheme, cookie }) {
           {chat.contactsConv.length ? (
             chat.contactsConv.map((con) => (
               <Box className={classes.containerConvertation} key={con.id}>
-                <Box
-                  className={classes.box_avatar_And_X}
-                  onClick={() => {
-                    chatContact(con.id);
-                  }}
-                >
-                  {" "}
                   <Conversations
                     key={con.id}
                     contacts={con}
                     contactsOnline={UsersOnlines}
                     darkTheme={darkTheme}
                     contactCurrent={chat.currentCont}
+                    deleteConv={deleteConvert}
+                    chatCont={chatContact}
                   />{" "}
-                </Box>
-                <IconButton
-                  onClick={() => {
-                    deleteConvert(con);
-                  }}
-                  className={classes.btn_x}
-                  size="small"
-                >
-                  <DeleteIcon fontSize="small" />
-                </IconButton>
+              
               </Box>
             ))
           ) : (
