@@ -137,6 +137,7 @@ async function getServicesByUserId(req, res, next) {
           "img",
           "price",
           "userId",
+          "avaliable",
           [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
         ],
         where: {
@@ -187,6 +188,7 @@ async function getServicesByIds(req, res, next) {
         "img",
         "price",
         "userId",
+        "avaliable",
         [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
 

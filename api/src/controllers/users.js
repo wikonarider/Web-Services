@@ -101,7 +101,7 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesFavs",
-          attributes: ["id", "title", "img", "price", "userId"],
+          attributes: ["id", "title", "img", "price", "userId", "avaliable"],
           through: {
             attributes: [],
           },
