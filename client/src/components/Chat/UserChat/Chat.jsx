@@ -34,7 +34,7 @@ function Chat({ user, darkTheme, cookie }) {
     searchContact: [],
     contactsBoungth: [],
     convertations: [],
-  }); //6
+  }); //5
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   const classes = useStylesChat(darkTheme)();
@@ -98,11 +98,8 @@ function Chat({ user, darkTheme, cookie }) {
   }, [chat]);
 
   //-----------------------------------------------------------------------------new msg receive
-  // Linea comentada. Useffect no acepta un callback async, descomentar la linea
-  // y leer la sugerencia, puede provocar cambios inesperados si es algo async
-  // y se trata como sync
   // eslint-disable-next-line
-  useEffect(async () => {
+  useEffect(() => {
     if (textReceive && chat.currentCont) {
       chat.currentCont.id === textReceive.userId &&
         setChat({
