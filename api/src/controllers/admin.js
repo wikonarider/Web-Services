@@ -13,13 +13,6 @@ const {
 } = require("../db");
 const { Op } = require("sequelize");
 
-const dicc = {
-  category: {
-    attributes: ["categoryId", [conn.col("category.name"), "categoryName"]],
-    where: { name: "" },
-  },
-};
-
 async function admin(req, res, next) {
   try {
     let totalServices = await Service.findAll({
@@ -241,4 +234,5 @@ async function admin(req, res, next) {
 
 module.exports = {
   admin,
+  services,
 };
