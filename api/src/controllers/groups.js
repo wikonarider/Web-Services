@@ -7,7 +7,7 @@ async function getGroups(req, res, next) {
         model: Category,
         attributes: ["name", "id"],
       },
-      order: [[Category, "name"]],
+      order: ["id", [Category, "name"]],
     });
 
     res.status(200).send(groupsInDb);
