@@ -76,62 +76,64 @@ export default function SideBarFilterLocaltion({ text, index }) {
       <ListItem button key={index}>
         <ListItemText primary={text} />
       </ListItem>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "20px",
-          width: "100%",
-          padding: "10px 10px 0 10px",
-        }}
-      >
-        {/* ---------------------Province----------------------- */}
-        <FormControl fullWidth>
-          <InputLabel>Province</InputLabel>
-          <Select
-            value={inputs.province}
-            label="Province"
-            name="province"
-            onChange={(e) => handleInputs(e)}
-          >
-            {provinces &&
-              provinces.map((el) => (
-                <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
-                  {`${el.name} (${el.count})`}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        {/* ---------------------------------------------------- */}
-
-        {/* ---------------------Cities----------------------- */}
-        {provinceId !== null ? (
+      {provinces.length > 0 && cities.length > 0 ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "20px",
+            width: "100%",
+            padding: "10px 10px 0 10px",
+          }}
+        >
+          {/* ---------------------Province----------------------- */}
           <FormControl fullWidth>
-            <InputLabel>Cities</InputLabel>
+            <InputLabel>Province</InputLabel>
             <Select
-              value={inputs.city}
-              label="Cities"
-              name="city"
+              value={inputs.province}
+              label="Province"
+              name="province"
               onChange={(e) => handleInputs(e)}
             >
-              {cities &&
-                cities.map((el) => {
-                  if (el.provinceId === provinceId) {
-                    return (
-                      <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
-                        {`${el.name} (${el.count})`}
-                      </MenuItem>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
+              {provinces &&
+                provinces.map((el) => (
+                  <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
+                    {`${el.name} (${el.count})`}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
-        ) : null}
-        {/* ---------------------------------------------------- */}
-      </Box>
+          {/* ---------------------------------------------------- */}
+
+          {/* ---------------------Cities----------------------- */}
+          {provinceId !== null ? (
+            <FormControl fullWidth>
+              <InputLabel>Cities</InputLabel>
+              <Select
+                value={inputs.city}
+                label="Cities"
+                name="city"
+                onChange={(e) => handleInputs(e)}
+              >
+                {cities &&
+                  cities.map((el) => {
+                    if (el.provinceId === provinceId) {
+                      return (
+                        <MenuItem key={`${el.name}_${el.id}`} value={el.name}>
+                          {`${el.name} (${el.count})`}
+                        </MenuItem>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+              </Select>
+            </FormControl>
+          ) : null}
+          {/* ---------------------------------------------------- */}
+        </Box>
+      ) : null}
     </List>
   );
 }
