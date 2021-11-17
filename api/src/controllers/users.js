@@ -92,7 +92,7 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesOwn",
-          attributes: ["id", "title", "img", "price", "userId"],
+          attributes: ["id", "title", "img", "price", "userId", "avaliable"],
           include: {
             model: Qualification,
             attributes: ["score"],
