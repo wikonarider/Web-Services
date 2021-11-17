@@ -44,7 +44,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     },
     btn: {
       textTransfrom: "none",
-      height: "30px",
+      height: "35px",
       marginLeft: "1%",
       marginRight: "4%",
     },
@@ -78,6 +78,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       alignItems: "center",
       height: "100%",
       overflowY: "auto",
+      overflowX: "hidden",
       marginRight: "0.2%",
       background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
@@ -86,7 +87,8 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       width: "80%",
       marginTop: "5%",
       minWidth: "200px",
-      height: "15%",
+      height: "120px",
+      minHeight: "80px",
       borderRadius: "0.3em",
       transition: "0.4s",
       "&:hover": {
@@ -135,7 +137,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       display: "flex",
       marginRight: "0.2%",
       flexDirection: "column",
-      background: darkTheme ? grey[900] : blueGrey[400],
+      background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
       maxHeight: "100%",
       "& div::-webkit-scrollbar ": {
@@ -157,6 +159,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       overflowY: "auto",
       flexWrap: "wrap",
       alignContent: "flex-start",
+      justifyContent: "center",
       maxHeight: "100%",
       height: "100%",
     },
