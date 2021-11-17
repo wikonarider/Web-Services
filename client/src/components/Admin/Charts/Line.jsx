@@ -10,7 +10,7 @@ export default function Chart({ info, x, yDomain, date, title }) {
   const darkGlobal = useSelector((state) => state.darkTheme);
 
   let darkLight = darkGlobal ? "dark" : "light";
-  console.log(title, info);
+
   return (
     <Box
       sx={{

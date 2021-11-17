@@ -33,6 +33,7 @@ export default function Admin() {
   useEffect(() => {
     axios(`/admin`).then((response) => {
       setInfo({
+        groupProvinceCount: response.data.groupProvinceCount,
         totalServices: response.data.totalServices,
         totalUsers: response.data.bannedUsers,
         totalSales: response.data.totalSales,

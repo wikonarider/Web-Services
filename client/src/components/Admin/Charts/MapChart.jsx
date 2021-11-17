@@ -7,21 +7,24 @@ import {
   Geography,
   ZoomableGroup,
   Marker,
-  Annotation,
 } from "react-simple-maps";
 import Box from "@mui/material/Box";
-import Style from "./map.module.css";
+import MapStyle from "./map.module.css";
+import { styles } from "../AdminStyles";
+import { useSelector } from "react-redux";
 // const geoUrl = "json!./argentina-provinces.json";
 
-export function MapChart({ setTooltipContent, info }) {
+export function MapChart({ setTooltipContent, info, setOpen }) {
+  const darkGlobal = useSelector((state) => state.darkTheme);
+  let darkLight = darkGlobal ? "dark" : "light";
   return (
     <Box
-      className={Style.map}
-
-      // sx={{ width: "200px", height: "400px", overflow: "hidden" }}
+      className={MapStyle.map}
+      position="absolute"
+      sx={{ width: "300px", height: "400px", overflow: "hidden" }}
     >
-      <ComposableMap data-tip="" width={200} height={300}>
-        <ZoomableGroup zoom={2.7} center={[-65, -38]}>
+      <ComposableMap data-tip="" width={300} height={400}>
+        <ZoomableGroup zoom={3.5} center={[-65, -38]}>
           <Geographies geography={argentina}>
             {({ geographies }) => (
               <>
@@ -40,13 +43,18 @@ export function MapChart({ setTooltipContent, info }) {
                       onMouseLeave={() => {
                         setTooltipContent("");
                       }}
+                      onClick={() => (n_services > 0 ? setOpen(ID_1) : null)}
                       style={{
                         default: {
-                          fill: n_services > 0 ? "#F53" : "rgb(112, 112, 112)",
+                          fill:
+                            n_services > 0
+                              ? styles[darkLight].map.filled.backgroundColor
+                              : styles[darkLight].map.empty.backgroundColor,
                           outline: "none",
                         },
                         hover: {
-                          fill: "#F53",
+                          fill: styles[darkLight].map.filled.backgroundColor,
+                          opacity: 0.4,
                           outline: "none",
                           cursor: "pointer",
                         },
@@ -63,7 +71,7 @@ export function MapChart({ setTooltipContent, info }) {
                   const centroid = geoCentroid(geo);
 
                   const { NAME_1, ID_1 } = geo.properties;
-                  console.log(NAME_1, centroid);
+
                   const n_services = info.find((p) => p.provinceId === ID_1)
                     ? info.find((p) => p.provinceId === ID_1).n_services
                     : 0;

@@ -29,6 +29,14 @@ export const styles = {
         color: darkTheme.palette.primary.main, //"rgb(251, 171, 158)",
       },
     },
+    map: {
+      empty: {
+        backgroundColor: darkTheme.palette.primary.main,
+      },
+      filled: {
+        backgroundColor: darkTheme.palette.secondary.main,
+      },
+    },
   },
   light: {
     box: {
@@ -57,6 +65,14 @@ export const styles = {
       },
       secondary: {
         color: lightTheme.palette.primary.contrastText, //"rgb(161, 174, 48)",
+      },
+    },
+    map: {
+      empty: {
+        backgroundColor: lightTheme.palette.primary.main,
+      },
+      filled: {
+        backgroundColor: lightTheme.palette.secondary.main,
       },
     },
   },
