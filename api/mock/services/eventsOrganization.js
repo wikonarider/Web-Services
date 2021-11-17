@@ -177,6 +177,8 @@ const entertainment = [
     categoryId: 21,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2021-02-01T09:49:43.960Z",
+    provinceId: 82,
+    cityId: 82084,
   },
   {
     title: "Grupo Musical Para Eventos",
