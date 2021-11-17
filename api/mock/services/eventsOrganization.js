@@ -364,6 +364,8 @@ const organization = [
     categoryId: 23,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
+    provinceId: 14,
+    cityId: 14014,
   },
   {
     title: "Organización de eventos",
