@@ -91,19 +91,21 @@ export default function CheckoutDetail() {
             total.push(item.price);
             return (
               <CheckoutCard
-                key={index}
-                title={item.title}
-                img={item.img}
-                price={item.price}
-                id={item.id}
+              key={index}
+              title={item.title}
+              img={item.img}
+              price={item.price}
+              id={item.id}
               />
-            );
-          })}
+              );
+            })}
       </Box>
+      
+    {!loading?
       <Paper
         sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, mb: 2, mt: 2 }}
         >
-        {total.length > 0?
+        {total.length> 0?
         <Grid container spacing={2} sx={{ gap: 1 }}>
           <Grid item xs={12} sm container>
             <Grid
@@ -113,7 +115,6 @@ export default function CheckoutDetail() {
               alignItems="center"
               className={classes.querie}
             >
-              {loading && <div className={s.spinner}></div>}
             {!loading?
               <Grid
                 style={{
@@ -135,7 +136,7 @@ export default function CheckoutDetail() {
                     color="text.primary"
                     textAlign="center"
                   >
-                    TOTAL:
+                    TOTAL
                     {total.length > 0 && (
                       <Typography gutterBottom variant="h4" component="div"
                       sx={{alingSelf:'center'}}>
@@ -192,6 +193,7 @@ export default function CheckoutDetail() {
         </Grid>
              : 'No products added to the cart' }
       </Paper>
+ : <div className={s.spinnerContainer}><div className={s.spinner}></div></div>}
     </>
   );
 }

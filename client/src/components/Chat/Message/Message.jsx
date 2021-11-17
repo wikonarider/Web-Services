@@ -6,7 +6,6 @@ import { format } from "timeago.js";
 
 export default function Message({
   user,
-  contact,
   message,
   scrollRef,
   darkTheme,

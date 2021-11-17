@@ -32,7 +32,6 @@ export default function useStylesConvertations(
       justifyContent: "center",
       height: "100%",
       borderRadius: "0.3em",
- 
       cursor: "pointer",
       width: "100%",
       transform: "scale(0.95,0.95)",

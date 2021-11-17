@@ -291,7 +291,6 @@ function Chat({ user, darkTheme, cookie }) {
                   scrollRef={scrollRef}
                   key={i}
                   user={user}
-                  contact={chat.currentCont}
                   message={msn}
                   darkTheme={darkTheme}
                 />
