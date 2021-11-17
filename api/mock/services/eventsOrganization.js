@@ -153,6 +153,8 @@ const catering = [
     price: 2999,
     categoryId: 20,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
+    provinceId: 2,
+    cityId: 2007,
   },
   {
     title: "Torta Pavlova",
