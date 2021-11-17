@@ -1,17 +1,17 @@
-require('dotenv').config();
-const { Users, Orders } = require('../db');
+require("dotenv").config();
+const { Users, Orders } = require("../db");
 const { ORIGIN, SUCCESS_MERCADOPAGO } = process.env;
-var mercadopago = require('mercadopago');
+var mercadopago = require("mercadopago");
 
 mercadopago.configure({
   access_token:
-    'APP_USR-6630129852838408-110415-697a3bf876a306168b38ca0aff892c43-1012143804',
+    "APP_USR-6630129852838408-110415-697a3bf876a306168b38ca0aff892c43-1012143804",
 });
 
 async function checkoutMercadoPago(req, res, next) {
   try {
     const { totalPrice, title, quantity, servicesId } = req.body;
-    console.log('totalPrice', req.body);
+    console.log("totalPrice", req.body);
     const userId = req.user;
 
     let prices = 0;
@@ -20,7 +20,7 @@ async function checkoutMercadoPago(req, res, next) {
     }
 
     const user = await Users.findOne({
-      attributes: ['username'],
+      attributes: ["username"],
       where: {
         id: userId,
       },
@@ -29,12 +29,12 @@ async function checkoutMercadoPago(req, res, next) {
     const order = await Orders.findOne({
       where: {
         userId: userId,
-        status: 'carrito',
+        status: "carrito",
       },
     });
     // cambiamos el estado de la orden
     if (order) {
-      order.status = 'pending';
+      // order.status = 'pending';
       order.total = prices;
       await order.save();
     }
@@ -42,7 +42,7 @@ async function checkoutMercadoPago(req, res, next) {
     var preference = {
       items: [
         {
-          title: title.join(', '),
+          title: title.join(", "),
           quantity: quantity,
           unit_price: prices,
           serviceId: servicesId,
@@ -53,7 +53,7 @@ async function checkoutMercadoPago(req, res, next) {
         failure: `${ORIGIN}/failedPayment`,
         pending: `${ORIGIN}/home`,
       },
-      auto_return: 'approved',
+      auto_return: "approved",
     };
 
     // console.log('mercadoPreferences', mercadopago.preferences)
@@ -82,7 +82,7 @@ async function checkoutMercadoPago(req, res, next) {
 
     // }
   } catch (error) {
-    console.log('MERCADO', error);
+    console.log("MERCADO", error);
     next(error);
   }
 }

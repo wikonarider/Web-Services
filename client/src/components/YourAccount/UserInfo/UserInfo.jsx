@@ -1,17 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo, putUser } from '../../../redux/actions';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo, putUser } from "../../../redux/actions";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 import s from "./UserInfo.module.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useMediaQuery } from "@mui/material";
-
 
 import {
   FacebookShareButton,
@@ -20,7 +18,7 @@ import {
   WhatsappIcon,
   LinkedinShareButton,
   LinkedinIcon,
-} from 'react-share';
+} from "react-share";
 
 export default function YourAccount({
   userProfile,
@@ -40,7 +38,7 @@ export default function YourAccount({
   }, [dispatch, userProfile]);
 
   // eslint-disable-next-line
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState("");
 
   //REFERENCIA PARA ESCONDER EL INPUT DE CARGA DE IMAGEN
   const fileInput = useRef();
@@ -51,16 +49,16 @@ export default function YourAccount({
     setLoading(true);
     const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append('file', files[0]);
+    formData.append("file", files[0]);
     // replace this with your upload preset name
-    formData.append('upload_preset', 'hn1tlyfq');
+    formData.append("upload_preset", "hn1tlyfq");
     const options = {
-      method: 'POST',
+      method: "POST",
       body: formData,
     };
 
     return fetch(
-      'https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload',
+      "https://api.cloudinary.com/v1_1/dzjz8pe0y/image/upload",
       options
     )
       .then((res) => res.json())
@@ -81,7 +79,7 @@ export default function YourAccount({
       container
       display="flex"
       alignItems="center"
-      sx={{ marginTop: "2%", marginBottom: `${matches ? null : `2%`}` }}
+      sx={{ marginTop:  `${matches ? `2%` : `7%`}`, marginBottom: `${matches ? null : `2%`}` }}
       justifyContent="center"
       gap={5}
       item
@@ -90,7 +88,7 @@ export default function YourAccount({
       <Grid
         item
         gridColumn="span 6"
-        sx={{ marginRight: `${matches ? '2%' : null}` }}
+        sx={{ marginRight: `${matches ? "2%" : null}` }}
       >
         <Avatar
           alt="user name"
@@ -98,9 +96,9 @@ export default function YourAccount({
           sx={{ width: 200, height: 200, marginBottom: 2 }}
         ></Avatar>
         {!userProfile && (
-          <Box>
+          <Box sx={{ display: "flex", justifyContent:'center'}}>
             <input
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               type="file"
               name="myImage"
               ref={fileInput}
@@ -125,7 +123,7 @@ export default function YourAccount({
                 // startIcon={<PhotoCameraIcon />}
                 size="small"
                 color="secondary"
-                sx={{ boxShadow: 'none', marginLeft: 1 }}
+                sx={{ boxShadow: "none", marginLeft: 1 }}
                 // onClick={() => {
                 //   fileInput.current.click();
                 // }}
@@ -134,7 +132,9 @@ export default function YourAccount({
                 SUBMIT
               </Button>
             ) : (
-              <div className={s.spinner}></div>
+              <Box sx={{ marginLeft: 1 }}>
+                <div className={s.spinner}></div>
+              </Box>
             )}
           </Box>
         )}
@@ -169,13 +169,13 @@ export default function YourAccount({
             justifyContent="center"
             gap="0.5rem"
           >
-            <FacebookShareButton url={'shareUrl'}>
+            <FacebookShareButton url={"shareUrl"}>
               <FacebookIcon size={35} round={true} />
             </FacebookShareButton>
-            <WhatsappShareButton url={'shareUrl'}>
+            <WhatsappShareButton url={"shareUrl"}>
               <WhatsappIcon size={35} round={true} />
             </WhatsappShareButton>
-            <LinkedinShareButton url={'shareUrl'}>
+            <LinkedinShareButton url={"shareUrl"}>
               <LinkedinIcon size={35} round={true} />
             </LinkedinShareButton>
           </Box>
