@@ -1,7 +1,6 @@
 import React from "react";
 import Map from "./Charts/Map";
 import Box from "@mui/material/Box";
-
 export default function Services({ info }) {
   return (
     <>

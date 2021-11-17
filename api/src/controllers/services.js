@@ -7,6 +7,7 @@ const {
   Province,
   City,
   conn,
+  Op,
 } = require("../db.js");
 const {
   validateServices,
@@ -52,6 +53,7 @@ async function getServices(req, res, next) {
           "img",
           "price",
           "userId",
+          "avaliable",
           [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
         ],
 
@@ -135,10 +137,14 @@ async function getServicesByUserId(req, res, next) {
           "img",
           "price",
           "userId",
+          "avaliable",
           [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
         ],
         where: {
           userId: userId,
+          avaliable: {
+            [Op.is]: true,
+          },
         },
         include: [
           {
@@ -185,6 +191,7 @@ async function getServicesByIds(req, res, next) {
         "img",
         "price",
         "userId",
+        "avaliable",
         [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
 
@@ -232,6 +239,7 @@ async function getServicesById(req, res, next) {
         "createdAt",
         "updatedAt",
         "userId",
+        "avaliable",
       ],
       include: [
         {
@@ -243,19 +251,19 @@ async function getServicesById(req, res, next) {
         },
         {
           model: Category,
-          attributes: ["name"],
+          attributes: ["name", "id"],
           include: {
             model: Group,
-            attributes: ["name"],
+            attributes: ["name", "id"],
           },
         },
         {
           model: Province,
-          attributes: ["name"],
+          attributes: ["name", "id"],
         },
         {
           model: City,
-          attributes: ["name", "lat", "lon"],
+          attributes: ["id", "name", "lat", "lon"],
         },
       ],
     });
@@ -344,6 +352,7 @@ async function putService(req, res, next) {
       provinceId,
       cityId,
       serviceId,
+      avaliable,
     } = req.body;
     // Paso serviceId por body
     if (serviceId) {
@@ -357,7 +366,8 @@ async function putService(req, res, next) {
           price ||
           categoryId ||
           provinceId ||
-          cityId
+          cityId ||
+          avaliable
         ) {
           // validamos los parametros, caso especial para provincia/ciudad
           const errors = await validateServicesEdit({
@@ -376,6 +386,9 @@ async function putService(req, res, next) {
             service.categoryId = categoryId ? categoryId : service.categoryId;
             service.provinceId = provinceId ? provinceId : service.provinceId;
             service.cityId = cityId ? cityId : service.cityId;
+            service.avaliable = avaliable
+              ? avaliable === "true"
+              : service.avaliable;
             // Guardamos esos cambios
             await service.save();
             res.json({ message: "Successfully edited service" });

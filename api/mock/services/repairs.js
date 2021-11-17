@@ -4,7 +4,7 @@ const carpentry = [
     description:
       "carpintero que disponga de herramientas , para trabajos por tanto zona pilar .",
     img: "https://img.freepik.com/free-photo/side-view-female-carpenter-studio-using-electric-saw_23-2148813332.jpg?size=626&ext=jpg",
-    price: 1,
+    price: 120,
     categoryId: 8,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2020-06-30T11:11:03.574Z",
@@ -39,7 +39,7 @@ const carpentry = [
     description:
       "carpintero que disponga de herramientas , para trabajos por tanto zona pilar .",
     img: "https://image.freepik.com/free-psd/carpentry-concept-banner-template_23-2148580739.jpg",
-    price: 1,
+    price: 125,
     categoryId: 8,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-02T15:47:37.277Z",
@@ -126,7 +126,7 @@ const construction = [
     title: "Oficial Albañil",
     description: "Busco jente para trabajar en Escobar oficial albañil",
     img: "https://img.freepik.com/free-photo/construction-silhouette_1150-8336.jpg?size=626&ext=jpg",
-    price: 35,
+    price: 355,
     categoryId: 10,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-11-12T05:55:51.597Z",
@@ -163,7 +163,7 @@ const construction = [
     title: "Oficial Albañil",
     description: "Busco jente para trabajar en Escobar oficial albañil",
     img: "https://img.freepik.com/free-photo/profile-woman-pointing-copy-space-advertisement-isolated-yellow-background_1258-80398.jpg?size=626&ext=jpg",
-    price: 35,
+    price: 345,
     categoryId: 10,
     userId: "4e218c00-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-24T21:03:10.438Z",
@@ -354,7 +354,7 @@ const computer = [
     
     *CAMBIO DE COMPONENTES`,
     img: "https://image.freepik.com/free-psd/website-template-laptop-screen_53876-57297.jpg",
-    price: 0,
+    price: 156,
     categoryId: 13,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     provinceId: 14,
@@ -448,7 +448,7 @@ const computer = [
     
     *CAMBIO DE COMPONENTES`,
     img: "https://img.freepik.com/free-vector/big-data-orange-circular-visualization_1217-3595.jpg?size=626&ext=jpg",
-    price: 0,
+    price: 156,
     categoryId: 13,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-09T16:02:43.095Z",
@@ -896,7 +896,7 @@ const other = [
     description:
       "Realizo tramites de MONOTRIBUTO- INSCRIPCION- RECATEGORIZACION- DGR- MUNICIPALIDAD: TISSH- HABILITACION- JUBILACION",
     img: "https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?size=338&ext=jpg",
-    price: 11,
+    price: 1199,
     categoryId: 18,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-01-23T19:57:11.713Z",

@@ -156,6 +156,10 @@ async function validateServicesEdit(service) {
       "It has to be a valid id and the city belongs to the province";
   }
 
+  if (service.avaliable && typeof service.avaliable !== "string") {
+    errors.avaliable = "It has to be of type string";
+  }
+
   return errors;
 }
 

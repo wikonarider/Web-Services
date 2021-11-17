@@ -1,16 +1,10 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import useStylesMessage from "./MessageStyled";
 import { format } from "timeago.js";
 
-export default function Message({
-  user,
-  contact,
-  message,
-  scrollRef,
-  darkTheme,
-}) {
+export default function Message({ user, message, scrollRef, darkTheme }) {
   var clasess = useStylesMessage(darkTheme, message, user)();
   return (
     <Box className={clasess.box_position_MsnSendReceive}>
@@ -18,7 +12,7 @@ export default function Message({
         ref={scrollRef}
         id="boxMsnReceive"
         className={
-            message.userId === user.id
+          message.userId === user.id
             ? clasess.boxMsnSend
             : clasess.boxMsnReceive
         }
@@ -27,9 +21,7 @@ export default function Message({
           <h5>{message.text}</h5>
         </Box>
 
-        <h5> 
-        {format(message.createdAt)}</h5>
-       
+        <h5>{format(message.createdAt)}</h5>
       </Box>
     </Box>
   );

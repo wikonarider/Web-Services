@@ -19,8 +19,17 @@ export default function RightInfoBar({
   handleClick,
   added,
 }) {
-  let { title, price, description, rating, qualifications, userId, city, id } =
-    service.service;
+  let {
+    title,
+    price,
+    description,
+    rating,
+    qualifications,
+    userId,
+    city,
+    id,
+    avaliable,
+  } = service.service;
   const query = useMediaQuery("(max-width: 890px)");
   const [modal, setModal] = useState(false);
 
@@ -47,7 +56,7 @@ export default function RightInfoBar({
         sx={{ mr: "auto" }}
       >
         <Box gridColumn="span 6">
-          {cookie && cookie !== userId ? (
+          {cookie && cookie !== userId && avaliable ? (
             <IconButton
               onClick={handleFavs}
               aria-label="add to favorites"
@@ -58,9 +67,11 @@ export default function RightInfoBar({
               <Favorite color={favState ? "error" : ""} />
             </IconButton>
           ) : null}
-          <IconButton aria-label="share" onClick={() => setModal(true)}>
-            <Share />
-          </IconButton>
+          {avaliable ? (
+            <IconButton aria-label="share" onClick={() => setModal(true)}>
+              <Share />
+            </IconButton>
+          ) : null}
         </Box>
 
         <Box gridColumn="span 6"></Box>
@@ -112,7 +123,7 @@ export default function RightInfoBar({
             {" "}
             {`$${price ? price : 0}`}{" "}
           </Typography>
-          {cookie && cookie !== userId ? (
+          {cookie && cookie !== userId && avaliable ? (
             <IconButton
               onClick={handleClick}
               color={!added ? "primary" : "success"}

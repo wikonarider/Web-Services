@@ -127,7 +127,7 @@ function App() {
     <ThemeProvider theme={darkGlobal ? darkTheme : lightTheme}>
       <CssBaseline />
 
-      <div className="App" >
+      <div className="App">
         <Route exact path="/" component={Landing} />
         <Route
           exact
@@ -217,9 +217,13 @@ function App() {
           exact
           path="/editservice/:id"
           render={({ match }) => {
-            return <EditService id={match.params.id} />;
+            return cookie ? (
+              <EditService id={match.params.id} />
+            ) : (
+              <Nav route="" />
+            );
           }}
-        ></Route>
+        />
       </div>
     </ThemeProvider>
   );

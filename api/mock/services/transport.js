@@ -102,7 +102,7 @@ const transport = [
     description:
       "Llevamos a tú mascota a cualquier punto del país.Servicio puerta a puerta ( peajes incluidos). Camioneta habilitada únicamente para el traslado de su perro/gato u otra mascota.Servicio seguro, cálido, puntual y efectivo.",
     img: "https://img.freepik.com/free-photo/industrial-port-container-yard_1112-1202.jpg?size=626&ext=jpg",
-    price: 30,
+    price: 300,
     categoryId: 27,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-16T04:23:20.531Z",
@@ -137,7 +137,7 @@ const transport = [
     description:
       "Llevamos a tú mascota a cualquier punto del país.Servicio puerta a puerta ( peajes incluidos). Camioneta habilitada únicamente para el traslado de su perro/gato u otra mascota.Servicio seguro, cálido, puntual y efectivo.",
     img: "https://img.freepik.com/free-photo/delivery-man-with-clipboard_23-2148590673.jpg?size=626&ext=jpg",
-    price: 30,
+    price: 300,
     categoryId: 27,
     userId: "4e218f98-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-16T04:23:20.531Z",

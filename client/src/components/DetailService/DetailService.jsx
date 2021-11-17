@@ -10,6 +10,7 @@ import RelatedServices from "./RelatedServices/RelatedServices";
 import RightInfoBar from "./RightInfoBar/RightInfoBar";
 import { getServiceById, getRelatedServices } from "../../utils/servicesPage";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 
 export default function DetailService({ id, closeModal }) {
   const [service, setService] = useState({ service: {}, user: {} });
@@ -121,6 +122,11 @@ export default function DetailService({ id, closeModal }) {
     <>
       {Object.keys(service.service).length ? (
         <>
+          {!service.service.avaliable ? (
+            <Alert severity="error" sx={{ mt: 1 }}>
+              Service not avaliable
+            </Alert>
+          ) : null}
           <Box
             display="grid"
             gridTemplateColumns="repeat(12, 1fr)"
