@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EditIcon from "@mui/icons-material/Edit";
 import Rating from "@mui/material/Rating";
+import Alert from "@mui/material/Alert";
 
 import ShareServiceModal from "./ShareServiceModal";
 
@@ -177,7 +178,13 @@ function CardService({ service, related, route }) {
             <IconButton aria-label="share" onClick={(e) => handleModal(e)}>
               <ShareIcon />
             </IconButton>
-
+            {/*----------- service disable -------------*/}
+            {!service.avaliable ? (
+              <Alert severity="error" sx={{ ml: "auto" }}>
+                Service disable
+              </Alert>
+            ) : null}
+            {/* ------------------------------------- */}
             {/*----------- EDIT ICON -----------------  */}
             {cookie && cookie === userId && route === "account" ? (
               <IconButton onClick={handleEditClick} sx={{ ml: "auto" }}>
