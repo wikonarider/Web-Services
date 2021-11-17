@@ -181,6 +181,31 @@ async function admin(req, res, next) {
       raw: true,
     });
 
+    let groupProvinceCount = await Category.findAll({
+      attributes: [
+        [conn.col("group.name"), "groupName"],
+        [conn.fn("COUNT", conn.col("services.id")), "n_services"],
+      ],
+      group: ["groupId", "group.id", "services->province.id"],
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          include: {
+            model: Province,
+            attributes: ["name"],
+          },
+        },
+        {
+          model: Group,
+          attributes: [],
+        },
+      ],
+      order: [[conn.literal("n_services"), "DESC"]],
+
+      raw: true,
+    });
+
     let groupNewServices = await groupServices(groups);
 
     let provinceServices = await Service.findAll({
@@ -195,6 +220,7 @@ async function admin(req, res, next) {
 
     // { services: servicesCount, category: categoryCount }
     res.status(200).send({
+      groupProvinceCount,
       provinceServices,
       monthlySales,
       totalSales,
