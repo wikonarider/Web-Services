@@ -4,7 +4,7 @@ const ambientation = [
     description:
       "telón de fondo - cortina luces led - globos - juegos de living puf-ambientación - tarjeta de invitación personalizada - decoracion candy bar mesa dulce.",
     img: "https://image.freepik.com/free-vector/colorful-happy-18th-birthday-background_52683-47593.jpg",
-    price: 4.5,
+    price: 150,
     categoryId: 19,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     createdAt: "2021-08-16T20:17:05.819Z",
@@ -16,7 +16,7 @@ const ambientation = [
     description:
       "JUEGO DE LIVING PARA 10 O 20 PERSONAS. INCLUYE PUFF ECO CUERO BLANCOS INDIVIDUALES - DOBLES Y MESA PUENTE. EXCELENTE ESTADO",
     img: "https://image.freepik.com/free-photo/dancing-people-club_23-2147717106.jpg",
-    price: 3.5,
+    price: 3500,
     categoryId: 19,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-02T15:18:01.623Z",
@@ -28,7 +28,7 @@ const ambientation = [
     description:
       "Alquiler mobiliario para eventos. Fondos, lluvia de luz, mesas accesorios de candy.",
     img: "https://img.freepik.com/free-photo/medium-shot-family-celebrating-birthday_23-2149148557.jpg?size=626&ext=jpg",
-    price: 1,
+    price: 120,
     categoryId: 19,
     userId: "4e219510-36ad-11ec-8d3d-0242ac110003",
     createdAt: "2021-02-19T01:58:00.318Z",
@@ -40,7 +40,7 @@ const ambientation = [
     description:
       "telón de fondo - cortina luces led - globos - juegos de living puf-ambientación - tarjeta de invitación personalizada - decoracion candy bar mesa dulce.",
     img: "https://image.freepik.com/free-photo/medium-shot-friends-with-firework_23-2149071742.jpg",
-    price: 4.5,
+    price: 450,
     categoryId: 19,
     userId: "4e21929a-36ad-11ec-8d3d-0242ad130003",
     provinceId: 82,
@@ -51,7 +51,7 @@ const ambientation = [
     description:
       "JUEGO DE LIVING PARA 10 O 20 PERSONAS. INCLUYE PUFF ECO CUERO BLANCOS INDIVIDUALES - DOBLES Y MESA PUENTE. EXCELENTE ESTADO",
     img: "https://image.freepik.com/free-photo/nightlife-with-people-dancing-club_23-2149052695.jpg",
-    price: 3.5,
+    price: 399,
     categoryId: 19,
     userId: "4e21899e-36ad-11ec-8d3d-0242ac130003",
     provinceId: 14,
@@ -79,7 +79,7 @@ const catering = [
         Brochettes
         Capresse.`,
     img: "https://image.freepik.com/free-photo/catering-buffet_74190-3789.jpg",
-    price: 15.0,
+    price: 1500,
     categoryId: 20,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2020-04-30T15:25:12.445Z",
@@ -133,7 +133,7 @@ const catering = [
         Brochettes
         Capresse.`,
     img: "https://image.freepik.com/free-photo/decorated-banquet-table-with-snacks-wedding_1303-19146.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 20,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     provinceId: 2,
@@ -173,7 +173,7 @@ const entertainment = [
     description:
       "SONIDO E ILUMINACION Y FOTOGRAFIA PROFESIONAL, 15 AÑOS CASAMIENTO , INFANTILES, EMPRESARIALES , PANTALLA GIGANTE CABEZALES MOVILES LUCES LED ",
     img: "https://image.freepik.com/free-vector/neon-light-text-effect-editable-retro-glowing-text-style_314614-519.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 21,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2021-02-01T09:49:43.960Z",
@@ -200,7 +200,7 @@ const entertainment = [
     title: "Servicio de dj sonido iluminación",
     description: `Dj la plata y alrededores contamos con pantallas maquinas de humo proyectores sonido profesional micrófono karaoke iluminacion led de pista y para decorar`,
     img: "https://image.freepik.com/free-vector/abstract-sunrise-light-effect_23-2148370572.jpg",
-    price: 6.5,
+    price: 650,
     categoryId: 21,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-02-01T09:49:43.960Z",
@@ -212,7 +212,7 @@ const entertainment = [
     description:
       "SONIDO E ILUMINACION Y FOTOGRAFIA PROFESIONAL, 15 AÑOS CASAMIENTO , INFANTILES, EMPRESARIALES , PANTALLA GIGANTE CABEZALES MOVILES LUCES LED ",
     img: "https://image.freepik.com/free-vector/dance-party-banner-with-girl-dj-with-headphones-vector-landing-page-discotheque-music-show-wit_107791-7446.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 21,
     userId: "4e2195c4-36ad-11ec-8d3d-0242ac120003",
     createdAt: "2021-02-01T09:49:43.960Z",
@@ -241,7 +241,7 @@ const entertainment = [
     title: "Servicio de dj sonido iluminación",
     description: `Dj la plata y alrededores contamos con pantallas maquinas de humo proyectores sonido profesional micrófono karaoke iluminacion led de pista y para decorar`,
     img: "https://img.freepik.com/free-photo/lady-with-disco-ball-bottle-glass_23-2147972051.jpg?size=626&ext=jpg",
-    price: 6.5,
+    price: 650,
     categoryId: 21,
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     createdAt: "2021-04-17T12:08:16.154Z",
@@ -268,7 +268,7 @@ const photography = [
     description:
       "Alquiler de Proyector y Pantalla gigante para eventos! Consulte presupuesto.",
     img: "https://image.freepik.com/free-psd/photography-workshop-banner-template_23-2148668972.jpg",
-    price: 3.5,
+    price: 350,
     categoryId: 22,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-22T02:48:50.463Z",
@@ -280,7 +280,7 @@ const photography = [
     description:
       "CABINA DE FOTOS INFLABLE CON LUZ LEED 2,20MTS X 5MTS DE LARGO",
     img: "https://img.freepik.com/free-psd/photographer-workshop-with-notebook-mock-up_23-2149015913.jpg?size=626&ext=jpg",
-    price: 1,
+    price: 120,
     categoryId: 22,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-22T02:48:50.463Z",
@@ -304,7 +304,7 @@ const photography = [
     description:
       "Alquiler de Proyector y Pantalla gigante para eventos! Consulte presupuesto.",
     img: "https://image.freepik.com/free-photo/handsome-african-guy-with-stylish-haircut-taking-photo-digital-camera_171337-1345.jpg",
-    price: 3.5,
+    price: 350,
     categoryId: 22,
     userId: "4e219056-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-12-17T16:55:17.737Z",
@@ -316,7 +316,7 @@ const photography = [
     description:
       "CABINA DE FOTOS INFLABLE CON LUZ LEED 2,20MTS X 5MTS DE LARGO",
     img: "https://img.freepik.com/free-psd/side-view-digital-camera-photo-studio_23-2148530161.jpg?size=626&ext=jpg",
-    price: 1,
+    price: 136,
     categoryId: 22,
     userId: "4e218b24-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-07-09T17:02:41.378Z",
@@ -331,7 +331,7 @@ const organization = [
     description:
       "Organizamos tu evento como lo soñaste.   Realizamos presupuestos sin cargo.   Contanos tu idea y te ayudamos a hacerla realidad !",
     img: "https://image.freepik.com/free-photo/asian-businessmen-businesswomen-meeting-brainstorming-ideas-about-creative-web-design-planning-application-developing-template-layout-mobile-phone-project-working-together-small-office_7861-2682.jpg",
-    price: 10.5,
+    price: 1050,
     categoryId: 23,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-01-19T20:36:36.761Z",
@@ -356,7 +356,7 @@ const organization = [
     description:
       "Decoración pelotero metegol cama elástica todo lo que necesitas para tus fiestas imagen del motivo. nosotros llevamos todo vos relájate - su consulta no molesta enviamos proforma por whatapp",
     img: "https://image.freepik.com/free-photo/group-people-working-out-business-plan-office_1303-15861.jpg",
-    price: 4.5,
+    price: 145,
     categoryId: 23,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
@@ -366,7 +366,7 @@ const organization = [
     description:
       "Organizamos tu evento como lo soñaste.   Realizamos presupuestos sin cargo.   Contanos tu idea y te ayudamos a hacerla realidad !",
     img: "https://image.freepik.com/free-photo/hesitant-male-entrepreneur-shrugs-shoulders-holds-paper-documents-discusses-solution-business-projecting-with-female-colleague-who-holds-paper-cup-coffee-partnership-cooperation-concept_273609-45114.jpg",
-    price: 10.5,
+    price: 1053,
     categoryId: 23,
     userId: "4e219678-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
@@ -391,7 +391,7 @@ const organization = [
     description:
       "Decoración pelotero metegol cama elástica todo lo que necesitas para tus fiestas imagen del motivo. nosotros llevamos todo vos relájate - su consulta no molesta enviamos proforma por whatapp",
     img: "https://img.freepik.com/free-photo/economist-office_1098-14825.jpg?size=626&ext=jpg",
-    price: 4.5,
+    price: 450,
     categoryId: 23,
     userId: "4e218e1c-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-04-28T14:47:25.378Z",
@@ -420,7 +420,7 @@ const saloons = [
         Brochettes
         Capresse.`,
     img: "https://image.freepik.com/free-photo/friends-clinking-drink-glasses-modern-bar_1150-18971.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 24,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
@@ -448,7 +448,7 @@ const saloons = [
         DECK en Terraza con vista RIO
         WiFi`,
     img: "https://image.freepik.com/free-vector/music-frequency-edm-background-design_1017-33904.jpg",
-    price: 25.0,
+    price: 250,
     categoryId: 24,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-09-30T11:31:58.227Z",
@@ -474,7 +474,7 @@ const saloons = [
         Brochettes
         Capresse.`,
     img: "https://image.freepik.com/free-photo/young-woman-having-fun-zumba_23-2149047685.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 24,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-07-21T18:39:04.429Z",
@@ -502,7 +502,7 @@ const saloons = [
         DECK en Terraza con vista RIO
         WiFi`,
     img: "https://image.freepik.com/free-photo/skillful-dancers-performing-dark-room-concert-light-smoke-sensual-couple-performing-artistic-emotional-contemporary-dance_146671-14632.jpg",
-    price: 25.0,
+    price: 250,
     categoryId: 24,
     userId: "4e219448-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2020-08-14T13:23:05.288Z",
@@ -517,7 +517,7 @@ const other = [
     description: `
     Mini desayunos en bandejita de madera decorada con taza..cositas ricas y otras saludables ademas de golosinas e infusiones paea un desayuno ideal...`,
     img: "https://image.freepik.com/free-photo/delicious-breakfast-meal-assortment_23-2148878829.jpg",
-    price: 15.0,
+    price: 150,
     categoryId: 25,
     userId: "4e218d5e-36ad-11ec-8d3d-0242ac130003",
     createdAt: "2021-05-11T10:00:56.826Z",
