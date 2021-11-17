@@ -1,27 +1,50 @@
-import React, { useState } from "react";
-import axios from "axios";
-import TextInput from "./TextInput";
-import Checkbox from "@mui/material/Checkbox";
-import Box from "@mui/material/Box";
+import React, { useState } from 'react';
+import axios from 'axios';
+import TextInput from './TextInput';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
 // import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 // import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import parse from "autosuggest-highlight/parse";
-import match from "autosuggest-highlight/match";
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import ClearIcon from "@mui/icons-material/Clear";
-import SaveIcon from "@mui/icons-material/Save";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Dialog from "@mui/material/Dialog";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
+import List from '@mui/material/List';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
+import SaveIcon from '@mui/icons-material/Save';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Dialog from '@mui/material/Dialog';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
 
 // const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 // const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const useStyles = makeStyles((theme) => ({
+  showDialog: {
+    [theme.breakpoints.up('lg')]: {
+      display: 'none !important',
+    },
+  },
+  showDataXs: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none !important',
+    },
+  },
+  showDatas: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none !important',
+    },
+  },
+
+  dialog: {
+    backgroundColor: 'theme.palette.primary !important',
+  },
+}));
 
 export default function Results({
   search,
@@ -84,7 +107,7 @@ export default function Results({
       ban,
     });
 
-    if (search === "") {
+    if (search === '') {
       setOptions([]);
     } else {
       await axios
@@ -113,9 +136,9 @@ export default function Results({
   const styleObj = {
     listItem: {
       text: {
-        pl: "10px",
-        m: "auto auto auto 0px",
-        textAlign: "start",
+        pl: '10px',
+        m: 'auto auto auto 0px',
+        textAlign: 'start',
       },
     },
   };
@@ -151,7 +174,7 @@ export default function Results({
           id="demo-simple-select"
           defaultValue={edit[userInfo.id].ban}
           value={edit[userInfo.id].ban}
-          sx={{ width: "100px", color: "black" }}
+          sx={{ width: '100px', color: 'black' }}
           onChange={(e) => handleStatusChange(e, userInfo.id)}
         >
           {options.map((option) => (
@@ -162,9 +185,11 @@ export default function Results({
     },
   };
 
+  const classes = useStyles();
+
   return (
     <>
-      <List sx={{ display: open ? "block" : "none" }}>
+      <List sx={{ display: open ? 'block' : 'none' }}>
         {options &&
           options.map((o) => {
             const fullName = parse(
@@ -186,19 +211,23 @@ export default function Results({
                     <Checkbox
                       checked={checked[o.id] || false}
                       onChange={(event) => handleCheck(event, o)}
-                      inputProps={{ "aria-label": "controlled" }}
+                      inputProps={{ 'aria-label': 'controlled' }}
                     />
                     <Avatar alt={`${o.name}-avatar`} src={o.userImg} />
                   </Box>
 
-                  <Box gridColumn="span 4" display="flex">
+                  <Box
+                    gridColumn="span 4"
+                    display="flex"
+                    // className={classes.showDataXs}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
                       <>
-                        {inputComponents.textInput(o.name, o.id, "name")}{" "}
+                        {inputComponents.textInput(o.name, o.id, 'name')}{' '}
                         {inputComponents.textInput(
                           o.lastname,
                           o.id,
-                          "lastname"
+                          'lastname'
                         )}
                       </>
                     ) : (
@@ -216,9 +245,14 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 2" display="flex">
+                  <Box
+                    gridColumn="span 2"
+                    display="flex"
+                    className={classes.showDataXs}
+                    className={classes.showDatas}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
-                      inputComponents.textInput(o.username, o.id, "username")
+                      inputComponents.textInput(o.username, o.id, 'username')
                     ) : (
                       <ListItemText sx={styleObj.listItem.text}>
                         {userName.map((part, index) => (
@@ -234,9 +268,14 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 4" display="flex">
+                  <Box
+                    gridColumn="span 4"
+                    display="flex"
+                    className={classes.showDataXs}
+                    className={classes.showDatas}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
-                      inputComponents.textInput(o.email, o.id, "email")
+                      inputComponents.textInput(o.email, o.id, 'email')
                     ) : (
                       <ListItemText sx={styleObj.listItem.text}>
                         {o.email}
@@ -244,58 +283,87 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 1" display="flex">
+                  <Box
+                    gridColumn="span 1"
+                    display="flex"
+                    className={classes.showDataXs}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
-                      inputComponents.select(o, ["Active", "Banned"])
+                      inputComponents.select(o, ['Active', 'Banned'])
                     ) : (
                       <ListItemText
                         sx={{
                           ...styleObj.listItem.text,
-                          color: o.ban ? "red" : "green",
+                          color: o.ban ? 'red' : 'green',
                         }}
                       >
-                        {o.ban ? "Banned" : "Active"}
+                        {o.ban ? 'Banned' : 'Active'}
                       </ListItemText>
                     )}
                   </Box>
-                  <Box gridColumn="span 1" display="flex">
+                  <Box
+                    gridColumn="span 1"
+                    display="flex"
+                    className={classes.showDataXs}
+                  >
                     <ListItemText sx={styleObj.listItem.text}>
-                      {o.admin ? "Admin" : "User"}
+                      {o.admin ? 'Admin' : 'User'}
                     </ListItemText>
                   </Box>
 
                   <Box gridColumn="span 1" display="flex">
                     {edit[o.id] &&
                       edit[o.id].editing &&
-                      inputComponents.textInput("password", o.id, "password")}
+                      inputComponents.textInput('password', o.id, 'password')}
                   </Box>
 
                   <Box gridColumn="span 1" display="flex">
                     {edit[o.id] && edit[o.id].editing ? (
                       <>
-                        {inputComponents.iconButton("clear", handleEdit, o)}
-                        {inputComponents.iconButton("save", handleSave, o)}
+                        {inputComponents.iconButton('clear', handleEdit, o)}
+                        {inputComponents.iconButton('save', handleSave, o)}
                       </>
                     ) : (
-                      inputComponents.iconButton("edit", handleEdit, o)
+                      inputComponents.iconButton('edit', handleEdit, o)
                     )}
                   </Box>
                 </Box>
 
                 {edit[o.id] && edit[o.id].editing && (
-                  <Dialog fullScreen open={edit.edit}>
-                    <AppBar sx={{ position: "relative" }}>
+                  <Dialog
+                    fullScreen
+                    open={edit.edit}
+                    className={classes.showDialog}
+                  >
+                    <AppBar
+                      sx={{
+                        position: 'relative',
+                      }}
+                      className={classes.dialog}
+                    >
                       <Toolbar>
-                        {inputComponents.iconButton("clear", handleEdit, o)}
-                        {inputComponents.iconButton("save", handleSave, o)}
+                        {inputComponents.iconButton('clear', handleEdit, o)}
+                        {inputComponents.iconButton('save', handleSave, o)}
                       </Toolbar>
                     </AppBar>
-                    {inputComponents.textInput(o.name, o.id, "name")}{" "}
-                    {inputComponents.textInput(o.lastname, o.id, "lastname")}
-                    {inputComponents.textInput(o.username, o.id, "username")}
-                    {inputComponents.textInput(o.email, o.id, "email")}
-                    {inputComponents.select(o, ["Active", "Banned"])}
-                    {inputComponents.textInput("password", o.id, "password")}
+                    <Box
+                      margin="1rem"
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        marginTop: '10rem',
+                      }}
+                    >
+                      {inputComponents.textInput(o.name, o.id, 'name')}{' '}
+                      {inputComponents.textInput(o.lastname, o.id, 'lastname')}
+                      {inputComponents.textInput(o.username, o.id, 'username')}
+                      {inputComponents.textInput(o.email, o.id, 'email')}
+                      {inputComponents.select(o, ['Active', 'Banned'])}
+                      {inputComponents.textInput('password', o.id, 'password')}
+                    </Box>
                   </Dialog>
                 )}
               </>
