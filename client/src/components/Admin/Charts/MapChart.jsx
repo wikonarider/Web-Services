@@ -70,7 +70,7 @@ export function MapChart({ setTooltipContent, info, setOpen }) {
                 {geographies.map((geo) => {
                   const centroid = geoCentroid(geo);
 
-                  const { NAME_1, ID_1 } = geo.properties;
+                  const { ID_1 } = geo.properties;
 
                   const n_services = info.find((p) => p.provinceId === ID_1)
                     ? info.find((p) => p.provinceId === ID_1).n_services

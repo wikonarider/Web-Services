@@ -1,10 +1,7 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Table from "@mui/material/Table";
