@@ -18,3 +18,10 @@
     transform: rotate(360deg);
   }
 }
+
+.spinnerContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}

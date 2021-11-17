@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { green, grey, red ,blueGrey} from "@mui/material/colors";
+import { green, grey, red, blueGrey } from "@mui/material/colors";
 
 // Descomentar cuando se va a usar
 // import { brown, amber, lime, deepOrange } from "@mui/material/colors";
@@ -14,18 +14,27 @@ export default function useStylesConvertations(
     avatar: {
       width: "76px",
       height: "76px",
-      minHeight:"76px",
-      minWidth:"76px",
+      minHeight: "76px",
+      minWidth: "76px",
       border: `4.0px solid ${!statusUser ? red[200] : green[800]}`,
     },
-    boxConvInline: {
+    avatarAndname: {
       display: "flex",
-      flexWrap: "wrap",
       alignItems: "center",
       justifyContent: "center",
       height: "100%",
-      transform: "scale(1,0.9)",
+      minWidth: "170px",
       cursor: "pointer",
+    },
+    boxConvInline: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100%",
+      borderRadius: "0.3em",
+      cursor: "pointer",
+      width: "100%",
+      transform: "scale(0.95,0.95)",
       background: `${
         darkTheme
           ? contactSelected
@@ -45,8 +54,6 @@ export default function useStylesConvertations(
           : grey[600]
       }`,
 
-      width: "80%",
-      borderRadius: "0.3em",
       "& div": {
         color: `${darkTheme ? grey[100] : blueGrey[700]}`,
         textOverflow: "ellipsis",

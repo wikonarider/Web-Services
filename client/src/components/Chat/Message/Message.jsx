@@ -6,7 +6,6 @@ import { format } from "timeago.js";
 
 export default function Message({
   user,
-  contact,
   message,
   scrollRef,
   darkTheme,
@@ -16,6 +15,7 @@ export default function Message({
     <Box className={clasess.box_position_MsnSendReceive}>
       <Box
         ref={scrollRef}
+        id="boxMsnReceive"
         className={
             message.userId === user.id
             ? clasess.boxMsnSend
