@@ -76,7 +76,7 @@ export default function AdminSideBar({ page, setPage }) {
   };
 
   return (
-    <Box sx={{ display: "flex", position: "relative" }}>
+    <Box sx={{ display: "flex", position: "absolute" }}>
       <Drawer variant="permanent" open={open}>
         <List>
           <ListItem
