@@ -90,6 +90,7 @@ function EditService({ id }) {
     getServiceById(id)
       .then((data) => setService(data.service))
       .catch((e) => console.log(e));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -115,6 +116,7 @@ function EditService({ id }) {
       });
       setShow(true);
     }
+    // eslint-disable-next-line
   }, [service]);
 
   const handleInputs = (e) => {
