@@ -36,7 +36,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         services: payload,
-        endPage: false,
+        endPage: payload && payload.length === 0 ? true : false,
       };
 
     case type.SET_SERVICES_PAGE:

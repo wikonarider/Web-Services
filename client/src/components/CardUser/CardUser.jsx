@@ -13,9 +13,10 @@ const IMG_TEMPLATE =
   "https://codyhouse.co/demo/squeezebox-portfolio-template/img/img.png";
 
 export default function CardUser({ user, serviceId }) {
-  const cookie = useSelector((state) => state.cookie);  
+  const cookie = useSelector((state) => state.cookie);
   const userAccount = useSelector((state) => state.user);
-
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   let { id, userImg, username, name, lastname } = user;
   let fullname = name + " " + lastname;

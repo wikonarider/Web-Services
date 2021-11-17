@@ -15,14 +15,14 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     },
     inputSend: {
       display: "flex",
-      background: darkTheme ? grey[900] : blueGrey[400],
-      borderRadius: "0.5em",
+      background: darkTheme ? grey[900] : blueGrey[100],
+      borderRadius: "0.2em",
       height: "100%",
       minHeight: "100%",
       marginLeft: "2%",
 
       "& input": {
-        color: darkTheme ? grey[400] : blueGrey[100],
+        color: darkTheme ? grey[400] : blueGrey[600],
         fontFamily: "roboto",
         margin: "1% 0 0 2%",
         padding: "0",
@@ -44,9 +44,9 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     },
     btn: {
       textTransfrom: "none",
-      height: "40%",
+      height: "30px",
       marginLeft: "1%",
-      marginRight: "2%",
+      marginRight: "4%",
     },
     //------------------------------------------------------------------button X
     btn_x: {
@@ -73,33 +73,26 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     //---------------------------------------------------------------------box contacts*/
     box_contacts_a: {
       flex: 1.5,
+      flexDirection: "column",
       display: "flex",
+      alignItems: "center",
       height: "100%",
       overflowY: "auto",
       marginRight: "0.2%",
-      flexDirection: "column",
-      background: darkTheme ? grey[900] : blueGrey[400],
+      background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
     },
     containerConvertation: {
-      position: "relative",
-      display: "flex",
-      flexDirection: "row",
-      width: "100%",
-      marginBottom: "3%",
-      height: "11%",
+      width: "80%",
+      marginTop: "5%",
+      minWidth: "200px",
+      height: "15%",
       borderRadius: "0.3em",
       transition: "0.4s",
       "&:hover": {
         background: darkTheme ? grey[700] : grey[200],
         borderRadius: "0.3em",
       },
-    },
-    box_avatar_And_X: {
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "row",
-      width: "100%",
     },
 
     /*input search*/
