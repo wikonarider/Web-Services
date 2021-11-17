@@ -37,7 +37,7 @@ export default function useStylesBougth(darkTheme, statusUser) {
     nameUserBought: {
       height: "100%",
       display: "flex",
-      color: darkTheme ? grey[300] : blueGrey[100],
+      color: darkTheme ? grey[300] : blueGrey[900],
       alignItems: "center",
       paddingBottom: "25%",
     },

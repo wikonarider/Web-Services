@@ -26,13 +26,15 @@ function Chat({ user, darkTheme, cookie }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
   const [text, setText] = useState(""); //2
   const [textReceive, setTextReceive] = useState(""); //3
+  const [inputs, setInputs] = useState({ searchCont: "", inputSend: "" }); //4
   const [chat, setChat] = useState({
     currentCont: "",
     chatting: [],
     contactsConv: [],
+    searchContact: [],
     contactsBoungth: [],
     convertations: [],
-  }); //4
+  }); //6
   var scrollRef = useRef();
   const socket = useRef(); //conexion al servidor para bidireccional peticiones
   const classes = useStylesChat(darkTheme)();
@@ -85,6 +87,7 @@ function Chat({ user, darkTheme, cookie }) {
       contactsConv: contactsConv.data,
       contactsBoungth: contactsBoungth.data,
       convertations: convertations.data,
+      searchContact: contactsConv.data,
     });
   }
   //----------------------------------------------------------------scroll
@@ -123,6 +126,7 @@ function Chat({ user, darkTheme, cookie }) {
             ...chat,
             contactsConv: contact.data,
             convertations: convertition.data,
+            searchContact: contact.data,
           });
         })
         .catch((err) => console.log(err));
@@ -144,10 +148,10 @@ function Chat({ user, darkTheme, cookie }) {
             ...chat,
             convertations: convertations.data,
             contactsConv: chat.contactsConv.concat(newContact),
+            searchContact: chat.contactsConv.concat(newContact),
           });
         })
         .catch((err) => console.log(err));
-      setChat({ ...chat, contactsConv: chat.contactsConv.concat(newContact) });
     }
   }
   //--------------------------------------------------------------------------------------------conversation of a contact
@@ -160,7 +164,13 @@ function Chat({ user, darkTheme, cookie }) {
       id = idPostConvertation(idUser);
       if (id > 0) {
         var post = await getPots(id);
-        setChat({ ...chat, currentCont: newCurrent[0], chatting: post.data });
+        setChat({
+          ...chat,
+          currentCont: newCurrent[0],
+          chatting: post.data,
+          searchContact: chat.contactsConv,
+        });
+        setInputs({ ...inputs, searchCont: "" });
       }
     }
   }
@@ -179,6 +189,17 @@ function Chat({ user, darkTheme, cookie }) {
     }
     return conv.length ? conv[0] : -1;
   }
+  //--------------------------------------------------------------------------------------------search contact
+  function searchContact({ value }) {
+    var searchFound = chat.contactsConv.filter((cont) =>
+      cont.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setInputs({
+      ...inputs,
+      searchCont: value.toLowerCase().substring(0, 20),
+    });
+    setChat({ ...chat, searchContact: searchFound });
+  }
 
   //-------------------------------------------------------------------------------------------------------------delete convertations
   async function deleteConvert(contact) {
@@ -189,6 +210,7 @@ function Chat({ user, darkTheme, cookie }) {
       setChat({
         ...chat,
         contactsConv: chat.contactsConv.filter((c) => c.id !== contact.id),
+        searchContact: chat.contactsConv.filter((c) => c.id !== contact.id),
         convertations: chat.convertations.filter((e) => e.id !== idConv),
         chating: [],
         currentCont: "",
@@ -198,31 +220,33 @@ function Chat({ user, darkTheme, cookie }) {
   //------------------------------------------------------------------------------------------send msn
   async function handleSubmit(e) {
     e.preventDefault();
-    if (user && chat.currentCont) {
-      socket.current.emit("sendMsn", {
-        //send socket io
-        senderId: user.id,
-        receiverId: chat.currentCont.id,
-        text: text,
-      });
-
-      setChat({
-        ...chat,
-        chatting: chat.chatting.concat({
-          //set chating local
-          userId: user.id,
-          remit: chat.currentCont.id,
+    if (text.length) {
+      if (user && chat.currentCont) {
+        socket.current.emit("sendMsn", {
+          //send socket io
+          senderId: user.id,
+          receiverId: chat.currentCont.id,
           text: text,
-          createdAt: Date.now(),
-        }),
-      });
-      // eslint-disable-next-line
-      var send = await sendMessage({
-        //send BD
-        remit: chat.currentCont.id,
-        message: text,
-      });
-      setText("");
+        });
+
+        setChat({
+          ...chat,
+          chatting: chat.chatting.concat({
+            //set chating local
+            userId: user.id,
+            remit: chat.currentCont.id,
+            text: text,
+            createdAt: Date.now(),
+          }),
+        });
+        // eslint-disable-next-line
+        var send = await sendMessage({
+          //send BD
+          remit: chat.currentCont.id,
+          message: text,
+        });
+        setText("");
+      }
     }
   }
   //---------------------------------------component chat----------------------------------------------------------------------------------------------
@@ -232,24 +256,26 @@ function Chat({ user, darkTheme, cookie }) {
         {/*------------------------ conversation list-------------------------------------------- */}
         <Box name="contacts" className={classes.box_contacts_a}>
           <Input
+            autoComplete="off"
             type="text"
             name="inputSearch"
+            value={inputs.searchCont}
+            onChange={(e) => searchContact(e.target)}
             placeholder="search contact!"
             className={classes.searchContact}
           ></Input>
           {chat.contactsConv.length ? (
-            chat.contactsConv.map((con) => (
+            chat.searchContact.map((con) => (
               <Box className={classes.containerConvertation} key={con.id}>
-                  <Conversations
-                    key={con.id}
-                    contacts={con}
-                    contactsOnline={UsersOnlines}
-                    darkTheme={darkTheme}
-                    contactCurrent={chat.currentCont}
-                    deleteConv={deleteConvert}
-                    chatCont={chatContact}
-                  />{" "}
-              
+                <Conversations
+                  key={con.id}
+                  contacts={con}
+                  contactsOnline={UsersOnlines}
+                  darkTheme={darkTheme}
+                  contactCurrent={chat.currentCont}
+                  deleteConv={deleteConvert}
+                  chatCont={chatContact}
+                />{" "}
               </Box>
             ))
           ) : (
@@ -279,6 +305,7 @@ function Chat({ user, darkTheme, cookie }) {
 
           {chat.currentCont ? (
             <form
+              name="formSubmit"
               className={classes.inputForm}
               onSubmit={(e) => handleSubmit(e)}
             >
@@ -302,7 +329,7 @@ function Chat({ user, darkTheme, cookie }) {
             <></>
           )}
         </Box>
-        {/*----------------contact list of purchased services */}
+        {/*---------------------------------------------contact list of purchased services---------------------------------------------- */}
         <Box name="contacts-online" className={classes.box_contactsStates_c}>
           <h3>Contacts</h3>
           <Box
@@ -330,7 +357,7 @@ function Chat({ user, darkTheme, cookie }) {
     return <h3>cargando</h3>;
   }
 }
-
+//------------------------------------------------------------------state global
 function mapStateToProps(state) {
   return {
     user: state.user,

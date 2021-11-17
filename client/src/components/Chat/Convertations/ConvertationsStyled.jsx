@@ -31,7 +31,8 @@ export default function useStylesConvertations(
       alignItems: "center",
       justifyContent: "center",
       height: "100%",
-      minWidth: "200px",
+      borderRadius: "0.3em",
+ 
       cursor: "pointer",
       width: "100%",
       transform: "scale(0.95,0.95)",
@@ -54,7 +55,6 @@ export default function useStylesConvertations(
           : grey[600]
       }`,
 
-      borderRadius: "0.3em",
       "& div": {
         color: `${darkTheme ? grey[100] : blueGrey[700]}`,
         textOverflow: "ellipsis",
