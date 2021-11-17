@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { putService, getUserInfo } from "../../redux/actions";
+import { putService } from "../../redux/actions";
 import { getServiceById } from "../../utils/servicesPage";
 import ModalService from "../CreateService/ModalService";
 import Box from "@mui/material/Box";
@@ -17,6 +17,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import Skeleton from "@mui/material/Skeleton";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import s from "./EditService.module.css";
 
 function validateServices(input) {
@@ -55,32 +57,6 @@ function EditService({ id }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  //---------- TRAIGO INFO DEL SERVICIO ---------------
-
-  useEffect(() => {
-    getServiceById(id)
-      .then((data) =>
-        setInputs({
-          title: data.service.title,
-          description: data.service.description,
-          price: data.service.price,
-          img: data.service.img,
-        })
-      )
-      .catch((e) => console.log(e));
-  }, [id]);
-
-  // useEffect(() => {
-  //   setInputs({
-  //     title: service.title,
-  //     description: service.description,
-  //     price: service.price,
-  //     img: service.img,
-  //   });
-  // }, [service]);
-
-  //-----------------------------------
-
   const groups = useSelector((state) => state.groups);
   const provinces = useSelector((state) => state.provinces);
   const query = useMediaQuery("(max-width: 500px)");
@@ -97,62 +73,128 @@ function EditService({ id }) {
     description: "",
     price: "",
     img: "",
+    avaliable: "",
   });
-
-  const [indexProv, setIndexProv] = useState(null);
+  const [inputsComplete, setInputsComplete] = useState({
+    province: null,
+    city: null,
+  });
   const [skeleton, setSkeleton] = useState(false);
   const [errors, setErrors] = useState({});
   const [modal, setModal] = useState(false);
   const [show, setShow] = useState(false);
+  const [service, setService] = useState({});
 
-  // Manejador de inputs
-  const handleInputs = (e, value, input) => {
+  //---------- TRAIGO INFO DEL SERVICIO ---------------
+  useEffect(() => {
+    getServiceById(id)
+      .then((data) => setService(data.service))
+      .catch((e) => console.log(e));
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(service).length) {
+      setInputs(() => ({
+        title: service.title,
+        description: service.description,
+        price: service.price,
+        img: service.img,
+        categoryId: service.category.id,
+        groupId: service.category.group.id,
+        provinceId: service.province.id,
+        cityId: service.city.id,
+        avaliable: service.avaliable ? "true" : "false",
+      }));
+      setInputsComplete(() => {
+        const province = provinces.find((p) => p.id === service.province.id);
+        const city = province.cities.find((c) => c.id === service.city.id);
+        return {
+          province: province,
+          city: city,
+        };
+      });
+      setShow(true);
+    }
+  }, [service]);
+
+  const handleInputs = (e) => {
     setInputs((prev) => {
-      // Cuando borra del text field
-      if (input === "province") {
-        if (!value) {
-          setIndexProv(null);
-          return { ...prev, provinceId: "", cityId: "" };
-        } else {
-          return { ...prev };
-        }
-      } else if (input === "cities") {
-        if (!value) {
-          return { ...prev, cityId: "" };
-        } else {
-          return { ...prev };
-        }
-      } else {
-        if (value && input === "provinceChange") {
-          setShow(false);
-          setIndexProv(() => {
-            const index = provinces.findIndex((p) => p.id === value.id);
-            return index;
-          });
-          // Demora aproposito para solventar un pegueño bug
-          setTimeout(() => {
-            setShow(true);
-          }, 150);
-          return { ...prev, provinceId: value.id, cityId: "" };
-        } else if (value && input === "citiesChange") {
-          return { ...prev, cityId: value.id };
-          // Resto de inputs
-        } else {
-          const obj = {
-            ...prev,
-            [e.target.name]: e.target.value,
-          };
-          if (e.target.name === "groupId") {
-            obj.categoryId = "";
-          }
-          return obj;
-        }
+      const obj = {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+      if (e.target.name === "groupId") {
+        obj.categoryId = "";
       }
+      setErrors(errorsValidate(obj));
+      return obj;
     });
-    setInputs((prev) => {
-      setErrors(errorsValidate(prev));
-      return prev;
-    });
+  };
+
+  const handleInputProvince = (e, value, input) => {
+    if (input === "province" && !value) {
+      setInputsComplete(() => ({
+        province: null,
+        city: null,
+      }));
+      setInputs((prev) => ({
+        ...prev,
+        provinceId: "",
+        cityId: "",
+      }));
+      setShow(false);
+    } else if (input === "province") {
+      return;
+    } else {
+      setInputsComplete(() => ({
+        province: value,
+        city: null,
+      }));
+      if (value) {
+        setShow(false);
+        setInputs((prev) => ({
+          ...prev,
+          provinceId: value.id,
+          cityId: "",
+        }));
+        setTimeout(() => {
+          setShow(true);
+        }, 100);
+      }
+    }
+  };
+
+  const handleInputCity = (e, value, input) => {
+    if (input === "cities" && !value) {
+      setInputsComplete((prev) => ({
+        ...prev,
+        city: null,
+      }));
+      setInputs((prev) => ({
+        ...prev,
+        cityId: "",
+      }));
+    } else if (input === "cities") {
+      return;
+    } else {
+      setInputsComplete((prev) => ({
+        ...prev,
+        city: value,
+      }));
+      if (value) {
+        setInputs((prev) => ({
+          ...prev,
+          cityId: value.id,
+        }));
+      }
+    }
+  };
+
+  const handleChangeSwitch = (e) => {
+    setInputs((prev) => ({
+      ...prev,
+      avaliable: e.target.checked ? "true" : "false",
+    }));
   };
 
   const loadImg = async (files) => {
@@ -183,9 +225,19 @@ function EditService({ id }) {
 
   const handleSubmit = () => {
     try {
-      dispatch(
-        putService({ ...inputs, price: Number(inputs.price), serviceId: id })
-      );
+      let obj = {
+        serviceId: id,
+      };
+      if (inputs.avaliable === "false") {
+        obj.avaliable = "false";
+      } else {
+        obj = {
+          ...obj,
+          ...inputs,
+          price: Number(inputs.price),
+        };
+      }
+      dispatch(putService(obj));
       setModal(true);
     } catch (e) {
       console.log(e.message);
@@ -194,8 +246,10 @@ function EditService({ id }) {
 
   return (
     <>
-      {!inputs.title ? (
-        <Box sx={{ display: "flex", justifyContent: "center", marginTop:'20%' }}>
+      {!Object.keys(service).length ? (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", marginTop: "20%" }}
+        >
           <div className={s.spinner}></div>
         </Box>
       ) : (
@@ -224,6 +278,24 @@ function EditService({ id }) {
             </IconButton>
           </Box>
           {/* -------------------------------------------------- */}
+          {/* ---------------- Disable service------------------ */}
+          <FormControlLabel
+            control={
+              <Switch
+                checked={inputs.avaliable === "true"}
+                color="success"
+                onChange={handleChangeSwitch}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+            label={
+              inputs.avaliable === "true"
+                ? "Service avaliable"
+                : "Service disable"
+            }
+          />
+
+          {/* -------------------------------------------------- */}
           {/* ----------Manejador de categorias y provincias ------*/}
           <Box
             sx={{
@@ -244,6 +316,7 @@ function EditService({ id }) {
               <FormControl fullWidth>
                 <InputLabel>Category</InputLabel>
                 <Select
+                  disabled={inputs.avaliable === "false"}
                   value={inputs.groupId}
                   label="Category"
                   name="groupId"
@@ -260,10 +333,11 @@ function EditService({ id }) {
               {/* ---------------------------------------------------- */}
 
               {/* ---------------- Type(Categoria) -------------------- */}
-              {inputs.groupId ? (
+              {groups[inputs.groupId - 1] && inputs.groupId !== null ? (
                 <FormControl fullWidth>
                   <InputLabel>Type</InputLabel>
                   <Select
+                    disabled={inputs.avaliable === "false"}
                     value={inputs.categoryId}
                     label="Type"
                     name="categoryId"
@@ -292,12 +366,14 @@ function EditService({ id }) {
             >
               <Autocomplete
                 fullwidth="true"
+                disabled={inputs.avaliable === "false"}
+                value={inputsComplete.province}
                 options={provinces}
                 getOptionLabel={(option) => option.name}
-                onChange={(e, value) => {
-                  handleInputs(e, value, "provinceChange");
-                }}
-                onInputChange={(e, value) => handleInputs(e, value, "province")}
+                onChange={(e, value) => handleInputProvince(e, value, null)}
+                onInputChange={(e, value) =>
+                  handleInputProvince(e, value, "province")
+                }
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -309,15 +385,19 @@ function EditService({ id }) {
               {/* ---------------------------------------------------- */}
 
               {/* ------------------- Ciudad ----------------------- */}
-              {show && inputs.provinceId ? (
+              {show && inputs.provinceId && inputsComplete.province.cities ? (
                 <Autocomplete
                   fullwidth="true"
-                  options={provinces[indexProv].cities}
+                  disabled={inputs.avaliable === "false"}
+                  options={inputsComplete.province.cities}
                   getOptionLabel={(option) => option.name}
+                  value={inputsComplete.city}
                   onChange={(e, value) => {
-                    handleInputs(e, value, "citiesChange");
+                    handleInputCity(e, value, null);
                   }}
-                  onInputChange={(e, value) => handleInputs(e, value, "cities")}
+                  onInputChange={(e, value) => {
+                    handleInputCity(e, value, "cities");
+                  }}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -340,12 +420,19 @@ function EditService({ id }) {
             }}
           >
             <TextField
+              disabled={inputs.avaliable === "false"}
               name="title"
               placeholder="title"
               value={inputs.title}
               onChange={handleInputs}
-              error={errors.title ? true : false}
-              helperText={errors.title}
+              error={
+                inputs.avaliable === "true"
+                  ? errors.title
+                    ? true
+                    : false
+                  : false
+              }
+              helperText={inputs.avaliable === "true" ? errors.title : ""}
               label="New Title"
               variant="outlined"
               required
@@ -353,14 +440,21 @@ function EditService({ id }) {
             />
 
             <TextField
+              disabled={inputs.avaliable === "false"}
               multiline
               minRows={4}
               name="description"
               placeholder="description"
               value={inputs.description}
               onChange={handleInputs}
-              error={errors.description ? true : false}
-              helperText={errors.description}
+              error={
+                inputs.avaliable === "true"
+                  ? errors.description
+                    ? true
+                    : false
+                  : false
+              }
+              helperText={inputs.avaliable === "true" ? errors.description : ""}
               label="New Description"
               variant="outlined"
               required
@@ -368,12 +462,19 @@ function EditService({ id }) {
             />
 
             <TextField
+              disabled={inputs.avaliable === "false"}
               name="price"
               placeholder="price"
               value={inputs.price}
               onChange={handleInputs}
-              error={errors.price ? true : false}
-              helperText={errors.price}
+              error={
+                inputs.avaliable === "true"
+                  ? errors.price
+                    ? true
+                    : false
+                  : false
+              }
+              helperText={inputs.avaliable === "true" ? errors.price : ""}
               label="New Price"
               variant="outlined"
               type="number"
@@ -418,7 +519,7 @@ function EditService({ id }) {
               justifyContent="center"
               alignItems="center"
             >
-              {inputs.img ? (
+              {inputs.img && !skeleton ? (
                 <img
                   style={{ maxWidth: "345px", width: "100%" }}
                   src={inputs.img}
@@ -434,7 +535,9 @@ function EditService({ id }) {
           {/* ---------------------------------------------------- */}
 
           <Button
-            disabled={!validateServices(inputs)}
+            disabled={
+              inputs.avaliable === "true" ? !validateServices(inputs) : false
+            }
             type="submit"
             variant="contained"
             fullWidth={true}
