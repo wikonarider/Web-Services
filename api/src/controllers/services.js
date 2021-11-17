@@ -142,6 +142,9 @@ async function getServicesByUserId(req, res, next) {
         ],
         where: {
           userId: userId,
+          avaliable: {
+            [Op.is]: true,
+          },
         },
         include: [
           {
