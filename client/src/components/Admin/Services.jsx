@@ -1,7 +1,7 @@
 import React from "react";
 import Map from "./Charts/Map";
 import Box from "@mui/material/Box";
-import { styles } from "./AdminStyles";
+// import { styles } from "./AdminStyles";
 export default function Services({ info }) {
   return (
     <>

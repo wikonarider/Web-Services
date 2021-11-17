@@ -7,7 +7,7 @@ import {
   Geography,
   ZoomableGroup,
   Marker,
-  Annotation,
+  // Annotation,
 } from "react-simple-maps";
 import Box from "@mui/material/Box";
 import Style from "./map.module.css";

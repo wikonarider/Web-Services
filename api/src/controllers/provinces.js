@@ -35,6 +35,7 @@ async function getProvincesFilters(req, res, next) {
       SELECT p.name, p.id, COUNT(p.name) FROM services AS s
       JOIN provinces AS p
       ON s."provinceId" = p.id
+      WHERE s.avaliable = true
       GROUP BY p.name, p.id   
       ORDER BY p.name   
       `
@@ -45,6 +46,7 @@ async function getProvincesFilters(req, res, next) {
       SELECT c.name, c.id, c."provinceId", COUNT(c.name) FROM services AS s
       JOIN cities AS c
       ON s."cityId" = c.id
+      WHERE s.avaliable = true
       GROUP BY c.name, c.id
       ORDER BY c.name
       `
