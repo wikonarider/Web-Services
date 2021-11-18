@@ -72,8 +72,7 @@ export default function SearchBar() {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        sx={{ backgroundColor: "transparent" }}
-        className={styles.searchInput}
+        className={`${name ? styles.searchInputWithValue : styles.searchInput}`}
         value={name}
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
