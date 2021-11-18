@@ -132,16 +132,6 @@ export default function TableAdmin({
         <Table size="small" stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell key={`searchRowCell`} align="center" colSpan={5}>
-                <SearchBar
-                  search={search}
-                  setSearch={setSearch}
-                  setOpen={(val) => val}
-                  setOptions={setInfo}
-                  url={`${url}?search=`}
-                  placeholder={searchPlaceholder}
-                />
-              </TableCell>
               <TableCell key="downloadCsvServices" align="right" colSpan={1}>
                 <IconButton
                   onClick={() =>
@@ -176,6 +166,16 @@ export default function TableAdmin({
                 >
                   <DownloadIcon />
                 </IconButton>
+              </TableCell>
+              <TableCell key={`searchRowCell`} align="center" colSpan={5}>
+                <SearchBar
+                  search={search}
+                  setSearch={setSearch}
+                  setOpen={(val) => val}
+                  setOptions={setInfo}
+                  url={`${url}?search=`}
+                  placeholder={searchPlaceholder}
+                />
               </TableCell>
             </TableRow>
             <TableRow>
