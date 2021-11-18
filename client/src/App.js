@@ -25,6 +25,7 @@ import {
   getProvinces,
 } from "./redux/actions";
 import Chat from "./components/Chat/UserChat/Chat";
+import About from "./components/About/About";
 import { getOrder, createOrder } from "./utils/orders";
 
 //DARK-MODE
@@ -224,6 +225,11 @@ function App() {
             );
           }}
         />
+        <Route exact path="/about">
+          <Nav route={"account"} />
+          <NavSpace />
+          <About />
+        </Route>
       </div>
     </ThemeProvider>
   );

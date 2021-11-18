@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 import SideBarNested from "./SideBarNested/SideBarNested";
 import SideBarOrderPrice from "./SideBarOrderPrice/SideBarOrderPrice";
@@ -29,7 +30,7 @@ const drawerWidth = 350;
 export default function SideBar() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const handleDrawer = () => {
     setOpen((prev) => !prev);
   };
@@ -88,13 +89,10 @@ export default function SideBar() {
         </Button>
         <Divider />
         <List>
-          {["Info", "About", "Something"].map((text, index) => (
-            <ListItem button key={index}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
+          {["About"].map((text, index) => (
+            <Button onClick={() => history.push("/about")}>
               <ListItemText primary={text} />
-            </ListItem>
+            </Button>
           ))}
         </List>
       </Drawer>
