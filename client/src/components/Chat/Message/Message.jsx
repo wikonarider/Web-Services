@@ -23,9 +23,11 @@ export default function Message({
         }
       >
         <Box className={clasess.message}>
-          <h5>{message.text}</h5>
+          <h5>
+            {message.text}
+         
+          </h5>
         </Box>
-
         <h5>{format(message.createdAt)}</h5>
       </Box>
     </Box>

@@ -5,13 +5,13 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
   //darkTheme booleano del estado global
   return makeStyles((theme) => ({
     //darkTheme prop global
-    //SEND BTN
     inputForm: {
       display: "flex",
       width: "100%",
       height: "5%",
       alignItems: "center",
-      margin: "1%",
+      marginBottom: "1%",
+      marginTop: "1%",
     },
     inputSend: {
       display: "flex",
@@ -46,7 +46,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       textTransfrom: "none",
       height: "35px",
       marginLeft: "1%",
-      marginRight: "4%",
+      marginRight: "1%",
     },
     //------------------------------------------------------------------button X
     btn_x: {
@@ -66,6 +66,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     box_messanger_father: {
       display: "flex",
       flexDirection: "row",
+      flexWrap: "wrap",
       height: "calc(100vh - 70px)",
       width: "100vw",
       overflowX: "hidden",
@@ -73,6 +74,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
     //---------------------------------------------------------------------box contacts*/
     box_contacts_a: {
       flex: 1.5,
+      minWidth: "197px",
       flexDirection: "column",
       display: "flex",
       alignItems: "center",
@@ -99,6 +101,15 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
 
     /*input search*/
 
+    box_conversations_b: {
+      overflowX: "hidden",
+      overflowY: "scroll",
+      marginTop: "15px",
+      minWidth: "280px",
+      height: "100%",
+      width: "100%",
+      maxHeight: "100%",
+    },
     /*---------------------------------------------------------------box conversations*/
     container_chatting: {
       flex: 5.5,
@@ -122,20 +133,14 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       },
     },
 
-    box_conversations_b: {
-      overflowX: "hidden",
-      overflowY: "scroll",
-      marginTop: "15px",
-      height: "100%",
-      width: "100%",
-      maxHeight: "100%",
-    },
     /*----------------------------------------------------------------box contacts online-offline*/
     box_contactsStates_c: {
       height: "100%",
       flex: 1.5,
       display: "flex",
+      minWidth: "100px",
       marginRight: "0.2%",
+      maxHeight: "100px",
       flexDirection: "column",
       background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
@@ -155,6 +160,7 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
 
     /*box contactsOnline wrapper*/
     box_contactsOnline_wrapper: {
+      maxHeight: "100px",
       display: "flex",
       overflowY: "auto",
       flexWrap: "wrap",
