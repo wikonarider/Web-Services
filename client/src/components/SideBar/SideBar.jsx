@@ -87,7 +87,7 @@ export default function SideBar() {
         <Divider />
         <List>
           {["About"].map((text, index) => (
-            <Button onClick={() => history.push("/about")}>
+            <Button key={"about_1"} onClick={() => history.push("/about")}>
               <ListItemText primary={text} />
             </Button>
           ))}
