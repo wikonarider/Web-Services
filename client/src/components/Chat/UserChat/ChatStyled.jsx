@@ -140,7 +140,6 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
       display: "flex",
       minWidth: "100px",
       marginRight: "0.2%",
-      maxHeight: "100px",
       flexDirection: "column",
       background: darkTheme ? grey[900] : blueGrey[100],
       padding: "0.5%",
@@ -160,13 +159,11 @@ export default function useStylesChat(darkTheme, selectCurrentChat) {
 
     /*box contactsOnline wrapper*/
     box_contactsOnline_wrapper: {
-      maxHeight: "100px",
       display: "flex",
       overflowY: "auto",
       flexWrap: "wrap",
       alignContent: "flex-start",
       justifyContent: "center",
-      maxHeight: "100%",
       height: "100%",
     },
   }));
