@@ -19,9 +19,32 @@ import Select from "@mui/material/Select";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
 
 // const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 // const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const useStyles = makeStyles((theme) => ({
+  showDialog: {
+    [theme.breakpoints.up("lg")]: {
+      display: "none !important",
+    },
+  },
+  showDataXs: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none !important",
+    },
+  },
+  showDatas: {
+    [theme.breakpoints.down("md")]: {
+      display: "none !important",
+    },
+  },
+
+  dialog: {
+    backgroundColor: "theme.palette.primary !important",
+  },
+}));
 
 export default function Results({
   search,
@@ -162,6 +185,8 @@ export default function Results({
     },
   };
 
+  const classes = useStyles();
+
   return (
     <>
       <List sx={{ display: open ? "block" : "none" }}>
@@ -191,7 +216,11 @@ export default function Results({
                     <Avatar alt={`${o.name}-avatar`} src={o.userImg} />
                   </Box>
 
-                  <Box gridColumn="span 4" display="flex">
+                  <Box
+                    gridColumn="span 4"
+                    display="flex"
+                    // className={classes.showDataXs}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
                       <>
                         {inputComponents.textInput(o.name, o.id, "name")}{" "}
@@ -216,7 +245,11 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 2" display="flex">
+                  <Box
+                    gridColumn="span 2"
+                    display="flex"
+                    className={`${classes.showDataXs} ${classes.showDatas}`}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
                       inputComponents.textInput(o.username, o.id, "username")
                     ) : (
@@ -234,7 +267,11 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 4" display="flex">
+                  <Box
+                    gridColumn="span 4"
+                    display="flex"
+                    className={`${classes.showDataXs} ${classes.showDatas}`}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
                       inputComponents.textInput(o.email, o.id, "email")
                     ) : (
@@ -244,7 +281,11 @@ export default function Results({
                     )}
                   </Box>
 
-                  <Box gridColumn="span 1" display="flex">
+                  <Box
+                    gridColumn="span 1"
+                    display="flex"
+                    className={classes.showDataXs}
+                  >
                     {edit[o.id] && edit[o.id].editing ? (
                       inputComponents.select(o, ["Active", "Banned"])
                     ) : (
@@ -258,7 +299,11 @@ export default function Results({
                       </ListItemText>
                     )}
                   </Box>
-                  <Box gridColumn="span 1" display="flex">
+                  <Box
+                    gridColumn="span 1"
+                    display="flex"
+                    className={classes.showDataXs}
+                  >
                     <ListItemText sx={styleObj.listItem.text}>
                       {o.admin ? "Admin" : "User"}
                     </ListItemText>
@@ -283,19 +328,40 @@ export default function Results({
                 </Box>
 
                 {edit[o.id] && edit[o.id].editing && (
-                  <Dialog fullScreen open={edit.edit}>
-                    <AppBar sx={{ position: "relative" }}>
+                  <Dialog
+                    fullScreen
+                    open={edit.edit}
+                    className={classes.showDialog}
+                  >
+                    <AppBar
+                      sx={{
+                        position: "relative",
+                      }}
+                      className={classes.dialog}
+                    >
                       <Toolbar>
                         {inputComponents.iconButton("clear", handleEdit, o)}
                         {inputComponents.iconButton("save", handleSave, o)}
                       </Toolbar>
                     </AppBar>
-                    {inputComponents.textInput(o.name, o.id, "name")}{" "}
-                    {inputComponents.textInput(o.lastname, o.id, "lastname")}
-                    {inputComponents.textInput(o.username, o.id, "username")}
-                    {inputComponents.textInput(o.email, o.id, "email")}
-                    {inputComponents.select(o, ["Active", "Banned"])}
-                    {inputComponents.textInput("password", o.id, "password")}
+                    <Box
+                      margin="1rem"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "1rem",
+                        marginTop: "10rem",
+                      }}
+                    >
+                      {inputComponents.textInput(o.name, o.id, "name")}{" "}
+                      {inputComponents.textInput(o.lastname, o.id, "lastname")}
+                      {inputComponents.textInput(o.username, o.id, "username")}
+                      {inputComponents.textInput(o.email, o.id, "email")}
+                      {inputComponents.select(o, ["Active", "Banned"])}
+                      {inputComponents.textInput("password", o.id, "password")}
+                    </Box>
                   </Dialog>
                 )}
               </>

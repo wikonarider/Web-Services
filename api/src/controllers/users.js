@@ -92,22 +92,60 @@ async function getUserInfo(req, res, next) {
         {
           model: Service,
           as: "servicesOwn",
-          attributes: ["id", "title", "img", "price", "userId", "avaliable"],
+          attributes: [
+            "id",
+            "title",
+            "img",
+            "price",
+            "userId",
+            "avaliable",
+            [
+              conn.literal(
+                `
+            (
+              SELECT AVG(q.score)
+              FROM qualifications AS q
+              WHERE q."serviceId" = "servicesOwn".id
+            )
+            `
+              ),
+              "rating",
+            ],
+          ],
           include: {
             model: Qualification,
-            attributes: ["score"],
+            attributes: [],
           },
         },
         {
           model: Service,
           as: "servicesFavs",
-          attributes: ["id", "title", "img", "price", "userId", "avaliable"],
+          attributes: [
+            "id",
+            "title",
+            "img",
+            "price",
+            "userId",
+            "avaliable",
+            [
+              conn.literal(
+                `
+          (
+            SELECT AVG(q.score)
+            FROM qualifications AS q
+            WHERE q."serviceId" = "servicesFavs".id
+          )
+          `
+              ),
+              "rating",
+            ],
+          ],
           through: {
             attributes: [],
           },
           include: {
             model: Qualification,
-            attributes: ["score"],
+            attributes: [],
           },
         },
         {
