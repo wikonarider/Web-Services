@@ -8,6 +8,7 @@ const {
 const { allServicesBought } = require("../utils/validOrders");
 require("dotenv").config();
 const { ORIGIN } = process.env;
+const bcrypt = require("bcrypt");
 
 async function userCreated(req, res, next) {
   try {
@@ -49,7 +50,11 @@ async function userEdit(req, res, next) {
         user.name = name ? name : user.name;
         user.lastname = lastname ? lastname : user.lastname;
         user.userImg = userImg ? userImg : user.userImg;
-        user.password = password ? password : user.password;
+        if (password) {
+          const salt = await bcrypt.genSalt(10);
+          const newPassword = await bcrypt.hash(password, salt);
+          user.password = newPassword;
+        }
         user.username = username ? username : user.username;
         user.email = email ? email : user.email;
         user.ban = !ban ? user.ban : ban === "Active" ? false : true;

@@ -178,10 +178,10 @@ function CardService({ service, related, route }) {
             <IconButton aria-label="share" onClick={(e) => handleModal(e)}>
               <ShareIcon />
             </IconButton>
-            {/*----------- service disable -------------*/}
+            {/*----------- service disabled -------------*/}
             {!service.avaliable ? (
               <Alert severity="error" sx={{ ml: "auto" }}>
-                Service disable
+                Service disabled
               </Alert>
             ) : null}
             {/* ------------------------------------- */}

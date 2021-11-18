@@ -65,11 +65,15 @@ async function googleAuthentication(req, res, next) {
     });
 
     if (user) {
-      const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
-      res.json({
-        id: user.id,
-        token: accessToken,
-      });
+      if (user.ban) {
+        res.status(401).json({ message: "Banned user" });
+      } else {
+        const accessToken = jwt.sign({ id: user.id }, SECRET_KEY);
+        res.json({
+          id: user.id,
+          token: accessToken,
+        });
+      }
     } else {
       res.status(400).json({ message: "Unregistered user" });
     }
