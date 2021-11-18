@@ -104,6 +104,11 @@ function CreateService() {
             setShow(true);
           }, 150);
           return { ...prev, provinceId: value.id, cityId: "" };
+        } else if (
+          !value &&
+          (input === "provinceChange" || input === "citiesChange")
+        ) {
+          return { ...prev };
         } else if (value && input === "citiesChange") {
           return { ...prev, cityId: value.id };
           // Resto de inputs

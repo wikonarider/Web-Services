@@ -12,6 +12,7 @@ paypal.configure({
 
 async function checkoutPaypal(req, res, next) {
   try {
+    const VALOR_DOLAR = 100;
     let { totalPrice, title, quantity, servicesId } = req.body;
     console.log("ESTOY EN BACK", req.body);
 
@@ -61,7 +62,7 @@ async function checkoutPaypal(req, res, next) {
               {
                 name: title.join(", "),
                 sku: "item",
-                price: price,
+                price: price / VALOR_DOLAR,
                 currency: "USD",
                 quantity: quantity,
               },
@@ -69,7 +70,7 @@ async function checkoutPaypal(req, res, next) {
           },
           amount: {
             currency: "USD",
-            total: price,
+            total: price / VALOR_DOLAR,
           },
           description: "This is the payment description.",
         },
@@ -101,7 +102,7 @@ function paypalSuccess(req, res, next) {
       {
         amount: {
           currency: "USD",
-          total: quantity * price,
+          total: (quantity * price) / VALOR_DOLAR,
         },
       },
     ],

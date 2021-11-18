@@ -15,10 +15,10 @@ const purchases = [
     createdAt: "2021-02-24T21:03:10.438Z",
   },
   {
-    services: [142, 131],
+    services: [25, 131],
     userId: "be19f20c-36aa-11ec-8d3d-0242ac130003",
     status: "success",
-    total: 3749,
+    total: 4499,
     createdAt: "2021-03-24T21:03:10.438Z",
   },
   // ------------------------

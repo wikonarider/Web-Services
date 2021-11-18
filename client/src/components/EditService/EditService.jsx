@@ -502,6 +502,7 @@ function EditService({ id }) {
             />
 
             <Button
+              disabled={inputs.avaliable === "false"}
               variant="outlined"
               startIcon={<PhotoSizeSelectActualIcon />}
               color="secondary"

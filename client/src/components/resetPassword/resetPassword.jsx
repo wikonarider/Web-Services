@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { ressetPassword } from "../../redux/actions/index";
-import ResetPasswordModal from './ResetPasswordModal'
+import ResetPasswordModal from "./ResetPasswordModal";
 
 const style = {
   position: "absolute",
@@ -23,10 +23,32 @@ const style = {
   p: 6,
 };
 
-export default function ResetPassword({resetPassword}) {
-    console.log('resetPassword en front', resetPassword)
+function validateErrors(password) {
+  let errors = {};
 
-  const [modal, setModal] = useState(false)
+  if (!password.password) {
+    errors.password = "Password ir required";
+  } else if (!password.confirmPassword) {
+    errors.confirmPassword = "You must to confirm your password";
+  } else if (password.password !== password.confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  } else if (
+    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(
+      password.password || password.confirmPassword
+    )
+  ) {
+    errors.password =
+      "At least 8 characters, it must contain 1 letter and 1 number";
+    errors.confirmPassword =
+      "At least 8 characters, it must contain 1 letter and 1 number";
+  }
+  return errors;
+}
+
+export default function ResetPassword({ resetPassword }) {
+  console.log("resetPassword en front", resetPassword);
+  const [start, setStart] = useState(false);
+  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({
     //   password : '',
@@ -38,25 +60,12 @@ export default function ResetPassword({resetPassword}) {
     confirmPassword: "",
   });
 
-  function validateErrors(password) {
-    let errors = {};
-
-    if (!password.password) {
-      errors.password = "Password ir required";
-    } else if (!password.confirmPassword) {
-      errors.confirmPassword = "You must to confirm your password";
-    } else if (password.password !== password.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-    else if ( /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password.password || password.confirmPassword)){
-        errors.password = "At least 8 characters, it must contain 1 letter and 1 number"
-        errors.confirmPassword = "At least 8 characters, it must contain 1 letter and 1 number"
-    }
-    return errors;
-  }
-
+  useEffect(() => {
+    setStart(true);
+  }, []);
 
   function handleChange(e) {
+    setStart(false);
     setPassword((prev) => {
       //guard el input modificado
       const input2 = {
@@ -99,7 +108,7 @@ export default function ResetPassword({resetPassword}) {
         resetPassword: resetPassword,
       })
     );
-    setModal(true)
+    setModal(true);
   }
 
   return (
@@ -137,6 +146,7 @@ export default function ResetPassword({resetPassword}) {
         />
 
         <Button
+          disabled={start ? true : Object.keys(errors).length}
           type="submit"
           variant="contained"
           color="secondary"
@@ -148,13 +158,12 @@ export default function ResetPassword({resetPassword}) {
         >
           Update Password
         </Button>
-       
-        <ResetPasswordModal
-        modal={modal}
-        setModal={setModal}
-        message={"Password changed successfully!"}
-      />
 
+        <ResetPasswordModal
+          modal={modal}
+          setModal={setModal}
+          message={"Password changed successfully!"}
+        />
       </Box>
     </div>
   );
