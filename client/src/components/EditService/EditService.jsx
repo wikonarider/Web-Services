@@ -293,7 +293,7 @@ function EditService({ id }) {
             label={
               inputs.avaliable === "true"
                 ? "Service avaliable"
-                : "Service disable"
+                : "Service disabled"
             }
           />
 
