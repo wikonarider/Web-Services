@@ -18,9 +18,10 @@ const style = {
   boxShadow: 24,
 };
 
-function ModalRegister({ modal, setModal, message }) {
+function ModalRegister({ modal, setModal, message, handleRedirect }) {
   const handleClose = () => {
     setModal(false);
+    handleRedirect && handleRedirect();
   };
 
   return (

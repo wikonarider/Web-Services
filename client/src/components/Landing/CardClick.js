@@ -1,13 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
+import Card from "@mui/material/Card";
 
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 import Grow from "@mui/material/Grow";
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     maxWidth: 645,
     background: "rgba(0,0,0,0.5)",
@@ -23,15 +22,14 @@ const useStyles = makeStyles({
     fontSize: "2rem",
     color: "#fff",
   },
-});
+};
 
 export default function CardClick({ infoCardClick, checkedCards }) {
-  const classes = useStyles();
   return (
     <Grow in={checkedCards} {...(checkedCards ? { timeout: 2500 } : {})}>
-      <Card className={classes.root}>
+      <Card sx={styles.root}>
         <CardMedia
-          className={classes.media}
+          sx={styles.media}
           image={infoCardClick.imageUrl}
           title="illustrative image"
         />
@@ -40,7 +38,7 @@ export default function CardClick({ infoCardClick, checkedCards }) {
             gutterBottom
             variant="h5"
             component="h1"
-            className={classes.title}
+            sx={styles.title}
           >
             {infoCardClick.title}
           </Typography>

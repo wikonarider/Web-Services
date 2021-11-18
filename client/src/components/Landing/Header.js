@@ -1,66 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Modal from '@material-ui/core/Modal';
-import Toolbar from '@material-ui/core/Toolbar';
-import SortIcon from '@material-ui/icons/Sort';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link as Scroll } from 'react-scroll';
-import Login from '../Login/Login';
-import { useHistory } from 'react-router';
-import UserMenu from '../Nav/UserMenu';
-import { useSelector } from 'react-redux';
-import Register from '../Register/Register';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Modal from "@mui/material/Modal";
+import Toolbar from "@mui/material/Toolbar";
+import SortIcon from "@material-ui/icons/Sort";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link as Scroll } from "react-scroll";
+import Login from "../Login/Login";
+import { useHistory } from "react-router";
+import UserMenu from "../Nav/UserMenu";
+import { useSelector } from "react-redux";
+import Register from "../Register/Register";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '150vh',
-    fontFamily: 'Nunito',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "150vh",
+    fontFamily: "Nunito",
   },
   appbar: {
-    [theme.breakpoints.down('xs')]: {
-      backgroundColor: 'rgba(188,179,179,0.6);',
+    backgroundColor: "transparent !important",
+    [theme.breakpoints.down("xs")]: {
+      backgroundColor: "rgba(188,179,179,0.6) !important",
     },
-    background: 'none',
   },
   appbarWrapper: {
-    width: '100%',
-    textAlign: 'left',
+    width: "100%",
+    textAlign: "left",
   },
   appbarTitle: {
-    flexGrow: '1',
+    flexGrow: "1",
   },
   icon: {
-    color: '#fff',
-    fontSize: '2rem',
-    margin: '0.5rem',
+    color: "#fff",
+    fontSize: "2rem",
+    margin: "0.5rem",
   },
   iconBtn: {
-    '&:hover': {
-      background: 'transparent',
+    "&:hover": {
+      background: "transparent !important",
     },
   },
   colorText: {
-    color: '#8d6e63',
+    color: "#8d6e63",
   },
   container: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   title: {
-    color: '#fff',
-    fontSize: '3rem',
-    fontFamily: 'Nunito',
+    color: "#fff",
+    fontSize: "3rem",
+    fontFamily: "Nunito",
   },
   goDown: {
-    color: '#cddc39', // lime[500]
-    fontSize: '4rem',
+    color: "#cddc39", // lime[500]
+    fontSize: "4rem",
+  },
+  downHover: {
+    "&:hover": {
+      backgroundColor: "#a2b2bec2 !important",
+    },
   },
 }));
 
@@ -87,20 +92,20 @@ const Header = ({ cookie, setCheckedCards }) => {
   const darkTheme = useSelector((state) => state.darkTheme);
 
   const styleLogin = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     maxWidth: 600,
-    width: '70%',
-    bgcolor: darkTheme ? '#121212' : '#ffffff',
-    borderRadius: '10px',
+    width: "70%",
+    bgcolor: darkTheme ? "#121212" : "#ffffff",
+    borderRadius: "10px",
     boxShadow: 24,
     p: 2,
   };
 
   if (login) {
-    history.push('/home');
+    history.push("/home");
   }
 
   const handleLogin = () => {
@@ -112,7 +117,7 @@ const Header = ({ cookie, setCheckedCards }) => {
   };
 
   const handleRedirect = () => {
-    history.push('/home');
+    history.push("/home");
   };
 
   useEffect(() => {
@@ -123,13 +128,13 @@ const Header = ({ cookie, setCheckedCards }) => {
     <div className={classes.root} id="header">
       <AppBar className={classes.appbar} elevation={0}>
         <Toolbar className={classes.appbarWrapper}>
-          <h1 className={classes.appbarTitle}>
+          <h1 className={classes.appbarTitle} style={{ color: "white" }}>
             WEB <span className={classes.colorText}>SERVICE. </span>
           </h1>
           {!cookie ? (
             <IconButton onClick={handleLogin} className={classes.iconBtn}>
               <SortIcon className={classes.icon} />
-              <p>Login</p>
+              <p style={{ color: "#535a60" }}>Login</p>
             </IconButton>
           ) : (
             <UserMenu userImg={userImg} name={name} />
@@ -161,7 +166,10 @@ const Header = ({ cookie, setCheckedCards }) => {
             WEB<span className={classes.colorText}>SERVICE.</span>
           </h1>
           <Scroll to="cards" smooth={true}>
-            <IconButton onClick={() => setCheckedCards(true)}>
+            <IconButton
+              onClick={() => setCheckedCards(true)}
+              className={classes.downHover}
+            >
               <ExpandMoreIcon className={classes.goDown} />
             </IconButton>
           </Scroll>
