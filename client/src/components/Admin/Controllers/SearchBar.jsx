@@ -12,6 +12,7 @@ export default function SearchBar({
   setOptions,
   setOpen,
   url,
+  placeholder,
 }) {
   const handleInputChange = (event, setSearch, setOptions) => {
     let value = event.target.value.toLowerCase();
@@ -36,7 +37,7 @@ export default function SearchBar({
         fullWidth
         id={"user-search"}
         value={search}
-        placeholder="Search ID, Name, Username, Email"
+        placeholder={placeholder}
         onClick={() => setOpen(true)}
         onChange={(e) => handleInputChange(e, setSearch, setOptions)}
         autoComplete="off"
