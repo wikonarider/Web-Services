@@ -14,6 +14,9 @@ import Switch from "@mui/material/Switch";
 import SearchBar from "./Controllers/SearchBar";
 import IconButton from "@mui/material/IconButton";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import DownloadIcon from "@mui/icons-material/Download";
+import { useJsonToCsv } from "react-json-csv";
+
 const useStyles = makeStyles((theme) => ({
   showDialog: {
     [theme.breakpoints.up("lg")]: {
@@ -60,6 +63,8 @@ export default function TableAdmin({
       axios.get(url).then((response) => setInfo(response.data));
     }
   }, [info]);
+
+  const { saveAsCsv } = useJsonToCsv();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -127,7 +132,7 @@ export default function TableAdmin({
         <Table size="small" stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell key={`searchRowCell`} align="center" colSpan={6}>
+              <TableCell key={`searchRowCell`} align="center" colSpan={5}>
                 <SearchBar
                   search={search}
                   setSearch={setSearch}
@@ -136,6 +141,41 @@ export default function TableAdmin({
                   url={`${url}?search=`}
                   placeholder={searchPlaceholder}
                 />
+              </TableCell>
+              <TableCell key="downloadCsvServices" align="right" colSpan={1}>
+                <IconButton
+                  onClick={() =>
+                    saveAsCsv({
+                      data: info.map((i) => ({
+                        ...i,
+                        rating: Number(i.rating),
+                        price: Number(i.price),
+                        title: i.title.split(",").join(" "),
+                      })),
+                      fields: {
+                        id: "id",
+                        title: "title",
+
+                        price: "price",
+                        createdAt: "createdAt",
+                        userId: "userId",
+                        rating: "rating",
+                        avaliable: "available",
+                        categoryID: "categoryId",
+                        cat: "category",
+                        groupID: "groupID",
+                        grp: "group",
+                        provinceId: "provinceId",
+                        prov: "province",
+                        cityId: "cityId",
+                        cty: "city",
+                      },
+                      filename: "services-csv",
+                    })
+                  }
+                >
+                  <DownloadIcon />
+                </IconButton>
               </TableCell>
             </TableRow>
             <TableRow>
