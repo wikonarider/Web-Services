@@ -1,0 +1,11 @@
+#boxConvInline{
+  position: relative;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0%   {background:rgb(85, 118, 124); }
+  10%  {transform: scale(0.9,0.9);}
+}

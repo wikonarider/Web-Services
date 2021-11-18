@@ -100,6 +100,7 @@ function Chat({ user, darkTheme, cookie }) {
   //-----------------------------------------------------------------------------new msg receive
   // eslint-disable-next-line
   useEffect(() => {
+    newUnReadMessage();
     if (textReceive && chat.currentCont) {
       chat.currentCont.id === textReceive.userId &&
         setChat({
@@ -151,6 +152,34 @@ function Chat({ user, darkTheme, cookie }) {
         .catch((err) => console.log(err));
     }
   }
+
+  //---------------------------------------------------------------------------------------------------enter new unread message
+  function newUnReadMessage() {
+    setChat({
+      ...chat,
+      searchContact: chat.searchContact.map((user) => {
+        if (user.id === textReceive.userId && user.id !== chat.currentCont.id) {
+          user.unRead = true;
+          return user;
+        }
+        return user;
+      }),
+    });
+  }
+  //-------------------------------------------------------------------------------------------------user has unread messages
+  function unreadMessages(idUser) {
+    var unReadMsm = false;
+    chat.searchContact.map((user) => {
+      if (idUser === user.id && user.unRead) {
+        unReadMsm = true; //has unread messages
+        return user;
+      } else {
+        return user;
+      }
+    });
+
+    return unReadMsm;
+  }
   //--------------------------------------------------------------------------------------------conversation of a contact
   async function chatContact(idUser) {
     var id;
@@ -165,7 +194,14 @@ function Chat({ user, darkTheme, cookie }) {
           ...chat,
           currentCont: newCurrent[0],
           chatting: post.data,
-          searchContact: chat.contactsConv,
+          searchContact: chat.searchContact.map((user) => {
+            if (user.id === newCurrent[0].id) {
+              user.unRead = false; //message reades
+              return user;
+            } else {
+              return user;
+            }
+          }),
         });
         setInputs({ ...inputs, searchCont: "" });
       }
@@ -215,7 +251,7 @@ function Chat({ user, darkTheme, cookie }) {
     }
   }
   //------------------------------------------------------------------------------------------send msn
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (text.length) {
       if (user && chat.currentCont) {
@@ -237,7 +273,7 @@ function Chat({ user, darkTheme, cookie }) {
           }),
         });
         // eslint-disable-next-line
-        var send = await sendMessage({
+        var send = sendMessage({
           //send BD
           remit: chat.currentCont.id,
           message: text,
@@ -268,6 +304,7 @@ function Chat({ user, darkTheme, cookie }) {
                   key={con.id}
                   contacts={con}
                   contactsOnline={UsersOnlines}
+                  contactNotification={unreadMessages(con.id)}
                   darkTheme={darkTheme}
                   contactCurrent={chat.currentCont}
                   deleteConv={deleteConvert}

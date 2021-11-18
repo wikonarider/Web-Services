@@ -228,7 +228,7 @@ function sendMessage(req, res, next) {
     },
     defaults: { userA: userId, userB: remit },
   })
-    .then(([convertation, flat]) => {
+    .then(([convertation]) => {
       Users.findByPk(userId)
         .then((userBd) => {
           user = userBd;

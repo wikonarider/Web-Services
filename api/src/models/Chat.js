@@ -1,4 +1,4 @@
-const { DataTypes, UUID, UUIDV1, TEXT } = require("sequelize");
+const { DataTypes, UUID, UUIDV1, TEXT, BOOLEAN } = require("sequelize");
 const { STRING } = DataTypes;
 module.exports = (sequelize) => {
   sequelize.define(
@@ -12,7 +12,8 @@ module.exports = (sequelize) => {
       text: {
         type: TEXT,
         alowNull: false,
-      }
+      },
+    
     },
     {
       timestamps: true,

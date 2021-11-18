@@ -4,6 +4,7 @@ import React from "react";
 import useStylesConvertations from "./ConvertationsStyled";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+require("./Convertations.css");
 export default function Conversations({
   contacts,
   contactsOnline,
@@ -11,6 +12,7 @@ export default function Conversations({
   contactCurrent,
   deleteConv,
   chatCont,
+  contactNotification,
 }) {
   //darkTheme boolean global state
   var statusUser = contactsOnline.some((e) => e.user === contacts.id);
@@ -23,7 +25,10 @@ export default function Conversations({
 
   if (contacts) {
     return (
-      <Box className={classes.boxConvInline}>
+      <Box
+        id={contactNotification ? "boxConvInline" : ""}
+        className={classes.boxConvInline}
+      >
         <Box
           className={classes.avatarAndname}
           onClick={() => {
