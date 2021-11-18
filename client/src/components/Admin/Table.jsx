@@ -54,7 +54,7 @@ export default function TableAdmin({
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [orderBy, setOrderBy] = React.useState({ order: "desc" });
-  const [sortFx, setSortFx] = React.useState();
+  // const [sortFx, setSortFx] = React.useState();
   const [info, setInfo] = React.useState();
   const [search, setSearch] = React.useState("");
 
@@ -62,6 +62,7 @@ export default function TableAdmin({
     if (!info || info.length === 0) {
       axios.get(url).then((response) => setInfo(response.data));
     }
+    // eslint-disable-next-line
   }, [info]);
 
   const { saveAsCsv } = useJsonToCsv();
