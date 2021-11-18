@@ -6,17 +6,21 @@ import CloseIcon from "@mui/icons-material/Close";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
-export default function SearchBar({ search, setSearch, setOptions, setOpen }) {
+export default function SearchBar({
+  search,
+  setSearch,
+  setOptions,
+  setOpen,
+  url,
+}) {
   const handleInputChange = (event, setSearch, setOptions) => {
-    let value = event.target.value;
+    let value = event.target.value.toLowerCase();
     setSearch(value);
 
     if (value === "") {
       setOptions([]);
     } else {
-      axios
-        .get(`/users/search?search=${value}`)
-        .then((response) => setOptions(response.data));
+      axios.get(`${url}${value}`).then((response) => setOptions(response.data));
     }
   };
 

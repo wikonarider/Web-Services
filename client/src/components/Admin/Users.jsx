@@ -15,6 +15,7 @@ export default function Users() {
         search={search}
         setSearch={setSearch}
         setOptions={setOptions}
+        url={`/users/search?search=`}
       />
       <Results
         search={search}
