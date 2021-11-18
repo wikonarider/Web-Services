@@ -12,6 +12,7 @@ const {
   conn,
 } = require("../db");
 const { Op } = require("sequelize");
+const { validateAdmin } = require("../utils/validUser");
 
 async function admin(req, res, next) {
   try {
@@ -233,6 +234,29 @@ async function admin(req, res, next) {
 }
 
 async function adminServices(req, res, next) {
+  const { search } = req.query;
+  let whereObj = {};
+  if (search) {
+    whereObj = {
+      [Op.or]: {
+        id: conn.where(
+          conn.fn("TEXT", conn.col("service.id")),
+          "LIKE",
+          search + "%"
+        ),
+        title: conn.where(
+          conn.fn("LOWER", conn.col("service.title")),
+          "LIKE",
+          search + "%"
+        ),
+        userId: conn.where(
+          conn.fn("TEXT", conn.col("service.userId")),
+          "LIKE",
+          search
+        ),
+      },
+    };
+  }
   try {
     const services = await Service.findAll({
       attributes: [
@@ -244,6 +268,7 @@ async function adminServices(req, res, next) {
         "avaliable",
         [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
       ],
+      where: { ...whereObj },
       include: [
         {
           model: Category,
