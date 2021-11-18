@@ -369,7 +369,7 @@ async function putService(req, res, next) {
           categoryId ||
           provinceId ||
           cityId ||
-          avaliable !== undefined
+          avaliable
         ) {
           // validamos los parametros, caso especial para provincia/ciudad
           const errors = await validateServicesEdit({
@@ -388,8 +388,9 @@ async function putService(req, res, next) {
             service.categoryId = categoryId ? categoryId : service.categoryId;
             service.provinceId = provinceId ? provinceId : service.provinceId;
             service.cityId = cityId ? cityId : service.cityId;
-            service.avaliable =
-              avaliable !== undefined ? avaliable : service.avaliable;
+            service.avaliable = avaliable
+              ? avaliable === "true"
+              : service.avaliable;
             // Guardamos esos cambios
             await service.save();
             res.json({ message: "Successfully edited service" });
