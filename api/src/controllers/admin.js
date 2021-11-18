@@ -12,13 +12,7 @@ const {
   conn,
 } = require("../db");
 const { Op } = require("sequelize");
-
-const dicc = {
-  category: {
-    attributes: ["categoryId", [conn.col("category.name"), "categoryName"]],
-    where: { name: "" },
-  },
-};
+const { validateAdmin } = require("../utils/validUser");
 
 async function admin(req, res, next) {
   try {
@@ -181,6 +175,31 @@ async function admin(req, res, next) {
       raw: true,
     });
 
+    let groupProvinceCount = await Category.findAll({
+      attributes: [
+        [conn.col("group.name"), "groupName"],
+        [conn.fn("COUNT", conn.col("services.id")), "n_services"],
+      ],
+      group: ["groupId", "group.id", "services->province.id"],
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          include: {
+            model: Province,
+            attributes: ["name"],
+          },
+        },
+        {
+          model: Group,
+          attributes: [],
+        },
+      ],
+      order: [[conn.literal("n_services"), "DESC"]],
+
+      raw: true,
+    });
+
     let groupNewServices = await groupServices(groups);
 
     let provinceServices = await Service.findAll({
@@ -195,6 +214,7 @@ async function admin(req, res, next) {
 
     // { services: servicesCount, category: categoryCount }
     res.status(200).send({
+      groupProvinceCount,
       provinceServices,
       monthlySales,
       totalSales,
@@ -213,6 +233,92 @@ async function admin(req, res, next) {
   }
 }
 
+async function adminServices(req, res, next) {
+  const { search } = req.query;
+  let whereObj = {};
+  if (search) {
+    whereObj = {
+      [Op.or]: {
+        id: conn.where(
+          conn.fn("TEXT", conn.col("service.id")),
+          "LIKE",
+          search + "%"
+        ),
+        title: conn.where(
+          conn.fn("LOWER", conn.col("service.title")),
+          "LIKE",
+          search + "%"
+        ),
+        userId: conn.where(
+          conn.fn("TEXT", conn.col("service.userId")),
+          "LIKE",
+          search
+        ),
+      },
+    };
+  }
+  try {
+    const services = await Service.findAll({
+      attributes: [
+        "id",
+        "title",
+        "img",
+        "price",
+        "userId",
+        "avaliable",
+        "description",
+        [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+        [conn.col("category.id"), "categoryID"],
+        [conn.col("category.name"), "cat"],
+        [conn.col("category.group.id"), "groupID"],
+        [conn.col("category.group.name"), "grp"],
+        [conn.col("province.id"), "provinceId"],
+        [conn.col("province.name"), "prov"],
+        [conn.col("city.id"), "cityId"],
+        [conn.col("city.name"), "cty"],
+        "createdAt",
+      ],
+      where: { ...whereObj },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+        {
+          model: Qualification,
+          attributes: [],
+        },
+        {
+          model: Province,
+          attributes: ["name"],
+        },
+        {
+          model: City,
+          attributes: ["name"],
+        },
+      ],
+      raw: false,
+      group: [
+        "service.id",
+        "category.id",
+        "category->group.id",
+        "province.id",
+        "city.id",
+      ],
+      subQuery: false,
+      // paginado
+    });
+    res.json(services);
+  } catch (e) {
+    next(e);
+  }
+}
+
 module.exports = {
   admin,
+  adminServices,
 };

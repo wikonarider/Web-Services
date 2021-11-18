@@ -33,6 +33,7 @@ export default function Admin() {
   useEffect(() => {
     axios(`/admin`).then((response) => {
       setInfo({
+        groupProvinceCount: response.data.groupProvinceCount,
         totalServices: response.data.totalServices,
         totalUsers: response.data.bannedUsers,
         totalSales: response.data.totalSales,
@@ -56,15 +57,14 @@ export default function Admin() {
       position="relative"
       height="100vh"
       m="10px auto"
-
-      // sx={{ overflowX: "hidden" }}
+      sx={{ overflowY: "scroll" }}
     >
       {/* gridColumn="span 2" */}
-      <Box>
-        <AdminSideBar page={page} setPage={setPage} />
-      </Box>
+
+      <AdminSideBar page={page} setPage={setPage} />
+
       {/* gridColumn="span 10" */}
-      <Box>{pagesList[page]}</Box>
+      <Box width={"100%"}>{pagesList[page]}</Box>
     </Box>
   );
 }

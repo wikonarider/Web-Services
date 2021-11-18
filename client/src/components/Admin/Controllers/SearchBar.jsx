@@ -6,17 +6,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
-export default function SearchBar({ search, setSearch, setOptions, setOpen }) {
+export default function SearchBar({
+  search,
+  setSearch,
+  setOptions,
+  setOpen,
+  url,
+  placeholder,
+}) {
   const handleInputChange = (event, setSearch, setOptions) => {
-    let value = event.target.value;
+    let value = event.target.value.toLowerCase();
     setSearch(value);
 
     if (value === "") {
       setOptions([]);
     } else {
-      axios
-        .get(`/users/search?search=${value}`)
-        .then((response) => setOptions(response.data));
+      axios.get(`${url}${value}`).then((response) => setOptions(response.data));
     }
   };
 
@@ -32,7 +37,7 @@ export default function SearchBar({ search, setSearch, setOptions, setOpen }) {
         fullWidth
         id={"user-search"}
         value={search}
-        placeholder="Search ID, Name, Username, Email"
+        placeholder={placeholder}
         onClick={() => setOpen(true)}
         onChange={(e) => handleInputChange(e, setSearch, setOptions)}
         autoComplete="off"
