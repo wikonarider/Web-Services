@@ -232,6 +232,58 @@ async function admin(req, res, next) {
   }
 }
 
+async function adminServices(req, res, next) {
+  try {
+    const services = await Service.findAll({
+      attributes: [
+        "id",
+        "title",
+        "img",
+        "price",
+        "userId",
+        "avaliable",
+        [conn.fn("AVG", conn.col("qualifications.score")), "rating"],
+      ],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+          include: {
+            model: Group,
+            attributes: ["name"],
+          },
+        },
+        {
+          model: Qualification,
+          attributes: [],
+        },
+        {
+          model: Province,
+          attributes: ["name"],
+        },
+        {
+          model: City,
+          attributes: ["name"],
+        },
+      ],
+      raw: false,
+      group: [
+        "service.id",
+        "category.id",
+        "category->group.id",
+        "province.id",
+        "city.id",
+      ],
+      subQuery: false,
+      // paginado
+    });
+    res.json(services);
+  } catch (e) {
+    next(e);
+  }
+}
+
 module.exports = {
   admin,
+  adminServices,
 };
