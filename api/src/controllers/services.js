@@ -16,6 +16,7 @@ const {
 } = require("../utils/validServices");
 const { validFilters, makeWhereFilter } = require("../utils/validFilters");
 const { addRating } = require("../utils/OldFilters/index");
+const { validateAdmin } = require("../utils/validUser");
 
 const dictonary = {
   price: "service.price",
@@ -343,6 +344,7 @@ async function postServices(req, res, next) {
 async function putService(req, res, next) {
   try {
     const userId = req.user;
+    const admin = validateAdmin(userId);
     const {
       title,
       img,
@@ -358,7 +360,7 @@ async function putService(req, res, next) {
     if (serviceId) {
       const service = await Service.findByPk(serviceId);
       // Existe el servicio y pertene al usuario logueado
-      if (service && service.userId === userId) {
+      if (service && (service.userId === userId || admin)) {
         if (
           title ||
           img ||
@@ -367,7 +369,7 @@ async function putService(req, res, next) {
           categoryId ||
           provinceId ||
           cityId ||
-          avaliable
+          avaliable !== undefined
         ) {
           // validamos los parametros, caso especial para provincia/ciudad
           const errors = await validateServicesEdit({
@@ -386,9 +388,8 @@ async function putService(req, res, next) {
             service.categoryId = categoryId ? categoryId : service.categoryId;
             service.provinceId = provinceId ? provinceId : service.provinceId;
             service.cityId = cityId ? cityId : service.cityId;
-            service.avaliable = avaliable
-              ? avaliable === "true"
-              : service.avaliable;
+            service.avaliable =
+              avaliable !== undefined ? avaliable : service.avaliable;
             // Guardamos esos cambios
             await service.save();
             res.json({ message: "Successfully edited service" });
