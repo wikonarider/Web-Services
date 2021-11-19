@@ -81,7 +81,8 @@ export default function Nav({ route, check, change }) {
         position="fixed"
         sx={{
           zIndex: "1201",
-          p: 1,
+          pb: 1,
+          pt: 1,
           backgroundColor: darkTheme ? "primary" : "#CFD8DC",
         }}
       >
