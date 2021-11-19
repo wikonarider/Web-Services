@@ -4,12 +4,7 @@ import Box from "@mui/material/Box";
 import useStylesMessage from "./MessageStyled";
 import { format } from "timeago.js";
 
-export default function Message({
-  user,
-  message,
-  scrollRef,
-  darkTheme,
-}) {
+export default function Message({ user, message, scrollRef, darkTheme }) {
   var clasess = useStylesMessage(darkTheme, message, user)();
   return (
     <Box className={clasess.box_position_MsnSendReceive}>
@@ -23,10 +18,7 @@ export default function Message({
         }
       >
         <Box className={clasess.message}>
-          <h5>
-            {message.text+"&#65"}
-         
-          </h5>
+          <h5>{message.text}</h5>
         </Box>
         <h5>{format(message.createdAt)}</h5>
       </Box>
