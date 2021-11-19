@@ -20,6 +20,11 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   });
   const [inputsErrors, setInputErrors] = useState({});
   const [modal, setModal] = useState(false);
+  const [focus, setFocus] = useState("");
+
+  const handleFocus = (e) => {
+    setFocus(e.target.name);
+  };
 
   const handleChange = (e) => {
     if (start) {
@@ -73,12 +78,16 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
   const handleLogin = async (googleData) => {
     // const token = googleData.tokenId;
     // console.log(token);
-    setInputs({
+    const obj = {
       name: googleData.profileObj.givenName,
       lastname: googleData.profileObj.familyName,
       username: googleData.profileObj.email.replace("@gmail.com", ""),
       password: "",
       email: googleData.profileObj.email,
+    };
+    setInputs(() => {
+      setInputErrors(validateInput(obj));
+      return obj;
     });
     // store returned user somehow
   };
@@ -101,8 +110,9 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           <TextField
             required
             fullWidth
-            error={inputsErrors.name ? true : false}
-            helperText={inputsErrors.name}
+            onFocus={handleFocus}
+            error={focus === "name" && inputsErrors.name ? true : false}
+            helperText={focus === "name" && inputsErrors.name}
             name="name"
             value={inputs.name}
             label="Name"
@@ -112,8 +122,9 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           <TextField
             required
             fullWidth
-            error={inputsErrors.lastname ? true : false}
-            helperText={inputsErrors.lastname}
+            onFocus={handleFocus}
+            error={focus === "lastname" && inputsErrors.lastname ? true : false}
+            helperText={focus === "lastname" && inputsErrors.lastname}
             name="lastname"
             value={inputs.lastname}
             label="Lastname"
@@ -123,8 +134,15 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           <TextField
             required
             fullWidth
-            error={inputsErrors.username ? true : false}
-            helperText={inputsErrors.username}
+            onFocus={handleFocus}
+            error={
+              (focus === "username" || inputs.username) && inputsErrors.username
+                ? true
+                : false
+            }
+            helperText={
+              (focus === "username" || inputs.username) && inputsErrors.username
+            }
             name="username"
             value={inputs.username}
             label="Username"
@@ -134,8 +152,9 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           <TextField
             required
             fullWidth
-            error={inputsErrors.password ? true : false}
-            helperText={inputsErrors.password}
+            onFocus={handleFocus}
+            error={focus === "password" && inputsErrors.password ? true : false}
+            helperText={focus === "password" && inputsErrors.password}
             name="password"
             value={inputs.password}
             label="Password"
@@ -146,8 +165,9 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
           <TextField
             required
             fullWidth
-            error={inputsErrors.email ? true : false}
-            helperText={inputsErrors.email}
+            onFocus={handleFocus}
+            error={focus === "email" && inputsErrors.email ? true : false}
+            helperText={focus === "email" && inputsErrors.email}
             name="email"
             value={inputs.email}
             label="Email"
