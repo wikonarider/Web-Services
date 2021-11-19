@@ -251,33 +251,37 @@ function Chat({ user, darkTheme, cookie }) {
   }
   //------------------------------------------------------------------------------------------send msn
   function handleSubmit(e) {
-    e.preventDefault();
-    if (text.length) {
-      if (user && chat.currentCont) {
-        socket.current.emit("sendMsn", {
-          //send socket io
-          senderId: user.id,
-          receiverId: chat.currentCont.id,
-          text: text,
-        });
-
-        setChat({
-          ...chat,
-          chatting: chat.chatting.concat({
-            //set chating local
-            userId: user.id,
-            remit: chat.currentCont.id,
+    if (e.keyCode && e.keyCode !== 13) {
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+      if (text.length) {
+        if (user && chat.currentCont) {
+          socket.current.emit("sendMsn", {
+            //send socket io
+            senderId: user.id,
+            receiverId: chat.currentCont.id,
             text: text,
-            createdAt: Date.now(),
-          }),
-        });
-        // eslint-disable-next-line
-        var send = sendMessage({
-          //send BD
-          remit: chat.currentCont.id,
-          message: text,
-        });
-        setText("");
+          });
+
+          setChat({
+            ...chat,
+            chatting: chat.chatting.concat({
+              //set chating local
+              userId: user.id,
+              remit: chat.currentCont.id,
+              text: text,
+              createdAt: Date.now(),
+            }),
+          });
+          // eslint-disable-next-line
+          var send = sendMessage({
+            //send BD
+            remit: chat.currentCont.id,
+            message: text,
+          });
+          setText("");
+        }
       }
     }
   }
@@ -338,20 +342,23 @@ function Chat({ user, darkTheme, cookie }) {
 
           {chat.currentCont ? (
             <form
-              name="formSubmit"
+              name="formSubmitt"
               className={classes.inputForm}
               onSubmit={(e) => handleSubmit(e)}
             >
               <TextField
                 fullWidth
+                multiline
+                onKeyUp={(e) => handleSubmit(e)}
+                rows={4}
                 size="small"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 className={classes.inputSend}
               />
               <IconButton
-                variant="contained"
                 type="submit"
+                variant="contained"
                 size="small"
                 className={classes.btn}
               >
