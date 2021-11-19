@@ -281,7 +281,7 @@ function Chat({ user, darkTheme, cookie }) {
       }
     }
   }
- 
+
   //---------------------------------------component chat----------------------------------------------------------------------------------------------
   if (user) {
     return (
@@ -344,8 +344,6 @@ function Chat({ user, darkTheme, cookie }) {
             >
               <TextField
                 fullWidth
-                multiline
-                rows={4}
                 size="small"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
