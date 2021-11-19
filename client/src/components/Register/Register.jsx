@@ -111,8 +111,12 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             required
             fullWidth
             onFocus={handleFocus}
-            error={focus === "name" && inputsErrors.name ? true : false}
-            helperText={focus === "name" && inputsErrors.name}
+            error={
+              (focus === "name" || inputs.name) && inputsErrors.name
+                ? true
+                : false
+            }
+            helperText={(focus === "name" || inputs.name) && inputsErrors.name}
             name="name"
             value={inputs.name}
             label="Name"
@@ -123,8 +127,14 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             required
             fullWidth
             onFocus={handleFocus}
-            error={focus === "lastname" && inputsErrors.lastname ? true : false}
-            helperText={focus === "lastname" && inputsErrors.lastname}
+            error={
+              (focus === "lastname" || inputs.lastname) && inputsErrors.lastname
+                ? true
+                : false
+            }
+            helperText={
+              (focus === "lastname" || inputs.lastname) && inputsErrors.lastname
+            }
             name="lastname"
             value={inputs.lastname}
             label="Lastname"
@@ -153,8 +163,14 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             required
             fullWidth
             onFocus={handleFocus}
-            error={focus === "password" && inputsErrors.password ? true : false}
-            helperText={focus === "password" && inputsErrors.password}
+            error={
+              (focus === "password" || inputs.password) && inputsErrors.password
+                ? true
+                : false
+            }
+            helperText={
+              (focus === "password" || inputs.password) && inputsErrors.password
+            }
             name="password"
             value={inputs.password}
             label="Password"
@@ -166,8 +182,14 @@ function Register({ setRegisterModal, handleRedirect, setLoginModal }) {
             required
             fullWidth
             onFocus={handleFocus}
-            error={focus === "email" && inputsErrors.email ? true : false}
-            helperText={focus === "email" && inputsErrors.email}
+            error={
+              (focus === "email" || inputs.email) && inputsErrors.email
+                ? true
+                : false
+            }
+            helperText={
+              (focus === "email" || inputs.email) && inputsErrors.email
+            }
             name="email"
             value={inputs.email}
             label="Email"
