@@ -14,7 +14,6 @@ export default function useStylesMessage(darkTheme, message, user) {
       display: "flex",
       justifyContent: message.userId === user.id ? "flex-end" : "flex-start",
       alignItems: "center",
-      minHeight: "100px",
       minHeight: "30px",
       width: "100%",
       marginBottom: "10px",
