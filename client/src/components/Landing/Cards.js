@@ -9,6 +9,9 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import s from "./Cards.module.css";
 import { useSelector } from "react-redux";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +31,7 @@ const Cards = ({ cookie, checkedCards }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [login, setLogin] = useState(false);
   const darkTheme = useSelector((state) => state.darkTheme);
+  const queryModal = useMediaQuery("(max-width: 500px)");
 
   const styleRegister = {
     position: "absolute",
@@ -40,6 +44,22 @@ const Cards = ({ cookie, checkedCards }) => {
     borderRadius: "10px",
     boxShadow: 24,
     p: 2,
+  };
+
+  const styleModal = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    bgcolor: darkTheme ? "#121212" : "#ffffff",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "10px",
+    boxShadow: 24,
   };
 
   if (login) {
@@ -61,13 +81,21 @@ const Cards = ({ cookie, checkedCards }) => {
   const classes = useStyles();
   return (
     <div className={classes.root} id="cards">
-      <div onClick={handleRedirect} className={s.hover}>
+      <div
+        onClick={handleRedirect}
+        className={s.hover}
+        style={{ width: "100%", maxWidth: "480px" }}
+      >
         <CardClick
           infoCardClick={infoCardClick[1]}
           checkedCards={checkedCards}
         />
       </div>
-      <div onClick={handleRegister} className={s.hover}>
+      <div
+        onClick={handleRegister}
+        className={s.hover}
+        style={{ width: "100%", maxWidth: "480px" }}
+      >
         <CardClick
           infoCardClick={infoCardClick[0]}
           checkedCards={checkedCards}
@@ -80,7 +108,16 @@ const Cards = ({ cookie, checkedCards }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styleRegister}>
+        <Box sx={queryModal ? styleModal : styleRegister}>
+          {queryModal ? (
+            <IconButton
+              color="inherit"
+              style={{ position: "absolute", top: "10px", right: "10px" }}
+              onClick={handleRegister}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
           <Register
             setRegisterModal={setRegisterModal}
             setLoginModal={setLoginModal}
@@ -95,7 +132,16 @@ const Cards = ({ cookie, checkedCards }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styleRegister}>
+        <Box sx={queryModal ? styleModal : styleRegister}>
+          {queryModal ? (
+            <IconButton
+              color="inherit"
+              style={{ position: "absolute", top: "10px", right: "10px" }}
+              onClick={handleLogin}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
           <Login
             setLoginModal={setLoginModal}
             setLogin={setLogin}

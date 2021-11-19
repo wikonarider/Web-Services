@@ -15,6 +15,8 @@ import UserMenu from "../Nav/UserMenu";
 import { useSelector } from "react-redux";
 import Register from "../Register/Register";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import CloseIcon from "@mui/icons-material/Close";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,6 +79,7 @@ const Header = ({ cookie, setCheckedCards }) => {
   const [loginModal, setLoginModal] = useState(false);
   // eslint-disable-next-line
   const [registerModal, setRegisterModal] = useState(false);
+  const queryModal = useMediaQuery("(max-width: 500px)");
   const history = useHistory();
   const trigger = useScrollTrigger();
 
@@ -102,6 +105,22 @@ const Header = ({ cookie, setCheckedCards }) => {
     borderRadius: "10px",
     boxShadow: 24,
     p: 2,
+  };
+
+  const styleModal = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    bgcolor: darkTheme ? "#121212" : "#ffffff",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "10px",
+    boxShadow: 24,
   };
 
   if (login) {
@@ -139,20 +158,6 @@ const Header = ({ cookie, setCheckedCards }) => {
           ) : (
             <UserMenu userImg={userImg} name={name} />
           )}
-          <Modal
-            open={loginModal}
-            onClose={handleLogin}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={styleLogin}>
-              <Login
-                setLoginModal={setLoginModal}
-                setLogin={setLogin}
-                setRegisterModal={setRegisterModal}
-              />
-            </Box>
-          </Modal>
         </Toolbar>
       </AppBar>
       <Collapse
@@ -177,12 +182,46 @@ const Header = ({ cookie, setCheckedCards }) => {
       </Collapse>
 
       <Modal
+        open={loginModal}
+        onClose={handleLogin}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        {/* ---------------Login----------------- */}
+        <Box sx={queryModal ? styleModal : styleLogin}>
+          {queryModal ? (
+            <IconButton
+              color="inherit"
+              style={{ position: "absolute", top: "10px", right: "10px" }}
+              onClick={handleLogin}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
+          <Login
+            setLoginModal={setLoginModal}
+            setLogin={setLogin}
+            setRegisterModal={setRegisterModal}
+          />
+        </Box>
+      </Modal>
+      {/* ---------------Register----------------- */}
+      <Modal
         open={!cookie ? registerModal : false}
         onClose={handleRegister}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={styleLogin}>
+        <Box sx={queryModal ? styleModal : styleLogin}>
+          {queryModal ? (
+            <IconButton
+              color="inherit"
+              style={{ position: "absolute", top: "10px", right: "10px" }}
+              onClick={handleRegister}
+            >
+              <CloseIcon />
+            </IconButton>
+          ) : null}
           <Register
             setRegisterModal={setRegisterModal}
             setLoginModal={setLoginModal}
