@@ -20,7 +20,6 @@ import {
   sendMessage,
   deleteConvertation,
 } from "./StateLocal.jsx";
-
 dotenv.config();
 function Chat({ user, darkTheme, cookie }) {
   const [UsersOnlines, setUsersOnlines] = useState([]); //1
@@ -36,7 +35,7 @@ function Chat({ user, darkTheme, cookie }) {
     convertations: [],
   }); //5
   var scrollRef = useRef();
-  const socket = useRef(); //conexion al servidor para bidireccional peticiones
+  const socket = useRef(); //conexion al servidor para bidireccionar peticiones
   const classes = useStylesChat(darkTheme)();
   // useStylesChat es una funcion que recive el valor booleano
   // del darkTheme estado global y retorna un makeStyles
@@ -282,6 +281,7 @@ function Chat({ user, darkTheme, cookie }) {
       }
     }
   }
+ 
   //---------------------------------------component chat----------------------------------------------------------------------------------------------
   if (user) {
     return (
@@ -344,6 +344,8 @@ function Chat({ user, darkTheme, cookie }) {
             >
               <TextField
                 fullWidth
+                multiline
+                rows={4}
                 size="small"
                 value={text}
                 onChange={(e) => setText(e.target.value)}

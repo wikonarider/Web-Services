@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { green, grey, red, blueGrey } from "@mui/material/colors";
+import { green, grey, red, blueGrey ,amber} from "@mui/material/colors";
 
 // Descomentar cuando se va a usar
 // import { brown, amber, lime, deepOrange } from "@mui/material/colors";
@@ -16,7 +16,7 @@ export default function useStylesConvertations(
       height: "76px",
       minHeight: "76px",
       minWidth: "76px",
-      border: `4.0px solid ${!statusUser ? red[200] : green[800]}`,
+      border: `4.0px solid ${!statusUser ? red[400] : green[500]}`,
     },
     avatarAndname: {
       display: "flex",
@@ -35,23 +35,25 @@ export default function useStylesConvertations(
       cursor: "pointer",
       width: "100%",
       transform: "scale(0.95,0.95)",
+      border: `1px solid ${darkTheme ? "#ab003c" : "#fb8c00"}
+`,
       background: `${
         darkTheme
           ? contactSelected
-            ? "#c51162"
+            ? "#d04081"
             : "#890b44"
           : contactSelected
-          ? "#ff7043"
-          : "#FFDA77"
+          ? amber[400]
+          : amber[200]
       }`,
-      boxShadow: `0.1em 0.1em 0.28em ${
+      boxShadow: `0.2em 0.2em 0.7em ${
         darkTheme
           ? contactSelected
             ? "#d04081"
-            : "#5f0937"
+            : "#5f072f"
           : contactSelected
-          ? "#b24e2e"
-          : grey[600]
+          ? amber[900]
+          : amber[500]
       }`,
 
       "& div": {

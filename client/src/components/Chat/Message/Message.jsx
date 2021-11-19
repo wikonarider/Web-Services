@@ -24,7 +24,7 @@ export default function Message({
       >
         <Box className={clasess.message}>
           <h5>
-            {message.text}
+            {message.text+"&#65"}
          
           </h5>
         </Box>

@@ -6,6 +6,6 @@
 }
 
 @keyframes example {
-  0%   {background:rgb(85, 118, 124); }
+  0%   {background:rgb(76, 138, 163); }
   10%  {transform: scale(0.9,0.9);}
 }
