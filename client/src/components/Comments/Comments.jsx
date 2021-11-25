@@ -91,6 +91,15 @@ export default function Comments({
     setComment(value);
   }
 
+  // Calcular si ya califico el servicio
+  let flagQualification = true;
+  if (qualifications && qualifications.length > 0 && cookieRedux) {
+    const index = qualifications.findIndex((q) => q.user.id === cookieRedux);
+    if (index !== -1) {
+      flagQualification = false;
+    }
+  }
+
   let buyer =
     servicesBought &&
     servicesBought.filter((id) => {
@@ -107,7 +116,7 @@ export default function Comments({
       border="solid 1px lightgrey"
       borderRadius="4px"
     >
-      {cookie && buyer ? (
+      {cookie && buyer && flagQualification ? (
         <>
           <Box
             gridColumn="span 12"

@@ -174,7 +174,7 @@ export default function Results({
           id="demo-simple-select"
           defaultValue={edit[userInfo.id].ban}
           value={edit[userInfo.id].ban}
-          sx={{ width: "100px", color: "black" }}
+          sx={{ width: "100px" }}
           onChange={(e) => handleStatusChange(e, userInfo.id)}
         >
           {options.map((option) => (

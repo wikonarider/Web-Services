@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+// import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -22,7 +22,7 @@ const sideBarOptions = {
   Dashboard: <DashboardIcon />,
   Services: <HomeRepairServiceIcon />,
   Users: <PeopleAltIcon />,
-  "Categories/Groups": <FormatListBulletedIcon />,
+  // "Categories/Groups": <FormatListBulletedIcon />,
 };
 
 const openedMixin = (theme) => ({

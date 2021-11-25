@@ -172,7 +172,7 @@ Funcionalidad de chat. En el se encuentran los contactos a los que se les realiz
 
 <img src="./imgs/admin1.gif" alt="admin_gif"/>
 
-Panel de admin. El administrador cuanto con privilegios mayores a los de un usuario comun. En el dashboard inicial, puede observar las estadisticas generales de la web, puede aplicar un filtrado tambien para ver en mas detalles las estadisticas.
+Panel de admin. El administrador cuenta con privilegios mayores a los de un usuario comun. En el dashboard inicial, puede observar las estadisticas generales de la web, puede aplicar un filtrado tambien para ver en mas detalles las estadisticas.
 
 <img src="./imgs/admin2.gif" alt="admin_gif"/>
 

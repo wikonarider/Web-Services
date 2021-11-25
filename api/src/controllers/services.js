@@ -247,7 +247,7 @@ async function getServicesById(req, res, next) {
           model: Qualification,
           include: {
             model: Users,
-            attributes: ["userImg", "username", "name", "lastname"],
+            attributes: ["userImg", "username", "name", "lastname", "id"],
           },
         },
         {
