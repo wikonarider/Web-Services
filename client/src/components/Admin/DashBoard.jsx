@@ -37,6 +37,13 @@ export default function Dashboard({
   };
 
   const successfulSales = (monthlySales) => {
+    let num = 0;
+    num = num.toLocaleString("en-EN", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
+
     if (monthlySales) {
       const find = monthlySales.find((s) => {
         return (
@@ -50,16 +57,30 @@ export default function Dashboard({
           currency: "USD",
           maximumFractionDigits: 0,
         });
-      } else {
-        const num = 0;
-        return num.toLocaleString("en-EN", {
+      } else return num;
+    }
+    return num;
+  };
+
+  const pendingSales = (totalSales) => {
+    let num = 0;
+    num = num.toLocaleString("en-EN", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
+
+    if (totalSales) {
+      const find = totalSales.find((s) => s.status === "carrito");
+      if (find) {
+        return find.totalSales.toLocaleString("en-EN", {
           style: "currency",
           currency: "USD",
           maximumFractionDigits: 0,
         });
-      }
+      } else return num;
     }
-    return null;
+    return num;
   };
 
   return (
@@ -118,25 +139,26 @@ export default function Dashboard({
         />
         <InfoCard
           title="Pending sales"
-          value={
-            info.monthlySales
-              ? info.monthlySales
-                  .find((s) => {
-                    return (
-                      s.status === "carrito" &&
-                      s.year ===
-                        `${new Date().getFullYear()}-${
-                          new Date().getMonth() + 1
-                        }`
-                    );
-                  })
-                  .totalSales.toLocaleString("en-EN", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 0,
-                  })
-              : null
-          }
+          value={pendingSales(info.totalSales)}
+          // value={
+          //   info.monthlySales
+          //     ? info.monthlySales
+          //         .find((s) => {
+          //           return (
+          //             s.status === "carrito" &&
+          //             s.year ===
+          //               `${new Date().getFullYear()}-${
+          //                 new Date().getMonth() + 1
+          //               }`
+          //           );
+          //         })
+          //         .totalSales.toLocaleString("en-EN", {
+          //           style: "currency",
+          //           currency: "USD",
+          //           maximumFractionDigits: 0,
+          //         })
+          //     : null
+          // }
           type="currency"
         />
       </Box>
