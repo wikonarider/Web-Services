@@ -36,6 +36,32 @@ export default function Dashboard({
     setGroupFilter(value);
   };
 
+  const successfulSales = (monthlySales) => {
+    if (monthlySales) {
+      const find = monthlySales.find((s) => {
+        return (
+          s.status === "success" &&
+          s.year === `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
+        );
+      });
+      if (find) {
+        return find.totalSales.toLocaleString("en-EN", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        });
+      } else {
+        const num = 0;
+        return num.toLocaleString("en-EN", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        });
+      }
+    }
+    return null;
+  };
+
   return (
     <Box display="flex" flexWrap="wrap" flexDirection="column" height="auto">
       <Box
@@ -65,27 +91,29 @@ export default function Dashboard({
           }
           type="users"
         />
+
         <InfoCard
           title="Successful sales"
-          value={
-            info.monthlySales
-              ? info.monthlySales
-                  .find((s) => {
-                    return (
-                      s.status === "success" &&
-                      s.year ===
-                        `${new Date().getFullYear()}-${
-                          new Date().getMonth() + 1
-                        }`
-                    );
-                  })
-                  .totalSales.toLocaleString("en-EN", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 0,
-                  })
-              : null
-          }
+          value={successfulSales(info.monthlySales)}
+          // value={
+          //   info.monthlySales
+          //     ? info.monthlySales
+          //         .find((s) => {
+          //           return (
+          //             s.status === "success" &&
+          //             s.year ===
+          //               `${new Date().getFullYear()}-${
+          //                 new Date().getMonth() + 1
+          //               }`
+          //           );
+          //         })
+          //         .totalSales.toLocaleString("en-EN", {
+          //           style: "currency",
+          //           currency: "USD",
+          //           maximumFractionDigits: 0,
+          //         })
+          //     : null
+          // }
           type="currency"
         />
         <InfoCard

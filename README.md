@@ -25,7 +25,7 @@ Este es el proyecto final realizado durante la etapa de Labs de <strong>Henry</s
 - React 17.0.1
 - Redux 4.1.1
 
-Y muchas más dependencias, consultar los package.json de la ruta <a href="https://github.com/Fedex159/pf-web-service/blob/main/api/package.json">/api</a> y <a href="https://github.com/Fedex159/pf-web-service/blob/main/client/package.json">/client</a>.
+Y muchas más dependencias, consultar los package.json de la ruta <a href="./api/package.json">/api</a> y <a href="./client/package.json">/client</a>.
 
 ## Instrucciones para utilizar el proyecto
 
@@ -58,11 +58,11 @@ Para poner en linea el servidor del front, utilizar <strong>npm start</strong> (
 
 ### Mockups
 
-En la carpeta <strong>/api/mock</strong> se encuentran todos los mocks para hacer las pruebas.
+En la carpeta <strong><a href="./api/mock">/api/mock</a></strong> se encuentran todos los mocks para hacer las pruebas.
 
-- Cuentas de usuarios
-- Cuentas de mercadopago
-- Cuentas de paypal
+- Cuentas de <a href="./api/mock/usersJson.js">usuarios</a>
+- Cuentas de <a href="./api/mock/testUser MercadoPago.js">mercadopago</a>
+- Cuentas de <a href="./api/mock/testUsers paypal">paypal</a>
 
 ## Presentación y funcionalidades
 
@@ -181,3 +181,11 @@ En la seccion de servicios, puede ver un mapa interactivo, con la informacion de
 <img src="./imgs/admin3.gif" alt="admin_gif"/>
 
 En la seccion de usuarios, puede buscar un usuario o varios usuarios, cambiarle los datos personales, o aplicarle un veto de la web.
+
+### Responsive
+
+<img src="./imgs/responsive1.gif" alt="responsive1_gif"/>
+
+<img src="./imgs/responsive2.gif" alt="responsive2_gif"/>
+
+Toda la app se encuentra configurada para funcionar de manera responsive.
